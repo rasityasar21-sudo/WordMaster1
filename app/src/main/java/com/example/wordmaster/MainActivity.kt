@@ -79,6 +79,13 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
     var themeChoice by remember { mutableIntStateOf(prefs.getInt("themeChoice", 0)) }
     var compactCards by remember { mutableStateOf(prefs.getBoolean("compactCards", false)) }
     var dailyGoal by remember { mutableIntStateOf(prefs.getInt("dailyGoal", 10)) }
+    var chosenLevel by remember { mutableStateOf(prefs.getString("chosenLevel", "") ?: "") }
+    var showOnboarding by remember { mutableStateOf(chosenLevel.isBlank()) }
+    var onboardingChoice by remember { mutableStateOf("A1") }
+    var placementMode by remember { mutableStateOf(false) }
+    var placementAnswered by remember { mutableIntStateOf(0) }
+    var placementCorrect by remember { mutableIntStateOf(0) }
+    var placementLevel by remember { mutableStateOf("A1") }
     var showMatchGame by remember { mutableStateOf(false) }
     var matchRound by remember { mutableIntStateOf(0) }
     var matchWords by remember { mutableStateOf<List<Word>>(emptyList()) }
@@ -95,8 +102,8 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
     val level = xp / 100 + 1
     val xpInLevel = xp % 100
     val today = LocalDate.now().toString() 
-    val pageBackground = when (themeChoice) { 1 -> Color(0xFFF2FBF7); 2 -> Color(0xFFFFF6EE); else -> Color(0xFFF5F7FC) } 
-    val heroBrush = when (themeChoice) { 1 -> Brush.linearGradient(listOf(Color(0xFF075E54), Color(0xFF16A085))); 2 -> Brush.linearGradient(listOf(Color(0xFF7C2D12), Color(0xFFF59E0B))); else -> Brush.linearGradient(listOf(Navy, Color(0xFF3858B8))) }
+    val pageBackground = when (themeChoice) { 1 -> Color(0xFFEAF8F3); 2 -> Color(0xFFFFF1E5); else -> Color(0xFFF3F2FF) } 
+    val heroBrush = when (themeChoice) { 1 -> Brush.linearGradient(listOf(Color(0xFF075E54), Color(0xFF16A085))); 2 -> Brush.linearGradient(listOf(Color(0xFF7C2D12), Color(0xFFF59E0B))); else -> Brush.linearGradient(listOf(Color(0xFF6D28D9), Color(0xFFDB2777), Color(0xFFF97316))) }
     LaunchedEffect(today) {
         if (lastLoginDate != today) {
             dailyStreak = if (lastLoginDate == LocalDate.now().minusDays(1).toString()) dailyStreak + 1 else 1
@@ -125,13 +132,13 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
 
     MaterialTheme(
         colorScheme = lightColorScheme(
-            primary = Blue, onPrimary = Color.White, background = Color(0xFFF5F7FC),
+            primary = Color(0xFF7C3AED), onPrimary = Color.White, background = pageBackground,
             surface = Color.White, onSurface = Ink, secondary = Color(0xFF13A879)
         )
     ) {
-        Scaffold(containerColor = pageBackground) { padding ->
+        Scaffold(containerColor = Color.Transparent) { padding ->
             LazyColumn(
-                modifier = Modifier.fillMaxSize().padding(padding),
+                modifier = Modifier.fillMaxSize().background(Brush.verticalGradient(listOf(pageBackground, Color.White, pageBackground))).padding(padding),
                 contentPadding = PaddingValues(start = 18.dp, end = 18.dp, top = 12.dp, bottom = 28.dp),
                 verticalArrangement = Arrangement.spacedBy(14.dp)
             ) {
@@ -334,6 +341,27 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
         }
     }
 
+    if (showOnboarding) AlertDialog(
+        onDismissRequest = { },
+        title = { Text("WordMaster’a hoş geldin! ✨", fontWeight = FontWeight.ExtraBold) },
+        text = { Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Text("İngilizce seviyeni seç. Emin değilsen seviye tespit sınavını çöz; uygulama seviyeni tahmin etsin.")
+            listOf("A1" to "Başlangıç", "A2" to "Temel", "B1" to "Orta", "B2" to "Orta-ileri", "C1" to "İleri").forEach { (code, desc) ->
+                Surface(color = if (onboardingChoice == code) Color(0xFFEDE9FE) else Color(0xFFF8FAFC), shape = RoundedCornerShape(14.dp), onClick = { onboardingChoice = code }) {
+                    Row(Modifier.fillMaxWidth().padding(8.dp), verticalAlignment = Alignment.CenterVertically) {
+                        RadioButton(selected = onboardingChoice == code, onClick = { onboardingChoice = code })
+                        Column { Text(code, fontWeight = FontWeight.Bold, color = Color(0xFF6D28D9)); Text(desc, fontSize = 12.sp, color = Color(0xFF64748B)) }
+                    }
+                }
+            }
+        } },
+        confirmButton = {
+            Column(horizontalAlignment = Alignment.End) {
+                TextButton(onClick = { chosenLevel = onboardingChoice; selected = onboardingChoice; prefs.edit().putString("chosenLevel", chosenLevel).apply(); showOnboarding = false }) { Text("Seviyemle devam et") }
+                Button(onClick = { placementMode = true; placementAnswered = 0; placementCorrect = 0; sessionAnswered = 0; sessionCorrect = 0; sessionActive = true; showOnboarding = false; selected = "Tümü"; quizMode = "İngilizce → Türkçe"; startQuiz() }) { Text("🧭 Seviye tespit sınavı") }
+            }
+        }
+    )
     if (showProfile) AlertDialog(
         onDismissRequest = { showProfile = false },
         title = { Text("Profilim 👤", fontWeight = FontWeight.ExtraBold) },
@@ -363,7 +391,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
         title = { Text("Görünüm ve ayarlar ⚙️", fontWeight = FontWeight.ExtraBold) },
         text = { Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
             Text("Uygulama teması", fontWeight = FontWeight.Bold)
-            listOf("Okyanus mavisi", "Zümrüt yeşili", "Gün batımı").forEachIndexed { index, label ->
+            listOf("Mor-pembe gün batımı", "Zümrüt yeşili", "Sıcak gün batımı").forEachIndexed { index, label ->
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     RadioButton(selected = themeChoice == index, onClick = { themeChoice = index })
                     Text(label)
@@ -411,6 +439,10 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                     quizCount++
                                     sessionAnswered++
                                     totalAnswered++
+                                    if (placementMode) {
+                                        placementAnswered++
+                                        if (choice.en == quizWord!!.en) placementCorrect++
+                                    }
                                     if (choice.en == quizWord!!.en) {
                                         quizCorrect++
                                         sessionCorrect++
@@ -427,6 +459,17 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                         quizMessage = "Doğru cevap: ${if (quizMode == "İngilizce → Türkçe") quizWord!!.tr.replaceFirstChar { it.uppercase() } else quizWord!!.en.replaceFirstChar { it.uppercase() }}  |  Seri sıfırlandı."
                                     }
                                     prefs.edit().putInt("totalCorrect", totalCorrect).putInt("totalAnswered", totalAnswered).putStringSet("reviewWords", reviewWords.toSet()).putInt("xp", xp).putInt("coins", coins).putInt("correctStreak", correctStreak).putInt("bestCorrectStreak", bestCorrectStreak).apply()
+                                    if (placementMode && placementAnswered >= 10) {
+                                        chosenLevel = when { placementCorrect >= 9 -> "B2"; placementCorrect >= 7 -> "B1"; placementCorrect >= 5 -> "A2"; else -> "A1" }
+                                        placementLevel = chosenLevel
+                                        selected = chosenLevel
+                                        prefs.edit().putString("chosenLevel", chosenLevel).apply()
+                                        placementMode = false
+                                        quizWord = null
+                                        quizMessage = null
+                                        sessionActive = false
+                                        showQuizSummary = true
+                                    }
                                 }
                             },
                             modifier = Modifier.fillMaxWidth(),
@@ -552,8 +595,8 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
             onDismissRequest = { showQuizSummary = false },
             title = { Text("Test tamamlandı! 🏆", fontWeight = FontWeight.ExtraBold) },
             text = { Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                Text("10 soruda $sessionCorrect doğru cevap verdin.", fontSize = 18.sp, fontWeight = FontWeight.Bold)
-                Text("Başarı oranı: ${sessionCorrect * 10}%", color = Blue, fontSize = 16.sp)
+                Text(if (placementAnswered >= 10) "Seviye tespit sonucu: $placementLevel" else "10 soruda $sessionCorrect doğru cevap verdin.", fontSize = 18.sp, fontWeight = FontWeight.Bold)
+                Text(if (placementAnswered >= 10) "10 soruda $placementCorrect doğru cevap." else "Başarı oranı: ${sessionCorrect * 10}%", color = Blue, fontSize = 16.sp)
                 Text("En iyi doğru serin: $bestCorrectStreak", color = Color(0xFF13734D))
                 Text(if (sessionCorrect >= 8) "Harika iş! Böyle devam et! 🌟" else "Biraz tekrar yap, sonra yeniden dene 💪")
             } },
