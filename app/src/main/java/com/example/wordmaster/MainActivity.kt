@@ -214,11 +214,12 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                             Column(Modifier.padding(18.dp)) {
                                 Text("📚", fontSize = 34.sp)
                                 Spacer(Modifier.height(7.dp))
-                                Text("Kelime hazinesi", fontWeight = FontWeight.Bold, color = Navy)
+                                Text("Sözlük", fontWeight = FontWeight.Bold, color = Navy)
                                 Text("${words.size} kelime", color = Color(0xFF5D6C8A), fontSize = 13.sp)
                             }
                         }
                         Card(
+                            onClick = { sessionActive = true; sessionAnswered = 0; sessionCorrect = 0; showQuizSummary = false; startQuiz() },
                             modifier = Modifier.weight(1f),
                             colors = CardDefaults.cardColors(containerColor = Color(0xFFD8F8EF)),
                             elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
@@ -328,11 +329,11 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                     elevation = CardDefaults.cardElevation(defaultElevation = if (selectedTopic == topic) 5.dp else 2.dp),
                                     colors = CardDefaults.cardColors(containerColor = if (selectedTopic == topic) Color(0xFFE9DEFF) else listOf(Color(0xFFFFF0F5), Color(0xFFEAF8FF), Color(0xFFFFF5DF), Color(0xFFE8FAF1), Color(0xFFF0EBFF))[index % 5])
                                 ) {
-                                    Row(Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 15.dp), verticalAlignment = Alignment.CenterVertically) {
+                                    Row(Modifier.fillMaxWidth().padding(horizontal = 14.dp, vertical = 11.dp), verticalAlignment = Alignment.CenterVertically) {
                                         Surface(
                                             color = listOf(Color(0xFFFFDDE8), Color(0xFFD7F4EA), Color(0xFFFFE8C7), Color(0xFFDCEBFF), Color(0xFFE4DCFF))[index % 5],
                                             shape = RoundedCornerShape(18.dp),
-                                            modifier = Modifier.size(54.dp)
+                                            modifier = Modifier.size(48.dp)
                                         ) {
                                             Box(contentAlignment = Alignment.Center) {
                                                 Text(listOf("👋", "👨‍👩‍👧", "🍎", "🏠", "🎒", "🕒", "🚌", "😊", "⚡", "📘")[index], fontSize = 25.sp)
@@ -343,7 +344,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                             Text(topic, fontWeight = FontWeight.ExtraBold, color = Navy, fontSize = 15.sp)
                                             Spacer(Modifier.height(3.dp))
                                             Text("$count kelime", fontSize = 12.sp, color = Color(0xFF68758E))
-                                            Text(if (selectedTopic == topic) "Şu an seçili ✓" else "Öğrenmeye başla  ›", fontSize = 11.sp, color = Blue, fontWeight = FontWeight.Bold)
+                                            Text(if (selectedTopic == topic) "Seçili ✓" else "Konuya git  ›", fontSize = 11.sp, color = Blue, fontWeight = FontWeight.Bold)
                                         }
                                     }
                                 }
