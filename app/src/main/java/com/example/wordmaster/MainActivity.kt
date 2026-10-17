@@ -70,6 +70,15 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
     var sessionActive by remember { mutableStateOf(false) }
     var showQuizSummary by remember { mutableStateOf(false) }
     var showTools by remember { mutableStateOf(false) }
+    var showMatchGame by remember { mutableStateOf(false) }
+    var matchRound by remember { mutableIntStateOf(0) }
+    var matchWords by remember { mutableStateOf<List<Word>>(emptyList()) }
+    var matched by remember { mutableStateOf(setOf<String>()) }
+    var selectedEnglish by remember { mutableStateOf<String?>(null) }
+    var matchMessage by remember { mutableStateOf("İngilizce kelimeyi seç, sonra Türkçe karşılığını bul.") }
+    var totalCorrect by remember { mutableIntStateOf(prefs.getInt("totalCorrect", 0)) }
+    var totalAnswered by remember { mutableIntStateOf(prefs.getInt("totalAnswered", 0)) }
+    var dailyRewardClaimed by remember { mutableStateOf(prefs.getString("dailyRewardDate", "") == LocalDate.now().toString()) }
     var quizMode by remember { mutableStateOf("İngilizce → Türkçe") }
     val reviewWords = remember { mutableStateListOf<String>().apply {
         addAll(prefs.getStringSet("reviewWords", emptySet()) ?: emptySet())
@@ -326,9 +335,11 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                 if (quizMessage == null) {
                                     quizCount++
                                     sessionAnswered++
+                                    totalAnswered++
                                     if (choice.en == quizWord!!.en) {
                                         quizCorrect++
                                         sessionCorrect++
+                                        totalCorrect++
                                         correctStreak++
                                         bestCorrectStreak = maxOf(bestCorrectStreak, correctStreak)
                                         xp += 10
@@ -340,7 +351,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                         if (quizWord!!.en !in reviewWords) reviewWords.add(quizWord!!.en)
                                         quizMessage = "Doğru cevap: ${if (quizMode == "İngilizce → Türkçe") quizWord!!.tr.replaceFirstChar { it.uppercase() } else quizWord!!.en.replaceFirstChar { it.uppercase() }}  |  Seri sıfırlandı."
                                     }
-                                    prefs.edit().putStringSet("reviewWords", reviewWords.toSet()).putInt("xp", xp).putInt("coins", coins).putInt("correctStreak", correctStreak).putInt("bestCorrectStreak", bestCorrectStreak).apply()
+                                    prefs.edit().putInt("totalCorrect", totalCorrect).putInt("totalAnswered", totalAnswered).putStringSet("reviewWords", reviewWords.toSet()).putInt("xp", xp).putInt("coins", coins).putInt("correctStreak", correctStreak).putInt("bestCorrectStreak", bestCorrectStreak).apply()
                                 }
                             },
                             modifier = Modifier.fillMaxWidth(),
@@ -365,30 +376,100 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
 
     if (showTools) AlertDialog(
         onDismissRequest = { showTools = false },
-        title = { Text("WordMaster araçları") },
-        text = { Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            Text("📅 GÜNLÜK GÖREVLER")
+        title = { Text("WordMaster Pro") },
+        text = { Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            Text("📅 GÜNLÜK GÖREVLER", fontWeight = FontWeight.Bold)
             Text("• 10 kelime öğren: ${learned.size.coerceAtMost(10)}/10")
-            Text("• Günlük giriş serisi: $dailyStreak gün")
-            Text("• Tekrar kuyruğu: ${reviewWords.size} kelime")
+            Text("• Testte 5 soruyu cevapla: ${quizCount.coerceAtMost(5)}/5")
+            Text("• Günlük seri: $dailyStreak gün")
+            Button(
+                enabled = !dailyRewardClaimed && learned.size >= 10,
+                onClick = {
+                    xp += 20
+                    coins += 10
+                    dailyRewardClaimed = true
+                    prefs.edit().putInt("xp", xp).putInt("coins", coins).putString("dailyRewardDate", LocalDate.now().toString()).apply()
+                },
+                modifier = Modifier.fillMaxWidth()
+            ) { Text(if (dailyRewardClaimed) "✅ Bugünkü ödül alındı" else "🎁 10 kelime ödülünü al (+20 XP, +10 coin)") }
             HorizontalDivider()
-            Text("🏅 ROZETLER")
+            Text("🏅 ROZETLER", fontWeight = FontWeight.Bold)
             Text((if (learned.isNotEmpty()) "✅" else "🔒") + " İlk kelime")
             Text((if (xp >= 100) "✅" else "🔒") + " 100 XP")
             Text((if (learned.size >= 50) "✅" else "🔒") + " 50 kelime")
             Text((if (bestCorrectStreak >= 5) "✅" else "🔒") + " 5 doğru üst üste")
             Text((if (dailyStreak >= 7) "✅" else "🔒") + " 7 günlük seri")
             HorizontalDivider()
-            Text("🎮 KELİME EŞLEŞTİRME")
-            Text("Bu sürümde oyun ekranı henüz eklenmedi; sonraki adımda işlevsel hale getireceğim.")
+            Text("🎮 KELİME EŞLEŞTİRME", fontWeight = FontWeight.Bold)
+            Button(onClick = {
+                matchWords = words.shuffled().take(4)
+                matched = emptySet()
+                selectedEnglish = null
+                matchMessage = "İngilizce kelimeyi seç, sonra Türkçe karşılığını bul."
+                showTools = false
+                showMatchGame = true
+            }, modifier = Modifier.fillMaxWidth()) { Text("Oyunu başlat") }
             HorizontalDivider()
-            Text("📊 İSTATİSTİKLER")
+            Text("📊 İSTATİSTİKLER", fontWeight = FontWeight.Bold)
             Text("Öğrenilen kelime: ${learned.size} / ${words.size}")
-            Text("XP: $xp  •  Seviye: ${xp / 100 + 1}")
-            Text("Doğru seri rekoru: $bestCorrectStreak")
-            Text("Tekrar kuyruğu: ${reviewWords.size}")
+            Text("XP: $xp • Seviye: ${xp / 100 + 1} • Coin: $coins")
+            Text("Doğru cevap: $totalCorrect / $totalAnswered")
+            Text("Başarı oranı: ${if (totalAnswered == 0) 0 else totalCorrect * 100 / totalAnswered}%")
+            Text("Doğru seri rekoru: $bestCorrectStreak • Tekrar kuyruğu: ${reviewWords.size}")
         } },
         confirmButton = { TextButton(onClick = { showTools = false }) { Text("Kapat") } }
+    )
+
+    if (showMatchGame) AlertDialog(
+        onDismissRequest = { showMatchGame = false },
+        title = { Text("Kelime eşleştirme 🎮") },
+        text = {
+            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                Text("Eşleşen: ${matched.size}/${matchWords.size}")
+                LinearProgressIndicator(progress = { if (matchWords.isEmpty()) 0f else matched.size.toFloat() / matchWords.size }, modifier = Modifier.fillMaxWidth())
+                Text(matchMessage, color = Blue, fontWeight = FontWeight.SemiBold)
+                HorizontalDivider()
+                Text("İngilizce", fontWeight = FontWeight.Bold)
+                matchWords.filter { it.en !in matched }.forEach { word ->
+                    OutlinedButton(
+                        onClick = { selectedEnglish = word.en; matchMessage = "Şimdi ${word.en} kelimesinin Türkçesini seç." },
+                        modifier = Modifier.fillMaxWidth(),
+                        enabled = selectedEnglish == null || selectedEnglish == word.en
+                    ) { Text(if (selectedEnglish == word.en) "👉 ${word.en}" else word.en) }
+                }
+                HorizontalDivider()
+                Text("Türkçe", fontWeight = FontWeight.Bold)
+                matchWords.filter { it.en !in matched }.shuffled().forEach { word ->
+                    OutlinedButton(
+                        onClick = {
+                            val selected = selectedEnglish
+                            if (selected == null) {
+                                matchMessage = "Önce İngilizce kelime seç."
+                            } else if (selected == word.en) {
+                                matched = matched + word.en
+                                selectedEnglish = null
+                                xp += 5
+                                prefs.edit().putInt("xp", xp).apply()
+                                matchMessage = if (matched.size == matchWords.size) "Harika! Tüm eşleşmeler tamamlandı. +${matchWords.size * 5} XP 🎉" else "Doğru eşleşme! +5 XP"
+                            } else {
+                                selectedEnglish = null
+                                matchMessage = "Bu eşleşme doğru değil. Tekrar dene!"
+                            }
+                        },
+                        modifier = Modifier.fillMaxWidth()
+                    ) { Text(word.tr) }
+                }
+            }
+        },
+        confirmButton = {
+            TextButton(onClick = {
+                matchWords = words.shuffled().take(4)
+                matched = emptySet()
+                selectedEnglish = null
+                matchMessage = "Yeni tur! İngilizce kelimeyi seç, sonra Türkçe karşılığını bul."
+            }) { Text("Yeni tur") }
+        },
+        dismissButton = { TextButton(onClick = { showMatchGame = false }) { Text("Bitir") } }
     )
 
     if (showQuizSummary) {
