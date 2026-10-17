@@ -321,15 +321,30 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                         topicList.forEachIndexed { index, topic ->
                             val count = words.count { (selected == "Tümü" || it.level == selected) && topicForWord(it) == topic }
                             if (count > 0) {
-                                Card(onClick = { selectedTopic = topic; tab = 0 }, modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(25.dp), elevation = CardDefaults.cardElevation(defaultElevation = 4.dp), colors = CardDefaults.cardColors(containerColor = if (selectedTopic == topic) Color(0xFFE9DEFF) else listOf(Color(0xFFFFF0F5), Color(0xFFEAF8FF), Color(0xFFFFF5DF), Color(0xFFE8FAF1), Color(0xFFF0EBFF))[index % 5])) {
-                                    Row(Modifier.fillMaxWidth().padding(14.dp), verticalAlignment = Alignment.CenterVertically) {
-                                        Text(listOf("👋", "👨‍👩‍👧", "🍎", "🏠", "🎒", "🕒", "🚌", "😊", "⚡", "📘")[index], fontSize = 23.sp)
-                                        Spacer(Modifier.width(12.dp))
-                                        Column(Modifier.weight(1f)) {
-                                            Text(topic, fontWeight = FontWeight.Bold, color = Navy)
-                                            Text("$count kelime · " + if (selectedTopic == topic) "Seçili konu" else "Konuya başla", fontSize = 12.sp, color = Color(0xFF68758E))
+                                Card(
+                                    onClick = { selectedTopic = topic; tab = 0 },
+                                    modifier = Modifier.fillMaxWidth(),
+                                    shape = RoundedCornerShape(24.dp),
+                                    elevation = CardDefaults.cardElevation(defaultElevation = if (selectedTopic == topic) 5.dp else 2.dp),
+                                    colors = CardDefaults.cardColors(containerColor = if (selectedTopic == topic) Color(0xFFE9DEFF) else listOf(Color(0xFFFFF0F5), Color(0xFFEAF8FF), Color(0xFFFFF5DF), Color(0xFFE8FAF1), Color(0xFFF0EBFF))[index % 5])
+                                ) {
+                                    Row(Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 15.dp), verticalAlignment = Alignment.CenterVertically) {
+                                        Surface(
+                                            color = listOf(Color(0xFFFFDDE8), Color(0xFFD7F4EA), Color(0xFFFFE8C7), Color(0xFFDCEBFF), Color(0xFFE4DCFF))[index % 5],
+                                            shape = RoundedCornerShape(18.dp),
+                                            modifier = Modifier.size(54.dp)
+                                        ) {
+                                            Box(contentAlignment = Alignment.Center) {
+                                                Text(listOf("👋", "👨‍👩‍👧", "🍎", "🏠", "🎒", "🕒", "🚌", "😊", "⚡", "📘")[index], fontSize = 25.sp)
+                                            }
                                         }
-                                        Text("›", fontSize = 26.sp, color = Blue, fontWeight = FontWeight.Bold)
+                                        Spacer(Modifier.width(14.dp))
+                                        Column(Modifier.weight(1f)) {
+                                            Text(topic, fontWeight = FontWeight.ExtraBold, color = Navy, fontSize = 15.sp)
+                                            Spacer(Modifier.height(3.dp))
+                                            Text("$count kelime", fontSize = 12.sp, color = Color(0xFF68758E))
+                                            Text(if (selectedTopic == topic) "Şu an seçili ✓" else "Öğrenmeye başla  ›", fontSize = 11.sp, color = Blue, fontWeight = FontWeight.Bold)
+                                        }
                                     }
                                 }
                             }
