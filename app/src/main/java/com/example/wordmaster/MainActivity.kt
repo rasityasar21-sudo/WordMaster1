@@ -255,7 +255,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                                     settings.javaScriptEnabled = true
                                                     settings.domStorageEnabled = true
                                                     webViewClient = WebViewClient()
-                                                    loadUrl("https://www.youtube.com/results?search_query=" + java.net.URLEncoder.encode("English lesson ${activeLesson}", "UTF-8"))
+                                                    loadUrl("https://m.youtube.com/results?search_query=" + java.net.URLEncoder.encode("English lesson ${activeLesson}", "UTF-8"))
                                                 }
                                             },
                                             update = { view ->
