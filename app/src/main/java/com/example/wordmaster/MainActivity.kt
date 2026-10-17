@@ -70,6 +70,15 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
     var sessionActive by remember { mutableStateOf(false) }
     var showQuizSummary by remember { mutableStateOf(false) }
     var showTools by remember { mutableStateOf(false) }
+    var showProfile by remember { mutableStateOf(false) }
+    var showSettings by remember { mutableStateOf(false) }
+    var displayName by remember { mutableStateOf(prefs.getString("displayName", "Kelime Kaşifi") ?: "Kelime Kaşifi") }
+    var username by remember { mutableStateOf(prefs.getString("username", "@kelimekasifi") ?: "@kelimekasifi") }
+    var nameDraft by remember { mutableStateOf(displayName) }
+    var usernameDraft by remember { mutableStateOf(username) }
+    var themeChoice by remember { mutableIntStateOf(prefs.getInt("themeChoice", 0)) }
+    var compactCards by remember { mutableStateOf(prefs.getBoolean("compactCards", false)) }
+    var dailyGoal by remember { mutableIntStateOf(prefs.getInt("dailyGoal", 10)) }
     var showMatchGame by remember { mutableStateOf(false) }
     var matchRound by remember { mutableIntStateOf(0) }
     var matchWords by remember { mutableStateOf<List<Word>>(emptyList()) }
@@ -85,7 +94,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
     } }
     val level = xp / 100 + 1
     val xpInLevel = xp % 100
-    val today = LocalDate.now().toString()
+    val today = LocalDate.now().toString()\n    val pageBackground = when (themeChoice) { 1 -> Color(0xFFF2FBF7); 2 -> Color(0xFFFFF6EE); else -> Color(0xFFF5F7FC) }\n    val heroBrush = when (themeChoice) { 1 -> Brush.linearGradient(listOf(Color(0xFF075E54), Color(0xFF16A085))); 2 -> Brush.linearGradient(listOf(Color(0xFF7C2D12), Color(0xFFF59E0B))); else -> Brush.linearGradient(listOf(Navy, Color(0xFF3858B8))) }
     LaunchedEffect(today) {
         if (lastLoginDate != today) {
             dailyStreak = if (lastLoginDate == LocalDate.now().minusDays(1).toString()) dailyStreak + 1 else 1
@@ -118,7 +127,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
             surface = Color.White, onSurface = Ink, secondary = Color(0xFF13A879)
         )
     ) {
-        Scaffold(containerColor = Color(0xFFF5F7FC)) { padding ->
+        Scaffold(containerColor = pageBackground) { padding ->
             LazyColumn(
                 modifier = Modifier.fillMaxSize().padding(padding),
                 contentPadding = PaddingValues(start = 18.dp, end = 18.dp, top = 12.dp, bottom = 28.dp),
@@ -127,10 +136,10 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                 item {
                     Column(
                         Modifier.fillMaxWidth()
-                            .background(Brush.linearGradient(listOf(Navy, Color(0xFF3858B8))), RoundedCornerShape(28.dp))
+                            .background(heroBrush, RoundedCornerShape(28.dp))
                             .padding(22.dp)
                     ) {
-                        Text("WORDMASTER", color = Color(0xFFBFD0FF), fontSize = 12.sp, fontWeight = FontWeight.Bold, letterSpacing = 2.sp)
+                        Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {\n                            Text("WORDMASTER", color = Color(0xFFBFD0FF), fontSize = 12.sp, fontWeight = FontWeight.Bold, letterSpacing = 2.sp)\n                            Spacer(Modifier.weight(1f))\n                            TextButton(onClick = { nameDraft = displayName; usernameDraft = username; showProfile = true }) { Text("👤 Profil", color = Color.White, fontWeight = FontWeight.Bold) }\n                            TextButton(onClick = { showSettings = true }) { Text("⚙️", color = Color.White, fontSize = 18.sp) }\n                        }\n                        Text("Merhaba, $displayName!", color = Color.White.copy(alpha = .9f), fontSize = 14.sp, fontWeight = FontWeight.SemiBold)
                         Spacer(Modifier.height(7.dp))
                         Text("Her gün biraz daha\nİngilizce! ✨", color = Color.White, fontSize = 27.sp, lineHeight = 32.sp, fontWeight = FontWeight.ExtraBold)
                         Spacer(Modifier.height(7.dp))
@@ -180,11 +189,11 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                 item {
                     Card(Modifier.fillMaxWidth(), shape = RoundedCornerShape(18.dp), colors = CardDefaults.cardColors(containerColor = Color.White)) {
                         Column(Modifier.padding(16.dp)) {
-                            Row(verticalAlignment = Alignment.CenterVertically) { Text("🏆 Günlük hedef", fontWeight = FontWeight.Bold, color = Navy); Spacer(Modifier.weight(1f)); Text("${learned.size.coerceAtMost(10)}/10 kelime", color = Blue, fontWeight = FontWeight.Bold) }
+                            Row(verticalAlignment = Alignment.CenterVertically) { Text("🏆 Günlük hedef", fontWeight = FontWeight.Bold, color = Navy); Spacer(Modifier.weight(1f)); Text("${learned.size.coerceAtMost(dailyGoal)}/$dailyGoal kelime", color = Blue, fontWeight = FontWeight.Bold) }
                             Spacer(Modifier.height(9.dp))
-                            LinearProgressIndicator(progress = { learned.size.coerceAtMost(10) / 10f }, modifier = Modifier.fillMaxWidth().height(8.dp), color = Blue, trackColor = PaleBlue)
+                            LinearProgressIndicator(progress = { learned.size.coerceAtMost(dailyGoal) / dailyGoal.toFloat() }, modifier = Modifier.fillMaxWidth().height(8.dp), color = Blue, trackColor = PaleBlue)
                             Spacer(Modifier.height(5.dp))
-                            Text("Hedef: her gün 10 kelime öğren. Günlük giriş ödülün: +3 coin.", fontSize = 12.sp, color = Color(0xFF68758E))
+                            Text("Hedef: her gün $dailyGoal kelime öğren. Günlük giriş ödülün: +3 coin.", fontSize = 12.sp, color = Color(0xFF68758E))
                         }
                     }
                 }
@@ -271,7 +280,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                         colors = CardDefaults.cardColors(containerColor = Color.White),
                         elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
                     ) {
-                        Column(Modifier.padding(17.dp)) {
+                        Column(Modifier.padding(if (compactCards) 11.dp else 17.dp)) {
                             Row(verticalAlignment = Alignment.CenterVertically) {
                                 Column(Modifier.weight(1f)) {
                                     Text(word.en.replaceFirstChar { it.uppercase() }, fontSize = 21.sp, fontWeight = FontWeight.ExtraBold, color = Navy)
@@ -316,6 +325,64 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
             }
         }
     }
+
+    if (showProfile) AlertDialog(
+        onDismissRequest = { showProfile = false },
+        title = { Text("Profilim 👤", fontWeight = FontWeight.ExtraBold) },
+        text = { Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+            Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+                Surface(shape = RoundedCornerShape(28.dp), color = PaleBlue) {
+                    Text("🧑‍🎓", modifier = Modifier.padding(18.dp), fontSize = 34.sp)
+                }
+            }
+            Text("Seviye ${xp / 100 + 1}  •  ${xp} XP  •  ${dailyStreak} günlük seri", color = Blue, fontWeight = FontWeight.Bold)
+            OutlinedTextField(value = nameDraft, onValueChange = { nameDraft = it.take(30) }, label = { Text("Görünen ad") }, singleLine = true)
+            OutlinedTextField(value = usernameDraft, onValueChange = { usernameDraft = it.filter { c -> c.isLetterOrDigit() || c == '_' }.take(20).let { if (it.isBlank()) "" else "@$it" } }, label = { Text("Kullanıcı adı") }, supportingText = { Text("Harf, rakam ve _ kullanabilirsin.") }, singleLine = true)
+            Text("📚 Öğrenilen: ${learned.size} kelime   ⭐ Favori: ${favorites.size}", color = Ink)
+            Text("🏆 En iyi seri: $bestCorrectStreak   🎯 Test doğrusu: $totalCorrect", color = Ink)
+        } },
+        confirmButton = { TextButton(onClick = {
+            displayName = nameDraft.trim().ifBlank { "Kelime Kaşifi" }
+            username = usernameDraft.trim().ifBlank { "@kelimekasifi" }
+            prefs.edit().putString("displayName", displayName).putString("username", username).apply()
+            showProfile = false
+        }) { Text("Kaydet") } },
+        dismissButton = { TextButton(onClick = { showProfile = false }) { Text("Vazgeç") } }
+    )
+
+    if (showSettings) AlertDialog(
+        onDismissRequest = { showSettings = false },
+        title = { Text("Görünüm ve ayarlar ⚙️", fontWeight = FontWeight.ExtraBold) },
+        text = { Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+            Text("Uygulama teması", fontWeight = FontWeight.Bold)
+            listOf("Okyanus mavisi", "Zümrüt yeşili", "Gün batımı").forEachIndexed { index, label ->
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    RadioButton(selected = themeChoice == index, onClick = { themeChoice = index })
+                    Text(label)
+                }
+            }
+            HorizontalDivider()
+            Text("Günlük kelime hedefi", fontWeight = FontWeight.Bold)
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                listOf(5, 10, 15, 20).forEach { goal ->
+                    FilterChip(selected = dailyGoal == goal, onClick = { dailyGoal = goal }, label = { Text("$goal") })
+                }
+            }
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Column(Modifier.weight(1f)) {
+                    Text("Kompakt kelime kartları", fontWeight = FontWeight.SemiBold)
+                    Text("Daha fazla kelimeyi ekranda göster", fontSize = 12.sp, color = Color.Gray)
+                }
+                Switch(checked = compactCards, onCheckedChange = { compactCards = it })
+            }
+            Text("Seçimler bu cihazda saklanır.", fontSize = 12.sp, color = Color.Gray)
+        } },
+        confirmButton = { TextButton(onClick = {
+            prefs.edit().putInt("themeChoice", themeChoice).putInt("dailyGoal", dailyGoal).putBoolean("compactCards", compactCards).apply()
+            showSettings = false
+        }) { Text("Uygula") } },
+        dismissButton = { TextButton(onClick = { showSettings = false }) { Text("Kapat") } }
+    )
 
     if (quizWord != null) {
         AlertDialog(
@@ -379,7 +446,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
         title = { Text("WordMaster Pro") },
         text = { Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
             Text("📅 GÜNLÜK GÖREVLER", fontWeight = FontWeight.Bold)
-            Text("• 10 kelime öğren: ${learned.size.coerceAtMost(10)}/10")
+            Text("• $dailyGoal kelime öğren: ${learned.size.coerceAtMost(dailyGoal)}/$dailyGoal")
             Text("• Testte 5 soruyu cevapla: ${quizCount.coerceAtMost(5)}/5")
             Text("• Günlük seri: $dailyStreak gün")
             Button(
@@ -391,7 +458,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                     prefs.edit().putInt("xp", xp).putInt("coins", coins).putString("dailyRewardDate", LocalDate.now().toString()).apply()
                 },
                 modifier = Modifier.fillMaxWidth()
-            ) { Text(if (dailyRewardClaimed) "✅ Bugünkü ödül alındı" else "🎁 10 kelime ödülünü al (+20 XP, +10 coin)") }
+            ) { Text(if (dailyRewardClaimed) "✅ Bugünkü ödül alındı" else "🎁 Günlük hedef ödülünü al (+20 XP, +10 coin)") }
             HorizontalDivider()
             Text("🏅 ROZETLER", fontWeight = FontWeight.Bold)
             Text((if (learned.isNotEmpty()) "✅" else "🔒") + " İlk kelime")
