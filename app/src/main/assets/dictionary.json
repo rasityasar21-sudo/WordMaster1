@@ -1,55 +1,1577 @@
 [
-{"en":"hello","tr":"merhaba","level":"A1","example":"Hello, how are you?"},
-{"en":"goodbye","tr":"hoşça kal","level":"A1","example":"Goodbye, see you tomorrow."},
-{"en":"please","tr":"lütfen","level":"A1","example":"Please sit down."},
-{"en":"thank you","tr":"teşekkür ederim","level":"A1","example":"Thank you for your help."},
-{"en":"sorry","tr":"üzgünüm / afedersin","level":"A1","example":"I am sorry."},
-{"en":"yes","tr":"evet","level":"A1"},{"en":"no","tr":"hayır","level":"A1"},
-{"en":"water","tr":"su","level":"A1","example":"I drink water."},
-{"en":"food","tr":"yemek","level":"A1"},{"en":"bread","tr":"ekmek","level":"A1"},
-{"en":"apple","tr":"elma","level":"A1"},{"en":"book","tr":"kitap","level":"A1","example":"This is my book."},
-{"en":"school","tr":"okul","level":"A1"},{"en":"teacher","tr":"öğretmen","level":"A1"},
-{"en":"student","tr":"öğrenci","level":"A1"},{"en":"friend","tr":"arkadaş","level":"A1"},
-{"en":"family","tr":"aile","level":"A1"},{"en":"mother","tr":"anne","level":"A1"},
-{"en":"father","tr":"baba","level":"A1"},{"en":"sister","tr":"kız kardeş","level":"A1"},
-{"en":"brother","tr":"erkek kardeş","level":"A1"},{"en":"house","tr":"ev","level":"A1"},
-{"en":"room","tr":"oda","level":"A1"},{"en":"door","tr":"kapı","level":"A1"},
-{"en":"window","tr":"pencere","level":"A1"},{"en":"table","tr":"masa","level":"A1"},
-{"en":"chair","tr":"sandalye","level":"A1"},{"en":"bed","tr":"yatak","level":"A1"},
-{"en":"city","tr":"şehir","level":"A1"},{"en":"country","tr":"ülke","level":"A1"},
-{"en":"day","tr":"gün","level":"A1"},{"en":"night","tr":"gece","level":"A1"},
-{"en":"morning","tr":"sabah","level":"A1"},{"en":"today","tr":"bugün","level":"A1"},
-{"en":"tomorrow","tr":"yarın","level":"A1"},{"en":"yesterday","tr":"dün","level":"A1"},
-{"en":"happy","tr":"mutlu","level":"A1"},{"en":"sad","tr":"üzgün","level":"A1"},
-{"en":"big","tr":"büyük","level":"A1"},{"en":"small","tr":"küçük","level":"A1"},
-{"en":"good","tr":"iyi","level":"A1"},{"en":"bad","tr":"kötü","level":"A1"},
-{"en":"beautiful","tr":"güzel","level":"A1"},{"en":"easy","tr":"kolay","level":"A1"},
-{"en":"difficult","tr":"zor","level":"A1"},{"en":"fast","tr":"hızlı","level":"A1"},
-{"en":"slow","tr":"yavaş","level":"A1"},{"en":"learn","tr":"öğrenmek","level":"A1"},
-{"en":"speak","tr":"konuşmak","level":"A1"},{"en":"read","tr":"okumak","level":"A1"},
-{"en":"write","tr":"yazmak","level":"A1"},{"en":"listen","tr":"dinlemek","level":"A1"},
-{"en":"understand","tr":"anlamak","level":"A2"},{"en":"remember","tr":"hatırlamak","level":"A2"},
-{"en":"forget","tr":"unutmak","level":"A2"},{"en":"travel","tr":"seyahat etmek","level":"A2"},
-{"en":"holiday","tr":"tatil","level":"A2"},{"en":"weather","tr":"hava durumu","level":"A2"},
-{"en":"sunny","tr":"güneşli","level":"A2"},{"en":"cloudy","tr":"bulutlu","level":"A2"},
-{"en":"rain","tr":"yağmur","level":"A2"},{"en":"healthy","tr":"sağlıklı","level":"A2"},
-{"en":"exercise","tr":"egzersiz","level":"A2"},{"en":"breakfast","tr":"kahvaltı","level":"A2"},
-{"en":"lunch","tr":"öğle yemeği","level":"A2"},{"en":"dinner","tr":"akşam yemeği","level":"A2"},
-{"en":"usually","tr":"genellikle","level":"A2"},{"en":"sometimes","tr":"bazen","level":"A2"},
-{"en":"always","tr":"her zaman","level":"A2"},{"en":"never","tr":"asla","level":"A2"},
-{"en":"important","tr":"önemli","level":"A2"},{"en":"different","tr":"farklı","level":"A2"},
-{"en":"interesting","tr":"ilginç","level":"A2"},{"en":"expensive","tr":"pahalı","level":"A2"},
-{"en":"cheap","tr":"ucuz","level":"A2"},{"en":"choose","tr":"seçmek","level":"A2"},
-{"en":"decide","tr":"karar vermek","level":"A2"},{"en":"invite","tr":"davet etmek","level":"A2"},
-{"en":"improve","tr":"geliştirmek","level":"B1"},{"en":"environment","tr":"çevre","level":"B1"},
-{"en":"experience","tr":"deneyim","level":"B1"},{"en":"opinion","tr":"görüş","level":"B1"},
-{"en":"probably","tr":"muhtemelen","level":"B1"},{"en":"although","tr":"-e rağmen","level":"B1"},
-{"en":"however","tr":"ancak / bununla birlikte","level":"B1"},{"en":"instead","tr":"onun yerine","level":"B1"},
-{"en":"increase","tr":"artırmak / artmak","level":"B1"},{"en":"decrease","tr":"azaltmak / azalmak","level":"B1"},
-{"en":"solution","tr":"çözüm","level":"B1"},{"en":"problem","tr":"sorun","level":"B1"},
-{"en":"opportunity","tr":"fırsat","level":"B1"},{"en":"achievement","tr":"başarı","level":"B2"},
-{"en":"responsibility","tr":"sorumluluk","level":"B2"},{"en":"confidence","tr":"öz güven","level":"B2"},
-{"en":"consequence","tr":"sonuç","level":"B2"},{"en":"sustainable","tr":"sürdürülebilir","level":"B2"},
-{"en":"challenge","tr":"zorluk","level":"B2"},{"en":"nevertheless","tr":"bununla birlikte","level":"C1"},
-{"en":"significant","tr":"önemli / kayda değer","level":"C1"},{"en":"perspective","tr":"bakış açısı","level":"C1"}
+  {
+    "en": "hello",
+    "tr": "merhaba",
+    "level": "A1",
+    "example": "Hello, how are you?"
+  },
+  {
+    "en": "goodbye",
+    "tr": "hoşça kal",
+    "level": "A1",
+    "example": "Goodbye, see you tomorrow."
+  },
+  {
+    "en": "please",
+    "tr": "lütfen",
+    "level": "A1",
+    "example": "Please sit down."
+  },
+  {
+    "en": "thank you",
+    "tr": "teşekkür ederim",
+    "level": "A1",
+    "example": "Thank you for your help."
+  },
+  {
+    "en": "sorry",
+    "tr": "üzgünüm / afedersin",
+    "level": "A1",
+    "example": "I am sorry."
+  },
+  {
+    "en": "yes",
+    "tr": "evet",
+    "level": "A1"
+  },
+  {
+    "en": "no",
+    "tr": "hayır",
+    "level": "A1"
+  },
+  {
+    "en": "water",
+    "tr": "su",
+    "level": "A1",
+    "example": "I drink water."
+  },
+  {
+    "en": "food",
+    "tr": "yemek",
+    "level": "A1"
+  },
+  {
+    "en": "bread",
+    "tr": "ekmek",
+    "level": "A1"
+  },
+  {
+    "en": "apple",
+    "tr": "elma",
+    "level": "A1"
+  },
+  {
+    "en": "book",
+    "tr": "kitap",
+    "level": "A1",
+    "example": "This is my book."
+  },
+  {
+    "en": "school",
+    "tr": "okul",
+    "level": "A1"
+  },
+  {
+    "en": "teacher",
+    "tr": "öğretmen",
+    "level": "A1"
+  },
+  {
+    "en": "student",
+    "tr": "öğrenci",
+    "level": "A1"
+  },
+  {
+    "en": "friend",
+    "tr": "arkadaş",
+    "level": "A1"
+  },
+  {
+    "en": "family",
+    "tr": "aile",
+    "level": "A1"
+  },
+  {
+    "en": "mother",
+    "tr": "anne",
+    "level": "A1"
+  },
+  {
+    "en": "father",
+    "tr": "baba",
+    "level": "A1"
+  },
+  {
+    "en": "sister",
+    "tr": "kız kardeş",
+    "level": "A1"
+  },
+  {
+    "en": "brother",
+    "tr": "erkek kardeş",
+    "level": "A1"
+  },
+  {
+    "en": "house",
+    "tr": "ev",
+    "level": "A1"
+  },
+  {
+    "en": "room",
+    "tr": "oda",
+    "level": "A1"
+  },
+  {
+    "en": "door",
+    "tr": "kapı",
+    "level": "A1"
+  },
+  {
+    "en": "window",
+    "tr": "pencere",
+    "level": "A1"
+  },
+  {
+    "en": "table",
+    "tr": "masa",
+    "level": "A1"
+  },
+  {
+    "en": "chair",
+    "tr": "sandalye",
+    "level": "A1"
+  },
+  {
+    "en": "bed",
+    "tr": "yatak",
+    "level": "A1"
+  },
+  {
+    "en": "city",
+    "tr": "şehir",
+    "level": "A1"
+  },
+  {
+    "en": "country",
+    "tr": "ülke",
+    "level": "A1"
+  },
+  {
+    "en": "day",
+    "tr": "gün",
+    "level": "A1"
+  },
+  {
+    "en": "night",
+    "tr": "gece",
+    "level": "A1"
+  },
+  {
+    "en": "morning",
+    "tr": "sabah",
+    "level": "A1"
+  },
+  {
+    "en": "today",
+    "tr": "bugün",
+    "level": "A1"
+  },
+  {
+    "en": "tomorrow",
+    "tr": "yarın",
+    "level": "A1"
+  },
+  {
+    "en": "yesterday",
+    "tr": "dün",
+    "level": "A1"
+  },
+  {
+    "en": "happy",
+    "tr": "mutlu",
+    "level": "A1"
+  },
+  {
+    "en": "sad",
+    "tr": "üzgün",
+    "level": "A1"
+  },
+  {
+    "en": "big",
+    "tr": "büyük",
+    "level": "A1"
+  },
+  {
+    "en": "small",
+    "tr": "küçük",
+    "level": "A1"
+  },
+  {
+    "en": "good",
+    "tr": "iyi",
+    "level": "A1"
+  },
+  {
+    "en": "bad",
+    "tr": "kötü",
+    "level": "A1"
+  },
+  {
+    "en": "beautiful",
+    "tr": "güzel",
+    "level": "A1"
+  },
+  {
+    "en": "easy",
+    "tr": "kolay",
+    "level": "A1"
+  },
+  {
+    "en": "difficult",
+    "tr": "zor",
+    "level": "A1"
+  },
+  {
+    "en": "fast",
+    "tr": "hızlı",
+    "level": "A1"
+  },
+  {
+    "en": "slow",
+    "tr": "yavaş",
+    "level": "A1"
+  },
+  {
+    "en": "learn",
+    "tr": "öğrenmek",
+    "level": "A1"
+  },
+  {
+    "en": "speak",
+    "tr": "konuşmak",
+    "level": "A1"
+  },
+  {
+    "en": "read",
+    "tr": "okumak",
+    "level": "A1"
+  },
+  {
+    "en": "write",
+    "tr": "yazmak",
+    "level": "A1"
+  },
+  {
+    "en": "listen",
+    "tr": "dinlemek",
+    "level": "A1"
+  },
+  {
+    "en": "understand",
+    "tr": "anlamak",
+    "level": "A2"
+  },
+  {
+    "en": "remember",
+    "tr": "hatırlamak",
+    "level": "A2"
+  },
+  {
+    "en": "forget",
+    "tr": "unutmak",
+    "level": "A2"
+  },
+  {
+    "en": "travel",
+    "tr": "seyahat etmek",
+    "level": "A2"
+  },
+  {
+    "en": "holiday",
+    "tr": "tatil",
+    "level": "A2"
+  },
+  {
+    "en": "weather",
+    "tr": "hava durumu",
+    "level": "A2"
+  },
+  {
+    "en": "sunny",
+    "tr": "güneşli",
+    "level": "A2"
+  },
+  {
+    "en": "cloudy",
+    "tr": "bulutlu",
+    "level": "A2"
+  },
+  {
+    "en": "rain",
+    "tr": "yağmur",
+    "level": "A2"
+  },
+  {
+    "en": "healthy",
+    "tr": "sağlıklı",
+    "level": "A2"
+  },
+  {
+    "en": "exercise",
+    "tr": "egzersiz",
+    "level": "A2"
+  },
+  {
+    "en": "breakfast",
+    "tr": "kahvaltı",
+    "level": "A2"
+  },
+  {
+    "en": "lunch",
+    "tr": "öğle yemeği",
+    "level": "A2"
+  },
+  {
+    "en": "dinner",
+    "tr": "akşam yemeği",
+    "level": "A2"
+  },
+  {
+    "en": "usually",
+    "tr": "genellikle",
+    "level": "A2"
+  },
+  {
+    "en": "sometimes",
+    "tr": "bazen",
+    "level": "A2"
+  },
+  {
+    "en": "always",
+    "tr": "her zaman",
+    "level": "A2"
+  },
+  {
+    "en": "never",
+    "tr": "asla",
+    "level": "A2"
+  },
+  {
+    "en": "important",
+    "tr": "önemli",
+    "level": "A2"
+  },
+  {
+    "en": "different",
+    "tr": "farklı",
+    "level": "A2"
+  },
+  {
+    "en": "interesting",
+    "tr": "ilginç",
+    "level": "A2"
+  },
+  {
+    "en": "expensive",
+    "tr": "pahalı",
+    "level": "A2"
+  },
+  {
+    "en": "cheap",
+    "tr": "ucuz",
+    "level": "A2"
+  },
+  {
+    "en": "choose",
+    "tr": "seçmek",
+    "level": "A2"
+  },
+  {
+    "en": "decide",
+    "tr": "karar vermek",
+    "level": "A2"
+  },
+  {
+    "en": "invite",
+    "tr": "davet etmek",
+    "level": "A2"
+  },
+  {
+    "en": "improve",
+    "tr": "geliştirmek",
+    "level": "B1"
+  },
+  {
+    "en": "environment",
+    "tr": "çevre",
+    "level": "B1"
+  },
+  {
+    "en": "experience",
+    "tr": "deneyim",
+    "level": "B1"
+  },
+  {
+    "en": "opinion",
+    "tr": "görüş",
+    "level": "B1"
+  },
+  {
+    "en": "probably",
+    "tr": "muhtemelen",
+    "level": "B1"
+  },
+  {
+    "en": "although",
+    "tr": "-e rağmen",
+    "level": "B1"
+  },
+  {
+    "en": "however",
+    "tr": "ancak / bununla birlikte",
+    "level": "B1"
+  },
+  {
+    "en": "instead",
+    "tr": "onun yerine",
+    "level": "B1"
+  },
+  {
+    "en": "increase",
+    "tr": "artırmak / artmak",
+    "level": "B1"
+  },
+  {
+    "en": "decrease",
+    "tr": "azaltmak / azalmak",
+    "level": "B1"
+  },
+  {
+    "en": "solution",
+    "tr": "çözüm",
+    "level": "B1"
+  },
+  {
+    "en": "problem",
+    "tr": "sorun",
+    "level": "B1"
+  },
+  {
+    "en": "opportunity",
+    "tr": "fırsat",
+    "level": "B1"
+  },
+  {
+    "en": "achievement",
+    "tr": "başarı",
+    "level": "B2"
+  },
+  {
+    "en": "responsibility",
+    "tr": "sorumluluk",
+    "level": "B2"
+  },
+  {
+    "en": "confidence",
+    "tr": "öz güven",
+    "level": "B2"
+  },
+  {
+    "en": "consequence",
+    "tr": "sonuç",
+    "level": "B2"
+  },
+  {
+    "en": "sustainable",
+    "tr": "sürdürülebilir",
+    "level": "B2"
+  },
+  {
+    "en": "challenge",
+    "tr": "zorluk",
+    "level": "B2"
+  },
+  {
+    "en": "nevertheless",
+    "tr": "bununla birlikte",
+    "level": "C1"
+  },
+  {
+    "en": "significant",
+    "tr": "önemli / kayda değer",
+    "level": "C1"
+  },
+  {
+    "en": "perspective",
+    "tr": "bakış açısı",
+    "level": "C1"
+  },
+  {
+    "en": "ability",
+    "tr": "yetenek",
+    "level": "B1",
+    "example": "She has the ability to learn quickly."
+  },
+  {
+    "en": "abroad",
+    "tr": "yurt dışında",
+    "level": "A2",
+    "example": "I want to study abroad."
+  },
+  {
+    "en": "accept",
+    "tr": "kabul etmek",
+    "level": "A2",
+    "example": "Please accept my apology."
+  },
+  {
+    "en": "accident",
+    "tr": "kaza",
+    "level": "A2",
+    "example": "He had a small accident."
+  },
+  {
+    "en": "achieve",
+    "tr": "başarmak",
+    "level": "B1",
+    "example": "You can achieve your goals."
+  },
+  {
+    "en": "active",
+    "tr": "aktif",
+    "level": "A2",
+    "example": "She is very active."
+  },
+  {
+    "en": "actually",
+    "tr": "aslında",
+    "level": "B1",
+    "example": "Actually, I agree with you."
+  },
+  {
+    "en": "advice",
+    "tr": "tavsiye",
+    "level": "B1",
+    "example": "Can you give me advice?"
+  },
+  {
+    "en": "afford",
+    "tr": "maddi gücü yetmek",
+    "level": "B1",
+    "example": "I cannot afford that phone."
+  },
+  {
+    "en": "amazing",
+    "tr": "şaşırtıcı, harika",
+    "level": "A2",
+    "example": "The view is amazing."
+  },
+  {
+    "en": "ancient",
+    "tr": "antik, eski",
+    "level": "B1",
+    "example": "We visited an ancient city."
+  },
+  {
+    "en": "appear",
+    "tr": "görünmek",
+    "level": "B1",
+    "example": "A rainbow appeared."
+  },
+  {
+    "en": "appointment",
+    "tr": "randevu",
+    "level": "A2",
+    "example": "I have a doctor appointment."
+  },
+  {
+    "en": "argue",
+    "tr": "tartışmak",
+    "level": "B1",
+    "example": "They argue about money."
+  },
+  {
+    "en": "arrange",
+    "tr": "düzenlemek",
+    "level": "B1",
+    "example": "Let's arrange a meeting."
+  },
+  {
+    "en": "arrive",
+    "tr": "varmak",
+    "level": "A2",
+    "example": "We arrive at noon."
+  },
+  {
+    "en": "attention",
+    "tr": "dikkat",
+    "level": "A2",
+    "example": "Pay attention, please."
+  },
+  {
+    "en": "avoid",
+    "tr": "kaçınmak",
+    "level": "B1",
+    "example": "Avoid too much sugar."
+  },
+  {
+    "en": "award",
+    "tr": "ödül",
+    "level": "A2",
+    "example": "She won an award."
+  },
+  {
+    "en": "background",
+    "tr": "arka plan",
+    "level": "B1",
+    "example": "The app has a blue background."
+  },
+  {
+    "en": "behavior",
+    "tr": "davranış",
+    "level": "B1",
+    "example": "Good behavior matters."
+  },
+  {
+    "en": "believe",
+    "tr": "inanmak",
+    "level": "A2",
+    "example": "I believe you."
+  },
+  {
+    "en": "benefit",
+    "tr": "fayda",
+    "level": "B1",
+    "example": "Exercise has many benefits."
+  },
+  {
+    "en": "borrow",
+    "tr": "ödünç almak",
+    "level": "A2",
+    "example": "Can I borrow your pen?"
+  },
+  {
+    "en": "brave",
+    "tr": "cesur",
+    "level": "A2",
+    "example": "The brave child helped."
+  },
+  {
+    "en": "breathe",
+    "tr": "nefes almak",
+    "level": "A2",
+    "example": "Breathe slowly."
+  },
+  {
+    "en": "bright",
+    "tr": "parlak, zeki",
+    "level": "A2",
+    "example": "The room is bright."
+  },
+  {
+    "en": "cancel",
+    "tr": "iptal etmek",
+    "level": "A2",
+    "example": "They cancelled the trip."
+  },
+  {
+    "en": "career",
+    "tr": "kariyer",
+    "level": "B1",
+    "example": "She has a career in science."
+  },
+  {
+    "en": "careful",
+    "tr": "dikkatli",
+    "level": "A2",
+    "example": "Be careful on the stairs."
+  },
+  {
+    "en": "celebrate",
+    "tr": "kutlamak",
+    "level": "A2",
+    "example": "We celebrate together."
+  },
+  {
+    "en": "chance",
+    "tr": "şans, fırsat",
+    "level": "A2",
+    "example": "Give me one more chance."
+  },
+  {
+    "en": "choice",
+    "tr": "seçim",
+    "level": "A2",
+    "example": "That was a good choice."
+  },
+  {
+    "en": "comfortable",
+    "tr": "rahat",
+    "level": "A2",
+    "example": "This chair is comfortable."
+  },
+  {
+    "en": "communicate",
+    "tr": "iletişim kurmak",
+    "level": "B1",
+    "example": "We communicate by email."
+  },
+  {
+    "en": "community",
+    "tr": "topluluk",
+    "level": "B1",
+    "example": "Our community is helpful."
+  },
+  {
+    "en": "compare",
+    "tr": "karşılaştırmak",
+    "level": "B1",
+    "example": "Compare the two pictures."
+  },
+  {
+    "en": "complain",
+    "tr": "şikâyet etmek",
+    "level": "B1",
+    "example": "Customers complain about delays."
+  },
+  {
+    "en": "complete",
+    "tr": "tamamlamak",
+    "level": "A2",
+    "example": "Complete the exercise."
+  },
+  {
+    "en": "confident",
+    "tr": "kendine güvenen",
+    "level": "B1",
+    "example": "She feels confident."
+  },
+  {
+    "en": "confuse",
+    "tr": "kafasını karıştırmak",
+    "level": "B1",
+    "example": "The instructions confuse me."
+  },
+  {
+    "en": "connect",
+    "tr": "bağlamak",
+    "level": "A2",
+    "example": "Connect your phone to Wi-Fi."
+  },
+  {
+    "en": "consider",
+    "tr": "düşünmek, değerlendirmek",
+    "level": "B1",
+    "example": "Consider all the options."
+  },
+  {
+    "en": "continue",
+    "tr": "devam etmek",
+    "level": "A2",
+    "example": "Please continue reading."
+  },
+  {
+    "en": "create",
+    "tr": "oluşturmak",
+    "level": "A2",
+    "example": "Create a new account."
+  },
+  {
+    "en": "creative",
+    "tr": "yaratıcı",
+    "level": "B1",
+    "example": "He has creative ideas."
+  },
+  {
+    "en": "culture",
+    "tr": "kültür",
+    "level": "A2",
+    "example": "I enjoy learning about culture."
+  },
+  {
+    "en": "customer",
+    "tr": "müşteri",
+    "level": "A2",
+    "example": "The customer is waiting."
+  },
+  {
+    "en": "decision",
+    "tr": "karar",
+    "level": "B1",
+    "example": "It was a difficult decision."
+  },
+  {
+    "en": "deliver",
+    "tr": "teslim etmek",
+    "level": "A2",
+    "example": "They deliver food."
+  },
+  {
+    "en": "depend",
+    "tr": "bağlı olmak",
+    "level": "B1",
+    "example": "It depends on the weather."
+  },
+  {
+    "en": "describe",
+    "tr": "tanımlamak",
+    "level": "A2",
+    "example": "Describe your best friend."
+  },
+  {
+    "en": "develop",
+    "tr": "geliştirmek",
+    "level": "B1",
+    "example": "We develop new skills."
+  },
+  {
+    "en": "difference",
+    "tr": "fark",
+    "level": "A2",
+    "example": "What is the difference?"
+  },
+  {
+    "en": "disappear",
+    "tr": "ortadan kaybolmak",
+    "level": "A2",
+    "example": "The clouds disappeared."
+  },
+  {
+    "en": "discover",
+    "tr": "keşfetmek",
+    "level": "A2",
+    "example": "They discovered a cave."
+  },
+  {
+    "en": "discuss",
+    "tr": "tartışmak, görüşmek",
+    "level": "B1",
+    "example": "Let's discuss the plan."
+  },
+  {
+    "en": "education",
+    "tr": "eğitim",
+    "level": "A2",
+    "example": "Education is important."
+  },
+  {
+    "en": "effective",
+    "tr": "etkili",
+    "level": "B1",
+    "example": "This is an effective method."
+  },
+  {
+    "en": "effort",
+    "tr": "çaba",
+    "level": "B1",
+    "example": "Your effort will help."
+  },
+  {
+    "en": "encourage",
+    "tr": "cesaretlendirmek",
+    "level": "B1",
+    "example": "Teachers encourage students."
+  },
+  {
+    "en": "especially",
+    "tr": "özellikle",
+    "level": "B1",
+    "example": "I especially like this song."
+  },
+  {
+    "en": "event",
+    "tr": "etkinlik",
+    "level": "A2",
+    "example": "The event starts at six."
+  },
+  {
+    "en": "explain",
+    "tr": "açıklamak",
+    "level": "A2",
+    "example": "Can you explain this rule?"
+  },
+  {
+    "en": "fail",
+    "tr": "başarısız olmak",
+    "level": "A2",
+    "example": "Don't be afraid to fail."
+  },
+  {
+    "en": "fair",
+    "tr": "adil",
+    "level": "B1",
+    "example": "That seems fair."
+  },
+  {
+    "en": "familiar",
+    "tr": "tanıdık",
+    "level": "B1",
+    "example": "This place looks familiar."
+  },
+  {
+    "en": "feature",
+    "tr": "özellik",
+    "level": "B1",
+    "example": "The app has a useful feature."
+  },
+  {
+    "en": "feedback",
+    "tr": "geri bildirim",
+    "level": "B1",
+    "example": "Thanks for your feedback."
+  },
+  {
+    "en": "focus",
+    "tr": "odaklanmak",
+    "level": "A2",
+    "example": "Focus on your goal."
+  },
+  {
+    "en": "foreign",
+    "tr": "yabancı",
+    "level": "A2",
+    "example": "She speaks a foreign language."
+  },
+  {
+    "en": "freedom",
+    "tr": "özgürlük",
+    "level": "B1",
+    "example": "Everyone values freedom."
+  },
+  {
+    "en": "future",
+    "tr": "gelecek",
+    "level": "A2",
+    "example": "Think about your future."
+  },
+  {
+    "en": "generous",
+    "tr": "cömert",
+    "level": "B1",
+    "example": "He is generous with his time."
+  },
+  {
+    "en": "goal",
+    "tr": "hedef",
+    "level": "A2",
+    "example": "My goal is to improve."
+  },
+  {
+    "en": "habit",
+    "tr": "alışkanlık",
+    "level": "A2",
+    "example": "Reading is a good habit."
+  },
+  {
+    "en": "handle",
+    "tr": "başa çıkmak",
+    "level": "B1",
+    "example": "I can handle this task."
+  },
+  {
+    "en": "honest",
+    "tr": "dürüst",
+    "level": "A2",
+    "example": "Please be honest."
+  },
+  {
+    "en": "include",
+    "tr": "içermek",
+    "level": "A2",
+    "example": "The price includes breakfast."
+  },
+  {
+    "en": "independent",
+    "tr": "bağımsız",
+    "level": "B1",
+    "example": "She is independent."
+  },
+  {
+    "en": "information",
+    "tr": "bilgi",
+    "level": "A2",
+    "example": "I need more information."
+  },
+  {
+    "en": "introduce",
+    "tr": "tanıştırmak, tanıtmak",
+    "level": "A2",
+    "example": "Let me introduce my friend."
+  },
+  {
+    "en": "invention",
+    "tr": "icat",
+    "level": "B1",
+    "example": "The telephone was an important invention."
+  },
+  {
+    "en": "journey",
+    "tr": "yolculuk",
+    "level": "A2",
+    "example": "The journey took two hours."
+  },
+  {
+    "en": "knowledge",
+    "tr": "bilgi",
+    "level": "B1",
+    "example": "Knowledge grows with reading."
+  },
+  {
+    "en": "language",
+    "tr": "dil",
+    "level": "A1",
+    "example": "English is a useful language."
+  },
+  {
+    "en": "lately",
+    "tr": "son zamanlarda",
+    "level": "B1",
+    "example": "I have been busy lately."
+  },
+  {
+    "en": "leader",
+    "tr": "lider",
+    "level": "A2",
+    "example": "The leader gave a speech."
+  },
+  {
+    "en": "local",
+    "tr": "yerel",
+    "level": "A2",
+    "example": "We buy local food."
+  },
+  {
+    "en": "manage",
+    "tr": "yönetmek, başarmak",
+    "level": "B1",
+    "example": "She manages a small team."
+  },
+  {
+    "en": "meaning",
+    "tr": "anlam",
+    "level": "A2",
+    "example": "What is the meaning of this word?"
+  },
+  {
+    "en": "memory",
+    "tr": "hafıza",
+    "level": "A2",
+    "example": "This song brings back a memory."
+  },
+  {
+    "en": "mention",
+    "tr": "bahsetmek",
+    "level": "B1",
+    "example": "He didn't mention the meeting."
+  },
+  {
+    "en": "method",
+    "tr": "yöntem",
+    "level": "B1",
+    "example": "Try a different method."
+  },
+  {
+    "en": "mistake",
+    "tr": "hata",
+    "level": "A2",
+    "example": "Everyone makes a mistake."
+  },
+  {
+    "en": "necessary",
+    "tr": "gerekli",
+    "level": "B1",
+    "example": "Sleep is necessary."
+  },
+  {
+    "en": "notice",
+    "tr": "fark etmek",
+    "level": "A2",
+    "example": "Did you notice the sign?"
+  },
+  {
+    "en": "organize",
+    "tr": "düzenlemek",
+    "level": "A2",
+    "example": "Organize your notes."
+  },
+  {
+    "en": "patient",
+    "tr": "sabırlı",
+    "level": "A2",
+    "example": "Be patient with yourself."
+  },
+  {
+    "en": "perhaps",
+    "tr": "belki",
+    "level": "B1",
+    "example": "Perhaps we can meet tomorrow."
+  },
+  {
+    "en": "performance",
+    "tr": "performans",
+    "level": "B1",
+    "example": "Her performance was excellent."
+  },
+  {
+    "en": "personal",
+    "tr": "kişisel",
+    "level": "A2",
+    "example": "That is a personal choice."
+  },
+  {
+    "en": "possible",
+    "tr": "mümkün",
+    "level": "A2",
+    "example": "Is it possible to help?"
+  },
+  {
+    "en": "prepare",
+    "tr": "hazırlamak",
+    "level": "A2",
+    "example": "Prepare for the exam."
+  },
+  {
+    "en": "prevent",
+    "tr": "önlemek",
+    "level": "B1",
+    "example": "Exercise can prevent illness."
+  },
+  {
+    "en": "progress",
+    "tr": "ilerleme",
+    "level": "B1",
+    "example": "You are making progress."
+  },
+  {
+    "en": "protect",
+    "tr": "korumak",
+    "level": "A2",
+    "example": "Protect your password."
+  },
+  {
+    "en": "purpose",
+    "tr": "amaç",
+    "level": "B1",
+    "example": "What is the purpose of this?"
+  },
+  {
+    "en": "realize",
+    "tr": "farkına varmak",
+    "level": "B1",
+    "example": "I realized my mistake."
+  },
+  {
+    "en": "receive",
+    "tr": "almak, teslim almak",
+    "level": "A2",
+    "example": "Did you receive my message?"
+  },
+  {
+    "en": "recommend",
+    "tr": "tavsiye etmek",
+    "level": "B1",
+    "example": "I recommend this book."
+  },
+  {
+    "en": "reduce",
+    "tr": "azaltmak",
+    "level": "B1",
+    "example": "We should reduce waste."
+  },
+  {
+    "en": "relationship",
+    "tr": "ilişki",
+    "level": "B1",
+    "example": "They have a good relationship."
+  },
+  {
+    "en": "reliable",
+    "tr": "güvenilir",
+    "level": "B1",
+    "example": "This source is reliable."
+  },
+  {
+    "en": "remain",
+    "tr": "kalmak",
+    "level": "B1",
+    "example": "Please remain calm."
+  },
+  {
+    "en": "remind",
+    "tr": "hatırlatmak",
+    "level": "B1",
+    "example": "Remind me tomorrow."
+  },
+  {
+    "en": "require",
+    "tr": "gerektirmek",
+    "level": "B1",
+    "example": "This job requires patience."
+  },
+  {
+    "en": "research",
+    "tr": "araştırma",
+    "level": "B1",
+    "example": "The research took a year."
+  },
+  {
+    "en": "respect",
+    "tr": "saygı duymak",
+    "level": "A2",
+    "example": "Respect other people's ideas."
+  },
+  {
+    "en": "responsible",
+    "tr": "sorumlu",
+    "level": "B1",
+    "example": "You are responsible for this task."
+  },
+  {
+    "en": "result",
+    "tr": "sonuç",
+    "level": "A2",
+    "example": "The result was excellent."
+  },
+  {
+    "en": "return",
+    "tr": "geri dönmek",
+    "level": "A2",
+    "example": "I will return soon."
+  },
+  {
+    "en": "routine",
+    "tr": "rutin",
+    "level": "B1",
+    "example": "My morning routine is simple."
+  },
+  {
+    "en": "safe",
+    "tr": "güvenli",
+    "level": "A2",
+    "example": "Keep your account safe."
+  },
+  {
+    "en": "schedule",
+    "tr": "program, takvim",
+    "level": "A2",
+    "example": "Check your schedule."
+  },
+  {
+    "en": "serious",
+    "tr": "ciddi",
+    "level": "A2",
+    "example": "This is a serious problem."
+  },
+  {
+    "en": "similar",
+    "tr": "benzer",
+    "level": "A2",
+    "example": "Our ideas are similar."
+  },
+  {
+    "en": "suggest",
+    "tr": "önermek",
+    "level": "B1",
+    "example": "What do you suggest?"
+  },
+  {
+    "en": "support",
+    "tr": "desteklemek",
+    "level": "A2",
+    "example": "Friends support each other."
+  },
+  {
+    "en": "surprise",
+    "tr": "şaşırtmak, sürpriz",
+    "level": "A2",
+    "example": "The gift was a surprise."
+  },
+  {
+    "en": "throughout",
+    "tr": "boyunca",
+    "level": "B1",
+    "example": "It rained throughout the night."
+  },
+  {
+    "en": "traditional",
+    "tr": "geleneksel",
+    "level": "A2",
+    "example": "We ate traditional food."
+  },
+  {
+    "en": "trust",
+    "tr": "güvenmek",
+    "level": "A2",
+    "example": "I trust my team."
+  },
+  {
+    "en": "useful",
+    "tr": "yararlı",
+    "level": "A2",
+    "example": "This guide is useful."
+  },
+  {
+    "en": "value",
+    "tr": "değer",
+    "level": "B1",
+    "example": "Time is valuable."
+  },
+  {
+    "en": "various",
+    "tr": "çeşitli",
+    "level": "B1",
+    "example": "We discussed various topics."
+  },
+  {
+    "en": "volunteer",
+    "tr": "gönüllü",
+    "level": "A2",
+    "example": "I volunteer at the library."
+  },
+  {
+    "en": "wonder",
+    "tr": "merak etmek",
+    "level": "B1",
+    "example": "I wonder what happened."
+  },
+  {
+    "en": "approach",
+    "tr": "yaklaşım",
+    "level": "B2",
+    "example": "We need a new approach."
+  },
+  {
+    "en": "assume",
+    "tr": "varsaymak",
+    "level": "B2",
+    "example": "Do not assume the answer."
+  },
+  {
+    "en": "aware",
+    "tr": "farkında",
+    "level": "B1",
+    "example": "Be aware of the risks."
+  },
+  {
+    "en": "circumstance",
+    "tr": "koşul, durum",
+    "level": "B2",
+    "example": "Under these circumstances, we should wait."
+  },
+  {
+    "en": "complex",
+    "tr": "karmaşık",
+    "level": "B2",
+    "example": "It is a complex issue."
+  },
+  {
+    "en": "consistent",
+    "tr": "tutarlı",
+    "level": "B2",
+    "example": "Consistent practice helps."
+  },
+  {
+    "en": "contribute",
+    "tr": "katkıda bulunmak",
+    "level": "B2",
+    "example": "Everyone can contribute."
+  },
+  {
+    "en": "crucial",
+    "tr": "çok önemli",
+    "level": "B2",
+    "example": "Sleep is crucial for learning."
+  },
+  {
+    "en": "demonstrate",
+    "tr": "göstermek",
+    "level": "B2",
+    "example": "The experiment demonstrates the idea."
+  },
+  {
+    "en": "efficient",
+    "tr": "verimli",
+    "level": "B2",
+    "example": "This is an efficient process."
+  },
+  {
+    "en": "establish",
+    "tr": "kurmak",
+    "level": "B2",
+    "example": "They established a new company."
+  },
+  {
+    "en": "evidence",
+    "tr": "kanıt",
+    "level": "B2",
+    "example": "We need more evidence."
+  },
+  {
+    "en": "expand",
+    "tr": "genişletmek",
+    "level": "B2",
+    "example": "The business plans to expand."
+  },
+  {
+    "en": "factor",
+    "tr": "etken",
+    "level": "B2",
+    "example": "Cost is an important factor."
+  },
+  {
+    "en": "function",
+    "tr": "işlev",
+    "level": "B2",
+    "example": "This button has one function."
+  },
+  {
+    "en": "impact",
+    "tr": "etki",
+    "level": "B2",
+    "example": "The decision had a big impact."
+  },
+  {
+    "en": "indicate",
+    "tr": "belirtmek, göstermek",
+    "level": "B2",
+    "example": "The results indicate progress."
+  },
+  {
+    "en": "interpret",
+    "tr": "yorumlamak",
+    "level": "B2",
+    "example": "How do you interpret the data?"
+  },
+  {
+    "en": "maintain",
+    "tr": "sürdürmek",
+    "level": "B2",
+    "example": "Maintain a healthy routine."
+  },
+  {
+    "en": "obtain",
+    "tr": "elde etmek",
+    "level": "B2",
+    "example": "You can obtain more information."
+  },
+  {
+    "en": "participate",
+    "tr": "katılmak",
+    "level": "B1",
+    "example": "Students participate in the activity."
+  },
+  {
+    "en": "principle",
+    "tr": "ilke",
+    "level": "B2",
+    "example": "Honesty is an important principle."
+  },
+  {
+    "en": "strategy",
+    "tr": "strateji",
+    "level": "B2",
+    "example": "We need a better strategy."
+  },
+  {
+    "en": "theory",
+    "tr": "kuram, teori",
+    "level": "B2",
+    "example": "The theory explains the results."
+  },
+  {
+    "en": "transform",
+    "tr": "dönüştürmek",
+    "level": "B2",
+    "example": "Technology can transform education."
+  },
+  {
+    "en": "accurate",
+    "tr": "doğru, kesin",
+    "level": "B2",
+    "example": "The information is accurate."
+  },
+  {
+    "en": "adapt",
+    "tr": "uyum sağlamak",
+    "level": "B2",
+    "example": "We adapt to change."
+  },
+  {
+    "en": "ambiguous",
+    "tr": "belirsiz, muğlak",
+    "level": "C1",
+    "example": "The sentence is ambiguous."
+  },
+  {
+    "en": "coherent",
+    "tr": "tutarlı, anlaşılır",
+    "level": "C1",
+    "example": "Write a coherent argument."
+  },
+  {
+    "en": "comprehensive",
+    "tr": "kapsamlı",
+    "level": "C1",
+    "example": "The report is comprehensive."
+  },
+  {
+    "en": "controversial",
+    "tr": "tartışmalı",
+    "level": "C1",
+    "example": "It is a controversial topic."
+  },
+  {
+    "en": "derive",
+    "tr": "türetmek, elde etmek",
+    "level": "C1",
+    "example": "The word derives from Latin."
+  },
+  {
+    "en": "emerge",
+    "tr": "ortaya çıkmak",
+    "level": "B2",
+    "example": "New ideas emerged."
+  },
+  {
+    "en": "fundamental",
+    "tr": "temel",
+    "level": "B2",
+    "example": "Trust is fundamental."
+  },
+  {
+    "en": "inevitable",
+    "tr": "kaçınılmaz",
+    "level": "C1",
+    "example": "Change is inevitable."
+  },
+  {
+    "en": "preliminary",
+    "tr": "ön hazırlık niteliğinde",
+    "level": "C1",
+    "example": "These are preliminary results."
+  },
+  {
+    "en": "substantial",
+    "tr": "önemli ölçüde, büyük",
+    "level": "C1",
+    "example": "The project needs substantial funding."
+  },
+  {
+    "en": "subsequent",
+    "tr": "sonraki",
+    "level": "C1",
+    "example": "Subsequent studies confirmed it."
+  },
+  {
+    "en": "valid",
+    "tr": "geçerli",
+    "level": "B2",
+    "example": "That is a valid point."
+  },
+  {
+    "en": "widespread",
+    "tr": "yaygın",
+    "level": "B2",
+    "example": "The practice is widespread."
+  }
 ]
