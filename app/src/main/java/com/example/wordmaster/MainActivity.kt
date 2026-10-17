@@ -8,6 +8,9 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.viewinterop.AndroidView
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import androidx.compose.runtime.DisposableEffect
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -68,6 +71,8 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
     var activeLesson by remember { mutableStateOf("") }
     var activeLessonIndex by remember { mutableIntStateOf(0) }
     var lessonAnswer by remember { mutableStateOf(false) }
+    var lessonStage by remember { mutableIntStateOf(0) }
+    var lessonChoice by remember { mutableStateOf("") }
     var selected by remember { mutableStateOf("Tümü") }
     var selectedTopic by remember { mutableStateOf("Tümü") }
     var tab by remember { mutableIntStateOf(0) }
@@ -201,39 +206,103 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
             ) {
                 if (currentScreen == "Ders İçeriği") {
                     item {
-                        val lessonWords = when {
-                            activeLesson.contains("Greetings", true) -> listOf("Hello" to "Merhaba", "Good morning" to "Günaydın", "Goodbye" to "Hoşça kal", "My name is..." to "Benim adım...", "Nice to meet you" to "Tanıştığıma memnun oldum")
-                            activeLesson.contains("Shopping", true) -> listOf("How much is it?" to "Ne kadar?", "price" to "fiyat", "cheap" to "ucuz", "expensive" to "pahalı", "I would like..." to "... istiyorum")
-                            activeLesson.contains("Countries", true) -> listOf("country" to "ülke", "nationality" to "milliyet", "Where are you from?" to "Nerelisin?", "I am from Türkiye" to "Türkiye denim")
-                            activeLesson.contains("Counting", true) -> listOf("one" to "bir", "two" to "iki", "three" to "üç", "How many?" to "Kaç tane?")
-                            activeLesson.contains("Daily routines", true) -> listOf("wake up" to "uyanmak", "get dressed" to "giyinmek", "have breakfast" to "kahvaltı yapmak", "go to work" to "işe gitmek", "go to bed" to "yatmaya gitmek")
-                            else -> words.filter { it.level == selected && it.en.isNotBlank() && it.tr.isNotBlank() }.take(5).map { it.en to it.tr }.ifEmpty { listOf("learn" to "öğrenmek", "practice" to "alıştırma") }
-                        }
-                        Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                            TextButton(onClick = { currentScreen = "Dersler" }) { Text("← Derslere dön") }
-                            Text(activeLesson, fontSize = 24.sp, fontWeight = FontWeight.ExtraBold, color = Navy)
-                            Text("Konu kelimeleri ve kısa alıştırma", color = Color(0xFF68758E))
-                            Card(shape = RoundedCornerShape(20.dp), colors = CardDefaults.cardColors(containerColor = Color.White)) {
-                                Column(Modifier.fillMaxWidth().padding(18.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                                    lessonWords.forEach { pair ->
-                                        Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-                                            Column(Modifier.weight(1f)) { Text(pair.first, fontWeight = FontWeight.Bold, color = Ink); Text(pair.second, color = Color(0xFF68758E), fontSize = 13.sp) }
+                        val lesson = lessonContent(activeLesson)
+                        Column(verticalArrangement = Arrangement.spacedBy(14.dp)) {
+                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                TextButton(onClick = { currentScreen = "Dersler"; lessonStage = 0 }) { Text("✕ Çık") }
+                                Spacer(Modifier.weight(1f))
+                                Text("Bölüm ${lessonStage + 1}/3", color = Blue, fontWeight = FontWeight.Bold)
+                            }
+                            LinearProgressIndicator(progress = { (lessonStage + 1) / 3f }, modifier = Modifier.fillMaxWidth(), color = Blue)
+                            Text(activeLesson, fontSize = 26.sp, fontWeight = FontWeight.ExtraBold, color = Navy)
+                            when (lessonStage) {
+                                0 -> {
+                                    Text("KONU ANLATIMI", color = Blue, fontWeight = FontWeight.ExtraBold, fontSize = 12.sp)
+                                    Card(shape = RoundedCornerShape(24.dp), colors = CardDefaults.cardColors(containerColor = Color.White)) {
+                                        Column(Modifier.fillMaxWidth().padding(20.dp), verticalArrangement = Arrangement.spacedBy(15.dp)) {
+                                            Text(lesson.heading, fontSize = 21.sp, fontWeight = FontWeight.ExtraBold, color = Ink)
+                                            Text(lesson.explanation, fontSize = 16.sp, lineHeight = 25.sp, color = Ink)
+                                            Surface(color = PaleBlue, shape = RoundedCornerShape(16.dp)) {
+                                                Text(lesson.rule, Modifier.fillMaxWidth().padding(16.dp), fontSize = 18.sp, fontWeight = FontWeight.Bold, color = Navy)
+                                            }
+                                            Text("Örnekler", fontWeight = FontWeight.ExtraBold, fontSize = 18.sp)
+                                            lesson.examples.forEach { example ->
+                                                Column(Modifier.fillMaxWidth().background(Color(0xFFF7F8FC), RoundedCornerShape(14.dp)).padding(13.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                                                    Text(example.first, fontWeight = FontWeight.Bold, color = Ink, fontSize = 16.sp)
+                                                    Text(example.second, color = Color(0xFF68758E), fontSize = 14.sp)
+                                                }
+                                            }
+                                            Text("Kelimeler", fontWeight = FontWeight.ExtraBold, fontSize = 18.sp)
+                                            lesson.words.forEach { pair ->
+                                                Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                                                    Text(pair.first, Modifier.weight(1f), fontWeight = FontWeight.SemiBold, color = Ink)
+                                                    Text(pair.second, color = Color(0xFF68758E))
+                                                }
+                                                HorizontalDivider(color = Color(0xFFEDEEF4))
+                                            }
                                         }
                                     }
-                                    HorizontalDivider()
-                                    Text("Mini alıştırma", fontWeight = FontWeight.Bold, fontSize = 17.sp)
-                                    val target = lessonWords.first()
-                                    Text("“${target.first}” ne demektir?")
-                                    listOf(target.second, lessonWords.getOrNull(1)?.second ?: "Günaydın", lessonWords.getOrNull(2)?.second ?: "Teşekkürler").distinct().forEach { answer ->
-                                        OutlinedButton(onClick = { lessonAnswer = answer == target.second }, modifier = Modifier.fillMaxWidth()) { Text(answer) }
+                                    Button(onClick = { lessonStage = 1 }, modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(16.dp)) { Text("Videoya geç  →", modifier = Modifier.padding(6.dp)) }
+                                }
+                                1 -> {
+                                    Text("VİDEO DERSİ", color = Blue, fontWeight = FontWeight.ExtraBold, fontSize = 12.sp)
+                                    Text("Videoyu uygulamanın içindeki YouTube ekranında aç. İzledikten sonra teste geç.", color = Color(0xFF68758E), lineHeight = 22.sp)
+                                    Card(shape = RoundedCornerShape(20.dp), colors = CardDefaults.cardColors(containerColor = Color.White)) {
+                                        AndroidView(
+                                            modifier = Modifier.fillMaxWidth().height(360.dp),
+                                            factory = { context ->
+                                                WebView(context).apply {
+                                                    settings.javaScriptEnabled = true
+                                                    settings.domStorageEnabled = true
+                                                    webViewClient = WebViewClient()
+                                                    loadUrl("https://www.youtube.com/results?search_query=" + java.net.URLEncoder.encode("English lesson ${activeLesson}", "UTF-8"))
+                                                }
+                                            },
+                                            update = { view ->
+                                                val expected = "https://www.youtube.com/results?search_query=" + java.net.URLEncoder.encode("English lesson ${activeLesson}", "UTF-8")
+                                                if (view.url != expected && view.tag != activeLesson) {
+                                                    view.tag = activeLesson
+                                                    view.loadUrl(expected)
+                                                }
+                                            }
+                                        )
                                     }
-                                    if (lessonAnswer) Text("Doğru cevap! Dersi tamamlayabilirsin.", color = Color(0xFF16845D), fontWeight = FontWeight.Bold)
-                                    Button(enabled = lessonAnswer, onClick = {
-                                        val key = "${selected}_${activeLessonIndex}_${activeLesson}"
-                                        val done = (prefs.getStringSet("completedLessons", emptySet()) ?: emptySet()) + key
-                                        prefs.edit().putStringSet("completedLessons", done).apply()
-                                        currentScreen = "Dersler"
-                                    }, modifier = Modifier.fillMaxWidth()) { Text("Dersi tamamla ve sonraki dersi aç") }
+                                    Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                                        OutlinedButton(onClick = { lessonStage = 0 }, modifier = Modifier.weight(1f)) { Text("← Konu anlatımı") }
+                                        Button(onClick = { lessonStage = 2; lessonAnswer = false; lessonChoice = "" }, modifier = Modifier.weight(1f)) { Text("Teste geç →") }
+                                    }
+                                }
+                                else -> {
+                                    Text("ALIŞTIRMA", color = Blue, fontWeight = FontWeight.ExtraBold, fontSize = 12.sp)
+                                    Card(shape = RoundedCornerShape(24.dp), colors = CardDefaults.cardColors(containerColor = Color.White)) {
+                                        Column(Modifier.fillMaxWidth().padding(20.dp), verticalArrangement = Arrangement.spacedBy(14.dp)) {
+                                            Text("Boşluğu doldur", fontSize = 21.sp, fontWeight = FontWeight.ExtraBold, color = Ink)
+                                            Text(lesson.question, fontSize = 18.sp, lineHeight = 26.sp, color = Ink)
+                                            lesson.options.forEach { option ->
+                                                OutlinedButton(
+                                                    onClick = { lessonChoice = option; lessonAnswer = option == lesson.correct },
+                                                    modifier = Modifier.fillMaxWidth(),
+                                                    shape = RoundedCornerShape(14.dp),
+                                                    colors = ButtonDefaults.outlinedButtonColors(containerColor = if (lessonChoice == option && lessonAnswer) Mint else Color.White)
+                                                ) { Text(option, modifier = Modifier.padding(4.dp)) }
+                                            }
+                                            if (lessonChoice.isNotBlank()) Text(if (lessonAnswer) "Doğru cevap! ✓" else "Tekrar dene; konu anlatımındaki kuralı hatırla.", color = if (lessonAnswer) Color(0xFF16845D) else Color(0xFFB45309), fontWeight = FontWeight.Bold)
+                                            HorizontalDivider()
+                                            Text("Video sonrası kontrol", fontWeight = FontWeight.Bold)
+                                            Text(lesson.videoQuestion, fontSize = 16.sp, lineHeight = 24.sp)
+                                            Text("Not: YouTube videosu konuya göre aranır; bu soru dersin dil bilgisi hedefini de kontrol eder.", color = Color(0xFF68758E), fontSize = 12.sp)
+                                        }
+                                    }
+                                    Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                                        OutlinedButton(onClick = { lessonStage = 1 }, modifier = Modifier.weight(1f)) { Text("← Videoya dön") }
+                                        Button(enabled = lessonAnswer, onClick = {
+                                            val key = "${selected}_${activeLessonIndex}_${activeLesson}"
+                                            val done = (prefs.getStringSet("completedLessons", emptySet()) ?: emptySet()) + key
+                                            prefs.edit().putStringSet("completedLessons", done).apply()
+                                            currentScreen = "Dersler"
+                                            lessonStage = 0
+                                        }, modifier = Modifier.weight(1f)) { Text("Dersi tamamla ✓") }
+                                    }
                                 }
                             }
                         }
@@ -819,3 +888,26 @@ private fun topicForWord(word: Word): String {
         else -> "Diğer kelimeler"
     }
 }
+
+private data class LessonContent(
+    val heading: String, val explanation: String, val rule: String,
+    val examples: List<Pair<String, String>>, val words: List<Pair<String, String>>,
+    val question: String, val options: List<String>, val correct: String, val videoQuestion: String
+)
+
+private fun lessonContent(title: String): LessonContent {
+    val t = title.lowercase(Locale.ROOT)
+    return when {
+        "past continuous" in t -> LessonContent("Geçmişte devam eden eylemler", "Geçmişte belirli bir anda devam etmekte olan işleri anlatırız. Genellikle başka bir olay olduğunda devam eden eylem için kullanılır.", "Özne + was/were + fiil-ing", listOf("I was studying at 8 p.m." to "Saat 8'de ders çalışıyordum.", "They were playing when it started to rain." to "Yağmur başladığında oyun oynuyorlardı.", "She wasn't sleeping." to "Uyumuyordu."), listOf("while" to "-iken", "when" to "-dığı zaman", "study" to "ders çalışmak", "wait" to "beklemek"), "I ___ watching TV when you called.", listOf("was", "were", "am", "did"), "was", "Videoda was/were yardımcı fiillerinin hangi öznelerle kullanıldığını dinle.")
+        "simple past" in t || "past events" in t -> LessonContent("Geçmişte tamamlanan olaylar", "Geçmişte belirli bir zamanda bitmiş olayları anlatır. Düzenli fiiller çoğunlukla -ed alır; düzensiz fiillerin ikinci hâli kullanılır.", "Özne + fiilin 2. hâli", listOf("I visited my aunt yesterday." to "Dün teyzemi ziyaret ettim.", "He went to school." to "Okula gitti.", "We didn't watch TV." to "Televizyon izlemedik."), listOf("yesterday" to "dün", "last week" to "geçen hafta", "visited" to "ziyaret etti", "went" to "gitti"), "She ___ to the museum yesterday.", listOf("went", "go", "goes", "going"), "went", "Videodaki örneklerde geçmiş zaman fiilinin ikinci hâline dikkat et.")
+        "present perfect" in t || "life experiences" in t -> LessonContent("Deneyimler ve sonucu süren durumlar", "Present Perfect, zamanı kesin belirtilmeyen deneyimler veya geçmişte başlayıp etkisi süren durumlar için kullanılır.", "Özne + have/has + V3", listOf("I have visited London." to "Londra'yı ziyaret ettim.", "She has finished her homework." to "Ödevini bitirdi.", "Have you ever tried sushi?" to "Hiç suşi denedin mi?"), listOf("already" to "çoktan", "yet" to "henüz", "ever" to "hiç", "never" to "asla / hiç"), "He ___ finished his work.", listOf("has", "have", "was", "did"), "has", "Videoda have ve has kullanımını ve fiilin üçüncü hâlini belirle.")
+        "passive voice" in t -> LessonContent("Edilgen yapı", "Eylemi kimin yaptığı değil, eylemden etkilenen şey önemliyse edilgen yapı kullanılır.", "Özne + be + V3", listOf("The bridge was built in 1990." to "Köprü 1990'da inşa edildi.", "English is spoken here." to "Burada İngilizce konuşulur.", "The meal was prepared by Ali." to "Yemek Ali tarafından hazırlandı."), listOf("built" to "inşa edildi", "made" to "yapıldı", "spoken" to "konuşulan", "by" to "tarafından"), "The letters ___ sent yesterday.", listOf("were", "was", "are", "did"), "were", "Videoda edilgen yapıda be fiili ile V3 arasındaki ilişkiye dikkat et.")
+        "reported speech" in t -> LessonContent("Dolaylı anlatım", "Birinin sözlerini doğrudan alıntılamak yerine aktardığımızda zaman ve kişi zamirleri değişebilir.", "He said (that) + aktarılan cümle", listOf("“I am tired.” → He said he was tired." to "“Yorgunum.” → Yorgun olduğunu söyledi.", "“I can swim.” → She said she could swim." to "“Yüzebilirim.” → Yüzebildiğini söyledi."), listOf("said" to "söyledi", "told" to "anlattı / söyledi", "asked" to "sordu", "promised" to "söz verdi"), "He said he ___ tired.", listOf("was", "is", "were", "be"), "was", "Videoda doğrudan konuşmadan dolaylı anlatıma geçerken zaman değişimini dinle.")
+        "greetings" in t || "introducing" in t -> LessonContent("Selamlaşma ve kendini tanıtma", "İlk kez karşılaştığımız kişilerle selamlaşır, adımızı söyler ve karşımızdakinin adını sorarız.", "Hello / My name is… / Nice to meet you.", listOf("Hello, my name is Ece." to "Merhaba, benim adım Ece.", "Nice to meet you." to "Tanıştığıma memnun oldum.", "What is your name?" to "Adın ne?"), listOf("hello" to "merhaba", "good morning" to "günaydın", "goodbye" to "hoşça kal", "name" to "isim"), "My name ___ Ece.", listOf("is", "are", "am", "be"), "is", "Videoda selamlaşma ve kendini tanıtma ifadelerini dinle.")
+        "shopping" in t -> LessonContent("Alışverişte konuşma", "Fiyat sormak, ürün istemek ve fiyatları karşılaştırmak için bu ifadeleri kullanırız.", "How much is it? / I'd like…", listOf("How much is this shirt?" to "Bu gömlek ne kadar?", "I'd like a bottle of water." to "Bir şişe su istiyorum.", "It's too expensive." to "Çok pahalı."), listOf("price" to "fiyat", "cheap" to "ucuz", "expensive" to "pahalı", "receipt" to "fiş"), "How much ___ it?", listOf("is", "are", "do", "be"), "is", "Videoda fiyat sorma ve kibarca bir ürün isteme kalıplarını dinle.")
+        "countries" in t || "nationalities" in t -> LessonContent("Ülkeler ve milliyetler", "Nereli olduğumuzu söylerken be fiilini ve ülke/milliyet adlarını kullanırız.", "Where are you from? — I'm from Türkiye.", listOf("Where are you from?" to "Nerelisin?", "I'm from Türkiye." to "Türkiye'denim.", "I'm Turkish." to "Türküm."), listOf("country" to "ülke", "nationality" to "milliyet", "Turkish" to "Türk", "from" to "-den / -dan"), "They ___ from Spain.", listOf("are", "is", "am", "be"), "are", "Videoda ülkeler ve milliyetlerden söz ederken kullanılan ifadeleri dinle.")
+        "daily routines" in t -> LessonContent("Günlük rutinler", "Günlük yaptığımız işleri anlatırken geniş zaman kullanırız. He/she/it ile olumlu cümlede fiile genellikle -s eklenir.", "I wake up. / She wakes up.", listOf("I have breakfast at seven." to "Saat yedide kahvaltı yaparım.", "He goes to work by bus." to "İşe otobüsle gider.", "They go to bed early." to "Erken yatarlar."), listOf("wake up" to "uyanmak", "get dressed" to "giyinmek", "have breakfast" to "kahvaltı yapmak", "go to bed" to "yatmaya gitmek"), "She ___ up at seven.", listOf("wakes", "wake", "waking", "woke"), "wakes", "Videoda günlük rutinleri anlatan fiilleri ve he/she ile gelen -s ekini dinle.")
+        else -> LessonContent(title, "Bu derste konuya ait temel ifadeleri ve örnek cümleleri öğreneceksin. Kuralı örneklerle incele, sonra videoyu izle ve alıştırmayı tamamla.", "Örnek cümleye bak; özne, fiil ve zaman yapısını belirle.", listOf("Read the example carefully." to "Örnek cümleyi dikkatlice oku.", "Listen and repeat." to "Dinle ve tekrar et.", "Try the exercise." to "Alıştırmayı dene."), listOf("example" to "örnek", "sentence" to "cümle", "meaning" to "anlam", "practice" to "alıştırma"), "She ___ English every day.", listOf("studies", "study", "studying", "studied"), "studies", "Videoda başlıktaki konunun örneklerini ve kullanılan dil yapısını takip et.")
+    }
+}
+
