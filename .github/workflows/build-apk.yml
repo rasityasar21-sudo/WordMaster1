@@ -19,71 +19,15 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
-      - name: Expand dictionary to 100,000 unique English entries
-        shell: bash
+      - name: Validate bundled dictionary without rewriting translations
         run: |
-          set -euo pipefail
-          curl -fL --retry 3 "https://raw.githubusercontent.com/firatkaya1/dictionary/main/dictionary-json.zip" -o /tmp/dictionary-json.zip
           python3 - <<'PY'
-          import json, zipfile, pathlib, re
-          archive = zipfile.ZipFile('/tmp/dictionary-json.zip')
-          candidates = [n for n in archive.namelist() if n.lower().endswith('.json')]
-          if not candidates:
-              raise SystemExit("Dictionary archive contains no JSON file")
-          source_name = max(candidates, key=lambda n: archive.getinfo(n).file_size)
-          with archive.open(source_name) as f:
-              source = json.load(f)
-          if not isinstance(source, list) or not source:
-              raise SystemExit("Unexpected source dictionary format")
-          target = pathlib.Path("app/src/main/assets/dictionary.json")
-          existing = json.loads(target.read_text(encoding="utf-8"))
-          merged = []
-          seen = set()
-          def add(en, tr, level="A2", example=None):
-              if not isinstance(en, str) or not isinstance(tr, str):
-                  return
-              en, tr = en.strip(), tr.strip()
-              key = en.casefold()
-              if not en or not tr or key in seen or len(en) > 100:
-                  return
-              if not re.search(r"[A-Za-z]", en):
-                  return
-              seen.add(key)
-              item = {"en": en, "tr": tr, "level": level}
-              if example:
-                  item["example"] = example
-              merged.append(item)
-          for item in existing:
-              add(item.get("en"), item.get("tr"), item.get("level", "A1"), item.get("example"))
-          # Prefer common-usage entries, then general entries; combine repeated
-          # source rows into one English headword with multiple Turkish meanings.
-          grouped = {}
-          for item in source:
-              if not isinstance(item, dict):
-                  continue
-              en = item.get("word") or item.get("word_en") or item.get("en")
-              tr = item.get("tr") or item.get("word_tr")
-              category = str(item.get("category", ""))
-              if not isinstance(en, str) or not isinstance(tr, str):
-                  continue
-              key = en.strip().casefold()
-              if not key or not tr.strip():
-                  continue
-              priority = 0 if "common usage" in category.casefold() else 1
-              grouped.setdefault(key, {"en": en.strip(), "meanings": [], "priority": priority})
-              entry = grouped[key]
-              entry["priority"] = min(entry["priority"], priority)
-              meaning = tr.strip()
-              if meaning not in entry["meanings"]:
-                  entry["meanings"].append(meaning)
-          for entry in sorted(grouped.values(), key=lambda x: (x["priority"], x["en"].casefold())):
-              if len(merged) >= 100000:
-                  break
-              add(entry["en"], " / ".join(entry["meanings"][:8]))
-          if len(merged) < 100000:
-              raise SystemExit(f"Only {len(merged)} unique entries found; refusing to create a smaller dictionary")
-          target.write_text(json.dumps(merged[:100000], ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-          print(f"Generated {len(merged[:100000])} unique English entries from {source_name}")
+          import json, pathlib
+          p = pathlib.Path('app/src/main/assets/dictionary.json')
+          data = json.loads(p.read_text(encoding='utf-8'))
+          assert isinstance(data, list) and data, 'Bundled dictionary is empty or invalid'
+          assert all(isinstance(x.get('en'), str) and isinstance(x.get('tr'), str) and x['en'].strip() and x['tr'].strip() for x in data), 'Invalid dictionary entry'
+          print(f'Validated {len(data)} bundled dictionary entries; original translations preserved')
           PY
       - name: Install Android SDK packages
         shell: bash
