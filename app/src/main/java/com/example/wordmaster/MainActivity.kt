@@ -69,6 +69,12 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
     var sessionCorrect by remember { mutableIntStateOf(0) }
     var sessionActive by remember { mutableStateOf(false) }
     var showQuizSummary by remember { mutableStateOf(false) }
+    var quizMode by remember { mutableStateOf("İngilizce → Türkçe") }
+    val reviewWords = remember { mutableStateListOf<String>().apply {
+        addAll(prefs.getStringSet("reviewWords", emptySet()) ?: emptySet())
+    } }
+    val level = xp / 100 + 1
+    val xpInLevel = xp % 100
     val today = LocalDate.now().toString()
     LaunchedEffect(today) {
         if (lastLoginDate != today) {
@@ -83,7 +89,8 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
 
     fun startQuiz() {
         if (words.size < 4) return
-        val target = words.random()
+        val reviewPool = words.filter { it.en in reviewWords }
+        val target = if (reviewPool.isNotEmpty() && (0..1).random() == 0) reviewPool.random() else words.random()
         quizWord = target
         quizChoices = (listOf(target) + words.filter { it.en != target.en }.shuffled().take(3)).shuffled()
         quizMessage = null
@@ -168,6 +175,31 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                             LinearProgressIndicator(progress = { learned.size.coerceAtMost(10) / 10f }, modifier = Modifier.fillMaxWidth().height(8.dp), color = Blue, trackColor = PaleBlue)
                             Spacer(Modifier.height(5.dp))
                             Text("Hedef: her gün 10 kelime öğren. Günlük giriş ödülün: +3 coin.", fontSize = 12.sp, color = Color(0xFF68758E))
+                        }
+                    }
+                }
+                item {
+                    Card(Modifier.fillMaxWidth(), shape = RoundedCornerShape(20.dp), colors = CardDefaults.cardColors(containerColor = Color.White)) {
+                        Column(Modifier.padding(16.dp)) {
+                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                Text("⭐ Seviye $level", fontWeight = FontWeight.ExtraBold, color = Navy, fontSize = 18.sp)
+                                Spacer(Modifier.weight(1f))
+                                Text("$xpInLevel / 100 XP", color = Blue, fontWeight = FontWeight.Bold)
+                            }
+                            Spacer(Modifier.height(8.dp))
+                            LinearProgressIndicator(progress = { xpInLevel / 100f }, modifier = Modifier.fillMaxWidth().height(8.dp), color = Blue, trackColor = PaleBlue)
+                            Spacer(Modifier.height(6.dp))
+                            Text("Her 100 XP'de yeni seviyeye ulaşırsın. Yanlış kelimeler tekrar listene eklenir.", color = Color(0xFF68758E), fontSize = 12.sp)
+                            Spacer(Modifier.height(8.dp))
+                            Text("🏅 Başarılar: ${if (xp >= 100) "İlk seviye ✓" else "İlk seviye: 100 XP"}  •  ${if (bestCorrectStreak >= 5) "5 doğru üst üste ✓" else "Seri rekoru: $bestCorrectStreak"}", color = Navy, fontSize = 12.sp)
+                        }
+                    }
+                }
+                item {
+                    Text("Test modu", fontWeight = FontWeight.Bold, color = Navy, fontSize = 18.sp)
+                    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        listOf("İngilizce → Türkçe", "Türkçe → İngilizce").forEach { mode ->
+                            FilterChip(selected = quizMode == mode, onClick = { quizMode = mode }, label = { Text(mode, fontSize = 11.sp) })
                         }
                     }
                 }
@@ -274,7 +306,12 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
             title = { Text("Mini test 🎯", fontWeight = FontWeight.ExtraBold) },
             text = {
                 Column(verticalArrangement = Arrangement.spacedBy(9.dp)) {
-                    Text("“${quizWord!!.en.replaceFirstChar { it.uppercase() }}” kelimesinin Türkçesi nedir?", fontSize = 17.sp, fontWeight = FontWeight.SemiBold)
+                    Text(
+                        if (quizMode == "İngilizce → Türkçe")
+                            "“${quizWord!!.en.replaceFirstChar { it.uppercase() }}” kelimesinin Türkçesi nedir?"
+                        else "“${quizWord!!.tr.replaceFirstChar { it.uppercase() }}” kelimesinin İngilizcesi nedir?",
+                        fontSize = 17.sp, fontWeight = FontWeight.SemiBold
+                    )
                     quizChoices.forEach { choice ->
                         OutlinedButton(
                             onClick = {
@@ -288,17 +325,19 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                         bestCorrectStreak = maxOf(bestCorrectStreak, correctStreak)
                                         xp += 10
                                         coins += 1
+                                        reviewWords.remove(quizWord!!.en)
                                         quizMessage = "Doğru! +10 XP ve +1 coin 🎉  |  🔥 $correctStreak seri"
                                     } else {
                                         correctStreak = 0
-                                        quizMessage = "Doğru cevap: ${quizWord!!.tr.replaceFirstChar { it.uppercase() }}  |  Seri sıfırlandı."
+                                        if (quizWord!!.en !in reviewWords) reviewWords.add(quizWord!!.en)
+                                        quizMessage = "Doğru cevap: ${if (quizMode == "İngilizce → Türkçe") quizWord!!.tr.replaceFirstChar { it.uppercase() } else quizWord!!.en.replaceFirstChar { it.uppercase() }}  |  Seri sıfırlandı."
                                     }
-                                    prefs.edit().putInt("xp", xp).putInt("coins", coins).putInt("correctStreak", correctStreak).putInt("bestCorrectStreak", bestCorrectStreak).apply()
+                                    prefs.edit().putStringSet("reviewWords", reviewWords.toSet()).putInt("xp", xp).putInt("coins", coins).putInt("correctStreak", correctStreak).putInt("bestCorrectStreak", bestCorrectStreak).apply()
                                 }
                             },
                             modifier = Modifier.fillMaxWidth(),
                             shape = RoundedCornerShape(13.dp)
-                        ) { Text(choice.tr.replaceFirstChar { it.uppercase() }) }
+                        ) { Text(if (quizMode == "İngilizce → Türkçe") choice.tr.replaceFirstChar { it.uppercase() } else choice.en.replaceFirstChar { it.uppercase() }) }
                     }
                     quizMessage?.let { Text(it, fontWeight = FontWeight.Bold, color = if (it.startsWith("Doğru!")) Color(0xFF12805C) else Color(0xFFB45309)) }
                     Text("Bu test: $sessionCorrect / $sessionAnswered   •   Genel: $quizCorrect / $quizCount", color = Color.Gray, fontSize = 12.sp)
