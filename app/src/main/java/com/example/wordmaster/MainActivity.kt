@@ -65,6 +65,9 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
         filterQuery = query.trim()
     }
     var currentScreen by remember { mutableStateOf("Dersler") }
+    var activeLesson by remember { mutableStateOf("") }
+    var activeLessonIndex by remember { mutableIntStateOf(0) }
+    var lessonAnswer by remember { mutableStateOf(false) }
     var selected by remember { mutableStateOf("Tümü") }
     var selectedTopic by remember { mutableStateOf("Tümü") }
     var tab by remember { mutableIntStateOf(0) }
@@ -196,6 +199,46 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                 contentPadding = PaddingValues(start = 18.dp, end = 18.dp, top = 12.dp, bottom = 28.dp),
                 verticalArrangement = Arrangement.spacedBy(14.dp)
             ) {
+                if (currentScreen == "Ders İçeriği") {
+                    item {
+                        val lessonWords = when {
+                            activeLesson.contains("Greetings", true) -> listOf("Hello" to "Merhaba", "Good morning" to "Günaydın", "Goodbye" to "Hoşça kal", "My name is..." to "Benim adım...", "Nice to meet you" to "Tanıştığıma memnun oldum")
+                            activeLesson.contains("Shopping", true) -> listOf("How much is it?" to "Ne kadar?", "price" to "fiyat", "cheap" to "ucuz", "expensive" to "pahalı", "I would like..." to "... istiyorum")
+                            activeLesson.contains("Countries", true) -> listOf("country" to "ülke", "nationality" to "milliyet", "Where are you from?" to "Nerelisin?", "I am from Türkiye" to "Türkiye denim")
+                            activeLesson.contains("Counting", true) -> listOf("one" to "bir", "two" to "iki", "three" to "üç", "How many?" to "Kaç tane?")
+                            activeLesson.contains("Daily routines", true) -> listOf("wake up" to "uyanmak", "get dressed" to "giyinmek", "have breakfast" to "kahvaltı yapmak", "go to work" to "işe gitmek", "go to bed" to "yatmaya gitmek")
+                            else -> words.filter { it.level == selected && it.en.isNotBlank() && it.tr.isNotBlank() }.take(5).map { it.en to it.tr }.ifEmpty { listOf("learn" to "öğrenmek", "practice" to "alıştırma") }
+                        }
+                        Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                            TextButton(onClick = { currentScreen = "Dersler" }) { Text("← Derslere dön") }
+                            Text(activeLesson, fontSize = 24.sp, fontWeight = FontWeight.ExtraBold, color = Navy)
+                            Text("Konu kelimeleri ve kısa alıştırma", color = Color(0xFF68758E))
+                            Card(shape = RoundedCornerShape(20.dp), colors = CardDefaults.cardColors(containerColor = Color.White)) {
+                                Column(Modifier.fillMaxWidth().padding(18.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                                    lessonWords.forEach { pair ->
+                                        Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                                            Column(Modifier.weight(1f)) { Text(pair.first, fontWeight = FontWeight.Bold, color = Ink); Text(pair.second, color = Color(0xFF68758E), fontSize = 13.sp) }
+                                        }
+                                    }
+                                    HorizontalDivider()
+                                    Text("Mini alıştırma", fontWeight = FontWeight.Bold, fontSize = 17.sp)
+                                    val target = lessonWords.first()
+                                    Text("“${target.first}” ne demektir?")
+                                    listOf(target.second, lessonWords.getOrNull(1)?.second ?: "Günaydın", lessonWords.getOrNull(2)?.second ?: "Teşekkürler").distinct().forEach { answer ->
+                                        OutlinedButton(onClick = { lessonAnswer = answer == target.second }, modifier = Modifier.fillMaxWidth()) { Text(answer) }
+                                    }
+                                    if (lessonAnswer) Text("Doğru cevap! Dersi tamamlayabilirsin.", color = Color(0xFF16845D), fontWeight = FontWeight.Bold)
+                                    Button(enabled = lessonAnswer, onClick = {
+                                        val key = "${selected}_${activeLessonIndex}_${activeLesson}"
+                                        val done = (prefs.getStringSet("completedLessons", emptySet()) ?: emptySet()) + key
+                                        prefs.edit().putStringSet("completedLessons", done).apply()
+                                        currentScreen = "Dersler"
+                                    }, modifier = Modifier.fillMaxWidth()) { Text("Dersi tamamla ve sonraki dersi aç") }
+                                }
+                            }
+                        }
+                    }
+                }
                 if (currentScreen == "Dersler") {
                     item {
                         Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
@@ -246,10 +289,10 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                                 elevation = CardDefaults.cardElevation(defaultElevation = if (unlocked) 3.dp else 0.dp),
                                                 onClick = {
                                                     if (unlocked) {
-                                                        currentScreen = "Sözlük"
-                                                        selectedTopic = "Tümü"
-                                                        tab = 0
-                                                        query = ""
+                                                        activeLesson = title
+                                                        activeLessonIndex = lessonIndex
+                                                        lessonAnswer = false
+                                                        currentScreen = "Ders İçeriği"
                                                     }
                                                 }
                                             ) {
