@@ -170,7 +170,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                             .animateContentSize()
                     ) {
                         Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) { 
-                            Text("WORDMASTER", color = Color(0xFFBFD0FF), fontSize = 12.sp, fontWeight = FontWeight.Bold, letterSpacing = 2.sp) 
+                            Text("✦ WORDMASTER", color = Color.White, fontSize = 13.sp, fontWeight = FontWeight.Black, letterSpacing = 2.5.sp) 
                             Spacer(Modifier.weight(1f)) 
                             TextButton(onClick = { nameDraft = displayName; usernameDraft = username; showProfile = true }) { Text("👤 Profil", color = Color.White, fontWeight = FontWeight.Bold) } 
                             TextButton(onClick = { showSettings = true }) { Text("⚙️", color = Color.White, fontSize = 18.sp) } 
@@ -179,12 +179,20 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                         Spacer(Modifier.height(7.dp))
                         Text("İngilizce öğrenmenin\nen renkli yolu! ✨", color = Color.White, fontSize = 28.sp, lineHeight = 34.sp, fontWeight = FontWeight.ExtraBold)
                         Spacer(Modifier.height(7.dp))
-                        Text("Keşfet  •  Öğren  •  Başar", color = Color.White.copy(alpha = .9f), fontSize = 15.sp, fontWeight = FontWeight.Medium)
+                        Text("✨  KELİME ÖĞRENME MACERAN", color = Color.White.copy(alpha = .95f), fontSize = 12.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 1.sp)
                         Spacer(Modifier.height(18.dp))
-                        Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                        Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.fillMaxWidth()) {
                             StatPill("⚡", "$xp XP")
                             StatPill("🪙", "$coins coin")
                             StatPill("📚", "${learned.size} kelime")
+                        }
+                        Spacer(Modifier.height(10.dp))
+                        Surface(color = Color.White.copy(alpha = .18f), shape = RoundedCornerShape(18.dp)) {
+                            Row(Modifier.fillMaxWidth().padding(horizontal = 13.dp, vertical = 10.dp), verticalAlignment = Alignment.CenterVertically) {
+                                Text("🚀", fontSize = 20.sp); Spacer(Modifier.width(9.dp))
+                                Column(Modifier.weight(1f)) { Text("Bugün yeni bir şey öğren!", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 13.sp); Text("Her kelime seni hedefine yaklaştırır.", color = Color.White.copy(alpha = .82f), fontSize = 11.sp) }
+                                Text("✦", color = Color.White, fontSize = 23.sp)
+                            }
                         }
                     }
                 }
@@ -192,12 +200,12 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                     Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                         Card(
                             modifier = Modifier.weight(1f),
-                            colors = CardDefaults.cardColors(containerColor = Color(0xFFEAE5FF)),
+                            colors = CardDefaults.cardColors(containerColor = Brush.linearGradient(listOf(Color(0xFFE6DFFF), Color(0xFFF2EFFF))).let { Color(0xFFE8E1FF) }),
                             elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
                             shape = RoundedCornerShape(26.dp)
                         ) {
                             Column(Modifier.padding(18.dp)) {
-                                Text("📚", fontSize = 30.sp)
+                                Text("📚", fontSize = 34.sp)
                                 Spacer(Modifier.height(7.dp))
                                 Text("Kelime hazinesi", fontWeight = FontWeight.Bold, color = Navy)
                                 Text("${words.size} kelime", color = Color(0xFF5D6C8A), fontSize = 13.sp)
@@ -205,12 +213,12 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                         }
                         Card(
                             modifier = Modifier.weight(1f),
-                            colors = CardDefaults.cardColors(containerColor = Color(0xFFDDF8F0)),
+                            colors = CardDefaults.cardColors(containerColor = Color(0xFFD8F8EF)),
                             elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
                             shape = RoundedCornerShape(26.dp)
                         ) {
                             Column(Modifier.padding(18.dp)) {
-                                Text("🎯", fontSize = 30.sp)
+                                Text("🎯", fontSize = 34.sp)
                                 Spacer(Modifier.height(7.dp))
                                 Text("Mini test", fontWeight = FontWeight.Bold, color = Color(0xFF12694D))
                                 Text("Bilgini dene", color = Color(0xFF397A66), fontSize = 13.sp)
@@ -225,7 +233,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                     }
                 }
                 item {
-                    Card(Modifier.fillMaxWidth(), shape = RoundedCornerShape(26.dp), elevation = CardDefaults.cardElevation(defaultElevation = 5.dp), colors = CardDefaults.cardColors(containerColor = Color(0xFFFFFBFF))) {
+                    Card(Modifier.fillMaxWidth(), shape = RoundedCornerShape(28.dp), elevation = CardDefaults.cardElevation(defaultElevation = 6.dp), colors = CardDefaults.cardColors(containerColor = Color(0xFFFFF8E8))) {
                         Column(Modifier.padding(16.dp)) {
                             Row(verticalAlignment = Alignment.CenterVertically) { Text("🏆 Günlük hedef", fontWeight = FontWeight.Bold, color = Navy); Spacer(Modifier.weight(1f)); Text("${learned.size.coerceAtMost(dailyGoal)}/$dailyGoal kelime", color = Blue, fontWeight = FontWeight.Bold) }
                             Spacer(Modifier.height(9.dp))
@@ -236,7 +244,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                     }
                 }
                 item {
-                    Card(Modifier.fillMaxWidth(), shape = RoundedCornerShape(26.dp), elevation = CardDefaults.cardElevation(defaultElevation = 5.dp), colors = CardDefaults.cardColors(containerColor = Color(0xFFFDFBFF))) {
+                    Card(Modifier.fillMaxWidth(), shape = RoundedCornerShape(28.dp), elevation = CardDefaults.cardElevation(defaultElevation = 6.dp), colors = CardDefaults.cardColors(containerColor = Color(0xFFEAF5FF))) {
                         Column(Modifier.padding(16.dp)) {
                             Row(verticalAlignment = Alignment.CenterVertically) {
                                 Text("⭐ Seviye $level", fontWeight = FontWeight.ExtraBold, color = Navy, fontSize = 18.sp)
@@ -283,7 +291,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                         topicList.forEachIndexed { index, topic ->
                             val count = words.count { (selected == "Tümü" || it.level == selected) && topicForWord(it) == topic }
                             if (count > 0) {
-                                Card(onClick = { selectedTopic = topic; tab = 0 }, modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(22.dp), elevation = CardDefaults.cardElevation(defaultElevation = 2.dp), colors = CardDefaults.cardColors(containerColor = if (selectedTopic == topic) Color(0xFFEDE9FE) else Color.White)) {
+                                Card(onClick = { selectedTopic = topic; tab = 0 }, modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(25.dp), elevation = CardDefaults.cardElevation(defaultElevation = 4.dp), colors = CardDefaults.cardColors(containerColor = if (selectedTopic == topic) Color(0xFFE9DEFF) else listOf(Color(0xFFFFF0F5), Color(0xFFEAF8FF), Color(0xFFFFF5DF), Color(0xFFE8FAF1), Color(0xFFF0EBFF))[index % 5])) {
                                     Row(Modifier.fillMaxWidth().padding(14.dp), verticalAlignment = Alignment.CenterVertically) {
                                         Text(listOf("👋", "👨‍👩‍👧", "🍎", "🏠", "🎒", "🕒", "🚌", "😊", "⚡", "📘")[index], fontSize = 23.sp)
                                         Spacer(Modifier.width(12.dp))
@@ -347,8 +355,8 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                     Card(
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(22.dp),
-                        colors = CardDefaults.cardColors(containerColor = Color.White),
-                        elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
+                        colors = CardDefaults.cardColors(containerColor = listOf(Color(0xFFFFFBF0), Color(0xFFF4F0FF), Color(0xFFEDFAF7), Color(0xFFFFF0F5), Color(0xFFEEF6FF))[filtered.indexOf(word).coerceAtLeast(0) % 5]),
+                        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
                     ) {
                         Column(Modifier.padding(if (compactCards) 11.dp else 17.dp)) {
                             Row(verticalAlignment = Alignment.CenterVertically) {
@@ -357,7 +365,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                     Spacer(Modifier.height(3.dp))
                                     Text(word.tr.replaceFirstChar { it.uppercase() }, fontSize = 16.sp, color = Color(0xFF46536D))
                                 }
-                                Surface(color = PaleBlue, shape = RoundedCornerShape(10.dp)) {
+                                Surface(color = listOf(Color(0xFFE9DEFF), Color(0xFFD9F7ED), Color(0xFFFFE6D5), Color(0xFFDDEEFF), Color(0xFFFFE0EB))[filtered.indexOf(word).coerceAtLeast(0) % 5], shape = RoundedCornerShape(12.dp)) {
                                     Text(word.level, modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp), color = Blue, fontSize = 12.sp, fontWeight = FontWeight.Bold)
                                 }
                             }
