@@ -4,6 +4,7 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import java.util.Locale
+import kotlinx.coroutines.delay
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.runtime.DisposableEffect
 import androidx.activity.ComponentActivity
@@ -56,6 +57,11 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
     var query by remember { mutableStateOf("") }
+    var filterQuery by remember { mutableStateOf("") }
+    LaunchedEffect(query) {
+        delay(180)
+        filterQuery = query.trim()
+    }
     var selected by remember { mutableStateOf("Tümü") }
     var selectedTopic by remember { mutableStateOf("Tümü") }
     var tab by remember { mutableIntStateOf(0) }
@@ -150,11 +156,16 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
         quizMessage = null
     }
 
-    val filtered = words.filter {
-        (selected == "Tümü" || it.level == selected) &&
-        (selectedTopic == "Tümü" || topicForWord(it) == selectedTopic) &&
-        (it.en.contains(query, true) || it.tr.contains(query, true)) &&
-        (tab != 1 || it.en in favorites) && (tab != 2 || it.en in learned)
+    val favoriteSet = favorites.toSet()
+    val learnedSet = learned.toSet()
+    val filtered = remember(words, selected, selectedTopic, filterQuery, tab, favoriteSet, learnedSet) {
+        val search = filterQuery.lowercase(Locale.ROOT)
+        words.filter { word ->
+            (selected == "Tümü" || word.level == selected) &&
+            (selectedTopic == "Tümü" || topicForWord(word) == selectedTopic) &&
+            (search.isBlank() || word.en.lowercase(Locale.ROOT).contains(search) || word.tr.lowercase(Locale.ROOT).contains(search)) &&
+            (tab != 1 || word.en in favoriteSet) && (tab != 2 || word.en in learnedSet)
+        }
     }
 
     MaterialTheme(
