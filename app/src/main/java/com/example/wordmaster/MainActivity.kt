@@ -271,10 +271,10 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                         Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(9.dp)) {
                             listOf("A1", "A2", "B1", "B2", "C1").forEach { levelName ->
                                 val count = words.count { it.level == levelName }
-                                FilterChip(selected = selected == levelName, onClick = { selected = levelName; selectedTopic = "Tümü"; tab = 0 }, label = { Text("$" + "levelName · $" + "count") })
+                                FilterChip(selected = selected == levelName, onClick = { selected = levelName; selectedTopic = "Tümü"; tab = 0 }, label = { Text("$levelName · $count kelime") })
                             }
                         }
-                        Text(if (selected == "Tümü") "Konular" else "$" + "selected konu başlıkları", fontSize = 19.sp, fontWeight = FontWeight.ExtraBold, color = Navy)
+                        Text(if (selected == "Tümü") "Konular" else "$selected konu başlıkları", fontSize = 19.sp, fontWeight = FontWeight.ExtraBold, color = Navy)
                         val topicList = listOf("Selamlaşma", "Aile ve insanlar", "Yiyecek ve içecek", "Ev ve eşyalar", "Okul ve öğrenme", "Zaman ve günlük hayat", "Yerler ve ulaşım", "Duygular ve sıfatlar", "Fiiller ve eylemler", "Diğer kelimeler")
                         topicList.forEachIndexed { index, topic ->
                             val count = words.count { (selected == "Tümü" || it.level == selected) && topicForWord(it) == topic }
@@ -285,7 +285,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                         Spacer(Modifier.width(12.dp))
                                         Column(Modifier.weight(1f)) {
                                             Text(topic, fontWeight = FontWeight.Bold, color = Navy)
-                                            Text("$" + "count kelime · $" + "(if (selectedTopic == topic) "Seçili konu" else "Konuya başla")", fontSize = 12.sp, color = Color(0xFF68758E))
+                                            Text("$count kelime · " + if (selectedTopic == topic) "Seçili konu" else "Konuya başla", fontSize = 12.sp, color = Color(0xFF68758E))
                                         }
                                         Text("›", fontSize = 26.sp, color = Blue, fontWeight = FontWeight.Bold)
                                     }
@@ -296,7 +296,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                     }
                 }
                 item {
-                    Text(if (selectedTopic == "Tümü") "Kelime defterim" else "$" + "selectedTopic · Kelimeler", fontSize = 21.sp, fontWeight = FontWeight.ExtraBold, color = Navy)
+                    Text(if (selectedTopic == "Tümü") "Kelime defterim" else "$selectedTopic · Kelimeler", fontSize = 21.sp, fontWeight = FontWeight.ExtraBold, color = Navy)
                 }
                 item {
                     OutlinedTextField(
