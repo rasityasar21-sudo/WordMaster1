@@ -1,0 +1,77 @@
+[
+  {
+    "en": "hello",
+    "tr": "merhaba",
+    "level": "A1"
+  },
+  {
+    "en": "book",
+    "tr": "kitap",
+    "level": "A1"
+  },
+  {
+    "en": "water",
+    "tr": "su",
+    "level": "A1"
+  },
+  {
+    "en": "house",
+    "tr": "ev",
+    "level": "A1"
+  },
+  {
+    "en": "friend",
+    "tr": "arkadaş",
+    "level": "A1"
+  },
+  {
+    "en": "family",
+    "tr": "aile",
+    "level": "A1"
+  },
+  {
+    "en": "school",
+    "tr": "okul",
+    "level": "A1"
+  },
+  {
+    "en": "learn",
+    "tr": "öğrenmek",
+    "level": "A1"
+  },
+  {
+    "en": "beautiful",
+    "tr": "güzel",
+    "level": "A2"
+  },
+  {
+    "en": "important",
+    "tr": "önemli",
+    "level": "A2"
+  },
+  {
+    "en": "improve",
+    "tr": "geliştirmek",
+    "level": "B1"
+  },
+  {
+    "en": "environment",
+    "tr": "çevre",
+    "level": "B1"
+  },
+  {
+    "en": "achievement",
+    "tr": "başarı",
+    "level": "B2"
+  },
+  {
+    "en": "opportunity",
+    "tr": "fırsat",
+    "level": "B2"
+  },
+  {
+    "en": "nevertheless",
+    "tr": "bununla birlikte",
+    "level": "C1"
+  }
+]
