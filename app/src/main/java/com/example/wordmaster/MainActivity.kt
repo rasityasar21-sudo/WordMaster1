@@ -117,8 +117,10 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
 
     fun startQuiz() {
         if (words.size < 4) return
+        // Akıllı tekrar: önce yanlış yapılan kelimeler, kuyruk boşsa rastgele kelime.
+        // Böylece zor kelimeler unutulmadan yeniden çalışılır.
         val reviewPool = words.filter { it.en in reviewWords }
-        val target = if (reviewPool.isNotEmpty() && (0..1).random() == 0) reviewPool.random() else words.random()
+        val target = if (reviewPool.isNotEmpty()) reviewPool.random() else words.random()
         quizWord = target
         quizChoices = (listOf(target) + words.filter { it.en != target.en }.shuffled().take(3)).shuffled()
         quizMessage = null
