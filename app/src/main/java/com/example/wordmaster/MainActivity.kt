@@ -181,7 +181,16 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
             surface = Color.White, onSurface = Ink, secondary = Color(0xFF13A879)
         )
     ) {
-        Scaffold(containerColor = Color.Transparent) { padding ->
+        Scaffold(
+            containerColor = Color.Transparent,
+            bottomBar = {
+                NavigationBar(containerColor = Color.Black, contentColor = Color.White) {
+                    NavigationBarItem(selected = currentScreen == "Dersler", onClick = { currentScreen = "Dersler"; selectedTopic = "Tümü" }, icon = { Text("📚") }, label = { Text("Dersler") })
+                    NavigationBarItem(selected = currentScreen == "Sözlük", onClick = { currentScreen = "Sözlük"; selectedTopic = "Tümü"; selected = "Tümü"; tab = 0 }, icon = { Text("A-Z") }, label = { Text("Sözlük") })
+                    NavigationBarItem(selected = false, onClick = { showProfile = true }, icon = { Text("👤") }, label = { Text("Profil") })
+                }
+            }
+        ) { padding ->
             LazyColumn(
                 modifier = Modifier.fillMaxSize().background(Brush.verticalGradient(listOf(Color(0xFFF0ECFF), Color(0xFFFFFFFF), Color(0xFFFFF0F7)))).padding(padding),
                 contentPadding = PaddingValues(start = 18.dp, end = 18.dp, top = 12.dp, bottom = 28.dp),
@@ -502,13 +511,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                 }
             }
         }
-    , bottomBar = {
-        NavigationBar(containerColor = Color.Black, contentColor = Color.White) {
-            NavigationBarItem(selected = currentScreen == "Dersler", onClick = { currentScreen = "Dersler"; selectedTopic = "Tümü" }, icon = { Text("📚") }, label = { Text("Dersler") })
-            NavigationBarItem(selected = currentScreen == "Sözlük", onClick = { currentScreen = "Sözlük"; selectedTopic = "Tümü"; selected = "Tümü"; tab = 0 }, icon = { Text("A-Z") }, label = { Text("Sözlük") })
-            NavigationBarItem(selected = false, onClick = { showProfile = true }, icon = { Text("👤") }, label = { Text("Profil") })
-        }
-    })
+    }
 
     if (showOnboarding) AlertDialog(
         onDismissRequest = { },
