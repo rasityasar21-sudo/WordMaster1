@@ -1,77 +1,55 @@
 [
-  {
-    "en": "hello",
-    "tr": "merhaba",
-    "level": "A1"
-  },
-  {
-    "en": "book",
-    "tr": "kitap",
-    "level": "A1"
-  },
-  {
-    "en": "water",
-    "tr": "su",
-    "level": "A1"
-  },
-  {
-    "en": "house",
-    "tr": "ev",
-    "level": "A1"
-  },
-  {
-    "en": "friend",
-    "tr": "arkadaş",
-    "level": "A1"
-  },
-  {
-    "en": "family",
-    "tr": "aile",
-    "level": "A1"
-  },
-  {
-    "en": "school",
-    "tr": "okul",
-    "level": "A1"
-  },
-  {
-    "en": "learn",
-    "tr": "öğrenmek",
-    "level": "A1"
-  },
-  {
-    "en": "beautiful",
-    "tr": "güzel",
-    "level": "A2"
-  },
-  {
-    "en": "important",
-    "tr": "önemli",
-    "level": "A2"
-  },
-  {
-    "en": "improve",
-    "tr": "geliştirmek",
-    "level": "B1"
-  },
-  {
-    "en": "environment",
-    "tr": "çevre",
-    "level": "B1"
-  },
-  {
-    "en": "achievement",
-    "tr": "başarı",
-    "level": "B2"
-  },
-  {
-    "en": "opportunity",
-    "tr": "fırsat",
-    "level": "B2"
-  },
-  {
-    "en": "nevertheless",
-    "tr": "bununla birlikte",
-    "level": "C1"
-  }
+{"en":"hello","tr":"merhaba","level":"A1","example":"Hello, how are you?"},
+{"en":"goodbye","tr":"hoşça kal","level":"A1","example":"Goodbye, see you tomorrow."},
+{"en":"please","tr":"lütfen","level":"A1","example":"Please sit down."},
+{"en":"thank you","tr":"teşekkür ederim","level":"A1","example":"Thank you for your help."},
+{"en":"sorry","tr":"üzgünüm / afedersin","level":"A1","example":"I am sorry."},
+{"en":"yes","tr":"evet","level":"A1"},{"en":"no","tr":"hayır","level":"A1"},
+{"en":"water","tr":"su","level":"A1","example":"I drink water."},
+{"en":"food","tr":"yemek","level":"A1"},{"en":"bread","tr":"ekmek","level":"A1"},
+{"en":"apple","tr":"elma","level":"A1"},{"en":"book","tr":"kitap","level":"A1","example":"This is my book."},
+{"en":"school","tr":"okul","level":"A1"},{"en":"teacher","tr":"öğretmen","level":"A1"},
+{"en":"student","tr":"öğrenci","level":"A1"},{"en":"friend","tr":"arkadaş","level":"A1"},
+{"en":"family","tr":"aile","level":"A1"},{"en":"mother","tr":"anne","level":"A1"},
+{"en":"father","tr":"baba","level":"A1"},{"en":"sister","tr":"kız kardeş","level":"A1"},
+{"en":"brother","tr":"erkek kardeş","level":"A1"},{"en":"house","tr":"ev","level":"A1"},
+{"en":"room","tr":"oda","level":"A1"},{"en":"door","tr":"kapı","level":"A1"},
+{"en":"window","tr":"pencere","level":"A1"},{"en":"table","tr":"masa","level":"A1"},
+{"en":"chair","tr":"sandalye","level":"A1"},{"en":"bed","tr":"yatak","level":"A1"},
+{"en":"city","tr":"şehir","level":"A1"},{"en":"country","tr":"ülke","level":"A1"},
+{"en":"day","tr":"gün","level":"A1"},{"en":"night","tr":"gece","level":"A1"},
+{"en":"morning","tr":"sabah","level":"A1"},{"en":"today","tr":"bugün","level":"A1"},
+{"en":"tomorrow","tr":"yarın","level":"A1"},{"en":"yesterday","tr":"dün","level":"A1"},
+{"en":"happy","tr":"mutlu","level":"A1"},{"en":"sad","tr":"üzgün","level":"A1"},
+{"en":"big","tr":"büyük","level":"A1"},{"en":"small","tr":"küçük","level":"A1"},
+{"en":"good","tr":"iyi","level":"A1"},{"en":"bad","tr":"kötü","level":"A1"},
+{"en":"beautiful","tr":"güzel","level":"A1"},{"en":"easy","tr":"kolay","level":"A1"},
+{"en":"difficult","tr":"zor","level":"A1"},{"en":"fast","tr":"hızlı","level":"A1"},
+{"en":"slow","tr":"yavaş","level":"A1"},{"en":"learn","tr":"öğrenmek","level":"A1"},
+{"en":"speak","tr":"konuşmak","level":"A1"},{"en":"read","tr":"okumak","level":"A1"},
+{"en":"write","tr":"yazmak","level":"A1"},{"en":"listen","tr":"dinlemek","level":"A1"},
+{"en":"understand","tr":"anlamak","level":"A2"},{"en":"remember","tr":"hatırlamak","level":"A2"},
+{"en":"forget","tr":"unutmak","level":"A2"},{"en":"travel","tr":"seyahat etmek","level":"A2"},
+{"en":"holiday","tr":"tatil","level":"A2"},{"en":"weather","tr":"hava durumu","level":"A2"},
+{"en":"sunny","tr":"güneşli","level":"A2"},{"en":"cloudy","tr":"bulutlu","level":"A2"},
+{"en":"rain","tr":"yağmur","level":"A2"},{"en":"healthy","tr":"sağlıklı","level":"A2"},
+{"en":"exercise","tr":"egzersiz","level":"A2"},{"en":"breakfast","tr":"kahvaltı","level":"A2"},
+{"en":"lunch","tr":"öğle yemeği","level":"A2"},{"en":"dinner","tr":"akşam yemeği","level":"A2"},
+{"en":"usually","tr":"genellikle","level":"A2"},{"en":"sometimes","tr":"bazen","level":"A2"},
+{"en":"always","tr":"her zaman","level":"A2"},{"en":"never","tr":"asla","level":"A2"},
+{"en":"important","tr":"önemli","level":"A2"},{"en":"different","tr":"farklı","level":"A2"},
+{"en":"interesting","tr":"ilginç","level":"A2"},{"en":"expensive","tr":"pahalı","level":"A2"},
+{"en":"cheap","tr":"ucuz","level":"A2"},{"en":"choose","tr":"seçmek","level":"A2"},
+{"en":"decide","tr":"karar vermek","level":"A2"},{"en":"invite","tr":"davet etmek","level":"A2"},
+{"en":"improve","tr":"geliştirmek","level":"B1"},{"en":"environment","tr":"çevre","level":"B1"},
+{"en":"experience","tr":"deneyim","level":"B1"},{"en":"opinion","tr":"görüş","level":"B1"},
+{"en":"probably","tr":"muhtemelen","level":"B1"},{"en":"although","tr":"-e rağmen","level":"B1"},
+{"en":"however","tr":"ancak / bununla birlikte","level":"B1"},{"en":"instead","tr":"onun yerine","level":"B1"},
+{"en":"increase","tr":"artırmak / artmak","level":"B1"},{"en":"decrease","tr":"azaltmak / azalmak","level":"B1"},
+{"en":"solution","tr":"çözüm","level":"B1"},{"en":"problem","tr":"sorun","level":"B1"},
+{"en":"opportunity","tr":"fırsat","level":"B1"},{"en":"achievement","tr":"başarı","level":"B2"},
+{"en":"responsibility","tr":"sorumluluk","level":"B2"},{"en":"confidence","tr":"öz güven","level":"B2"},
+{"en":"consequence","tr":"sonuç","level":"B2"},{"en":"sustainable","tr":"sürdürülebilir","level":"B2"},
+{"en":"challenge","tr":"zorluk","level":"B2"},{"en":"nevertheless","tr":"bununla birlikte","level":"C1"},
+{"en":"significant","tr":"önemli / kayda değer","level":"C1"},{"en":"perspective","tr":"bakış açısı","level":"C1"}
 ]
