@@ -26,10 +26,10 @@ import org.json.JSONArray
 
 data class Word(val en: String, val tr: String, val level: String, val example: String = "")
 
-private val Navy = Color(0xFF15264A)
-private val Blue = Color(0xFF4568F5)
-private val PaleBlue = Color(0xFFEFF3FF)
-private val Mint = Color(0xFFDAF7EB)
+private val Navy = Color(0xFF202044)
+private val Blue = Color(0xFF6957E8)
+private val PaleBlue = Color(0xFFF0EDFF)
+private val Mint = Color(0xFFE1F8F0)
 private val Ink = Color(0xFF172033)
 
 class MainActivity : ComponentActivity() {
@@ -103,8 +103,8 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
     val level = xp / 100 + 1
     val xpInLevel = xp % 100
     val today = LocalDate.now().toString() 
-    val pageBackground = when (themeChoice) { 1 -> Color(0xFFEAF8F3); 2 -> Color(0xFFFFF1E5); else -> Color(0xFFF3F2FF) } 
-    val heroBrush = when (themeChoice) { 1 -> Brush.linearGradient(listOf(Color(0xFF075E54), Color(0xFF16A085))); 2 -> Brush.linearGradient(listOf(Color(0xFF7C2D12), Color(0xFFF59E0B))); else -> Brush.linearGradient(listOf(Color(0xFF6D28D9), Color(0xFFDB2777), Color(0xFFF97316))) }
+    val pageBackground = when (themeChoice) { 1 -> Color(0xFFEAF8F3); 2 -> Color(0xFFFFF1E5); else -> Color(0xFFF7F5FF) } 
+    val heroBrush = when (themeChoice) { 1 -> Brush.linearGradient(listOf(Color(0xFF075E54), Color(0xFF16A085))); 2 -> Brush.linearGradient(listOf(Color(0xFF7C2D12), Color(0xFFF59E0B))); else -> Brush.linearGradient(listOf(Color(0xFF4F46E5), Color(0xFF9333EA), Color(0xFFEC4899))) }
     LaunchedEffect(today) {
         if (lastLoginDate != today) {
             dailyStreak = if (lastLoginDate == LocalDate.now().minusDays(1).toString()) dailyStreak + 1 else 1
@@ -165,8 +165,8 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                 item {
                     Column(
                         Modifier.fillMaxWidth()
-                            .background(heroBrush, RoundedCornerShape(28.dp))
-                            .padding(22.dp)
+                            .background(heroBrush, RoundedCornerShape(30.dp))
+                            .padding(24.dp)
                     ) {
                         Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) { 
                             Text("WORDMASTER", color = Color(0xFFBFD0FF), fontSize = 12.sp, fontWeight = FontWeight.Bold, letterSpacing = 2.sp) 
@@ -222,7 +222,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                     }
                 }
                 item {
-                    Card(Modifier.fillMaxWidth(), shape = RoundedCornerShape(18.dp), colors = CardDefaults.cardColors(containerColor = Color.White)) {
+                    Card(Modifier.fillMaxWidth(), shape = RoundedCornerShape(22.dp), elevation = CardDefaults.cardElevation(defaultElevation = 2.dp), colors = CardDefaults.cardColors(containerColor = Color.White)) {
                         Column(Modifier.padding(16.dp)) {
                             Row(verticalAlignment = Alignment.CenterVertically) { Text("🏆 Günlük hedef", fontWeight = FontWeight.Bold, color = Navy); Spacer(Modifier.weight(1f)); Text("${learned.size.coerceAtMost(dailyGoal)}/$dailyGoal kelime", color = Blue, fontWeight = FontWeight.Bold) }
                             Spacer(Modifier.height(9.dp))
@@ -233,7 +233,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                     }
                 }
                 item {
-                    Card(Modifier.fillMaxWidth(), shape = RoundedCornerShape(20.dp), colors = CardDefaults.cardColors(containerColor = Color.White)) {
+                    Card(Modifier.fillMaxWidth(), shape = RoundedCornerShape(24.dp), elevation = CardDefaults.cardElevation(defaultElevation = 2.dp), colors = CardDefaults.cardColors(containerColor = Color.White)) {
                         Column(Modifier.padding(16.dp)) {
                             Row(verticalAlignment = Alignment.CenterVertically) {
                                 Text("⭐ Seviye $level", fontWeight = FontWeight.ExtraBold, color = Navy, fontSize = 18.sp)
@@ -260,8 +260,9 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                 item {
                     Button(
                         onClick = { sessionActive = true; sessionAnswered = 0; sessionCorrect = 0; showQuizSummary = false; startQuiz() },
-                        modifier = Modifier.fillMaxWidth().height(54.dp),
-                        shape = RoundedCornerShape(17.dp)
+                        modifier = Modifier.fillMaxWidth().height(58.dp),
+                        shape = RoundedCornerShape(20.dp),
+                        elevation = ButtonDefaults.buttonElevation(defaultElevation = 3.dp)
                     ) { Text("🎯  Teste Başla", fontSize = 16.sp, fontWeight = FontWeight.Bold) }
                 }
                 item {
@@ -279,7 +280,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                         topicList.forEachIndexed { index, topic ->
                             val count = words.count { (selected == "Tümü" || it.level == selected) && topicForWord(it) == topic }
                             if (count > 0) {
-                                Card(onClick = { selectedTopic = topic; tab = 0 }, modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(18.dp), colors = CardDefaults.cardColors(containerColor = if (selectedTopic == topic) Color(0xFFEDE9FE) else Color.White)) {
+                                Card(onClick = { selectedTopic = topic; tab = 0 }, modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(22.dp), elevation = CardDefaults.cardElevation(defaultElevation = 2.dp), colors = CardDefaults.cardColors(containerColor = if (selectedTopic == topic) Color(0xFFEDE9FE) else Color.White)) {
                                     Row(Modifier.fillMaxWidth().padding(14.dp), verticalAlignment = Alignment.CenterVertically) {
                                         Text(listOf("👋", "👨‍👩‍👧", "🍎", "🏠", "🎒", "🕒", "🚌", "😊", "⚡", "📘")[index], fontSize = 23.sp)
                                         Spacer(Modifier.width(12.dp))
