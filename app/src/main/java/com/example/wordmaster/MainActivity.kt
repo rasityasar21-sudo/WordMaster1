@@ -8,9 +8,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.viewinterop.AndroidView
-import android.webkit.WebView
-import android.webkit.WebViewClient
 import androidx.compose.runtime.DisposableEffect
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -73,6 +70,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
     var lessonAnswer by remember { mutableStateOf(false) }
     var lessonStage by remember { mutableIntStateOf(0) }
     var lessonChoice by remember { mutableStateOf("") }
+    var offlineVideoFrame by remember { mutableIntStateOf(0) }
     var selected by remember { mutableStateOf("Tümü") }
     var selectedTopic by remember { mutableStateOf("Tümü") }
     var tab by remember { mutableIntStateOf(0) }
@@ -246,26 +244,33 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                 }
                                 1 -> {
                                     Text("VİDEO DERSİ", color = Blue, fontWeight = FontWeight.ExtraBold, fontSize = 12.sp)
-                                    Text("Videoyu uygulamanın içindeki YouTube ekranında aç. İzledikten sonra teste geç.", color = Color(0xFF68758E), lineHeight = 22.sp)
-                                    Card(shape = RoundedCornerShape(20.dp), colors = CardDefaults.cardColors(containerColor = Color.White)) {
-                                        AndroidView(
-                                            modifier = Modifier.fillMaxWidth().height(360.dp),
-                                            factory = { context ->
-                                                WebView(context).apply {
-                                                    settings.javaScriptEnabled = true
-                                                    settings.domStorageEnabled = true
-                                                    webViewClient = WebViewClient()
-                                                    loadUrl("https://m.youtube.com/results?search_query=" + java.net.URLEncoder.encode("English lesson ${activeLesson}", "UTF-8"))
-                                                }
-                                            },
-                                            update = { view ->
-                                                val expected = "https://www.youtube.com/results?search_query=" + java.net.URLEncoder.encode("English lesson ${activeLesson}", "UTF-8")
-                                                if (view.url != expected && view.tag != activeLesson) {
-                                                    view.tag = activeLesson
-                                                    view.loadUrl(expected)
+                                    Text("Kısa çevrimdışı video", color = Color(0xFF68758E), lineHeight = 22.sp)
+                                    val offlineFrames = lesson.offlineFrames
+                                    LaunchedEffect(activeLesson, lessonStage) {
+                                        offlineVideoFrame = 0
+                                        while (lessonStage == 1) {
+                                            delay(2600)
+                                            offlineVideoFrame = (offlineVideoFrame + 1) % offlineFrames.size
+                                        }
+                                    }
+                                    Card(shape = RoundedCornerShape(20.dp), colors = CardDefaults.cardColors(containerColor = Color(0xFF19172D))) {
+                                        Column(Modifier.fillMaxWidth().padding(18.dp), verticalArrangement = Arrangement.spacedBy(14.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+                                            Text("WORDMASTER • OFFLINE", color = Color(0xFFBDB4FF), fontWeight = FontWeight.Bold, fontSize = 12.sp)
+                                            Box(Modifier.fillMaxWidth().height(190.dp).background(Brush.linearGradient(listOf(Color(0xFF5145CD), Color(0xFF9A4DCC))), RoundedCornerShape(16.dp)), contentAlignment = Alignment.Center) {
+                                                Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.padding(12.dp)) {
+                                                    Text(offlineFrames[offlineVideoFrame].first, color = Color.White, fontSize = 25.sp, fontWeight = FontWeight.ExtraBold, textAlign = androidx.compose.ui.text.style.TextAlign.Center)
+                                                    Text(offlineFrames[offlineVideoFrame].second, color = Color.White, fontSize = 18.sp, textAlign = androidx.compose.ui.text.style.TextAlign.Center)
                                                 }
                                             }
-                                        )
+                                            Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                                                offlineFrames.indices.forEach { index -> Box(Modifier.weight(1f).height(5.dp).background(if (index == offlineVideoFrame) Color(0xFFFFE500) else Color(0xFF55516C), RoundedCornerShape(8.dp))) }
+                                            }
+                                            Text("Kısa animasyonlu konu özeti • İnternet gerekmez", color = Color.White, fontWeight = FontWeight.SemiBold)
+                                            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                                                OutlinedButton(onClick = { offlineVideoFrame = (offlineVideoFrame - 1 + offlineFrames.size) % offlineFrames.size }, modifier = Modifier.weight(1f)) { Text("← Önceki") }
+                                                Button(onClick = { offlineVideoFrame = (offlineVideoFrame + 1) % offlineFrames.size }, modifier = Modifier.weight(1f)) { Text("Sonraki →") }
+                                            }
+                                        }
                                     }
                                     Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                                         OutlinedButton(onClick = { lessonStage = 0 }, modifier = Modifier.weight(1f)) { Text("← Konu anlatımı") }
