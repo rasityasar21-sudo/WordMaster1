@@ -210,7 +210,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                     FilterChip(
                                         selected = selected == levelName,
                                         onClick = { selected = levelName; selectedTopic = "Tümü"; tab = 0 },
-                                        label = { Text("$levelName · $count", fontSize = 12.sp) }
+                                        label = { Text(levelName, fontSize = 12.sp) }
                                     )
                                 }
                             }
