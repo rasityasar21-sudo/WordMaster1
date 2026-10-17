@@ -96,8 +96,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                     ) {
                         Text("WORDMASTER", color = Color(0xFFBFD0FF), fontSize = 12.sp, fontWeight = FontWeight.Bold, letterSpacing = 2.sp)
                         Spacer(Modifier.height(7.dp))
-                        Text("Her gün biraz daha
-İngilizce! ✨", color = Color.White, fontSize = 27.sp, lineHeight = 32.sp, fontWeight = FontWeight.ExtraBold)
+                        Text("Her gün biraz daha\nİngilizce! ✨", color = Color.White, fontSize = 27.sp, lineHeight = 32.sp, fontWeight = FontWeight.ExtraBold)
                         Spacer(Modifier.height(7.dp))
                         Text("Kelime öğren • Tekrar et • İlerle", color = Color.White.copy(alpha = .82f), fontSize = 14.sp)
                         Spacer(Modifier.height(18.dp))
