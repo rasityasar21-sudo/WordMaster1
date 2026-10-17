@@ -117,12 +117,28 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
 
     fun startQuiz() {
         if (words.size < 4) return
-        // Akıllı tekrar: önce yanlış yapılan kelimeler, kuyruk boşsa rastgele kelime.
-        // Böylece zor kelimeler unutulmadan yeniden çalışılır.
-        val reviewPool = words.filter { it.en in reviewWords }
-        val target = if (reviewPool.isNotEmpty()) reviewPool.random() else words.random()
+        val levels = listOf("A1", "A2", "B1", "B2", "C1")
+        // Seviye tespitinde sorular, kullanıcının seçtiği başlangıç seviyesinden gelir.
+        // Sıradan mini testte ise önce yanlış cevaplanan kelimeler tekrar edilir.
+        val pool = if (placementMode) {
+            val preferred = words.filter { it.level == onboardingChoice }
+            val index = levels.indexOf(onboardingChoice).coerceAtLeast(0)
+            preferred.ifEmpty {
+                val nearestLevels = levels.sortedBy { kotlin.math.abs(levels.indexOf(it) - index) }
+                nearestLevels.asSequence().map { level -> words.filter { it.level == level } }
+                    .firstOrNull { it.isNotEmpty() } ?: words
+            }
+        } else {
+            val reviewPool = words.filter { it.en in reviewWords }
+            if (reviewPool.isNotEmpty()) reviewPool else words
+        }
+        val target = pool.random()
+        val sameLevelChoices = words.filter { it.level == target.level && it.en != target.en }
+        val otherChoices = words.filter { it.en != target.en && it !in sameLevelChoices }
         quizWord = target
-        quizChoices = (listOf(target) + words.filter { it.en != target.en }.shuffled().take(3)).shuffled()
+        quizChoices = (listOf(target) + sameLevelChoices.shuffled().take(3).let { picked ->
+            if (picked.size == 3) picked else picked + otherChoices.shuffled().take(3 - picked.size)
+        }).shuffled()
         quizMessage = null
     }
 
@@ -462,7 +478,14 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                     }
                                     prefs.edit().putInt("totalCorrect", totalCorrect).putInt("totalAnswered", totalAnswered).putStringSet("reviewWords", reviewWords.toSet()).putInt("xp", xp).putInt("coins", coins).putInt("correctStreak", correctStreak).putInt("bestCorrectStreak", bestCorrectStreak).apply()
                                     if (placementMode && placementAnswered >= 10) {
-                                        chosenLevel = when { placementCorrect >= 9 -> "B2"; placementCorrect >= 7 -> "B1"; placementCorrect >= 5 -> "A2"; else -> "A1" }
+                                        val levelOrder = listOf("A1", "A2", "B1", "B2", "C1")
+                                        val baseIndex = levelOrder.indexOf(onboardingChoice).coerceAtLeast(0)
+                                        val assessedIndex = when {
+                                            placementCorrect >= 8 -> (baseIndex + 1).coerceAtMost(levelOrder.lastIndex)
+                                            placementCorrect >= 5 -> baseIndex
+                                            else -> (baseIndex - 1).coerceAtLeast(0)
+                                        }
+                                        chosenLevel = levelOrder[assessedIndex]
                                         placementLevel = chosenLevel
                                         selected = chosenLevel
                                         prefs.edit().putString("chosenLevel", chosenLevel).apply()
