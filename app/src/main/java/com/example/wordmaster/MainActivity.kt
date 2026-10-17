@@ -308,49 +308,81 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                     ) { Text("🎯  Teste Başla", fontSize = 16.sp, fontWeight = FontWeight.Bold) }
                 }
                 item {
-                    Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                        Text("🚀 Öğrenme yolculuğun", fontSize = 24.sp, fontWeight = FontWeight.ExtraBold, color = Navy)
-                        Text("Seviyeni seç, bir konu aç ve adım adım ilerle.", fontSize = 13.sp, color = Color(0xFF68758E))
-                        Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(9.dp)) {
+                    Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                        Text("🚀 Öğrenme yolculuğun", fontSize = 23.sp, fontWeight = FontWeight.ExtraBold, color = Navy)
+                        Text("Bir seviye ve konu seç.", fontSize = 13.sp, color = Color(0xFF68758E))
+                        Row(
+                            Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()),
+                            horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        ) {
                             listOf("A1", "A2", "B1", "B2", "C1").forEach { levelName ->
                                 val count = words.count { it.level == levelName }
-                                FilterChip(selected = selected == levelName, onClick = { selected = levelName; selectedTopic = "Tümü"; tab = 0 }, label = { Text("$levelName · $count kelime") })
+                                FilterChip(
+                                    selected = selected == levelName,
+                                    onClick = { selected = levelName; selectedTopic = "Tümü"; tab = 0 },
+                                    label = { Text("$levelName · $count", fontSize = 12.sp) }
+                                )
                             }
                         }
-                        Text(if (selected == "Tümü") "Konular" else "$selected konu başlıkları", fontSize = 19.sp, fontWeight = FontWeight.ExtraBold, color = Navy)
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Text(if (selected == "Tümü") "Konular" else "$selected konuları", fontSize = 19.sp, fontWeight = FontWeight.ExtraBold, color = Navy)
+                            Spacer(Modifier.weight(1f))
+                            Text("Birini seç", fontSize = 11.sp, color = Color(0xFF68758E))
+                        }
                         val topicList = listOf("Selamlaşma", "Aile ve insanlar", "Yiyecek ve içecek", "Ev ve eşyalar", "Okul ve öğrenme", "Zaman ve günlük hayat", "Yerler ve ulaşım", "Duygular ve sıfatlar", "Fiiller ve eylemler", "Diğer kelimeler")
-                        topicList.forEachIndexed { index, topic ->
-                            val count = words.count { (selected == "Tümü" || it.level == selected) && topicForWord(it) == topic }
-                            if (count > 0) {
-                                Card(
-                                    onClick = { selectedTopic = topic; tab = 0 },
-                                    modifier = Modifier.fillMaxWidth(),
-                                    shape = RoundedCornerShape(24.dp),
-                                    elevation = CardDefaults.cardElevation(defaultElevation = if (selectedTopic == topic) 5.dp else 2.dp),
-                                    colors = CardDefaults.cardColors(containerColor = if (selectedTopic == topic) Color(0xFFE9DEFF) else listOf(Color(0xFFFFF0F5), Color(0xFFEAF8FF), Color(0xFFFFF5DF), Color(0xFFE8FAF1), Color(0xFFF0EBFF))[index % 5])
-                                ) {
-                                    Row(Modifier.fillMaxWidth().padding(horizontal = 14.dp, vertical = 11.dp), verticalAlignment = Alignment.CenterVertically) {
-                                        Surface(
-                                            color = listOf(Color(0xFFFFDDE8), Color(0xFFD7F4EA), Color(0xFFFFE8C7), Color(0xFFDCEBFF), Color(0xFFE4DCFF))[index % 5],
+                        val topicColors = listOf(Color(0xFFFFF0F5), Color(0xFFEAF8FF), Color(0xFFFFF5DF), Color(0xFFE8FAF1), Color(0xFFF0EBFF))
+                        val iconColors = listOf(Color(0xFFFFDDE8), Color(0xFFD7F4EA), Color(0xFFFFE8C7), Color(0xFFDCEBFF), Color(0xFFE4DCFF))
+                        topicList.chunked(2).forEachIndexed { rowIndex, topicPair ->
+                            Row(
+                                Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.spacedBy(9.dp)
+                            ) {
+                                topicPair.forEachIndexed { pairIndex, topic ->
+                                    val index = rowIndex * 2 + pairIndex
+                                    val count = words.count { (selected == "Tümü" || it.level == selected) && topicForWord(it) == topic }
+                                    if (count > 0) {
+                                        Card(
+                                            onClick = { selectedTopic = if (selectedTopic == topic) "Tümü" else topic; tab = 0 },
+                                            modifier = Modifier.weight(1f).height(88.dp),
                                             shape = RoundedCornerShape(18.dp),
-                                            modifier = Modifier.size(48.dp)
+                                            elevation = CardDefaults.cardElevation(defaultElevation = if (selectedTopic == topic) 3.dp else 1.dp),
+                                            colors = CardDefaults.cardColors(
+                                                containerColor = if (selectedTopic == topic) Color(0xFFE5DCFF) else topicColors[index % topicColors.size]
+                                            )
                                         ) {
-                                            Box(contentAlignment = Alignment.Center) {
-                                                Text(listOf("👋", "👨‍👩‍👧", "🍎", "🏠", "🎒", "🕒", "🚌", "😊", "⚡", "📘")[index], fontSize = 25.sp)
+                                            Row(
+                                                Modifier.fillMaxSize().padding(horizontal = 10.dp, vertical = 9.dp),
+                                                verticalAlignment = Alignment.CenterVertically,
+                                                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                                            ) {
+                                                Surface(
+                                                    color = iconColors[index % iconColors.size],
+                                                    shape = RoundedCornerShape(12.dp),
+                                                    modifier = Modifier.size(38.dp)
+                                                ) {
+                                                    Box(contentAlignment = Alignment.Center) {
+                                                        Text(listOf("👋", "👨‍👩‍👧", "🍎", "🏠", "🎒", "🕒", "🚌", "😊", "⚡", "📘")[index], fontSize = 20.sp)
+                                                    }
+                                                }
+                                                Column(Modifier.weight(1f), verticalArrangement = Arrangement.Center) {
+                                                    Text(topic, fontWeight = FontWeight.Bold, color = Navy, fontSize = 12.sp, lineHeight = 15.sp, maxLines = 2)
+                                                    Spacer(Modifier.height(3.dp))
+                                                    Text("$count kelime", fontSize = 11.sp, color = Color(0xFF68758E))
+                                                }
                                             }
                                         }
-                                        Spacer(Modifier.width(14.dp))
-                                        Column(Modifier.weight(1f)) {
-                                            Text(topic, fontWeight = FontWeight.ExtraBold, color = Navy, fontSize = 15.sp)
-                                            Spacer(Modifier.height(3.dp))
-                                            Text("$count kelime", fontSize = 12.sp, color = Color(0xFF68758E))
-                                            Text(if (selectedTopic == topic) "Seçili ✓" else "Konuya git  ›", fontSize = 11.sp, color = Blue, fontWeight = FontWeight.Bold)
-                                        }
+                                    } else {
+                                        Spacer(Modifier.weight(1f))
                                     }
                                 }
+                                if (topicPair.size == 1) Spacer(Modifier.weight(1f))
                             }
                         }
-                        if (selectedTopic != "Tümü") OutlinedButton(onClick = { selectedTopic = "Tümü" }, modifier = Modifier.fillMaxWidth()) { Text("Tüm konuları göster") }
+                        if (selectedTopic != "Tümü") {
+                            TextButton(onClick = { selectedTopic = "Tümü" }, modifier = Modifier.align(Alignment.End)) {
+                                Text("Tüm konuları göster")
+                            }
+                        }
                     }
                 }
                 item {
