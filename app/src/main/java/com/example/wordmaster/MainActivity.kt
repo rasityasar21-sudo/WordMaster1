@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import java.util.Locale
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.runtime.DisposableEffect
 import androidx.activity.ComponentActivity
@@ -158,13 +160,17 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
 
     val favoriteSet = favorites.toSet()
     val learnedSet = learned.toSet()
-    val filtered = remember(words, selected, selectedTopic, filterQuery, tab, favoriteSet, learnedSet) {
+    // 100.000 kelimelik sözlükte filtrelemeyi ana UI iş parçacığından çıkar.
+    var filtered by remember { mutableStateOf<List<Word>>(emptyList()) }
+    LaunchedEffect(words, selected, selectedTopic, filterQuery, tab, favoriteSet, learnedSet) {
         val search = filterQuery.lowercase(Locale.ROOT)
-        words.filter { word ->
-            (selected == "Tümü" || word.level == selected) &&
-            (selectedTopic == "Tümü" || topicForWord(word) == selectedTopic) &&
-            (search.isBlank() || word.en.lowercase(Locale.ROOT).contains(search) || word.tr.lowercase(Locale.ROOT).contains(search)) &&
-            (tab != 1 || word.en in favoriteSet) && (tab != 2 || word.en in learnedSet)
+        filtered = withContext(Dispatchers.Default) {
+            words.asSequence().filter { word ->
+                (selected == "Tümü" || word.level == selected) &&
+                (selectedTopic == "Tümü" || topicForWord(word) == selectedTopic) &&
+                (search.isBlank() || word.en.contains(search, ignoreCase = true) || word.tr.contains(search, ignoreCase = true)) &&
+                (tab != 1 || word.en in favoriteSet) && (tab != 2 || word.en in learnedSet)
+            }.toList()
         }
     }
 
