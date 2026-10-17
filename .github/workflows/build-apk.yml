@@ -3,7 +3,7 @@ name: Build WordMaster APK
 on:
   workflow_dispatch:
   push:
-    branches: [ "main", "feature/wordmaster-23" ]
+    branches: [ "main", "feature/wordmaster-23", "feature/wordmaster-24-profile-design-vocabulary" ]
 
 jobs:
   build:
