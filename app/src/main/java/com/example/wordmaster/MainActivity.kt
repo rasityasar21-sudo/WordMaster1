@@ -226,48 +226,62 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                 "B2" -> listOf("Debates and opinions", "Professional life", "Society and culture", "Science and technology", "News and media", "Complex feelings", "Academic vocabulary", "Idioms", "Advanced conditionals", "Cause and effect", "Formal writing", "Presentations", "Negotiation", "Global issues", "Research", "Collocations", "Nuanced adjectives", "Advanced phrasal verbs", "Workplace communication", "B2 review")
                                 else -> listOf("Advanced expressions", "Academic English", "Abstract concepts", "Culture and society", "Professional communication", "Subtle meaning differences", "Advanced verbs", "Idioms and phrases", "Critical analysis", "Formal register", "Research vocabulary", "Persuasive language", "Literature", "Politics and society", "Advanced collocations", "C1 review")
                             }
-                            val lessonIcons = listOf("🤝", "🔤", "🌍", "🔢", "🎒", "👨‍👩‍👧", "🏠", "🎨", "🍎", "🏡", "📚", "📅", "🕒", "🧭")
+                            val lessonIcons = listOf("✦", "Aa", "◎", "123", "▣", "⌂", "◇", "＋", "☼", "↗", "▤", "◷")
                             val completedLessons = remember { mutableStateListOf<String>().apply {
                                 addAll(prefs.getStringSet("completedLessons", emptySet()) ?: emptySet())
                             } }
-                            Column(verticalArrangement = Arrangement.spacedBy(0.dp)) {
-                                lessonTitles.forEachIndexed { lessonIndex, title ->
-                                    val lessonKey = "${selected}_${lessonIndex}_${title}"
-                                    val completed = lessonKey in completedLessons
-                                    val isNext = lessonIndex == 0 || "${selected}_${lessonIndex - 1}_${lessonTitles.getOrNull(lessonIndex - 1).orEmpty()}" in completedLessons
-                                    Row(Modifier.fillMaxWidth().heightIn(min = 108.dp), verticalAlignment = Alignment.CenterVertically) {
-                                        Column(Modifier.width(76.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-                                            Box(
-                                                modifier = Modifier.size(62.dp).background(
-                                                    if (completed) Color(0xFFE8F8EC) else if (isNext) Color(0xFFFFF200) else Color(0xFFF0F0F0),
-                                                    RoundedCornerShape(18.dp)
-                                                ),
-                                                contentAlignment = Alignment.Center
+                            val lessonRows = lessonTitles.chunked(2)
+                            Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                                lessonRows.forEachIndexed { rowIndex, rowTitles ->
+                                    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                                        rowTitles.forEachIndexed { columnIndex, title ->
+                                            val lessonIndex = rowIndex * 2 + columnIndex
+                                            val lessonKey = "${selected}_${lessonIndex}_${title}"
+                                            val completed = lessonKey in completedLessons
+                                            val unlocked = lessonIndex == 0 || "${selected}_${lessonIndex - 1}_${lessonTitles.getOrNull(lessonIndex - 1).orEmpty()}" in completedLessons
+                                            Card(
+                                                modifier = Modifier.weight(1f).heightIn(min = 142.dp),
+                                                shape = RoundedCornerShape(22.dp),
+                                                colors = CardDefaults.cardColors(containerColor = if (unlocked) Color.White else Color(0xFFF0F1F6)),
+                                                elevation = CardDefaults.cardElevation(defaultElevation = if (unlocked) 3.dp else 0.dp),
+                                                onClick = {
+                                                    if (unlocked) {
+                                                        currentScreen = "Sözlük"
+                                                        selectedTopic = "Tümü"
+                                                        tab = 0
+                                                        query = ""
+                                                    }
+                                                }
                                             ) {
-                                                Text(lessonIcons[lessonIndex % lessonIcons.size], fontSize = 28.sp)
+                                                Column(Modifier.fillMaxSize().padding(14.dp), verticalArrangement = Arrangement.SpaceBetween) {
+                                                    Row(verticalAlignment = Alignment.CenterVertically) {
+                                                        Box(
+                                                            Modifier.size(38.dp).background(
+                                                                if (completed) Color(0xFFDDF7EA) else if (unlocked) Color(0xFFE3F5F0) else Color(0xFFE2E4EC),
+                                                                RoundedCornerShape(12.dp)
+                                                            ),
+                                                            contentAlignment = Alignment.Center
+                                                        ) {
+                                                            Text(lessonIcons[lessonIndex % lessonIcons.size], fontSize = 17.sp, fontWeight = FontWeight.Bold, color = Color(0xFF175E57))
+                                                        }
+                                                        Spacer(Modifier.weight(1f))
+                                                        Text(
+                                                            if (completed) "✓" else if (unlocked) "→" else "•",
+                                                            fontSize = 20.sp, fontWeight = FontWeight.Bold,
+                                                            color = if (completed) Color(0xFF16845D) else Color(0xFF667085)
+                                                        )
+                                                    }
+                                                    Spacer(Modifier.height(12.dp))
+                                                    Text(title, fontSize = 14.sp, fontWeight = FontWeight.Bold, color = Ink, lineHeight = 19.sp)
+                                                    Spacer(Modifier.height(6.dp))
+                                                    Text(
+                                                        if (completed) "Tamamlandı" else if (unlocked) "Başlamak için dokun" else "Daha sonra açılır",
+                                                        fontSize = 11.sp, color = Color(0xFF667085)
+                                                    )
+                                                }
                                             }
-                                            if (lessonIndex < lessonTitles.lastIndex) {
-                                                Box(Modifier.width(4.dp).height(44.dp).background(if (completed) Color(0xFF43A85B) else Color.LightGray))
-                                            }
                                         }
-                                        Spacer(Modifier.width(12.dp))
-                                        Column(Modifier.weight(1f).padding(vertical = 12.dp)) {
-                                            Text(title, fontSize = 15.sp, fontWeight = FontWeight.SemiBold, color = Navy)
-                                            Text(if (completed) "Tamamlandı ✓" else if (isNext) "Derse başla" else "Sıradaki ders", fontSize = 12.sp, color = if (completed) Color(0xFF32964B) else Color(0xFF68758E))
-                                        }
-                                        if (completed) {
-                                            Text("✓", fontSize = 24.sp, color = Color(0xFF43A85B), fontWeight = FontWeight.Bold)
-                                        } else if (isNext) {
-                                            TextButton(onClick = {
-                                                currentScreen = "Sözlük"
-                                                selected = selected
-                                                selectedTopic = "Tümü"
-                                                tab = 0
-                                                query = ""
-                                            }) { Text("▶", color = Color.Black, fontSize = 20.sp) }
-                                        } else {
-                                            Text("🔒", fontSize = 19.sp)
-                                        }
+                                        if (rowTitles.size == 1) Spacer(Modifier.weight(1f))
                                     }
                                 }
                             }
