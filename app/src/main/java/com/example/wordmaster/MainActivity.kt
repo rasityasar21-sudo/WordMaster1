@@ -158,15 +158,16 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
     ) {
         Scaffold(containerColor = Color.Transparent) { padding ->
             LazyColumn(
-                modifier = Modifier.fillMaxSize().background(Brush.verticalGradient(listOf(pageBackground, Color.White, pageBackground))).padding(padding),
+                modifier = Modifier.fillMaxSize().background(Brush.verticalGradient(listOf(Color(0xFFF0ECFF), Color(0xFFFFFFFF), Color(0xFFFFF0F7)))).padding(padding),
                 contentPadding = PaddingValues(start = 18.dp, end = 18.dp, top = 12.dp, bottom = 28.dp),
                 verticalArrangement = Arrangement.spacedBy(14.dp)
             ) {
                 item {
                     Column(
                         Modifier.fillMaxWidth()
-                            .background(heroBrush, RoundedCornerShape(30.dp))
+                            .background(heroBrush, RoundedCornerShape(32.dp))
                             .padding(24.dp)
+                            .animateContentSize()
                     ) {
                         Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) { 
                             Text("WORDMASTER", color = Color(0xFFBFD0FF), fontSize = 12.sp, fontWeight = FontWeight.Bold, letterSpacing = 2.sp) 
@@ -176,9 +177,9 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                         } 
                         Text("Merhaba, $displayName!", color = Color.White.copy(alpha = .9f), fontSize = 14.sp, fontWeight = FontWeight.SemiBold)
                         Spacer(Modifier.height(7.dp))
-                        Text("Her gün biraz daha\nİngilizce! ✨", color = Color.White, fontSize = 27.sp, lineHeight = 32.sp, fontWeight = FontWeight.ExtraBold)
+                        Text("İngilizce öğrenmenin\nen renkli yolu! ✨", color = Color.White, fontSize = 28.sp, lineHeight = 34.sp, fontWeight = FontWeight.ExtraBold)
                         Spacer(Modifier.height(7.dp))
-                        Text("Kelime öğren • Tekrar et • İlerle", color = Color.White.copy(alpha = .82f), fontSize = 14.sp)
+                        Text("Keşfet  •  Öğren  •  Başar", color = Color.White.copy(alpha = .9f), fontSize = 15.sp, fontWeight = FontWeight.Medium)
                         Spacer(Modifier.height(18.dp))
                         Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                             StatPill("⚡", "$xp XP")
@@ -191,11 +192,12 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                     Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                         Card(
                             modifier = Modifier.weight(1f),
-                            colors = CardDefaults.cardColors(containerColor = PaleBlue),
-                            shape = RoundedCornerShape(20.dp)
+                            colors = CardDefaults.cardColors(containerColor = Color(0xFFEAE5FF)),
+                            elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
+                            shape = RoundedCornerShape(26.dp)
                         ) {
-                            Column(Modifier.padding(16.dp)) {
-                                Text("📖", fontSize = 24.sp)
+                            Column(Modifier.padding(18.dp)) {
+                                Text("📚", fontSize = 30.sp)
                                 Spacer(Modifier.height(7.dp))
                                 Text("Kelime hazinesi", fontWeight = FontWeight.Bold, color = Navy)
                                 Text("${words.size} kelime", color = Color(0xFF5D6C8A), fontSize = 13.sp)
@@ -203,11 +205,12 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                         }
                         Card(
                             modifier = Modifier.weight(1f),
-                            colors = CardDefaults.cardColors(containerColor = Mint),
-                            shape = RoundedCornerShape(20.dp)
+                            colors = CardDefaults.cardColors(containerColor = Color(0xFFDDF8F0)),
+                            elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
+                            shape = RoundedCornerShape(26.dp)
                         ) {
-                            Column(Modifier.padding(16.dp)) {
-                                Text("🎯", fontSize = 24.sp)
+                            Column(Modifier.padding(18.dp)) {
+                                Text("🎯", fontSize = 30.sp)
                                 Spacer(Modifier.height(7.dp))
                                 Text("Mini test", fontWeight = FontWeight.Bold, color = Color(0xFF12694D))
                                 Text("Bilgini dene", color = Color(0xFF397A66), fontSize = 13.sp)
@@ -217,12 +220,12 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                 }
                 item {
                     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                        StreakCard("🔥", "Günlük seri", "$dailyStreak gün", Color(0xFFFFF0D8), Color(0xFF9A5800), Modifier.weight(1f))
-                        StreakCard("⚡", "Doğru serisi", "$correctStreak", Color(0xFFE6F8EE), Color(0xFF13734D), Modifier.weight(1f))
+                        StreakCard("🔥", "GÜNLÜK SERİ", "$dailyStreak gün", Color(0xFFFFE5C2), Color(0xFF984B00), Modifier.weight(1f))
+                        StreakCard("⚡", "DOĞRU SERİSİ", "$correctStreak", Color(0xFFD8F7EE), Color(0xFF087F5B), Modifier.weight(1f))
                     }
                 }
                 item {
-                    Card(Modifier.fillMaxWidth(), shape = RoundedCornerShape(22.dp), elevation = CardDefaults.cardElevation(defaultElevation = 2.dp), colors = CardDefaults.cardColors(containerColor = Color.White)) {
+                    Card(Modifier.fillMaxWidth(), shape = RoundedCornerShape(26.dp), elevation = CardDefaults.cardElevation(defaultElevation = 5.dp), colors = CardDefaults.cardColors(containerColor = Color(0xFFFFFBFF))) {
                         Column(Modifier.padding(16.dp)) {
                             Row(verticalAlignment = Alignment.CenterVertically) { Text("🏆 Günlük hedef", fontWeight = FontWeight.Bold, color = Navy); Spacer(Modifier.weight(1f)); Text("${learned.size.coerceAtMost(dailyGoal)}/$dailyGoal kelime", color = Blue, fontWeight = FontWeight.Bold) }
                             Spacer(Modifier.height(9.dp))
@@ -233,7 +236,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                     }
                 }
                 item {
-                    Card(Modifier.fillMaxWidth(), shape = RoundedCornerShape(24.dp), elevation = CardDefaults.cardElevation(defaultElevation = 2.dp), colors = CardDefaults.cardColors(containerColor = Color.White)) {
+                    Card(Modifier.fillMaxWidth(), shape = RoundedCornerShape(26.dp), elevation = CardDefaults.cardElevation(defaultElevation = 5.dp), colors = CardDefaults.cardColors(containerColor = Color(0xFFFDFBFF))) {
                         Column(Modifier.padding(16.dp)) {
                             Row(verticalAlignment = Alignment.CenterVertically) {
                                 Text("⭐ Seviye $level", fontWeight = FontWeight.ExtraBold, color = Navy, fontSize = 18.sp)
@@ -250,7 +253,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                     }
                 }
                 item {
-                    Text("Test modu", fontWeight = FontWeight.Bold, color = Navy, fontSize = 18.sp)
+                    Text("🎮  Hadi kendini dene!", fontWeight = FontWeight.ExtraBold, color = Navy, fontSize = 21.sp)
                     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                         listOf("İngilizce → Türkçe", "Türkçe → İngilizce").forEach { mode ->
                             FilterChip(selected = quizMode == mode, onClick = { quizMode = mode }, label = { Text(mode, fontSize = 11.sp) })
@@ -260,14 +263,14 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                 item {
                     Button(
                         onClick = { sessionActive = true; sessionAnswered = 0; sessionCorrect = 0; showQuizSummary = false; startQuiz() },
-                        modifier = Modifier.fillMaxWidth().height(58.dp),
-                        shape = RoundedCornerShape(20.dp),
-                        elevation = ButtonDefaults.buttonElevation(defaultElevation = 3.dp)
+                        modifier = Modifier.fillMaxWidth().height(64.dp),
+                        shape = RoundedCornerShape(22.dp),
+                        elevation = ButtonDefaults.buttonElevation(defaultElevation = 6.dp)
                     ) { Text("🎯  Teste Başla", fontSize = 16.sp, fontWeight = FontWeight.Bold) }
                 }
                 item {
                     Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                        Text("Öğrenme yolculuğun", fontSize = 22.sp, fontWeight = FontWeight.ExtraBold, color = Navy)
+                        Text("🚀 Öğrenme yolculuğun", fontSize = 24.sp, fontWeight = FontWeight.ExtraBold, color = Navy)
                         Text("Seviyeni seç, bir konu aç ve adım adım ilerle.", fontSize = 13.sp, color = Color(0xFF68758E))
                         Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(9.dp)) {
                             listOf("A1", "A2", "B1", "B2", "C1").forEach { levelName ->
