@@ -359,7 +359,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                     topicPair.forEachIndexed { pairIndex, topic ->
                                         val index = rowIndex * 2 + pairIndex
                                         val count = remember(words, selected, topic) { words.count { (selected == "Tümü" || it.level == selected) && topicForWord(it) == topic } }
-                                        {
+                                    if (count > 0) {
                                             Card(
                                                 onClick = { selectedTopic = topic; tab = 0; currentScreen = "Sözlük" },
                                                 modifier = Modifier.weight(1f).height(88.dp),
