@@ -94,7 +94,9 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
     } }
     val level = xp / 100 + 1
     val xpInLevel = xp % 100
-    val today = LocalDate.now().toString()\n    val pageBackground = when (themeChoice) { 1 -> Color(0xFFF2FBF7); 2 -> Color(0xFFFFF6EE); else -> Color(0xFFF5F7FC) }\n    val heroBrush = when (themeChoice) { 1 -> Brush.linearGradient(listOf(Color(0xFF075E54), Color(0xFF16A085))); 2 -> Brush.linearGradient(listOf(Color(0xFF7C2D12), Color(0xFFF59E0B))); else -> Brush.linearGradient(listOf(Navy, Color(0xFF3858B8))) }
+    val today = LocalDate.now().toString() 
+    val pageBackground = when (themeChoice) { 1 -> Color(0xFFF2FBF7); 2 -> Color(0xFFFFF6EE); else -> Color(0xFFF5F7FC) } 
+    val heroBrush = when (themeChoice) { 1 -> Brush.linearGradient(listOf(Color(0xFF075E54), Color(0xFF16A085))); 2 -> Brush.linearGradient(listOf(Color(0xFF7C2D12), Color(0xFFF59E0B))); else -> Brush.linearGradient(listOf(Navy, Color(0xFF3858B8))) }
     LaunchedEffect(today) {
         if (lastLoginDate != today) {
             dailyStreak = if (lastLoginDate == LocalDate.now().minusDays(1).toString()) dailyStreak + 1 else 1
@@ -139,7 +141,13 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                             .background(heroBrush, RoundedCornerShape(28.dp))
                             .padding(22.dp)
                     ) {
-                        Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {\n                            Text("WORDMASTER", color = Color(0xFFBFD0FF), fontSize = 12.sp, fontWeight = FontWeight.Bold, letterSpacing = 2.sp)\n                            Spacer(Modifier.weight(1f))\n                            TextButton(onClick = { nameDraft = displayName; usernameDraft = username; showProfile = true }) { Text("👤 Profil", color = Color.White, fontWeight = FontWeight.Bold) }\n                            TextButton(onClick = { showSettings = true }) { Text("⚙️", color = Color.White, fontSize = 18.sp) }\n                        }\n                        Text("Merhaba, $displayName!", color = Color.White.copy(alpha = .9f), fontSize = 14.sp, fontWeight = FontWeight.SemiBold)
+                        Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) { 
+                            Text("WORDMASTER", color = Color(0xFFBFD0FF), fontSize = 12.sp, fontWeight = FontWeight.Bold, letterSpacing = 2.sp) 
+                            Spacer(Modifier.weight(1f)) 
+                            TextButton(onClick = { nameDraft = displayName; usernameDraft = username; showProfile = true }) { Text("👤 Profil", color = Color.White, fontWeight = FontWeight.Bold) } 
+                            TextButton(onClick = { showSettings = true }) { Text("⚙️", color = Color.White, fontSize = 18.sp) } 
+                        } 
+                        Text("Merhaba, $displayName!", color = Color.White.copy(alpha = .9f), fontSize = 14.sp, fontWeight = FontWeight.SemiBold)
                         Spacer(Modifier.height(7.dp))
                         Text("Her gün biraz daha\nİngilizce! ✨", color = Color.White, fontSize = 27.sp, lineHeight = 32.sp, fontWeight = FontWeight.ExtraBold)
                         Spacer(Modifier.height(7.dp))
