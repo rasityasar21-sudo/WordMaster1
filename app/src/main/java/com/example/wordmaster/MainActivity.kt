@@ -282,7 +282,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                         ) {
                             Text("🎧", fontSize = 38.sp)
                             Column(Modifier.weight(1f)) {
-                                Text("Telaffuz ve dinleme", fontWeight = FontWeight.ExtraBold, color = Navy, fontSize = 17.sp)
+                                Text("Kelime Telaffuzu", fontWeight = FontWeight.ExtraBold, color = Navy, fontSize = 17.sp)
                                 Text("Kelimeleri dinle, duyduğunu seç ve pratik yap.", color = Color(0xFF5D5877), fontSize = 12.sp)
                             }
                             Button(onClick = { showPronunciation = true }, shape = RoundedCornerShape(16.dp)) {
@@ -733,6 +733,7 @@ private fun StreakCard(emoji: String, title: String, value: String, bg: Color, f
 private fun PronunciationPracticeDialog(words: List<Word>, onDismiss: () -> Unit) {
     val context = LocalContext.current
     var current by remember { mutableStateOf(words.random()) }
+    var searchText by remember { mutableStateOf("") }
     var choices by remember { mutableStateOf((listOf(current) + words.filter { it.en != current.en }.shuffled().take(3)).shuffled()) }
     var message by remember { mutableStateOf("") }
     var ttsReady by remember { mutableStateOf(false) }
@@ -749,10 +750,33 @@ private fun PronunciationPracticeDialog(words: List<Word>, onDismiss: () -> Unit
     }
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("🎧 Telaffuz ve dinleme") },
+        title = { Text("🎧 Kelime Telaffuzu") },
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                Text("Önce kelimeyi dinle, sonra duyduğun İngilizce kelimeyi seç.")
+                Text("İstediğin İngilizce kelimeyi yazıp telaffuzunu dinleyebilirsin.")
+                OutlinedTextField(
+                    value = searchText,
+                    onValueChange = { searchText = it },
+                    modifier = Modifier.fillMaxWidth(),
+                    label = { Text("Kelime ara") },
+                    placeholder = { Text("Örn. beautiful") },
+                    singleLine = true
+                )
+                Button(
+                    onClick = {
+                        val term = searchText.trim()
+                        if (term.isBlank()) {
+                            message = "Önce bir kelime yaz."
+                        } else if (ttsReady) {
+                            tts.language = Locale.US
+                            tts.speak(term, TextToSpeech.QUEUE_FLUSH, null, "wordmaster_search_word")
+                            message = "Dinletiliyor: $term"
+                        } else message = "Ses motoru hazırlanıyor. Birazdan tekrar dene."
+                    },
+                    modifier = Modifier.fillMaxWidth()
+                ) { Text("🔎 Ara ve telaffuzunu dinle") }
+                HorizontalDivider()
+                Text("Kelime pratiği", fontWeight = FontWeight.Bold)
                 Text("Türkçe anlamı: ${current.tr}", color = Blue, fontWeight = FontWeight.Bold)
                 Button(
                     onClick = {
@@ -762,7 +786,7 @@ private fun PronunciationPracticeDialog(words: List<Word>, onDismiss: () -> Unit
                         } else message = "Ses motoru hazırlanıyor. Birazdan tekrar dene."
                     },
                     modifier = Modifier.fillMaxWidth()
-                ) { Text("🔊 Kelimeyi dinle") }
+                ) { Text("🔊 Seçili kelimeyi dinle") }
                 choices.forEach { option ->
                     OutlinedButton(
                         onClick = {
