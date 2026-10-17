@@ -69,6 +69,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
     var sessionCorrect by remember { mutableIntStateOf(0) }
     var sessionActive by remember { mutableStateOf(false) }
     var showQuizSummary by remember { mutableStateOf(false) }
+    var showTools by remember { mutableStateOf(false) }
     var quizMode by remember { mutableStateOf("İngilizce → Türkçe") }
     val reviewWords = remember { mutableStateListOf<String>().apply {
         addAll(prefs.getStringSet("reviewWords", emptySet()) ?: emptySet())
@@ -293,6 +294,13 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                         }
                     }
                 }
+
+                item {
+                    Button(onClick = { showTools = true }, modifier = Modifier.fillMaxWidth()) {
+                        Text("📅 Günlük görevler  •  🏅 Rozetler  •  🎮 Eşleştirme  •  📊 İstatistikler")
+                    }
+                }
+
                 item {
                     Text("İpucu: Kelimeleri favorilerine ekleyip sonra tekrar çalışabilirsin.", color = Color(0xFF758099), fontSize = 12.sp)
                 }
@@ -354,6 +362,35 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
             }
         )
     }
+
+    if (showTools) AlertDialog(
+        onDismissRequest = { showTools = false },
+        title = { Text("WordMaster araçları") },
+        text = { Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Text("📅 GÜNLÜK GÖREVLER")
+            Text("• 10 kelime öğren: ${learned.size.coerceAtMost(10)}/10")
+            Text("• Günlük giriş serisi: $dailyStreak gün")
+            Text("• Tekrar kuyruğu: ${reviewWords.size} kelime")
+            HorizontalDivider()
+            Text("🏅 ROZETLER")
+            Text((if (learned.isNotEmpty()) "✅" else "🔒") + " İlk kelime")
+            Text((if (xp >= 100) "✅" else "🔒") + " 100 XP")
+            Text((if (learned.size >= 50) "✅" else "🔒") + " 50 kelime")
+            Text((if (bestCorrectStreak >= 5) "✅" else "🔒") + " 5 doğru üst üste")
+            Text((if (dailyStreak >= 7) "✅" else "🔒") + " 7 günlük seri")
+            HorizontalDivider()
+            Text("🎮 KELİME EŞLEŞTİRME")
+            Text("Bu sürümde oyun ekranı henüz eklenmedi; sonraki adımda işlevsel hale getireceğim.")
+            HorizontalDivider()
+            Text("📊 İSTATİSTİKLER")
+            Text("Öğrenilen kelime: ${learned.size} / ${words.size}")
+            Text("XP: $xp  •  Seviye: ${xp / 100 + 1}")
+            Text("Doğru seri rekoru: $bestCorrectStreak")
+            Text("Tekrar kuyruğu: ${reviewWords.size}")
+        } },
+        confirmButton = { TextButton(onClick = { showTools = false }) { Text("Kapat") } }
+    )
+
     if (showQuizSummary) {
         AlertDialog(
             onDismissRequest = { showQuizSummary = false },
