@@ -13,6 +13,8 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.animation.animateContentSize
+import java.time.LocalDate
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -59,6 +61,23 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
     var quizMessage by remember { mutableStateOf<String?>(null) }
     var quizCount by remember { mutableIntStateOf(0) }
     var quizCorrect by remember { mutableIntStateOf(0) }
+    var correctStreak by remember { mutableIntStateOf(prefs.getInt("correctStreak", 0)) }
+    var bestCorrectStreak by remember { mutableIntStateOf(prefs.getInt("bestCorrectStreak", 0)) }
+    var dailyStreak by remember { mutableIntStateOf(prefs.getInt("dailyStreak", 0)) }
+    var lastLoginDate by remember { mutableStateOf(prefs.getString("lastLoginDate", "") ?: "") }
+    var sessionAnswered by remember { mutableIntStateOf(0) }
+    var sessionCorrect by remember { mutableIntStateOf(0) }
+    var sessionActive by remember { mutableStateOf(false) }
+    var showQuizSummary by remember { mutableStateOf(false) }
+    val today = LocalDate.now().toString()
+    LaunchedEffect(today) {
+        if (lastLoginDate != today) {
+            dailyStreak = if (lastLoginDate == LocalDate.now().minusDays(1).toString()) dailyStreak + 1 else 1
+            lastLoginDate = today
+            coins += 3
+            prefs.edit().putInt("dailyStreak", dailyStreak).putString("lastLoginDate", today).putInt("coins", coins).apply()
+        }
+    }
     val learned = remember { mutableStateListOf<String>().apply { addAll(prefs.getStringSet("learned", emptySet()) ?: emptySet()) } }
     val favorites = remember { mutableStateListOf<String>().apply { addAll(prefs.getStringSet("favorites", emptySet()) ?: emptySet()) } }
 
@@ -136,8 +155,25 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                     }
                 }
                 item {
+                    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                        StreakCard("🔥", "Günlük seri", "$dailyStreak gün", Color(0xFFFFF0D8), Color(0xFF9A5800), Modifier.weight(1f))
+                        StreakCard("⚡", "Doğru serisi", "$correctStreak", Color(0xFFE6F8EE), Color(0xFF13734D), Modifier.weight(1f))
+                    }
+                }
+                item {
+                    Card(Modifier.fillMaxWidth(), shape = RoundedCornerShape(18.dp), colors = CardDefaults.cardColors(containerColor = Color.White)) {
+                        Column(Modifier.padding(16.dp)) {
+                            Row(verticalAlignment = Alignment.CenterVertically) { Text("🏆 Günlük hedef", fontWeight = FontWeight.Bold, color = Navy); Spacer(Modifier.weight(1f)); Text("${learned.size.coerceAtMost(10)}/10 kelime", color = Blue, fontWeight = FontWeight.Bold) }
+                            Spacer(Modifier.height(9.dp))
+                            LinearProgressIndicator(progress = { learned.size.coerceAtMost(10) / 10f }, modifier = Modifier.fillMaxWidth().height(8.dp), color = Blue, trackColor = PaleBlue)
+                            Spacer(Modifier.height(5.dp))
+                            Text("Hedef: her gün 10 kelime öğren. Günlük giriş ödülün: +3 coin.", fontSize = 12.sp, color = Color(0xFF68758E))
+                        }
+                    }
+                }
+                item {
                     Button(
-                        onClick = { startQuiz() },
+                        onClick = { sessionActive = true; sessionAnswered = 0; sessionCorrect = 0; showQuizSummary = false; startQuiz() },
                         modifier = Modifier.fillMaxWidth().height(54.dp),
                         shape = RoundedCornerShape(17.dp)
                     ) { Text("🎯  Teste Başla", fontSize = 16.sp, fontWeight = FontWeight.Bold) }
@@ -244,15 +280,20 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                             onClick = {
                                 if (quizMessage == null) {
                                     quizCount++
+                                    sessionAnswered++
                                     if (choice.en == quizWord!!.en) {
                                         quizCorrect++
+                                        sessionCorrect++
+                                        correctStreak++
+                                        bestCorrectStreak = maxOf(bestCorrectStreak, correctStreak)
                                         xp += 10
                                         coins += 1
-                                        quizMessage = "Doğru! +10 XP ve +1 coin 🎉"
-                                        prefs.edit().putInt("xp", xp).putInt("coins", coins).apply()
+                                        quizMessage = "Doğru! +10 XP ve +1 coin 🎉  |  🔥 $correctStreak seri"
                                     } else {
-                                        quizMessage = "Doğru cevap: ${quizWord!!.tr.replaceFirstChar { it.uppercase() }}"
+                                        correctStreak = 0
+                                        quizMessage = "Doğru cevap: ${quizWord!!.tr.replaceFirstChar { it.uppercase() }}  |  Seri sıfırlandı."
                                     }
+                                    prefs.edit().putInt("xp", xp).putInt("coins", coins).putInt("correctStreak", correctStreak).putInt("bestCorrectStreak", bestCorrectStreak).apply()
                                 }
                             },
                             modifier = Modifier.fillMaxWidth(),
@@ -260,18 +301,40 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                         ) { Text(choice.tr.replaceFirstChar { it.uppercase() }) }
                     }
                     quizMessage?.let { Text(it, fontWeight = FontWeight.Bold, color = if (it.startsWith("Doğru!")) Color(0xFF12805C) else Color(0xFFB45309)) }
-                    Text("Skor: $quizCorrect / $quizCount", color = Color.Gray, fontSize = 12.sp)
+                    Text("Bu test: $sessionCorrect / $sessionAnswered   •   Genel: $quizCorrect / $quizCount", color = Color.Gray, fontSize = 12.sp)
                 }
             },
             confirmButton = {
                 TextButton(onClick = {
                     if (quizMessage == null) { quizWord = null }
+                    else if (sessionActive && sessionAnswered >= 10) { quizWord = null; sessionActive = false; showQuizSummary = true }
                     else startQuiz()
-                }) { Text(if (quizMessage == null) "Kapat" else "Sonraki soru") }
+                }) { Text(if (quizMessage == null) "Kapat" else if (sessionActive && sessionAnswered >= 10) "Sonucu gör" else "Sonraki soru") }
             },
             dismissButton = { TextButton(onClick = { quizWord = null; quizMessage = null }) { Text("Bitir") }
             }
         )
+    }
+    if (showQuizSummary) {
+        AlertDialog(
+            onDismissRequest = { showQuizSummary = false },
+            title = { Text("Test tamamlandı! 🏆", fontWeight = FontWeight.ExtraBold) },
+            text = { Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                Text("10 soruda $sessionCorrect doğru cevap verdin.", fontSize = 18.sp, fontWeight = FontWeight.Bold)
+                Text("Başarı oranı: ${sessionCorrect * 10}%", color = Blue, fontSize = 16.sp)
+                Text("En iyi doğru serin: $bestCorrectStreak", color = Color(0xFF13734D))
+                Text(if (sessionCorrect >= 8) "Harika iş! Böyle devam et! 🌟" else "Biraz tekrar yap, sonra yeniden dene 💪")
+            } },
+            confirmButton = { TextButton(onClick = { showQuizSummary = false; sessionActive = true; sessionAnswered = 0; sessionCorrect = 0; startQuiz() }) { Text("Tekrar dene") } },
+            dismissButton = { TextButton(onClick = { showQuizSummary = false }) { Text("Kapat") } }
+        )
+    }
+}
+
+@Composable
+private fun StreakCard(emoji: String, title: String, value: String, bg: Color, fg: Color, modifier: Modifier = Modifier) {
+    Card(modifier = modifier.animateContentSize(), shape = RoundedCornerShape(20.dp), colors = CardDefaults.cardColors(containerColor = bg)) {
+        Column(Modifier.padding(14.dp)) { Text(emoji, fontSize = 22.sp); Spacer(Modifier.height(4.dp)); Text(title, color = fg, fontWeight = FontWeight.Bold, fontSize = 12.sp); Text(value, color = fg, fontSize = 20.sp, fontWeight = FontWeight.ExtraBold) }
     }
 }
 
