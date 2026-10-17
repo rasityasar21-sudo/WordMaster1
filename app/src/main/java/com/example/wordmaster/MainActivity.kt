@@ -2,6 +2,10 @@ package com.example.wordmaster
 
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.speech.tts.TextToSpeech
+import java.util.Locale
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.runtime.DisposableEffect
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
@@ -71,6 +75,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
     var sessionActive by remember { mutableStateOf(false) }
     var showQuizSummary by remember { mutableStateOf(false) }
     var showTools by remember { mutableStateOf(false) }
+    var showPronunciation by remember { mutableStateOf(false) }
     var showProfile by remember { mutableStateOf(false) }
     var showSettings by remember { mutableStateOf(false) }
     var displayName by remember { mutableStateOf(prefs.getString("displayName", "Kelime Kaşifi") ?: "Kelime Kaşifi") }
@@ -113,6 +118,8 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
             prefs.edit().putInt("dailyStreak", dailyStreak).putString("lastLoginDate", today).putInt("coins", coins).apply()
         }
     }
+    if (showPronunciation) PronunciationPracticeDialog(words = words, onDismiss = { showPronunciation = false })
+
     val learned = remember { mutableStateListOf<String>().apply { addAll(prefs.getStringSet("learned", emptySet()) ?: emptySet()) } }
     val favorites = remember { mutableStateListOf<String>().apply { addAll(prefs.getStringSet("favorites", emptySet()) ?: emptySet()) } }
 
@@ -257,6 +264,29 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                             Text("Her 100 XP'de yeni seviyeye ulaşırsın. Yanlış kelimeler tekrar listene eklenir.", color = Color(0xFF68758E), fontSize = 12.sp)
                             Spacer(Modifier.height(8.dp))
                             Text("🏅 Başarılar: ${if (xp >= 100) "İlk seviye ✓" else "İlk seviye: 100 XP"}  •  ${if (bestCorrectStreak >= 5) "5 doğru üst üste ✓" else "Seri rekoru: $bestCorrectStreak"}", color = Navy, fontSize = 12.sp)
+                        }
+                    }
+                }
+                item {
+                    Card(
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(26.dp),
+                        colors = CardDefaults.cardColors(containerColor = Color(0xFFEDE9FE)),
+                        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+                    ) {
+                        Row(
+                            Modifier.fillMaxWidth().padding(18.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(14.dp)
+                        ) {
+                            Text("🎧", fontSize = 38.sp)
+                            Column(Modifier.weight(1f)) {
+                                Text("Telaffuz ve dinleme", fontWeight = FontWeight.ExtraBold, color = Navy, fontSize = 17.sp)
+                                Text("Kelimeleri dinle, duyduğunu seç ve pratik yap.", color = Color(0xFF5D5877), fontSize = 12.sp)
+                            }
+                            Button(onClick = { showPronunciation = true }, shape = RoundedCornerShape(16.dp)) {
+                                Text("Başla")
+                            }
                         }
                     }
                 }
@@ -681,6 +711,62 @@ private fun StreakCard(emoji: String, title: String, value: String, bg: Color, f
     Card(modifier = modifier.animateContentSize(), shape = RoundedCornerShape(20.dp), colors = CardDefaults.cardColors(containerColor = bg)) {
         Column(Modifier.padding(14.dp)) { Text(emoji, fontSize = 22.sp); Spacer(Modifier.height(4.dp)); Text(title, color = fg, fontWeight = FontWeight.Bold, fontSize = 12.sp); Text(value, color = fg, fontSize = 20.sp, fontWeight = FontWeight.ExtraBold) }
     }
+}
+
+@Composable
+private fun PronunciationPracticeDialog(words: List<Word>, onDismiss: () -> Unit) {
+    val context = LocalContext.current
+    var current by remember { mutableStateOf(words.random()) }
+    var choices by remember { mutableStateOf((listOf(current) + words.filter { it.en != current.en }.shuffled().take(3)).shuffled()) }
+    var message by remember { mutableStateOf("") }
+    var ttsReady by remember { mutableStateOf(false) }
+    val tts = remember {
+        TextToSpeech(context) { status ->
+            ttsReady = status == TextToSpeech.SUCCESS
+        }
+    }
+    DisposableEffect(tts) {
+        onDispose { tts.stop(); tts.shutdown() }
+    }
+    LaunchedEffect(ttsReady) {
+        if (ttsReady) tts.language = Locale.US
+    }
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text("🎧 Telaffuz ve dinleme") },
+        text = {
+            Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                Text("Önce kelimeyi dinle, sonra duyduğun İngilizce kelimeyi seç.")
+                Text("Türkçe anlamı: ${current.tr}", color = Blue, fontWeight = FontWeight.Bold)
+                Button(
+                    onClick = {
+                        if (ttsReady) {
+                            tts.language = Locale.US
+                            tts.speak(current.en, TextToSpeech.QUEUE_FLUSH, null, "wordmaster_word")
+                        } else message = "Ses motoru hazırlanıyor. Birazdan tekrar dene."
+                    },
+                    modifier = Modifier.fillMaxWidth()
+                ) { Text("🔊 Kelimeyi dinle") }
+                choices.forEach { option ->
+                    OutlinedButton(
+                        onClick = {
+                            message = if (option.en == current.en) "Doğru! ✓" else "Tekrar dene. İpucu: Türkçe anlamı düşün."
+                        },
+                        modifier = Modifier.fillMaxWidth()
+                    ) { Text(option.en.replaceFirstChar { it.uppercase() }) }
+                }
+                if (message.isNotBlank()) Text(message, color = if (message.startsWith("Doğru")) Color(0xFF12805C) else Color(0xFFB45309), fontWeight = FontWeight.Bold)
+            }
+        },
+        confirmButton = {
+            TextButton(onClick = {
+                current = words.random()
+                choices = (listOf(current) + words.filter { it.en != current.en }.shuffled().take(3)).shuffled()
+                message = ""
+            }) { Text("Sonraki kelime") }
+        },
+        dismissButton = { TextButton(onClick = onDismiss) { Text("Bitir") } }
+    )
 }
 
 @Composable
