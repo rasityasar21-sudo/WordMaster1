@@ -897,8 +897,7 @@ private fun topicForWord(word: Word): String {
 private data class LessonContent(
     val heading: String, val explanation: String, val rule: String,
     val examples: List<Pair<String, String>>, val words: List<Pair<String, String>>,
-    val question: String, val options: List<String>, val correct: String, val videoQuestion: String
-)
+    val question: String, val options: List<String>, val correct: String, val videoQuestion: String,\n    val offlineFrames: List<Pair<String, String>> = listOf("Learn the rule" to "Kuralı öğren", "Read the example" to "Örneği oku", "Try it yourself" to "Kendin dene")\n)
 
 private fun lessonContent(title: String): LessonContent {
     val t = title.lowercase(Locale.ROOT)
