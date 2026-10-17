@@ -49,7 +49,7 @@ class MainActivity : ComponentActivity() {
             (0 until arr.length()).map { i ->
                 val item = arr.getJSONObject(i)
                 Word(item.optString("en"), item.optString("tr"), item.optString("level", "A1"), item.optString("example", ""))
-            }
+            }.sortedBy { it.en.lowercase(Locale.ROOT) }
         } catch (_: Exception) { listOf(Word("hello", "merhaba", "A1")) }
         setContent { WordMasterApp(words, prefs) }
     }
@@ -64,6 +64,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
         delay(180)
         filterQuery = query.trim()
     }
+    var currentScreen by remember { mutableStateOf("Dersler") }
     var selected by remember { mutableStateOf("Tümü") }
     var selectedTopic by remember { mutableStateOf("Tümü") }
     var tab by remember { mutableIntStateOf(0) }
@@ -324,168 +325,172 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                         elevation = ButtonDefaults.buttonElevation(defaultElevation = 6.dp)
                     ) { Text("🎯  Teste Başla", fontSize = 16.sp, fontWeight = FontWeight.Bold) }
                 }
-                item {
-                    Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                        Text("🚀 Öğrenme yolculuğun", fontSize = 23.sp, fontWeight = FontWeight.ExtraBold, color = Navy)
-                        Text("Bir seviye ve konu seç.", fontSize = 13.sp, color = Color(0xFF68758E))
-                        Row(
-                            Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()),
-                            horizontalArrangement = Arrangement.spacedBy(8.dp)
-                        ) {
-                            listOf("A1", "A2", "B1", "B2", "C1").forEach { levelName ->
-                                val count = words.count { it.level == levelName }
+                if (currentScreen == "Dersler") {
+                    item {
+                        Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                            Text("📚 Dersler", fontSize = 23.sp, fontWeight = FontWeight.ExtraBold, color = Navy)
+                            Text("Bir seviye ve konu seç.", fontSize = 13.sp, color = Color(0xFF68758E))
+                            Row(
+                                Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()),
+                                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                            ) {
+                                listOf("A1", "A2", "B1", "B2", "C1").forEach { levelName ->
+                                    val count = remember(words) { words.count { it.level == levelName } }
+                                    FilterChip(
+                                        selected = selected == levelName,
+                                        onClick = { selected = levelName; selectedTopic = "Tümü"; tab = 0 },
+                                        label = { Text("$levelName · $count", fontSize = 12.sp) }
+                                    )
+                                }
+                            }
+                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                Text(if (selected == "Tümü") "Konular" else "$selected konuları", fontSize = 19.sp, fontWeight = FontWeight.ExtraBold, color = Navy)
+                                Spacer(Modifier.weight(1f))
+                                Text("Birini seç", fontSize = 11.sp, color = Color(0xFF68758E))
+                            }
+                            val topicList = listOf("Selamlaşma", "Aile ve insanlar", "Yiyecek ve içecek", "Ev ve eşyalar", "Okul ve öğrenme", "Zaman ve günlük hayat", "Yerler ve ulaşım", "Duygular ve sıfatlar", "Fiiller ve eylemler", "Diğer kelimeler")
+                            val topicColors = listOf(Color(0xFFFFF0F5), Color(0xFFEAF8FF), Color(0xFFFFF5DF), Color(0xFFE8FAF1), Color(0xFFF0EBFF))
+                            val iconColors = listOf(Color(0xFFFFDDE8), Color(0xFFD7F4EA), Color(0xFFFFE8C7), Color(0xFFDCEBFF), Color(0xFFE4DCFF))
+                            topicList.chunked(2).forEachIndexed { rowIndex, topicPair ->
+                                Row(
+                                    Modifier.fillMaxWidth(),
+                                    horizontalArrangement = Arrangement.spacedBy(9.dp)
+                                ) {
+                                    topicPair.forEachIndexed { pairIndex, topic ->
+                                        val index = rowIndex * 2 + pairIndex
+                                        val count = remember(words, selected, topic) { words.count { (selected == "Tümü" || it.level == selected) && topicForWord(it) == topic } }
+                                        {
+                                            Card(
+                                                onClick = { selectedTopic = topic; tab = 0; currentScreen = "Sözlük" },
+                                                modifier = Modifier.weight(1f).height(88.dp),
+                                                shape = RoundedCornerShape(18.dp),
+                                                elevation = CardDefaults.cardElevation(defaultElevation = if (selectedTopic == topic) 3.dp else 1.dp),
+                                                colors = CardDefaults.cardColors(
+                                                    containerColor = if (selectedTopic == topic) Color(0xFFE5DCFF) else topicColors[index % topicColors.size]
+                                                )
+                                            ) {
+                                                Row(
+                                                    Modifier.fillMaxSize().padding(horizontal = 10.dp, vertical = 9.dp),
+                                                    verticalAlignment = Alignment.CenterVertically,
+                                                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                                                ) {
+                                                    Surface(
+                                                        color = iconColors[index % iconColors.size],
+                                                        shape = RoundedCornerShape(12.dp),
+                                                        modifier = Modifier.size(38.dp)
+                                                    ) {
+                                                        Box(contentAlignment = Alignment.Center) {
+                                                            Text(listOf("👋", "👨‍👩‍👧", "🍎", "🏠", "🎒", "🕒", "🚌", "😊", "⚡", "📘")[index], fontSize = 20.sp)
+                                                        }
+                                                    }
+                                                    Column(Modifier.weight(1f), verticalArrangement = Arrangement.Center) {
+                                                        Text(topic, fontWeight = FontWeight.Bold, color = Navy, fontSize = 12.sp, lineHeight = 15.sp, maxLines = 2)
+                                                        Spacer(Modifier.height(3.dp))
+                                                        Text("$count kelime", fontSize = 11.sp, color = Color(0xFF68758E))
+                                                    }
+                                                }
+                                            }
+                                        } else {
+                                            Spacer(Modifier.weight(1f))
+                                        }
+                                    }
+                                    if (topicPair.size == 1) Spacer(Modifier.weight(1f))
+                                }
+                            }
+                            if (selectedTopic != "Tümü") {
+                                TextButton(onClick = { selectedTopic = "Tümü" }, modifier = Modifier.align(Alignment.End)) {
+                                    Text("Tüm konuları göster")
+                                }
+                            }
+                        }
+                    }
+                    }
+                if (currentScreen == "Sözlük") {
+                    item {
+                        Text(if (selectedTopic == "Tümü") "Kelime defterim" else "$selectedTopic · Kelimeler", fontSize = 21.sp, fontWeight = FontWeight.ExtraBold, color = Navy)
+                    }
+                    item {
+                        OutlinedTextField(
+                            value = query, onValueChange = { query = it },
+                            modifier = Modifier.fillMaxWidth(),
+                            label = { Text("İngilizce veya Türkçe ara") },
+                            placeholder = { Text("Örn. apple, elma...") },
+                            singleLine = true,
+                            shape = RoundedCornerShape(17.dp),
+                            colors = OutlinedTextFieldDefaults.colors(focusedBorderColor = Blue, focusedLabelColor = Blue)
+                        )
+                    }
+                    item {
+                        Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                            listOf("Tümü", "A1", "A2", "B1", "B2", "C1").forEach { level ->
                                 FilterChip(
-                                    selected = selected == levelName,
-                                    onClick = { selected = levelName; selectedTopic = "Tümü"; tab = 0 },
-                                    label = { Text("$levelName · $count", fontSize = 12.sp) }
+                                    selected = selected == level,
+                                    onClick = { selected = level },
+                                    label = { Text(level) },
+                                    shape = RoundedCornerShape(14.dp)
                                 )
                             }
                         }
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            Text(if (selected == "Tümü") "Konular" else "$selected konuları", fontSize = 19.sp, fontWeight = FontWeight.ExtraBold, color = Navy)
-                            Spacer(Modifier.weight(1f))
-                            Text("Birini seç", fontSize = 11.sp, color = Color(0xFF68758E))
+                    }
+                    item {
+                        ScrollableTabRow(selectedTabIndex = tab, edgePadding = 0.dp, containerColor = Color.Transparent, divider = {}) {
+                            listOf("Tüm kelimeler", "⭐ Favoriler", "✓ Öğrendiklerim").forEachIndexed { index, label ->
+                                Tab(selected = tab == index, onClick = { tab = index }, text = { Text(label, fontWeight = if (tab == index) FontWeight.Bold else FontWeight.Normal) })
+                            }
                         }
-                        val topicList = listOf("Selamlaşma", "Aile ve insanlar", "Yiyecek ve içecek", "Ev ve eşyalar", "Okul ve öğrenme", "Zaman ve günlük hayat", "Yerler ve ulaşım", "Duygular ve sıfatlar", "Fiiller ve eylemler", "Diğer kelimeler")
-                        val topicColors = listOf(Color(0xFFFFF0F5), Color(0xFFEAF8FF), Color(0xFFFFF5DF), Color(0xFFE8FAF1), Color(0xFFF0EBFF))
-                        val iconColors = listOf(Color(0xFFFFDDE8), Color(0xFFD7F4EA), Color(0xFFFFE8C7), Color(0xFFDCEBFF), Color(0xFFE4DCFF))
-                        topicList.chunked(2).forEachIndexed { rowIndex, topicPair ->
-                            Row(
-                                Modifier.fillMaxWidth(),
-                                horizontalArrangement = Arrangement.spacedBy(9.dp)
-                            ) {
-                                topicPair.forEachIndexed { pairIndex, topic ->
-                                    val index = rowIndex * 2 + pairIndex
-                                    val count = words.count { (selected == "Tümü" || it.level == selected) && topicForWord(it) == topic }
-                                    if (count > 0) {
-                                        Card(
-                                            onClick = { selectedTopic = if (selectedTopic == topic) "Tümü" else topic; tab = 0 },
-                                            modifier = Modifier.weight(1f).height(88.dp),
-                                            shape = RoundedCornerShape(18.dp),
-                                            elevation = CardDefaults.cardElevation(defaultElevation = if (selectedTopic == topic) 3.dp else 1.dp),
-                                            colors = CardDefaults.cardColors(
-                                                containerColor = if (selectedTopic == topic) Color(0xFFE5DCFF) else topicColors[index % topicColors.size]
-                                            )
-                                        ) {
-                                            Row(
-                                                Modifier.fillMaxSize().padding(horizontal = 10.dp, vertical = 9.dp),
-                                                verticalAlignment = Alignment.CenterVertically,
-                                                horizontalArrangement = Arrangement.spacedBy(8.dp)
-                                            ) {
-                                                Surface(
-                                                    color = iconColors[index % iconColors.size],
-                                                    shape = RoundedCornerShape(12.dp),
-                                                    modifier = Modifier.size(38.dp)
-                                                ) {
-                                                    Box(contentAlignment = Alignment.Center) {
-                                                        Text(listOf("👋", "👨‍👩‍👧", "🍎", "🏠", "🎒", "🕒", "🚌", "😊", "⚡", "📘")[index], fontSize = 20.sp)
-                                                    }
-                                                }
-                                                Column(Modifier.weight(1f), verticalArrangement = Arrangement.Center) {
-                                                    Text(topic, fontWeight = FontWeight.Bold, color = Navy, fontSize = 12.sp, lineHeight = 15.sp, maxLines = 2)
-                                                    Spacer(Modifier.height(3.dp))
-                                                    Text("$count kelime", fontSize = 11.sp, color = Color(0xFF68758E))
-                                                }
-                                            }
-                                        }
-                                    } else {
-                                        Spacer(Modifier.weight(1f))
+                    }
+                    if (filtered.isEmpty()) {
+                        item {
+                            Card(shape = RoundedCornerShape(20.dp)) {
+                                Column(Modifier.fillMaxWidth().padding(24.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+                                    Text("🔎", fontSize = 32.sp)
+                                    Text("Kelime bulunamadı", fontWeight = FontWeight.Bold)
+                                    Text("Aramayı veya seçtiğin filtreyi değiştir.", color = Color.Gray)
+                                }
+                            }
+                        }
+                    }
+                    items(filtered, key = { it.en }) { word ->
+                        Card(
+                            modifier = Modifier.fillMaxWidth(),
+                            shape = RoundedCornerShape(22.dp),
+                            colors = CardDefaults.cardColors(containerColor = listOf(Color(0xFFFFFBF0), Color(0xFFF4F0FF), Color(0xFFEDFAF7), Color(0xFFFFF0F5), Color(0xFFEEF6FF))[filtered.indexOf(word).coerceAtLeast(0) % 5]),
+                            elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+                        ) {
+                            Column(Modifier.padding(if (compactCards) 11.dp else 17.dp)) {
+                                Row(verticalAlignment = Alignment.CenterVertically) {
+                                    Column(Modifier.weight(1f)) {
+                                        Text(word.en.replaceFirstChar { it.uppercase() }, fontSize = 21.sp, fontWeight = FontWeight.ExtraBold, color = Navy)
+                                        Spacer(Modifier.height(3.dp))
+                                        Text(word.tr.replaceFirstChar { it.uppercase() }, fontSize = 16.sp, color = Color(0xFF46536D))
+                                    }
+                                    Surface(color = listOf(Color(0xFFE9DEFF), Color(0xFFD9F7ED), Color(0xFFFFE6D5), Color(0xFFDDEEFF), Color(0xFFFFE0EB))[filtered.indexOf(word).coerceAtLeast(0) % 5], shape = RoundedCornerShape(12.dp)) {
+                                        Text(word.level, modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp), color = Blue, fontSize = 12.sp, fontWeight = FontWeight.Bold)
                                     }
                                 }
-                                if (topicPair.size == 1) Spacer(Modifier.weight(1f))
-                            }
-                        }
-                        if (selectedTopic != "Tümü") {
-                            TextButton(onClick = { selectedTopic = "Tümü" }, modifier = Modifier.align(Alignment.End)) {
-                                Text("Tüm konuları göster")
-                            }
-                        }
-                    }
-                }
-                item {
-                    Text(if (selectedTopic == "Tümü") "Kelime defterim" else "$selectedTopic · Kelimeler", fontSize = 21.sp, fontWeight = FontWeight.ExtraBold, color = Navy)
-                }
-                item {
-                    OutlinedTextField(
-                        value = query, onValueChange = { query = it },
-                        modifier = Modifier.fillMaxWidth(),
-                        label = { Text("İngilizce veya Türkçe ara") },
-                        placeholder = { Text("Örn. apple, elma...") },
-                        singleLine = true,
-                        shape = RoundedCornerShape(17.dp),
-                        colors = OutlinedTextFieldDefaults.colors(focusedBorderColor = Blue, focusedLabelColor = Blue)
-                    )
-                }
-                item {
-                    Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                        listOf("Tümü", "A1", "A2", "B1", "B2", "C1").forEach { level ->
-                            FilterChip(
-                                selected = selected == level,
-                                onClick = { selected = level },
-                                label = { Text(level) },
-                                shape = RoundedCornerShape(14.dp)
-                            )
-                        }
-                    }
-                }
-                item {
-                    ScrollableTabRow(selectedTabIndex = tab, edgePadding = 0.dp, containerColor = Color.Transparent, divider = {}) {
-                        listOf("Tüm kelimeler", "⭐ Favoriler", "✓ Öğrendiklerim").forEachIndexed { index, label ->
-                            Tab(selected = tab == index, onClick = { tab = index }, text = { Text(label, fontWeight = if (tab == index) FontWeight.Bold else FontWeight.Normal) })
-                        }
-                    }
-                }
-                if (filtered.isEmpty()) {
-                    item {
-                        Card(shape = RoundedCornerShape(20.dp)) {
-                            Column(Modifier.fillMaxWidth().padding(24.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-                                Text("🔎", fontSize = 32.sp)
-                                Text("Kelime bulunamadı", fontWeight = FontWeight.Bold)
-                                Text("Aramayı veya seçtiğin filtreyi değiştir.", color = Color.Gray)
-                            }
-                        }
-                    }
-                }
-                items(filtered, key = { it.en }) { word ->
-                    Card(
-                        modifier = Modifier.fillMaxWidth(),
-                        shape = RoundedCornerShape(22.dp),
-                        colors = CardDefaults.cardColors(containerColor = listOf(Color(0xFFFFFBF0), Color(0xFFF4F0FF), Color(0xFFEDFAF7), Color(0xFFFFF0F5), Color(0xFFEEF6FF))[filtered.indexOf(word).coerceAtLeast(0) % 5]),
-                        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
-                    ) {
-                        Column(Modifier.padding(if (compactCards) 11.dp else 17.dp)) {
-                            Row(verticalAlignment = Alignment.CenterVertically) {
-                                Column(Modifier.weight(1f)) {
-                                    Text(word.en.replaceFirstChar { it.uppercase() }, fontSize = 21.sp, fontWeight = FontWeight.ExtraBold, color = Navy)
-                                    Spacer(Modifier.height(3.dp))
-                                    Text(word.tr.replaceFirstChar { it.uppercase() }, fontSize = 16.sp, color = Color(0xFF46536D))
+                                if (word.example.isNotBlank()) {
+                                    Spacer(Modifier.height(10.dp))
+                                    Text("Örnek: ${word.example}", color = Color(0xFF67748C), fontSize = 13.sp)
                                 }
-                                Surface(color = listOf(Color(0xFFE9DEFF), Color(0xFFD9F7ED), Color(0xFFFFE6D5), Color(0xFFDDEEFF), Color(0xFFFFE0EB))[filtered.indexOf(word).coerceAtLeast(0) % 5], shape = RoundedCornerShape(12.dp)) {
-                                    Text(word.level, modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp), color = Blue, fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                                Spacer(Modifier.height(8.dp))
+                                HorizontalDivider(color = Color(0xFFF0F2F7))
+                                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                                    TextButton(onClick = {
+                                        if (word.en in learned) learned.remove(word.en)
+                                        else { learned.add(word.en); xp += 5; prefs.edit().putInt("xp", xp).putStringSet("learned", learned.toSet()).apply() }
+                                        prefs.edit().putStringSet("learned", learned.toSet()).apply()
+                                    }) { Text(if (word.en in learned) "✓ Öğrenildi" else "✓ Öğrendim") }
+                                    Spacer(Modifier.weight(1f))
+                                    TextButton(onClick = {
+                                        if (word.en in favorites) favorites.remove(word.en) else favorites.add(word.en)
+                                        prefs.edit().putStringSet("favorites", favorites.toSet()).apply()
+                                    }) { Text(if (word.en in favorites) "★ Favoride" else "☆ Favori") }
                                 }
                             }
-                            if (word.example.isNotBlank()) {
-                                Spacer(Modifier.height(10.dp))
-                                Text("Örnek: ${word.example}", color = Color(0xFF67748C), fontSize = 13.sp)
-                            }
-                            Spacer(Modifier.height(8.dp))
-                            HorizontalDivider(color = Color(0xFFF0F2F7))
-                            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-                                TextButton(onClick = {
-                                    if (word.en in learned) learned.remove(word.en)
-                                    else { learned.add(word.en); xp += 5; prefs.edit().putInt("xp", xp).putStringSet("learned", learned.toSet()).apply() }
-                                    prefs.edit().putStringSet("learned", learned.toSet()).apply()
-                                }) { Text(if (word.en in learned) "✓ Öğrenildi" else "✓ Öğrendim") }
-                                Spacer(Modifier.weight(1f))
-                                TextButton(onClick = {
-                                    if (word.en in favorites) favorites.remove(word.en) else favorites.add(word.en)
-                                    prefs.edit().putStringSet("favorites", favorites.toSet()).apply()
-                                }) { Text(if (word.en in favorites) "★ Favoride" else "☆ Favori") }
-                            }
                         }
                     }
-                }
-
+    
+                    }
                 item {
                     Button(onClick = { showTools = true }, modifier = Modifier.fillMaxWidth()) {
                         Text("📅 Günlük görevler  •  🏅 Rozetler  •  🎮 Eşleştirme  •  📊 İstatistikler")
@@ -497,7 +502,13 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                 }
             }
         }
-    }
+    , bottomBar = {
+        NavigationBar(containerColor = Color.Black, contentColor = Color.White) {
+            NavigationBarItem(selected = currentScreen == "Dersler", onClick = { currentScreen = "Dersler"; selectedTopic = "Tümü" }, icon = { Text("📚") }, label = { Text("Dersler") })
+            NavigationBarItem(selected = currentScreen == "Sözlük", onClick = { currentScreen = "Sözlük"; selectedTopic = "Tümü"; selected = "Tümü"; tab = 0 }, icon = { Text("A-Z") }, label = { Text("Sözlük") })
+            NavigationBarItem(selected = false, onClick = { showProfile = true }, icon = { Text("👤") }, label = { Text("Profil") })
+        }
+    })
 
     if (showOnboarding) AlertDialog(
         onDismissRequest = { },
