@@ -220,42 +220,53 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                 Text("Birini seç", fontSize = 11.sp, color = Color(0xFF68758E))
                             }
                             val lessonTitles = when (selected) {
-                                "A1" -> listOf("Temel kelimeler", "Sayılar ve renkler", "Aile ve insanlar", "Yiyecek ve içecek", "Ev ve eşyalar", "Okul ve günlük yaşam", "Zaman ve günler", "Yerler ve ulaşım")
-                                "A2" -> listOf("Günlük rutinler", "Alışveriş", "Yol tarifi", "Sağlık", "Hobiler", "Geçmiş zaman", "Planlar ve davetler", "Karşılaştırmalar")
-                                "B1" -> listOf("Fikir belirtme", "Eğitim ve iş", "Seyahat deneyimleri", "Duygular ve ilişkiler", "Medya ve teknoloji", "Sorun çözme", "Çevre", "Hedefler")
-                                "B2" -> listOf("Tartışma ve görüşler", "İş hayatı", "Toplum", "Bilim ve teknoloji", "Haberler", "Karmaşık duygular", "Akademik kelimeler", "Deyimler")
-                                else -> listOf("İleri düzey ifadeler", "Akademik İngilizce", "Soyut kavramlar", "Kültür ve toplum", "Profesyonel iletişim", "İnce anlam farkları", "İleri fiiller", "Deyimler ve kalıplar")
+                                "A1" -> listOf("Greetings & Introducing", "Spelling words & Telling phone numbers", "Countries and nationalities", "Counting objects", "Expressing possession", "Family members", "Everyday objects", "Colors and numbers", "Food and drinks", "At home", "School life", "Days and months", "Telling the time", "Daily routines", "Likes and dislikes", "Describing people", "Clothes", "Weather", "Places in town", "Asking for directions", "Transport", "Can / can't", "There is / There are", "A1 review")
+                                "A2" -> listOf("Daily routines", "Shopping", "Asking for directions", "Health and body", "Hobbies and free time", "Past events", "Plans and invitations", "Comparisons", "Travel", "Food choices", "At work", "Household tasks", "Making requests", "Giving advice", "Feelings", "Describing places", "Weather forecast", "Transport problems", "Life experiences", "Future plans", "A2 review")
+                                "B1" -> listOf("Simple Past Tense", "Used to / Get used to / Be used to", "Past Continuous Tense", "Present Perfect", "Future forms", "Giving opinions", "Education and work", "Travel experiences", "Feelings and relationships", "Media and technology", "Solving problems", "Environment", "Goals and ambitions", "Conditionals", "Passive voice", "Reported speech", "Making decisions", "Culture", "Health and lifestyle", "Describing trends", "Phrasal verbs", "B1 review")
+                                "B2" -> listOf("Debates and opinions", "Professional life", "Society and culture", "Science and technology", "News and media", "Complex feelings", "Academic vocabulary", "Idioms", "Advanced conditionals", "Cause and effect", "Formal writing", "Presentations", "Negotiation", "Global issues", "Research", "Collocations", "Nuanced adjectives", "Advanced phrasal verbs", "Workplace communication", "B2 review")
+                                else -> listOf("Advanced expressions", "Academic English", "Abstract concepts", "Culture and society", "Professional communication", "Subtle meaning differences", "Advanced verbs", "Idioms and phrases", "Critical analysis", "Formal register", "Research vocabulary", "Persuasive language", "Literature", "Politics and society", "Advanced collocations", "C1 review")
                             }
-                            val lessonIcons = listOf("📘", "🔢", "👨‍👩‍👧", "🍎", "🏠", "🎒", "🕒", "🚌")
-                            val topicColors = listOf(Color(0xFFFFF0F5), Color(0xFFEAF8FF), Color(0xFFFFF5DF), Color(0xFFE8FAF1), Color(0xFFF0EBFF))
-                            lessonTitles.chunked(2).forEachIndexed { rowIndex, lessonPair ->
-                                Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(9.dp)) {
-                                    lessonPair.forEachIndexed { pairIndex, title ->
-                                        val lessonIndex = rowIndex * 2 + pairIndex
-                                        Card(
-                                            onClick = {
-                                                selectedTopic = "Tümü"
+                            val lessonIcons = listOf("🤝", "🔤", "🌍", "🔢", "🎒", "👨‍👩‍👧", "🏠", "🎨", "🍎", "🏡", "📚", "📅", "🕒", "🧭")
+                            val completedLessons = remember { mutableStateListOf<String>().apply {
+                                addAll(prefs.getStringSet("completedLessons", emptySet()) ?: emptySet())
+                            } }
+                            Column(verticalArrangement = Arrangement.spacedBy(0.dp)) {
+                                lessonTitles.forEachIndexed { lessonIndex, title ->
+                                    val lessonKey = "${selected}_${lessonIndex}_${title}"
+                                    val completed = lessonKey in completedLessons
+                                    val isNext = lessonIndex == 0 || "${selected}_${lessonIndex - 1}_${lessonTitles.getOrNull(lessonIndex - 1).orEmpty()}" in completedLessons
+                                    Row(Modifier.fillMaxWidth().heightIn(min = 108.dp), verticalAlignment = Alignment.CenterVertically) {
+                                        Column(Modifier.width(76.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+                                            Box(
+                                                modifier = Modifier.size(62.dp).background(
+                                                    if (completed) Color(0xFFE8F8EC) else if (isNext) Color(0xFFFFF200) else Color(0xFFF0F0F0),
+                                                    RoundedCornerShape(18.dp)
+                                                ),
+                                                contentAlignment = Alignment.Center
+                                            ) {
+                                                Text(lessonIcons[lessonIndex % lessonIcons.size], fontSize = 28.sp)
+                                            }
+                                            if (lessonIndex < lessonTitles.lastIndex) {
+                                                Box(Modifier.width(4.dp).height(44.dp).background(if (completed) Color(0xFF43A85B) else Color.LightGray))
+                                            }
+                                        }
+                                        Spacer(Modifier.width(12.dp))
+                                        Column(Modifier.weight(1f).padding(vertical = 12.dp)) {
+                                            Text(title, fontSize = 15.sp, fontWeight = FontWeight.SemiBold, color = Navy)
+                                            Text(if (completed) "Tamamlandı ✓" else if (isNext) "Derse başla" else "Sıradaki ders", fontSize = 12.sp, color = if (completed) Color(0xFF32964B) else Color(0xFF68758E))
+                                        }
+                                        if (completed) {
+                                            Text("✓", fontSize = 24.sp, color = Color(0xFF43A85B), fontWeight = FontWeight.Bold)
+                                        } else if (isNext) {
+                                            TextButton(onClick = {
                                                 currentScreen = "Sözlük"
+                                                selected = selected
+                                                selectedTopic = "Tümü"
                                                 tab = 0
                                                 query = ""
-                                            },
-                                            modifier = Modifier.weight(1f).height(94.dp),
-                                            shape = RoundedCornerShape(18.dp),
-                                            elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
-                                            colors = CardDefaults.cardColors(containerColor = topicColors[lessonIndex % topicColors.size])
-                                        ) {
-                                            Row(
-                                                Modifier.fillMaxSize().padding(12.dp),
-                                                verticalAlignment = Alignment.CenterVertically,
-                                                horizontalArrangement = Arrangement.spacedBy(9.dp)
-                                            ) {
-                                                Text(lessonIcons[lessonIndex % lessonIcons.size], fontSize = 25.sp)
-                                                Column(Modifier.weight(1f), verticalArrangement = Arrangement.Center) {
-                                                    Text("Ders ${lessonIndex + 1}", fontSize = 10.sp, color = Blue, fontWeight = FontWeight.Bold)
-                                                    Text(title, fontWeight = FontWeight.Bold, color = Navy, fontSize = 12.sp, lineHeight = 15.sp, maxLines = 2)
-                                                    Text("Derse gir  →", fontSize = 10.sp, color = Color(0xFF68758E))
-                                                }
-                                            }
+                                            }) { Text("▶", color = Color.Black, fontSize = 20.sp) }
+                                        } else {
+                                            Text("🔒", fontSize = 19.sp)
                                         }
                                     }
                                 }
