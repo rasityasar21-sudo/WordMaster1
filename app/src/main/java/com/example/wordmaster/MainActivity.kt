@@ -243,37 +243,75 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                     Button(onClick = { lessonStage = 1 }, modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(16.dp)) { Text("Videoya geç  →", modifier = Modifier.padding(6.dp)) }
                                 }
                                 1 -> {
-                                    Text("VİDEO DERSİ", color = Blue, fontWeight = FontWeight.ExtraBold, fontSize = 12.sp)
-                                    Text("Kısa çevrimdışı video", color = Color(0xFF68758E), lineHeight = 22.sp)
-                                    val offlineFrames = listOf(
-                                        lesson.heading to lesson.explanation,
-                                        lesson.rule to (lesson.examples.firstOrNull()?.first ?: "Read the example carefully."),
-                                        (lesson.examples.getOrElse(1) { lesson.examples.firstOrNull() ?: ("Try it yourself." to "Kendin dene.") }).first to (lesson.examples.getOrElse(1) { lesson.examples.firstOrNull() ?: ("Try it yourself." to "Kendin dene.") }).second
-                                    )
-                                    LaunchedEffect(activeLesson, lessonStage) {
-                                        offlineVideoFrame = 0
-                                        while (lessonStage == 1) {
-                                            delay(2600)
-                                            offlineVideoFrame = (offlineVideoFrame + 1) % offlineFrames.size
+                                    Text("LISTENING • DİNLEME", color = Blue, fontWeight = FontWeight.ExtraBold, fontSize = 12.sp)
+                                    Text("Kısa konuşmayı dinle, ardından soruları cevapla.", color = Color(0xFF68758E), lineHeight = 22.sp)
+                                    val context = LocalContext.current
+                                    var listeningReady by remember { mutableStateOf(false) }
+                                    val listeningTts = remember {
+                                        TextToSpeech(context) { status ->
+                                            listeningReady = status == TextToSpeech.SUCCESS
                                         }
                                     }
-                                    Card(shape = RoundedCornerShape(20.dp), colors = CardDefaults.cardColors(containerColor = Color(0xFF19172D))) {
-                                        Column(Modifier.fillMaxWidth().padding(18.dp), verticalArrangement = Arrangement.spacedBy(14.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-                                            Text("WORDMASTER • OFFLINE", color = Color(0xFFBDB4FF), fontWeight = FontWeight.Bold, fontSize = 12.sp)
-                                            Box(Modifier.fillMaxWidth().height(190.dp).background(Brush.linearGradient(listOf(Color(0xFF5145CD), Color(0xFF9A4DCC))), RoundedCornerShape(16.dp)), contentAlignment = Alignment.Center) {
-                                                Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.padding(12.dp)) {
-                                                    Text(offlineFrames[offlineVideoFrame].first, color = Color.White, fontSize = 25.sp, fontWeight = FontWeight.ExtraBold, textAlign = androidx.compose.ui.text.style.TextAlign.Center)
-                                                    Text(offlineFrames[offlineVideoFrame].second, color = Color.White, fontSize = 18.sp, textAlign = androidx.compose.ui.text.style.TextAlign.Center)
+                                    DisposableEffect(listeningTts) {
+                                        onDispose { listeningTts.stop(); listeningTts.shutdown() }
+                                    }
+                                    LaunchedEffect(listeningReady) {
+                                        if (listeningReady) listeningTts.language = Locale.US
+                                    }
+                                    val dialogue = lesson.examples.take(3).ifEmpty {
+                                        listOf(lesson.heading to lesson.explanation)
+                                    }
+                                    Card(
+                                        shape = RoundedCornerShape(22.dp),
+                                        colors = CardDefaults.cardColors(containerColor = Color(0xFF19172D))
+                                    ) {
+                                        Column(
+                                            Modifier.fillMaxWidth().padding(18.dp),
+                                            verticalArrangement = Arrangement.spacedBy(14.dp)
+                                        ) {
+                                            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                                                Text("🎧", fontSize = 30.sp)
+                                                Column {
+                                                    Text("LISTENING PRACTICE", color = Color(0xFFBDB4FF), fontWeight = FontWeight.Bold, fontSize = 12.sp)
+                                                    Text(lesson.heading, color = Color.White, fontWeight = FontWeight.ExtraBold, fontSize = 20.sp)
                                                 }
                                             }
-                                            Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-                                                offlineFrames.indices.forEach { index -> Box(Modifier.weight(1f).height(5.dp).background(if (index == offlineVideoFrame) Color(0xFFFFE500) else Color(0xFF55516C), RoundedCornerShape(8.dp))) }
+                                            Text("Konuşmayı önce dinle. İstersen tekrar dinleyip sonra metni kontrol et.", color = Color(0xFFE5E2FF), lineHeight = 22.sp)
+                                            Button(
+                                                onClick = {
+                                                    if (listeningReady) {
+                                                        listeningTts.language = Locale.US
+                                                        val script = dialogue.mapIndexed { i, pair ->
+                                                            (if (i % 2 == 0) "Speaker one. " else "Speaker two. ") + pair.first
+                                                        }.joinToString(". ")
+                                                        listeningTts.speak(script, TextToSpeech.QUEUE_FLUSH, null, "lesson_listening_dialogue")
+                                                    }
+                                                },
+                                                modifier = Modifier.fillMaxWidth(),
+                                                shape = RoundedCornerShape(14.dp)
+                                            ) { Text("▶ Konuşmayı dinle", modifier = Modifier.padding(4.dp)) }
+                                            HorizontalDivider(color = Color(0xFF55516C))
+                                            Text("Konuşma metni", color = Color(0xFFBDB4FF), fontWeight = FontWeight.Bold)
+                                            dialogue.forEachIndexed { index, pair ->
+                                                Row(
+                                                    Modifier.fillMaxWidth().background(Color(0xFF292541), RoundedCornerShape(12.dp)).padding(12.dp),
+                                                    verticalAlignment = Alignment.CenterVertically,
+                                                    horizontalArrangement = Arrangement.spacedBy(10.dp)
+                                                ) {
+                                                    Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                                                        Text(if (index % 2 == 0) "A" else "B", color = Color(0xFFFFE500), fontWeight = FontWeight.ExtraBold)
+                                                        Text(pair.first, color = Color.White, fontWeight = FontWeight.SemiBold, fontSize = 16.sp)
+                                                        Text(pair.second, color = Color(0xFFD0CBEA), fontSize = 14.sp)
+                                                    }
+                                                    IconButton(onClick = {
+                                                        if (listeningReady) {
+                                                            listeningTts.language = Locale.US
+                                                            listeningTts.speak(pair.first, TextToSpeech.QUEUE_FLUSH, null, "lesson_line_$index")
+                                                        }
+                                                    }) { Text("🔊", fontSize = 20.sp) }
+                                                }
                                             }
-                                            Text("Kısa animasyonlu konu özeti • İnternet gerekmez", color = Color.White, fontWeight = FontWeight.SemiBold)
-                                            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                                                OutlinedButton(onClick = { offlineVideoFrame = (offlineVideoFrame - 1 + offlineFrames.size) % offlineFrames.size }, modifier = Modifier.weight(1f)) { Text("← Önceki") }
-                                                Button(onClick = { offlineVideoFrame = (offlineVideoFrame + 1) % offlineFrames.size }, modifier = Modifier.weight(1f)) { Text("Sonraki →") }
-                                            }
+                                            Text("Dinledikten sonra aşağıdaki alıştırmada doğru cevabı seç.", color = Color.White, fontWeight = FontWeight.SemiBold)
                                         }
                                     }
                                     Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
