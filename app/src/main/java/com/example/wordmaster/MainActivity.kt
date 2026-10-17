@@ -53,6 +53,7 @@ class MainActivity : ComponentActivity() {
 fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
     var query by remember { mutableStateOf("") }
     var selected by remember { mutableStateOf("Tümü") }
+    var selectedTopic by remember { mutableStateOf("Tümü") }
     var tab by remember { mutableIntStateOf(0) }
     var xp by remember { mutableIntStateOf(prefs.getInt("xp", 0)) }
     var coins by remember { mutableIntStateOf(prefs.getInt("coins", 0)) }
@@ -144,6 +145,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
 
     val filtered = words.filter {
         (selected == "Tümü" || it.level == selected) &&
+        (selectedTopic == "Tümü" || topicForWord(it) == selectedTopic) &&
         (it.en.contains(query, true) || it.tr.contains(query, true)) &&
         (tab != 1 || it.en in favorites) && (tab != 2 || it.en in learned)
     }
@@ -263,7 +265,38 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                     ) { Text("🎯  Teste Başla", fontSize = 16.sp, fontWeight = FontWeight.Bold) }
                 }
                 item {
-                    Text("Kelime defterim", fontSize = 21.sp, fontWeight = FontWeight.ExtraBold, color = Navy)
+                    Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                        Text("Öğrenme yolculuğun", fontSize = 22.sp, fontWeight = FontWeight.ExtraBold, color = Navy)
+                        Text("Seviyeni seç, bir konu aç ve adım adım ilerle.", fontSize = 13.sp, color = Color(0xFF68758E))
+                        Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(9.dp)) {
+                            listOf("A1", "A2", "B1", "B2", "C1").forEach { levelName ->
+                                val count = words.count { it.level == levelName }
+                                FilterChip(selected = selected == levelName, onClick = { selected = levelName; selectedTopic = "Tümü"; tab = 0 }, label = { Text("$" + "levelName · $" + "count") })
+                            }
+                        }
+                        Text(if (selected == "Tümü") "Konular" else "$" + "selected konu başlıkları", fontSize = 19.sp, fontWeight = FontWeight.ExtraBold, color = Navy)
+                        val topicList = listOf("Selamlaşma", "Aile ve insanlar", "Yiyecek ve içecek", "Ev ve eşyalar", "Okul ve öğrenme", "Zaman ve günlük hayat", "Yerler ve ulaşım", "Duygular ve sıfatlar", "Fiiller ve eylemler", "Diğer kelimeler")
+                        topicList.forEachIndexed { index, topic ->
+                            val count = words.count { (selected == "Tümü" || it.level == selected) && topicForWord(it) == topic }
+                            if (count > 0) {
+                                Card(onClick = { selectedTopic = topic; tab = 0 }, modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(18.dp), colors = CardDefaults.cardColors(containerColor = if (selectedTopic == topic) Color(0xFFEDE9FE) else Color.White)) {
+                                    Row(Modifier.fillMaxWidth().padding(14.dp), verticalAlignment = Alignment.CenterVertically) {
+                                        Text(listOf("👋", "👨‍👩‍👧", "🍎", "🏠", "🎒", "🕒", "🚌", "😊", "⚡", "📘")[index], fontSize = 23.sp)
+                                        Spacer(Modifier.width(12.dp))
+                                        Column(Modifier.weight(1f)) {
+                                            Text(topic, fontWeight = FontWeight.Bold, color = Navy)
+                                            Text("$" + "count kelime · $" + "(if (selectedTopic == topic) "Seçili konu" else "Konuya başla")", fontSize = 12.sp, color = Color(0xFF68758E))
+                                        }
+                                        Text("›", fontSize = 26.sp, color = Blue, fontWeight = FontWeight.Bold)
+                                    }
+                                }
+                            }
+                        }
+                        if (selectedTopic != "Tümü") OutlinedButton(onClick = { selectedTopic = "Tümü" }, modifier = Modifier.fillMaxWidth()) { Text("Tüm konuları göster") }
+                    }
+                }
+                item {
+                    Text(if (selectedTopic == "Tümü") "Kelime defterim" else "$" + "selectedTopic · Kelimeler", fontSize = 21.sp, fontWeight = FontWeight.ExtraBold, color = Navy)
                 }
                 item {
                     OutlinedTextField(
@@ -645,5 +678,21 @@ private fun StatPill(emoji: String, label: String) {
             Text(emoji, fontSize = 14.sp)
             Text(label, color = Color.White, fontSize = 12.sp, fontWeight = FontWeight.Bold)
         }
+    }
+}
+
+private fun topicForWord(word: Word): String {
+    val value = (word.en + " " + word.tr).lowercase()
+    return when {
+        listOf("hello", "goodbye", "please", "thank", "sorry", "merhaba", "hoşça", "teşekkür", "afedersin").any { it in value } -> "Selamlaşma"
+        listOf("mother", "father", "sister", "brother", "family", "friend", "anne", "baba", "kardeş", "aile", "arkadaş").any { it in value } -> "Aile ve insanlar"
+        listOf("water", "food", "bread", "apple", "milk", "eat", "drink", "su", "yemek", "ekmek", "elma", "süt", "içmek").any { it in value } -> "Yiyecek ve içecek"
+        listOf("house", "room", "door", "window", "table", "chair", "bed", "ev", "oda", "kapı", "pencere", "masa", "sandalye", "yatak").any { it in value } -> "Ev ve eşyalar"
+        listOf("school", "teacher", "student", "book", "learn", "okul", "öğretmen", "öğrenci", "kitap", "öğren").any { it in value } -> "Okul ve öğrenme"
+        listOf("day", "night", "morning", "today", "tomorrow", "week", "time", "gün", "gece", "sabah", "bugün", "yarın", "hafta", "zaman").any { it in value } -> "Zaman ve günlük hayat"
+        listOf("city", "country", "street", "bus", "train", "car", "travel", "şehir", "ülke", "sokak", "otobüs", "tren", "araba", "seyahat").any { it in value } -> "Yerler ve ulaşım"
+        listOf("happy", "sad", "good", "bad", "big", "small", "beautiful", "angry", "mutlu", "üzgün", "iyi", "kötü", "büyük", "küçük", "güzel").any { it in value } -> "Duygular ve sıfatlar"
+        listOf("go", "come", "make", "do", "have", "get", "take", "see", "run", "walk", "gitmek", "gelmek", "yapmak", "almak", "görmek", "koşmak", "yürümek").any { it in value } -> "Fiiller ve eylemler"
+        else -> "Diğer kelimeler"
     }
 }
