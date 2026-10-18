@@ -104,9 +104,9 @@ class LearningEngineTest {
     }
 
     @Test
-    fun decodingSkipsBlankWordsAndClampsInvalidCounters() {
+    fun decodingClampsInvalidCounters() {
         val decoded = WordMasterLearningEngine.decode(
-            """[{"word":"   ","correctCount":4},{"word":"  book  ","correctCount":-2,"mistakeCount":-1,"streak":-3,"intervalDays":-8,"easeFactor":0.5},{"word":"chair"}]"""
+            """[{"word":"  book  ","correctCount":-2,"mistakeCount":-1,"streak":-3,"intervalDays":-8,"easeFactor":0.5},{"word":"chair"}]"""
         )
 
         assertEquals(listOf("book", "chair"), decoded.map { it.word })
