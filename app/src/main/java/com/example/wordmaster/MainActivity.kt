@@ -148,7 +148,9 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
     val xpInLevel = xp % 100
     val today = LocalDate.now().toString()
     val studyPlanLevel = chosenLevel.ifBlank { selected.takeIf { it in listOf("A1", "A2", "B1", "B2", "C1") } ?: "A1" }
-    val dueReviewWords = learningStore.dueForReview()
+    var reviewRefresh by remember { mutableIntStateOf(0) }
+    var showReviewQueue by remember { mutableStateOf(false) }
+    val dueReviewWords = remember(reviewRefresh) { learningStore.dueForReview() }
     val studyPlan = remember(studyPlanLevel, completedCourseIds, dueReviewWords, today) {
         DailyStudyPlan.create(
             level = studyPlanLevel,
@@ -451,14 +453,48 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                             }
                             if (dueCount > 0) {
                                 Card(shape = RoundedCornerShape(18.dp), colors = CardDefaults.cardColors(containerColor = Color(0xFFFFF7E8))) {
-                                    Row(Modifier.fillMaxWidth().padding(15.dp), verticalAlignment = Alignment.CenterVertically) {
-                                        Text("🧠", fontSize = 25.sp)
-                                        Spacer(Modifier.width(12.dp))
-                                        Column(Modifier.weight(1f)) {
-                                            Text("$dueCount kelime tekrar bekliyor", fontWeight = FontWeight.Bold, color = Color(0xFF7C4A03))
-                                            Text("Unutmadan önce bilgini tazele.", fontSize = 12.sp, color = Color(0xFF926C30))
+                                    Column(Modifier.fillMaxWidth().padding(15.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                                        Row(verticalAlignment = Alignment.CenterVertically) {
+                                            Text("🧠", fontSize = 25.sp)
+                                            Spacer(Modifier.width(12.dp))
+                                            Column(Modifier.weight(1f)) {
+                                                Text("$dueCount kelime tekrar bekliyor", fontWeight = FontWeight.Bold, color = Color(0xFF7C4A03))
+                                                Text("Unutmadan önce bilgini tazele.", fontSize = 12.sp, color = Color(0xFF926C30))
+                                            }
+                                            TextButton(onClick = { placementMode = false; startQuiz(); sessionAnswered = 0; sessionCorrect = 0; sessionActive = true; currentScreen = "Sınav" }) { Text("Test et") }
                                         }
-                                        TextButton(onClick = { placementMode = false; startQuiz(); sessionAnswered = 0; sessionCorrect = 0; sessionActive = true; currentScreen = "Sınav" }) { Text("Tekrar et") }
+                                        TextButton(onClick = { showReviewQueue = !showReviewQueue }) {
+                                            Text(if (showReviewQueue) "Tekrar listesini gizle" else "Kelime listesini aç")
+                                        }
+                                        if (showReviewQueue) {
+                                            dueReviewWords.take(5).forEach { progress ->
+                                                val translation = words.firstOrNull { it.en.equals(progress.word, ignoreCase = true) }?.tr
+                                                Column(Modifier.fillMaxWidth().background(Color.White, RoundedCornerShape(12.dp)).padding(12.dp), verticalArrangement = Arrangement.spacedBy(7.dp)) {
+                                                    Text(progress.word, color = Ink, fontWeight = FontWeight.Bold, fontSize = 16.sp)
+                                                    Text(translation ?: "Türkçe karşılık sözlükte bulunamadı", color = Color(0xFF68758E), fontSize = 13.sp)
+                                                    Text("Doğru: ${progress.correctCount} · Hata: ${progress.mistakeCount} · Başarı: ${progress.accuracyPercent}%", color = Color(0xFF77738B), fontSize = 11.sp)
+                                                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                                                        OutlinedButton(
+                                                            onClick = {
+                                                                learningStore.rateRecall(progress.word, quality = 1)
+                                                                reviewRefresh++
+                                                            },
+                                                            modifier = Modifier.weight(1f)
+                                                        ) { Text("Zorlandım") }
+                                                        Button(
+                                                            onClick = {
+                                                                learningStore.rateRecall(progress.word, quality = 4)
+                                                                reviewRefresh++
+                                                            },
+                                                            modifier = Modifier.weight(1f)
+                                                        ) { Text("Biliyordum") }
+                                                    }
+                                                }
+                                            }
+                                            if (dueReviewWords.size > 5) {
+                                                Text("İlk 5 kelime gösteriliyor. Test modunda tüm tekrar kuyruğu kullanılabilir.", color = Color(0xFF926C30), fontSize = 11.sp)
+                                            }
+                                        }
                                     }
                                 }
                             }
