@@ -106,19 +106,21 @@ data class DailyStudyPlan(
             }
             targetLessons.forEach(::addPrerequisites)
 
-            val eligibleTargetLessons = targetLessons.filter { lesson ->
-                lesson.prerequisiteIds.all { it in completedLessonIds || it in chosen }
-            }
-            val candidates = (chosen.toList() + eligibleTargetLessons.map { it.id }).distinct()
+            // Keep prerequisite lessons first, then consider selected-level lessons
+            // in catalog order. A lesson is added only after its prerequisites are
+            // completed or already included earlier in today's plan.
+            val candidates = (chosen.toList() + targetLessons.map { it.id }).distinct()
             val selectedLessons = candidates.mapNotNull(WordMasterCourseCatalog::find)
             val chosenForPlan = mutableListOf<String>()
-            val targetLessonIds = eligibleTargetLessons.map { it.id }.toSet()
+            val targetLessonIds = targetLessons.map { it.id }.toSet()
             var minutes = 0
             var targetLessonAdded = false
             for (lesson in selectedLessons) {
-                // Do not stop at the target time until one lesson from the chosen
-                // level has been added after its prerequisites.
                 if (targetLessonAdded && minutes >= safeTarget) break
+                val prerequisitesSatisfied = lesson.prerequisiteIds.all {
+                    it in completedLessonIds || it in chosenForPlan
+                }
+                if (!prerequisitesSatisfied) continue
                 chosenForPlan += lesson.id
                 minutes += lesson.estimatedMinutes
                 if (lesson.id in targetLessonIds) targetLessonAdded = true
