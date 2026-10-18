@@ -8,7 +8,8 @@ data class DailyLearningPlan(
     val level: String,
     val availableMinutes: Int,
     val lessons: List<CourseLesson>,
-    val totalMinutes: Int
+    val totalMinutes: Int,
+    val reviewWords: List<WordProgress> = emptyList()
 )
 
 object DailyLearningPlanner {
@@ -18,7 +19,9 @@ object DailyLearningPlanner {
         preferredLevel: String,
         completedLessonIds: Set<String>,
         availableMinutes: Int = 20,
-        catalog: List<CourseLesson> = WordMasterCourseCatalog.lessons
+        catalog: List<CourseLesson> = WordMasterCourseCatalog.lessons,
+        wordProgress: List<WordProgress> = emptyList(),
+        maxReviewWords: Int = 10
     ): DailyLearningPlan {
         val level = preferredLevel.uppercase().takeIf { it in levels } ?: "A1"
         val budget = availableMinutes.coerceIn(5, 180)
@@ -45,6 +48,8 @@ object DailyLearningPlanner {
         if (selected.isEmpty()) {
             eligible.minByOrNull { it.estimatedMinutes }?.let { selected += it; used = it.estimatedMinutes.coerceAtLeast(1) }
         }
-        return DailyLearningPlan(level, budget, selected, used)
+        val reviewWords = WordMasterLearningEngine.dueForReview(wordProgress)
+            .take(maxReviewWords.coerceAtLeast(0))
+        return DailyLearningPlan(level, budget, selected, used, reviewWords)
     }
 }
