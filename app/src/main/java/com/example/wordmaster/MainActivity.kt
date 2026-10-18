@@ -1035,7 +1035,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
             Text("Uygulama teması", fontWeight = FontWeight.Bold)
             listOf("Mor-pembe gün batımı", "Zümrüt yeşili", "Sıcak gün batımı").forEachIndexed { index, label ->
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    RadioButton(selected = themeChoice == index, onClick = { themeChoice = index })
+                    RadioButton(selected = themeChoice == index, onClick = { themeChoice = index; prefs.edit().putInt("themeChoice", index).apply() })
                     Text(label)
                 }
             }
@@ -1043,7 +1043,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
             Text("Günlük kelime hedefi", fontWeight = FontWeight.Bold)
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 listOf(5, 10, 15, 20).forEach { goal ->
-                    FilterChip(selected = dailyGoal == goal, onClick = { dailyGoal = goal }, label = { Text("$goal") })
+                    FilterChip(selected = dailyGoal == goal, onClick = { dailyGoal = goal; prefs.edit().putInt("dailyGoal", goal).apply() }, label = { Text("$goal") })
                 }
             }
             Row(verticalAlignment = Alignment.CenterVertically) {
@@ -1051,7 +1051,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                     Text("Kompakt kelime kartları", fontWeight = FontWeight.SemiBold)
                     Text("Daha fazla kelimeyi ekranda göster", fontSize = 12.sp, color = Color.Gray)
                 }
-                Switch(checked = compactCards, onCheckedChange = { compactCards = it })
+                Switch(checked = compactCards, onCheckedChange = { compactCards = it; prefs.edit().putBoolean("compactCards", it).apply() })
             }
             Text("Seçimler bu cihazda saklanır.", fontSize = 12.sp, color = Color.Gray)
         } },
