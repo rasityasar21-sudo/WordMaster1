@@ -67,3 +67,48 @@ class LearningEngineTest {
         assertTrue("future" !in due)
     }
 }
+
+    @Test
+    fun progressSurvivesJsonRoundTrip() {
+        val original = listOf(
+            WordProgress(
+                word = "inspection",
+                correctCount = 5,
+                mistakeCount = 2,
+                streak = 3,
+                intervalDays = 7,
+                easeFactor = 2.35,
+                dueDate = "2026-10-25",
+                lastReviewed = "2026-10-18"
+            )
+        )
+
+        val decoded = WordMasterLearningEngine.decode(WordMasterLearningEngine.encode(original))
+
+        assertEquals(original, decoded)
+    }
+
+    @Test
+    fun malformedSavedJsonFallsBackToEmptyProgress() {
+        assertTrue(WordMasterLearningEngine.decode("not-json").isEmpty())
+        assertTrue(WordMasterLearningEngine.decode(null).isEmpty())
+    }
+
+    @Test
+    fun summaryReportsAccuracyMasteryAndDueCounts() {
+        val today = LocalDate.now()
+        val words = listOf(
+            WordProgress(word = "mastered", correctCount = 8, mistakeCount = 1, streak = 3, dueDate = today.plusDays(3).toString()),
+            WordProgress(word = "review", correctCount = 1, mistakeCount = 2, streak = 0, dueDate = today.toString())
+        )
+
+        val summary = WordMasterLearningEngine.summary(words, currentStreak = 4)
+
+        assertEquals(2, summary.totalWords)
+        assertEquals(1, summary.masteredWords)
+        assertEquals(1, summary.dueWords)
+        assertEquals(9, summary.totalCorrect)
+        assertEquals(3, summary.totalMistakes)
+        assertEquals(75, summary.accuracyPercent)
+        assertEquals(4, summary.currentStreak)
+    }
