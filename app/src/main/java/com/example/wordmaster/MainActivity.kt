@@ -265,7 +265,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                 if (currentScreen == "Dersler") {
                     item {
                         val dueCount = learningStore.dueForReview().size
-                        val todayProgress = (prefs.getInt("todayWords", 0)).coerceAtMost(dailyGoal)
+                        val todayProgress = (if (prefs.getString("todayWordsDate", "") == today) prefs.getInt("todayWords", 0) else 0).coerceAtMost(dailyGoal)
                         Column(verticalArrangement = Arrangement.spacedBy(14.dp)) {
                             Row(verticalAlignment = Alignment.CenterVertically) {
                                 Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(3.dp)) {
@@ -298,7 +298,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                     }
                                     Row(verticalAlignment = Alignment.CenterVertically) {
                                         Column(Modifier.weight(1f)) {
-                                            Text("$todayProgress / $dailyGoal kelime hedefi", color = Color.White, fontWeight = FontWeight.SemiBold, fontSize = 13.sp)
+                                            Text("$todayProgress / $dailyGoal günlük soru hedefi", color = Color.White, fontWeight = FontWeight.SemiBold, fontSize = 13.sp)
                                             Spacer(Modifier.height(8.dp))
                                             LinearProgressIndicator(
                                                 progress = { if (dailyGoal > 0) (todayProgress.toFloat() / dailyGoal).coerceIn(0f, 1f) else 0f },
@@ -895,6 +895,9 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                     quizCount++
                                     sessionAnswered++
                                     totalAnswered++
+                                    val savedToday = prefs.getString("todayWordsDate", "") == today
+                                    val todayAnswered = (if (savedToday) prefs.getInt("todayWords", 0) else 0) + 1
+                                    prefs.edit().putString("todayWordsDate", today).putInt("todayWords", todayAnswered).apply()
                                     if (placementMode) {
                                         placementAnswered++
                                         if (choice.en == quizWord!!.en) placementCorrect++
