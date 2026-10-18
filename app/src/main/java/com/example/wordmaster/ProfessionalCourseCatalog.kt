@@ -390,13 +390,23 @@ object ProfessionalCourseCatalog {
             title = "Otomotiv İngilizcesi",
             titleEnglish = "Automotive English",
             description = "Araç sistemleri, servis iletişimi ve teknik arıza açıklamaları.",
-            topics = listOf("Araç parçaları", "Servis kabul", "Arıza tanımlama", "Bakım kayıtları"),
-            lessons = listOf(ProfessionalLesson("vehicle-complaint", "Araç şikâyetini tarif etme", "Müşteri bildirimini açık ve tarafsız kaydetmek.", "Servis kabulünde müşterinin bildirdiği belirti ile teknisyenin kontrol sonucu ayrı tutulur. Ses, zaman, koşul ve gösterge uyarıları net biçimde sorulup kaydedilmelidir.", listOf("When did the noise start?" to "Ses ne zaman başladı?", "The warning light is on." to "Uyarı ışığı yanıyor.", "The customer reports a vibration." to "Müşteri titreşim olduğunu bildiriyor."), "Müşteri bildirimi ile doğrulanmış teknik bulgu neden ayrı yazılır?", "Bildirilen şikâyet ile kontrol sonucu birbirine karıştırılmamalıdır.")),
+            topics = listOf("Araç parçaları", "Servis kabul", "Arıza tanımlama", "Bakım kayıtları", "Güvenlik kontrolü", "Onarım teslimi"),
+            lessons = listOf(
+                ProfessionalLesson("vehicle-complaint", "Araç şikâyetini tarif etme", "Müşteri bildirimini açık ve tarafsız kaydetmek.", "Servis kabulünde müşterinin bildirdiği belirti ile teknisyenin kontrol sonucu ayrı tutulur. Ses, zaman, koşul ve gösterge uyarıları net biçimde sorulup kaydedilmelidir.", listOf("When did the noise start?" to "Ses ne zaman başladı?", "The warning light is on." to "Uyarı ışığı yanıyor.", "The customer reports a vibration." to "Müşteri titreşim olduğunu bildiriyor."), "Müşteri bildirimi ile doğrulanmış teknik bulgu neden ayrı yazılır?", "Bildirilen şikâyet ile kontrol sonucu birbirine karıştırılmamalıdır."),
+                ProfessionalLesson("vehicle-inspection", "Araç kontrolü ve güvenlik", "Kontrol adımlarını ve güvenlik bulgularını aktarmak.", "Araç kontrolünde ölçüm ve gözlem sonuçları açıkça kaydedilir. Güvenlik açısından önemli bir sorun varsa araç teslim edilmeden önce ilgili prosedür izlenmelidir.", listOf("Check the fluid level." to "Sıvı seviyesini kontrol edin.", "The battery voltage is low." to "Akü voltajı düşük.", "The brake pads need inspection." to "Fren balatalarının kontrol edilmesi gerekiyor."), "Kontrol sonucunu kaydederken neden ölçüm ve gözlem açık yazılmalıdır?", "Sonucun anlaşılır ve tekrar kontrol edilebilir olması için."),
+                ProfessionalLesson("repair-handover", "Onarım kaydı ve teslim", "Yapılan işi ve önerilen sonraki adımları açıklamak.", "Servis kaydı yapılan işlemi, değişen parçaları ve önerilen bakımı belirtmelidir. Teslim sırasında yapılan işlem ile henüz yapılması önerilen işlem birbirinden ayrılmalıdır.", listOf("The filter has been replaced." to "Filtre değiştirildi.", "The vehicle is ready for collection." to "Araç teslim alınmaya hazır.", "We recommend a follow-up inspection." to "Takip kontrolü öneriyoruz."), "Onarım tesliminde hangi bilgiler müşteriye aktarılmalıdır?", "Yapılan işlem, ilgili parçalar ve önerilen takip adımları.")
+            ),
             sampleTerms = listOf(
-            ProfessionalTerm("brake", "fren", "The mechanic inspected the brakes."),
-            ProfessionalTerm("engine", "motor", "The engine needs an inspection."),
-            ProfessionalTerm("tire", "lastik", "Check the tire pressure."),
-            ProfessionalTerm("repair", "onarım", "The repair is complete.")
+                ProfessionalTerm("brake", "fren", "The mechanic inspected the brakes."),
+                ProfessionalTerm("engine", "motor", "The engine needs an inspection."),
+                ProfessionalTerm("tire pressure", "lastik basıncı", "Check the tire pressure."),
+                ProfessionalTerm("repair", "onarım", "The repair is complete."),
+                ProfessionalTerm("battery", "akü", "The battery voltage is low."),
+                ProfessionalTerm("coolant", "soğutma sıvısı", "Check the coolant level."),
+                ProfessionalTerm("fault code", "arıza kodu", "Record the fault code."),
+                ProfessionalTerm("inspection", "kontrol", "The inspection is complete."),
+                ProfessionalTerm("replacement part", "yedek parça", "The replacement part has arrived."),
+                ProfessionalTerm("maintenance record", "bakım kaydı", "Update the maintenance record.")
             )
         )
     )
