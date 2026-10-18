@@ -115,6 +115,45 @@ object ProfessionalCourseCatalog {
                     ),
                     question = "Bir emniyet uyarısını anlamadığında doğru yaklaşım nedir?",
                     answer = "İşleme devam etmek yerine açıklama istemek ve onaylı prosedürü/yetkili sorumluyu takip etmektir."
+                ),
+                ProfessionalLesson(
+                    id = "measurement-language",
+                    title = "5. Ölçüm ve tolerans ifadeleri",
+                    objective = "Ölçüm değerleri, birimler ve kabul sınırları hakkında İngilizce cümleleri anlamak.",
+                    explanation = "Measured value ölçülen değeri, specified limit belirtilen sınırı, within tolerance ise ilgili tolerans aralığında olmayı anlatır. Sayısal değer tek başına yeterli değildir; birim ve karşılaştırılacak güncel onaylı teknik referans da gerekir.",
+                    phrases = listOf(
+                        "Record the measured value." to "Ölçülen değeri kaydedin.",
+                        "The value is outside the specified limit." to "Değer belirtilen sınırın dışındadır.",
+                        "Refer to the approved data for the tolerance." to "Tolerans için onaylı teknik veriye başvurun."
+                    ),
+                    question = "Bir ölçüm değerini kaydederken sayıyla birlikte ne belirtilmelidir?",
+                    answer = "Ölçü birimi ve değerin karşılaştırılacağı onaylı teknik referans."
+                ),
+                ProfessionalLesson(
+                    id = "corrosion-and-wear",
+                    title = "6. Korozyon ve aşınmayı tarif etme",
+                    objective = "Gözlenen korozyon veya aşınmayı varsayım eklemeden ifade etmek.",
+                    explanation = "Corrosion korozyon, wear aşınma, surface damage yüzey hasarı demektir. Raporlama dilinde gözlenen durum, konum ve varsa ilgili kayıt referansı açıkça belirtilir; neden veya ciddiyet hakkında kanıtsız çıkarım yapılmaz.",
+                    phrases = listOf(
+                        "Signs of corrosion were observed on the surface." to "Yüzeyde korozyon belirtileri gözlemlendi.",
+                        "The area shows signs of wear." to "Bölgede aşınma belirtileri görülüyor.",
+                        "Record the location of the finding." to "Bulgunun konumunu kaydedin."
+                    ),
+                    question = "Bir bulgu raporunda neden hakkında tahmin yürütmek yerine ne yazılmalıdır?",
+                    answer = "Gözlemlenen durum, açık konum ve gerekli referans bilgisi."
+                ),
+                ProfessionalLesson(
+                    id = "maintenance-handover",
+                    title = "7. İş devri ve teknik iletişim",
+                    objective = "Devam eden işin durumunu açık, izlenebilir ifadelerle aktarmak.",
+                    explanation = "Handover iş devri, outstanding task tamamlanmamış iş, recorded finding kaydedilmiş bulgu anlamına gelir. Devir sırasında tamamlanan ve bekleyen işler birbirinden ayrılır; kritik bilgi yalnızca sözlü bırakılmayıp kurumun kayıt sürecine göre belgelenir.",
+                    phrases = listOf(
+                        "The inspection is complete; the record is pending." to "Kontrol tamamlandı; kayıt işlemi bekliyor.",
+                        "This task remains outstanding." to "Bu iş henüz tamamlanmadı.",
+                        "Please review the recorded findings." to "Lütfen kaydedilen bulguları gözden geçirin."
+                    ),
+                    question = "İş devrinde hangi iki durum açıkça ayrılmalıdır?",
+                    answer = "Tamamlanan işler ile henüz tamamlanmamış veya takip bekleyen işler."
                 )
             ),
             sampleTerms = listOf(
