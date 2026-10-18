@@ -239,7 +239,10 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
     val studyPlanLevel = chosenLevel.ifBlank { selected.takeIf { it in listOf("A1", "A2", "B1", "B2", "C1") } ?: "A1" }
     var reviewRefresh by remember { mutableIntStateOf(0) }
     var showReviewQueue by remember { mutableStateOf(false) }
-    val dueReviewWords = remember(reviewRefresh) { learningStore.dueForReview() }
+    var dueReviewWords by remember { mutableStateOf<List<WordProgress>>(emptyList()) }
+    LaunchedEffect(learningStore, reviewRefresh) {
+        dueReviewWords = withContext(Dispatchers.IO) { learningStore.dueForReview() }
+    }
     val studyPlan = remember(studyPlanLevel, completedCourseIds, dueReviewWords, today, dailyStudyGoal) {
         DailyStudyPlan.create(
             level = studyPlanLevel,
