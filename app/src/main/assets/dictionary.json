@@ -7471,5 +7471,1397 @@
     "tr": "verim; üretmek; boyun eğmek",
     "level": "B2",
     "example": "The word \"yield\" is used in context."
+  },
+  {
+    "en": "abandon",
+    "tr": "terk etmek",
+    "level": "B2",
+    "example": "We use the word \"abandon\" in everyday English."
+  },
+  {
+    "en": "absorb",
+    "tr": "emmek; özümsemek",
+    "level": "B2",
+    "example": "We use the word \"absorb\" in everyday English."
+  },
+  {
+    "en": "acceptance",
+    "tr": "kabul",
+    "level": "B2",
+    "example": "We use the word \"acceptance\" in everyday English."
+  },
+  {
+    "en": "access",
+    "tr": "erişim",
+    "level": "A2",
+    "example": "We use the word \"access\" in everyday English."
+  },
+  {
+    "en": "accomplish",
+    "tr": "başarmak",
+    "level": "B1",
+    "example": "We use the word \"accomplish\" in everyday English."
+  },
+  {
+    "en": "account",
+    "tr": "hesap",
+    "level": "A2",
+    "example": "We use the word \"account\" in everyday English."
+  },
+  {
+    "en": "additional",
+    "tr": "ek",
+    "level": "A2",
+    "example": "We use the word \"additional\" in everyday English."
+  },
+  {
+    "en": "admit",
+    "tr": "itiraf etmek; kabul etmek",
+    "level": "B1",
+    "example": "We use the word \"admit\" in everyday English."
+  },
+  {
+    "en": "advantage",
+    "tr": "avantaj",
+    "level": "A2",
+    "example": "We use the word \"advantage\" in everyday English."
+  },
+  {
+    "en": "adventure",
+    "tr": "macera",
+    "level": "A2",
+    "example": "We use the word \"adventure\" in everyday English."
+  },
+  {
+    "en": "advertise",
+    "tr": "reklam yapmak",
+    "level": "A2",
+    "example": "We use the word \"advertise\" in everyday English."
+  },
+  {
+    "en": "agency",
+    "tr": "kurum; ajans",
+    "level": "B1",
+    "example": "We use the word \"agency\" in everyday English."
+  },
+  {
+    "en": "agreement",
+    "tr": "anlaşma",
+    "level": "A2",
+    "example": "We use the word \"agreement\" in everyday English."
+  },
+  {
+    "en": "album",
+    "tr": "albüm",
+    "level": "A2",
+    "example": "We use the word \"album\" in everyday English."
+  },
+  {
+    "en": "anger",
+    "tr": "öfke",
+    "level": "A2",
+    "example": "We use the word \"anger\" in everyday English."
+  },
+  {
+    "en": "angle",
+    "tr": "açı",
+    "level": "A2",
+    "example": "We use the word \"angle\" in everyday English."
+  },
+  {
+    "en": "announce",
+    "tr": "duyurmak",
+    "level": "A2",
+    "example": "We use the word \"announce\" in everyday English."
+  },
+  {
+    "en": "appetite",
+    "tr": "iştah",
+    "level": "B1",
+    "example": "We use the word \"appetite\" in everyday English."
+  },
+  {
+    "en": "application",
+    "tr": "başvuru; uygulama",
+    "level": "A2",
+    "example": "We use the word \"application\" in everyday English."
+  },
+  {
+    "en": "appoint",
+    "tr": "atamak",
+    "level": "B2",
+    "example": "We use the word \"appoint\" in everyday English."
+  },
+  {
+    "en": "appreciate",
+    "tr": "takdir etmek",
+    "level": "B1",
+    "example": "We use the word \"appreciate\" in everyday English."
+  },
+  {
+    "en": "approve",
+    "tr": "onaylamak",
+    "level": "B1",
+    "example": "We use the word \"approve\" in everyday English."
+  },
+  {
+    "en": "approximately",
+    "tr": "yaklaşık olarak",
+    "level": "B1",
+    "example": "We use the word \"approximately\" in everyday English."
+  },
+  {
+    "en": "architect",
+    "tr": "mimar",
+    "level": "A2",
+    "example": "We use the word \"architect\" in everyday English."
+  },
+  {
+    "en": "architecture",
+    "tr": "mimarlık",
+    "level": "B1",
+    "example": "We use the word \"architecture\" in everyday English."
+  },
+  {
+    "en": "argument",
+    "tr": "tartışma; sav",
+    "level": "B1",
+    "example": "We use the word \"argument\" in everyday English."
+  },
+  {
+    "en": "arrest",
+    "tr": "tutuklamak",
+    "level": "B1",
+    "example": "We use the word \"arrest\" in everyday English."
+  },
+  {
+    "en": "assist",
+    "tr": "yardım etmek",
+    "level": "B1",
+    "example": "We use the word \"assist\" in everyday English."
+  },
+  {
+    "en": "associate",
+    "tr": "ilişkilendirmek",
+    "level": "B2",
+    "example": "We use the word \"associate\" in everyday English."
+  },
+  {
+    "en": "attract",
+    "tr": "çekmek; cezbetmek",
+    "level": "A2",
+    "example": "We use the word \"attract\" in everyday English."
+  },
+  {
+    "en": "attraction",
+    "tr": "cazibe; çekim",
+    "level": "B1",
+    "example": "We use the word \"attraction\" in everyday English."
+  },
+  {
+    "en": "average",
+    "tr": "ortalama",
+    "level": "A2",
+    "example": "We use the word \"average\" in everyday English."
+  },
+  {
+    "en": "balance",
+    "tr": "denge; dengelemek",
+    "level": "A2",
+    "example": "We use the word \"balance\" in everyday English."
+  },
+  {
+    "en": "ban",
+    "tr": "yasaklamak; yasak",
+    "level": "B1",
+    "example": "We use the word \"ban\" in everyday English."
+  },
+  {
+    "en": "basis",
+    "tr": "temel",
+    "level": "B1",
+    "example": "We use the word \"basis\" in everyday English."
+  },
+  {
+    "en": "battery",
+    "tr": "pil",
+    "level": "A2",
+    "example": "We use the word \"battery\" in everyday English."
+  },
+  {
+    "en": "belief",
+    "tr": "inanç",
+    "level": "A2",
+    "example": "We use the word \"belief\" in everyday English."
+  },
+  {
+    "en": "beyond",
+    "tr": "ötesinde",
+    "level": "B1",
+    "example": "We use the word \"beyond\" in everyday English."
+  },
+  {
+    "en": "bid",
+    "tr": "teklif vermek",
+    "level": "B2",
+    "example": "We use the word \"bid\" in everyday English."
+  },
+  {
+    "en": "billion",
+    "tr": "milyar",
+    "level": "A2",
+    "example": "We use the word \"billion\" in everyday English."
+  },
+  {
+    "en": "birth",
+    "tr": "doğum",
+    "level": "A1",
+    "example": "We use the word \"birth\" in everyday English."
+  },
+  {
+    "en": "blame",
+    "tr": "suçlamak",
+    "level": "B1",
+    "example": "We use the word \"blame\" in everyday English."
+  },
+  {
+    "en": "blank",
+    "tr": "boş",
+    "level": "A2",
+    "example": "We use the word \"blank\" in everyday English."
+  },
+  {
+    "en": "border",
+    "tr": "sınır",
+    "level": "A2",
+    "example": "We use the word \"border\" in everyday English."
+  },
+  {
+    "en": "bound",
+    "tr": "sınırlandırılmış; bağlı",
+    "level": "B2",
+    "example": "We use the word \"bound\" in everyday English."
+  },
+  {
+    "en": "branch",
+    "tr": "dal; şube",
+    "level": "A2",
+    "example": "We use the word \"branch\" in everyday English."
+  },
+  {
+    "en": "brand",
+    "tr": "marka",
+    "level": "A2",
+    "example": "We use the word \"brand\" in everyday English."
+  },
+  {
+    "en": "brief",
+    "tr": "kısa",
+    "level": "B1",
+    "example": "We use the word \"brief\" in everyday English."
+  },
+  {
+    "en": "budget",
+    "tr": "bütçe",
+    "level": "A2",
+    "example": "We use the word \"budget\" in everyday English."
+  },
+  {
+    "en": "burden",
+    "tr": "yük",
+    "level": "B2",
+    "example": "We use the word \"burden\" in everyday English."
+  },
+  {
+    "en": "campaign",
+    "tr": "kampanya",
+    "level": "A2",
+    "example": "We use the word \"campaign\" in everyday English."
+  },
+  {
+    "en": "candidate",
+    "tr": "aday",
+    "level": "B1",
+    "example": "We use the word \"candidate\" in everyday English."
+  },
+  {
+    "en": "capable",
+    "tr": "yetenekli; muktedir",
+    "level": "B1",
+    "example": "We use the word \"capable\" in everyday English."
+  },
+  {
+    "en": "cause",
+    "tr": "neden; sebep olmak",
+    "level": "A2",
+    "example": "We use the word \"cause\" in everyday English."
+  },
+  {
+    "en": "celebration",
+    "tr": "kutlama",
+    "level": "A2",
+    "example": "We use the word \"celebration\" in everyday English."
+  },
+  {
+    "en": "central",
+    "tr": "merkezi",
+    "level": "A2",
+    "example": "We use the word \"central\" in everyday English."
+  },
+  {
+    "en": "channel",
+    "tr": "kanal",
+    "level": "A2",
+    "example": "We use the word \"channel\" in everyday English."
+  },
+  {
+    "en": "chapter",
+    "tr": "bölüm",
+    "level": "A2",
+    "example": "We use the word \"chapter\" in everyday English."
+  },
+  {
+    "en": "characteristic",
+    "tr": "özellik",
+    "level": "B1",
+    "example": "We use the word \"characteristic\" in everyday English."
+  },
+  {
+    "en": "charity",
+    "tr": "hayır kurumu; yardım",
+    "level": "A2",
+    "example": "We use the word \"charity\" in everyday English."
+  },
+  {
+    "en": "chemical",
+    "tr": "kimyasal",
+    "level": "B1",
+    "example": "We use the word \"chemical\" in everyday English."
+  },
+  {
+    "en": "citizen",
+    "tr": "vatandaş",
+    "level": "A2",
+    "example": "We use the word \"citizen\" in everyday English."
+  },
+  {
+    "en": "civil",
+    "tr": "sivil",
+    "level": "B1",
+    "example": "We use the word \"civil\" in everyday English."
+  },
+  {
+    "en": "climate",
+    "tr": "iklim",
+    "level": "A2",
+    "example": "We use the word \"climate\" in everyday English."
+  },
+  {
+    "en": "collection",
+    "tr": "koleksiyon; toplama",
+    "level": "A2",
+    "example": "We use the word \"collection\" in everyday English."
+  },
+  {
+    "en": "commercial",
+    "tr": "ticari",
+    "level": "B1",
+    "example": "We use the word \"commercial\" in everyday English."
+  },
+  {
+    "en": "commission",
+    "tr": "komisyon; görevlendirmek",
+    "level": "B2",
+    "example": "We use the word \"commission\" in everyday English."
+  },
+  {
+    "en": "commit",
+    "tr": "işlemek; adamak",
+    "level": "B2",
+    "example": "We use the word \"commit\" in everyday English."
+  },
+  {
+    "en": "committee",
+    "tr": "komite",
+    "level": "B1",
+    "example": "We use the word \"committee\" in everyday English."
+  },
+  {
+    "en": "communication",
+    "tr": "iletişim",
+    "level": "A2",
+    "example": "We use the word \"communication\" in everyday English."
+  },
+  {
+    "en": "comparison",
+    "tr": "karşılaştırma",
+    "level": "A2",
+    "example": "We use the word \"comparison\" in everyday English."
+  },
+  {
+    "en": "competition",
+    "tr": "yarışma; rekabet",
+    "level": "A2",
+    "example": "We use the word \"competition\" in everyday English."
+  },
+  {
+    "en": "concentration",
+    "tr": "konsantrasyon",
+    "level": "B1",
+    "example": "We use the word \"concentration\" in everyday English."
+  },
+  {
+    "en": "concern",
+    "tr": "endişe; ilgilendirmek",
+    "level": "B1",
+    "example": "We use the word \"concern\" in everyday English."
+  },
+  {
+    "en": "conference",
+    "tr": "konferans",
+    "level": "A2",
+    "example": "We use the word \"conference\" in everyday English."
+  },
+  {
+    "en": "constant",
+    "tr": "sabit; sürekli",
+    "level": "B1",
+    "example": "We use the word \"constant\" in everyday English."
+  },
+  {
+    "en": "construction",
+    "tr": "inşaat",
+    "level": "A2",
+    "example": "We use the word \"construction\" in everyday English."
+  },
+  {
+    "en": "consumer",
+    "tr": "tüketici",
+    "level": "A2",
+    "example": "We use the word \"consumer\" in everyday English."
+  },
+  {
+    "en": "contact",
+    "tr": "iletişim; temas",
+    "level": "A2",
+    "example": "We use the word \"contact\" in everyday English."
+  },
+  {
+    "en": "container",
+    "tr": "kap; konteyner",
+    "level": "A2",
+    "example": "We use the word \"container\" in everyday English."
+  },
+  {
+    "en": "content",
+    "tr": "içerik; memnun",
+    "level": "A2",
+    "example": "We use the word \"content\" in everyday English."
+  },
+  {
+    "en": "contest",
+    "tr": "yarışma",
+    "level": "A2",
+    "example": "We use the word \"contest\" in everyday English."
+  },
+  {
+    "en": "contract",
+    "tr": "sözleşme",
+    "level": "B1",
+    "example": "We use the word \"contract\" in everyday English."
+  },
+  {
+    "en": "contribution",
+    "tr": "katkı",
+    "level": "B1",
+    "example": "We use the word \"contribution\" in everyday English."
+  },
+  {
+    "en": "controversy",
+    "tr": "tartışma",
+    "level": "B2",
+    "example": "We use the word \"controversy\" in everyday English."
+  },
+  {
+    "en": "convention",
+    "tr": "gelenek; toplantı",
+    "level": "B2",
+    "example": "We use the word \"convention\" in everyday English."
+  },
+  {
+    "en": "convert",
+    "tr": "dönüştürmek",
+    "level": "B1",
+    "example": "We use the word \"convert\" in everyday English."
+  },
+  {
+    "en": "corporation",
+    "tr": "şirket",
+    "level": "B1",
+    "example": "We use the word \"corporation\" in everyday English."
+  },
+  {
+    "en": "council",
+    "tr": "konsey",
+    "level": "B1",
+    "example": "We use the word \"council\" in everyday English."
+  },
+  {
+    "en": "county",
+    "tr": "ilçe; kontluk",
+    "level": "B2",
+    "example": "We use the word \"county\" in everyday English."
+  },
+  {
+    "en": "courage",
+    "tr": "cesaret",
+    "level": "A2",
+    "example": "We use the word \"courage\" in everyday English."
+  },
+  {
+    "en": "crash",
+    "tr": "çarpışmak; çökme",
+    "level": "A2",
+    "example": "We use the word \"crash\" in everyday English."
+  },
+  {
+    "en": "creature",
+    "tr": "yaratık",
+    "level": "A2",
+    "example": "We use the word \"creature\" in everyday English."
+  },
+  {
+    "en": "credit",
+    "tr": "kredi; itibar",
+    "level": "A2",
+    "example": "We use the word \"credit\" in everyday English."
+  },
+  {
+    "en": "crime",
+    "tr": "suç",
+    "level": "A2",
+    "example": "We use the word \"crime\" in everyday English."
+  },
+  {
+    "en": "criminal",
+    "tr": "suçlu; cezai",
+    "level": "B1",
+    "example": "We use the word \"criminal\" in everyday English."
+  },
+  {
+    "en": "crisis",
+    "tr": "kriz",
+    "level": "B1",
+    "example": "We use the word \"crisis\" in everyday English."
+  },
+  {
+    "en": "criterion",
+    "tr": "ölçüt",
+    "level": "B2",
+    "example": "We use the word \"criterion\" in everyday English."
+  },
+  {
+    "en": "critical",
+    "tr": "kritik; eleştirel",
+    "level": "B1",
+    "example": "We use the word \"critical\" in everyday English."
+  },
+  {
+    "en": "criticism",
+    "tr": "eleştiri",
+    "level": "B1",
+    "example": "We use the word \"criticism\" in everyday English."
+  },
+  {
+    "en": "criticize",
+    "tr": "eleştirmek",
+    "level": "B1",
+    "example": "We use the word \"criticize\" in everyday English."
+  },
+  {
+    "en": "current",
+    "tr": "mevcut; akım",
+    "level": "A2",
+    "example": "We use the word \"current\" in everyday English."
+  },
+  {
+    "en": "currently",
+    "tr": "şu anda",
+    "level": "A2",
+    "example": "We use the word \"currently\" in everyday English."
+  },
+  {
+    "en": "cycle",
+    "tr": "döngü; bisiklet sürmek",
+    "level": "A2",
+    "example": "We use the word \"cycle\" in everyday English."
+  },
+  {
+    "en": "data",
+    "tr": "veri",
+    "level": "A2",
+    "example": "We use the word \"data\" in everyday English."
+  },
+  {
+    "en": "debate",
+    "tr": "tartışma; tartışmak",
+    "level": "B1",
+    "example": "We use the word \"debate\" in everyday English."
+  },
+  {
+    "en": "decade",
+    "tr": "on yıl",
+    "level": "B1",
+    "example": "We use the word \"decade\" in everyday English."
+  },
+  {
+    "en": "definition",
+    "tr": "tanım",
+    "level": "A2",
+    "example": "We use the word \"definition\" in everyday English."
+  },
+  {
+    "en": "demand",
+    "tr": "talep; talep etmek",
+    "level": "A2",
+    "example": "We use the word \"demand\" in everyday English."
+  },
+  {
+    "en": "deny",
+    "tr": "inkâr etmek",
+    "level": "B1",
+    "example": "We use the word \"deny\" in everyday English."
+  },
+  {
+    "en": "department",
+    "tr": "bölüm; departman",
+    "level": "A2",
+    "example": "We use the word \"department\" in everyday English."
+  },
+  {
+    "en": "departure",
+    "tr": "ayrılış",
+    "level": "B1",
+    "example": "We use the word \"departure\" in everyday English."
+  },
+  {
+    "en": "dependent",
+    "tr": "bağımlı",
+    "level": "B1",
+    "example": "We use the word \"dependent\" in everyday English."
+  },
+  {
+    "en": "deposit",
+    "tr": "yatırmak; depozito",
+    "level": "B1",
+    "example": "We use the word \"deposit\" in everyday English."
+  },
+  {
+    "en": "depression",
+    "tr": "depresyon; çöküş",
+    "level": "B2",
+    "example": "We use the word \"depression\" in everyday English."
+  },
+  {
+    "en": "destination",
+    "tr": "varış noktası",
+    "level": "A2",
+    "example": "We use the word \"destination\" in everyday English."
+  },
+  {
+    "en": "device",
+    "tr": "cihaz",
+    "level": "A2",
+    "example": "We use the word \"device\" in everyday English."
+  },
+  {
+    "en": "diagnosis",
+    "tr": "teşhis",
+    "level": "B2",
+    "example": "We use the word \"diagnosis\" in everyday English."
+  },
+  {
+    "en": "disaster",
+    "tr": "felaket",
+    "level": "A2",
+    "example": "We use the word \"disaster\" in everyday English."
+  },
+  {
+    "en": "discipline",
+    "tr": "disiplin; alan",
+    "level": "B1",
+    "example": "We use the word \"discipline\" in everyday English."
+  },
+  {
+    "en": "discount",
+    "tr": "indirim",
+    "level": "A2",
+    "example": "We use the word \"discount\" in everyday English."
+  },
+  {
+    "en": "discovery",
+    "tr": "keşif",
+    "level": "A2",
+    "example": "We use the word \"discovery\" in everyday English."
+  },
+  {
+    "en": "discussion",
+    "tr": "tartışma",
+    "level": "A2",
+    "example": "We use the word \"discussion\" in everyday English."
+  },
+  {
+    "en": "disease",
+    "tr": "hastalık",
+    "level": "A2",
+    "example": "We use the word \"disease\" in everyday English."
+  },
+  {
+    "en": "distinction",
+    "tr": "ayrım",
+    "level": "B2",
+    "example": "We use the word \"distinction\" in everyday English."
+  },
+  {
+    "en": "distribution",
+    "tr": "dağıtım",
+    "level": "B1",
+    "example": "We use the word \"distribution\" in everyday English."
+  },
+  {
+    "en": "district",
+    "tr": "bölge",
+    "level": "A2",
+    "example": "We use the word \"district\" in everyday English."
+  },
+  {
+    "en": "document",
+    "tr": "belge",
+    "level": "A2",
+    "example": "We use the word \"document\" in everyday English."
+  },
+  {
+    "en": "energy",
+    "tr": "enerji",
+    "level": "A1",
+    "example": "We use the word \"energy\" in everyday English."
+  },
+  {
+    "en": "engage",
+    "tr": "katılmak; meşgul etmek",
+    "level": "B1",
+    "example": "We use the word \"engage\" in everyday English."
+  },
+  {
+    "en": "enterprise",
+    "tr": "girişim; işletme",
+    "level": "B2",
+    "example": "We use the word \"enterprise\" in everyday English."
+  },
+  {
+    "en": "entire",
+    "tr": "bütün",
+    "level": "A2",
+    "example": "We use the word \"entire\" in everyday English."
+  },
+  {
+    "en": "entirely",
+    "tr": "tamamen",
+    "level": "A2",
+    "example": "We use the word \"entirely\" in everyday English."
+  },
+  {
+    "en": "environmental",
+    "tr": "çevresel",
+    "level": "B1",
+    "example": "We use the word \"environmental\" in everyday English."
+  },
+  {
+    "en": "equal",
+    "tr": "eşit",
+    "level": "A1",
+    "example": "We use the word \"equal\" in everyday English."
+  },
+  {
+    "en": "equally",
+    "tr": "eşit şekilde",
+    "level": "A2",
+    "example": "We use the word \"equally\" in everyday English."
+  },
+  {
+    "en": "equipment",
+    "tr": "ekipman",
+    "level": "A2",
+    "example": "We use the word \"equipment\" in everyday English."
+  },
+  {
+    "en": "evaluation",
+    "tr": "değerlendirme",
+    "level": "B1",
+    "example": "We use the word \"evaluation\" in everyday English."
+  },
+  {
+    "en": "eventually",
+    "tr": "sonunda",
+    "level": "B1",
+    "example": "We use the word \"eventually\" in everyday English."
+  },
+  {
+    "en": "exact",
+    "tr": "tam; kesin",
+    "level": "A2",
+    "example": "We use the word \"exact\" in everyday English."
+  },
+  {
+    "en": "examine",
+    "tr": "incelemek",
+    "level": "A2",
+    "example": "We use the word \"examine\" in everyday English."
+  },
+  {
+    "en": "exchange",
+    "tr": "değiş tokuş; değiştirmek",
+    "level": "A2",
+    "example": "We use the word \"exchange\" in everyday English."
+  },
+  {
+    "en": "existence",
+    "tr": "varoluş",
+    "level": "B1",
+    "example": "We use the word \"existence\" in everyday English."
+  },
+  {
+    "en": "expansion",
+    "tr": "genişleme",
+    "level": "B1",
+    "example": "We use the word \"expansion\" in everyday English."
+  },
+  {
+    "en": "expectation",
+    "tr": "beklenti",
+    "level": "B1",
+    "example": "We use the word \"expectation\" in everyday English."
+  },
+  {
+    "en": "expense",
+    "tr": "masraf",
+    "level": "A2",
+    "example": "We use the word \"expense\" in everyday English."
+  },
+  {
+    "en": "experiment",
+    "tr": "deney",
+    "level": "A2",
+    "example": "We use the word \"experiment\" in everyday English."
+  },
+  {
+    "en": "expert",
+    "tr": "uzman",
+    "level": "A2",
+    "example": "We use the word \"expert\" in everyday English."
+  },
+  {
+    "en": "explanation",
+    "tr": "açıklama",
+    "level": "A2",
+    "example": "We use the word \"explanation\" in everyday English."
+  },
+  {
+    "en": "exploration",
+    "tr": "keşif; araştırma",
+    "level": "B1",
+    "example": "We use the word \"exploration\" in everyday English."
+  },
+  {
+    "en": "expose",
+    "tr": "maruz bırakmak; açığa çıkarmak",
+    "level": "B1",
+    "example": "We use the word \"expose\" in everyday English."
+  },
+  {
+    "en": "extension",
+    "tr": "uzantı; genişletme",
+    "level": "B1",
+    "example": "We use the word \"extension\" in everyday English."
+  },
+  {
+    "en": "failure",
+    "tr": "başarısızlık",
+    "level": "A2",
+    "example": "We use the word \"failure\" in everyday English."
+  },
+  {
+    "en": "finance",
+    "tr": "finans; finanse etmek",
+    "level": "B1",
+    "example": "We use the word \"finance\" in everyday English."
+  },
+  {
+    "en": "financial",
+    "tr": "mali",
+    "level": "B1",
+    "example": "We use the word \"financial\" in everyday English."
+  },
+  {
+    "en": "formal",
+    "tr": "resmî",
+    "level": "A2",
+    "example": "We use the word \"formal\" in everyday English."
+  },
+  {
+    "en": "former",
+    "tr": "eski; önceki",
+    "level": "A2",
+    "example": "We use the word \"former\" in everyday English."
+  },
+  {
+    "en": "foundation",
+    "tr": "temel; vakıf",
+    "level": "B1",
+    "example": "We use the word \"foundation\" in everyday English."
+  },
+  {
+    "en": "gender",
+    "tr": "cinsiyet",
+    "level": "B1",
+    "example": "We use the word \"gender\" in everyday English."
+  },
+  {
+    "en": "govern",
+    "tr": "yönetmek",
+    "level": "B1",
+    "example": "We use the word \"govern\" in everyday English."
+  },
+  {
+    "en": "government",
+    "tr": "hükümet",
+    "level": "A2",
+    "example": "We use the word \"government\" in everyday English."
+  },
+  {
+    "en": "gradually",
+    "tr": "yavaş yavaş",
+    "level": "B1",
+    "example": "We use the word \"gradually\" in everyday English."
+  },
+  {
+    "en": "historical",
+    "tr": "tarihî",
+    "level": "A2",
+    "example": "We use the word \"historical\" in everyday English."
+  },
+  {
+    "en": "identity",
+    "tr": "kimlik",
+    "level": "A2",
+    "example": "We use the word \"identity\" in everyday English."
+  },
+  {
+    "en": "ignore",
+    "tr": "görmezden gelmek",
+    "level": "A2",
+    "example": "We use the word \"ignore\" in everyday English."
+  },
+  {
+    "en": "image",
+    "tr": "görüntü; imaj",
+    "level": "A1",
+    "example": "We use the word \"image\" in everyday English."
+  },
+  {
+    "en": "imply",
+    "tr": "ima etmek",
+    "level": "B2",
+    "example": "We use the word \"imply\" in everyday English."
+  },
+  {
+    "en": "impose",
+    "tr": "dayatmak; uygulamak",
+    "level": "B2",
+    "example": "We use the word \"impose\" in everyday English."
+  },
+  {
+    "en": "incident",
+    "tr": "olay",
+    "level": "A2",
+    "example": "We use the word \"incident\" in everyday English."
+  },
+  {
+    "en": "income",
+    "tr": "gelir",
+    "level": "A2",
+    "example": "We use the word \"income\" in everyday English."
+  },
+  {
+    "en": "individual",
+    "tr": "birey; bireysel",
+    "level": "A2",
+    "example": "We use the word \"individual\" in everyday English."
+  },
+  {
+    "en": "industrial",
+    "tr": "endüstriyel",
+    "level": "B1",
+    "example": "We use the word \"industrial\" in everyday English."
+  },
+  {
+    "en": "industry",
+    "tr": "sanayi",
+    "level": "A2",
+    "example": "We use the word \"industry\" in everyday English."
+  },
+  {
+    "en": "influence",
+    "tr": "etki; etkilemek",
+    "level": "A2",
+    "example": "We use the word \"influence\" in everyday English."
+  },
+  {
+    "en": "initially",
+    "tr": "başlangıçta",
+    "level": "B1",
+    "example": "We use the word \"initially\" in everyday English."
+  },
+  {
+    "en": "initiative",
+    "tr": "girişim",
+    "level": "B2",
+    "example": "We use the word \"initiative\" in everyday English."
+  },
+  {
+    "en": "instance",
+    "tr": "örnek",
+    "level": "B1",
+    "example": "We use the word \"instance\" in everyday English."
+  },
+  {
+    "en": "institution",
+    "tr": "kurum",
+    "level": "B1",
+    "example": "We use the word \"institution\" in everyday English."
+  },
+  {
+    "en": "instruction",
+    "tr": "talimat",
+    "level": "A2",
+    "example": "We use the word \"instruction\" in everyday English."
+  },
+  {
+    "en": "insurance",
+    "tr": "sigorta",
+    "level": "A2",
+    "example": "We use the word \"insurance\" in everyday English."
+  },
+  {
+    "en": "intellectual",
+    "tr": "entelektüel",
+    "level": "B2",
+    "example": "We use the word \"intellectual\" in everyday English."
+  },
+  {
+    "en": "internal",
+    "tr": "dahili",
+    "level": "B1",
+    "example": "We use the word \"internal\" in everyday English."
+  },
+  {
+    "en": "interpretation",
+    "tr": "yorum",
+    "level": "B2",
+    "example": "We use the word \"interpretation\" in everyday English."
+  },
+  {
+    "en": "investigation",
+    "tr": "soruşturma; araştırma",
+    "level": "B1",
+    "example": "We use the word \"investigation\" in everyday English."
+  },
+  {
+    "en": "investor",
+    "tr": "yatırımcı",
+    "level": "B1",
+    "example": "We use the word \"investor\" in everyday English."
+  },
+  {
+    "en": "legitimate",
+    "tr": "meşru",
+    "level": "B2",
+    "example": "We use the word \"legitimate\" in everyday English."
+  },
+  {
+    "en": "limit",
+    "tr": "sınır; sınırlamak",
+    "level": "A2",
+    "example": "We use the word \"limit\" in everyday English."
+  },
+  {
+    "en": "location",
+    "tr": "konum",
+    "level": "A2",
+    "example": "We use the word \"location\" in everyday English."
+  },
+  {
+    "en": "logical",
+    "tr": "mantıklı",
+    "level": "B1",
+    "example": "We use the word \"logical\" in everyday English."
+  },
+  {
+    "en": "management",
+    "tr": "yönetim",
+    "level": "A2",
+    "example": "We use the word \"management\" in everyday English."
+  },
+  {
+    "en": "media",
+    "tr": "medya",
+    "level": "A2",
+    "example": "We use the word \"media\" in everyday English."
+  },
+  {
+    "en": "medical",
+    "tr": "tıbbi",
+    "level": "A2",
+    "example": "We use the word \"medical\" in everyday English."
+  },
+  {
+    "en": "mental",
+    "tr": "zihinsel",
+    "level": "A2",
+    "example": "We use the word \"mental\" in everyday English."
+  },
+  {
+    "en": "minority",
+    "tr": "azınlık",
+    "level": "B1",
+    "example": "We use the word \"minority\" in everyday English."
+  },
+  {
+    "en": "motivate",
+    "tr": "motive etmek",
+    "level": "B1",
+    "example": "We use the word \"motivate\" in everyday English."
+  },
+  {
+    "en": "motivation",
+    "tr": "motivasyon",
+    "level": "B1",
+    "example": "We use the word \"motivation\" in everyday English."
+  },
+  {
+    "en": "normal",
+    "tr": "normal",
+    "level": "A1",
+    "example": "We use the word \"normal\" in everyday English."
+  },
+  {
+    "en": "obviously",
+    "tr": "açıkça",
+    "level": "A2",
+    "example": "We use the word \"obviously\" in everyday English."
+  },
+  {
+    "en": "occasion",
+    "tr": "fırsat; durum",
+    "level": "A2",
+    "example": "We use the word \"occasion\" in everyday English."
+  },
+  {
+    "en": "operation",
+    "tr": "işlem; operasyon",
+    "level": "A2",
+    "example": "We use the word \"operation\" in everyday English."
+  },
+  {
+    "en": "participation",
+    "tr": "katılım",
+    "level": "B1",
+    "example": "We use the word \"participation\" in everyday English."
+  },
+  {
+    "en": "perception",
+    "tr": "algı",
+    "level": "B2",
+    "example": "We use the word \"perception\" in everyday English."
+  },
+  {
+    "en": "potentially",
+    "tr": "potansiyel olarak",
+    "level": "B2",
+    "example": "We use the word \"potentially\" in everyday English."
+  },
+  {
+    "en": "previous",
+    "tr": "önceki",
+    "level": "A2",
+    "example": "We use the word \"previous\" in everyday English."
+  },
+  {
+    "en": "previously",
+    "tr": "önceden",
+    "level": "A2",
+    "example": "We use the word \"previously\" in everyday English."
+  },
+  {
+    "en": "primary",
+    "tr": "birincil; ilk",
+    "level": "A2",
+    "example": "We use the word \"primary\" in everyday English."
+  },
+  {
+    "en": "procedure",
+    "tr": "prosedür",
+    "level": "B1",
+    "example": "We use the word \"procedure\" in everyday English."
+  },
+  {
+    "en": "professionalism",
+    "tr": "profesyonellik",
+    "level": "B2",
+    "example": "We use the word \"professionalism\" in everyday English."
+  },
+  {
+    "en": "promotion",
+    "tr": "terfi; tanıtım",
+    "level": "B1",
+    "example": "We use the word \"promotion\" in everyday English."
+  },
+  {
+    "en": "proposal",
+    "tr": "öneri",
+    "level": "B1",
+    "example": "We use the word \"proposal\" in everyday English."
+  },
+  {
+    "en": "propose",
+    "tr": "önermek",
+    "level": "A2",
+    "example": "We use the word \"propose\" in everyday English."
+  },
+  {
+    "en": "reaction",
+    "tr": "tepki",
+    "level": "A2",
+    "example": "We use the word \"reaction\" in everyday English."
+  },
+  {
+    "en": "recognition",
+    "tr": "tanıma; takdir",
+    "level": "B1",
+    "example": "We use the word \"recognition\" in everyday English."
+  },
+  {
+    "en": "recommendation",
+    "tr": "tavsiye",
+    "level": "B1",
+    "example": "We use the word \"recommendation\" in everyday English."
+  },
+  {
+    "en": "recovery",
+    "tr": "iyileşme; toparlanma",
+    "level": "B1",
+    "example": "We use the word \"recovery\" in everyday English."
+  },
+  {
+    "en": "reduction",
+    "tr": "azalma; indirim",
+    "level": "B1",
+    "example": "We use the word \"reduction\" in everyday English."
+  },
+  {
+    "en": "refer",
+    "tr": "atıfta bulunmak",
+    "level": "B1",
+    "example": "We use the word \"refer\" in everyday English."
+  },
+  {
+    "en": "reference",
+    "tr": "referans",
+    "level": "A2",
+    "example": "We use the word \"reference\" in everyday English."
+  },
+  {
+    "en": "reflect",
+    "tr": "yansıtmak; düşünmek",
+    "level": "A2",
+    "example": "We use the word \"reflect\" in everyday English."
+  },
+  {
+    "en": "reflection",
+    "tr": "yansıma; düşünme",
+    "level": "B1",
+    "example": "We use the word \"reflection\" in everyday English."
+  },
+  {
+    "en": "regional",
+    "tr": "bölgesel",
+    "level": "B1",
+    "example": "We use the word \"regional\" in everyday English."
+  },
+  {
+    "en": "regulation",
+    "tr": "düzenleme",
+    "level": "B1",
+    "example": "We use the word \"regulation\" in everyday English."
+  },
+  {
+    "en": "response",
+    "tr": "yanıt",
+    "level": "A2",
+    "example": "We use the word \"response\" in everyday English."
+  },
+  {
+    "en": "restriction",
+    "tr": "kısıtlama",
+    "level": "B1",
+    "example": "We use the word \"restriction\" in everyday English."
+  },
+  {
+    "en": "survive",
+    "tr": "hayatta kalmak",
+    "level": "A2",
+    "example": "We use the word \"survive\" in everyday English."
+  },
+  {
+    "en": "therefore",
+    "tr": "bu nedenle",
+    "level": "A2",
+    "example": "We use the word \"therefore\" in everyday English."
+  },
+  {
+    "en": "transformation",
+    "tr": "dönüşüm",
+    "level": "B1",
+    "example": "We use the word \"transformation\" in everyday English."
+  },
+  {
+    "en": "transport",
+    "tr": "taşımak; ulaşım",
+    "level": "A2",
+    "example": "We use the word \"transport\" in everyday English."
+  },
+  {
+    "en": "urban",
+    "tr": "kentsel",
+    "level": "B1",
+    "example": "We use the word \"urban\" in everyday English."
+  },
+  {
+    "en": "variety",
+    "tr": "çeşitlilik",
+    "level": "A2",
+    "example": "We use the word \"variety\" in everyday English."
+  },
+  {
+    "en": "vehicle",
+    "tr": "araç",
+    "level": "A2",
+    "example": "We use the word \"vehicle\" in everyday English."
+  },
+  {
+    "en": "visual",
+    "tr": "görsel",
+    "level": "A2",
+    "example": "We use the word \"visual\" in everyday English."
   }
 ]
