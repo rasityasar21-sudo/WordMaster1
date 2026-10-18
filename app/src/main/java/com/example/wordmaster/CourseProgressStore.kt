@@ -1,0 +1,59 @@
+package com.example.wordmaster
+
+import android.content.SharedPreferences
+
+/**
+ * Persistence helpers for course progress.
+ *
+ * Uses the existing "completedLessons" preference key so older WordMaster progress
+ * remains compatible. Call these helpers from lesson completion and profile UI.
+ */
+object CourseProgressStore {
+    private const val COMPLETED_KEY = "completedLessons"
+    private const val DAILY_GOAL_KEY = "dailyGoalMinutes"
+    private const val DAILY_MINUTES_PREFIX = "studyMinutes_"
+
+    fun completedIds(prefs: SharedPreferences): Set<String> =
+        prefs.getStringSet(COMPLETED_KEY, emptySet())?.toSet() ?: emptySet()
+
+    fun markCompleted(prefs: SharedPreferences, lessonId: String): Set<String> {
+        require(lessonId.isNotBlank()) { "lessonId must not be blank" }
+        val updated = completedIds(prefs) + lessonId
+        prefs.edit().putStringSet(COMPLETED_KEY, updated).apply()
+        return updated
+    }
+
+    fun isCompleted(prefs: SharedPreferences, lessonId: String): Boolean =
+        lessonId in completedIds(prefs)
+
+    fun completedCount(prefs: SharedPreferences): Int = completedIds(prefs).size
+
+    fun setDailyGoalMinutes(prefs: SharedPreferences, minutes: Int) {
+        prefs.edit().putInt(DAILY_GOAL_KEY, minutes.coerceIn(5, 120)).apply()
+    }
+
+    fun dailyGoalMinutes(prefs: SharedPreferences): Int =
+        prefs.getInt(DAILY_GOAL_KEY, 15).coerceIn(5, 120)
+
+    fun addStudyMinutes(
+        prefs: SharedPreferences,
+        minutes: Int,
+        date: String = java.time.LocalDate.now().toString()
+    ): Int {
+        require(minutes >= 0) { "minutes must be non-negative" }
+        val key = DAILY_MINUTES_PREFIX + date
+        val updated = (prefs.getInt(key, 0) + minutes).coerceAtMost(24 * 60)
+        prefs.edit().putInt(key, updated).apply()
+        return updated
+    }
+
+    fun studyMinutes(
+        prefs: SharedPreferences,
+        date: String = java.time.LocalDate.now().toString()
+    ): Int = prefs.getInt(DAILY_MINUTES_PREFIX + date, 0)
+
+    fun isDailyGoalMet(
+        prefs: SharedPreferences,
+        date: String = java.time.LocalDate.now().toString()
+    ): Boolean = studyMinutes(prefs, date) >= dailyGoalMinutes(prefs)
+}
