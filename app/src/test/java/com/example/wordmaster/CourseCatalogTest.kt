@@ -134,4 +134,24 @@ class CourseCatalogTest {
         assertEquals(5, tooShort.targetMinutes)
         assertEquals(120, tooLong.targetMinutes)
     }
+
+    @Test
+    fun expandedCurriculumCoversEveryCoreLevelWithMeaningfulTopics() {
+        listOf("A1", "A2", "B1", "B2", "C1").forEach { level ->
+            val lessons = WordMasterCourseCatalog.forLevel(level)
+            assertTrue("$level should have a substantial lesson path", lessons.size >= 5)
+            assertTrue("$level lessons should have objectives", lessons.all { it.objectives.isNotEmpty() })
+        }
+    }
+
+    @Test
+    fun expandedCurriculumPrerequisitesAreResolvableAndAcyclicBySelfReference() {
+        val lessons = WordMasterCourseCatalog.lessons
+        val ids = lessons.map { it.id }.toSet()
+        assertEquals(lessons.size, ids.size)
+        lessons.forEach { lesson ->
+            assertTrue("Lesson cannot depend on itself: ${lesson.id}", lesson.id !in lesson.prerequisiteIds)
+            assertTrue("All prerequisites must exist for ${lesson.id}", ids.containsAll(lesson.prerequisiteIds))
+        }
+    }
 }
