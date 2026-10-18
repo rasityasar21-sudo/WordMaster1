@@ -223,12 +223,22 @@ object ProfessionalCourseCatalog {
             titleEnglish = "Software and IT English",
             description = "Teknik dokümantasyon, yazılım ekipleri ve hata raporları için İngilizce.",
             topics = listOf("Programlama terimleri", "Hata raporlama", "Teknik doküman okuma", "Toplantı ve kod inceleme"),
-            lessons = listOf(ProfessionalLesson("bug-reporting", "Hata raporu yazma", "Sorunu yeniden üretilebilir biçimde anlatmak.", "İyi bir hata raporu beklenen davranışı, gerçekleşen davranışı, tekrar adımlarını ve ilgili ortamı belirtir. Gizli anahtarlar veya kişisel veriler rapora eklenmemelidir.", listOf("The issue occurs when I sign in." to "Sorun oturum açarken oluşuyor.", "Steps to reproduce are listed below." to "Yeniden oluşturma adımları aşağıda listelenmiştir.", "The expected result is..." to "Beklenen sonuç ... şeklindedir."), "Hata raporunda hangi iki davranış karşılaştırılmalıdır?", "Beklenen davranış ile gerçekleşen davranış.")),
+            lessons = listOf(
+                ProfessionalLesson("bug-reporting", "Hata raporu yazma", "Sorunu yeniden üretilebilir biçimde anlatmak.", "İyi bir hata raporu beklenen davranışı, gerçekleşen davranışı, tekrar adımlarını ve ilgili ortamı belirtir. Gizli anahtarlar veya kişisel veriler rapora eklenmemelidir.", listOf("The issue occurs when I sign in." to "Sorun oturum açarken oluşuyor.", "Steps to reproduce are listed below." to "Yeniden oluşturma adımları aşağıda listelenmiştir.", "The expected result is..." to "Beklenen sonuç ... şeklindedir."), "Hata raporunda hangi iki davranış karşılaştırılmalıdır?", "Beklenen davranış ile gerçekleşen davranış."),
+                ProfessionalLesson("code-review", "Kod incelemesinde iletişim", "Geri bildirimi yapıcı ve somut biçimde ifade etmek.", "Kod incelemesinde kişiyi değil değişikliği eleştir; gözlemi, olası etkiyi ve öneriyi açıkça yaz. Emin olunmayan konular soru biçiminde sorulabilir.", listOf("Could we add a test for this case?" to "Bu durum için bir test ekleyebilir miyiz?", "This change may affect performance." to "Bu değişiklik performansı etkileyebilir.", "I suggest extracting this into a function." to "Bunu ayrı bir fonksiyona çıkarmayı öneriyorum."), "İyi bir kod inceleme yorumu neye odaklanır?", "Kişiye değil, değişikliğe, etkisine ve uygulanabilir öneriye."),
+                ProfessionalLesson("technical-documentation", "Teknik dokümantasyon", "Kurulum ve kullanım adımlarını sıralı anlatmak.", "Dokümantasyon hedef kullanıcıyı, ön koşulları, adımları ve beklenen sonucu belirtmelidir. Komutlar ve örnekler doğrulanmalı; gizli bilgiler paylaşılmamalıdır.", listOf("Install the required dependencies." to "Gerekli bağımlılıkları yükleyin.", "Run the tests before merging." to "Birleştirmeden önce testleri çalıştırın.", "The following steps reproduce the issue." to "Aşağıdaki adımlar sorunu yeniden oluşturur."), "Bir teknik rehberde adımlar nasıl yazılmalı?", "Sıralı, doğrulanabilir ve beklenen sonucu belirtecek şekilde.")
+            ),
             sampleTerms = listOf(
             ProfessionalTerm("bug", "yazılım hatası", "We found a bug in the application."),
             ProfessionalTerm("deploy", "yayına almak", "We will deploy the update tonight."),
             ProfessionalTerm("database", "veritabanı", "The database stores user information."),
-            ProfessionalTerm("debug", "hata ayıklamak", "We need to debug this function.")
+            ProfessionalTerm("debug", "hata ayıklamak", "We need to debug this function."),
+            ProfessionalTerm("dependency", "bağımlılık", "Update the project dependency."),
+            ProfessionalTerm("code review", "kod incelemesi", "The change is ready for code review."),
+            ProfessionalTerm("test case", "test senaryosu", "Add a test case for the edge condition."),
+            ProfessionalTerm("release", "sürüm / yayımlama", "The release includes several bug fixes."),
+            ProfessionalTerm("requirement", "gereksinim", "Document each requirement clearly."),
+            ProfessionalTerm("repository", "kod deposu", "The repository contains the project source.")
             )
         ),
         ProfessionalTrack(
