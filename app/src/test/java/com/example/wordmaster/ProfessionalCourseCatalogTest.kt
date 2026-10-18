@@ -180,4 +180,24 @@ class ProfessionalCourseCatalogTest {
         assertTrue(track.lessons.all { it.phrases.size >= 3 && it.question.isNotBlank() && it.answer.isNotBlank() })
     }
 
+
+    @Test
+    fun everyLessonHasCompleteBilingualPhrasesAndObjectives() {
+        assertTrue(ProfessionalCourseCatalog.tracks.all { track ->
+            track.lessons.all { lesson ->
+                lesson.objective.isNotBlank() &&
+                    lesson.phrases.all { (english, turkish) ->
+                        english.isNotBlank() && turkish.isNotBlank()
+                    }
+            }
+        })
+    }
+
+    @Test
+    fun lessonIdsAreUniqueAcrossTheWholeCatalog() {
+        val ids = ProfessionalCourseCatalog.tracks.flatMap { track ->
+            track.lessons.map { "${track.id}:${it.id}" }
+        }
+        assertEquals(ids.size, ids.toSet().size)
+    }
 }
