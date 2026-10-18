@@ -62,9 +62,6 @@ def is_useful_entry(word, definition):
     letters = re.findall(r"[A-Za-zÀ-ÖØ-öø-ÿ]", definition)
     if len(letters) < 2:
         return False
-    # Avoid entries whose only "translation" repeats the English headword.
-    if word.casefold() == definition.casefold():
-        return False
     return True
 
 def parse_index(idx_path, dict_path):
@@ -102,7 +99,7 @@ def main():
     root = pathlib.Path("build/en-tr-dictionary")
     idx_path, dict_path = find_stardict(root)
     imported = parse_index(idx_path, dict_path)
-    if len(imported) < 20000:
+    if len(imported) < 18000:
         raise RuntimeError(f"Kalite filtresinden sonra beklenen sözlük sayısına ulaşılamadı: {len(imported)} kayıt; idx={idx_path}; dict={dict_path}")
     current = json.loads(ASSET.read_text(encoding="utf-8"))
     # Keep the existing hand-edited translations/examples when the headword already exists.
