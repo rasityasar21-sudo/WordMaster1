@@ -42,4 +42,13 @@ class ProfessionalCourseCatalogTest {
     fun everyProfessionHasStarterVocabularyForTheQuiz() {
         assertTrue(ProfessionalCourseCatalog.tracks.all { it.sampleTerms.size >= 4 })
     }
+
+    @Test
+    fun aircraftCourseContainsStructuredLessonsWithExamplesAndChecks() {
+        val lessons = ProfessionalCourseCatalog.find("aviation-maintenance")!!.lessons
+        assertTrue(lessons.size >= 4)
+        assertEquals(lessons.size, lessons.map { it.id }.toSet().size)
+        assertTrue(lessons.all { it.objective.isNotBlank() && it.explanation.isNotBlank() })
+        assertTrue(lessons.all { it.phrases.size >= 3 && it.question.isNotBlank() && it.answer.isNotBlank() })
+    }
 }
