@@ -77,6 +77,9 @@ fun ProfessionalCoursesScreen(onBackToLessons: () -> Unit) {
             TextButton(onClick = { selectedTrackId = null; showAnswers = false }) { Text("← Meslek kataloğuna dön") }
             Text(selectedTrack!!.title, color = Color(0xFF202044), fontSize = 23.sp, fontWeight = FontWeight.ExtraBold)
             Text(selectedTrack.description, color = Color(0xFF687086), fontSize = 14.sp, lineHeight = 20.sp)
+            Surface(color = Color(0xFFE7F7EF), shape = RoundedCornerShape(12.dp)) {
+                Text(if (selectedTrack.id == "aviation-maintenance") "Önemli: Bu kurs İngilizce öğrenimi içindir. Gerçek bakım işlemlerinde güncel, onaylı bakım dokümanları ve yetkili prosedürler esas alınmalıdır." else "Öğrenme yolu: konu başlıklarını incele, terimleri örnek cümlelerle öğren ve mini testle kendini kontrol et.", Modifier.fillMaxWidth().padding(12.dp), color = Color(0xFF245B46), fontSize = 12.sp, lineHeight = 17.sp)
+            }
             Card(colors = CardDefaults.cardColors(containerColor = Color.White), shape = RoundedCornerShape(20.dp)) {
                 Column(Modifier.fillMaxWidth().padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     Text("DERS YOL HARİTASI", color = Color(0xFF6957E8), fontSize = 11.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 1.sp)
@@ -96,7 +99,8 @@ fun ProfessionalCoursesScreen(onBackToLessons: () -> Unit) {
                         Column(Modifier.fillMaxWidth().padding(15.dp), verticalArrangement = Arrangement.spacedBy(5.dp)) {
                             Text(term.english, color = Color(0xFF202044), fontSize = 17.sp, fontWeight = FontWeight.ExtraBold)
                             Text(term.turkish, color = Color(0xFF6957E8), fontWeight = FontWeight.SemiBold, fontSize = 14.sp)
-                            Text(term.exampleEnglish, color = Color(0xFF30384B), fontSize = 13.sp)
+                            Text(term.exampleEnglish, color = Color(0xFF30384B), fontSize = 13.sp, lineHeight = 18.sp)
+                            if (term.note.isNotBlank()) Text(term.note, color = Color(0xFF687086), fontSize = 12.sp)
                         }
                     }
                 }
