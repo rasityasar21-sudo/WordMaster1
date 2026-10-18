@@ -21,6 +21,7 @@ fun ProfessionalCoursesScreen(onBackToLessons: () -> Unit) {
     var quizAnswer by remember { mutableStateOf<String?>(null) }
     var quizChecked by remember { mutableStateOf(false) }
     var quizScore by remember { mutableIntStateOf(0) }
+    var missedTerms by remember { mutableStateOf(listOf<String>()) }
     var trackSearch by remember { mutableStateOf("") }
     var revealedLessonAnswers by remember { mutableStateOf(setOf<String>()) }
     val tracks = ProfessionalCourseCatalog.tracks
@@ -150,7 +151,7 @@ fun ProfessionalCoursesScreen(onBackToLessons: () -> Unit) {
                         }
                     }
                 }
-                Button(onClick = { showAnswers = !showAnswers; quizIndex = 0; quizAnswer = null; quizChecked = false; quizScore = 0 }, modifier = Modifier.fillMaxWidth()) { Text(if (showAnswers) "Mini testi kapat" else "Kendini test et") }
+                Button(onClick = { showAnswers = !showAnswers; quizIndex = 0; quizAnswer = null; quizChecked = false; quizScore = 0; missedTerms = emptyList() }, modifier = Modifier.fillMaxWidth()) { Text(if (showAnswers) "Mini testi kapat" else "Kendini test et") }
                 if (showAnswers) {
                     val quizTerms = selectedTrack.sampleTerms.take(5)
                     if (quizTerms.isNotEmpty() && quizIndex < quizTerms.size) {
@@ -165,8 +166,14 @@ fun ProfessionalCoursesScreen(onBackToLessons: () -> Unit) {
                                 }
                                 if (quizChecked) {
                                     val correct = quizAnswer == currentTerm.turkish
-                                    Text(if (correct) "Doğru cevap!" else "Doğru cevap: ${currentTerm.turkish}", color = if (correct) Color(0xFF18794E) else Color(0xFFB42318), fontWeight = FontWeight.Bold)
-                                    Button(onClick = { if (correct) quizScore++; quizIndex++; quizAnswer = null; quizChecked = false }, modifier = Modifier.fillMaxWidth()) { Text(if (quizIndex == quizTerms.lastIndex) "Sonucu gör" else "Sonraki soru") }
+                                    Text(if (correct) "Doğru cevap! ✓" else "Doğru cevap: ${currentTerm.turkish}", color = if (correct) Color(0xFF18794E) else Color(0xFFB42318), fontWeight = FontWeight.Bold)
+                                    Text("Kelime: ${currentTerm.english}  •  Türkçesi: ${currentTerm.turkish}", color = Color(0xFF687086), fontSize = 12.sp, lineHeight = 17.sp)
+                                    Button(onClick = {
+                                        if (correct) quizScore++ else missedTerms = (missedTerms + currentTerm.english).distinct()
+                                        quizIndex++
+                                        quizAnswer = null
+                                        quizChecked = false
+                                    }, modifier = Modifier.fillMaxWidth()) { Text(if (quizIndex == quizTerms.lastIndex) "Sonucu gör" else "Sonraki soru") }
                                 } else { Button(onClick = { if (quizAnswer != null) quizChecked = true }, enabled = quizAnswer != null, modifier = Modifier.fillMaxWidth()) { Text("Cevabı kontrol et") } }
                             }
                         }
@@ -174,8 +181,19 @@ fun ProfessionalCoursesScreen(onBackToLessons: () -> Unit) {
                         Card(colors = CardDefaults.cardColors(containerColor = Color.White), shape = RoundedCornerShape(18.dp)) {
                             Column(Modifier.fillMaxWidth().padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                                 Text("Test tamamlandı!", color = Color(0xFF202044), fontSize = 20.sp, fontWeight = FontWeight.ExtraBold)
-                                Text("Doğru cevap: $quizScore / ${quizTerms.size}", color = Color(0xFF6957E8), fontSize = 18.sp, fontWeight = FontWeight.Bold)
-                                Button(onClick = { quizIndex = 0; quizAnswer = null; quizChecked = false; quizScore = 0 }, modifier = Modifier.fillMaxWidth()) { Text("Tekrar çöz") }
+                                Text("Doğru cevap: $quizScore / ${quizTerms.size}  •  Başarı: ${(quizScore * 100) / quizTerms.size}%", color = Color(0xFF6957E8), fontSize = 18.sp, fontWeight = FontWeight.Bold)
+                                if (missedTerms.isNotEmpty()) {
+                                    Text("TEKRAR ETMEN GEREKEN TERİMLER", color = Color(0xFFB42318), fontSize = 11.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 0.6.sp)
+                                    missedTerms.forEach { missed ->
+                                        val missedTerm = quizTerms.firstOrNull { it.english == missed }
+                                        if (missedTerm != null) {
+                                            Text("• ${missedTerm.english} — ${missedTerm.turkish}", color = Color(0xFF30384B), fontSize = 13.sp)
+                                        }
+                                    }
+                                } else {
+                                    Text("Harika! Bu testte tüm cevaplar doğru. Bir sonraki oturumda yeni terimlerle tekrar yap.", color = Color(0xFF18794E), fontSize = 13.sp, lineHeight = 18.sp)
+                                }
+                                Button(onClick = { quizIndex = 0; quizAnswer = null; quizChecked = false; quizScore = 0; missedTerms = emptyList() }, modifier = Modifier.fillMaxWidth()) { Text("Tekrar çöz") }
                             }
                         }
                     }
