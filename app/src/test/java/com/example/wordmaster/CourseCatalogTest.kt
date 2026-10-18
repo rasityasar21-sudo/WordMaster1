@@ -69,6 +69,31 @@ class CourseCatalogTest {
     }
 
     @Test
+    fun dailyPlanPlacesEveryPrerequisiteBeforeItsDependentLesson() {
+        listOf("A1", "A2", "B1", "B2").forEach { level ->
+            val plan = DailyStudyPlan.create(
+                level = level,
+                completedLessonIds = emptySet(),
+                dueWords = emptyList(),
+                targetMinutes = 30,
+                date = "2026-10-18"
+            )
+            plan.lessonIds.forEachIndexed { index, lessonId ->
+                val lesson = WordMasterCourseCatalog.find(lessonId)!!
+                lesson.prerequisiteIds.forEach { prerequisiteId ->
+                    if (prerequisiteId !in emptySet<String>()) {
+                        val prerequisiteIndex = plan.lessonIds.indexOf(prerequisiteId)
+                        assertTrue(
+                            "Level $level: $prerequisiteId must precede $lessonId",
+                            prerequisiteIndex >= 0 && prerequisiteIndex < index
+                        )
+                    }
+                }
+            }
+        }
+    }
+
+    @Test
     fun beginnerPlanStartsWithAvailableLessonsRatherThanRepeatingPrerequisites() {
         val plan = DailyStudyPlan.create(
             level = "A1",
