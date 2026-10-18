@@ -603,9 +603,35 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                             }
                             LinearProgressIndicator(progress = { (lessonStage + 1) / 3f }, modifier = Modifier.fillMaxWidth(), color = Blue)
                             Text(activeLesson, fontSize = 26.sp, fontWeight = FontWeight.ExtraBold, color = Navy)
+                            val bookChapter = remember(activeLesson) { LessonBook.chapter(activeLesson) }
                             when (lessonStage) {
                                 0 -> {
-                                    Text("KONU ANLATIMI", color = Blue, fontWeight = FontWeight.ExtraBold, fontSize = 12.sp)
+                                    Text("KONU ANLATIMI · KİTAP MODU", color = Blue, fontWeight = FontWeight.ExtraBold, fontSize = 12.sp)
+                                    Card(shape = RoundedCornerShape(24.dp), colors = CardDefaults.cardColors(containerColor = Color.White)) {
+                                        Column(Modifier.fillMaxWidth().padding(20.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                                            Text(bookChapter.purpose, fontSize = 19.sp, fontWeight = FontWeight.ExtraBold, color = Ink)
+                                            Text(bookChapter.explanation, fontSize = 15.sp, lineHeight = 23.sp, color = Ink)
+                                            Text("Yapı ve kullanım", fontWeight = FontWeight.Bold, fontSize = 16.sp, color = Navy)
+                                            Surface(color = PaleBlue, shape = RoundedCornerShape(14.dp)) {
+                                                Text(bookChapter.formation, Modifier.fillMaxWidth().padding(14.dp), fontSize = 14.sp, lineHeight = 21.sp, color = Navy)
+                                            }
+                                            Text("Ek örnekler", fontWeight = FontWeight.Bold, fontSize = 16.sp, color = Navy)
+                                            bookChapter.examples.forEach { example ->
+                                                Column(Modifier.fillMaxWidth().background(Color(0xFFF7F8FC), RoundedCornerShape(12.dp)).padding(12.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                                                    Text(example.first, fontWeight = FontWeight.Bold, fontSize = 14.sp, color = Ink)
+                                                    Text(example.second, fontSize = 13.sp, color = Color(0xFF68758E))
+                                                }
+                                            }
+                                            Text("Sık yapılan hatalar", fontWeight = FontWeight.Bold, fontSize = 16.sp, color = Navy)
+                                            bookChapter.commonMistakes.forEach { mistake ->
+                                                Text("• $mistake", fontSize = 13.sp, lineHeight = 19.sp, color = Ink)
+                                            }
+                                            Text("Kendini kontrol et", fontWeight = FontWeight.Bold, fontSize = 16.sp, color = Navy)
+                                            bookChapter.checkpoints.forEachIndexed { index, checkpoint ->
+                                                Text("${index + 1}. $checkpoint", fontSize = 13.sp, lineHeight = 19.sp, color = Ink)
+                                            }
+                                        }
+                                    }
                                     Card(shape = RoundedCornerShape(24.dp), colors = CardDefaults.cardColors(containerColor = Color.White)) {
                                         Column(Modifier.fillMaxWidth().padding(20.dp), verticalArrangement = Arrangement.spacedBy(15.dp)) {
                                             Text(lesson.heading, fontSize = 21.sp, fontWeight = FontWeight.ExtraBold, color = Ink)
