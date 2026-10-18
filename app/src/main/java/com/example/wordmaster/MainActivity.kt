@@ -1215,71 +1215,105 @@ private fun StreakCard(emoji: String, title: String, value: String, bg: Color, f
     }
 }
 
+private suspend fun findHumanPronunciationAudio(word: String): String? = withContext(Dispatchers.IO) {
+    val safeWord = word.trim().lowercase(Locale.ROOT)
+    if (safeWord.isBlank() || !safeWord.matches(Regex("[a-z][a-z' -]{0,79}"))) return@withContext null
+    try {
+        val encoded = java.net.URLEncoder.encode(safeWord, "UTF-8")
+        val connection = java.net.URL("https://api.dictionaryapi.dev/api/v2/entries/en/$encoded").openConnection() as java.net.HttpURLConnection
+        connection.connectTimeout = 6000
+        connection.readTimeout = 6000
+        try {
+            if (connection.responseCode !in 200..299) return@withContext null
+            val entries = JSONArray(connection.inputStream.bufferedReader().use { it.readText() })
+            for (i in 0 until entries.length()) {
+                val phonetics = entries.getJSONObject(i).optJSONArray("phonetics") ?: continue
+                for (j in 0 until phonetics.length()) {
+                    val audio = phonetics.optJSONObject(j)?.optString("audio").orEmpty()
+                    if (audio.startsWith("https://") && audio.contains(".mp3")) return@withContext audio
+                }
+            }
+            null
+        } finally { connection.disconnect() }
+    } catch (_: Exception) { null }
+}
+
 @Composable
 private fun PronunciationPracticeDialog(words: List<Word>, onDismiss: () -> Unit) {
-    val context = LocalContext.current
-    var current by remember { mutableStateOf(words.random()) }
+    val scope = rememberCoroutineScope()
+    var current by remember { mutableStateOf(words.firstOrNull() ?: Word("hello", "merhaba", "A1")) }
     var searchText by remember { mutableStateOf("") }
     var choices by remember { mutableStateOf((listOf(current) + words.filter { it.en != current.en }.shuffled().take(3)).shuffled()) }
-    var message by remember { mutableStateOf("") }
-    var ttsReady by remember { mutableStateOf(false) }
-    val tts = remember {
-        TextToSpeech(context) { status ->
-            ttsReady = status == TextToSpeech.SUCCESS
+    var message by remember { mutableStateOf("Kayıtlı insan sesleri kullanılır; ses bulunamazsa yapay sesle değiştirilmez.") }
+    var isLoading by remember { mutableStateOf(false) }
+    var mediaPlayer by remember { mutableStateOf<MediaPlayer?>(null) }
+
+    fun playRecorded(term: String) {
+        scope.launch {
+            isLoading = true
+            message = "Kayıtlı telaffuz aranıyor…"
+            mediaPlayer?.let { old -> try { old.stop() } catch (_: Exception) { }; old.release() }
+            mediaPlayer = null
+            val url = findHumanPronunciationAudio(term)
+            if (url == null) {
+                message = "Bu kelime için kayıtlı ses bulunamadı. Başka bir kelime dene."
+                isLoading = false
+                return@launch
+            }
+            try {
+                val player = MediaPlayer()
+                mediaPlayer = player
+                player.setDataSource(url)
+                player.setOnPreparedListener {
+                    isLoading = false
+                    message = "Kayıtlı telaffuz çalınıyor: $term"
+                    it.start()
+                }
+                player.setOnCompletionListener { message = "Dinleme tamamlandı." }
+                player.setOnErrorListener { _, _, _ ->
+                    isLoading = false
+                    message = "Ses oynatılamadı. İnternet bağlantını kontrol et."
+                    true
+                }
+                player.prepareAsync()
+            } catch (_: Exception) {
+                isLoading = false
+                message = "Ses kaydı açılamadı. İnternet bağlantını kontrol et."
+            }
         }
     }
-    DisposableEffect(tts) {
-        onDispose { tts.stop(); tts.shutdown() }
+
+    DisposableEffect(Unit) {
+        onDispose { mediaPlayer?.let { player -> try { player.stop() } catch (_: Exception) { }; player.release() } }
     }
-    LaunchedEffect(ttsReady) {
-        if (ttsReady) tts.language = Locale.US
-    }
+
     AlertDialog(
         onDismissRequest = onDismiss,
         title = { Text("🎧 Kelime Telaffuzu") },
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                Text("İstediğin İngilizce kelimeyi yazıp telaffuzunu dinleyebilirsin.")
+                Text("İngilizce sözlüklerdeki kayıtlı telaffuzları dinle. Ses kaydı olmayan kelimelerde yapay ses kullanılmaz.")
                 OutlinedTextField(
-                    value = searchText,
-                    onValueChange = { searchText = it },
-                    modifier = Modifier.fillMaxWidth(),
-                    label = { Text("Kelime ara") },
-                    placeholder = { Text("Örn. beautiful") },
-                    singleLine = true
+                    value = searchText, onValueChange = { searchText = it },
+                    modifier = Modifier.fillMaxWidth(), label = { Text("Kelime ara") },
+                    placeholder = { Text("Örn. beautiful") }, singleLine = true
                 )
-                Button(
-                    onClick = {
-                        val term = searchText.trim()
-                        if (term.isBlank()) {
-                            message = "Önce bir kelime yaz."
-                        } else if (ttsReady) {
-                            tts.language = Locale.US
-                            tts.speak(term, TextToSpeech.QUEUE_FLUSH, null, "wordmaster_search_word")
-                            message = "Dinletiliyor: $term"
-                        } else message = "Ses motoru hazırlanıyor. Birazdan tekrar dene."
-                    },
-                    modifier = Modifier.fillMaxWidth()
-                ) { Text("🔎 Ara ve telaffuzunu dinle") }
+                Button(onClick = {
+                    val term = searchText.trim()
+                    if (term.isBlank()) message = "Önce bir İngilizce kelime yaz." else playRecorded(term)
+                }, enabled = !isLoading, modifier = Modifier.fillMaxWidth()) {
+                    Text(if (isLoading) "Ses aranıyor…" else "🔎 Kayıtlı telaffuzu dinle")
+                }
                 HorizontalDivider()
                 Text("Kelime pratiği", fontWeight = FontWeight.Bold)
-                Text("Türkçe anlamı: ${current.tr}", color = Blue, fontWeight = FontWeight.Bold)
-                Button(
-                    onClick = {
-                        if (ttsReady) {
-                            tts.language = Locale.US
-                            tts.speak(current.en, TextToSpeech.QUEUE_FLUSH, null, "wordmaster_word")
-                        } else message = "Ses motoru hazırlanıyor. Birazdan tekrar dene."
-                    },
-                    modifier = Modifier.fillMaxWidth()
-                ) { Text("🔊 Seçili kelimeyi dinle") }
+                Text("${current.en} — ${current.tr}", color = Blue, fontWeight = FontWeight.Bold)
+                Button(onClick = { playRecorded(current.en) }, enabled = !isLoading, modifier = Modifier.fillMaxWidth()) {
+                    Text("🔊 Seçili kelimeyi dinle")
+                }
                 choices.forEach { option ->
-                    OutlinedButton(
-                        onClick = {
-                            message = if (option.en == current.en) "Doğru! ✓" else "Tekrar dene. İpucu: Türkçe anlamı düşün."
-                        },
-                        modifier = Modifier.fillMaxWidth()
-                    ) { Text(option.en.replaceFirstChar { it.uppercase() }) }
+                    OutlinedButton(onClick = {
+                        message = if (option.en == current.en) "Doğru! ✓" else "Tekrar dene. İpucu: Türkçe anlamı düşün."
+                    }, modifier = Modifier.fillMaxWidth()) { Text(option.en.replaceFirstChar { it.uppercase() }) }
                 }
                 if (message.isNotBlank()) Text(message, color = if (message.startsWith("Doğru")) Color(0xFF12805C) else Color(0xFFB45309), fontWeight = FontWeight.Bold)
             }
@@ -1288,7 +1322,7 @@ private fun PronunciationPracticeDialog(words: List<Word>, onDismiss: () -> Unit
             TextButton(onClick = {
                 current = words.random()
                 choices = (listOf(current) + words.filter { it.en != current.en }.shuffled().take(3)).shuffled()
-                message = ""
+                message = "Yeni kelime seçildi."
             }) { Text("Sonraki kelime") }
         },
         dismissButton = { TextButton(onClick = onDismiss) { Text("Bitir") } }
