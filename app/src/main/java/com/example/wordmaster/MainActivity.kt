@@ -83,6 +83,14 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
     var currentScreen by remember { mutableStateOf("Dersler") }
     var activeLesson by remember { mutableStateOf("") }
     var activeCourseLessonId by remember { mutableStateOf<String?>(null) }
+    var lessonSessionStartedAt by remember { mutableStateOf<Long?>(null) }
+    LaunchedEffect(currentScreen) {
+        if (currentScreen == "Ders İçeriği") {
+            lessonSessionStartedAt = System.currentTimeMillis()
+        } else {
+            lessonSessionStartedAt = null
+        }
+    }
     var completedCourseIds by remember { mutableStateOf(CourseProgressStore.completedIds(prefs)) }
     var activeLessonIndex by remember { mutableIntStateOf(0) }
     var lessonAnswer by remember { mutableStateOf(false) }
@@ -727,10 +735,12 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                             completedCourseId?.let { courseId ->
                                                 completedCourseIds = CourseProgressStore.markCompleted(prefs, courseId)
                                             }
-                                            val minutesToRecord = completedCourseId
-                                                ?.let { WordMasterCourseCatalog.find(it)?.estimatedMinutes }
-                                                ?: 10
-                                            CourseProgressStore.addStudyMinutes(prefs, minutesToRecord)
+                                            val sessionStart = lessonSessionStartedAt
+                                            val elapsedMinutes = sessionStart?.let { startedAt ->
+                                                StudySessionClock.elapsedWholeMinutes(startedAt, System.currentTimeMillis())
+                                            } ?: 1
+                                            CourseProgressStore.addStudyMinutes(prefs, elapsedMinutes)
+                                            lessonSessionStartedAt = null
                                             activeCourseLessonId = null
                                             currentScreen = "Dersler"
                                             lessonStage = 0
@@ -1161,7 +1171,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
             }
             HorizontalDivider()
             Text("Günlük çalışma süresi hedefi", fontWeight = FontWeight.Bold)
-            Text("Dersleri tamamladıkça kaydedilen tahmini süreye göre ilerler.", fontSize = 12.sp, color = Color.Gray)
+            Text("Ders ekranında geçirilen süre kaydedilir; tamamlanan kısa oturumlar en az 1 dakika sayılır.", fontSize = 12.sp, color = Color.Gray)
             Row(
                 modifier = Modifier.horizontalScroll(rememberScrollState()),
                 horizontalArrangement = Arrangement.spacedBy(6.dp)
