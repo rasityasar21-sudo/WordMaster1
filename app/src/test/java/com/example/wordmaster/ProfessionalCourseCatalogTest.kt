@@ -44,6 +44,17 @@ class ProfessionalCourseCatalogTest {
     }
 
     @Test
+    fun everyProfessionalTermHasCompleteUniqueBilingualContent() {
+        assertTrue(ProfessionalCourseCatalog.tracks.all { track ->
+            val terms = track.sampleTerms
+            terms.all { term ->
+                term.english.isNotBlank() && term.turkish.isNotBlank() &&
+                    term.exampleEnglish.isNotBlank()
+            } && terms.map { it.english.trim().lowercase() }.toSet().size == terms.size
+        })
+    }
+
+    @Test
     fun everyProfessionHasAtLeastOneGuidedLesson() {
         val tracks = ProfessionalCourseCatalog.tracks
         assertTrue(tracks.all { it.lessons.isNotEmpty() })
