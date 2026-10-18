@@ -44,6 +44,24 @@ class ProfessionalCourseCatalogTest {
     }
 
     @Test
+    fun everyProfessionHasAtLeastOneGuidedLesson() {
+        val tracks = ProfessionalCourseCatalog.tracks
+        assertTrue(tracks.all { it.lessons.isNotEmpty() })
+        assertTrue(tracks.all { track -> track.lessons.all { lesson ->
+            lesson.id.isNotBlank() && lesson.title.isNotBlank() &&
+                lesson.explanation.isNotBlank() && lesson.phrases.isNotEmpty() &&
+                lesson.question.isNotBlank() && lesson.answer.isNotBlank()
+        } })
+    }
+
+    @Test
+    fun lessonIdsAreUniqueWithinEachProfession() {
+        assertTrue(ProfessionalCourseCatalog.tracks.all { track ->
+            track.lessons.map { it.id }.toSet().size == track.lessons.size
+        })
+    }
+
+    @Test
     fun aircraftCourseContainsStructuredLessonsWithExamplesAndChecks() {
         val lessons = ProfessionalCourseCatalog.find("aviation-maintenance")!!.lessons
         assertTrue(lessons.size >= 4)
