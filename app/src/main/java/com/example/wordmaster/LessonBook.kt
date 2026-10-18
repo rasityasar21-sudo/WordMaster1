@@ -17,7 +17,7 @@ object LessonBook {
     fun chapter(title: String): LessonBookChapter {
         val t = title.lowercase()
         return when {
-            "zamir" in t || "pronoun" in t || "be" in t ->
+            "zamir" in t || "pronoun" in t || "to be" in t || "am/is/are" in t || "am is are" in t ->
                 LessonBookChapter("Cümlede özneyi doğru belirlemek",
                     "İngilizcede çoğu tam cümlede özne ve fiil bulunur. I, you, he, she, it, we ve they özneyi gösterir. Be fiili özneye göre am, is veya are biçimini alır. Olumsuzluk için be fiilinden sonra not gelir; soru oluştururken be fiili öznenin önüne geçer.",
                     "Olumlu: Özne + am/is/are + tamamlayıcı\nOlumsuz: Özne + am/is/are + not + tamamlayıcı\nSoru: Am/Is/Are + özne + tamamlayıcı?",
