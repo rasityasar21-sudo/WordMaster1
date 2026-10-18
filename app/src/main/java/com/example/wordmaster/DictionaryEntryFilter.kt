@@ -18,9 +18,9 @@ internal object DictionaryEntryFilter {
 
         val looksLikeEnglishDefinition = tr.length > 65 &&
             tr.split(' ').size > 8 &&
-            !tr.contains("ç", true) && !tr.contains("ğ", true) &&
-            !tr.contains("ı", true) && !tr.contains("ö", true) &&
-            !tr.contains("ş", true) && !tr.contains("ü", true) &&
+            !tr.contains("ç") && !tr.contains("ğ") &&
+            !tr.contains("ı") && !tr.contains("ö") &&
+            !tr.contains("ş") && !tr.contains("ü") &&
             !tr.contains("/") && !tr.contains(",")
 
         // Exclude low-value ordinal abbreviations and number-like dictionary noise.
