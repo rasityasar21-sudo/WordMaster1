@@ -89,4 +89,14 @@ class ProfessionalCourseCatalogTest {
         })
     }
 
+    @Test
+    fun softwareCourseCoversBugReportsCodeReviewAndDocumentation() {
+        val track = ProfessionalCourseCatalog.find("software-it")!!
+        assertTrue(track.lessons.size >= 3)
+        assertTrue(track.sampleTerms.size >= 8)
+        assertTrue(track.lessons.any { it.id == "bug-reporting" })
+        assertTrue(track.lessons.any { it.id == "code-review" })
+        assertTrue(track.lessons.any { it.id == "technical-documentation" })
+    }
+
 }
