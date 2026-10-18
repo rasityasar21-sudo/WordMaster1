@@ -150,8 +150,10 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
     var compactCards by remember { mutableStateOf(prefs.getBoolean("compactCards", false)) }
     var dailyGoal by remember { mutableIntStateOf(prefs.getInt("dailyGoal", 10)) }
     var chosenLevel by remember { mutableStateOf(prefs.getString("chosenLevel", "") ?: "") }
+    var placementCompleted by remember { mutableStateOf(prefs.getBoolean("placementCompleted", false)) }
+    var savedPlacementCorrect by remember { mutableIntStateOf(prefs.getInt("placementCorrect", 0)) }
     var showOnboarding by remember { mutableStateOf(chosenLevel.isBlank()) }
-    var onboardingChoice by remember { mutableStateOf("A1") }
+    var onboardingChoice by remember { mutableStateOf(chosenLevel.ifBlank { "A1" }) }
     var placementMode by remember { mutableStateOf(false) }
     var placementAnswered by remember { mutableIntStateOf(0) }
     var placementCorrect by remember { mutableIntStateOf(0) }
@@ -625,22 +627,87 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
 
     if (showOnboarding) AlertDialog(
         onDismissRequest = { },
-        title = { Text("WordMaster’a hoş geldin! ✨", fontWeight = FontWeight.ExtraBold) },
-        text = { Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            Text("İngilizce seviyeni seç. Emin değilsen seviye tespit sınavını çöz; uygulama seviyeni tahmin etsin.")
-            listOf("A1" to "Başlangıç", "A2" to "Temel", "B1" to "Orta", "B2" to "Orta-ileri", "C1" to "İleri").forEach { (code, desc) ->
-                Surface(color = if (onboardingChoice == code) Color(0xFFEDE9FE) else Color(0xFFF8FAFC), shape = RoundedCornerShape(14.dp), onClick = { onboardingChoice = code }) {
-                    Row(Modifier.fillMaxWidth().padding(8.dp), verticalAlignment = Alignment.CenterVertically) {
-                        RadioButton(selected = onboardingChoice == code, onClick = { onboardingChoice = code })
-                        Column { Text(code, fontWeight = FontWeight.Bold, color = Color(0xFF6D28D9)); Text(desc, fontSize = 12.sp, color = Color(0xFF64748B)) }
+        title = {
+            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                Box(
+                    Modifier.fillMaxWidth().height(112.dp)
+                        .background(
+                            Brush.linearGradient(listOf(Color(0xFF4F46E5), Color(0xFF9333EA), Color(0xFFEC4899))),
+                            RoundedCornerShape(22.dp)
+                        ),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(5.dp)) {
+                        Text("📚", fontSize = 34.sp)
+                        Text("WORDMASTER", color = Color.White, fontSize = 19.sp, fontWeight = FontWeight.Black)
+                        Text("Her gün biraz daha İngilizce", color = Color.White, fontSize = 12.sp)
+                    }
+                }
+                Text("Hoş geldin! ✨", fontWeight = FontWeight.ExtraBold, fontSize = 23.sp, color = Navy)
+            }
+        },
+        text = {
+            Column(verticalArrangement = Arrangement.spacedBy(9.dp)) {
+                Text("Sana uygun dersleri hazırlayalım. Seviyeni seçebilir ya da kısa sınavla belirleyebilirsin.", fontSize = 14.sp, lineHeight = 20.sp, color = Color(0xFF596579))
+                if (placementCompleted) {
+                    Surface(color = Color(0xFFE1F8F0), shape = RoundedCornerShape(14.dp)) {
+                        Row(Modifier.fillMaxWidth().padding(12.dp), verticalAlignment = Alignment.CenterVertically) {
+                            Text("✓", color = Color(0xFF087F5B), fontSize = 22.sp, fontWeight = FontWeight.Black)
+                            Spacer(Modifier.width(8.dp))
+                            Column {
+                                Text("Seviye tespit sınavın kaydedildi", fontWeight = FontWeight.Bold, color = Color(0xFF087F5B))
+                                Text("$chosenLevel seviyesi • $savedPlacementCorrect/10 doğru", fontSize = 12.sp, color = Color(0xFF087F5B))
+                            }
+                        }
+                    }
+                }
+                listOf("A1" to "Başlangıç", "A2" to "Temel", "B1" to "Orta", "B2" to "Orta-ileri", "C1" to "İleri").forEach { (code, desc) ->
+                    Surface(
+                        color = if (onboardingChoice == code) Color(0xFFEDE9FE) else Color(0xFFF8FAFC),
+                        shape = RoundedCornerShape(14.dp),
+                        onClick = { onboardingChoice = code }
+                    ) {
+                        Row(Modifier.fillMaxWidth().padding(horizontal = 9.dp, vertical = 5.dp), verticalAlignment = Alignment.CenterVertically) {
+                            RadioButton(selected = onboardingChoice == code, onClick = { onboardingChoice = code })
+                            Column {
+                                Text(code, fontWeight = FontWeight.Bold, color = Color(0xFF6D28D9))
+                                Text(desc, fontSize = 12.sp, color = Color(0xFF64748B))
+                            }
+                            Spacer(Modifier.weight(1f))
+                            if (onboardingChoice == code) Text("✓", color = Color(0xFF6D28D9), fontWeight = FontWeight.Black)
+                        }
                     }
                 }
             }
-        } },
+        },
         confirmButton = {
-            Column(horizontalAlignment = Alignment.End) {
-                TextButton(onClick = { chosenLevel = onboardingChoice; selected = onboardingChoice; prefs.edit().putString("chosenLevel", chosenLevel).apply(); showOnboarding = false }) { Text("Seviyemle devam et") }
-                Button(onClick = { placementMode = true; placementAnswered = 0; placementCorrect = 0; sessionAnswered = 0; sessionCorrect = 0; sessionActive = true; showOnboarding = false; selected = "Tümü"; quizMode = "İngilizce → Türkçe"; startQuiz() }) { Text("🧭 Seviye tespit sınavı") }
+            Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(7.dp)) {
+                Button(
+                    onClick = {
+                        chosenLevel = onboardingChoice
+                        selected = onboardingChoice
+                        prefs.edit().putString("chosenLevel", chosenLevel).apply()
+                        showOnboarding = false
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(15.dp)
+                ) { Text("🚀  $onboardingChoice seviyesiyle başla", modifier = Modifier.padding(vertical = 5.dp)) }
+                OutlinedButton(
+                    onClick = {
+                        placementMode = true
+                        placementAnswered = 0
+                        placementCorrect = 0
+                        sessionAnswered = 0
+                        sessionCorrect = 0
+                        sessionActive = true
+                        showOnboarding = false
+                        selected = "Tümü"
+                        quizMode = "İngilizce → Türkçe"
+                        startQuiz()
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(15.dp)
+                ) { Text("🧭  Seviye tespit sınavını çöz") }
             }
         }
     )
@@ -752,7 +819,13 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                         chosenLevel = levelOrder[assessedIndex]
                                         placementLevel = chosenLevel
                                         selected = chosenLevel
-                                        prefs.edit().putString("chosenLevel", chosenLevel).apply()
+                                        placementCompleted = true
+                                        savedPlacementCorrect = placementCorrect
+                                        prefs.edit()
+                                            .putString("chosenLevel", chosenLevel)
+                                            .putBoolean("placementCompleted", true)
+                                            .putInt("placementCorrect", placementCorrect)
+                                            .apply()
                                         placementMode = false
                                         quizWord = null
                                         quizMessage = null
