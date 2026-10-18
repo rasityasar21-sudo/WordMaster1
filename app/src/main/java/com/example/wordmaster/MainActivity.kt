@@ -1409,7 +1409,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
         onDismissRequest = { showMatchGame = false },
         title = { Text("Kelime eşleştirme 🎮") },
         text = {
-            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Column(modifier = Modifier.heightIn(max = 420.dp).verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 Text("Eşleşen: ${matched.size}/${matchWords.size}")
                 LinearProgressIndicator(progress = { if (matchWords.isEmpty()) 0f else matched.size.toFloat() / matchWords.size }, modifier = Modifier.fillMaxWidth())
                 Text(matchMessage, color = Blue, fontWeight = FontWeight.SemiBold)
@@ -1556,7 +1556,7 @@ private fun PronunciationPracticeDialog(words: List<Word>, onDismiss: () -> Unit
         onDismissRequest = onDismiss,
         title = { Text("🎧 Kelime Telaffuzu") },
         text = {
-            Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            Column(modifier = Modifier.heightIn(max = 420.dp).verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(10.dp)) {
                 Text("İngilizce sözlüklerdeki kayıtlı telaffuzları dinle. Ses kaydı olmayan kelimelerde yapay ses kullanılmaz.")
                 OutlinedTextField(
                     value = searchText, onValueChange = { searchText = it },
