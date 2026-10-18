@@ -1,7 +1,12 @@
 package com.example.wordmaster
 
 import android.content.SharedPreferences
+import android.app.DownloadManager
+import android.content.Context
+import android.net.Uri
+import android.os.Environment
 import android.media.MediaPlayer
+import java.io.File
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import java.util.Locale
@@ -34,6 +39,48 @@ import org.json.JSONArray
 
 data class Word(val en: String, val tr: String, val level: String, val example: String = "")
 
+private const val CAFE_AUDIO_URL = "https://www.oxfordonlineenglish.com/wp-content/uploads/2021/09/Ordering-at-a-Coffee-Shop-full.mp3"
+private const val CAFE_AUDIO_FILE = "wordmaster_cafe_dialogue.mp3"
+private const val CAFE_AUDIO_DOWNLOAD_ID = "cafeAudioDownloadId"
+
+/** Downloads the currently configured lesson audio once on first app launch.
+ * Android DownloadManager continues the transfer in the background. Wi-Fi is required
+ * by default to avoid unexpectedly using mobile data.
+ */
+private fun ensureLessonMediaDownloaded(context: Context, prefs: SharedPreferences) {
+    val folder = context.getExternalFilesDir(Environment.DIRECTORY_MUSIC) ?: return
+    val file = File(folder, CAFE_AUDIO_FILE)
+    if (file.exists() && file.length() > 0L) return
+
+    val manager = context.getSystemService(Context.DOWNLOAD_SERVICE) as? DownloadManager ?: return
+    val oldId = prefs.getLong(CAFE_AUDIO_DOWNLOAD_ID, -1L)
+    if (oldId != -1L) {
+        val query = DownloadManager.Query().setFilterById(oldId)
+        val cursor = manager.query(query)
+        val stillActive = cursor?.use {
+            it.moveToFirst() && it.getInt(it.getColumnIndexOrThrow(DownloadManager.COLUMN_STATUS)) in
+                listOf(DownloadManager.STATUS_PENDING, DownloadManager.STATUS_RUNNING, DownloadManager.STATUS_PAUSED)
+        } ?: false
+        if (stillActive) return
+    }
+
+    try {
+        val request = DownloadManager.Request(Uri.parse(CAFE_AUDIO_URL))
+            .setTitle("WordMaster – Kafe diyaloğu")
+            .setDescription("Dinleme dersi çevrimdışı kullanım için indiriliyor")
+            .setMimeType("audio/mpeg")
+            .setAllowedOverMetered(false)
+            .setAllowedOverRoaming(false)
+            .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+            .setDestinationInExternalFilesDir(context, Environment.DIRECTORY_MUSIC, CAFE_AUDIO_FILE)
+        val id = manager.enqueue(request)
+        prefs.edit().putLong(CAFE_AUDIO_DOWNLOAD_ID, id).apply()
+    } catch (_: Exception) {
+        // The next app launch retries if the download could not be queued.
+    }
+}
+
+
 private val Navy = Color(0xFF202044)
 private val Blue = Color(0xFF6957E8)
 private val PaleBlue = Color(0xFFF0EDFF)
@@ -44,6 +91,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val prefs = getSharedPreferences("wordmaster", MODE_PRIVATE)
+        ensureLessonMediaDownloaded(this, prefs)
         val words = try {
             val json = assets.open("dictionary.json").bufferedReader().use { it.readText() }
             val arr = JSONArray(json)
@@ -327,7 +375,8 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                                     cafeAudioStatus = "Ses yükleniyor…"
                                                     val player = MediaPlayer()
                                                     cafeAudioPlayer = player
-                                                    player.setDataSource("https://www.oxfordonlineenglish.com/wp-content/uploads/2021/09/Ordering-at-a-Coffee-Shop-full.mp3")
+                                                    val offlineAudio = File(context.getExternalFilesDir(Environment.DIRECTORY_MUSIC), "wordmaster_cafe_dialogue.mp3")
+                                                    player.setDataSource(if (offlineAudio.exists() && offlineAudio.length() > 0L) offlineAudio.absolutePath else "https://www.oxfordonlineenglish.com/wp-content/uploads/2021/09/Ordering-at-a-Coffee-Shop-full.mp3")
                                                     player.setOnPreparedListener { it.start(); cafeAudioStatus = "Çalıyor" }
                                                     player.setOnCompletionListener { cafeAudioStatus = "Bitti" }
                                                     player.setOnErrorListener { _, _, _ -> cafeAudioStatus = "Ses açılamadı. İnternet bağlantını kontrol et."; true }
