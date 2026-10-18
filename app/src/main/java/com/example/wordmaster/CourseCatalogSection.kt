@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -18,6 +19,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -40,8 +42,11 @@ fun CourseCatalogSection(
         Text("YAPILANDIRILMIŞ İNGİLİZCE KURSU", color = Color(0xFF6D5AE6), fontSize = 11.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 1.2.sp)
         Text("A1’den C1’e ders yolu", color = Color(0xFF202044), fontSize = 21.sp, fontWeight = FontWeight.ExtraBold)
         Text("Konu anlatımı, hedefler ve ön koşullarla ilerle. Tamamlanan dersler bu cihazda saklanır.", color = Color(0xFF68758E), fontSize = 13.sp, lineHeight = 19.sp)
-        Row(horizontalArrangement = Arrangement.spacedBy(7.dp)) {
-            listOf("A1", "A2", "B1", "B2", "C1").forEach { option ->
+        Row(
+            modifier = Modifier.horizontalScroll(rememberScrollState()),
+            horizontalArrangement = Arrangement.spacedBy(7.dp)
+        ) {
+            listOf("A1", "A2", "B1", "B2", "C1", "Mesleki").forEach { option ->
                 FilterChip(selected = selectedLevel == option, onClick = { selectedLevel = option }, label = { Text(option) })
             }
         }
