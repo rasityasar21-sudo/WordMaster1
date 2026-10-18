@@ -696,24 +696,29 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                                 shape = RoundedCornerShape(14.dp)
                                             ) { Text("▶ Konuşmayı dinle", modifier = Modifier.padding(4.dp)) }
                                             HorizontalDivider(color = Color(0xFF55516C))
-                                            Text("Konuşma metni", color = Color(0xFFBDB4FF), fontWeight = FontWeight.Bold)
-                                            dialogue.forEachIndexed { index, pair ->
-                                                Row(
-                                                    Modifier.fillMaxWidth().background(Color(0xFF292541), RoundedCornerShape(12.dp)).padding(12.dp),
-                                                    verticalAlignment = Alignment.CenterVertically,
-                                                    horizontalArrangement = Arrangement.spacedBy(10.dp)
-                                                ) {
-                                                    Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                                                        Text(if (index % 2 == 0) "A" else "B", color = Color(0xFFFFE500), fontWeight = FontWeight.ExtraBold)
-                                                        Text(pair.first, color = Color.White, fontWeight = FontWeight.SemiBold, fontSize = 16.sp)
-                                                        Text(pair.second, color = Color(0xFFD0CBEA), fontSize = 14.sp)
-                                                    }
-                                                    IconButton(onClick = {
-                                                        if (listeningReady) {
-                                                            listeningTts.language = Locale.US
-                                                            listeningTts.speak(pair.first, TextToSpeech.QUEUE_FLUSH, null, "lesson_line_$index")
+                                            var showListeningTranscript by remember { mutableStateOf(false) }
+                                            TextButton(onClick = { showListeningTranscript = !showListeningTranscript }) {
+                                                Text(if (showListeningTranscript) "Konuşma metnini gizle" else "Konuşma metnini göster", color = Color(0xFFBDB4FF), fontWeight = FontWeight.Bold)
+                                            }
+                                            if (showListeningTranscript) {
+                                                dialogue.forEachIndexed { index, pair ->
+                                                    Row(
+                                                        Modifier.fillMaxWidth().background(Color(0xFF292541), RoundedCornerShape(12.dp)).padding(12.dp),
+                                                        verticalAlignment = Alignment.CenterVertically,
+                                                        horizontalArrangement = Arrangement.spacedBy(10.dp)
+                                                    ) {
+                                                        Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                                                            Text(if (index % 2 == 0) "A" else "B", color = Color(0xFFFFE500), fontWeight = FontWeight.ExtraBold)
+                                                            Text(pair.first, color = Color.White, fontWeight = FontWeight.SemiBold, fontSize = 16.sp)
+                                                            Text(pair.second, color = Color(0xFFD0CBEA), fontSize = 14.sp)
                                                         }
-                                                    }) { Text("🔊", fontSize = 20.sp) }
+                                                        IconButton(onClick = {
+                                                            if (listeningReady) {
+                                                                listeningTts.language = Locale.US
+                                                                listeningTts.speak(pair.first, TextToSpeech.QUEUE_FLUSH, null, "lesson_line_$index")
+                                                            }
+                                                        }) { Text("🔊", fontSize = 20.sp) }
+                                                    }
                                                 }
                                             }
                                             Text("Dinledikten sonra aşağıdaki alıştırmada doğru cevabı seç.", color = Color.White, fontWeight = FontWeight.SemiBold)
