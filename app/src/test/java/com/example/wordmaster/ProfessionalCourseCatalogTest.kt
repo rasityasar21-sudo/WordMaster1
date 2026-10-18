@@ -159,4 +159,14 @@ class ProfessionalCourseCatalogTest {
         assertTrue(track.lessons.all { it.phrases.size >= 3 && it.question.isNotBlank() && it.answer.isNotBlank() })
     }
 
+    @Test
+    fun automotiveCourseCoversVehicleInspectionAndRepairHandover() {
+        val track = ProfessionalCourseCatalog.find("automotive")!!
+        assertTrue(track.lessons.size >= 3)
+        assertTrue(track.sampleTerms.size >= 8)
+        assertTrue(track.lessons.any { it.id == "vehicle-inspection" })
+        assertTrue(track.lessons.any { it.id == "repair-handover" })
+        assertTrue(track.lessons.all { it.phrases.size >= 3 && it.question.isNotBlank() && it.answer.isNotBlank() })
+    }
+
 }
