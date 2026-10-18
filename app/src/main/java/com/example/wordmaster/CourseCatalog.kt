@@ -112,11 +112,16 @@ data class DailyStudyPlan(
             val candidates = (chosen.toList() + eligibleTargetLessons.map { it.id }).distinct()
             val selectedLessons = candidates.mapNotNull(WordMasterCourseCatalog::find)
             val chosenForPlan = mutableListOf<String>()
+            val targetLessonIds = eligibleTargetLessons.map { it.id }.toSet()
             var minutes = 0
+            var targetLessonAdded = false
             for (lesson in selectedLessons) {
-                if (chosenForPlan.isNotEmpty() && minutes >= safeTarget) break
+                // Do not stop at the target time until one lesson from the chosen
+                // level has been added after its prerequisites.
+                if (targetLessonAdded && minutes >= safeTarget) break
                 chosenForPlan += lesson.id
                 minutes += lesson.estimatedMinutes
+                if (lesson.id in targetLessonIds) targetLessonAdded = true
             }
             return DailyStudyPlan(
                 date = date,
