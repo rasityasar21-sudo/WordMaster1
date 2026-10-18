@@ -90,7 +90,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
         lessonSessionStartedAt = if (currentScreen == "Ders İçeriği") System.currentTimeMillis() else null
     }
     val lifecycleActivity = appContext as? ComponentActivity
-    DisposableEffect(lifecycleActivity) {
+    DisposableEffect(lifecycleActivity, currentScreen) {
         val observer = androidx.lifecycle.LifecycleEventObserver { _, event ->
             if (event == androidx.lifecycle.Lifecycle.Event.ON_PAUSE) {
                 lessonSessionStartedAt?.let { startedAt ->
