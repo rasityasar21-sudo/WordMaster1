@@ -272,6 +272,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                 NavigationBar(containerColor = Color.Black, contentColor = Color.White) {
                     NavigationBarItem(selected = currentScreen == "Dersler", onClick = { currentScreen = "Dersler"; selectedTopic = "Tümü"; selected = "A1" }, icon = { Text("📚") }, label = { Text("Dersler") })
                     NavigationBarItem(selected = currentScreen == "Sözlük", onClick = { currentScreen = "Sözlük"; selectedTopic = "Tümü"; selected = "Tümü"; tab = 0; query = "" }, icon = { Text("A-Z") }, label = { Text("Sözlük") })
+                    NavigationBarItem(selected = currentScreen == "Mesleki İngilizce", onClick = { currentScreen = "Mesleki İngilizce" }, icon = { Text("✈️") }, label = { Text("Mesleki") })
                     NavigationBarItem(selected = false, onClick = { showProfile = true }, icon = { Text("👤") }, label = { Text("Profil") })
                 }
             }
@@ -743,6 +744,9 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                         }
                     }
                     }
+                if (currentScreen == "Mesleki İngilizce") {
+                    item { ProfessionalCoursesScreen(onBackToLessons = { currentScreen = "Dersler" }) }
+                }
                 if (currentScreen == "Sözlük") {
                     item {
                         Text(if (selectedTopic == "Tümü") "Kelime defterim" else "$selectedTopic · Kelimeler", fontSize = 21.sp, fontWeight = FontWeight.ExtraBold, color = Navy)
