@@ -62,7 +62,12 @@ object CourseProgressStore {
     ): Int {
         require(minutes >= 0) { "minutes must be non-negative" }
         val key = DAILY_MINUTES_PREFIX + date
-        val updated = (prefs.getInt(key, 0) + minutes).coerceAtMost(24 * 60)
+        val current = prefs.getInt(key, 0).coerceIn(0, 24 * 60)
+        // Add in Long arithmetic so a very large input cannot overflow Int
+        // and accidentally turn the recorded total negative.
+        val updated = (current.toLong() + minutes.toLong())
+            .coerceAtMost((24 * 60).toLong())
+            .toInt()
         prefs.edit().putInt(key, updated).apply()
         return updated
     }
