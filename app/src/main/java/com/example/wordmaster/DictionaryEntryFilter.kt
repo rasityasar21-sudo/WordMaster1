@@ -10,8 +10,6 @@ internal object DictionaryEntryFilter {
         val tr = turkish.trim()
         if (en.isBlank() || tr.isBlank()) return true
 
-        // Dictionary-source morphemes such as "-gen" and "-gram" are not
-        // standalone vocabulary for Turkish learners.
         val isMorphologyFragment = en.startsWith("-") ||
             tr.contains("Suf.", ignoreCase = true) ||
             tr.contains("(morpheme)", ignoreCase = true)
@@ -23,10 +21,25 @@ internal object DictionaryEntryFilter {
             !tr.contains("ş") && !tr.contains("ü") &&
             !tr.contains("/") && !tr.contains(",")
 
-        // Exclude low-value ordinal abbreviations and number-like dictionary noise.
         val isOrdinalNoise = en.matches(Regex("(?i)(?:\\d+|\\d{1,3}(?:,\\d{3})+)(?:st|nd|rd|th)")) ||
             en.matches(Regex("\\d+(?:st|nd|rd|th)?"))
 
-        return isMorphologyFragment || looksLikeEnglishDefinition || isOrdinalNoise
+        // Definitions accidentally stored in the translation field pollute quizzes and matching games.
+        val isDefinitionInTranslation = tr.contains("—") || tr.contains("–") ||
+            Regex("(?i)^\\s*(?:n\\.|v\\.|adj\\.|adv\\.|pron\\.|prep\\.|conj\\.|interj\\.)").containsMatchIn(tr) ||
+            Regex("(?i)^\\s*(?:the action of|to be |to do |a person who|an act of|the state of|used to describe)").containsMatchIn(tr)
+
+        return isMorphologyFragment || looksLikeEnglishDefinition || isOrdinalNoise || isDefinitionInTranslation
+    }
+
+    /** Short, learner-friendly entries suitable for rapid matching and pronunciation drills. */
+    fun isQuickPracticeEntry(english: String, turkish: String): Boolean {
+        val en = english.trim()
+        val tr = turkish.trim()
+        if (shouldExclude(en, tr)) return false
+        if (en.length > 22 || en.split(Regex("\\s+")).size > 3) return false
+        if (tr.length > 48 || tr.contains(';') || tr.contains('|')) return false
+        if (tr.count { it == ',' } > 2) return false
+        return true
     }
 }
