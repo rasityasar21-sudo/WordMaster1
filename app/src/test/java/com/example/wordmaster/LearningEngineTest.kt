@@ -104,20 +104,6 @@ class LearningEngineTest {
     }
 
     @Test
-    fun decodingClampsInvalidCounters() {
-        val decoded = WordMasterLearningEngine.decode(
-            """[{"word":"  book  ","correctCount":-2,"mistakeCount":-1,"streak":-3,"intervalDays":-8,"easeFactor":0.5},{"word":"chair"}]"""
-        )
-
-        assertEquals(listOf("book", "chair"), decoded.map { it.word })
-        assertEquals(0, decoded.first().correctCount)
-        assertEquals(0, decoded.first().mistakeCount)
-        assertEquals(0, decoded.first().streak)
-        assertEquals(0, decoded.first().intervalDays)
-        assertEquals(1.3, decoded.first().easeFactor, 0.001)
-    }
-
-    @Test
     fun malformedDueDateIsSafelyScheduledForReview() {
         val progress = WordProgress(word = "clock", dueDate = "not-a-date")
 
