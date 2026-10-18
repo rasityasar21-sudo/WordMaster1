@@ -29,15 +29,7 @@ fun ProfessionalCoursesScreen(onBackToLessons: () -> Unit) {
         }
         Text("Mesleğine özel terimler, teknik okuma ve örnek cümlelerle İngilizceni geliştir.", color = Color(0xFF687086), fontSize = 14.sp, lineHeight = 20.sp)
         if (selectedTrack == null) {
-            Card(colors = CardDefaults.cardColors(containerColor = Color(0xFF202044)), shape = RoundedCornerShape(22.dp)) {
-                Column(Modifier.fillMaxWidth().padding(18.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                    Text("✈️ SENİN İÇİN ÖZEL", color = Color(0xFFC9C0FF), fontWeight = FontWeight.Bold, fontSize = 11.sp)
-                    Text("Uçak Bakım İngilizcesi", color = Color.White, fontSize = 21.sp, fontWeight = FontWeight.ExtraBold)
-                    Text("Airframe, powerplant, bakım kayıtları, arıza raporları ve emniyet terminolojisi.", color = Color(0xFFE2E1F2), fontSize = 13.sp, lineHeight = 19.sp)
-                    Button(onClick = { selectedTrackId = "aviation-maintenance"; showAnswers = false }, modifier = Modifier.fillMaxWidth(), colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF9B8AFF))) { Text("Uçak Bakım Kursuna Başla", color = Color(0xFF191633), fontWeight = FontWeight.Bold) }
-                }
-            }
-            tracks.filter { it.id != "aviation-maintenance" }.forEach { track ->
+            tracks.forEach { track ->
                 Card(Modifier.fillMaxWidth().clickable { selectedTrackId = track.id; showAnswers = false }, colors = CardDefaults.cardColors(containerColor = Color.White), shape = RoundedCornerShape(18.dp)) {
                     Row(Modifier.fillMaxWidth().padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
                         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
