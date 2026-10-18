@@ -32,4 +32,13 @@ class DictionaryEntryFilterTest {
         val definition = "A specialized device designed to measure display and record changes in air pressure during a long period of continuous operation"
         assertTrue(DictionaryEntryFilter.shouldExclude("barometer", definition))
     }
+    @Test
+    fun quickPracticeKeepsShortEntriesAndRejectsLongPhrasesAndDefinitions() {
+        assertTrue(DictionaryEntryFilter.isQuickPracticeEntry("engine", "motor"))
+        assertTrue(DictionaryEntryFilter.isQuickPracticeEntry("take off", "havalanmak"))
+        assertFalse(DictionaryEntryFilter.isQuickPracticeEntry("15 minutes of fame", "sabunköpüğü"))
+        assertFalse(DictionaryEntryFilter.isQuickPracticeEntry("pistil", "n. 1. şekillendirme — The action of the verb to shape."))
+        assertFalse(DictionaryEntryFilter.isQuickPracticeEntry("a very long technical phrase", "uzun anlam"))
+    }
+
 }
