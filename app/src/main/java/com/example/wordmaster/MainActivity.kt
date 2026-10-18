@@ -183,9 +183,10 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
     val level = xp / 100 + 1
     val xpInLevel = xp % 100
     val today = LocalDate.now().toString()
-    val studyPlan = remember(chosenLevel, completedCourseIds, today) {
+    val studyPlanLevel = chosenLevel.ifBlank { selected.takeIf { it in listOf("A1", "A2", "B1", "B2", "C1") } ?: "A1" }
+    val studyPlan = remember(studyPlanLevel, completedCourseIds, today) {
         DailyStudyPlan.create(
-            level = chosenLevel.ifBlank { selected }.ifBlank { "A1" },
+            level = studyPlanLevel,
             completedLessonIds = completedCourseIds,
             dueWords = learningStore.dueForReview(),
             targetMinutes = CourseProgressStore.dailyGoalMinutes(prefs),
@@ -409,7 +410,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                         }
                                         Text("🗺️", fontSize = 28.sp)
                                     }
-                                    Text("Seviye: ${chosenLevel.ifBlank { selected }} · Tahmini süre: ${studyPlan.estimatedMinutes} dk", color = Color(0xFF68758E), fontSize = 12.sp)
+                                    Text("Seviye: $studyPlanLevel · Tahmini süre: ${studyPlan.estimatedMinutes} dk", color = Color(0xFF68758E), fontSize = 12.sp)
                                     if (studyPlan.lessonIds.isEmpty() && studyPlan.reviewWords.isEmpty()) {
                                         Text("Bu seviyedeki dersleri tamamladın. Tekrar kelimeleri eklenince planın güncellenecek.", color = Color(0xFF68758E), fontSize = 13.sp, lineHeight = 19.sp)
                                     } else {
