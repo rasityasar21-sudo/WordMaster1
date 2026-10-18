@@ -53,3 +53,23 @@ Kullanıcı talebine göre sonraki meslekler eklenecek; her alan aynı kalite ko
 
 ## Mevcut durum
 ProfessionalCourseCatalog.kt meslek kataloğunun ilk veri modelini ve uçak bakım için örnek terimleri içerir. Bu dosyanın eklenmesi tek başına uygulamada tamamlanmış bir ekran, tam ders kütüphanesi, canlı kaynak toplama sistemi veya gerçek ödeme entegrasyonu anlamına gelmez. Bu özellikler ayrı geliştirme ve test adımlarıdır.
+
+## Geliştirme durumu — 18 Ekim 2026
+
+### Uygulananlar
+- Mesleki İngilizce ekranı uygulama gezinmesine bağlandı; 10 meslek aynı katalog listesinde.
+- Meslek arama alanı, meslek simgeleri ve konu/terim sayıları eklendi.
+- Uçak Bakım kursunda 34 terim, 12 konu başlığı ve ilk 10 terim için Türkçe örnek cümle açıklamaları var.
+- Diğer mesleklerin her birine başlangıç terimleri ve örnek cümleler eklendi.
+- Çoktan seçmeli mini test; cevap kontrolü, puan ve tekrar çözme akışı eklendi.
+- Gerçek bakım işlemlerinde güncel onaylı doküman ve yetkili prosedürlerin esas alınmasına dair güvenlik notu eklendi.
+- Kurs kataloğu için birim testleri genişletildi.
+
+### Tamamlanması gerekenler
+- Her konu için tam ders anlatımı, teknik okuma parçaları ve açıklamalı farklı soru türleri.
+- FAA/EASA kaynaklarının güncel sürümlerinin doğrulanması ve ders-kaynak eşleştirmesi.
+- Telaffuz/dinleme, kalıcı kurs ilerlemesi ve aralıklı tekrar entegrasyonu.
+- Gerçek Google Play Billing doğrulaması ve Premium erişim kilidi.
+- Son birim testlerinin ve APK derlemesinin başarıyla tamamlanması; APK ekranlarının cihazda kontrolü.
+
+Bu nedenle mevcut sürüm, tam mesleki ders kütüphanesi veya çalışan ödeme sistemi olarak kabul edilmemelidir. Kalan işler sırayla uygulanıp doğrulanacaktır.
