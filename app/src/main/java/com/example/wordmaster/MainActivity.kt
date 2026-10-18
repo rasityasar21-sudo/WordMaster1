@@ -22,6 +22,7 @@ import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
@@ -1015,19 +1016,19 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                             }
                         }
                     }
-                    items(filtered, key = { it.en }) { word ->
+                    itemsIndexed(filtered, key = { _, word -> word.en }) { wordIndex, word ->
                         Card(
                             modifier = Modifier.fillMaxWidth(),
                             shape = RoundedCornerShape(22.dp),
-                            colors = CardDefaults.cardColors(containerColor = listOf(Color(0xFFFFFBF0), Color(0xFFF4F0FF), Color(0xFFEDFAF7), Color(0xFFFFF0F5), Color(0xFFEEF6FF))[filtered.indexOf(word).coerceAtLeast(0) % 5]),
+                            colors = CardDefaults.cardColors(containerColor = listOf(Color(0xFFFFFBF0), Color(0xFFF4F0FF), Color(0xFFEDFAF7), Color(0xFFFFF0F5), Color(0xFFEEF6FF))[wordIndex % 5]),
                             elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
                         ) {
                             Column(Modifier.padding(if (compactCards) 11.dp else 17.dp)) {
                                 Row(verticalAlignment = Alignment.CenterVertically) {
                                     Column(Modifier.weight(1f)) {
-                                        Text(word.en.replaceFirstChar { it.uppercase() }, fontSize = 21.sp, fontWeight = FontWeight.ExtraBold, color = Navy)
+                                        Text(word.en.replaceFirstChar { it.uppercase() }, fontSize = 20.sp, maxLines = 2, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis, fontWeight = FontWeight.ExtraBold, color = Navy)
                                         Spacer(Modifier.height(3.dp))
-                                        Text(word.tr.replaceFirstChar { it.uppercase() }, fontSize = 16.sp, color = Color(0xFF46536D))
+                                        Text(word.tr.replaceFirstChar { it.uppercase() }, fontSize = 15.sp, maxLines = 2, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis, color = Color(0xFF46536D))
                                     }
                                     Surface(color = listOf(Color(0xFFE9DEFF), Color(0xFFD9F7ED), Color(0xFFFFE6D5), Color(0xFFDDEEFF), Color(0xFFFFE0EB))[filtered.indexOf(word).coerceAtLeast(0) % 5], shape = RoundedCornerShape(12.dp)) {
                                         Text(word.level, modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp), color = Blue, fontSize = 12.sp, fontWeight = FontWeight.Bold)
@@ -1035,7 +1036,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                 }
                                 if (word.example.isNotBlank()) {
                                     Spacer(Modifier.height(10.dp))
-                                    Text("Örnek: ${word.example}", color = Color(0xFF67748C), fontSize = 13.sp)
+                                    Text("Örnek: ${word.example}", color = Color(0xFF67748C), fontSize = 13.sp, maxLines = 2, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis)
                                 }
                                 Spacer(Modifier.height(8.dp))
                                 HorizontalDivider(color = Color(0xFFF0F2F7))
