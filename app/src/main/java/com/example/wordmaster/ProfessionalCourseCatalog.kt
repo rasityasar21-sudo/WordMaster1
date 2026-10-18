@@ -143,14 +143,26 @@ object ProfessionalCourseCatalog {
             title = "Hukuk İngilizcesi",
             titleEnglish = "Legal English",
             description = "Hukuki metinleri ve profesyonel yazışmaları anlamaya yönelik dil çalışmaları.",
-            topics = listOf("Hukuki terimler", "Sözleşmeler", "Resmî yazışma", "Metin okuma")
+            topics = listOf("Hukuki terimler", "Sözleşmeler", "Resmî yazışma", "Metin okuma"),
+            sampleTerms = listOf(
+            ProfessionalTerm("agreement", "anlaşma", "Both parties signed the agreement."),
+            ProfessionalTerm("clause", "madde", "Read the clause carefully."),
+            ProfessionalTerm("evidence", "delil", "The lawyer reviewed the evidence."),
+            ProfessionalTerm("claim", "iddia / talep", "The claim was reviewed by the court.")
+            )
         ),
         ProfessionalTrack(
             id = "education",
             title = "Eğitim İngilizcesi",
             titleEnglish = "Education English",
             description = "Sınıf içi iletişim, eğitim terminolojisi ve akademik beceriler.",
-            topics = listOf("Sınıf dili", "Ders anlatımı", "Ölçme ve değerlendirme", "Akademik kelimeler")
+            topics = listOf("Sınıf dili", "Ders anlatımı", "Ölçme ve değerlendirme", "Akademik kelimeler"),
+            sampleTerms = listOf(
+            ProfessionalTerm("assignment", "ödev", "Please submit your assignment tomorrow."),
+            ProfessionalTerm("grade", "not", "Your grade is available online."),
+            ProfessionalTerm("curriculum", "öğretim programı", "The curriculum includes language practice."),
+            ProfessionalTerm("explain", "açıklamak", "Can you explain the answer?")
+            )
         ),
         ProfessionalTrack(
             id = "automotive",
