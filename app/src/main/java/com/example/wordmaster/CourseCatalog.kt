@@ -84,18 +84,42 @@ data class DailyStudyPlan(
             date: String = java.time.LocalDate.now().toString()
         ): DailyStudyPlan {
             val safeTarget = targetMinutes.coerceIn(5, 120)
-            val available = WordMasterCourseCatalog.available(completedLessonIds, level)
             val chosen = mutableListOf<String>()
+            val targetLessons = WordMasterCourseCatalog.forLevel(level)
+                .filter { it.id !in completedLessonIds }
+
+            // If the selected level is blocked by earlier lessons, guide the learner
+            // to the missing prerequisites instead of showing an empty daily plan.
+            fun addPrerequisites(lesson: CourseLesson) {
+                lesson.prerequisiteIds.forEach { prerequisiteId ->
+                    if (prerequisiteId !in completedLessonIds && prerequisiteId !in chosen) {
+                        WordMasterCourseCatalog.find(prerequisiteId)?.let { prerequisite ->
+                            addPrerequisites(prerequisite)
+                            if (prerequisite.id !in completedLessonIds && prerequisite.id !in chosen) {
+                                chosen += prerequisite.id
+                            }
+                        }
+                    }
+                }
+            }
+            targetLessons.forEach(::addPrerequisites)
+
+            val eligibleTargetLessons = targetLessons.filter { lesson ->
+                lesson.prerequisiteIds.all { it in completedLessonIds || it in chosen }
+            }
+            val candidates = (chosen.toList() + eligibleTargetLessons.map { it.id }).distinct()
+            val selectedLessons = candidates.mapNotNull(WordMasterCourseCatalog::find)
+            val chosenForPlan = mutableListOf<String>()
             var minutes = 0
-            for (lesson in available) {
-                if (chosen.isNotEmpty() && minutes >= safeTarget) break
-                chosen += lesson.id
+            for (lesson in selectedLessons) {
+                if (chosenForPlan.isNotEmpty() && minutes >= safeTarget) break
+                chosenForPlan += lesson.id
                 minutes += lesson.estimatedMinutes
             }
             return DailyStudyPlan(
                 date = date,
                 targetMinutes = safeTarget,
-                lessonIds = chosen,
+                lessonIds = chosenForPlan,
                 reviewWords = dueWords.take(10).map { it.word }
             )
         }
