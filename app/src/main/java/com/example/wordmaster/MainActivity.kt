@@ -73,6 +73,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
     val appContext = LocalContext.current
+    val quickPracticeWords = remember(words) { words.filter { DictionaryEntryFilter.isQuickPracticeEntry(it.en, it.tr) }.ifEmpty { words.filter { it.en.length <= 22 && it.tr.length <= 48 } } }
     val learningStore = remember { LearningProgressStore(appContext) }
     var query by remember { mutableStateOf("") }
     var filterQuery by remember { mutableStateOf("") }
@@ -195,7 +196,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
             prefs.edit().putInt("dailyStreak", dailyStreak).putString("lastLoginDate", today).putInt("coins", coins).apply()
         }
     }
-    if (showPronunciation) PronunciationPracticeDialog(words = words, onDismiss = { showPronunciation = false })
+    if (showPronunciation) PronunciationPracticeDialog(words = quickPracticeWords, onDismiss = { showPronunciation = false })
 
     val learned = remember { mutableStateListOf<String>().apply { addAll(prefs.getStringSet("learned", emptySet()) ?: emptySet()) } }
     val favorites = remember { mutableStateListOf<String>().apply { addAll(prefs.getStringSet("favorites", emptySet()) ?: emptySet()) } }
@@ -358,7 +359,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                             }
                             Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                                 Card(Modifier.weight(1f), shape = RoundedCornerShape(20.dp), colors = CardDefaults.cardColors(containerColor = Color.White)) {
-                                    Column(Modifier.fillMaxWidth().clickable { showMatchGame = true; matchRound = 0; matched = emptySet(); selectedEnglish = null; matchWords = words.shuffled().take(5); matchTurkishOrder = matchWords.shuffled(); matchMessage = "İngilizce kelimeyi seç, sonra Türkçe karşılığını bul." }.padding(15.dp), verticalArrangement = Arrangement.spacedBy(7.dp)) {
+                                    Column(Modifier.fillMaxWidth().clickable { showMatchGame = true; matchRound = 0; matched = emptySet(); selectedEnglish = null; matchWords = quickPracticeWords.shuffled().take(5); matchTurkishOrder = matchWords.shuffled(); matchMessage = "İngilizce kelimeyi seç, sonra Türkçe karşılığını bul." }.padding(15.dp), verticalArrangement = Arrangement.spacedBy(7.dp)) {
                                         Text("🧩", fontSize = 25.sp)
                                         Text("Eşleştirme", color = Color(0xFF211D3A), fontWeight = FontWeight.Bold)
                                         Text("Hızlı oyun", color = Color(0xFF77738B), fontSize = 12.sp)
@@ -1372,7 +1373,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
             HorizontalDivider()
             Text("🎮 KELİME EŞLEŞTİRME", fontWeight = FontWeight.Bold)
             Button(onClick = {
-                matchWords = words.shuffled().take(4)
+                matchWords = quickPracticeWords.shuffled().take(4)
                 matchTurkishOrder = matchWords.shuffled()
                 matchRound++
                 matched = emptySet()
