@@ -22,6 +22,7 @@ fun ProfessionalCoursesScreen(onBackToLessons: () -> Unit) {
     var quizChecked by remember { mutableStateOf(false) }
     var quizScore by remember { mutableIntStateOf(0) }
     var trackSearch by remember { mutableStateOf("") }
+    var revealedLessonAnswers by remember { mutableStateOf(setOf<String>()) }
     val tracks = ProfessionalCourseCatalog.tracks
     val selectedTrack = tracks.firstOrNull { it.id == selectedTrackId }
     Column(Modifier.fillMaxWidth().background(Color(0xFFF7F5FF)).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
@@ -55,7 +56,7 @@ fun ProfessionalCoursesScreen(onBackToLessons: () -> Unit) {
             val visibleTracks = tracks.filter { it.title.contains(trackSearch, ignoreCase = true) || it.description.contains(trackSearch, ignoreCase = true) }
             if (visibleTracks.isEmpty()) Text("Bu aramayla eşleşen meslek bulunamadı.", color = Color(0xFF687086), fontSize = 13.sp)
             visibleTracks.forEach { track ->
-                Card(Modifier.fillMaxWidth().clickable { selectedTrackId = track.id; showAnswers = false; quizIndex = 0; quizAnswer = null; quizChecked = false; quizScore = 0 }, colors = CardDefaults.cardColors(containerColor = Color.White), shape = RoundedCornerShape(18.dp)) {
+                Card(Modifier.fillMaxWidth().clickable { selectedTrackId = track.id; showAnswers = false; revealedLessonAnswers = emptySet(); quizIndex = 0; quizAnswer = null; quizChecked = false; quizScore = 0 }, colors = CardDefaults.cardColors(containerColor = Color.White), shape = RoundedCornerShape(18.dp)) {
                     Row(Modifier.fillMaxWidth().padding(16.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                         Surface(color = Color(0xFFEDEAFF), shape = RoundedCornerShape(14.dp)) {
                             Text(when (track.id) {
@@ -99,6 +100,39 @@ fun ProfessionalCoursesScreen(onBackToLessons: () -> Unit) {
                         Row(verticalAlignment = Alignment.Top, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                             Surface(color = Color(0xFFE8E4FF), shape = RoundedCornerShape(8.dp)) { Text("${index + 1}", Modifier.padding(horizontal = 9.dp, vertical = 5.dp), color = Color(0xFF5943C5), fontWeight = FontWeight.Bold) }
                             Text(topic, color = Color(0xFF202044), fontSize = 14.sp, modifier = Modifier.padding(top = 4.dp))
+                        }
+                    }
+                }
+            }
+            if (selectedTrack.lessons.isNotEmpty()) {
+                Text("KONU ANLATIMLI DERSLER", color = Color(0xFF6957E8), fontSize = 11.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 1.sp)
+                Text("Her derste hedef, kısa anlatım, mesleki ifadeler ve kontrol sorusu bulunur.", color = Color(0xFF687086), fontSize = 13.sp, lineHeight = 18.sp)
+                selectedTrack.lessons.forEach { lesson ->
+                    Card(colors = CardDefaults.cardColors(containerColor = Color.White), shape = RoundedCornerShape(18.dp)) {
+                        Column(Modifier.fillMaxWidth().padding(16.dp), verticalArrangement = Arrangement.spacedBy(9.dp)) {
+                            Text(lesson.title, color = Color(0xFF202044), fontSize = 17.sp, fontWeight = FontWeight.ExtraBold)
+                            Text("BU DERSTE", color = Color(0xFF6957E8), fontSize = 10.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 1.sp)
+                            Text(lesson.objective, color = Color(0xFF30384B), fontSize = 13.sp, lineHeight = 18.sp)
+                            Text(lesson.explanation, color = Color(0xFF687086), fontSize = 13.sp, lineHeight = 19.sp)
+                            Divider(color = Color(0xFFECEAF4))
+                            lesson.phrases.forEach { (english, turkish) ->
+                                Column(verticalArrangement = Arrangement.spacedBy(3.dp)) {
+                                    Text(english, color = Color(0xFF202044), fontSize = 13.sp, fontWeight = FontWeight.SemiBold)
+                                    Text(turkish, color = Color(0xFF6957E8), fontSize = 12.sp)
+                                }
+                            }
+                            OutlinedButton(
+                                onClick = {
+                                    revealedLessonAnswers = if (lesson.id in revealedLessonAnswers) revealedLessonAnswers - lesson.id else revealedLessonAnswers + lesson.id
+                                },
+                                modifier = Modifier.fillMaxWidth()
+                            ) { Text(if (lesson.id in revealedLessonAnswers) "Yanıtı gizle" else "Kontrol sorusunu yanıtla") }
+                            Text(lesson.question, color = Color(0xFF202044), fontSize = 14.sp, fontWeight = FontWeight.Bold)
+                            if (lesson.id in revealedLessonAnswers) {
+                                Surface(color = Color(0xFFE7F7EF), shape = RoundedCornerShape(10.dp)) {
+                                    Text(lesson.answer, Modifier.fillMaxWidth().padding(11.dp), color = Color(0xFF245B46), fontSize = 12.sp, lineHeight = 18.sp)
+                                }
+                            }
                         }
                     }
                 }
