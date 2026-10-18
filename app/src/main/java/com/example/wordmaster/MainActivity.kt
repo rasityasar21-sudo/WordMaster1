@@ -383,7 +383,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                         (base + examples + examples.reversed() + examples).take(10)
                                     }
                                     val practice = practiceQuestions[practiceIndex.coerceIn(0, practiceQuestions.lastIndex)]
-                                    Text("ALIŞTIRMA • ${practiceIndex + 1}/${practiceQuestions.size}", color = Blue, fontWeight = FontWeight.ExtraBold, fontSize = 12.sp), color = Blue, fontWeight = FontWeight.ExtraBold, fontSize = 12.sp)
+                                    Text("ALIŞTIRMA • ${practiceIndex + 1}/${practiceQuestions.size}", color = Blue, fontWeight = FontWeight.ExtraBold, fontSize = 12.sp)
                                     Card(shape = RoundedCornerShape(24.dp), colors = CardDefaults.cardColors(containerColor = Color.White)) {
                                         Column(Modifier.fillMaxWidth().padding(20.dp), verticalArrangement = Arrangement.spacedBy(14.dp)) {
                                             Text("Soru ${practiceIndex + 1} / ${practiceQuestions.size}", fontSize = 13.sp, color = Color(0xFF68758E), fontWeight = FontWeight.Bold)
