@@ -748,6 +748,22 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                         }
                     }
                     }
+                if (currentScreen == "Dersler") {
+                    item {
+                        CourseCatalogSection(
+                            level = studyPlanLevel,
+                            completedIds = completedCourseIds,
+                            onLaunch = { courseLesson ->
+                                activeCourseLessonId = courseLesson.id
+                                activeLesson = courseLesson.title
+                                activeLessonIndex = 0
+                                lessonAnswer = false
+                                lessonStage = 0
+                                currentScreen = "Ders İçeriği"
+                            }
+                        )
+                    }
+                }
                 if (currentScreen == "Mesleki İngilizce") {
                     item { ProfessionalCoursesScreen(onBackToLessons = { currentScreen = "Dersler" }) }
                 }
