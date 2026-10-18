@@ -73,3 +73,13 @@ ProfessionalCourseCatalog.kt meslek kataloğunun ilk veri modelini ve uçak bak�
 - Son birim testlerinin ve APK derlemesinin başarıyla tamamlanması; APK ekranlarının cihazda kontrolü.
 
 Bu nedenle mevcut sürüm, tam mesleki ders kütüphanesi veya çalışan ödeme sistemi olarak kabul edilmemelidir. Kalan işler sırayla uygulanıp doğrulanacaktır.
+## Resmî kaynak başlangıç listesi
+- FAA, Aviation Handbooks & Manuals: https://www.faa.gov/regulations_policies/handbooks_manuals/aviation
+- FAA-H-8083-30B, Aviation Maintenance Technician Handbook — General (2023): https://www.faa.gov/regulationspolicies/handbooksmanuals/aviation/faa-h-8083-30b-aviation-maintenance-technician
+- FAA-H-8083-31B, Aviation Maintenance Technician Handbook — Airframe (2023): https://www.faa.gov/regulationspolicies/handbooksmanuals/aviation/faa-h-8083-31b-aviation-maintenance-technician
+- FAA-H-8083-32B, Aviation Maintenance Technician Handbook — Powerplant (2023): https://www.faa.gov/regulationspolicies/handbooksmanuals/aviation/faa-h-8083-32b-aviation-maintenance-technician
+- FAA, Aviation Mechanic General, Airframe, and Powerplant Airman Certification Standards: https://www.faa.gov/trainingtesting/aviation-mechanic-general-airframe-and-powerplant-airman-certification-standards
+- EASA, Part-66 — Maintenance certifying staff, AMC/GM (latest listed amendment must be rechecked before publishing): https://www.easa.europa.eu/en/acceptable-means-compliance-and-guidance-material-group/part-66-maintenance-certifying-staff
+- EASA, Easy Access Rules for Continuing Airworthiness (September 2025 revision): https://www.easa.europa.eu/en/document-library/easy-access-rules/online-publications/easy-access-rules-continuing-airworthiness
+
+Kaynaklar içerik planlama ve terminoloji kontrolü içindir. Uygulamaya kaynak metinleri topluca kopyalanmayacak; özgün öğretici açıklamalar yazılacak, kaynak sürümleri yayımdan önce tekrar kontrol edilecek.
