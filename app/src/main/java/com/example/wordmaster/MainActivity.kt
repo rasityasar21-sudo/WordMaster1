@@ -370,7 +370,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
             ) {
                 if (currentScreen == "Dersler") {
                     item {
-                        val dueCount = learningStore.dueForReview().size
+                        val dueCount = dueReviewWords.size
                         val todayProgress = (if (prefs.getString("todayWordsDate", "") == today) prefs.getInt("todayWords", 0) else 0).coerceAtMost(dailyGoal)
                         Column(verticalArrangement = Arrangement.spacedBy(14.dp)) {
                             Row(verticalAlignment = Alignment.CenterVertically) {
@@ -1370,8 +1370,15 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                     }
                                     val answerWasCorrect = choice.en == quizWord!!.en
                                     // Her cevap gerçek aralıklı tekrar kaydına yazılır; doğru/yanlış aralığı günceller.
-                                    learningStore.rateRecall(quizWord!!.en, if (answerWasCorrect) 4 else 1)
-                                    learningStore.recordStudyDay()
+                                    scope.launch {
+                                        val updatedDueWords = withContext(Dispatchers.IO) {
+                                            learningStore.rateRecall(quizWord!!.en, if (answerWasCorrect) 4 else 1)
+                                            learningStore.recordStudyDay()
+                                            learningStore.dueForReview()
+                                        }
+                                        dueReviewWords = updatedDueWords
+                                        dueReviewCount = updatedDueWords.size
+                                    }
                                     if (answerWasCorrect) {
                                         quizCorrect++
                                         sessionCorrect++
