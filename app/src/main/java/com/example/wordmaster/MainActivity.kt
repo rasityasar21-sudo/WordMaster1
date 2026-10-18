@@ -951,11 +951,9 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                         } else {
                             chosenLevel = onboardingChoice
                             selected = onboardingChoice
-                            dailyGoal = onboardingGoal.coerceIn(1, 100)
                             prefs.edit()
                                 .putString("chosenLevel", chosenLevel)
                                 .putInt("dailyGoalMinutes", onboardingGoal)
-                                .putInt("dailyGoal", onboardingGoal)
                                 .putString("onboardingReason", onboardingReason)
                                 .apply()
                             showOnboarding = false
