@@ -64,9 +64,17 @@ class ProfessionalCourseCatalogTest {
     @Test
     fun aircraftCourseContainsStructuredLessonsWithExamplesAndChecks() {
         val lessons = ProfessionalCourseCatalog.find("aviation-maintenance")!!.lessons
-        assertTrue(lessons.size >= 4)
+        assertTrue(lessons.size >= 7)
         assertEquals(lessons.size, lessons.map { it.id }.toSet().size)
         assertTrue(lessons.all { it.objective.isNotBlank() && it.explanation.isNotBlank() })
         assertTrue(lessons.all { it.phrases.size >= 3 && it.question.isNotBlank() && it.answer.isNotBlank() })
+    }
+
+    @Test
+    fun aircraftCourseIncludesMeasurementCorrosionAndHandoverLessons() {
+        val ids = ProfessionalCourseCatalog.find("aviation-maintenance")!!.lessons.map { it.id }
+        assertTrue("measurement-language" in ids)
+        assertTrue("corrosion-and-wear" in ids)
+        assertTrue("maintenance-handover" in ids)
     }
 }
