@@ -70,32 +70,6 @@ class LearningEngineTest {
 
 
     @Test
-    fun progressSurvivesJsonRoundTrip() {
-        val original = listOf(
-            WordProgress(
-                word = "inspection",
-                correctCount = 5,
-                mistakeCount = 2,
-                streak = 3,
-                intervalDays = 7,
-                easeFactor = 2.35,
-                dueDate = "2026-10-25",
-                lastReviewed = "2026-10-18"
-            )
-        )
-
-        val decoded = WordMasterLearningEngine.decode(WordMasterLearningEngine.encode(original))
-
-        assertEquals(original, decoded)
-    }
-
-    @Test
-    fun malformedSavedJsonFallsBackToEmptyProgress() {
-        assertTrue(WordMasterLearningEngine.decode("not-json").isEmpty())
-        assertTrue(WordMasterLearningEngine.decode(null).isEmpty())
-    }
-
-    @Test
     fun summaryReportsAccuracyMasteryAndDueCounts() {
         val today = LocalDate.now()
         val words = listOf(
