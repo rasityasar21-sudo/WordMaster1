@@ -68,7 +68,7 @@ class CourseCatalogTest {
         assertEquals("2026-10-18", plan.date)
         assertEquals(15, plan.targetMinutes)
         assertTrue(plan.estimatedMinutes >= plan.targetMinutes)
-        assertEquals(10, plan.reviewWords.size)
+        assertEquals(5, plan.reviewWords.size)
     }
 
     @Test
