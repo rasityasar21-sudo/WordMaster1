@@ -82,6 +82,17 @@ class ProfessionalCourseCatalogTest {
     }
 
     @Test
+    fun aircraftCourseIncludesFlightControlTermsWithUsefulExplanations() {
+        val terms = ProfessionalCourseCatalog.find("aviation-maintenance")!!.sampleTerms.associateBy { it.english }
+        assertTrue(terms.containsKey("aileron"))
+        assertTrue(terms.containsKey("flap"))
+        assertTrue(terms.containsKey("elevator"))
+        assertTrue(terms.containsKey("rudder"))
+        assertTrue(terms["aileron"]!!.note.contains("yatış"))
+        assertTrue(terms["flap"]!!.note.contains("kaldırmayı"))
+    }
+
+    @Test
     fun aircraftCourseIncludesMeasurementCorrosionAndHandoverLessons() {
         val ids = ProfessionalCourseCatalog.find("aviation-maintenance")!!.lessons.map { it.id }
         assertTrue("measurement-language" in ids)
