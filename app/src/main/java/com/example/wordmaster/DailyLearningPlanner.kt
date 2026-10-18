@@ -27,7 +27,9 @@ object DailyLearningPlanner {
         val eligible = catalog.filter { lesson ->
             lesson.level == level &&
                 lesson.id !in completed &&
-                lesson.prerequisiteIds.all { it in completed || (byId[it]?.level == level && it !in completed) }
+                lesson.prerequisiteIds.all { prerequisiteId ->
+                    prerequisiteId in completed || (byId[prerequisiteId]?.level?.let { levels.indexOf(it) < levels.indexOf(level) } == true)
+                }
         }.sortedWith(compareBy<CourseLesson> { it.category }.thenBy { it.estimatedMinutes }.thenBy { it.id })
 
         val selected = mutableListOf<CourseLesson>()
