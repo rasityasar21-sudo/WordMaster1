@@ -29,7 +29,7 @@ class DictionaryEntryFilterTest {
 
     @Test
     fun rejectsLikelyEnglishDefinitionAccidentallyStoredAsTurkish() {
-        val definition = "A device that is used to measure and record changes in pressure over time"
+        val definition = "A specialized device designed to measure, display, and record changes in air pressure during a long period of continuous operation"
         assertTrue(DictionaryEntryFilter.shouldExclude("barometer", definition))
     }
 }
