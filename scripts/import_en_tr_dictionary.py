@@ -32,7 +32,7 @@ def plain_text(raw):
     except Exception:
         text = re.sub(r"<[^>]+>", " ", raw)
     text = html.unescape(text)
-    return re.sub(r"\\s+", " ", text).strip()
+    return re.sub(r"\s+", " ", text).strip()
 
 def find_stardict(root):
     idxs = list(root.rglob("*.idx"))
@@ -54,7 +54,7 @@ def parse_index(idx_path, dict_path):
     invalid_ranges = 0
     cursor = 0
     while cursor < len(idx_bytes):
-        end = idx_bytes.find(b"\\0", cursor)
+        end = idx_bytes.find(b"\0", cursor)
         if end < 0 or end + 9 > len(idx_bytes):
             break
         word = idx_bytes[cursor:end].decode("utf-8", errors="replace").strip()
@@ -93,18 +93,18 @@ def main():
         if key:
             merged[key] = {**merged.get(key, {}), **item}
     result = sorted(merged.values(), key=lambda item: item.get("en", "").casefold())
-    OUT.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\\n", encoding="utf-8")
+    OUT.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     # Include the source's required attribution/license notices in the APK assets.
     notices = []
     for p in root.rglob("*"):
         if p.is_file() and p.name.lower() in {"license", "license.txt", "attribution", "attribution.txt", "readme.txt"}:
             try:
-                notices.append(f"--- {p.name} ---\\n" + p.read_text(encoding="utf-8", errors="replace"))
+                notices.append(f"--- {p.name} ---\n" + p.read_text(encoding="utf-8", errors="replace"))
             except OSError:
                 pass
     if notices:
         (ASSET.parent / "THIRD_PARTY_DICTIONARY_ATTRIBUTION.txt").write_text(
-            "Source: DanielGregorini/koreader-dicts, en-tr. Distributed under CC-BY-SA-4.0.\\n\\n" + "\\n\\n".join(notices),
+            "Source: DanielGregorini/koreader-dicts, en-tr. Distributed under CC-BY-SA-4.0.\n\n" + "\n\n".join(notices),
             encoding="utf-8"
         )
     print(f"Imported {len(imported)} source entries; bundled total after merge: {len(result)}")
