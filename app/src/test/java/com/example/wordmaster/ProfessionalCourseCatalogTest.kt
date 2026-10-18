@@ -30,4 +30,16 @@ class ProfessionalCourseCatalogTest {
         assertEquals(tracks.size, tracks.map { it.id }.toSet().size)
         assertTrue(tracks.all { it.title.isNotBlank() && it.topics.isNotEmpty() })
     }
+    @Test
+    fun aircraftCourseHasExpandedVocabularyAndTranslatedExamples() {
+        val track = ProfessionalCourseCatalog.find("aviation-maintenance")!!
+        assertTrue(track.sampleTerms.size >= 30)
+        assertTrue(track.sampleTerms.any { it.note.startsWith("Türkçesi:") })
+        assertTrue(track.topics.size >= 10)
+    }
+
+    @Test
+    fun everyProfessionHasStarterVocabularyForTheQuiz() {
+        assertTrue(ProfessionalCourseCatalog.tracks.all { it.sampleTerms.size >= 4 })
+    }
 }
