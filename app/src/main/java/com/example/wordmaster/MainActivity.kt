@@ -10,6 +10,7 @@ import java.io.File
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import java.util.Locale
+import java.util.UUID
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -146,6 +147,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
     var showSettings by remember { mutableStateOf(false) }
     var displayName by remember { mutableStateOf(prefs.getString("displayName", "Kelime Kaşifi") ?: "Kelime Kaşifi") }
     var username by remember { mutableStateOf(prefs.getString("username", "@kelimekasifi") ?: "@kelimekasifi") }
+    val userId = remember { prefs.getString("userId", null) ?: UUID.randomUUID().toString().replace("-", "").take(10).uppercase(Locale.ROOT).also { prefs.edit().putString("userId", it).apply() } }
     var nameDraft by remember { mutableStateOf(displayName) }
     var usernameDraft by remember { mutableStateOf(username) }
     var themeChoice by remember { mutableIntStateOf(prefs.getInt("themeChoice", 0)) }
@@ -826,6 +828,13 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                 }
             }
             Text("Seviye ${xp / 100 + 1}  •  ${xp} XP  •  ${dailyStreak} günlük seri", color = Blue, fontWeight = FontWeight.Bold)
+            Surface(Modifier.fillMaxWidth(), shape = RoundedCornerShape(14.dp), color = Color(0xFFF1EEFF)) {
+                Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                    Text("WORDMASTER ID", color = Color(0xFF6D5AE6), fontWeight = FontWeight.ExtraBold, fontSize = 11.sp, letterSpacing = 1.sp)
+                    Text(userId, color = Color(0xFF211D3A), fontWeight = FontWeight.Black, fontSize = 20.sp)
+                    Text("Bu cihazda oluşturulan profil kimliği. Arkadaş ekleme için çevrim içi hesap sunucusu henüz bağlı değil.", color = Color(0xFF77738B), fontSize = 11.sp, lineHeight = 16.sp)
+                }
+            }
             OutlinedTextField(value = nameDraft, onValueChange = { nameDraft = it.take(30) }, label = { Text("Görünen ad") }, singleLine = true)
             OutlinedTextField(value = usernameDraft, onValueChange = { usernameDraft = it.filter { c -> c.isLetterOrDigit() || c == '_' }.take(20).let { if (it.isBlank()) "" else "@$it" } }, label = { Text("Kullanıcı adı") }, supportingText = { Text("Harf, rakam ve _ kullanabilirsin.") }, singleLine = true)
             Text("📚 Öğrenilen: ${learned.size} kelime   ⭐ Favori: ${favorites.size}", color = Ink)
