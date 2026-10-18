@@ -691,6 +691,49 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                         Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                             Text("📚 Dersler", fontSize = 23.sp, fontWeight = FontWeight.ExtraBold, color = Navy)
                             Text("Bir seviye ve konu seç.", fontSize = 13.sp, color = Color(0xFF68758E))
+                            if (selected in listOf("A1", "A2", "B1", "B2", "C1")) {
+                                val levelProgress = CourseProgressStore.levelProgress(prefs, selected)
+                                val progressPercent = if (levelProgress.second > 0) levelProgress.first * 100 / levelProgress.second else 0
+                                val nextLesson = WordMasterCourseCatalog.nextRecommended(completedCourseIds, selected)
+                                Card(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    shape = RoundedCornerShape(20.dp),
+                                    colors = CardDefaults.cardColors(containerColor = Color.White)
+                                ) {
+                                    Column(Modifier.fillMaxWidth().padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                                        Row(verticalAlignment = Alignment.CenterVertically) {
+                                            Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(3.dp)) {
+                                                Text("$selected SEVİYE İLERLEMESİ", color = Blue, fontWeight = FontWeight.ExtraBold, fontSize = 11.sp, letterSpacing = 1.sp)
+                                                Text("${levelProgress.first} / ${levelProgress.second} ders tamamlandı", color = Navy, fontWeight = FontWeight.Bold, fontSize = 16.sp)
+                                            }
+                                            Text("$progressPercent%", color = Blue, fontWeight = FontWeight.ExtraBold, fontSize = 22.sp)
+                                        }
+                                        LinearProgressIndicator(
+                                            progress = { progressPercent / 100f },
+                                            modifier = Modifier.fillMaxWidth().height(7.dp),
+                                            color = Blue,
+                                            trackColor = PaleBlue
+                                        )
+                                        if (nextLesson != null) {
+                                            Text("Sıradaki öneri: ${nextLesson.title}", color = Color(0xFF68758E), fontSize = 12.sp)
+                                            Button(
+                                                onClick = {
+                                                    activeCourseLessonId = nextLesson.id
+                                                    activeLesson = nextLesson.title
+                                                    activeLessonIndex = 0
+                                                    lessonAnswer = false
+                                                    lessonStage = 0
+                                                    currentScreen = "Ders İçeriği"
+                                                },
+                                                modifier = Modifier.fillMaxWidth(),
+                                                shape = RoundedCornerShape(14.dp)
+                                            ) { Text("Önerilen derse başla  →") }
+                                        } else {
+                                            Text("Bu seviyedeki tüm katalog derslerini tamamladın. Harika ilerleme!", color = Color(0xFF16845D), fontSize = 13.sp, fontWeight = FontWeight.SemiBold)
+                                        }
+                                    }
+                                }
+                            }
                             Row(
                                 Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()),
                                 horizontalArrangement = Arrangement.spacedBy(8.dp)
