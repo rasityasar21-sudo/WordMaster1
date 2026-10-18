@@ -362,50 +362,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                             }
                                             Text("Dinledikten sonra aşağıdaki alıştırmada doğru cevabı seç.", color = Color.White, fontWeight = FontWeight.SemiBold)
                                             Spacer(Modifier.height(8.dp))
-                                            Text("GERÇEK KAYIT • KAFEDE SİPARİŞ", color = Color(0xFFBDB4FF), fontWeight = FontWeight.Bold)
-                                            Text("Bu örnek, Oxford Online English tarafından yayımlanan insan sesli kafe diyaloğudur. Ses çevrimiçi oynatılır; bu sürümde çevrimdışı değildir.", color = Color(0xFFE5E2FF), fontSize = 13.sp, lineHeight = 19.sp)
-                                            var cafeAudioStatus by remember { mutableStateOf("Hazır") }
-                                            var cafeAudioPlayer by remember { mutableStateOf<MediaPlayer?>(null) }
-                                            DisposableEffect(Unit) {
-                                                onDispose { cafeAudioPlayer?.release(); cafeAudioPlayer = null }
-                                            }
-                                            Button(onClick = {
-                                                try {
-                                                    cafeAudioPlayer?.release()
-                                                    cafeAudioStatus = "Ses yükleniyor…"
-                                                    val player = MediaPlayer()
-                                                    cafeAudioPlayer = player
-                                                    val offlineAudio = File(context.getExternalFilesDir(Environment.DIRECTORY_MUSIC), "wordmaster_cafe_dialogue.mp3")
-                                                    player.setDataSource(if (offlineAudio.exists() && offlineAudio.length() > 0L) offlineAudio.absolutePath else "https://www.oxfordonlineenglish.com/wp-content/uploads/2021/09/Ordering-at-a-Coffee-Shop-full.mp3")
-                                                    player.setOnPreparedListener { it.start(); cafeAudioStatus = "Çalıyor" }
-                                                    player.setOnCompletionListener { cafeAudioStatus = "Bitti" }
-                                                    player.setOnErrorListener { _, _, _ -> cafeAudioStatus = "Ses açılamadı. İnternet bağlantını kontrol et."; true }
-                                                    player.prepareAsync()
-                                                } catch (_: Exception) {
-                                                    cafeAudioStatus = "Ses açılamadı. İnternet bağlantını kontrol et."
-                                                }
-                                            }, modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(14.dp)) {
-                                                Text("▶ Gerçek diyaloğu oynat")
-                                            }
-                                            Text(cafeAudioStatus, color = Color(0xFFE5E2FF), fontSize = 12.sp)
-                                            Text("Dinleme sorusu: Kadın hangi içeceği sipariş ediyor?", color = Color.White, fontWeight = FontWeight.Bold)
-                                            var cafeAnswer by remember { mutableStateOf("") }
-                                            listOf("A tea" to "A tea", "A latte" to "A latte", "A juice" to "A juice").forEach { option ->
-                                                OutlinedButton(
-                                                    onClick = { cafeAnswer = option.first },
-                                                    modifier = Modifier.fillMaxWidth(),
-                                                    colors = ButtonDefaults.outlinedButtonColors(
-                                                        containerColor = if (cafeAnswer == option.first) Color(0xFF3B365B) else Color.Transparent
-                                                    )
-                                                ) { Text(option.second, color = Color.White) }
-                                            }
-                                            if (cafeAnswer.isNotBlank()) {
-                                                Text(
-                                                    if (cafeAnswer == "A latte") "Doğru! Kadın latte istiyor. ✓" else "Tekrar dinle: doğru cevap A latte.",
-                                                    color = if (cafeAnswer == "A latte") Color(0xFF86EFAC) else Color(0xFFFCD34D),
-                                                    fontWeight = FontWeight.Bold
-                                                )
-                                            }
+                                            Text("Bu dinleme bölümünde yukarıdaki konuşmayı dinleyip cümleleri kontrol edebilirsin.", color = Color(0xFFE5E2FF), fontSize = 13.sp, lineHeight = 19.sp)
                                         }
                                     }
                                     Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
@@ -414,24 +371,45 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                     }
                                 }
                                 else -> {
-                                    Text("ALIŞTIRMA", color = Blue, fontWeight = FontWeight.ExtraBold, fontSize = 12.sp)
+                                    var practiceIndex by remember(activeLesson) { mutableIntStateOf(0) }
+                                    var practiceCorrect by remember(activeLesson) { mutableIntStateOf(0) }
+                                    var practiceChoice by remember(activeLesson) { mutableStateOf("") }
+                                    var practiceFeedback by remember(activeLesson) { mutableStateOf("") }
+                                    val practiceQuestions = remember(lesson) {
+                                        val base = listOf(lesson.question to lesson.options to lesson.correct).map { Triple(it.first.first, it.first.second, it.second) }
+                                        val examples = lesson.examples.map { pair ->
+                                            Triple("“${pair.first}” cümlesinin Türkçe karşılığı nedir?", lesson.examples.map { it.second }.distinct().shuffled(), pair.second)
+                                        }
+                                        (base + examples + examples.reversed() + examples).take(10)
+                                    }
+                                    val practice = practiceQuestions[practiceIndex.coerceIn(0, practiceQuestions.lastIndex)]
+                                    Text("ALIŞTIRMA • ${practiceIndex + 1}/${practiceQuestions.size}", color = Blue, fontWeight = FontWeight.ExtraBold, fontSize = 12.sp), color = Blue, fontWeight = FontWeight.ExtraBold, fontSize = 12.sp)
                                     Card(shape = RoundedCornerShape(24.dp), colors = CardDefaults.cardColors(containerColor = Color.White)) {
                                         Column(Modifier.fillMaxWidth().padding(20.dp), verticalArrangement = Arrangement.spacedBy(14.dp)) {
-                                            Text("Boşluğu doldur", fontSize = 21.sp, fontWeight = FontWeight.ExtraBold, color = Ink)
-                                            Text(lesson.question, fontSize = 18.sp, lineHeight = 26.sp, color = Ink)
-                                            lesson.options.forEach { option ->
+                                            Text("Soru ${practiceIndex + 1} / ${practiceQuestions.size}", fontSize = 13.sp, color = Color(0xFF68758E), fontWeight = FontWeight.Bold)
+                                            LinearProgressIndicator(progress = { (practiceIndex + 1) / practiceQuestions.size.toFloat() }, modifier = Modifier.fillMaxWidth(), color = Blue)
+                                            Text(if (practiceIndex == 0) "Boşluğu doldur" else "Anlamı veya doğru kullanımı seç", fontSize = 21.sp, fontWeight = FontWeight.ExtraBold, color = Ink)
+                                            Text(practice.first, fontSize = 18.sp, lineHeight = 26.sp, color = Ink)
+                                            practice.second.shuffled().forEach { option ->
                                                 OutlinedButton(
-                                                    onClick = { lessonChoice = option; lessonAnswer = option == lesson.correct },
+                                                    onClick = {
+                                                        practiceChoice = option
+                                                        val correct = option == practice.third
+                                                        practiceFeedback = if (correct) "Doğru cevap! ✓" else "Tekrar dene."
+                                                        if (correct) practiceCorrect = (practiceCorrect + 1).coerceAtMost(practiceQuestions.size)
+                                                        lessonChoice = if (correct) lesson.correct else option
+                                                        lessonAnswer = correct
+                                                    },
                                                     modifier = Modifier.fillMaxWidth(),
                                                     shape = RoundedCornerShape(14.dp),
-                                                    colors = ButtonDefaults.outlinedButtonColors(containerColor = if (lessonChoice == option && lessonAnswer) Mint else Color.White)
+                                                    colors = ButtonDefaults.outlinedButtonColors(containerColor = if (practiceChoice == option && option == practice.third) Mint else Color.White)
                                                 ) { Text(option, modifier = Modifier.padding(4.dp)) }
                                             }
-                                            if (lessonChoice.isNotBlank()) Text(if (lessonAnswer) "Doğru cevap! ✓" else "Tekrar dene; konu anlatımındaki kuralı hatırla.", color = if (lessonAnswer) Color(0xFF16845D) else Color(0xFFB45309), fontWeight = FontWeight.Bold)
+                                            if (practiceFeedback.isNotBlank()) Text(practiceFeedback, color = if (practiceChoice == practice.third) Color(0xFF16845D) else Color(0xFFB45309), fontWeight = FontWeight.Bold)
+                                            Text("Doğru cevaplanan soru: $practiceCorrect / ${practiceQuestions.size}", color = Color(0xFF68758E), fontSize = 13.sp)
                                             HorizontalDivider()
-                                            Text("Video sonrası kontrol", fontWeight = FontWeight.Bold)
+                                            Text("Dinleme / konu kontrolü", fontWeight = FontWeight.Bold)
                                             Text(lesson.videoQuestion, fontSize = 16.sp, lineHeight = 24.sp)
-                                            Text("Not: YouTube videosu konuya göre aranır; bu soru dersin dil bilgisi hedefini de kontrol eder.", color = Color(0xFF68758E), fontSize = 12.sp)
                                         }
                                     }
                                     Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
