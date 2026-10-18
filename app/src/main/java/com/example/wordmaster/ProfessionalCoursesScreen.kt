@@ -50,10 +50,10 @@ fun ProfessionalCoursesScreen(onBackToLessons: () -> Unit) {
                 Text("‹", color = Color(0xFF5943C5), fontSize = 32.sp, fontWeight = FontWeight.Bold)
             }
             Column(Modifier.weight(1f)) {
-                Text("WORDMASTER PREMIUM", color = Color(0xFF6957E8), fontSize = 11.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 1.4.sp)
+                Text("WORDMASTER • CAREER ENGLISH", color = Color(0xFF6957E8), fontSize = 11.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 1.4.sp)
                 Text("Mesleki İngilizce", color = Color(0xFF202044), fontSize = 27.sp, fontWeight = FontWeight.ExtraBold)
             }
-            Surface(color = Color(0xFFE8E4FF), shape = RoundedCornerShape(14.dp)) { Text("✦ PREMIUM", Modifier.padding(horizontal = 10.dp, vertical = 8.dp), color = Color(0xFF5943C5), fontWeight = FontWeight.Bold, fontSize = 11.sp) }
+            Surface(color = Color(0xFFE8E4FF), shape = RoundedCornerShape(14.dp)) { Text("UZMANLIK YOLU", Modifier.padding(horizontal = 10.dp, vertical = 8.dp), color = Color(0xFF5943C5), fontWeight = FontWeight.Bold, fontSize = 11.sp) }
         }
         Text("Mesleğine özel terimler, teknik okuma ve örnek cümlelerle İngilizceni geliştir.", color = Color(0xFF687086), fontSize = 14.sp, lineHeight = 20.sp)
         if (selectedTrack == null) {
@@ -97,7 +97,7 @@ fun ProfessionalCoursesScreen(onBackToLessons: () -> Unit) {
                         }
                         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(5.dp)) {
                             Text(track.title, color = Color(0xFF202044), fontWeight = FontWeight.Bold, fontSize = 16.sp)
-                            Text(track.description, color = Color(0xFF687086), fontSize = 12.sp, lineHeight = 17.sp)
+                            Text(track.description, color = Color(0xFF687086), fontSize = 12.sp, lineHeight = 17.sp, maxLines = 2, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis)
                             Row(horizontalArrangement = Arrangement.spacedBy(6.dp), verticalAlignment = Alignment.CenterVertically) {
                                 Surface(color = Color(0xFFF0EDFF), shape = RoundedCornerShape(7.dp)) { Text("${track.topics.size} konu", Modifier.padding(horizontal = 8.dp, vertical = 4.dp), color = Color(0xFF5943C5), fontSize = 10.sp, fontWeight = FontWeight.Bold) }
                                 if (track.sampleTerms.isNotEmpty()) Surface(color = Color(0xFFE7F7EF), shape = RoundedCornerShape(7.dp)) { Text("${track.sampleTerms.size} terim", Modifier.padding(horizontal = 8.dp, vertical = 4.dp), color = Color(0xFF18794E), fontSize = 10.sp, fontWeight = FontWeight.Bold) }
