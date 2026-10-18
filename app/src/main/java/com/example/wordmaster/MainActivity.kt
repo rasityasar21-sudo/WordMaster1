@@ -626,10 +626,14 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                             val key = "${selected}_${activeLessonIndex}_${activeLesson}"
                                             val done = (prefs.getStringSet("completedLessons", emptySet()) ?: emptySet()) + key
                                             prefs.edit().putStringSet("completedLessons", done).apply()
-                                            activeCourseLessonId?.let { courseId ->
+                                            val completedCourseId = activeCourseLessonId
+                                            completedCourseId?.let { courseId ->
                                                 completedCourseIds = CourseProgressStore.markCompleted(prefs, courseId)
                                             }
-                                            CourseProgressStore.addStudyMinutes(prefs, 10)
+                                            val minutesToRecord = completedCourseId
+                                                ?.let { WordMasterCourseCatalog.find(it)?.estimatedMinutes }
+                                                ?: 10
+                                            CourseProgressStore.addStudyMinutes(prefs, minutesToRecord)
                                             activeCourseLessonId = null
                                             currentScreen = "Dersler"
                                             lessonStage = 0
