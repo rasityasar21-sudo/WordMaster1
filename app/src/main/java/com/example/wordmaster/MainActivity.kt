@@ -40,8 +40,8 @@ import org.json.JSONArray
 data class Word(val en: String, val tr: String, val level: String, val example: String = "")
 
 private val Navy = Color(0xFF202044)
-private val Blue = Color(0xFF6957E8)
-private val PaleBlue = Color(0xFFF0EDFF)
+private val Blue = Color(0xFFC62828)
+private val PaleBlue = Color(0xFFFDECEC)
 private val Mint = Color(0xFFE1F8F0)
 private val Ink = Color(0xFF172033)
 
@@ -184,8 +184,8 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
             date = today
         )
     }
-    val pageBackground = when (themeChoice) { 1 -> Color(0xFFEAF8F3); 2 -> Color(0xFFFFF1E5); else -> Color(0xFFF7F5FF) } 
-    val heroBrush = when (themeChoice) { 1 -> Brush.linearGradient(listOf(Color(0xFF075E54), Color(0xFF16A085))); 2 -> Brush.linearGradient(listOf(Color(0xFF7C2D12), Color(0xFFF59E0B))); else -> Brush.linearGradient(listOf(Color(0xFF4F46E5), Color(0xFF9333EA), Color(0xFFEC4899))) }
+    val pageBackground = when (themeChoice) { 1 -> Color(0xFFEAF8F3); 2 -> Color(0xFFFFF1E5); else -> Color(0xFFFFF5F5) } 
+    val heroBrush = when (themeChoice) { 1 -> Brush.linearGradient(listOf(Color(0xFF075E54), Color(0xFF16A085))); 2 -> Brush.linearGradient(listOf(Color(0xFF7C2D12), Color(0xFFF59E0B))); else -> Brush.linearGradient(listOf(Color(0xFF991B1B), Color(0xFFDC2626), Color(0xFFFB7185))) }
     LaunchedEffect(today) {
         if (lastLoginDate != today) {
             dailyStreak = if (lastLoginDate == LocalDate.now().minusDays(1).toString()) dailyStreak + 1 else 1
@@ -319,7 +319,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                         Column(verticalArrangement = Arrangement.spacedBy(14.dp)) {
                             Row(verticalAlignment = Alignment.CenterVertically) {
                                 Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(3.dp)) {
-                                    Text("WORDMASTER", color = Color(0xFF6D5AE6), fontSize = 12.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 2.sp)
+                                    Text("WORDMASTER", color = Color(0xFFB91C1C), fontSize = 12.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 2.sp)
                                     Text("Merhaba, $displayName 👋", color = Color(0xFF17152B), fontSize = 25.sp, fontWeight = FontWeight.ExtraBold)
                                     Text("Bugün küçük bir adım, yarın büyük ilerleme.", color = Color(0xFF77738B), fontSize = 13.sp)
                                 }
@@ -362,7 +362,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                         onClick = { placementMode = false; quizMode = "İngilizce → Türkçe"; startQuiz(); sessionAnswered = 0; sessionCorrect = 0; sessionActive = true; currentScreen = "Sınav" },
                                         modifier = Modifier.fillMaxWidth(),
                                         shape = RoundedCornerShape(16.dp),
-                                        colors = ButtonDefaults.buttonColors(containerColor = Color.White, contentColor = Color(0xFF4F46E5))
+                                        colors = ButtonDefaults.buttonColors(containerColor = Color.White, contentColor = Color(0xFFB91C1C))
                                     ) {
                                         Text("Öğrenmeye başla  →", fontWeight = FontWeight.ExtraBold, modifier = Modifier.padding(vertical = 5.dp))
                                     }
@@ -404,7 +404,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                 Column(Modifier.fillMaxWidth().padding(18.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
                                     Row(verticalAlignment = Alignment.CenterVertically) {
                                         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(3.dp)) {
-                                            Text("ÖĞRENME ÖZETİ", color = Color(0xFF6D5AE6), fontSize = 11.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 1.3.sp)
+                                            Text("ÖĞRENME ÖZETİ", color = Color(0xFFB91C1C), fontSize = 11.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 1.3.sp)
                                             Text("İlerlemen tek yerde", color = Color(0xFF211D3A), fontSize = 18.sp, fontWeight = FontWeight.ExtraBold)
                                         }
                                         Text("📊", fontSize = 28.sp)
@@ -453,7 +453,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                 Column(Modifier.fillMaxWidth().padding(18.dp), verticalArrangement = Arrangement.spacedBy(13.dp)) {
                                     Row(verticalAlignment = Alignment.CenterVertically) {
                                         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(3.dp)) {
-                                            Text("GÜNLÜK GÖREVLER", color = Color(0xFF6D5AE6), fontSize = 11.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 1.3.sp)
+                                            Text("GÜNLÜK GÖREVLER", color = Color(0xFFB91C1C), fontSize = 11.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 1.3.sp)
                                             Text("Bugünün küçük kazanımları", color = Color(0xFF211D3A), fontSize = 18.sp, fontWeight = FontWeight.ExtraBold)
                                         }
                                         Text("🎯", fontSize = 28.sp)
@@ -492,7 +492,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                 Column(Modifier.fillMaxWidth().padding(18.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
                                     Row(verticalAlignment = Alignment.CenterVertically) {
                                         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(3.dp)) {
-                                            Text("KİŞİSEL ÇALIŞMA PLANI", color = Color(0xFF6D5AE6), fontSize = 11.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 1.2.sp)
+                                            Text("KİŞİSEL ÇALIŞMA PLANI", color = Color(0xFFB91C1C), fontSize = 11.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 1.2.sp)
                                             Text("${studyPlan.targetMinutes} dakikalık rota", color = Navy, fontSize = 19.sp, fontWeight = FontWeight.ExtraBold)
                                         }
                                         Text("🗺️", fontSize = 28.sp)
@@ -1075,7 +1075,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                 Box(
                     Modifier.fillMaxWidth().height(112.dp)
                         .background(
-                            Brush.linearGradient(listOf(Color(0xFF4F46E5), Color(0xFF9333EA), Color(0xFFEC4899))),
+                            Brush.linearGradient(listOf(Color(0xFFB91C1C), Color(0xFFDC2626), Color(0xFFEC4899))),
                             RoundedCornerShape(22.dp)
                         ),
                     contentAlignment = Alignment.Center
@@ -1166,7 +1166,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
             Text("Seviye ${xp / 100 + 1}  •  ${xp} XP  •  ${dailyStreak} günlük seri", color = Blue, fontWeight = FontWeight.Bold)
             Surface(Modifier.fillMaxWidth(), shape = RoundedCornerShape(14.dp), color = Color(0xFFF1EEFF)) {
                 Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                    Text("WORDMASTER ID", color = Color(0xFF6D5AE6), fontWeight = FontWeight.ExtraBold, fontSize = 11.sp, letterSpacing = 1.sp)
+                    Text("WORDMASTER ID", color = Color(0xFFB91C1C), fontWeight = FontWeight.ExtraBold, fontSize = 11.sp, letterSpacing = 1.sp)
                     Text(userId, color = Color(0xFF211D3A), fontWeight = FontWeight.Black, fontSize = 20.sp)
                     Text("Bu cihazdaki profil kimliğin. Kullanıcı adı uygunluğu ve arkadaş ekleme için çevrim içi hesap sunucusu henüz bağlı değil.", color = Color(0xFF77738B), fontSize = 11.sp, lineHeight = 16.sp)
                 }
@@ -1214,7 +1214,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
         title = { Text("Görünüm ve ayarlar ⚙️", fontWeight = FontWeight.ExtraBold) },
         text = { Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
             Text("Uygulama teması", fontWeight = FontWeight.Bold)
-            listOf("Mor-pembe gün batımı", "Zümrüt yeşili", "Sıcak gün batımı").forEachIndexed { index, label ->
+            listOf("Kırmızı premium", "Zümrüt yeşili", "Sıcak gün batımı").forEachIndexed { index, label ->
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     RadioButton(selected = themeChoice == index, onClick = { themeChoice = index; prefs.edit().putInt("themeChoice", index).apply() })
                     Text(label)
