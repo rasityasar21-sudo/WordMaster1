@@ -199,12 +199,22 @@ object ProfessionalCourseCatalog {
             titleEnglish = "Healthcare English",
             description = "Hasta iletişimi, temel tıbbi terimler ve klinik ortamda İngilizce.",
             topics = listOf("Hasta karşılama", "Belirti ve şikâyetler", "Tıbbi terimler", "Hasta güvenliği"),
-            lessons = listOf(ProfessionalLesson("patient-communication", "Hasta iletişiminin temelleri", "Nazik ve açık sorularla temel bilgi istemek.", "Sağlık ortamında kısa, açık ve saygılı cümleler kullanılır. Öğrenme örnekleri gerçek klinik karar veya tanı yerine geçmez.", listOf("How are you feeling today?" to "Bugün nasıl hissediyorsunuz?", "When did the symptoms start?" to "Belirtiler ne zaman başladı?", "Could you please repeat that?" to "Lütfen tekrar edebilir misiniz?"), "Hasta bir ifadeyi anlamadığında ne yapılmalı?", "Nazikçe tekrar etmesi istenmeli; bilgi tahmin edilmemelidir.")),
+            lessons = listOf(
+                ProfessionalLesson("patient-communication", "Hasta iletişiminin temelleri", "Nazik ve açık sorularla temel bilgi istemek.", "Sağlık ortamında kısa, açık ve saygılı cümleler kullanılır. Öğrenme örnekleri gerçek klinik karar veya tanı yerine geçmez.", listOf("How are you feeling today?" to "Bugün nasıl hissediyorsunuz?", "When did the symptoms start?" to "Belirtiler ne zaman başladı?", "Could you please repeat that?" to "Lütfen tekrar edebilir misiniz?"), "Hasta bir ifadeyi anlamadığında ne yapılmalı?", "Nazikçe tekrar etmesi istenmeli; bilgi tahmin edilmemelidir."),
+                ProfessionalLesson("patient-history", "Belirti ve öykü hakkında soru sorma", "Zamanı ve belirtiyi tarafsız sorularla öğrenmek.", "Sorular kısa ve anlaşılır olmalı; hastanın kendi ifadeleri mümkün olduğunca doğru aktarılmalıdır. Bilinmeyen bilgiler varsayımla tamamlanmamalıdır.", listOf("When did the pain begin?" to "Ağrı ne zaman başladı?", "Does anything make it better or worse?" to "Herhangi bir şey ağrıyı artırıyor veya azaltıyor mu?", "Are you taking any medication?" to "Herhangi bir ilaç kullanıyor musunuz?"), "Yanıt bilinmiyorsa nasıl kayıt tutulmalı?", "Bilinmeyen bilgi uydurulmamalı; uygun biçimde bilinmediği belirtilmelidir."),
+                ProfessionalLesson("patient-instructions", "Açık ve nazik talimatlar", "Basit yönergeleri anlaşılır İngilizceyle ifade etmek.", "Talimatlar tek tek ve açık verilir; hastanın anladığını teyit etmek için geri anlatım istenebilir. Dil pratiği klinik protokolün yerini tutmaz.", listOf("Please sit here." to "Lütfen buraya oturun.", "Take a slow, deep breath." to "Yavaşça derin bir nefes alın.", "Could you tell me what you understood?" to "Ne anladığınızı söyleyebilir misiniz?"), "Anlaşılırlığı kontrol etmek için ne yapılabilir?", "Kişiden talimatı kendi sözleriyle tekrar anlatması nazikçe istenebilir.")
+            ),
             sampleTerms = listOf(
             ProfessionalTerm("symptom", "belirti", "Tell me about your symptoms."),
             ProfessionalTerm("appointment", "randevu", "Your appointment is at ten o’clock."),
             ProfessionalTerm("patient", "hasta", "The patient is waiting in the room."),
-            ProfessionalTerm("recovery", "iyileşme", "The patient is making a good recovery.")
+            ProfessionalTerm("recovery", "iyileşme", "The patient is making a good recovery."),
+            ProfessionalTerm("medical history", "tıbbi öykü", "Please tell me about your medical history."),
+            ProfessionalTerm("allergy", "alerji", "Do you have any known allergies?"),
+            ProfessionalTerm("prescription", "reçete", "Please bring your prescription."),
+            ProfessionalTerm("follow-up", "kontrol randevusu / takip", "A follow-up appointment has been scheduled."),
+            ProfessionalTerm("consent", "onam", "Please explain the form before asking for consent."),
+            ProfessionalTerm("vital signs", "yaşam bulguları", "The nurse records the vital signs.")
             )
         ),
         ProfessionalTrack(
