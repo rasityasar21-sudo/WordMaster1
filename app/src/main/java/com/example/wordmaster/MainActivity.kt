@@ -134,9 +134,6 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
         }
     }
     val learningStore = remember { LearningProgressStore(appContext) }
-    LaunchedEffect(learningStore) {
-        dueReviewCount = withContext(Dispatchers.IO) { learningStore.dueForReview().size }
-    }
     var query by remember { mutableStateOf("") }
     var filterQuery by remember { mutableStateOf("") }
     LaunchedEffect(query) {
@@ -183,6 +180,9 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
     var quizWord by remember { mutableStateOf<Word?>(null) }
     var quizLoading by remember { mutableStateOf(false) }
     var dueReviewCount by remember { mutableIntStateOf(0) }
+    LaunchedEffect(learningStore) {
+        dueReviewCount = withContext(Dispatchers.IO) { learningStore.dueForReview().size }
+    }
     var quizChoices by remember { mutableStateOf<List<Word>>(emptyList()) }
     var quizMessage by remember { mutableStateOf<String?>(null) }
     var quizCount by remember { mutableIntStateOf(0) }
