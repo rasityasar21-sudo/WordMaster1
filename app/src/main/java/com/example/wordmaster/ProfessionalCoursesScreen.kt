@@ -1,5 +1,7 @@
 package com.example.wordmaster
 
+import android.content.Context
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -24,6 +26,11 @@ fun ProfessionalCoursesScreen(onBackToLessons: () -> Unit) {
     var missedTerms by remember { mutableStateOf(listOf<String>()) }
     var trackSearch by remember { mutableStateOf("") }
     var revealedLessonAnswers by remember { mutableStateOf(setOf<String>()) }
+    val context = LocalContext.current
+    val prefs = remember(context) { context.getSharedPreferences("wordmaster", Context.MODE_PRIVATE) }
+    var completedProfessionalLessons by remember {
+        mutableStateOf(prefs.getStringSet("professionalCompletedLessons", emptySet())?.toSet() ?: emptySet())
+    }
     val tracks = ProfessionalCourseCatalog.tracks
     val selectedTrack = tracks.firstOrNull { it.id == selectedTrackId }
     Column(Modifier.fillMaxWidth().background(Color(0xFFF7F5FF)).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
@@ -91,6 +98,23 @@ fun ProfessionalCoursesScreen(onBackToLessons: () -> Unit) {
             TextButton(onClick = { selectedTrackId = null; showAnswers = false }) { Text("← Meslek kataloğuna dön") }
             Text(selectedTrack!!.title, color = Color(0xFF202044), fontSize = 23.sp, fontWeight = FontWeight.ExtraBold)
             Text(selectedTrack.description, color = Color(0xFF687086), fontSize = 14.sp, lineHeight = 20.sp)
+            if (selectedTrack.lessons.isNotEmpty()) {
+                val trackLessonIds = selectedTrack.lessons.map { "${selectedTrack.id}:${it.id}" }
+                val completedInTrack = trackLessonIds.count { it in completedProfessionalLessons }
+                Card(colors = CardDefaults.cardColors(containerColor = Color.White), shape = RoundedCornerShape(16.dp)) {
+                    Column(Modifier.fillMaxWidth().padding(14.dp), verticalArrangement = Arrangement.spacedBy(7.dp)) {
+                        Text("KURS İLERLEMEN", color = Color(0xFF6957E8), fontSize = 11.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 0.8.sp)
+                        Text("$completedInTrack / ${selectedTrack.lessons.size} ders tamamlandı", color = Color(0xFF202044), fontWeight = FontWeight.Bold)
+                        LinearProgressIndicator(
+                            progress = { completedInTrack.toFloat() / selectedTrack.lessons.size.coerceAtLeast(1) },
+                            modifier = Modifier.fillMaxWidth(),
+                            color = Color(0xFF319B73),
+                            trackColor = Color(0xFFE8E4FF)
+                        )
+                        Text("İlerlemen bu cihazda saklanır.", color = Color(0xFF687086), fontSize = 11.sp)
+                    }
+                }
+            }
             Surface(color = Color(0xFFE7F7EF), shape = RoundedCornerShape(12.dp)) {
                 Text(if (selectedTrack.id == "aviation-maintenance") "Önemli: Bu kurs İngilizce öğrenimi içindir. Gerçek bakım işlemlerinde güncel, onaylı bakım dokümanları ve yetkili prosedürler esas alınmalıdır." else "Öğrenme yolu: konu başlıklarını incele, terimleri örnek cümlelerle öğren ve mini testle kendini kontrol et.", Modifier.fillMaxWidth().padding(12.dp), color = Color(0xFF245B46), fontSize = 12.sp, lineHeight = 17.sp)
             }
@@ -111,7 +135,16 @@ fun ProfessionalCoursesScreen(onBackToLessons: () -> Unit) {
                 selectedTrack.lessons.forEach { lesson ->
                     Card(colors = CardDefaults.cardColors(containerColor = Color.White), shape = RoundedCornerShape(18.dp)) {
                         Column(Modifier.fillMaxWidth().padding(16.dp), verticalArrangement = Arrangement.spacedBy(9.dp)) {
-                            Text(lesson.title, color = Color(0xFF202044), fontSize = 17.sp, fontWeight = FontWeight.ExtraBold)
+                            val progressId = "${selectedTrack.id}:${lesson.id}"
+                            val isLessonCompleted = progressId in completedProfessionalLessons
+                            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                                Text(lesson.title, modifier = Modifier.weight(1f), color = Color(0xFF202044), fontSize = 17.sp, fontWeight = FontWeight.ExtraBold)
+                                if (isLessonCompleted) {
+                                    Surface(color = Color(0xFFE7F7EF), shape = RoundedCornerShape(8.dp)) {
+                                        Text("✓ Tamamlandı", Modifier.padding(horizontal = 8.dp, vertical = 5.dp), color = Color(0xFF18794E), fontSize = 10.sp, fontWeight = FontWeight.Bold)
+                                    }
+                                }
+                            }
                             Text("BU DERSTE", color = Color(0xFF6957E8), fontSize = 10.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 1.sp)
                             Text(lesson.objective, color = Color(0xFF30384B), fontSize = 13.sp, lineHeight = 18.sp)
                             Text(lesson.explanation, color = Color(0xFF687086), fontSize = 13.sp, lineHeight = 19.sp)
@@ -133,6 +166,19 @@ fun ProfessionalCoursesScreen(onBackToLessons: () -> Unit) {
                                 Surface(color = Color(0xFFE7F7EF), shape = RoundedCornerShape(10.dp)) {
                                     Text(lesson.answer, Modifier.fillMaxWidth().padding(11.dp), color = Color(0xFF245B46), fontSize = 12.sp, lineHeight = 18.sp)
                                 }
+                            }
+                            OutlinedButton(
+                                onClick = {
+                                    completedProfessionalLessons = if (isLessonCompleted) {
+                                        completedProfessionalLessons - progressId
+                                    } else {
+                                        completedProfessionalLessons + progressId
+                                    }
+                                    prefs.edit().putStringSet("professionalCompletedLessons", completedProfessionalLessons).apply()
+                                },
+                                modifier = Modifier.fillMaxWidth()
+                            ) {
+                                Text(if (isLessonCompleted) "Tamamlandı olarak işaretlendi · geri al" else "Dersi tamamlandı olarak işaretle")
                             }
                         }
                     }
