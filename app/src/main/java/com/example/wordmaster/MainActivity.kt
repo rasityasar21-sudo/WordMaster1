@@ -214,13 +214,14 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
         if (words.size < 4 || quizLoading) return
         val isPlacement = placementMode
         val selectedLevel = onboardingChoice
-        val dueSet = if (isPlacement) emptySet() else learningStore.dueForReview().map { it.word }.toSet()
         val reviewSet = reviewWords.toSet()
         quizWord = null
         quizLoading = true
         quizMessage = null
         scope.launch {
             val result = withContext(Dispatchers.Default) {
+                // Progress-store reads and large vocabulary filtering stay off the UI thread.
+                val dueSet = if (isPlacement) emptySet() else learningStore.dueForReview().map { it.word }.toSet()
                 val levels = listOf("A1", "A2", "B1", "B2", "C1")
                 val pool = if (isPlacement) {
                     val preferred = words.filter { it.level == selectedLevel }
