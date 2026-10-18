@@ -224,31 +224,8 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
             }
         }
         val target = pool.randomOrNull() ?: words.randomOrNull() ?: return
-        // Avoid shuffling the entire large dictionary on the main thread: that made
-        // the placement quiz appear frozen on phones with tens of thousands of entries.
-        val choices = linkedMapOf<String, Word>()
-        choices[target.en] = target
-        repeat(3) {
-            var candidate: Word? = null
-            var attemptsForChoice = 0
-            while (candidate == null && attemptsForChoice < 100) {
-                val sampled = words.randomOrNull()
-                if (sampled != null && sampled.en != target.en && sampled.en !in choices.keys) {
-                    candidate = sampled
-                }
-                attemptsForChoice++
-            }
-            if (candidate == null) {
-                candidate = words.firstOrNull { it.en != target.en && it.en !in choices.keys }
-            }
-            if (candidate != null) choices[candidate.en] = candidate
-        }
-        var attempts = 0
-        while (choices.size < minOf(4, words.distinctBy { it.en }.size) && attempts < 40) {
-            val candidate = words.randomOrNull()
-            if (candidate != null) choices[candidate.en] = candidate
-            attempts++
-        }
+        // Prefer same-level distractors with different Turkish meanings to avoid ambiguous questions.
+        val choices = QuizChoiceSelector.select(target, words, count = 4)
         quizWord = target
         quizChoices = choices.values.shuffled()
         quizMessage = null
