@@ -145,9 +145,11 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
     var showPronunciation by remember { mutableStateOf(false) }
     var showProfile by remember { mutableStateOf(false) }
     var showSettings by remember { mutableStateOf(false) }
-    var displayName by remember { mutableStateOf(prefs.getString("displayName", "Kelime Kaşifi") ?: "Kelime Kaşifi") }
-    var username by remember { mutableStateOf(prefs.getString("username", "@kelimekasifi") ?: "@kelimekasifi") }
     val userId = remember { prefs.getString("userId", null) ?: UUID.randomUUID().toString().replace("-", "").take(10).uppercase(Locale.ROOT).also { prefs.edit().putString("userId", it).apply() } }
+    val defaultUsername = "kasif" + userId.lowercase(Locale.ROOT).takeLast(6)
+    var displayName by remember { mutableStateOf(prefs.getString("displayName", "Kelime Kaşifi") ?: "Kelime Kaşifi") }
+    var username by remember { mutableStateOf(prefs.getString("username", "@$defaultUsername") ?: "@$defaultUsername") }
+    var profileError by remember { mutableStateOf<String?>(null) }
     var nameDraft by remember { mutableStateOf(displayName) }
     var usernameDraft by remember { mutableStateOf(username) }
     var themeChoice by remember { mutableIntStateOf(prefs.getInt("themeChoice", 0)) }
@@ -832,21 +834,27 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                 Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                     Text("WORDMASTER ID", color = Color(0xFF6D5AE6), fontWeight = FontWeight.ExtraBold, fontSize = 11.sp, letterSpacing = 1.sp)
                     Text(userId, color = Color(0xFF211D3A), fontWeight = FontWeight.Black, fontSize = 20.sp)
-                    Text("Bu cihazda oluşturulan profil kimliği. Arkadaş ekleme için çevrim içi hesap sunucusu henüz bağlı değil.", color = Color(0xFF77738B), fontSize = 11.sp, lineHeight = 16.sp)
+                    Text("Bu cihazdaki profil kimliğin. Kullanıcı adı uygunluğu ve arkadaş ekleme için çevrim içi hesap sunucusu henüz bağlı değil.", color = Color(0xFF77738B), fontSize = 11.sp, lineHeight = 16.sp)
                 }
             }
             OutlinedTextField(value = nameDraft, onValueChange = { nameDraft = it.take(30) }, label = { Text("Görünen ad") }, singleLine = true)
-            OutlinedTextField(value = usernameDraft, onValueChange = { usernameDraft = it.filter { c -> c.isLetterOrDigit() || c == '_' }.take(20).let { if (it.isBlank()) "" else "@$it" } }, label = { Text("Kullanıcı adı") }, supportingText = { Text("Harf, rakam ve _ kullanabilirsin.") }, singleLine = true)
+            OutlinedTextField(value = usernameDraft, onValueChange = { value -> usernameDraft = value.removePrefix("@").filter { ch -> ch.isLetterOrDigit() || ch == '_' }.take(20).let { clean -> if (clean.isBlank()) "" else "@$clean" }; profileError = null }, label = { Text("Kullanıcı adı") }, supportingText = { Text("3-20 karakter; harf, rakam ve _ kullan.") }, singleLine = true)
+            profileError?.let { Text(it, color = MaterialTheme.colorScheme.error, fontSize = 12.sp) }
             Text("📚 Öğrenilen: ${learned.size} kelime   ⭐ Favori: ${favorites.size}", color = Ink)
             Text("📖 Tamamlanan ders: ${CourseProgressStore.completedCount(prefs)}", color = Ink)
             Text("⏱️ Günlük çalışma: ${CourseProgressStore.studyMinutes(prefs)} / ${CourseProgressStore.dailyGoalMinutes(prefs)} dakika", color = Ink)
             Text("🏆 En iyi seri: $bestCorrectStreak   🎯 Test doğrusu: $totalCorrect", color = Ink)
         } },
         confirmButton = { TextButton(onClick = {
-            displayName = nameDraft.trim().ifBlank { "Kelime Kaşifi" }
-            username = usernameDraft.trim().ifBlank { "@kelimekasifi" }
-            prefs.edit().putString("displayName", displayName).putString("username", username).apply()
-            showProfile = false
+            val cleanUsername = usernameDraft.trim().removePrefix("@")
+            if (cleanUsername.length !in 3..20 || !cleanUsername.matches(Regex("[A-Za-z0-9_]+"))) {
+                profileError = "Kullanıcı adı 3-20 karakter olmalı; İngilizce harf, rakam ve _ kullan."
+            } else {
+                displayName = nameDraft.trim().ifBlank { "Kelime Kaşifi" }
+                username = "@$cleanUsername"
+                prefs.edit().putString("displayName", displayName).putString("username", username).apply()
+                showProfile = false
+            }
         }) { Text("Kaydet") } },
         dismissButton = { TextButton(onClick = { showProfile = false }) { Text("Vazgeç") } }
     )
