@@ -160,6 +160,7 @@ object ProfessionalCourseCatalog {
             titleEnglish = "Healthcare English",
             description = "Hasta iletişimi, temel tıbbi terimler ve klinik ortamda İngilizce.",
             topics = listOf("Hasta karşılama", "Belirti ve şikâyetler", "Tıbbi terimler", "Hasta güvenliği"),
+            lessons = listOf(ProfessionalLesson("patient-communication", "Hasta iletişiminin temelleri", "Nazik ve açık sorularla temel bilgi istemek.", "Sağlık ortamında kısa, açık ve saygılı cümleler kullanılır. Öğrenme örnekleri gerçek klinik karar veya tanı yerine geçmez.", listOf("How are you feeling today?" to "Bugün nasıl hissediyorsunuz?", "When did the symptoms start?" to "Belirtiler ne zaman başladı?", "Could you please repeat that?" to "Lütfen tekrar edebilir misiniz?"), "Hasta bir ifadeyi anlamadığında ne yapılmalı?", "Nazikçe tekrar etmesi istenmeli; bilgi tahmin edilmemelidir.")),
             sampleTerms = listOf(
             ProfessionalTerm("symptom", "belirti", "Tell me about your symptoms."),
             ProfessionalTerm("appointment", "randevu", "Your appointment is at ten o’clock."),
@@ -173,6 +174,7 @@ object ProfessionalCourseCatalog {
             titleEnglish = "Software and IT English",
             description = "Teknik dokümantasyon, yazılım ekipleri ve hata raporları için İngilizce.",
             topics = listOf("Programlama terimleri", "Hata raporlama", "Teknik doküman okuma", "Toplantı ve kod inceleme"),
+            lessons = listOf(ProfessionalLesson("bug-reporting", "Hata raporu yazma", "Sorunu yeniden üretilebilir biçimde anlatmak.", "İyi bir hata raporu beklenen davranışı, gerçekleşen davranışı, tekrar adımlarını ve ilgili ortamı belirtir. Gizli anahtarlar veya kişisel veriler rapora eklenmemelidir.", listOf("The issue occurs when I sign in." to "Sorun oturum açarken oluşuyor.", "Steps to reproduce are listed below." to "Yeniden oluşturma adımları aşağıda listelenmiştir.", "The expected result is..." to "Beklenen sonuç ... şeklindedir."), "Hata raporunda hangi iki davranış karşılaştırılmalıdır?", "Beklenen davranış ile gerçekleşen davranış.")),
             sampleTerms = listOf(
             ProfessionalTerm("bug", "yazılım hatası", "We found a bug in the application."),
             ProfessionalTerm("deploy", "yayına almak", "We will deploy the update tonight."),
@@ -186,6 +188,7 @@ object ProfessionalCourseCatalog {
             titleEnglish = "Engineering English",
             description = "Teknik çizimler, ölçüler, süreçler ve mühendislik raporları.",
             topics = listOf("Teknik çizimler", "Ölçüm ve toleranslar", "Malzeme ve üretim", "Teknik raporlama"),
+            lessons = listOf(ProfessionalLesson("engineering-specs", "Teknik şartname okuma", "Ölçü, birim ve tolerans ifadelerini ayırt etmek.", "Teknik raporlarda ölçüm birimini ve kabul sınırını birlikte belirtmek gerekir. Bir değerin uygun olup olmadığı, ilgili çizim veya şartnamedeki gerekliliklere göre değerlendirilir.", listOf("The part is within tolerance." to "Parça tolerans sınırları içindedir.", "Record the measured value." to "Ölçülen değeri kaydedin.", "Refer to the drawing for dimensions." to "Boyutlar için teknik çizime başvurun."), "Bir ölçüm raporunda sayısal değerle birlikte ne belirtilmelidir?", "Ölçü birimi ve karşılaştırılacağı ilgili şartname/tolerans.")),
             sampleTerms = listOf(
             ProfessionalTerm("measurement", "ölçüm", "Record the measurement in the report."),
             ProfessionalTerm("tolerance", "tolerans", "The part is within the specified tolerance."),
@@ -199,6 +202,7 @@ object ProfessionalCourseCatalog {
             titleEnglish = "Business English",
             description = "E-posta, toplantı, sunum ve profesyonel iletişim.",
             topics = listOf("Profesyonel e-posta", "Toplantılar", "Sunumlar", "Müşteri iletişimi"),
+            lessons = listOf(ProfessionalLesson("business-email", "Profesyonel e-posta yazımı", "Kısa, nazik ve amacı açık e-posta yazmak.", "İyi bir iş e-postası konu satırı, kısa bağlam, net istek ve uygun kapanış içerir. Alıcıdan beklenen eylem ve son tarih gerekiyorsa açıkça belirtilmelidir.", listOf("I am writing to follow up on..." to "...konusunu takip etmek için yazıyorum.", "Could you please confirm receipt?" to "Aldığınızı teyit edebilir misiniz?", "Thank you for your time." to "Zaman ayırdığınız için teşekkür ederim."), "İş e-postasında isteğin anlaşılır olması için ne yapılmalı?", "İstenen eylem ve gerekiyorsa son tarih açıkça yazılmalı.")),
             sampleTerms = listOf(
             ProfessionalTerm("deadline", "son teslim tarihi", "The deadline is Friday."),
             ProfessionalTerm("meeting", "toplantı", "The meeting starts at nine."),
@@ -212,6 +216,7 @@ object ProfessionalCourseCatalog {
             titleEnglish = "Hospitality English",
             description = "Misafir karşılama, rezervasyon ve hizmet iletişimi.",
             topics = listOf("Misafir karşılama", "Rezervasyon", "Şikâyet çözme", "Yön tarif etme"),
+            lessons = listOf(ProfessionalLesson("guest-service", "Misafir talebini karşılama", "Kibarca bilgi almak ve çözüm seçeneklerini anlatmak.", "Hizmet dilinde sakin bir ton, teyit soruları ve gerçekçi beklentiler önemlidir. Yapılamayacak bir işlem için kesin söz vermek yerine uygun ekipten destek istenmelidir.", listOf("How may I help you?" to "Size nasıl yardımcı olabilirim?", "Let me check that for you." to "Sizin için kontrol edeyim.", "I apologize for the inconvenience." to "Yaşanan aksaklık için özür dilerim."), "Bir isteği hemen çözemiyorsan nasıl yanıt vermek uygundur?", "Kontrol edeceğini söylemek ve gerçekçi bir sonraki adım sunmak.")),
             sampleTerms = listOf(
             ProfessionalTerm("reservation", "rezervasyon", "I would like to confirm my reservation."),
             ProfessionalTerm("guest", "misafir", "The guest needs an extra towel."),
@@ -225,6 +230,7 @@ object ProfessionalCourseCatalog {
             titleEnglish = "Logistics English",
             description = "Sevkiyat, depo, teslimat ve tedarik zinciri terminolojisi.",
             topics = listOf("Sevkiyat belgeleri", "Depo işlemleri", "Teslimat durumları", "Tedarik zinciri"),
+            lessons = listOf(ProfessionalLesson("shipment-status", "Sevkiyat durumunu bildirme", "Durum, gecikme ve tahmini varış bilgisini net ifade etmek.", "Lojistik iletişiminde gönderi numarası, güncel durum ve tahmini tarih birbirinden ayrılmalıdır. Kesinleşmemiş teslimat tarihi garanti gibi sunulmamalıdır.", listOf("The shipment is in transit." to "Sevkiyat yolda.", "The delivery has been delayed." to "Teslimat gecikti.", "The estimated arrival date is..." to "Tahmini varış tarihi ..."), "Tahmini varış tarihi kesin teslimat garantisi midir?", "Hayır; tahmini bilgidir ve güncel durumla birlikte belirtilmelidir.")),
             sampleTerms = listOf(
             ProfessionalTerm("shipment", "sevkiyat", "The shipment will arrive tomorrow."),
             ProfessionalTerm("warehouse", "depo", "The goods are stored in the warehouse."),
@@ -238,6 +244,7 @@ object ProfessionalCourseCatalog {
             titleEnglish = "Legal English",
             description = "Hukuki metinleri ve profesyonel yazışmaları anlamaya yönelik dil çalışmaları.",
             topics = listOf("Hukuki terimler", "Sözleşmeler", "Resmî yazışma", "Metin okuma"),
+            lessons = listOf(ProfessionalLesson("contract-language", "Sözleşme dilini anlama", "Taraf, yükümlülük ve madde ifadelerini ayırt etmek.", "Hukuki İngilizcede shall, may ve must gibi ifadelerin anlamı bağlama ve belgeye göre değişebilir. Öğrenme örnekleri hukuki tavsiye değildir; gerçek belgeler uzman tarafından değerlendirilmelidir.", listOf("The parties agree to..." to "Taraflar ... konusunda anlaşır.", "This clause applies to..." to "Bu madde ... için geçerlidir.", "The agreement takes effect on..." to "Anlaşma ... tarihinde yürürlüğe girer."), "Gerçek bir sözleşmenin anlamı yalnızca tek bir kelimeye bakılarak kesinleştirilebilir mi?", "Hayır; tüm bağlam ve ilgili hukuk dikkate alınmalıdır.")),
             sampleTerms = listOf(
             ProfessionalTerm("agreement", "anlaşma", "Both parties signed the agreement."),
             ProfessionalTerm("clause", "madde", "Read the clause carefully."),
@@ -251,6 +258,7 @@ object ProfessionalCourseCatalog {
             titleEnglish = "Education English",
             description = "Sınıf içi iletişim, eğitim terminolojisi ve akademik beceriler.",
             topics = listOf("Sınıf dili", "Ders anlatımı", "Ölçme ve değerlendirme", "Akademik kelimeler"),
+            lessons = listOf(ProfessionalLesson("classroom-instructions", "Sınıf içi yönergeler", "Talimat ve açıklamaları basit İngilizceyle ifade etmek.", "Eğitim ortamında kısa yönergeler, kontrol soruları ve anlaşılmayı doğrulama ifadeleri kullanılır. Öğrenciden anlamadığında soru sorması istenebilir.", listOf("Please work in pairs." to "Lütfen ikili çalışın.", "Can you explain your answer?" to "Cevabını açıklayabilir misin?", "Do you have any questions?" to "Sorunuz var mı?"), "Bir yönergenin anlaşıldığını nasıl kontrol edebilirsin?", "Öğrenciden kendi sözleriyle açıklamasını istemek veya kısa kontrol sorusu sormak.")),
             sampleTerms = listOf(
             ProfessionalTerm("assignment", "ödev", "Please submit your assignment tomorrow."),
             ProfessionalTerm("grade", "not", "Your grade is available online."),
@@ -264,6 +272,7 @@ object ProfessionalCourseCatalog {
             titleEnglish = "Automotive English",
             description = "Araç sistemleri, servis iletişimi ve teknik arıza açıklamaları.",
             topics = listOf("Araç parçaları", "Servis kabul", "Arıza tanımlama", "Bakım kayıtları"),
+            lessons = listOf(ProfessionalLesson("vehicle-complaint", "Araç şikâyetini tarif etme", "Müşteri bildirimini açık ve tarafsız kaydetmek.", "Servis kabulünde müşterinin bildirdiği belirti ile teknisyenin kontrol sonucu ayrı tutulur. Ses, zaman, koşul ve gösterge uyarıları net biçimde sorulup kaydedilmelidir.", listOf("When did the noise start?" to "Ses ne zaman başladı?", "The warning light is on." to "Uyarı ışığı yanıyor.", "The customer reports a vibration." to "Müşteri titreşim olduğunu bildiriyor."), "Müşteri bildirimi ile doğrulanmış teknik bulgu neden ayrı yazılır?", "Bildirilen şikâyet ile kontrol sonucu birbirine karıştırılmamalıdır.")),
             sampleTerms = listOf(
             ProfessionalTerm("brake", "fren", "The mechanic inspected the brakes."),
             ProfessionalTerm("engine", "motor", "The engine needs an inspection."),
