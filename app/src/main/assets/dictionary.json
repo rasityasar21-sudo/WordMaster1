@@ -5197,5 +5197,2279 @@
     "en": "snake",
     "tr": "yılan",
     "level": "B2"
+  },
+  {
+    "en": "absence",
+    "tr": "yokluk",
+    "level": "B2",
+    "example": "The word \"absence\" is used in context."
+  },
+  {
+    "en": "absolute",
+    "tr": "mutlak",
+    "level": "B2",
+    "example": "The word \"absolute\" is used in context."
+  },
+  {
+    "en": "academic",
+    "tr": "akademik",
+    "level": "B2",
+    "example": "The word \"academic\" is used in context."
+  },
+  {
+    "en": "accompany",
+    "tr": "eşlik etmek",
+    "level": "B1",
+    "example": "The word \"accompany\" is used in context."
+  },
+  {
+    "en": "acknowledge",
+    "tr": "kabul etmek; belirtmek",
+    "level": "B2",
+    "example": "The word \"acknowledge\" is used in context."
+  },
+  {
+    "en": "acquire",
+    "tr": "edinmek",
+    "level": "B2",
+    "example": "The word \"acquire\" is used in context."
+  },
+  {
+    "en": "adequate",
+    "tr": "yeterli",
+    "level": "B2",
+    "example": "The word \"adequate\" is used in context."
+  },
+  {
+    "en": "adjust",
+    "tr": "ayarlamak; uyum sağlamak",
+    "level": "B1",
+    "example": "The word \"adjust\" is used in context."
+  },
+  {
+    "en": "administration",
+    "tr": "yönetim",
+    "level": "B2",
+    "example": "The word \"administration\" is used in context."
+  },
+  {
+    "en": "admire",
+    "tr": "hayran olmak",
+    "level": "B1",
+    "example": "The word \"admire\" is used in context."
+  },
+  {
+    "en": "admission",
+    "tr": "kabul; giriş",
+    "level": "B2",
+    "example": "The word \"admission\" is used in context."
+  },
+  {
+    "en": "adopt",
+    "tr": "benimsemek; evlat edinmek",
+    "level": "B1",
+    "example": "The word \"adopt\" is used in context."
+  },
+  {
+    "en": "advance",
+    "tr": "ilerlemek; ilerleme",
+    "level": "B1",
+    "example": "The word \"advance\" is used in context."
+  },
+  {
+    "en": "advocate",
+    "tr": "savunmak; savunucu",
+    "level": "C1",
+    "example": "The word \"advocate\" is used in context."
+  },
+  {
+    "en": "affair",
+    "tr": "mesele; ilişki",
+    "level": "B2",
+    "example": "The word \"affair\" is used in context."
+  },
+  {
+    "en": "affect",
+    "tr": "etkilemek",
+    "level": "B1",
+    "example": "The word \"affect\" is used in context."
+  },
+  {
+    "en": "affordable",
+    "tr": "karşılanabilir fiyatlı",
+    "level": "B1",
+    "example": "The word \"affordable\" is used in context."
+  },
+  {
+    "en": "agenda",
+    "tr": "gündem",
+    "level": "B2",
+    "example": "The word \"agenda\" is used in context."
+  },
+  {
+    "en": "aggressive",
+    "tr": "saldırgan",
+    "level": "B2",
+    "example": "The word \"aggressive\" is used in context."
+  },
+  {
+    "en": "agriculture",
+    "tr": "tarım",
+    "level": "B1",
+    "example": "The word \"agriculture\" is used in context."
+  },
+  {
+    "en": "aid",
+    "tr": "yardım",
+    "level": "B1",
+    "example": "The word \"aid\" is used in context."
+  },
+  {
+    "en": "aim",
+    "tr": "amaç; hedeflemek",
+    "level": "A2",
+    "example": "The word \"aim\" is used in context."
+  },
+  {
+    "en": "alarm",
+    "tr": "alarm; telaşlandırmak",
+    "level": "A2",
+    "example": "The word \"alarm\" is used in context."
+  },
+  {
+    "en": "alter",
+    "tr": "değiştirmek",
+    "level": "B2",
+    "example": "The word \"alter\" is used in context."
+  },
+  {
+    "en": "ambition",
+    "tr": "hırs; hedef",
+    "level": "B2",
+    "example": "The word \"ambition\" is used in context."
+  },
+  {
+    "en": "analysis",
+    "tr": "analiz",
+    "level": "B2",
+    "example": "The word \"analysis\" is used in context."
+  },
+  {
+    "en": "ancestor",
+    "tr": "ata",
+    "level": "B2",
+    "example": "The word \"ancestor\" is used in context."
+  },
+  {
+    "en": "annual",
+    "tr": "yıllık",
+    "level": "B1",
+    "example": "The word \"annual\" is used in context."
+  },
+  {
+    "en": "anxiety",
+    "tr": "kaygı",
+    "level": "B2",
+    "example": "The word \"anxiety\" is used in context."
+  },
+  {
+    "en": "apparent",
+    "tr": "açık; görünür",
+    "level": "B2",
+    "example": "The word \"apparent\" is used in context."
+  },
+  {
+    "en": "appeal",
+    "tr": "çekicilik; başvurmak",
+    "level": "B2",
+    "example": "The word \"appeal\" is used in context."
+  },
+  {
+    "en": "applicant",
+    "tr": "başvuran kişi",
+    "level": "B2",
+    "example": "The word \"applicant\" is used in context."
+  },
+  {
+    "en": "appropriate",
+    "tr": "uygun",
+    "level": "B1",
+    "example": "The word \"appropriate\" is used in context."
+  },
+  {
+    "en": "approval",
+    "tr": "onay",
+    "level": "B2",
+    "example": "The word \"approval\" is used in context."
+  },
+  {
+    "en": "arise",
+    "tr": "ortaya çıkmak",
+    "level": "B2",
+    "example": "The word \"arise\" is used in context."
+  },
+  {
+    "en": "armed",
+    "tr": "silahlı",
+    "level": "B2",
+    "example": "The word \"armed\" is used in context."
+  },
+  {
+    "en": "arrangement",
+    "tr": "düzenleme",
+    "level": "B1",
+    "example": "The word \"arrangement\" is used in context."
+  },
+  {
+    "en": "artificial",
+    "tr": "yapay",
+    "level": "B1",
+    "example": "The word \"artificial\" is used in context."
+  },
+  {
+    "en": "aspect",
+    "tr": "yön; açı",
+    "level": "B2",
+    "example": "The word \"aspect\" is used in context."
+  },
+  {
+    "en": "assemble",
+    "tr": "bir araya getirmek",
+    "level": "B2",
+    "example": "The word \"assemble\" is used in context."
+  },
+  {
+    "en": "assess",
+    "tr": "değerlendirmek",
+    "level": "B2",
+    "example": "The word \"assess\" is used in context."
+  },
+  {
+    "en": "assessment",
+    "tr": "değerlendirme",
+    "level": "B2",
+    "example": "The word \"assessment\" is used in context."
+  },
+  {
+    "en": "assignment",
+    "tr": "ödev; görev",
+    "level": "B1",
+    "example": "The word \"assignment\" is used in context."
+  },
+  {
+    "en": "assistance",
+    "tr": "yardım",
+    "level": "B1",
+    "example": "The word \"assistance\" is used in context."
+  },
+  {
+    "en": "assumption",
+    "tr": "varsayım",
+    "level": "B2",
+    "example": "The word \"assumption\" is used in context."
+  },
+  {
+    "en": "assure",
+    "tr": "güvence vermek",
+    "level": "B2",
+    "example": "The word \"assure\" is used in context."
+  },
+  {
+    "en": "atmosphere",
+    "tr": "atmosfer; ortam",
+    "level": "B1",
+    "example": "The word \"atmosphere\" is used in context."
+  },
+  {
+    "en": "attach",
+    "tr": "eklemek; iliştirmek",
+    "level": "A2",
+    "example": "The word \"attach\" is used in context."
+  },
+  {
+    "en": "attain",
+    "tr": "ulaşmak; elde etmek",
+    "level": "C1",
+    "example": "The word \"attain\" is used in context."
+  },
+  {
+    "en": "attempt",
+    "tr": "girişim; denemek",
+    "level": "B1",
+    "example": "The word \"attempt\" is used in context."
+  },
+  {
+    "en": "attitude",
+    "tr": "tutum",
+    "level": "B1",
+    "example": "The word \"attitude\" is used in context."
+  },
+  {
+    "en": "authority",
+    "tr": "yetki; otorite",
+    "level": "B2",
+    "example": "The word \"authority\" is used in context."
+  },
+  {
+    "en": "automatic",
+    "tr": "otomatik",
+    "level": "A2",
+    "example": "The word \"automatic\" is used in context."
+  },
+  {
+    "en": "available",
+    "tr": "mevcut; uygun",
+    "level": "A2",
+    "example": "The word \"available\" is used in context."
+  },
+  {
+    "en": "awareness",
+    "tr": "farkındalık",
+    "level": "B2",
+    "example": "The word \"awareness\" is used in context."
+  },
+  {
+    "en": "awkward",
+    "tr": "garip; beceriksiz",
+    "level": "B2",
+    "example": "The word \"awkward\" is used in context."
+  },
+  {
+    "en": "backup",
+    "tr": "yedek; yedekleme",
+    "level": "B1",
+    "example": "The word \"backup\" is used in context."
+  },
+  {
+    "en": "bacteria",
+    "tr": "bakteriler",
+    "level": "B1",
+    "example": "The word \"bacteria\" is used in context."
+  },
+  {
+    "en": "barrier",
+    "tr": "engel",
+    "level": "B2",
+    "example": "The word \"barrier\" is used in context."
+  },
+  {
+    "en": "beneficial",
+    "tr": "yararlı",
+    "level": "B2",
+    "example": "The word \"beneficial\" is used in context."
+  },
+  {
+    "en": "bias",
+    "tr": "önyargı; yanlılık",
+    "level": "C1",
+    "example": "The word \"bias\" is used in context."
+  },
+  {
+    "en": "biology",
+    "tr": "biyoloji",
+    "level": "A2",
+    "example": "The word \"biology\" is used in context."
+  },
+  {
+    "en": "boundary",
+    "tr": "sınır",
+    "level": "B2",
+    "example": "The word \"boundary\" is used in context."
+  },
+  {
+    "en": "briefly",
+    "tr": "kısaca",
+    "level": "B1",
+    "example": "The word \"briefly\" is used in context."
+  },
+  {
+    "en": "broad",
+    "tr": "geniş; kapsamlı",
+    "level": "B1",
+    "example": "The word \"broad\" is used in context."
+  },
+  {
+    "en": "capacity",
+    "tr": "kapasite; yetenek",
+    "level": "B2",
+    "example": "The word \"capacity\" is used in context."
+  },
+  {
+    "en": "capture",
+    "tr": "yakalamak; ele geçirmek",
+    "level": "B1",
+    "example": "The word \"capture\" is used in context."
+  },
+  {
+    "en": "category",
+    "tr": "kategori",
+    "level": "A2",
+    "example": "The word \"category\" is used in context."
+  },
+  {
+    "en": "cease",
+    "tr": "sona ermek; durdurmak",
+    "level": "C1",
+    "example": "The word \"cease\" is used in context."
+  },
+  {
+    "en": "civilization",
+    "tr": "medeniyet",
+    "level": "B1",
+    "example": "The word \"civilization\" is used in context."
+  },
+  {
+    "en": "clarify",
+    "tr": "açıklığa kavuşturmak",
+    "level": "B2",
+    "example": "The word \"clarify\" is used in context."
+  },
+  {
+    "en": "classic",
+    "tr": "klasik",
+    "level": "A2",
+    "example": "The word \"classic\" is used in context."
+  },
+  {
+    "en": "classify",
+    "tr": "sınıflandırmak",
+    "level": "B2",
+    "example": "The word \"classify\" is used in context."
+  },
+  {
+    "en": "clinical",
+    "tr": "klinik",
+    "level": "B2",
+    "example": "The word \"clinical\" is used in context."
+  },
+  {
+    "en": "code",
+    "tr": "kod; kodlamak",
+    "level": "A2",
+    "example": "The word \"code\" is used in context."
+  },
+  {
+    "en": "coincidence",
+    "tr": "tesadüf",
+    "level": "B2",
+    "example": "The word \"coincidence\" is used in context."
+  },
+  {
+    "en": "collapse",
+    "tr": "çökmek; çöküş",
+    "level": "B2",
+    "example": "The word \"collapse\" is used in context."
+  },
+  {
+    "en": "colleague",
+    "tr": "iş arkadaşı",
+    "level": "B1",
+    "example": "The word \"colleague\" is used in context."
+  },
+  {
+    "en": "commodity",
+    "tr": "emtia; ticari mal",
+    "level": "C1",
+    "example": "The word \"commodity\" is used in context."
+  },
+  {
+    "en": "companion",
+    "tr": "arkadaş; yoldaş",
+    "level": "B1",
+    "example": "The word \"companion\" is used in context."
+  },
+  {
+    "en": "compensate",
+    "tr": "telafi etmek",
+    "level": "B2",
+    "example": "The word \"compensate\" is used in context."
+  },
+  {
+    "en": "competence",
+    "tr": "yetkinlik",
+    "level": "B2",
+    "example": "The word \"competence\" is used in context."
+  },
+  {
+    "en": "complexity",
+    "tr": "karmaşıklık",
+    "level": "B2",
+    "example": "The word \"complexity\" is used in context."
+  },
+  {
+    "en": "component",
+    "tr": "bileşen",
+    "level": "B1",
+    "example": "The word \"component\" is used in context."
+  },
+  {
+    "en": "comprise",
+    "tr": "içermek; oluşmak",
+    "level": "B2",
+    "example": "The word \"comprise\" is used in context."
+  },
+  {
+    "en": "conceive",
+    "tr": "tasarlamak; kavramak",
+    "level": "C1",
+    "example": "The word \"conceive\" is used in context."
+  },
+  {
+    "en": "concentrate",
+    "tr": "odaklanmak",
+    "level": "A2",
+    "example": "The word \"concentrate\" is used in context."
+  },
+  {
+    "en": "concept",
+    "tr": "kavram",
+    "level": "B1",
+    "example": "The word \"concept\" is used in context."
+  },
+  {
+    "en": "conclude",
+    "tr": "sonuçlandırmak",
+    "level": "B1",
+    "example": "The word \"conclude\" is used in context."
+  },
+  {
+    "en": "conclusion",
+    "tr": "sonuç",
+    "level": "B1",
+    "example": "The word \"conclusion\" is used in context."
+  },
+  {
+    "en": "conduct",
+    "tr": "yürütmek; davranış",
+    "level": "B2",
+    "example": "The word \"conduct\" is used in context."
+  },
+  {
+    "en": "confess",
+    "tr": "itiraf etmek",
+    "level": "B2",
+    "example": "The word \"confess\" is used in context."
+  },
+  {
+    "en": "confine",
+    "tr": "sınırlamak",
+    "level": "C1",
+    "example": "The word \"confine\" is used in context."
+  },
+  {
+    "en": "confirm",
+    "tr": "doğrulamak",
+    "level": "A2",
+    "example": "The word \"confirm\" is used in context."
+  },
+  {
+    "en": "conflict",
+    "tr": "çatışma; çatışmak",
+    "level": "B1",
+    "example": "The word \"conflict\" is used in context."
+  },
+  {
+    "en": "conform",
+    "tr": "uyum sağlamak",
+    "level": "C1",
+    "example": "The word \"conform\" is used in context."
+  },
+  {
+    "en": "considerable",
+    "tr": "kayda değer",
+    "level": "B2",
+    "example": "The word \"considerable\" is used in context."
+  },
+  {
+    "en": "constitute",
+    "tr": "oluşturmak",
+    "level": "C1",
+    "example": "The word \"constitute\" is used in context."
+  },
+  {
+    "en": "constraint",
+    "tr": "kısıtlama",
+    "level": "C1",
+    "example": "The word \"constraint\" is used in context."
+  },
+  {
+    "en": "construct",
+    "tr": "inşa etmek; oluşturmak",
+    "level": "B1",
+    "example": "The word \"construct\" is used in context."
+  },
+  {
+    "en": "consult",
+    "tr": "danışmak",
+    "level": "B1",
+    "example": "The word \"consult\" is used in context."
+  },
+  {
+    "en": "contemporary",
+    "tr": "çağdaş",
+    "level": "B2",
+    "example": "The word \"contemporary\" is used in context."
+  },
+  {
+    "en": "context",
+    "tr": "bağlam",
+    "level": "B1",
+    "example": "The word \"context\" is used in context."
+  },
+  {
+    "en": "conventional",
+    "tr": "geleneksel; alışılmış",
+    "level": "B2",
+    "example": "The word \"conventional\" is used in context."
+  },
+  {
+    "en": "convey",
+    "tr": "iletmek; aktarmak",
+    "level": "B2",
+    "example": "The word \"convey\" is used in context."
+  },
+  {
+    "en": "convince",
+    "tr": "ikna etmek",
+    "level": "B1",
+    "example": "The word \"convince\" is used in context."
+  },
+  {
+    "en": "cooperate",
+    "tr": "iş birliği yapmak",
+    "level": "B1",
+    "example": "The word \"cooperate\" is used in context."
+  },
+  {
+    "en": "coordinate",
+    "tr": "koordine etmek",
+    "level": "B2",
+    "example": "The word \"coordinate\" is used in context."
+  },
+  {
+    "en": "core",
+    "tr": "öz; temel",
+    "level": "B1",
+    "example": "The word \"core\" is used in context."
+  },
+  {
+    "en": "corporate",
+    "tr": "kurumsal",
+    "level": "B2",
+    "example": "The word \"corporate\" is used in context."
+  },
+  {
+    "en": "correspond",
+    "tr": "karşılık gelmek; yazışmak",
+    "level": "B2",
+    "example": "The word \"correspond\" is used in context."
+  },
+  {
+    "en": "criteria",
+    "tr": "ölçütler",
+    "level": "B2",
+    "example": "The word \"criteria\" is used in context."
+  },
+  {
+    "en": "currency",
+    "tr": "para birimi",
+    "level": "A2",
+    "example": "The word \"currency\" is used in context."
+  },
+  {
+    "en": "decline",
+    "tr": "azalmak; reddetmek",
+    "level": "B2",
+    "example": "The word \"decline\" is used in context."
+  },
+  {
+    "en": "dedicate",
+    "tr": "adamak",
+    "level": "B2",
+    "example": "The word \"dedicate\" is used in context."
+  },
+  {
+    "en": "deficiency",
+    "tr": "eksiklik",
+    "level": "C1",
+    "example": "The word \"deficiency\" is used in context."
+  },
+  {
+    "en": "denial",
+    "tr": "inkâr",
+    "level": "B2",
+    "example": "The word \"denial\" is used in context."
+  },
+  {
+    "en": "despite",
+    "tr": "-e rağmen",
+    "level": "B1",
+    "example": "The word \"despite\" is used in context."
+  },
+  {
+    "en": "detect",
+    "tr": "tespit etmek",
+    "level": "B1",
+    "example": "The word \"detect\" is used in context."
+  },
+  {
+    "en": "determine",
+    "tr": "belirlemek",
+    "level": "B1",
+    "example": "The word \"determine\" is used in context."
+  },
+  {
+    "en": "devote",
+    "tr": "adamak; ayırmak",
+    "level": "B2",
+    "example": "The word \"devote\" is used in context."
+  },
+  {
+    "en": "differentiate",
+    "tr": "ayırt etmek",
+    "level": "B2",
+    "example": "The word \"differentiate\" is used in context."
+  },
+  {
+    "en": "dimension",
+    "tr": "boyut",
+    "level": "B1",
+    "example": "The word \"dimension\" is used in context."
+  },
+  {
+    "en": "diminish",
+    "tr": "azalmak; azaltmak",
+    "level": "C1",
+    "example": "The word \"diminish\" is used in context."
+  },
+  {
+    "en": "disability",
+    "tr": "engellilik",
+    "level": "B1",
+    "example": "The word \"disability\" is used in context."
+  },
+  {
+    "en": "discourse",
+    "tr": "söylem",
+    "level": "C1",
+    "example": "The word \"discourse\" is used in context."
+  },
+  {
+    "en": "discrimination",
+    "tr": "ayrımcılık",
+    "level": "B2",
+    "example": "The word \"discrimination\" is used in context."
+  },
+  {
+    "en": "dismiss",
+    "tr": "işten çıkarmak; reddetmek",
+    "level": "B2",
+    "example": "The word \"dismiss\" is used in context."
+  },
+  {
+    "en": "display",
+    "tr": "sergilemek; ekran",
+    "level": "A2",
+    "example": "The word \"display\" is used in context."
+  },
+  {
+    "en": "dispute",
+    "tr": "anlaşmazlık; tartışmak",
+    "level": "B2",
+    "example": "The word \"dispute\" is used in context."
+  },
+  {
+    "en": "distinct",
+    "tr": "farklı; belirgin",
+    "level": "B2",
+    "example": "The word \"distinct\" is used in context."
+  },
+  {
+    "en": "distinguish",
+    "tr": "ayırt etmek",
+    "level": "B1",
+    "example": "The word \"distinguish\" is used in context."
+  },
+  {
+    "en": "distribute",
+    "tr": "dağıtmak",
+    "level": "B1",
+    "example": "The word \"distribute\" is used in context."
+  },
+  {
+    "en": "diverse",
+    "tr": "çeşitli",
+    "level": "B1",
+    "example": "The word \"diverse\" is used in context."
+  },
+  {
+    "en": "diversity",
+    "tr": "çeşitlilik",
+    "level": "B2",
+    "example": "The word \"diversity\" is used in context."
+  },
+  {
+    "en": "domestic",
+    "tr": "yerel; ev içi",
+    "level": "B2",
+    "example": "The word \"domestic\" is used in context."
+  },
+  {
+    "en": "dominant",
+    "tr": "baskın",
+    "level": "B2",
+    "example": "The word \"dominant\" is used in context."
+  },
+  {
+    "en": "dramatic",
+    "tr": "çarpıcı; dramatik",
+    "level": "B1",
+    "example": "The word \"dramatic\" is used in context."
+  },
+  {
+    "en": "duration",
+    "tr": "süre",
+    "level": "B1",
+    "example": "The word \"duration\" is used in context."
+  },
+  {
+    "en": "dynamic",
+    "tr": "dinamik",
+    "level": "B1",
+    "example": "The word \"dynamic\" is used in context."
+  },
+  {
+    "en": "economic",
+    "tr": "ekonomik",
+    "level": "A2",
+    "example": "The word \"economic\" is used in context."
+  },
+  {
+    "en": "economy",
+    "tr": "ekonomi",
+    "level": "A2",
+    "example": "The word \"economy\" is used in context."
+  },
+  {
+    "en": "elaborate",
+    "tr": "ayrıntılı; ayrıntılandırmak",
+    "level": "B2",
+    "example": "The word \"elaborate\" is used in context."
+  },
+  {
+    "en": "eliminate",
+    "tr": "ortadan kaldırmak",
+    "level": "B2",
+    "example": "The word \"eliminate\" is used in context."
+  },
+  {
+    "en": "emphasis",
+    "tr": "vurgu",
+    "level": "B2",
+    "example": "The word \"emphasis\" is used in context."
+  },
+  {
+    "en": "empirical",
+    "tr": "deneysel; ampirik",
+    "level": "C1",
+    "example": "The word \"empirical\" is used in context."
+  },
+  {
+    "en": "enable",
+    "tr": "olanak sağlamak",
+    "level": "B1",
+    "example": "The word \"enable\" is used in context."
+  },
+  {
+    "en": "encounter",
+    "tr": "karşılaşmak; karşılaşma",
+    "level": "B1",
+    "example": "The word \"encounter\" is used in context."
+  },
+  {
+    "en": "enhance",
+    "tr": "geliştirmek; artırmak",
+    "level": "B2",
+    "example": "The word \"enhance\" is used in context."
+  },
+  {
+    "en": "enormous",
+    "tr": "muazzam",
+    "level": "A2",
+    "example": "The word \"enormous\" is used in context."
+  },
+  {
+    "en": "ensure",
+    "tr": "sağlamak; garanti etmek",
+    "level": "B1",
+    "example": "The word \"ensure\" is used in context."
+  },
+  {
+    "en": "entity",
+    "tr": "varlık; kuruluş",
+    "level": "C1",
+    "example": "The word \"entity\" is used in context."
+  },
+  {
+    "en": "equivalent",
+    "tr": "eşdeğer",
+    "level": "B2",
+    "example": "The word \"equivalent\" is used in context."
+  },
+  {
+    "en": "estimate",
+    "tr": "tahmin etmek; tahmin",
+    "level": "B1",
+    "example": "The word \"estimate\" is used in context."
+  },
+  {
+    "en": "ethical",
+    "tr": "etik",
+    "level": "B2",
+    "example": "The word \"ethical\" is used in context."
+  },
+  {
+    "en": "evident",
+    "tr": "açık; belli",
+    "level": "B2",
+    "example": "The word \"evident\" is used in context."
+  },
+  {
+    "en": "evolve",
+    "tr": "gelişmek; evrilmek",
+    "level": "B1",
+    "example": "The word \"evolve\" is used in context."
+  },
+  {
+    "en": "exceed",
+    "tr": "aşmak",
+    "level": "B2",
+    "example": "The word \"exceed\" is used in context."
+  },
+  {
+    "en": "exception",
+    "tr": "istisna",
+    "level": "B1",
+    "example": "The word \"exception\" is used in context."
+  },
+  {
+    "en": "excessive",
+    "tr": "aşırı",
+    "level": "B2",
+    "example": "The word \"excessive\" is used in context."
+  },
+  {
+    "en": "exclude",
+    "tr": "hariç tutmak",
+    "level": "B1",
+    "example": "The word \"exclude\" is used in context."
+  },
+  {
+    "en": "execute",
+    "tr": "uygulamak; yürütmek",
+    "level": "B2",
+    "example": "The word \"execute\" is used in context."
+  },
+  {
+    "en": "exhibit",
+    "tr": "sergilemek",
+    "level": "B2",
+    "example": "The word \"exhibit\" is used in context."
+  },
+  {
+    "en": "expertise",
+    "tr": "uzmanlık",
+    "level": "B2",
+    "example": "The word \"expertise\" is used in context."
+  },
+  {
+    "en": "explicit",
+    "tr": "açıkça belirtilmiş",
+    "level": "C1",
+    "example": "The word \"explicit\" is used in context."
+  },
+  {
+    "en": "exploit",
+    "tr": "sömürmek; kullanmak",
+    "level": "B2",
+    "example": "The word \"exploit\" is used in context."
+  },
+  {
+    "en": "exposure",
+    "tr": "maruz kalma; görünürlük",
+    "level": "B2",
+    "example": "The word \"exposure\" is used in context."
+  },
+  {
+    "en": "external",
+    "tr": "harici; dış",
+    "level": "A2",
+    "example": "The word \"external\" is used in context."
+  },
+  {
+    "en": "facilitate",
+    "tr": "kolaylaştırmak",
+    "level": "B2",
+    "example": "The word \"facilitate\" is used in context."
+  },
+  {
+    "en": "federal",
+    "tr": "federal",
+    "level": "B2",
+    "example": "The word \"federal\" is used in context."
+  },
+  {
+    "en": "fluctuate",
+    "tr": "dalgalanmak",
+    "level": "C1",
+    "example": "The word \"fluctuate\" is used in context."
+  },
+  {
+    "en": "format",
+    "tr": "biçim; biçimlendirmek",
+    "level": "B1",
+    "example": "The word \"format\" is used in context."
+  },
+  {
+    "en": "formula",
+    "tr": "formül",
+    "level": "A2",
+    "example": "The word \"formula\" is used in context."
+  },
+  {
+    "en": "framework",
+    "tr": "çerçeve; yapı",
+    "level": "B2",
+    "example": "The word \"framework\" is used in context."
+  },
+  {
+    "en": "furthermore",
+    "tr": "dahası",
+    "level": "B2",
+    "example": "The word \"furthermore\" is used in context."
+  },
+  {
+    "en": "generation",
+    "tr": "nesil; üretim",
+    "level": "A2",
+    "example": "The word \"generation\" is used in context."
+  },
+  {
+    "en": "global",
+    "tr": "küresel",
+    "level": "A2",
+    "example": "The word \"global\" is used in context."
+  },
+  {
+    "en": "grant",
+    "tr": "hibe; vermek",
+    "level": "B2",
+    "example": "The word \"grant\" is used in context."
+  },
+  {
+    "en": "guarantee",
+    "tr": "garanti; garanti etmek",
+    "level": "B1",
+    "example": "The word \"guarantee\" is used in context."
+  },
+  {
+    "en": "guideline",
+    "tr": "kılavuz ilke",
+    "level": "B2",
+    "example": "The word \"guideline\" is used in context."
+  },
+  {
+    "en": "highlight",
+    "tr": "vurgulamak; öne çıkarmak",
+    "level": "B1",
+    "example": "The word \"highlight\" is used in context."
+  },
+  {
+    "en": "hypothesis",
+    "tr": "hipotez",
+    "level": "B2",
+    "example": "The word \"hypothesis\" is used in context."
+  },
+  {
+    "en": "identify",
+    "tr": "tanımlamak; belirlemek",
+    "level": "A2",
+    "example": "The word \"identify\" is used in context."
+  },
+  {
+    "en": "illustrate",
+    "tr": "örneklemek; açıklamak",
+    "level": "B1",
+    "example": "The word \"illustrate\" is used in context."
+  },
+  {
+    "en": "implication",
+    "tr": "sonuç; ima",
+    "level": "B2",
+    "example": "The word \"implication\" is used in context."
+  },
+  {
+    "en": "implicit",
+    "tr": "örtük",
+    "level": "C1",
+    "example": "The word \"implicit\" is used in context."
+  },
+  {
+    "en": "incentive",
+    "tr": "teşvik",
+    "level": "B2",
+    "example": "The word \"incentive\" is used in context."
+  },
+  {
+    "en": "incidence",
+    "tr": "görülme sıklığı; olay",
+    "level": "C1",
+    "example": "The word \"incidence\" is used in context."
+  },
+  {
+    "en": "incline",
+    "tr": "eğilimli olmak; eğmek",
+    "level": "C1",
+    "example": "The word \"incline\" is used in context."
+  },
+  {
+    "en": "incorporate",
+    "tr": "dahil etmek; birleştirmek",
+    "level": "B2",
+    "example": "The word \"incorporate\" is used in context."
+  },
+  {
+    "en": "infer",
+    "tr": "çıkarım yapmak",
+    "level": "B2",
+    "example": "The word \"infer\" is used in context."
+  },
+  {
+    "en": "infrastructure",
+    "tr": "altyapı",
+    "level": "B2",
+    "example": "The word \"infrastructure\" is used in context."
+  },
+  {
+    "en": "inherent",
+    "tr": "doğasında bulunan",
+    "level": "C1",
+    "example": "The word \"inherent\" is used in context."
+  },
+  {
+    "en": "initial",
+    "tr": "ilk; başlangıç",
+    "level": "A2",
+    "example": "The word \"initial\" is used in context."
+  },
+  {
+    "en": "initiate",
+    "tr": "başlatmak",
+    "level": "B2",
+    "example": "The word \"initiate\" is used in context."
+  },
+  {
+    "en": "innovation",
+    "tr": "yenilik",
+    "level": "B1",
+    "example": "The word \"innovation\" is used in context."
+  },
+  {
+    "en": "input",
+    "tr": "girdi; katkı",
+    "level": "A2",
+    "example": "The word \"input\" is used in context."
+  },
+  {
+    "en": "insight",
+    "tr": "içgörü",
+    "level": "B2",
+    "example": "The word \"insight\" is used in context."
+  },
+  {
+    "en": "integrate",
+    "tr": "bütünleştirmek",
+    "level": "B2",
+    "example": "The word \"integrate\" is used in context."
+  },
+  {
+    "en": "integrity",
+    "tr": "dürüstlük; bütünlük",
+    "level": "B2",
+    "example": "The word \"integrity\" is used in context."
+  },
+  {
+    "en": "intelligence",
+    "tr": "zekâ; istihbarat",
+    "level": "A2",
+    "example": "The word \"intelligence\" is used in context."
+  },
+  {
+    "en": "intense",
+    "tr": "yoğun",
+    "level": "B1",
+    "example": "The word \"intense\" is used in context."
+  },
+  {
+    "en": "interaction",
+    "tr": "etkileşim",
+    "level": "B1",
+    "example": "The word \"interaction\" is used in context."
+  },
+  {
+    "en": "interval",
+    "tr": "aralık",
+    "level": "B1",
+    "example": "The word \"interval\" is used in context."
+  },
+  {
+    "en": "intervene",
+    "tr": "müdahale etmek",
+    "level": "B2",
+    "example": "The word \"intervene\" is used in context."
+  },
+  {
+    "en": "intrinsic",
+    "tr": "özünde bulunan",
+    "level": "C1",
+    "example": "The word \"intrinsic\" is used in context."
+  },
+  {
+    "en": "investigate",
+    "tr": "araştırmak",
+    "level": "A2",
+    "example": "The word \"investigate\" is used in context."
+  },
+  {
+    "en": "investment",
+    "tr": "yatırım",
+    "level": "B1",
+    "example": "The word \"investment\" is used in context."
+  },
+  {
+    "en": "invoke",
+    "tr": "başvurmak; çağırmak",
+    "level": "C1",
+    "example": "The word \"invoke\" is used in context."
+  },
+  {
+    "en": "involve",
+    "tr": "içermek; dahil etmek",
+    "level": "A2",
+    "example": "The word \"involve\" is used in context."
+  },
+  {
+    "en": "isolate",
+    "tr": "yalıtmak; izole etmek",
+    "level": "B1",
+    "example": "The word \"isolate\" is used in context."
+  },
+  {
+    "en": "issue",
+    "tr": "konu; yayımlamak",
+    "level": "A2",
+    "example": "The word \"issue\" is used in context."
+  },
+  {
+    "en": "label",
+    "tr": "etiket; etiketlemek",
+    "level": "A2",
+    "example": "The word \"label\" is used in context."
+  },
+  {
+    "en": "laboratory",
+    "tr": "laboratuvar",
+    "level": "A2",
+    "example": "The word \"laboratory\" is used in context."
+  },
+  {
+    "en": "layer",
+    "tr": "katman",
+    "level": "A2",
+    "example": "The word \"layer\" is used in context."
+  },
+  {
+    "en": "lecture",
+    "tr": "ders; konferans",
+    "level": "A2",
+    "example": "The word \"lecture\" is used in context."
+  },
+  {
+    "en": "legal",
+    "tr": "yasal",
+    "level": "A2",
+    "example": "The word \"legal\" is used in context."
+  },
+  {
+    "en": "legislation",
+    "tr": "mevzuat",
+    "level": "B2",
+    "example": "The word \"legislation\" is used in context."
+  },
+  {
+    "en": "likewise",
+    "tr": "aynı şekilde",
+    "level": "B2",
+    "example": "The word \"likewise\" is used in context."
+  },
+  {
+    "en": "link",
+    "tr": "bağlantı; bağlamak",
+    "level": "A2",
+    "example": "The word \"link\" is used in context."
+  },
+  {
+    "en": "logic",
+    "tr": "mantık",
+    "level": "B1",
+    "example": "The word \"logic\" is used in context."
+  },
+  {
+    "en": "majority",
+    "tr": "çoğunluk",
+    "level": "B1",
+    "example": "The word \"majority\" is used in context."
+  },
+  {
+    "en": "manipulate",
+    "tr": "yönlendirmek; manipüle etmek",
+    "level": "B2",
+    "example": "The word \"manipulate\" is used in context."
+  },
+  {
+    "en": "mechanism",
+    "tr": "mekanizma",
+    "level": "B2",
+    "example": "The word \"mechanism\" is used in context."
+  },
+  {
+    "en": "mediate",
+    "tr": "arabuluculuk yapmak",
+    "level": "C1",
+    "example": "The word \"mediate\" is used in context."
+  },
+  {
+    "en": "methodology",
+    "tr": "yöntem bilimi; metodoloji",
+    "level": "C1",
+    "example": "The word \"methodology\" is used in context."
+  },
+  {
+    "en": "minimal",
+    "tr": "asgari; en az",
+    "level": "B1",
+    "example": "The word \"minimal\" is used in context."
+  },
+  {
+    "en": "modify",
+    "tr": "değiştirmek",
+    "level": "B1",
+    "example": "The word \"modify\" is used in context."
+  },
+  {
+    "en": "monitor",
+    "tr": "izlemek; monitör",
+    "level": "B1",
+    "example": "The word \"monitor\" is used in context."
+  },
+  {
+    "en": "mutual",
+    "tr": "karşılıklı",
+    "level": "B1",
+    "example": "The word \"mutual\" is used in context."
+  },
+  {
+    "en": "negate",
+    "tr": "geçersiz kılmak; olumsuzlamak",
+    "level": "C1",
+    "example": "The word \"negate\" is used in context."
+  },
+  {
+    "en": "network",
+    "tr": "ağ",
+    "level": "A2",
+    "example": "The word \"network\" is used in context."
+  },
+  {
+    "en": "neutral",
+    "tr": "tarafsız; nötr",
+    "level": "B1",
+    "example": "The word \"neutral\" is used in context."
+  },
+  {
+    "en": "notion",
+    "tr": "kavram; düşünce",
+    "level": "B2",
+    "example": "The word \"notion\" is used in context."
+  },
+  {
+    "en": "objective",
+    "tr": "amaç; nesnel",
+    "level": "B1",
+    "example": "The word \"objective\" is used in context."
+  },
+  {
+    "en": "obvious",
+    "tr": "bariz; açık",
+    "level": "A2",
+    "example": "The word \"obvious\" is used in context."
+  },
+  {
+    "en": "occupy",
+    "tr": "işgal etmek; yer kaplamak",
+    "level": "B1",
+    "example": "The word \"occupy\" is used in context."
+  },
+  {
+    "en": "occur",
+    "tr": "meydana gelmek",
+    "level": "A2",
+    "example": "The word \"occur\" is used in context."
+  },
+  {
+    "en": "offset",
+    "tr": "dengelemek; telafi etmek",
+    "level": "B2",
+    "example": "The word \"offset\" is used in context."
+  },
+  {
+    "en": "ongoing",
+    "tr": "devam eden",
+    "level": "B2",
+    "example": "The word \"ongoing\" is used in context."
+  },
+  {
+    "en": "option",
+    "tr": "seçenek",
+    "level": "A2",
+    "example": "The word \"option\" is used in context."
+  },
+  {
+    "en": "orient",
+    "tr": "yönlendirmek; yönelmek",
+    "level": "B2",
+    "example": "The word \"orient\" is used in context."
+  },
+  {
+    "en": "outcome",
+    "tr": "sonuç",
+    "level": "B1",
+    "example": "The word \"outcome\" is used in context."
+  },
+  {
+    "en": "overall",
+    "tr": "genel; genel olarak",
+    "level": "B1",
+    "example": "The word \"overall\" is used in context."
+  },
+  {
+    "en": "overlap",
+    "tr": "örtüşmek",
+    "level": "B2",
+    "example": "The word \"overlap\" is used in context."
+  },
+  {
+    "en": "paradigm",
+    "tr": "paradigma",
+    "level": "C1",
+    "example": "The word \"paradigm\" is used in context."
+  },
+  {
+    "en": "parameter",
+    "tr": "parametre",
+    "level": "B2",
+    "example": "The word \"parameter\" is used in context."
+  },
+  {
+    "en": "perceive",
+    "tr": "algılamak",
+    "level": "B2",
+    "example": "The word \"perceive\" is used in context."
+  },
+  {
+    "en": "percent",
+    "tr": "yüzde",
+    "level": "A2",
+    "example": "The word \"percent\" is used in context."
+  },
+  {
+    "en": "persist",
+    "tr": "ısrar etmek; sürmek",
+    "level": "B2",
+    "example": "The word \"persist\" is used in context."
+  },
+  {
+    "en": "phase",
+    "tr": "aşama; evre",
+    "level": "B1",
+    "example": "The word \"phase\" is used in context."
+  },
+  {
+    "en": "phenomenon",
+    "tr": "olgu",
+    "level": "B2",
+    "example": "The word \"phenomenon\" is used in context."
+  },
+  {
+    "en": "philosophy",
+    "tr": "felsefe",
+    "level": "A2",
+    "example": "The word \"philosophy\" is used in context."
+  },
+  {
+    "en": "physical",
+    "tr": "fiziksel",
+    "level": "A2",
+    "example": "The word \"physical\" is used in context."
+  },
+  {
+    "en": "policy",
+    "tr": "politika; ilke",
+    "level": "B1",
+    "example": "The word \"policy\" is used in context."
+  },
+  {
+    "en": "portion",
+    "tr": "porsiyon; bölüm",
+    "level": "B1",
+    "example": "The word \"portion\" is used in context."
+  },
+  {
+    "en": "practitioner",
+    "tr": "uygulayıcı; uzman",
+    "level": "C1",
+    "example": "The word \"practitioner\" is used in context."
+  },
+  {
+    "en": "precede",
+    "tr": "önce gelmek",
+    "level": "B2",
+    "example": "The word \"precede\" is used in context."
+  },
+  {
+    "en": "precise",
+    "tr": "kesin; hassas",
+    "level": "B1",
+    "example": "The word \"precise\" is used in context."
+  },
+  {
+    "en": "predict",
+    "tr": "tahmin etmek",
+    "level": "A2",
+    "example": "The word \"predict\" is used in context."
+  },
+  {
+    "en": "predominant",
+    "tr": "baskın; yaygın",
+    "level": "C1",
+    "example": "The word \"predominant\" is used in context."
+  },
+  {
+    "en": "presume",
+    "tr": "varsaymak",
+    "level": "B2",
+    "example": "The word \"presume\" is used in context."
+  },
+  {
+    "en": "prior",
+    "tr": "önceki",
+    "level": "B2",
+    "example": "The word \"prior\" is used in context."
+  },
+  {
+    "en": "priority",
+    "tr": "öncelik",
+    "level": "A2",
+    "example": "The word \"priority\" is used in context."
+  },
+  {
+    "en": "proceed",
+    "tr": "devam etmek; ilerlemek",
+    "level": "B1",
+    "example": "The word \"proceed\" is used in context."
+  },
+  {
+    "en": "process",
+    "tr": "süreç; işlemek",
+    "level": "A2",
+    "example": "The word \"process\" is used in context."
+  },
+  {
+    "en": "professional",
+    "tr": "profesyonel",
+    "level": "A2",
+    "example": "The word \"professional\" is used in context."
+  },
+  {
+    "en": "prohibit",
+    "tr": "yasaklamak",
+    "level": "B2",
+    "example": "The word \"prohibit\" is used in context."
+  },
+  {
+    "en": "promote",
+    "tr": "desteklemek; terfi ettirmek",
+    "level": "B1",
+    "example": "The word \"promote\" is used in context."
+  },
+  {
+    "en": "proportion",
+    "tr": "oran",
+    "level": "B2",
+    "example": "The word \"proportion\" is used in context."
+  },
+  {
+    "en": "prospect",
+    "tr": "olasılık; beklenti",
+    "level": "B2",
+    "example": "The word \"prospect\" is used in context."
+  },
+  {
+    "en": "protocol",
+    "tr": "protokol",
+    "level": "B2",
+    "example": "The word \"protocol\" is used in context."
+  },
+  {
+    "en": "psychological",
+    "tr": "psikolojik",
+    "level": "B1",
+    "example": "The word \"psychological\" is used in context."
+  },
+  {
+    "en": "publication",
+    "tr": "yayın",
+    "level": "B1",
+    "example": "The word \"publication\" is used in context."
+  },
+  {
+    "en": "publish",
+    "tr": "yayımlamak",
+    "level": "A2",
+    "example": "The word \"publish\" is used in context."
+  },
+  {
+    "en": "purchase",
+    "tr": "satın almak; satın alma",
+    "level": "A2",
+    "example": "The word \"purchase\" is used in context."
+  },
+  {
+    "en": "pursue",
+    "tr": "peşinden gitmek; sürdürmek",
+    "level": "B2",
+    "example": "The word \"pursue\" is used in context."
+  },
+  {
+    "en": "qualitative",
+    "tr": "nitel",
+    "level": "C1",
+    "example": "The word \"qualitative\" is used in context."
+  },
+  {
+    "en": "quantify",
+    "tr": "nicel olarak ifade etmek",
+    "level": "C1",
+    "example": "The word \"quantify\" is used in context."
+  },
+  {
+    "en": "quote",
+    "tr": "alıntı; alıntı yapmak",
+    "level": "A2",
+    "example": "The word \"quote\" is used in context."
+  },
+  {
+    "en": "radical",
+    "tr": "köklü; radikal",
+    "level": "B2",
+    "example": "The word \"radical\" is used in context."
+  },
+  {
+    "en": "random",
+    "tr": "rastgele",
+    "level": "A2",
+    "example": "The word \"random\" is used in context."
+  },
+  {
+    "en": "range",
+    "tr": "aralık; çeşitlilik",
+    "level": "A2",
+    "example": "The word \"range\" is used in context."
+  },
+  {
+    "en": "ratio",
+    "tr": "oran",
+    "level": "B1",
+    "example": "The word \"ratio\" is used in context."
+  },
+  {
+    "en": "rational",
+    "tr": "akılcı",
+    "level": "B2",
+    "example": "The word \"rational\" is used in context."
+  },
+  {
+    "en": "recover",
+    "tr": "iyileşmek; geri kazanmak",
+    "level": "A2",
+    "example": "The word \"recover\" is used in context."
+  },
+  {
+    "en": "refine",
+    "tr": "arıtmak; geliştirmek",
+    "level": "B2",
+    "example": "The word \"refine\" is used in context."
+  },
+  {
+    "en": "regime",
+    "tr": "rejim; yönetim biçimi",
+    "level": "C1",
+    "example": "The word \"regime\" is used in context."
+  },
+  {
+    "en": "region",
+    "tr": "bölge",
+    "level": "A2",
+    "example": "The word \"region\" is used in context."
+  },
+  {
+    "en": "regulate",
+    "tr": "düzenlemek",
+    "level": "B1",
+    "example": "The word \"regulate\" is used in context."
+  },
+  {
+    "en": "reinforce",
+    "tr": "pekiştirmek; güçlendirmek",
+    "level": "B2",
+    "example": "The word \"reinforce\" is used in context."
+  },
+  {
+    "en": "reject",
+    "tr": "reddetmek",
+    "level": "A2",
+    "example": "The word \"reject\" is used in context."
+  },
+  {
+    "en": "relevant",
+    "tr": "ilgili; alakalı",
+    "level": "B1",
+    "example": "The word \"relevant\" is used in context."
+  },
+  {
+    "en": "reluctant",
+    "tr": "isteksiz",
+    "level": "B2",
+    "example": "The word \"reluctant\" is used in context."
+  },
+  {
+    "en": "rely",
+    "tr": "güvenmek; dayanmak",
+    "level": "A2",
+    "example": "The word \"rely\" is used in context."
+  },
+  {
+    "en": "remove",
+    "tr": "kaldırmak; çıkarmak",
+    "level": "A2",
+    "example": "The word \"remove\" is used in context."
+  },
+  {
+    "en": "resolve",
+    "tr": "çözmek; karara bağlamak",
+    "level": "B1",
+    "example": "The word \"resolve\" is used in context."
+  },
+  {
+    "en": "resource",
+    "tr": "kaynak",
+    "level": "A2",
+    "example": "The word \"resource\" is used in context."
+  },
+  {
+    "en": "respond",
+    "tr": "yanıt vermek",
+    "level": "A2",
+    "example": "The word \"respond\" is used in context."
+  },
+  {
+    "en": "restore",
+    "tr": "eski hâline getirmek",
+    "level": "B1",
+    "example": "The word \"restore\" is used in context."
+  },
+  {
+    "en": "restrain",
+    "tr": "dizginlemek; kısıtlamak",
+    "level": "B2",
+    "example": "The word \"restrain\" is used in context."
+  },
+  {
+    "en": "restrict",
+    "tr": "kısıtlamak",
+    "level": "B1",
+    "example": "The word \"restrict\" is used in context."
+  },
+  {
+    "en": "retain",
+    "tr": "korumak; elinde tutmak",
+    "level": "B2",
+    "example": "The word \"retain\" is used in context."
+  },
+  {
+    "en": "reveal",
+    "tr": "ortaya çıkarmak",
+    "level": "A2",
+    "example": "The word \"reveal\" is used in context."
+  },
+  {
+    "en": "revenue",
+    "tr": "gelir",
+    "level": "B2",
+    "example": "The word \"revenue\" is used in context."
+  },
+  {
+    "en": "reverse",
+    "tr": "tersine çevirmek; ters",
+    "level": "A2",
+    "example": "The word \"reverse\" is used in context."
+  },
+  {
+    "en": "revise",
+    "tr": "gözden geçirmek; düzeltmek",
+    "level": "B1",
+    "example": "The word \"revise\" is used in context."
+  },
+  {
+    "en": "revolution",
+    "tr": "devrim",
+    "level": "A2",
+    "example": "The word \"revolution\" is used in context."
+  },
+  {
+    "en": "rigid",
+    "tr": "katı; esnemez",
+    "level": "B2",
+    "example": "The word \"rigid\" is used in context."
+  },
+  {
+    "en": "role",
+    "tr": "rol",
+    "level": "A2",
+    "example": "The word \"role\" is used in context."
+  },
+  {
+    "en": "route",
+    "tr": "güzergâh",
+    "level": "A2",
+    "example": "The word \"route\" is used in context."
+  },
+  {
+    "en": "scenario",
+    "tr": "senaryo",
+    "level": "B1",
+    "example": "The word \"scenario\" is used in context."
+  },
+  {
+    "en": "scheme",
+    "tr": "plan; düzenek",
+    "level": "B2",
+    "example": "The word \"scheme\" is used in context."
+  },
+  {
+    "en": "scope",
+    "tr": "kapsam",
+    "level": "B2",
+    "example": "The word \"scope\" is used in context."
+  },
+  {
+    "en": "sector",
+    "tr": "sektör",
+    "level": "B1",
+    "example": "The word \"sector\" is used in context."
+  },
+  {
+    "en": "select",
+    "tr": "seçmek",
+    "level": "A2",
+    "example": "The word \"select\" is used in context."
+  },
+  {
+    "en": "sequence",
+    "tr": "sıra; dizi",
+    "level": "B1",
+    "example": "The word \"sequence\" is used in context."
+  },
+  {
+    "en": "shift",
+    "tr": "değişim; değiştirmek",
+    "level": "A2",
+    "example": "The word \"shift\" is used in context."
+  },
+  {
+    "en": "simulate",
+    "tr": "simüle etmek",
+    "level": "B2",
+    "example": "The word \"simulate\" is used in context."
+  },
+  {
+    "en": "site",
+    "tr": "alan; site",
+    "level": "A2",
+    "example": "The word \"site\" is used in context."
+  },
+  {
+    "en": "so-called",
+    "tr": "sözde; denilen",
+    "level": "B2",
+    "example": "The word \"so-called\" is used in context."
+  },
+  {
+    "en": "sole",
+    "tr": "tek; yegâne",
+    "level": "B2",
+    "example": "The word \"sole\" is used in context."
+  },
+  {
+    "en": "source",
+    "tr": "kaynak",
+    "level": "A2",
+    "example": "The word \"source\" is used in context."
+  },
+  {
+    "en": "specific",
+    "tr": "belirli; özgül",
+    "level": "A2",
+    "example": "The word \"specific\" is used in context."
+  },
+  {
+    "en": "specify",
+    "tr": "belirtmek",
+    "level": "B1",
+    "example": "The word \"specify\" is used in context."
+  },
+  {
+    "en": "sphere",
+    "tr": "küre; alan",
+    "level": "B2",
+    "example": "The word \"sphere\" is used in context."
+  },
+  {
+    "en": "stable",
+    "tr": "istikrarlı; sabit",
+    "level": "A2",
+    "example": "The word \"stable\" is used in context."
+  },
+  {
+    "en": "statistic",
+    "tr": "istatistik",
+    "level": "A2",
+    "example": "The word \"statistic\" is used in context."
+  },
+  {
+    "en": "status",
+    "tr": "durum; statü",
+    "level": "A2",
+    "example": "The word \"status\" is used in context."
+  },
+  {
+    "en": "straightforward",
+    "tr": "açık ve anlaşılır",
+    "level": "B2",
+    "example": "The word \"straightforward\" is used in context."
+  },
+  {
+    "en": "stress",
+    "tr": "stres; vurgulamak",
+    "level": "A2",
+    "example": "The word \"stress\" is used in context."
+  },
+  {
+    "en": "structure",
+    "tr": "yapı; yapılandırmak",
+    "level": "A2",
+    "example": "The word \"structure\" is used in context."
+  },
+  {
+    "en": "submit",
+    "tr": "sunmak; teslim etmek",
+    "level": "B1",
+    "example": "The word \"submit\" is used in context."
+  },
+  {
+    "en": "subsidy",
+    "tr": "sübvansiyon; devlet desteği",
+    "level": "C1",
+    "example": "The word \"subsidy\" is used in context."
+  },
+  {
+    "en": "substitute",
+    "tr": "yerine koymak; ikame",
+    "level": "B1",
+    "example": "The word \"substitute\" is used in context."
+  },
+  {
+    "en": "sum",
+    "tr": "toplam; toplamak",
+    "level": "A2",
+    "example": "The word \"sum\" is used in context."
+  },
+  {
+    "en": "summary",
+    "tr": "özet",
+    "level": "A2",
+    "example": "The word \"summary\" is used in context."
+  },
+  {
+    "en": "supplement",
+    "tr": "ek; tamamlamak",
+    "level": "B2",
+    "example": "The word \"supplement\" is used in context."
+  },
+  {
+    "en": "survey",
+    "tr": "anket; araştırmak",
+    "level": "A2",
+    "example": "The word \"survey\" is used in context."
+  },
+  {
+    "en": "sustain",
+    "tr": "sürdürmek; desteklemek",
+    "level": "B2",
+    "example": "The word \"sustain\" is used in context."
+  },
+  {
+    "en": "symbol",
+    "tr": "sembol",
+    "level": "A2",
+    "example": "The word \"symbol\" is used in context."
+  },
+  {
+    "en": "target",
+    "tr": "hedef",
+    "level": "A2",
+    "example": "The word \"target\" is used in context."
+  },
+  {
+    "en": "task",
+    "tr": "görev",
+    "level": "A2",
+    "example": "The word \"task\" is used in context."
+  },
+  {
+    "en": "technical",
+    "tr": "teknik",
+    "level": "A2",
+    "example": "The word \"technical\" is used in context."
+  },
+  {
+    "en": "technique",
+    "tr": "teknik; yöntem",
+    "level": "A2",
+    "example": "The word \"technique\" is used in context."
+  },
+  {
+    "en": "technology",
+    "tr": "teknoloji",
+    "level": "A2",
+    "example": "The word \"technology\" is used in context."
+  },
+  {
+    "en": "temporary",
+    "tr": "geçici",
+    "level": "A2",
+    "example": "The word \"temporary\" is used in context."
+  },
+  {
+    "en": "tense",
+    "tr": "gergin; zaman (dilbilgisi)",
+    "level": "B1",
+    "example": "The word \"tense\" is used in context."
+  },
+  {
+    "en": "theoretical",
+    "tr": "kuramsal",
+    "level": "B2",
+    "example": "The word \"theoretical\" is used in context."
+  },
+  {
+    "en": "thereby",
+    "tr": "bu sayede",
+    "level": "C1",
+    "example": "The word \"thereby\" is used in context."
+  },
+  {
+    "en": "thesis",
+    "tr": "tez",
+    "level": "B2",
+    "example": "The word \"thesis\" is used in context."
+  },
+  {
+    "en": "trace",
+    "tr": "iz; izini sürmek",
+    "level": "B1",
+    "example": "The word \"trace\" is used in context."
+  },
+  {
+    "en": "tradition",
+    "tr": "gelenek",
+    "level": "A2",
+    "example": "The word \"tradition\" is used in context."
+  },
+  {
+    "en": "transfer",
+    "tr": "aktarmak; transfer",
+    "level": "A2",
+    "example": "The word \"transfer\" is used in context."
+  },
+  {
+    "en": "transition",
+    "tr": "geçiş",
+    "level": "B2",
+    "example": "The word \"transition\" is used in context."
+  },
+  {
+    "en": "transmit",
+    "tr": "iletmek; aktarmak",
+    "level": "B2",
+    "example": "The word \"transmit\" is used in context."
+  },
+  {
+    "en": "trend",
+    "tr": "eğilim",
+    "level": "A2",
+    "example": "The word \"trend\" is used in context."
+  },
+  {
+    "en": "trigger",
+    "tr": "tetiklemek; tetikleyici",
+    "level": "B1",
+    "example": "The word \"trigger\" is used in context."
+  },
+  {
+    "en": "ultimate",
+    "tr": "nihai; en son",
+    "level": "B2",
+    "example": "The word \"ultimate\" is used in context."
+  },
+  {
+    "en": "undergo",
+    "tr": "geçirmek; maruz kalmak",
+    "level": "B2",
+    "example": "The word \"undergo\" is used in context."
+  },
+  {
+    "en": "underlying",
+    "tr": "temelinde yatan",
+    "level": "B2",
+    "example": "The word \"underlying\" is used in context."
+  },
+  {
+    "en": "undertake",
+    "tr": "üstlenmek",
+    "level": "B2",
+    "example": "The word \"undertake\" is used in context."
+  },
+  {
+    "en": "uniform",
+    "tr": "tek tip; üniforma",
+    "level": "A2",
+    "example": "The word \"uniform\" is used in context."
+  },
+  {
+    "en": "unique",
+    "tr": "benzersiz",
+    "level": "A2",
+    "example": "The word \"unique\" is used in context."
+  },
+  {
+    "en": "utilize",
+    "tr": "yararlanmak; kullanmak",
+    "level": "B2",
+    "example": "The word \"utilize\" is used in context."
+  },
+  {
+    "en": "validity",
+    "tr": "geçerlilik",
+    "level": "B2",
+    "example": "The word \"validity\" is used in context."
+  },
+  {
+    "en": "variable",
+    "tr": "değişken",
+    "level": "B1",
+    "example": "The word \"variable\" is used in context."
+  },
+  {
+    "en": "variation",
+    "tr": "değişim; çeşitlilik",
+    "level": "B1",
+    "example": "The word \"variation\" is used in context."
+  },
+  {
+    "en": "version",
+    "tr": "sürüm; versiyon",
+    "level": "A2",
+    "example": "The word \"version\" is used in context."
+  },
+  {
+    "en": "via",
+    "tr": "aracılığıyla",
+    "level": "B1",
+    "example": "The word \"via\" is used in context."
+  },
+  {
+    "en": "violate",
+    "tr": "ihlal etmek",
+    "level": "B2",
+    "example": "The word \"violate\" is used in context."
+  },
+  {
+    "en": "virtual",
+    "tr": "sanal",
+    "level": "A2",
+    "example": "The word \"virtual\" is used in context."
+  },
+  {
+    "en": "visible",
+    "tr": "görünür",
+    "level": "A2",
+    "example": "The word \"visible\" is used in context."
+  },
+  {
+    "en": "vision",
+    "tr": "görüş; vizyon",
+    "level": "A2",
+    "example": "The word \"vision\" is used in context."
+  },
+  {
+    "en": "volume",
+    "tr": "hacim; cilt",
+    "level": "A2",
+    "example": "The word \"volume\" is used in context."
+  },
+  {
+    "en": "welfare",
+    "tr": "refah",
+    "level": "B2",
+    "example": "The word \"welfare\" is used in context."
+  },
+  {
+    "en": "whereas",
+    "tr": "oysa; halbuki",
+    "level": "B2",
+    "example": "The word \"whereas\" is used in context."
+  },
+  {
+    "en": "withdraw",
+    "tr": "geri çekmek; çekilmek",
+    "level": "B1",
+    "example": "The word \"withdraw\" is used in context."
+  },
+  {
+    "en": "yield",
+    "tr": "verim; üretmek; boyun eğmek",
+    "level": "B2",
+    "example": "The word \"yield\" is used in context."
   }
 ]
