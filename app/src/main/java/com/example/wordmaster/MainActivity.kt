@@ -1162,7 +1162,10 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
             HorizontalDivider()
             Text("Günlük çalışma süresi hedefi", fontWeight = FontWeight.Bold)
             Text("Dersleri tamamladıkça kaydedilen tahmini süreye göre ilerler.", fontSize = 12.sp, color = Color.Gray)
-            Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+            Row(
+                modifier = Modifier.horizontalScroll(rememberScrollState()),
+                horizontalArrangement = Arrangement.spacedBy(6.dp)
+            ) {
                 listOf(5, 10, 15, 20, 30, 45, 60).forEach { goalMinutes ->
                     FilterChip(
                         selected = dailyStudyGoal == goalMinutes,
