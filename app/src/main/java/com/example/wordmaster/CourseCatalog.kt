@@ -105,7 +105,29 @@ object WordMasterCourseCatalog {
         CourseLesson("c1-synthesis", "Birden fazla kaynaktan sentez", "C1", "Okuma", 22,
             listOf("Kaynaklar arasındaki ortak noktaları bul", "Bilgiyi özgün biçimde sentezle"), listOf("b2-critical-reading")),
         CourseLesson("c1-formal-writing", "Resmî rapor ve öneri yazımı", "C1", "Yazma", 22,
-            listOf("Raporu bölümlere ayır", "Önerileri gerekçeleriyle sun"), listOf("b2-academic-writing"))
+            listOf("Raporu bölümlere ayır", "Önerileri gerekçeleriyle sun"), listOf("b2-academic-writing")),
+        CourseLesson("aviation-maintenance-basics", "Uçak bakımına giriş ve emniyet dili", "Mesleki", "Uçak Bakım İngilizcesi", 20,
+            listOf("Bakım dokümanlarında temel emniyet ifadelerini tanı", "Talimatı okumadan önce uyarı ve ikazları ayırt et")),
+        CourseLesson("aviation-tools", "Bakım aletleri ve ekipman", "Mesleki", "Uçak Bakım İngilizcesi", 20,
+            listOf("Yaygın el aletlerini İngilizce adlandır", "Alet ile kullanım amacını eşleştir"), listOf("aviation-maintenance-basics")),
+        CourseLesson("aviation-airframe", "Gövde ve yapısal parçalar", "Mesleki", "Uçak Bakım İngilizcesi", 22,
+            listOf("Fuselage, skin, rib ve spar terimlerini tanı", "Basit teknik açıklamayı anla"), listOf("aviation-maintenance-basics")),
+        CourseLesson("aviation-flight-controls", "Uçuş kumandaları", "Mesleki", "Uçak Bakım İngilizcesi", 22,
+            listOf("Aileron, elevator ve rudder terimlerini ayırt et", "Kumanda yüzeylerinin işlevini İngilizce açıkla"), listOf("aviation-airframe")),
+        CourseLesson("aviation-powerplant", "Motor ve güç ünitesi terimleri", "Mesleki", "Uçak Bakım İngilizcesi", 22,
+            listOf("Engine, compressor, turbine ve exhaust terimlerini tanı", "Motor açıklamalarındaki temel bilgiyi çıkar"), listOf("aviation-maintenance-basics")),
+        CourseLesson("aviation-hydraulics", "Hidrolik sistemler", "Mesleki", "Uçak Bakım İngilizcesi", 22,
+            listOf("Pressure, reservoir, pump ve leak terimlerini öğren", "Sistem durumunu basit İngilizceyle tarif et"), listOf("aviation-tools")),
+        CourseLesson("aviation-electrical", "Elektrik ve kablolama", "Mesleki", "Uçak Bakım İngilizcesi", 22,
+            listOf("Wire, connector, circuit ve continuity terimlerini tanı", "Teknik metinde elektrikle ilgili ifadeleri anla"), listOf("aviation-tools")),
+        CourseLesson("aviation-inspection", "Kontrol, bulgu ve hasar ifadeleri", "Mesleki", "Uçak Bakım İngilizcesi", 25,
+            listOf("Inspect, check, crack, corrosion ve damage terimlerini ayırt et", "Gözlemi açık ve tarafsız biçimde raporla"), listOf("aviation-airframe")),
+        CourseLesson("aviation-documentation", "Bakım kayıtları ve teknik dokümanlar", "Mesleki", "Uçak Bakım İngilizcesi", 25,
+            listOf("Work order, logbook ve maintenance manual ifadelerini tanı", "Yapılan işi kısa ve net İngilizceyle kaydet"), listOf("aviation-inspection")),
+        CourseLesson("aviation-tool-control", "Alet kontrolü ve yabancı cisim önleme", "Mesleki", "Uçak Bakım İngilizcesi", 20,
+            listOf("Tool inventory ve foreign object debris terimlerini tanı", "Kontrol listesi dilini anla"), listOf("aviation-tools")),
+        CourseLesson("aviation-defect-report", "Arıza ve bulgu raporu yazımı", "Mesleki", "Uçak Bakım İngilizcesi", 25,
+            listOf("Belirti, bulgu ve eylemi birbirinden ayır", "Varsayım eklemeden teknik rapor yaz"), listOf("aviation-inspection", "aviation-documentation"))
     )
 
     fun forLevel(level: String): List<CourseLesson> =
