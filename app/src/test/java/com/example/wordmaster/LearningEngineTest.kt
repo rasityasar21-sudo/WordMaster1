@@ -1,5 +1,7 @@
 package com.example.wordmaster
 
+import org.json.JSONArray
+import org.json.JSONObject
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -105,9 +107,12 @@ class LearningEngineTest {
 
     @Test
     fun decodingSkipsBlankWordsAndClampsInvalidCounters() {
-        val decoded = WordMasterLearningEngine.decode(
-            """[{"word":"   ","correctCount":4},{"word":"  book  ","correctCount":-2,"mistakeCount":-1,"streak":-3,"intervalDays":-8,"easeFactor":0.5},{"word":"chair"}]"""
-        )
+        val json = JSONArray()
+            .put(JSONObject().put("word", "   ").put("correctCount", 4))
+            .put(JSONObject().put("word", "  book  ").put("correctCount", -2)
+                .put("mistakeCount", -1).put("streak", -3).put("intervalDays", -8).put("easeFactor", 0.5))
+            .put(JSONObject().put("word", "chair"))
+        val decoded = WordMasterLearningEngine.decode(json.toString())
 
         assertEquals(listOf("book", "chair"), decoded.map { it.word })
         assertEquals(0, decoded.first().correctCount)
