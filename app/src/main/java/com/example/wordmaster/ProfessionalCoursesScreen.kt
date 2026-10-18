@@ -34,7 +34,21 @@ fun ProfessionalCoursesScreen(onBackToLessons: () -> Unit) {
     val tracks = ProfessionalCourseCatalog.tracks
     val selectedTrack = tracks.firstOrNull { it.id == selectedTrackId }
     Column(Modifier.fillMaxWidth().background(Color(0xFFF7F5FF)).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
+        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            IconButton(onClick = {
+                if (selectedTrackId != null) {
+                    selectedTrackId = null
+                    showAnswers = false
+                    revealedLessonAnswers = emptySet()
+                    quizIndex = 0
+                    quizAnswer = null
+                    quizChecked = false
+                    quizScore = 0
+                    missedTerms = emptyList()
+                } else onBackToLessons()
+            }) {
+                Text("‹", color = Color(0xFF5943C5), fontSize = 32.sp, fontWeight = FontWeight.Bold)
+            }
             Column(Modifier.weight(1f)) {
                 Text("WORDMASTER PREMIUM", color = Color(0xFF6957E8), fontSize = 11.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 1.4.sp)
                 Text("Mesleki İngilizce", color = Color(0xFF202044), fontSize = 27.sp, fontWeight = FontWeight.ExtraBold)
