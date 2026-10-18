@@ -346,6 +346,45 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                     }
                                 }
                             }
+                            Card(
+                                modifier = Modifier.fillMaxWidth(),
+                                shape = RoundedCornerShape(22.dp),
+                                colors = CardDefaults.cardColors(containerColor = Color.White)
+                            ) {
+                                Column(Modifier.fillMaxWidth().padding(18.dp), verticalArrangement = Arrangement.spacedBy(13.dp)) {
+                                    Row(verticalAlignment = Alignment.CenterVertically) {
+                                        Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(3.dp)) {
+                                            Text("GÜNLÜK GÖREVLER", color = Color(0xFF6D5AE6), fontSize = 11.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 1.3.sp)
+                                            Text("Bugünün küçük kazanımları", color = Color(0xFF211D3A), fontSize = 18.sp, fontWeight = FontWeight.ExtraBold)
+                                        }
+                                        Text("🎯", fontSize = 28.sp)
+                                    }
+                                    val taskOne = todayProgress >= dailyGoal
+                                    val taskTwo = totalCorrect >= 5
+                                    val taskThree = dailyStreak >= 3
+                                    listOf(
+                                        Triple("Cevapla $dailyGoal soru", todayProgress, dailyGoal.coerceAtLeast(1)),
+                                        Triple("5 doğru cevap biriktir", totalCorrect.coerceAtMost(5), 5),
+                                        Triple("3 günlük serini koru", dailyStreak.coerceAtMost(3), 3)
+                                    ).forEachIndexed { index, task ->
+                                        val completed = when (index) { 0 -> taskOne; 1 -> taskTwo; else -> taskThree }
+                                        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                                            Text(if (completed) "✅" else "◯", fontSize = 18.sp)
+                                            Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(5.dp)) {
+                                                Text(task.first, color = Color(0xFF29263D), fontWeight = FontWeight.SemiBold, fontSize = 13.sp)
+                                                LinearProgressIndicator(
+                                                    progress = { (task.second.toFloat() / task.third).coerceIn(0f, 1f) },
+                                                    modifier = Modifier.fillMaxWidth().height(5.dp),
+                                                    color = if (completed) Color(0xFF13A879) else Color(0xFF7C3AED),
+                                                    trackColor = Color(0xFFEDEAF7)
+                                                )
+                                            }
+                                            Text(if (completed) "Tamam" else "${task.second}/${task.third}", color = Color(0xFF77738B), fontSize = 11.sp)
+                                        }
+                                    }
+                                    Text("Not: Görevler bu cihazdaki kayıtlarına göre hesaplanır.", color = Color(0xFF89859B), fontSize = 11.sp)
+                                }
+                            }
                             if (dueCount > 0) {
                                 Card(shape = RoundedCornerShape(18.dp), colors = CardDefaults.cardColors(containerColor = Color(0xFFFFF7E8))) {
                                     Row(Modifier.fillMaxWidth().padding(15.dp), verticalAlignment = Alignment.CenterVertically) {
