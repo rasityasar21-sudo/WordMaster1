@@ -45,6 +45,28 @@ def find_stardict(root):
             return idx, dictionary
     raise RuntimeError("Sözlük .idx bulundu ancak .dict.dz/.dict dosyası bulunamadı")
 
+def is_useful_entry(word, definition):
+    """Reject corrupt/index-noise entries while retaining legitimate short words."""
+    word = re.sub(r"\\s+", " ", word).strip()
+    definition = re.sub(r"\\s+", " ", definition).strip()
+    if not word or not definition:
+        return False
+    # Headwords may contain letters, digits, spaces, apostrophes, hyphens, dots or slashes.
+    if not re.search(r"[A-Za-zÀ-ÖØ-öø-ÿ]", word):
+        return False
+    if re.search(r"[<>\\x00-\\x1f\\x7f]", word):
+        return False
+    if len(word) > 100 or len(definition) < 2:
+        return False
+    # Ignore corrupted definitions that contain no meaningful alphabetic content.
+    letters = re.findall(r"[A-Za-zÀ-ÖØ-öø-ÿ]", definition)
+    if len(letters) < 2:
+        return False
+    # Avoid entries whose only "translation" repeats the English headword.
+    if word.casefold() == definition.casefold():
+        return False
+    return True
+
 def parse_index(idx_path, dict_path):
     idx_bytes = idx_path.read_bytes()
     raw_dict = dict_path.read_bytes()
@@ -64,14 +86,14 @@ def parse_index(idx_path, dict_path):
             invalid_ranges += 1
             continue
         definition = plain_text(raw_dict[offset:offset + size])
-        if not definition:
+        if not is_useful_entry(word, definition):
             continue
         entries.append({
             "en": word,
             "tr": definition[:1200],
             "level": "B1"
         })
-    print(f"StarDict index={idx_path} ({len(idx_bytes)} bytes), dictionary={dict_path} ({len(raw_dict)} uncompressed bytes), invalid ranges={invalid_ranges}")
+    print(f"StarDict index={idx_path} ({len(idx_bytes)} bytes), dictionary={dict_path} ({len(raw_dict)} uncompressed bytes), invalid ranges={invalid_ranges}, useful entries={len(entries)}")
     return entries
 
 def main():
@@ -81,7 +103,7 @@ def main():
     idx_path, dict_path = find_stardict(root)
     imported = parse_index(idx_path, dict_path)
     if len(imported) < 20000:
-        raise RuntimeError(f"Beklenen sözlük sayısına ulaşılamadı: {len(imported)} kayıt; idx={idx_path}; dict={dict_path}")
+        raise RuntimeError(f"Kalite filtresinden sonra beklenen sözlük sayısına ulaşılamadı: {len(imported)} kayıt; idx={idx_path}; dict={dict_path}")
     current = json.loads(ASSET.read_text(encoding="utf-8"))
     # Keep the existing hand-edited translations/examples when the headword already exists.
     merged = {}
