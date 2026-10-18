@@ -115,7 +115,10 @@ class MainActivity : ComponentActivity() {
                     !turkish.contains("ı", true) && !turkish.contains("ö", true) &&
                     !turkish.contains("ş", true) && !turkish.contains("ü", true) &&
                     !turkish.contains("/") && !turkish.contains(",")
-                if (english.isBlank() || turkish.isBlank() || isMorphologyFragment || looksLikeEnglishDefinition) {
+                // Exclude low-value ordinal abbreviations and number-like dictionary noise.
+                val isOrdinalNoise = english.matches(Regex("(?i)(?:\\d+|\\d{1,3}(?:,\\d{3})+)(?:st|nd|rd|th)")) ||
+                    english.matches(Regex("\\d+(?:st|nd|rd|th)?"))
+                if (english.isBlank() || turkish.isBlank() || isMorphologyFragment || looksLikeEnglishDefinition || isOrdinalNoise) {
                     null
                 } else {
                     Word(english, turkish, item.optString("level", "A1"), example)
@@ -255,13 +258,25 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                 else -> words
             }
         }
-        val target = pool.random()
-        val sameLevelChoices = words.filter { it.level == target.level && it.en != target.en }
-        val otherChoices = words.filter { it.en != target.en && it !in sameLevelChoices }
+        val target = pool.randomOrNull() ?: words.randomOrNull() ?: return
+        // Avoid shuffling the entire large dictionary on the main thread: that made
+        // the placement quiz appear frozen on phones with tens of thousands of entries.
+        val choices = linkedMapOf<String, Word>()
+        choices[target.en] = target
+        repeat(3) {
+            val sameLevel = words.filter { it.level == target.level && it.en != target.en }
+            val candidate = sameLevel.randomOrNull()
+                ?: words.randomOrNull { it.en != target.en && it.en !in choices.keys }
+            if (candidate != null) choices[candidate.en] = candidate
+        }
+        var attempts = 0
+        while (choices.size < minOf(4, words.distinctBy { it.en }.size) && attempts < 40) {
+            val candidate = words.randomOrNull()
+            if (candidate != null) choices[candidate.en] = candidate
+            attempts++
+        }
         quizWord = target
-        quizChoices = (listOf(target) + sameLevelChoices.shuffled().take(3).let { picked ->
-            if (picked.size == 3) picked else picked + otherChoices.shuffled().take(3 - picked.size)
-        }).shuffled()
+        quizChoices = choices.values.shuffled()
         quizMessage = null
     }
 
