@@ -21,6 +21,7 @@ fun ProfessionalCoursesScreen(onBackToLessons: () -> Unit) {
     var quizAnswer by remember { mutableStateOf<String?>(null) }
     var quizChecked by remember { mutableStateOf(false) }
     var quizScore by remember { mutableIntStateOf(0) }
+    var trackSearch by remember { mutableStateOf("") }
     val tracks = ProfessionalCourseCatalog.tracks
     val selectedTrack = tracks.firstOrNull { it.id == selectedTrackId }
     Column(Modifier.fillMaxWidth().background(Color(0xFFF7F5FF)).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
@@ -42,7 +43,18 @@ fun ProfessionalCoursesScreen(onBackToLessons: () -> Unit) {
                     }
                 }
             }
-            tracks.forEach { track ->
+            OutlinedTextField(
+                value = trackSearch,
+                onValueChange = { trackSearch = it },
+                modifier = Modifier.fillMaxWidth(),
+                singleLine = true,
+                label = { Text("Meslek ara") },
+                placeholder = { Text("Örn. uçak bakım, yazılım, sağlık") },
+                shape = RoundedCornerShape(14.dp)
+            )
+            val visibleTracks = tracks.filter { it.title.contains(trackSearch, ignoreCase = true) || it.description.contains(trackSearch, ignoreCase = true) }
+            if (visibleTracks.isEmpty()) Text("Bu aramayla eşleşen meslek bulunamadı.", color = Color(0xFF687086), fontSize = 13.sp)
+            visibleTracks.forEach { track ->
                 Card(Modifier.fillMaxWidth().clickable { selectedTrackId = track.id; showAnswers = false; quizIndex = 0; quizAnswer = null; quizChecked = false; quizScore = 0 }, colors = CardDefaults.cardColors(containerColor = Color.White), shape = RoundedCornerShape(18.dp)) {
                     Row(Modifier.fillMaxWidth().padding(16.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                         Surface(color = Color(0xFFEDEAFF), shape = RoundedCornerShape(14.dp)) {
