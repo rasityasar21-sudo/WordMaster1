@@ -191,6 +191,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
     var showMatchGame by remember { mutableStateOf(false) }
     var matchRound by remember { mutableIntStateOf(0) }
     var matchWords by remember { mutableStateOf<List<Word>>(emptyList()) }
+    var matchTurkishOrder by remember { mutableStateOf<List<Word>>(emptyList()) }
     var matched by remember { mutableStateOf(setOf<String>()) }
     var selectedEnglish by remember { mutableStateOf<String?>(null) }
     var matchMessage by remember { mutableStateOf("İngilizce kelimeyi seç, sonra Türkçe karşılığını bul.") }
@@ -281,7 +282,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
     }
 
     val hasDismissibleOverlay = showProfile || showSettings || showTools || showPronunciation ||
-        showMatchGame || showQuizSummary || quizWord != null || showQuizSummary
+        showMatchGame || showQuizSummary || quizWord != null
 
     BackHandler(enabled = hasDismissibleOverlay || currentScreen != "Dersler") {
         when {
@@ -380,7 +381,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                             }
                             Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                                 Card(Modifier.weight(1f), shape = RoundedCornerShape(20.dp), colors = CardDefaults.cardColors(containerColor = Color.White)) {
-                                    Column(Modifier.fillMaxWidth().clickable { showMatchGame = true; matchRound = 0; matched = emptySet(); selectedEnglish = null; matchWords = words.shuffled().take(5) }.padding(15.dp), verticalArrangement = Arrangement.spacedBy(7.dp)) {
+                                    Column(Modifier.fillMaxWidth().clickable { showMatchGame = true; matchRound = 0; matched = emptySet(); selectedEnglish = null; matchWords = words.shuffled().take(5); matchTurkishOrder = matchWords.shuffled(); matchMessage = "İngilizce kelimeyi seç, sonra Türkçe karşılığını bul." }.padding(15.dp), verticalArrangement = Arrangement.spacedBy(7.dp)) {
                                         Text("🧩", fontSize = 25.sp)
                                         Text("Eşleştirme", color = Color(0xFF211D3A), fontWeight = FontWeight.Bold)
                                         Text("Hızlı oyun", color = Color(0xFF77738B), fontSize = 12.sp)
@@ -1184,6 +1185,8 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
             Text("🎮 KELİME EŞLEŞTİRME", fontWeight = FontWeight.Bold)
             Button(onClick = {
                 matchWords = words.shuffled().take(4)
+                matchTurkishOrder = matchWords.shuffled()
+                matchRound++
                 matched = emptySet()
                 selectedEnglish = null
                 matchMessage = "İngilizce kelimeyi seç, sonra Türkçe karşılığını bul."
@@ -1220,7 +1223,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                 }
                 HorizontalDivider()
                 Text("Türkçe", fontWeight = FontWeight.Bold)
-                matchWords.filter { it.en !in matched }.shuffled().forEach { word ->
+                matchTurkishOrder.filter { it.en !in matched }.forEach { word ->
                     OutlinedButton(
                         onClick = {
                             val selected = selectedEnglish
