@@ -294,13 +294,23 @@ object ProfessionalCourseCatalog {
             title = "Turizm ve Otelcilik İngilizcesi",
             titleEnglish = "Hospitality English",
             description = "Misafir karşılama, rezervasyon ve hizmet iletişimi.",
-            topics = listOf("Misafir karşılama", "Rezervasyon", "Şikâyet çözme", "Yön tarif etme"),
-            lessons = listOf(ProfessionalLesson("guest-service", "Misafir talebini karşılama", "Kibarca bilgi almak ve çözüm seçeneklerini anlatmak.", "Hizmet dilinde sakin bir ton, teyit soruları ve gerçekçi beklentiler önemlidir. Yapılamayacak bir işlem için kesin söz vermek yerine uygun ekipten destek istenmelidir.", listOf("How may I help you?" to "Size nasıl yardımcı olabilirim?", "Let me check that for you." to "Sizin için kontrol edeyim.", "I apologize for the inconvenience." to "Yaşanan aksaklık için özür dilerim."), "Bir isteği hemen çözemiyorsan nasıl yanıt vermek uygundur?", "Kontrol edeceğini söylemek ve gerçekçi bir sonraki adım sunmak.")),
+            topics = listOf("Misafir karşılama", "Rezervasyon", "Şikâyet çözme", "Yön tarif etme", "Oda özellikleri", "Ödeme ve çıkış"),
+            lessons = listOf(
+                ProfessionalLesson("guest-service", "Misafir talebini karşılama", "Kibarca bilgi almak ve çözüm seçeneklerini anlatmak.", "Hizmet dilinde sakin bir ton, teyit soruları ve gerçekçi beklentiler önemlidir. Yapılamayacak bir işlem için kesin söz vermek yerine uygun ekipten destek istenmelidir.", listOf("How may I help you?" to "Size nasıl yardımcı olabilirim?", "Let me check that for you." to "Sizin için kontrol edeyim.", "I apologize for the inconvenience." to "Yaşanan aksaklık için özür dilerim."), "Bir isteği hemen çözemiyorsan nasıl yanıt vermek uygundur?", "Kontrol edeceğini söylemek ve gerçekçi bir sonraki adım sunmak."),
+                ProfessionalLesson("reservations-and-facilities", "Rezervasyon ve oda bilgisi", "Rezervasyon ayrıntılarını doğrulamak ve olanakları anlatmak.", "Tarih, kişi sayısı, oda tipi ve özel talepler teyit edilmelidir. Mevcut olmayan bir olanağı varmış gibi söylemek yerine doğrulama yapılmalıdır.", listOf("Could I have your booking reference?" to "Rezervasyon numaranızı alabilir miyim?", "Breakfast is served from seven to ten." to "Kahvaltı yediden ona kadar servis edilir.", "Let me confirm the room type." to "Oda tipini teyit edeyim."), "Rezervasyon sırasında hangi ayrıntılar teyit edilmelidir?", "Tarih, kişi sayısı, oda tipi ve önemli özel talepler."),
+                ProfessionalLesson("handling-complaints", "Şikâyetleri profesyonelce ele alma", "Sorunu dinlemek, özür dilemek ve sonraki adımı açıklamak.", "Önce misafirin sorunu kesmeden dinlenir ve anlaşıldığı teyit edilir. Çözüm sözü ancak yetki ve gerçek durum doğrulandıktan sonra verilmelidir.", listOf("I understand your concern." to "Endişenizi anlıyorum.", "I will contact the relevant team." to "İlgili ekiple iletişime geçeceğim.", "Thank you for bringing this to our attention." to "Bunu bize bildirdiğiniz için teşekkür ederiz."), "Bir şikâyete yanıt verirken neden gerçekçi beklenti sunulmalıdır?", "Yapılamayacak bir çözüm için yanlış söz vermemek ve güveni korumak için.")
+            ),
             sampleTerms = listOf(
             ProfessionalTerm("reservation", "rezervasyon", "I would like to confirm my reservation."),
             ProfessionalTerm("guest", "misafir", "The guest needs an extra towel."),
             ProfessionalTerm("checkout", "çıkış işlemi", "Checkout is before noon."),
-            ProfessionalTerm("available", "müsait / mevcut", "A single room is available.")
+            ProfessionalTerm("available", "müsait / mevcut", "A single room is available."),
+            ProfessionalTerm("amenity", "olanak / imkân", "Please ask reception about this amenity."),
+            ProfessionalTerm("housekeeping", "kat hizmetleri", "Housekeeping will bring extra towels."),
+            ProfessionalTerm("booking reference", "rezervasyon numarası", "Could I have your booking reference?"),
+            ProfessionalTerm("complaint", "şikâyet", "We will review your complaint."),
+            ProfessionalTerm("vacancy", "boş oda / müsaitlik", "Please check room vacancy for those dates."),
+            ProfessionalTerm("invoice", "fatura", "Would you like an itemized invoice?")
             )
         ),
         ProfessionalTrack(
@@ -308,13 +318,23 @@ object ProfessionalCourseCatalog {
             title = "Lojistik İngilizcesi",
             titleEnglish = "Logistics English",
             description = "Sevkiyat, depo, teslimat ve tedarik zinciri terminolojisi.",
-            topics = listOf("Sevkiyat belgeleri", "Depo işlemleri", "Teslimat durumları", "Tedarik zinciri"),
-            lessons = listOf(ProfessionalLesson("shipment-status", "Sevkiyat durumunu bildirme", "Durum, gecikme ve tahmini varış bilgisini net ifade etmek.", "Lojistik iletişiminde gönderi numarası, güncel durum ve tahmini tarih birbirinden ayrılmalıdır. Kesinleşmemiş teslimat tarihi garanti gibi sunulmamalıdır.", listOf("The shipment is in transit." to "Sevkiyat yolda.", "The delivery has been delayed." to "Teslimat gecikti.", "The estimated arrival date is..." to "Tahmini varış tarihi ..."), "Tahmini varış tarihi kesin teslimat garantisi midir?", "Hayır; tahmini bilgidir ve güncel durumla birlikte belirtilmelidir.")),
+            topics = listOf("Sevkiyat belgeleri", "Depo işlemleri", "Teslimat durumları", "Tedarik zinciri", "Stok yönetimi", "Gecikme bildirimi"),
+            lessons = listOf(
+                ProfessionalLesson("shipment-status", "Sevkiyat durumunu bildirme", "Durum, gecikme ve tahmini varış bilgisini net ifade etmek.", "Lojistik iletişiminde gönderi numarası, güncel durum ve tahmini tarih birbirinden ayrılmalıdır. Kesinleşmemiş teslimat tarihi garanti gibi sunulmamalıdır.", listOf("The shipment is in transit." to "Sevkiyat yolda.", "The delivery has been delayed." to "Teslimat gecikti.", "The estimated arrival date is..." to "Tahmini varış tarihi ..."), "Tahmini varış tarihi kesin teslimat garantisi midir?", "Hayır; tahmini bilgidir ve güncel durumla birlikte belirtilmelidir."),
+                ProfessionalLesson("warehouse-receiving", "Depo kabul ve stok güncelleme", "Mal kabulü ve stok kayıtları hakkında net iletişim kurmak.", "Mal kabulünde miktar, ürün kodu ve görülen hasar kontrol edilip kayıtla karşılaştırılır. Eksik veya hasarlı ürünler sürece uygun biçimde raporlanır.", listOf("The goods have arrived at the warehouse." to "Ürünler depoya ulaştı.", "The quantity does not match the order." to "Miktar siparişle uyuşmuyor.", "Please update the inventory record." to "Lütfen stok kaydını güncelleyin."), "Mal kabulünde miktar uyuşmazlığı varsa ne yapılmalıdır?", "Uyuşmazlık kaydedilmeli ve ilgili sorumluya bildirilmelidir."),
+                ProfessionalLesson("delivery-exceptions", "Teslimat sorunlarını bildirme", "Gecikme ve teslimat istisnalarını çözüm odaklı aktarmak.", "Bildirimde gönderi referansı, sorun, bilinen neden ve doğrulanmış sonraki adım bulunmalıdır. Bilinmeyen neden tahmin edilerek kesin bilgi gibi sunulmamalıdır.", listOf("The shipment is delayed due to weather." to "Sevkiyat hava koşulları nedeniyle gecikti.", "We are checking the revised delivery estimate." to "Güncellenmiş teslimat tahminini kontrol ediyoruz.", "Please confirm receipt of the goods." to "Lütfen ürünleri teslim aldığınızı teyit edin."), "Sorun bildiriminde hangi bilgiler açıkça verilmelidir?", "Gönderi referansı, mevcut sorun ve doğrulanmış sonraki adım.")
+            ),
             sampleTerms = listOf(
             ProfessionalTerm("shipment", "sevkiyat", "The shipment will arrive tomorrow."),
             ProfessionalTerm("warehouse", "depo", "The goods are stored in the warehouse."),
             ProfessionalTerm("delivery", "teslimat", "The delivery is delayed."),
-            ProfessionalTerm("inventory", "stok / envanter", "Update the inventory after receiving goods.")
+            ProfessionalTerm("inventory", "stok / envanter", "Update the inventory after receiving goods."),
+            ProfessionalTerm("dispatch", "sevkiyata çıkarma", "The order is ready for dispatch."),
+            ProfessionalTerm("consignment", "gönderi", "Track the consignment using its reference."),
+            ProfessionalTerm("purchase order", "satın alma siparişi", "Check the goods against the purchase order."),
+            ProfessionalTerm("lead time", "tedarik / teslim süresi", "The lead time is estimated at five days."),
+            ProfessionalTerm("shortage", "eksik miktar", "Report any shortage on receipt."),
+            ProfessionalTerm("tracking number", "takip numarası", "Please provide the tracking number.")
             )
         ),
         ProfessionalTrack(
