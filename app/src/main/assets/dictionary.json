@@ -9631,5 +9631,617 @@
     "tr": "alan; etki alanı",
     "level": "B1",
     "example": "The word \"domain\" is useful in everyday English."
+  },
+  {
+    "en": "ecological",
+    "tr": "ekolojik",
+    "level": "A2",
+    "example": "The word \"ecological\" is useful in everyday English."
+  },
+  {
+    "en": "ecosystem",
+    "tr": "ekosistem",
+    "level": "B1",
+    "example": "The word \"ecosystem\" is useful in everyday English."
+  },
+  {
+    "en": "electoral",
+    "tr": "seçimle ilgili",
+    "level": "B2",
+    "example": "The word \"electoral\" is useful in everyday English."
+  },
+  {
+    "en": "elevate",
+    "tr": "yükseltmek",
+    "level": "B2",
+    "example": "The word \"elevate\" is useful in everyday English."
+  },
+  {
+    "en": "eligible",
+    "tr": "uygun; hak sahibi",
+    "level": "B1",
+    "example": "The word \"eligible\" is useful in everyday English."
+  },
+  {
+    "en": "embark",
+    "tr": "başlamak; girişmek",
+    "level": "B2",
+    "example": "The word \"embark\" is useful in everyday English."
+  },
+  {
+    "en": "embassy",
+    "tr": "büyükelçilik",
+    "level": "A2",
+    "example": "The word \"embassy\" is useful in everyday English."
+  },
+  {
+    "en": "embed",
+    "tr": "gömmek; yerleştirmek",
+    "level": "B2",
+    "example": "The word \"embed\" is useful in everyday English."
+  },
+  {
+    "en": "embody",
+    "tr": "somutlaştırmak; temsil etmek",
+    "level": "B2",
+    "example": "The word \"embody\" is useful in everyday English."
+  },
+  {
+    "en": "emergence",
+    "tr": "ortaya çıkış",
+    "level": "B2",
+    "example": "The word \"emergence\" is useful in everyday English."
+  },
+  {
+    "en": "empower",
+    "tr": "yetki vermek; güçlendirmek",
+    "level": "B2",
+    "example": "The word \"empower\" is useful in everyday English."
+  },
+  {
+    "en": "enact",
+    "tr": "yasalaştırmak; yürürlüğe koymak",
+    "level": "B2",
+    "example": "The word \"enact\" is useful in everyday English."
+  },
+  {
+    "en": "encompass",
+    "tr": "kapsamak",
+    "level": "B2",
+    "example": "The word \"encompass\" is useful in everyday English."
+  },
+  {
+    "en": "endorse",
+    "tr": "desteklemek; onaylamak",
+    "level": "B2",
+    "example": "The word \"endorse\" is useful in everyday English."
+  },
+  {
+    "en": "enforce",
+    "tr": "uygulamak; zorla uygulatmak",
+    "level": "B2",
+    "example": "The word \"enforce\" is useful in everyday English."
+  },
+  {
+    "en": "engagement",
+    "tr": "katılım; bağlılık",
+    "level": "B1",
+    "example": "The word \"engagement\" is useful in everyday English."
+  },
+  {
+    "en": "enhancement",
+    "tr": "geliştirme; iyileştirme",
+    "level": "B2",
+    "example": "The word \"enhancement\" is useful in everyday English."
+  },
+  {
+    "en": "enrich",
+    "tr": "zenginleştirmek",
+    "level": "B1",
+    "example": "The word \"enrich\" is useful in everyday English."
+  },
+  {
+    "en": "entrepreneur",
+    "tr": "girişimci",
+    "level": "B1",
+    "example": "The word \"entrepreneur\" is useful in everyday English."
+  },
+  {
+    "en": "entrepreneurship",
+    "tr": "girişimcilik",
+    "level": "B2",
+    "example": "The word \"entrepreneurship\" is useful in everyday English."
+  },
+  {
+    "en": "epidemic",
+    "tr": "salgın",
+    "level": "B1",
+    "example": "The word \"epidemic\" is useful in everyday English."
+  },
+  {
+    "en": "era",
+    "tr": "dönem; çağ",
+    "level": "A2",
+    "example": "The word \"era\" is useful in everyday English."
+  },
+  {
+    "en": "erode",
+    "tr": "aşındırmak; aşınmak",
+    "level": "B2",
+    "example": "The word \"erode\" is useful in everyday English."
+  },
+  {
+    "en": "escalate",
+    "tr": "tırmanmak; artırmak",
+    "level": "B2",
+    "example": "The word \"escalate\" is useful in everyday English."
+  },
+  {
+    "en": "essence",
+    "tr": "öz; esas",
+    "level": "B2",
+    "example": "The word \"essence\" is useful in everyday English."
+  },
+  {
+    "en": "evolutionary",
+    "tr": "evrimsel",
+    "level": "B2",
+    "example": "The word \"evolutionary\" is useful in everyday English."
+  },
+  {
+    "en": "exaggerate",
+    "tr": "abartmak",
+    "level": "B1",
+    "example": "The word \"exaggerate\" is useful in everyday English."
+  },
+  {
+    "en": "exceptional",
+    "tr": "olağanüstü",
+    "level": "B1",
+    "example": "The word \"exceptional\" is useful in everyday English."
+  },
+  {
+    "en": "exclusion",
+    "tr": "dışlama",
+    "level": "B2",
+    "example": "The word \"exclusion\" is useful in everyday English."
+  },
+  {
+    "en": "exert",
+    "tr": "uygulamak; sarf etmek",
+    "level": "B2",
+    "example": "The word \"exert\" is useful in everyday English."
+  },
+  {
+    "en": "exile",
+    "tr": "sürgün; sürgüne göndermek",
+    "level": "B2",
+    "example": "The word \"exile\" is useful in everyday English."
+  },
+  {
+    "en": "explicitly",
+    "tr": "açıkça",
+    "level": "B2",
+    "example": "The word \"explicitly\" is useful in everyday English."
+  },
+  {
+    "en": "extract",
+    "tr": "çıkarmak; özüt",
+    "level": "B1",
+    "example": "The word \"extract\" is useful in everyday English."
+  },
+  {
+    "en": "faction",
+    "tr": "grup; hizip",
+    "level": "C1",
+    "example": "The word \"faction\" is useful in everyday English."
+  },
+  {
+    "en": "faculty",
+    "tr": "fakülte; yeti",
+    "level": "B1",
+    "example": "The word \"faculty\" is useful in everyday English."
+  },
+  {
+    "en": "feasible",
+    "tr": "uygulanabilir",
+    "level": "B2",
+    "example": "The word \"feasible\" is useful in everyday English."
+  },
+  {
+    "en": "feminine",
+    "tr": "kadınsı; dişil",
+    "level": "B1",
+    "example": "The word \"feminine\" is useful in everyday English."
+  },
+  {
+    "en": "filter",
+    "tr": "süzmek; filtre",
+    "level": "A2",
+    "example": "The word \"filter\" is useful in everyday English."
+  },
+  {
+    "en": "financially",
+    "tr": "mali açıdan",
+    "level": "B1",
+    "example": "The word \"financially\" is useful in everyday English."
+  },
+  {
+    "en": "fiscal",
+    "tr": "mali; bütçeyle ilgili",
+    "level": "C1",
+    "example": "The word \"fiscal\" is useful in everyday English."
+  },
+  {
+    "en": "flexibility",
+    "tr": "esneklik",
+    "level": "B1",
+    "example": "The word \"flexibility\" is useful in everyday English."
+  },
+  {
+    "en": "flourish",
+    "tr": "gelişmek; serpilmek",
+    "level": "B2",
+    "example": "The word \"flourish\" is useful in everyday English."
+  },
+  {
+    "en": "formulate",
+    "tr": "formüle etmek; oluşturmak",
+    "level": "B2",
+    "example": "The word \"formulate\" is useful in everyday English."
+  },
+  {
+    "en": "forthcoming",
+    "tr": "yaklaşan; gelecek",
+    "level": "B2",
+    "example": "The word \"forthcoming\" is useful in everyday English."
+  },
+  {
+    "en": "frequency",
+    "tr": "sıklık; frekans",
+    "level": "A2",
+    "example": "The word \"frequency\" is useful in everyday English."
+  },
+  {
+    "en": "fulfil",
+    "tr": "yerine getirmek; karşılamak",
+    "level": "B1",
+    "example": "The word \"fulfil\" is useful in everyday English."
+  },
+  {
+    "en": "genetic",
+    "tr": "genetik",
+    "level": "B1",
+    "example": "The word \"genetic\" is useful in everyday English."
+  },
+  {
+    "en": "genuine",
+    "tr": "gerçek; samimi",
+    "level": "B1",
+    "example": "The word \"genuine\" is useful in everyday English."
+  },
+  {
+    "en": "governance",
+    "tr": "yönetim; yönetişim",
+    "level": "C1",
+    "example": "The word \"governance\" is useful in everyday English."
+  },
+  {
+    "en": "gradient",
+    "tr": "eğim; gradyan",
+    "level": "B2",
+    "example": "The word \"gradient\" is useful in everyday English."
+  },
+  {
+    "en": "graphic",
+    "tr": "grafik; görsel",
+    "level": "A2",
+    "example": "The word \"graphic\" is useful in everyday English."
+  },
+  {
+    "en": "grasp",
+    "tr": "kavramak; sıkıca tutmak",
+    "level": "B1",
+    "example": "The word \"grasp\" is useful in everyday English."
+  },
+  {
+    "en": "hence",
+    "tr": "bu nedenle; dolayısıyla",
+    "level": "B2",
+    "example": "The word \"hence\" is useful in everyday English."
+  },
+  {
+    "en": "hierarchy",
+    "tr": "hiyerarşi",
+    "level": "B2",
+    "example": "The word \"hierarchy\" is useful in everyday English."
+  },
+  {
+    "en": "holistic",
+    "tr": "bütüncül",
+    "level": "C1",
+    "example": "The word \"holistic\" is useful in everyday English."
+  },
+  {
+    "en": "identical",
+    "tr": "özdeş; aynı",
+    "level": "B1",
+    "example": "The word \"identical\" is useful in everyday English."
+  },
+  {
+    "en": "ideological",
+    "tr": "ideolojik",
+    "level": "B2",
+    "example": "The word \"ideological\" is useful in everyday English."
+  },
+  {
+    "en": "immediate",
+    "tr": "anında; yakın",
+    "level": "A2",
+    "example": "The word \"immediate\" is useful in everyday English."
+  },
+  {
+    "en": "indication",
+    "tr": "belirti; gösterge",
+    "level": "B1",
+    "example": "The word \"indication\" is useful in everyday English."
+  },
+  {
+    "en": "inequality",
+    "tr": "eşitsizlik",
+    "level": "B1",
+    "example": "The word \"inequality\" is useful in everyday English."
+  },
+  {
+    "en": "inhibit",
+    "tr": "engellemek; baskılamak",
+    "level": "B2",
+    "example": "The word \"inhibit\" is useful in everyday English."
+  },
+  {
+    "en": "inquiry",
+    "tr": "soruşturma; sorgulama",
+    "level": "B1",
+    "example": "The word \"inquiry\" is useful in everyday English."
+  },
+  {
+    "en": "inspect",
+    "tr": "incelemek; denetlemek",
+    "level": "A2",
+    "example": "The word \"inspect\" is useful in everyday English."
+  },
+  {
+    "en": "inspiration",
+    "tr": "ilham",
+    "level": "A2",
+    "example": "The word \"inspiration\" is useful in everyday English."
+  },
+  {
+    "en": "integral",
+    "tr": "ayrılmaz; bütünleyici",
+    "level": "B2",
+    "example": "The word \"integral\" is useful in everyday English."
+  },
+  {
+    "en": "integration",
+    "tr": "bütünleşme; entegrasyon",
+    "level": "B1",
+    "example": "The word \"integration\" is useful in everyday English."
+  },
+  {
+    "en": "intensity",
+    "tr": "yoğunluk",
+    "level": "B1",
+    "example": "The word \"intensity\" is useful in everyday English."
+  },
+  {
+    "en": "interact",
+    "tr": "etkileşim kurmak",
+    "level": "A2",
+    "example": "The word \"interact\" is useful in everyday English."
+  },
+  {
+    "en": "intermediate",
+    "tr": "orta düzey; ara",
+    "level": "A2",
+    "example": "The word \"intermediate\" is useful in everyday English."
+  },
+  {
+    "en": "intervention",
+    "tr": "müdahale",
+    "level": "B2",
+    "example": "The word \"intervention\" is useful in everyday English."
+  },
+  {
+    "en": "investigator",
+    "tr": "araştırmacı; soruşturmacı",
+    "level": "B1",
+    "example": "The word \"investigator\" is useful in everyday English."
+  },
+  {
+    "en": "liberal",
+    "tr": "liberal; özgürlükçü",
+    "level": "B1",
+    "example": "The word \"liberal\" is useful in everyday English."
+  },
+  {
+    "en": "likelihood",
+    "tr": "olasılık",
+    "level": "B1",
+    "example": "The word \"likelihood\" is useful in everyday English."
+  },
+  {
+    "en": "limitation",
+    "tr": "sınırlama; kısıt",
+    "level": "B1",
+    "example": "The word \"limitation\" is useful in everyday English."
+  },
+  {
+    "en": "literal",
+    "tr": "kelimesi kelimesine; gerçek anlamlı",
+    "level": "B1",
+    "example": "The word \"literal\" is useful in everyday English."
+  },
+  {
+    "en": "maintenance",
+    "tr": "bakım; sürdürme",
+    "level": "B1",
+    "example": "The word \"maintenance\" is useful in everyday English."
+  },
+  {
+    "en": "mandatory",
+    "tr": "zorunlu",
+    "level": "B1",
+    "example": "The word \"mandatory\" is useful in everyday English."
+  },
+  {
+    "en": "mediation",
+    "tr": "arabuluculuk",
+    "level": "B2",
+    "example": "The word \"mediation\" is useful in everyday English."
+  },
+  {
+    "en": "migration",
+    "tr": "göç",
+    "level": "A2",
+    "example": "The word \"migration\" is useful in everyday English."
+  },
+  {
+    "en": "minimize",
+    "tr": "minimize etmek; en aza indirmek",
+    "level": "B1",
+    "example": "The word \"minimize\" is useful in everyday English."
+  },
+  {
+    "en": "ministry",
+    "tr": "bakanlık",
+    "level": "A2",
+    "example": "The word \"ministry\" is useful in everyday English."
+  },
+  {
+    "en": "mobility",
+    "tr": "hareketlilik",
+    "level": "B1",
+    "example": "The word \"mobility\" is useful in everyday English."
+  },
+  {
+    "en": "moderate",
+    "tr": "ılımlı; orta düzeyde",
+    "level": "B1",
+    "example": "The word \"moderate\" is useful in everyday English."
+  },
+  {
+    "en": "modification",
+    "tr": "değişiklik; uyarlama",
+    "level": "B1",
+    "example": "The word \"modification\" is useful in everyday English."
+  },
+  {
+    "en": "monitoring",
+    "tr": "izleme; denetleme",
+    "level": "B1",
+    "example": "The word \"monitoring\" is useful in everyday English."
+  },
+  {
+    "en": "namely",
+    "tr": "yani; özellikle",
+    "level": "B2",
+    "example": "The word \"namely\" is useful in everyday English."
+  },
+  {
+    "en": "neglect",
+    "tr": "ihmal etmek; ihmal",
+    "level": "B1",
+    "example": "The word \"neglect\" is useful in everyday English."
+  },
+  {
+    "en": "normative",
+    "tr": "normatif; kurala dayalı",
+    "level": "C1",
+    "example": "The word \"normative\" is useful in everyday English."
+  },
+  {
+    "en": "notable",
+    "tr": "dikkate değer",
+    "level": "B1",
+    "example": "The word \"notable\" is useful in everyday English."
+  },
+  {
+    "en": "obligation",
+    "tr": "yükümlülük",
+    "level": "B1",
+    "example": "The word \"obligation\" is useful in everyday English."
+  },
+  {
+    "en": "observation",
+    "tr": "gözlem",
+    "level": "A2",
+    "example": "The word \"observation\" is useful in everyday English."
+  },
+  {
+    "en": "occupational",
+    "tr": "mesleki",
+    "level": "B2",
+    "example": "The word \"occupational\" is useful in everyday English."
+  },
+  {
+    "en": "operational",
+    "tr": "işletimsel; operasyonel",
+    "level": "B2",
+    "example": "The word \"operational\" is useful in everyday English."
+  },
+  {
+    "en": "opponent",
+    "tr": "rakip; karşıt",
+    "level": "A2",
+    "example": "The word \"opponent\" is useful in everyday English."
+  },
+  {
+    "en": "optimism",
+    "tr": "iyimserlik",
+    "level": "B1",
+    "example": "The word \"optimism\" is useful in everyday English."
+  },
+  {
+    "en": "orientation",
+    "tr": "yönelim; yönlendirme",
+    "level": "B1",
+    "example": "The word \"orientation\" is useful in everyday English."
+  },
+  {
+    "en": "oversee",
+    "tr": "denetlemek; gözetmek",
+    "level": "B2",
+    "example": "The word \"oversee\" is useful in everyday English."
+  },
+  {
+    "en": "persistent",
+    "tr": "ısrarcı; kalıcı",
+    "level": "B1",
+    "example": "The word \"persistent\" is useful in everyday English."
+  },
+  {
+    "en": "philosophical",
+    "tr": "felsefi",
+    "level": "B1",
+    "example": "The word \"philosophical\" is useful in everyday English."
+  },
+  {
+    "en": "predominantly",
+    "tr": "çoğunlukla; ağırlıklı olarak",
+    "level": "B2",
+    "example": "The word \"predominantly\" is useful in everyday English."
+  },
+  {
+    "en": "presumably",
+    "tr": "muhtemelen",
+    "level": "B2",
+    "example": "The word \"presumably\" is useful in everyday English."
+  },
+  {
+    "en": "prospective",
+    "tr": "muhtemel; gelecekteki",
+    "level": "B2",
+    "example": "The word \"prospective\" is useful in everyday English."
   }
 ]
