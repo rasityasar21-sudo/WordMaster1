@@ -52,6 +52,36 @@ class CourseCatalogTest {
     }
 
     @Test
+    fun higherLevelPlanSurfacesMissingLowerLevelPrerequisitesFirst() {
+        val plan = DailyStudyPlan.create(
+            level = "A2",
+            completedLessonIds = emptySet(),
+            dueWords = emptyList(),
+            targetMinutes = 15,
+            date = "2026-10-18"
+        )
+
+        assertTrue(plan.lessonIds.contains("a1-pronouns"))
+        assertTrue(plan.lessonIds.contains("a2-past"))
+        assertTrue(
+            plan.lessonIds.indexOf("a1-pronouns") < plan.lessonIds.indexOf("a2-past")
+        )
+    }
+
+    @Test
+    fun beginnerPlanStartsWithAvailableLessonsRatherThanRepeatingPrerequisites() {
+        val plan = DailyStudyPlan.create(
+            level = "A1",
+            completedLessonIds = emptySet(),
+            dueWords = emptyList(),
+            targetMinutes = 5
+        )
+
+        assertEquals("a1-greetings", plan.lessonIds.first())
+        assertFalse(plan.lessonIds.first() == "a1-questions")
+    }
+
+    @Test
     fun dailyPlanClampsTargetToSupportedRange() {
         val tooShort = DailyStudyPlan.create("A1", emptySet(), emptyList(), targetMinutes = 1)
         val tooLong = DailyStudyPlan.create("A1", emptySet(), emptyList(), targetMinutes = 500)
