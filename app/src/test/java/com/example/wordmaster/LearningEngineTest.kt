@@ -87,4 +87,26 @@ class LearningEngineTest {
         assertEquals(75, summary.accuracyPercent)
         assertEquals(4, summary.currentStreak)
     }
+
+    @Test
+    fun reviewQueuePrioritizesLowerAccuracyThenOlderDueDate() {
+        val today = LocalDate.now()
+        val words = listOf(
+            WordProgress(word = "high", correctCount = 9, mistakeCount = 1, dueDate = today.minusDays(2).toString()),
+            WordProgress(word = "low-old", correctCount = 1, mistakeCount = 3, dueDate = today.minusDays(2).toString()),
+            WordProgress(word = "low-new", correctCount = 1, mistakeCount = 3, dueDate = today.toString()),
+            WordProgress(word = "future", dueDate = today.plusDays(1).toString())
+        )
+
+        val due = WordMasterLearningEngine.dueForReview(words).map { it.word }
+
+        assertEquals(listOf("low-old", "low-new", "high"), due)
+    }
+
+    @Test
+    fun decodingInvalidOrMissingProgressDataSafelyReturnsEmptyList() {
+        assertTrue(WordMasterLearningEngine.decode(null).isEmpty())
+        assertTrue(WordMasterLearningEngine.decode("not-json").isEmpty())
+        assertTrue(WordMasterLearningEngine.decode("[null, 7, {}]").isEmpty())
+    }
 }
