@@ -29,12 +29,9 @@ class LearningProgressStore(context: Context) {
         val current = all().toMutableList()
         val index = current.indexOfFirst { it.word.equals(normalized, ignoreCase = true) }
         val old = if (index >= 0) current[index] else WordProgress(word = normalized)
-        val updated = old.copy(
-            correctCount = old.correctCount + if (correct) 1 else 0,
-            mistakeCount = old.mistakeCount + if (correct) 0 else 1,
-            dueDate = if (correct) old.dueDate else LocalDate.now().toString(),
-            lastReviewed = LocalDate.now().toString()
-        )
+        // Quiz answers feed the same spaced-repetition schedule as explicit recall ratings.
+        // A correct answer is a "good" recall (quality 4); a miss resets the streak (quality 1).
+        val updated = old.reviewed(quality = if (correct) 4 else 1)
         if (index >= 0) current[index] = updated else current.add(updated)
         save(current)
         return updated
