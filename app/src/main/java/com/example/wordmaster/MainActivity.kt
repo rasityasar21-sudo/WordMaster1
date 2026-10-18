@@ -121,6 +121,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
     var themeChoice by remember { mutableIntStateOf(prefs.getInt("themeChoice", 0)) }
     var compactCards by remember { mutableStateOf(prefs.getBoolean("compactCards", false)) }
     var dailyGoal by remember { mutableIntStateOf(prefs.getInt("dailyGoal", 10)) }
+    var dailyStudyGoal by remember { mutableIntStateOf(CourseProgressStore.dailyGoalMinutes(prefs)) }
     var chosenLevel by remember { mutableStateOf(prefs.getString("chosenLevel", "") ?: "") }
     var placementCompleted by remember { mutableStateOf(prefs.getBoolean("placementCompleted", false)) }
     var savedPlacementCorrect by remember { mutableIntStateOf(prefs.getInt("placementCorrect", 0)) }
@@ -151,12 +152,12 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
     var reviewRefresh by remember { mutableIntStateOf(0) }
     var showReviewQueue by remember { mutableStateOf(false) }
     val dueReviewWords = remember(reviewRefresh) { learningStore.dueForReview() }
-    val studyPlan = remember(studyPlanLevel, completedCourseIds, dueReviewWords, today) {
+    val studyPlan = remember(studyPlanLevel, completedCourseIds, dueReviewWords, today, dailyStudyGoal) {
         DailyStudyPlan.create(
             level = studyPlanLevel,
             completedLessonIds = completedCourseIds,
             dueWords = dueReviewWords,
-            targetMinutes = CourseProgressStore.dailyGoalMinutes(prefs),
+            targetMinutes = dailyStudyGoal,
             date = today
         )
     }
@@ -375,7 +376,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                 val progressSummary = learningStore.summary()
                                 val completedLessonCount = completedCourseIds.size
                                 val totalStudyMinutes = CourseProgressStore.studyMinutes(prefs, today)
-                                val studyMinuteGoal = CourseProgressStore.dailyGoalMinutes(prefs)
+                                val studyMinuteGoal = dailyStudyGoal
                                 val studyProgress = (totalStudyMinutes.toFloat() / studyMinuteGoal.coerceAtLeast(1)).coerceIn(0f, 1f)
                                 Column(Modifier.fillMaxWidth().padding(18.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
                                     Row(verticalAlignment = Alignment.CenterVertically) {
@@ -1158,6 +1159,21 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                     FilterChip(selected = dailyGoal == goal, onClick = { dailyGoal = goal; prefs.edit().putInt("dailyGoal", goal).apply() }, label = { Text("$goal") })
                 }
             }
+            HorizontalDivider()
+            Text("Günlük çalışma süresi hedefi", fontWeight = FontWeight.Bold)
+            Text("Dersleri tamamladıkça kaydedilen tahmini süreye göre ilerler.", fontSize = 12.sp, color = Color.Gray)
+            Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                listOf(5, 10, 15, 20, 30, 45, 60).forEach { goalMinutes ->
+                    FilterChip(
+                        selected = dailyStudyGoal == goalMinutes,
+                        onClick = {
+                            dailyStudyGoal = goalMinutes
+                            CourseProgressStore.setDailyGoalMinutes(prefs, goalMinutes)
+                        },
+                        label = { Text("$goalMinutes") }
+                    )
+                }
+            }
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Column(Modifier.weight(1f)) {
                     Text("Kompakt kelime kartları", fontWeight = FontWeight.SemiBold)
@@ -1169,6 +1185,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
         } },
         confirmButton = { TextButton(onClick = {
             prefs.edit().putInt("themeChoice", themeChoice).putInt("dailyGoal", dailyGoal).putBoolean("compactCards", compactCards).apply()
+            CourseProgressStore.setDailyGoalMinutes(prefs, dailyStudyGoal)
             showSettings = false
         }) { Text("Uygula") } },
         dismissButton = { TextButton(onClick = { showSettings = false }) { Text("Kapat") } }
