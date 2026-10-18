@@ -974,6 +974,22 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
             Text("📚 Öğrenilen: ${learned.size} kelime   ⭐ Favori: ${favorites.size}", color = Ink)
             Text("📖 Tamamlanan ders: ${CourseProgressStore.completedCount(prefs)}", color = Ink)
             Text("⏱️ Günlük çalışma: ${CourseProgressStore.studyMinutes(prefs)} / ${CourseProgressStore.dailyGoalMinutes(prefs)} dakika", color = Ink)
+            val todayWordCount = if (prefs.getString("todayWordsDate", "") == today) prefs.getInt("todayWords", 0) else 0
+            val learningSummary = learningStore.summary()
+            Surface(Modifier.fillMaxWidth(), shape = RoundedCornerShape(14.dp), color = Color(0xFFEAF7F1)) {
+                Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(5.dp)) {
+                    Text("BUGÜNKÜ ÖĞRENME PLANI", color = Color(0xFF24785A), fontWeight = FontWeight.ExtraBold, fontSize = 11.sp, letterSpacing = 0.7.sp)
+                    Text("$todayWordCount / $dailyGoal kelime hedefi", color = Ink, fontWeight = FontWeight.Bold)
+                    LinearProgressIndicator(
+                        progress = { (todayWordCount.toFloat() / dailyGoal.coerceAtLeast(1)).coerceIn(0f, 1f) },
+                        modifier = Modifier.fillMaxWidth(),
+                        color = Color(0xFF319B73),
+                        trackColor = Color(0xFFD2E9DF)
+                    )
+                    Text("Tekrar bekleyen: ${learningSummary.dueWords} kelime", color = Ink, fontSize = 13.sp)
+                    Text("Kelime doğruluğu: ${learningSummary.accuracyPercent}%  •  Öğrenilen toplam: ${learningSummary.totalWords}", color = Ink, fontSize = 13.sp)
+                }
+            }
             Text("🏆 En iyi seri: $bestCorrectStreak   🎯 Test doğrusu: $totalCorrect", color = Ink)
         } },
         confirmButton = { TextButton(onClick = {
