@@ -37,9 +37,12 @@ internal object DictionaryEntryFilter {
         val en = english.trim()
         val tr = turkish.trim()
         if (shouldExclude(en, tr)) return false
-        if (en.length > 22 || en.split(Regex("\\s+")).size > 3) return false
-        if (tr.length > 48 || tr.contains(';') || tr.contains('|')) return false
-        if (tr.count { it == ',' } > 2) return false
+        val wordCount = en.split(Regex("\\s+")).size
+        if (en.length > 20 || wordCount > 2) return false
+        if (!en.matches(Regex("(?i)[a-z]+(?:['’-][a-z]+)?(?:\\s+[a-z]+(?:['’-][a-z]+)?){0,1}"))) return false
+        if (tr.length > 36 || tr.contains(';') || tr.contains('|')) return false
+        if (tr.count { it == ',' } > 1) return false
+        if (Regex("(?i)\\b(the action of|a person who|the state of|used to describe|a type of|a kind of)\\b").containsMatchIn(tr)) return false
         return true
     }
 }
