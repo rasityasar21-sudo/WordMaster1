@@ -142,7 +142,7 @@ object LessonBook {
                     "Countable: a book / many books\nUncountable: some water / much information",
                     listOf("I have some information." to "Biraz bilgim/bilgi var.", "Are there any apples?" to "Hiç elma var mı?", "We need a bottle of water." to "Bir şişe suya ihtiyacımız var."),
                     listOf("Informations değil information kullan.", "Sayılamayan ismin önüne doğrudan a/an getirme.", "Much/many seçiminde isim türünü kontrol et."),
-                    listOf("İsmin sayılabilir olup olmadığını belirle.", "Tekil-çoğul biçimini kontrol et.", "Some/any/much/many seçimini cümle türüyle birlikte yap.")),
+                    listOf("İsmin sayılabilir olup olmadığını belirle.", "Tekil-çoğul biçimini kontrol et.", "Some/any/much/many seçimini cümle türüyle birlikte yap."))
             else ->
                 LessonBookChapter("Konuyu adım adım öğren",
                     "Önce konunun ne zaman ve neden kullanıldığını anla. Ardından temel kalıbı incele, örnek cümleleri İngilizce ve Türkçe karşılaştır, son olarak kalıbı kendi cümlende kullan. Bir kelimenin anlamı kadar cümledeki görevi ve diğer kelimelerle ilişkisi de önemlidir.",
