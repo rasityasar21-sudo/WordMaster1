@@ -113,3 +113,4 @@ class LearningEngineTest {
         assertEquals(75, summary.accuracyPercent)
         assertEquals(4, summary.currentStreak)
     }
+}
