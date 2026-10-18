@@ -23,7 +23,9 @@ class QuizChoiceSelectorTest {
         assertTrue(choices.any { it.en == "apple" })
         assertEquals(choices.size, choices.map { it.en.lowercase() }.distinct().size)
         assertEquals(choices.size, choices.map { it.tr.trim().lowercase() }.distinct().size)
-        assertTrue(choices.filterNot { it.en == "apple" }.all { it.level == "A1" })
+        assertTrue(choices.any { it.en == "pear" })
+        assertTrue(choices.any { it.en == "bread" })
+        assertTrue(choices.none { it.en == "fruit" })
     }
 
     @Test
