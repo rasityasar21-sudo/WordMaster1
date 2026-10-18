@@ -14,7 +14,8 @@ data class ProfessionalTrack(
     val premiumOnly: Boolean = true,
     val sourceGuidance: List<String> = emptyList(),
     val topics: List<String> = emptyList(),
-    val sampleTerms: List<ProfessionalTerm> = emptyList()
+    val sampleTerms: List<ProfessionalTerm> = emptyList(),
+    val lessons: List<ProfessionalLesson> = emptyList()
 )
 
 data class ProfessionalTerm(
@@ -22,6 +23,16 @@ data class ProfessionalTerm(
     val turkish: String,
     val exampleEnglish: String,
     val note: String = ""
+)
+
+data class ProfessionalLesson(
+    val id: String,
+    val title: String,
+    val objective: String,
+    val explanation: String,
+    val phrases: List<Pair<String, String>>,
+    val question: String,
+    val answer: String
 )
 
 object ProfessionalCourseCatalog {
@@ -51,6 +62,60 @@ object ProfessionalCourseCatalog {
                 "Teknik metin okuma ve Türkçe anlamlandırma",
                 "İş emri ve bakım kayıtları için yazılı İngilizce",
                 "Tekrar testi ve mesleki kelime değerlendirmesi"
+            ),
+            lessons = listOf(
+                ProfessionalLesson(
+                    id = "maintenance-documentation",
+                    title = "1. Bakım dokümanlarını anlama",
+                    objective = "Bir bakım talimatının amacı, kapsamı ve kayıt gerekliliklerini ayırt etmek.",
+                    explanation = "Teknik metinlerde must zorunluluğu, should tavsiyeyi, refer to ise başka bir dokümana başvurmayı ifade eder. Bir terimi anlamak tek başına işlem yapmak için yeterli değildir; ilgili uçak/komponent, doküman revizyonu ve yetkili prosedür kontrol edilmelidir.",
+                    phrases = listOf(
+                        "Refer to the current maintenance manual." to "Güncel bakım el kitabına başvurun.",
+                        "Record the result in the task card." to "Sonucu iş kartına kaydedin.",
+                        "The procedure must be followed." to "Prosedür izlenmelidir."
+                    ),
+                    question = "Teknik talimatta “must” genellikle ne ifade eder?",
+                    answer = "Zorunlu bir gerekliliği ifade eder; gerçek bakımda daima geçerli onaylı doküman izlenmelidir."
+                ),
+                ProfessionalLesson(
+                    id = "inspection-findings",
+                    title = "2. Kontrol bulgularını tarif etme",
+                    objective = "Görsel kontrol bulgusunu açık ve tarafsız İngilizceyle bildirmek.",
+                    explanation = "Bulguyu yazarken konumu, gözlenen durumu ve ilgili referansı açıkça belirtmek gerekir. Tahmin yürütmek yerine gözlemleneni kaydetmek ve kurumun raporlama sürecini izlemek önemlidir.",
+                    phrases = listOf(
+                        "A crack was found near the bracket." to "Braketin yakınında bir çatlak bulundu.",
+                        "Signs of corrosion were observed." to "Korozyon belirtileri gözlemlendi.",
+                        "No visible damage was observed." to "Görünür bir hasar gözlemlenmedi."
+                    ),
+                    question = "Bir kontrol bulgusu raporlanırken en önemli dil ilkesi nedir?",
+                    answer = "Konumu ve gözlemi açık, tarafsız ve doğrulanabilir biçimde yazmak; varsayımı gerçek gibi sunmamak."
+                ),
+                ProfessionalLesson(
+                    id = "defect-reporting",
+                    title = "3. Arıza ve iş emri dili",
+                    objective = "Bir bildirilen arıza ile yapılan işi dil açısından birbirinden ayırmak.",
+                    explanation = "Reported defect bildirilen arızayı, corrective action ise uygulanan düzeltici işlemi anlatır. Bu alanları karıştırmamak, kaydın izlenebilirliği için önemlidir. Öğrenci örnek cümleleri dil pratiği olarak kullanmalı; gerçek kayıtlar yetkili iş akışına göre hazırlanmalıdır.",
+                    phrases = listOf(
+                        "The pilot reported an intermittent fault." to "Pilot aralıklı bir arıza bildirdi.",
+                        "The defect was entered in the technical log." to "Arıza teknik kayıt defterine işlendi.",
+                        "The corrective action is recorded separately." to "Düzeltici işlem ayrı olarak kaydedilir."
+                    ),
+                    question = "“Reported defect” ile “corrective action” arasındaki fark nedir?",
+                    answer = "Reported defect bildirilen sorundur; corrective action ise soruna yönelik yapılan düzeltici işlemdir."
+                ),
+                ProfessionalLesson(
+                    id = "safety-language",
+                    title = "4. Emniyet uyarıları ve ekip iletişimi",
+                    objective = "Uyarı, tehlike ve açıklama ifadelerini doğru anlamak.",
+                    explanation = "Warning, dikkat edilmezse ciddi sonuç doğurabilecek tehlikeye; caution ekipman hasarı veya prosedür riski gibi konulara; note ise ek bilgiye dikkat çeker. Kurum ve üretici dokümanlarındaki tanımlar esas alınmalıdır.",
+                    phrases = listOf(
+                        "Read the warning before proceeding." to "Devam etmeden önce uyarıyı okuyun.",
+                        "Report the hazard to the supervisor." to "Tehlikeyi sorumlu kişiye bildirin.",
+                        "Confirm the task status during handover." to "İş devri sırasında işin durumunu doğrulayın."
+                    ),
+                    question = "Bir emniyet uyarısını anlamadığında doğru yaklaşım nedir?",
+                    answer = "İşleme devam etmek yerine açıklama istemek ve onaylı prosedürü/yetkili sorumluyu takip etmektir."
+                )
             ),
             sampleTerms = listOf(
                 ProfessionalTerm("maintenance", "bakım", "Maintenance must follow the approved procedure.", note = "Türkçesi: Bakım, onaylı prosedüre uygun yapılmalıdır."),
