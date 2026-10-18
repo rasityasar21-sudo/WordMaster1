@@ -33,14 +33,42 @@ fun ProfessionalCoursesScreen(onBackToLessons: () -> Unit) {
         }
         Text("Mesleğine özel terimler, teknik okuma ve örnek cümlelerle İngilizceni geliştir.", color = Color(0xFF687086), fontSize = 14.sp, lineHeight = 20.sp)
         if (selectedTrack == null) {
+            Surface(color = Color(0xFFEDEAFF), shape = RoundedCornerShape(14.dp)) {
+                Row(Modifier.fillMaxWidth().padding(12.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                    Text("✦", color = Color(0xFF6957E8), fontSize = 22.sp)
+                    Column {
+                        Text("Mesleğini seç, kendi alanında öğren", color = Color(0xFF202044), fontWeight = FontWeight.Bold, fontSize = 14.sp)
+                        Text("${tracks.size} uzmanlık alanı • Terimler • Örnek cümleler • Mini testler", color = Color(0xFF687086), fontSize = 11.sp)
+                    }
+                }
+            }
             tracks.forEach { track ->
                 Card(Modifier.fillMaxWidth().clickable { selectedTrackId = track.id; showAnswers = false; quizIndex = 0; quizAnswer = null; quizChecked = false; quizScore = 0 }, colors = CardDefaults.cardColors(containerColor = Color.White), shape = RoundedCornerShape(18.dp)) {
-                    Row(Modifier.fillMaxWidth().padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
-                        Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                    Row(Modifier.fillMaxWidth().padding(16.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                        Surface(color = Color(0xFFEDEAFF), shape = RoundedCornerShape(14.dp)) {
+                            Text(when (track.id) {
+                                "aviation-maintenance" -> "✈"
+                                "healthcare" -> "✚"
+                                "software-it" -> "</>"
+                                "engineering" -> "⚙"
+                                "business" -> "▣"
+                                "hospitality" -> "✦"
+                                "logistics" -> "⇄"
+                                "law" -> "§"
+                                "education" -> "✎"
+                                "automotive" -> "◈"
+                                else -> "✦"
+                            }, Modifier.padding(12.dp), color = Color(0xFF5943C5), fontWeight = FontWeight.ExtraBold, fontSize = 18.sp)
+                        }
+                        Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(5.dp)) {
                             Text(track.title, color = Color(0xFF202044), fontWeight = FontWeight.Bold, fontSize = 16.sp)
                             Text(track.description, color = Color(0xFF687086), fontSize = 12.sp, lineHeight = 17.sp)
+                            Row(horizontalArrangement = Arrangement.spacedBy(6.dp), verticalAlignment = Alignment.CenterVertically) {
+                                Surface(color = Color(0xFFF0EDFF), shape = RoundedCornerShape(7.dp)) { Text("${track.topics.size} konu", Modifier.padding(horizontal = 8.dp, vertical = 4.dp), color = Color(0xFF5943C5), fontSize = 10.sp, fontWeight = FontWeight.Bold) }
+                                if (track.sampleTerms.isNotEmpty()) Surface(color = Color(0xFFE7F7EF), shape = RoundedCornerShape(7.dp)) { Text("${track.sampleTerms.size} terim", Modifier.padding(horizontal = 8.dp, vertical = 4.dp), color = Color(0xFF18794E), fontSize = 10.sp, fontWeight = FontWeight.Bold) }
+                            }
                         }
-                        Text("✦", color = Color(0xFF6957E8), fontSize = 22.sp)
+                        Text("›", color = Color(0xFF6957E8), fontSize = 26.sp, fontWeight = FontWeight.Bold)
                     }
                 }
             }
