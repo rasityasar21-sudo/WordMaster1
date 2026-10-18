@@ -1064,7 +1064,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
 
     if (quizWord != null) {
         AlertDialog(
-            onDismissRequest = { quizWord = null; quizMessage = null },
+            onDismissRequest = { quizWord = null; quizMessage = null; sessionActive = false; placementMode = false },
             title = { Text("Mini test 🎯", fontWeight = FontWeight.ExtraBold) },
             text = {
                 Column(verticalArrangement = Arrangement.spacedBy(9.dp)) {
@@ -1146,12 +1146,12 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
             },
             confirmButton = {
                 TextButton(onClick = {
-                    if (quizMessage == null) { quizWord = null }
+                    if (quizMessage == null) { quizWord = null; sessionActive = false; placementMode = false }
                     else if (sessionActive && sessionAnswered >= 10) { quizWord = null; sessionActive = false; showQuizSummary = true }
                     else startQuiz()
                 }) { Text(if (quizMessage == null) "Kapat" else if (sessionActive && sessionAnswered >= 10) "Sonucu gör" else "Sonraki soru") }
             },
-            dismissButton = { TextButton(onClick = { quizWord = null; quizMessage = null }) { Text("Bitir") }
+            dismissButton = { TextButton(onClick = { quizWord = null; quizMessage = null; sessionActive = false; placementMode = false }) { Text("Bitir") }
             }
         )
     }
