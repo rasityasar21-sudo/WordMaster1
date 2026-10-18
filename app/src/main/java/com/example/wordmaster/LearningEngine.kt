@@ -68,12 +68,13 @@ data class WordProgress(
 
     companion object {
         fun fromJson(json: JSONObject): WordProgress = WordProgress(
-            word = json.optString("word"),
-            correctCount = json.optInt("correctCount"),
-            mistakeCount = json.optInt("mistakeCount"),
-            streak = json.optInt("streak"),
-            intervalDays = json.optInt("intervalDays"),
-            easeFactor = json.optDouble("easeFactor", 2.5),
+            word = json.optString("word").trim(),
+            correctCount = json.optInt("correctCount").coerceAtLeast(0),
+            mistakeCount = json.optInt("mistakeCount").coerceAtLeast(0),
+            streak = json.optInt("streak").coerceAtLeast(0),
+            intervalDays = json.optInt("intervalDays").coerceAtLeast(0),
+            easeFactor = json.optDouble("easeFactor", 2.5)
+                .let { if (it.isFinite()) it.coerceAtLeast(1.3) else 2.5 },
             dueDate = json.optString("dueDate", LocalDate.now().toString()),
             lastReviewed = json.optString("lastReviewed")
         )
@@ -95,7 +96,9 @@ object WordMasterLearningEngine {
     fun decode(json: String?): List<WordProgress> = runCatching {
         val array = JSONArray(json ?: "[]")
         (0 until array.length()).mapNotNull { index ->
-            runCatching { WordProgress.fromJson(array.getJSONObject(index)) }.getOrNull()
+            runCatching { WordProgress.fromJson(array.getJSONObject(index)) }
+                .getOrNull()
+                ?.takeIf { it.word.isNotBlank() }
         }
     }.getOrDefault(emptyList())
 
