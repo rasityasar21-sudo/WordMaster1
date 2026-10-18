@@ -119,4 +119,24 @@ class ProfessionalCourseCatalogTest {
         assertTrue(track.lessons.all { it.phrases.size >= 3 && it.question.isNotBlank() && it.answer.isNotBlank() })
     }
 
+    @Test
+    fun hospitalityCourseCoversReservationsAndComplaints() {
+        val track = ProfessionalCourseCatalog.find("hospitality")!!
+        assertTrue(track.lessons.size >= 3)
+        assertTrue(track.sampleTerms.size >= 8)
+        assertTrue(track.lessons.any { it.id == "reservations-and-facilities" })
+        assertTrue(track.lessons.any { it.id == "handling-complaints" })
+        assertTrue(track.lessons.all { it.phrases.size >= 3 && it.question.isNotBlank() && it.answer.isNotBlank() })
+    }
+
+    @Test
+    fun logisticsCourseCoversWarehouseAndDeliveryExceptions() {
+        val track = ProfessionalCourseCatalog.find("logistics")!!
+        assertTrue(track.lessons.size >= 3)
+        assertTrue(track.sampleTerms.size >= 8)
+        assertTrue(track.lessons.any { it.id == "warehouse-receiving" })
+        assertTrue(track.lessons.any { it.id == "delivery-exceptions" })
+        assertTrue(track.lessons.all { it.phrases.size >= 3 && it.question.isNotBlank() && it.answer.isNotBlank() })
+    }
+
 }
