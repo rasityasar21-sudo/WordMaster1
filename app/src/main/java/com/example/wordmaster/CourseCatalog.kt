@@ -151,8 +151,9 @@ data class DailyStudyPlan(
     val lessonIds: List<String>,
     val reviewWords: List<String>
 ) {
+    /** Lesson estimates plus one minute for each scheduled vocabulary review. */
     val estimatedMinutes: Int
-        get() = lessonIds.mapNotNull(WordMasterCourseCatalog::find).sumOf { it.estimatedMinutes }
+        get() = lessonIds.mapNotNull(WordMasterCourseCatalog::find).sumOf { it.estimatedMinutes } + reviewWords.size
 
     val isGoalMet: Boolean
         get() = estimatedMinutes >= targetMinutes
@@ -166,6 +167,10 @@ data class DailyStudyPlan(
             date: String = java.time.LocalDate.now().toString()
         ): DailyStudyPlan {
             val safeTarget = targetMinutes.coerceIn(5, 120)
+            // Reserve up to one third of the target (maximum five minutes) for due words.
+            // This keeps the plan review-first without letting reviews consume the whole session.
+            val plannedReviewWords = dueWords.take(minOf(5, safeTarget / 3, dueWords.size)).map { it.word }
+            val lessonBudget = (safeTarget - plannedReviewWords.size).coerceAtLeast(5)
             val chosen = mutableListOf<String>()
             val targetLessons = WordMasterCourseCatalog.forLevel(level)
                 .filter { it.id !in completedLessonIds }
@@ -198,7 +203,7 @@ data class DailyStudyPlan(
             var minutes = 0
             var targetLessonAdded = false
             for (lesson in selectedLessons) {
-                if (targetLessonAdded && minutes >= safeTarget) break
+                if (targetLessonAdded && minutes >= lessonBudget) break
                 val prerequisitesSatisfied = lesson.prerequisiteIds.all {
                     it in completedLessonIds || it in chosenForPlan
                 }
@@ -211,7 +216,7 @@ data class DailyStudyPlan(
                 date = date,
                 targetMinutes = safeTarget,
                 lessonIds = chosenForPlan,
-                reviewWords = dueWords.take(10).map { it.word }
+                reviewWords = plannedReviewWords
             )
         }
     }
