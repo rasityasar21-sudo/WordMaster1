@@ -545,6 +545,19 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                             Text(if (showReviewQueue) "Tekrar listesini gizle" else "Kelime listesini aç")
                                         }
                                         if (showReviewQueue) {
+                                            val adaptiveAdvice = AdaptiveLearningAdvisor.recommend(learningStore.all())
+                                            Card(
+                                                shape = RoundedCornerShape(12.dp),
+                                                colors = CardDefaults.cardColors(containerColor = Color(0xFFF2F0FF))
+                                            ) {
+                                                Column(
+                                                    Modifier.fillMaxWidth().padding(12.dp),
+                                                    verticalArrangement = Arrangement.spacedBy(4.dp)
+                                                ) {
+                                                    Text(adaptiveAdvice.title, color = Color(0xFF4F46A5), fontWeight = FontWeight.Bold, fontSize = 13.sp)
+                                                    Text(adaptiveAdvice.message, color = Color(0xFF55536B), fontSize = 12.sp, lineHeight = 17.sp)
+                                                }
+                                            }
                                             dueReviewWords.take(5).forEach { progress ->
                                                 val translation = words.firstOrNull { it.en.equals(progress.word, ignoreCase = true) }?.tr
                                                 Column(Modifier.fillMaxWidth().background(Color.White, RoundedCornerShape(12.dp)).padding(12.dp), verticalArrangement = Arrangement.spacedBy(7.dp)) {
