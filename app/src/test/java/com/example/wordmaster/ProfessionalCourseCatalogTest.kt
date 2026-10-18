@@ -99,4 +99,24 @@ class ProfessionalCourseCatalogTest {
         assertTrue(track.lessons.any { it.id == "technical-documentation" })
     }
 
+    @Test
+    fun engineeringCourseCoversQualityInspectionAndTechnicalHandover() {
+        val track = ProfessionalCourseCatalog.find("engineering")!!
+        assertTrue(track.lessons.size >= 3)
+        assertTrue(track.sampleTerms.size >= 8)
+        assertTrue(track.lessons.any { it.id == "quality-inspection" })
+        assertTrue(track.lessons.any { it.id == "engineering-handover" })
+        assertTrue(track.lessons.all { it.phrases.size >= 3 && it.question.isNotBlank() && it.answer.isNotBlank() })
+    }
+
+    @Test
+    fun businessCourseCoversMeetingsAndNegotiation() {
+        val track = ProfessionalCourseCatalog.find("business")!!
+        assertTrue(track.lessons.size >= 3)
+        assertTrue(track.sampleTerms.size >= 8)
+        assertTrue(track.lessons.any { it.id == "business-meetings" })
+        assertTrue(track.lessons.any { it.id == "business-negotiation" })
+        assertTrue(track.lessons.all { it.phrases.size >= 3 && it.question.isNotBlank() && it.answer.isNotBlank() })
+    }
+
 }
