@@ -107,6 +107,8 @@ class MainActivity : ComponentActivity() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
+    val appContext = LocalContext.current
+    val learningStore = remember { LearningProgressStore(appContext) }
     var query by remember { mutableStateOf("") }
     var filterQuery by remember { mutableStateOf("") }
     LaunchedEffect(query) {
@@ -203,8 +205,15 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                     .firstOrNull { it.isNotEmpty() } ?: words
             }
         } else {
+            // Önce zamanı gelen aralıklı tekrar kelimeleri; sonra eski yanlış cevap kuyruğu.
+            val dueSet = learningStore.dueForReview().map { it.word }.toSet()
+            val duePool = words.filter { it.en in dueSet }
             val reviewPool = words.filter { it.en in reviewWords }
-            if (reviewPool.isNotEmpty()) reviewPool else words
+            when {
+                duePool.isNotEmpty() -> duePool
+                reviewPool.isNotEmpty() -> reviewPool
+                else -> words
+            }
         }
         val target = pool.random()
         val sameLevelChoices = words.filter { it.level == target.level && it.en != target.en }
@@ -795,7 +804,11 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                         placementAnswered++
                                         if (choice.en == quizWord!!.en) placementCorrect++
                                     }
-                                    if (choice.en == quizWord!!.en) {
+                                    val answerWasCorrect = choice.en == quizWord!!.en
+                                    // Her cevap gerçek aralıklı tekrar kaydına yazılır; doğru/yanlış aralığı günceller.
+                                    learningStore.rateRecall(quizWord!!.en, if (answerWasCorrect) 4 else 1)
+                                    learningStore.recordStudyDay()
+                                    if (answerWasCorrect) {
                                         quizCorrect++
                                         sessionCorrect++
                                         totalCorrect++
@@ -843,6 +856,8 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                     }
                     quizMessage?.let { Text(it, fontWeight = FontWeight.Bold, color = if (it.startsWith("Doğru!")) Color(0xFF12805C) else Color(0xFFB45309)) }
                     Text("Bu test: $sessionCorrect / $sessionAnswered   •   Genel: $quizCorrect / $quizCount", color = Color.Gray, fontSize = 12.sp)
+                    val dueCount = learningStore.dueForReview().size
+                    Text("Akıllı tekrar: $dueCount kelime hazır • Cevapların tekrar tarihini günceller", color = Blue, fontSize = 12.sp)
                 }
             },
             confirmButton = {
