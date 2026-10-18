@@ -9,6 +9,26 @@ import org.junit.Test
 
 class CourseCatalogTest {
     @Test
+    fun courseCatalogHasUniqueIdsAndResolvablePrerequisites() {
+        val lessons = WordMasterCourseCatalog.lessons
+        val ids = lessons.map { it.id }
+
+        assertEquals("Course lesson IDs must be unique", ids.size, ids.toSet().size)
+        lessons.forEach { lesson ->
+            lesson.prerequisiteIds.forEach { prerequisiteId ->
+                assertNotNull(
+                    "Missing prerequisite $prerequisiteId for ${lesson.id}",
+                    WordMasterCourseCatalog.find(prerequisiteId)
+                )
+                assertFalse(
+                    "A lesson cannot require itself: ${lesson.id}",
+                    prerequisiteId == lesson.id
+                )
+            }
+        }
+    }
+
+    @Test
     fun lessonLookupAndLevelFilteringAreCaseInsensitive() {
         assertNotNull(WordMasterCourseCatalog.find("a1-greetings"))
         assertNull(WordMasterCourseCatalog.find("missing-lesson"))
