@@ -19,6 +19,11 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
+      - name: Import full English-Turkish dictionary in one pass
+        run: |
+          mkdir -p build
+          curl --fail --location --retry 3 --output build/en-tr.zip https://github.com/DanielGregorini/koreader-dicts/releases/download/v1.2.0/en-tr.zip
+          python3 scripts/import_en_tr_dictionary.py build/en-tr.zip
       - name: Validate bundled dictionary without rewriting translations
         run: |
           python3 - <<'PY'
