@@ -34,7 +34,10 @@ object QuizChoiceSelector {
         val usedMeanings = mutableSetOf(targetMeaning)
 
         fun addUnique(candidates: List<Word>) {
-            for (candidate in candidates.shuffled()) {
+            // Select only the few needed options instead of shuffling the entire pool.
+            val remaining = candidates.toMutableList()
+            while (remaining.isNotEmpty() && result.size < count) {
+                val candidate = remaining.removeAt(kotlin.random.Random.nextInt(remaining.size))
                 val key = normalize(candidate.en)
                 val meaning = normalize(candidate.tr)
                 if (key.isBlank() || meaning.isBlank()) continue
@@ -42,7 +45,6 @@ object QuizChoiceSelector {
                 result.add(candidate)
                 usedWords.add(key)
                 usedMeanings.add(meaning)
-                if (result.size >= count) return
             }
         }
 
