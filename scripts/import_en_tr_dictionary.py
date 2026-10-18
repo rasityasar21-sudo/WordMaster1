@@ -51,6 +51,7 @@ def parse_index(idx_path, dict_path):
     if dict_path.name.endswith(".dz"):
         raw_dict = gzip.decompress(raw_dict)
     entries = []
+    invalid_ranges = 0
     cursor = 0
     while cursor < len(idx_bytes):
         end = idx_bytes.find(b"\\0", cursor)
@@ -60,6 +61,7 @@ def parse_index(idx_path, dict_path):
         offset, size = struct.unpack(">II", idx_bytes[end + 1:end + 9])
         cursor = end + 9
         if not word or offset + size > len(raw_dict):
+            invalid_ranges += 1
             continue
         definition = plain_text(raw_dict[offset:offset + size])
         if not definition:
@@ -69,6 +71,7 @@ def parse_index(idx_path, dict_path):
             "tr": definition[:1200],
             "level": "B1"
         })
+    print(f"StarDict index={idx_path} ({len(idx_bytes)} bytes), dictionary={dict_path} ({len(raw_dict)} uncompressed bytes), invalid ranges={invalid_ranges}")
     return entries
 
 def main():
@@ -78,7 +81,7 @@ def main():
     idx_path, dict_path = find_stardict(root)
     imported = parse_index(idx_path, dict_path)
     if len(imported) < 20000:
-        raise RuntimeError(f"Beklenen sözlük sayısına ulaşılamadı: {len(imported)} kayıt")
+        raise RuntimeError(f"Beklenen sözlük sayısına ulaşılamadı: {len(imported)} kayıt; idx={idx_path}; dict={dict_path}")
     current = json.loads(ASSET.read_text(encoding="utf-8"))
     # Keep the existing hand-edited translations/examples when the headword already exists.
     merged = {}
