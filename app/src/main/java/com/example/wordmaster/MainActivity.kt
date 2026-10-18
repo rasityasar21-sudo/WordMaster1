@@ -262,6 +262,101 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                 contentPadding = PaddingValues(start = 18.dp, end = 18.dp, top = 12.dp, bottom = 28.dp),
                 verticalArrangement = Arrangement.spacedBy(14.dp)
             ) {
+                if (currentScreen == "Dersler") {
+                    item {
+                        val dueCount = learningStore.dueForReview().size
+                        val todayProgress = (prefs.getInt("todayWords", 0)).coerceAtMost(dailyGoal)
+                        Column(verticalArrangement = Arrangement.spacedBy(14.dp)) {
+                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(3.dp)) {
+                                    Text("WORDMASTER", color = Color(0xFF6D5AE6), fontSize = 12.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 2.sp)
+                                    Text("Merhaba, $displayName 👋", color = Color(0xFF17152B), fontSize = 25.sp, fontWeight = FontWeight.ExtraBold)
+                                    Text("Bugün küçük bir adım, yarın büyük ilerleme.", color = Color(0xFF77738B), fontSize = 13.sp)
+                                }
+                                Surface(shape = RoundedCornerShape(18.dp), color = Color.White, shadowElevation = 4.dp) {
+                                    Column(Modifier.padding(horizontal = 13.dp, vertical = 10.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+                                        Text("🔥 $dailyStreak", color = Color(0xFFE45D36), fontWeight = FontWeight.ExtraBold, fontSize = 18.sp)
+                                        Text("seri", color = Color(0xFF77738B), fontSize = 11.sp)
+                                    }
+                                }
+                            }
+                            Card(
+                                modifier = Modifier.fillMaxWidth(),
+                                shape = RoundedCornerShape(28.dp),
+                                colors = CardDefaults.cardColors(containerColor = Color.Transparent)
+                            ) {
+                                Column(
+                                    Modifier.fillMaxWidth().background(heroBrush).padding(22.dp),
+                                    verticalArrangement = Arrangement.spacedBy(14.dp)
+                                ) {
+                                    Row(verticalAlignment = Alignment.CenterVertically) {
+                                        Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(5.dp)) {
+                                            Text("BUGÜNÜN ROTASI", color = Color.White.copy(alpha = 0.78f), fontSize = 11.sp, fontWeight = FontWeight.Bold, letterSpacing = 1.5.sp)
+                                            Text("İngilizceni bir adım ileri taşı.", color = Color.White, fontSize = 22.sp, fontWeight = FontWeight.ExtraBold, lineHeight = 28.sp)
+                                        }
+                                        Text("🚀", fontSize = 42.sp)
+                                    }
+                                    Row(verticalAlignment = Alignment.CenterVertically) {
+                                        Column(Modifier.weight(1f)) {
+                                            Text("$todayProgress / $dailyGoal kelime hedefi", color = Color.White, fontWeight = FontWeight.SemiBold, fontSize = 13.sp)
+                                            Spacer(Modifier.height(8.dp))
+                                            LinearProgressIndicator(
+                                                progress = { if (dailyGoal > 0) (todayProgress.toFloat() / dailyGoal).coerceIn(0f, 1f) else 0f },
+                                                modifier = Modifier.fillMaxWidth().height(7.dp),
+                                                color = Color.White,
+                                                trackColor = Color.White.copy(alpha = 0.28f)
+                                            )
+                                        }
+                                    }
+                                    Button(
+                                        onClick = { placementMode = false; quizMode = "İngilizce → Türkçe"; startQuiz(); sessionAnswered = 0; sessionCorrect = 0; sessionActive = true; currentScreen = "Sınav" },
+                                        modifier = Modifier.fillMaxWidth(),
+                                        shape = RoundedCornerShape(16.dp),
+                                        colors = ButtonDefaults.buttonColors(containerColor = Color.White, contentColor = Color(0xFF4F46E5))
+                                    ) {
+                                        Text("Öğrenmeye başla  →", fontWeight = FontWeight.ExtraBold, modifier = Modifier.padding(vertical = 5.dp))
+                                    }
+                                }
+                            }
+                            Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                                Card(Modifier.weight(1f), shape = RoundedCornerShape(20.dp), colors = CardDefaults.cardColors(containerColor = Color.White)) {
+                                    Column(Modifier.fillMaxWidth().clickable { showMatchGame = true; matchRound = 0; matched = emptySet(); selectedEnglish = null; matchWords = words.shuffled().take(5) }.padding(15.dp), verticalArrangement = Arrangement.spacedBy(7.dp)) {
+                                        Text("🧩", fontSize = 25.sp)
+                                        Text("Eşleştirme", color = Color(0xFF211D3A), fontWeight = FontWeight.Bold)
+                                        Text("Hızlı oyun", color = Color(0xFF77738B), fontSize = 12.sp)
+                                    }
+                                }
+                                Card(Modifier.weight(1f), shape = RoundedCornerShape(20.dp), colors = CardDefaults.cardColors(containerColor = Color.White)) {
+                                    Column(Modifier.fillMaxWidth().clickable { showPronunciation = true }.padding(15.dp), verticalArrangement = Arrangement.spacedBy(7.dp)) {
+                                        Text("🎙️", fontSize = 25.sp)
+                                        Text("Konuşma", color = Color(0xFF211D3A), fontWeight = FontWeight.Bold)
+                                        Text("Sesli pratik", color = Color(0xFF77738B), fontSize = 12.sp)
+                                    }
+                                }
+                                Card(Modifier.weight(1f), shape = RoundedCornerShape(20.dp), colors = CardDefaults.cardColors(containerColor = Color.White)) {
+                                    Column(Modifier.fillMaxWidth().clickable { showProfile = true }.padding(15.dp), verticalArrangement = Arrangement.spacedBy(7.dp)) {
+                                        Text("📈", fontSize = 25.sp)
+                                        Text("İlerleme", color = Color(0xFF211D3A), fontWeight = FontWeight.Bold)
+                                        Text("$xp XP • Seviye $level", color = Color(0xFF77738B), fontSize = 11.sp)
+                                    }
+                                }
+                            }
+                            if (dueCount > 0) {
+                                Card(shape = RoundedCornerShape(18.dp), colors = CardDefaults.cardColors(containerColor = Color(0xFFFFF7E8))) {
+                                    Row(Modifier.fillMaxWidth().padding(15.dp), verticalAlignment = Alignment.CenterVertically) {
+                                        Text("🧠", fontSize = 25.sp)
+                                        Spacer(Modifier.width(12.dp))
+                                        Column(Modifier.weight(1f)) {
+                                            Text("$dueCount kelime tekrar bekliyor", fontWeight = FontWeight.Bold, color = Color(0xFF7C4A03))
+                                            Text("Unutmadan önce bilgini tazele.", fontSize = 12.sp, color = Color(0xFF926C30))
+                                        }
+                                        TextButton(onClick = { placementMode = false; startQuiz(); sessionAnswered = 0; sessionCorrect = 0; sessionActive = true; currentScreen = "Sınav" }) { Text("Tekrar et") }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
                 if (currentScreen == "Ders İçeriği") {
                     item {
                         val lesson = lessonContent(activeLesson)
