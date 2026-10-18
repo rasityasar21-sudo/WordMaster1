@@ -47,14 +47,14 @@ def find_stardict(root):
 
 def is_useful_entry(word, definition):
     """Reject corrupt/index-noise entries while retaining legitimate short words."""
-    word = re.sub(r"\\s+", " ", word).strip()
-    definition = re.sub(r"\\s+", " ", definition).strip()
+    word = re.sub(r"\s+", " ", word).strip()
+    definition = re.sub(r"\s+", " ", definition).strip()
     if not word or not definition:
         return False
     # Headwords may contain letters, digits, spaces, apostrophes, hyphens, dots or slashes.
     if not re.search(r"[A-Za-zÀ-ÖØ-öø-ÿ]", word):
         return False
-    if re.search(r"[<>\\x00-\\x1f\\x7f]", word):
+    if re.search(r"[<>\x00-\x1f\x7f]", word):
         return False
     if len(word) > 100 or len(definition) < 2:
         return False
