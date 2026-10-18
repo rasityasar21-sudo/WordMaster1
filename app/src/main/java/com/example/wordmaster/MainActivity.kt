@@ -134,6 +134,9 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
         }
     }
     val learningStore = remember { LearningProgressStore(appContext) }
+    LaunchedEffect(learningStore) {
+        dueReviewCount = withContext(Dispatchers.IO) { learningStore.dueForReview().size }
+    }
     var query by remember { mutableStateOf("") }
     var filterQuery by remember { mutableStateOf("") }
     LaunchedEffect(query) {
@@ -179,6 +182,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
     var coins by remember { mutableIntStateOf(prefs.getInt("coins", 0)) }
     var quizWord by remember { mutableStateOf<Word?>(null) }
     var quizLoading by remember { mutableStateOf(false) }
+    var dueReviewCount by remember { mutableIntStateOf(0) }
     var quizChoices by remember { mutableStateOf<List<Word>>(emptyList()) }
     var quizMessage by remember { mutableStateOf<String?>(null) }
     var quizCount by remember { mutableIntStateOf(0) }
@@ -1413,8 +1417,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                     }
                     quizMessage?.let { Text(it, fontWeight = FontWeight.Bold, color = if (it.startsWith("Doğru!")) Color(0xFF12805C) else Color(0xFFB45309)) }
                     Text("Bu test: $sessionCorrect / $sessionAnswered   •   Genel: $quizCorrect / $quizCount", color = Color.Gray, fontSize = 12.sp)
-                    val dueCount = learningStore.dueForReview().size
-                    Text("Akıllı tekrar: $dueCount kelime hazır • Cevapların tekrar tarihini günceller", color = Blue, fontSize = 12.sp)
+                    Text("Akıllı tekrar: $dueReviewCount kelime hazır • Cevapların tekrar tarihini günceller", color = Blue, fontSize = 12.sp)
                 }
             },
             confirmButton = {
