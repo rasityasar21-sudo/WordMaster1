@@ -98,10 +98,29 @@ class MainActivity : ComponentActivity() {
         val words = try {
             val json = assets.open("dictionary.json").bufferedReader().use { it.readText() }
             val arr = JSONArray(json)
-            (0 until arr.length()).map { i ->
+            (0 until arr.length()).mapNotNull { i ->
                 val item = arr.getJSONObject(i)
-                Word(item.optString("en"), item.optString("tr"), item.optString("level", "A1"), item.optString("example", ""))
-            }.sortedBy { it.en.lowercase(Locale.ROOT) }
+                val english = item.optString("en").trim()
+                val turkish = item.optString("tr").trim()
+                val example = item.optString("example", "").trim()
+                // Dictionary-source morphemes such as "-gen" and "-gram"
+                // are not standalone vocabulary for Turkish learners.
+                val isMorphologyFragment = english.startsWith("-") ||
+                    turkish.contains("Suf.", ignoreCase = true) ||
+                    turkish.contains("(morpheme)", ignoreCase = true)
+                val looksLikeEnglishDefinition = turkish.length > 65 &&
+                    turkish.split(' ').size > 8 &&
+                    !turkish.contains("ç", true) && !turkish.contains("ğ", true) &&
+                    !turkish.contains("ı", true) && !turkish.contains("ö", true) &&
+                    !turkish.contains("ş", true) && !turkish.contains("ü", true) &&
+                    !turkish.contains("/") && !turkish.contains(",")
+                if (english.isBlank() || turkish.isBlank() || isMorphologyFragment || looksLikeEnglishDefinition) {
+                    null
+                } else {
+                    Word(english, turkish, item.optString("level", "A1"), example)
+                }
+            }.distinctBy { it.en.lowercase(Locale.ROOT) }
+                .sortedBy { it.en.lowercase(Locale.ROOT) }
         } catch (_: Exception) { listOf(Word("hello", "merhaba", "A1")) }
         setContent { WordMasterApp(words, prefs) }
     }
