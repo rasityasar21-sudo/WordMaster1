@@ -298,9 +298,9 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
             bottomBar = {
                 NavigationBar(containerColor = Color.White, contentColor = Ink) {
                     NavigationBarItem(selected = currentScreen == "Dersler", onClick = { currentScreen = "Dersler"; selectedTopic = "Tümü"; selected = "A1" }, icon = { Text("📚") }, label = { Text("Dersler") }, colors = NavigationBarItemDefaults.colors(selectedIconColor = Color(0xFFB91C1C), selectedTextColor = Color(0xFF991B1B), indicatorColor = Color(0xFFFDECEC), unselectedIconColor = Color(0xFF77738B), unselectedTextColor = Color(0xFF77738B)))
-                    NavigationBarItem(selected = currentScreen == "Sözlük", onClick = { currentScreen = "Sözlük"; selectedTopic = "Tümü"; selected = "Tümü"; tab = 0; query = "" }, icon = { Text("A-Z") }, label = { Text("Sözlük") }, colors = NavigationBarItemDefaults.colors(selectedIconColor = Color(0xFF211D3A), selectedTextColor = Color.White, indicatorColor = Color(0xFFE9D5FF), unselectedIconColor = Color(0xFFB8B8C5), unselectedTextColor = Color(0xFFB8B8C5)))
-                    NavigationBarItem(selected = currentScreen == "Mesleki İngilizce", onClick = { currentScreen = "Mesleki İngilizce" }, icon = { Text("✈️") }, label = { Text("Mesleki") }, colors = NavigationBarItemDefaults.colors(selectedIconColor = Color(0xFF211D3A), selectedTextColor = Color.White, indicatorColor = Color(0xFFE9D5FF), unselectedIconColor = Color(0xFFB8B8C5), unselectedTextColor = Color(0xFFB8B8C5)))
-                    NavigationBarItem(selected = false, onClick = { showProfile = true }, icon = { Text("👤") }, label = { Text("Profil") }, colors = NavigationBarItemDefaults.colors(selectedIconColor = Color(0xFF211D3A), selectedTextColor = Color.White, indicatorColor = Color(0xFFE9D5FF), unselectedIconColor = Color(0xFFB8B8C5), unselectedTextColor = Color(0xFFB8B8C5)))
+                    NavigationBarItem(selected = currentScreen == "Sözlük", onClick = { currentScreen = "Sözlük"; selectedTopic = "Tümü"; selected = "Tümü"; tab = 0; query = "" }, icon = { Text("A-Z") }, label = { Text("Sözlük") }, colors = NavigationBarItemDefaults.colors(selectedIconColor = Color(0xFFB91C1C), selectedTextColor = Color(0xFF991B1B), indicatorColor = Color(0xFFFDECEC), unselectedIconColor = Color(0xFF77738B), unselectedTextColor = Color(0xFF77738B)))
+                    NavigationBarItem(selected = currentScreen == "Mesleki İngilizce", onClick = { currentScreen = "Mesleki İngilizce" }, icon = { Text("✈️") }, label = { Text("Mesleki") }, colors = NavigationBarItemDefaults.colors(selectedIconColor = Color(0xFFB91C1C), selectedTextColor = Color(0xFF991B1B), indicatorColor = Color(0xFFFDECEC), unselectedIconColor = Color(0xFF77738B), unselectedTextColor = Color(0xFF77738B)))
+                    NavigationBarItem(selected = false, onClick = { showProfile = true }, icon = { Text("👤") }, label = { Text("Profil") }, colors = NavigationBarItemDefaults.colors(selectedIconColor = Color(0xFFB91C1C), selectedTextColor = Color(0xFF991B1B), indicatorColor = Color(0xFFFDECEC), unselectedIconColor = Color(0xFF77738B), unselectedTextColor = Color(0xFF77738B)))
                 }
             }
         ) { padding ->
@@ -386,6 +386,25 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                         Text("İlerleme", color = Color(0xFF211D3A), fontWeight = FontWeight.Bold)
                                         Text("$xp XP • Seviye $level", color = Color(0xFF77738B), fontSize = 11.sp)
                                     }
+                                }
+                            }
+                            Card(
+                                modifier = Modifier.fillMaxWidth().clickable { currentScreen = "Mesleki İngilizce" },
+                                shape = RoundedCornerShape(22.dp),
+                                colors = CardDefaults.cardColors(containerColor = Color(0xFF211D3A))
+                            ) {
+                                Row(
+                                    Modifier.fillMaxWidth().background(Brush.linearGradient(listOf(Color(0xFF211D3A), Color(0xFF40356F)))).padding(16.dp),
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement = Arrangement.spacedBy(12.dp)
+                                ) {
+                                    Text("✈️", fontSize = 30.sp)
+                                    Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                                        Text("MESLEKİ İNGİLİZCE", color = Color(0xFFD8D0FF), fontSize = 10.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 1.2.sp)
+                                        Text("Kendi alanında uzmanlaş", color = Color.White, fontSize = 17.sp, fontWeight = FontWeight.ExtraBold)
+                                        Text("Havacılık, yazılım, sağlık ve daha fazlası", color = Color(0xFFE2DDF5), fontSize = 12.sp, maxLines = 2)
+                                    }
+                                    Text("→", color = Color.White, fontSize = 24.sp, fontWeight = FontWeight.Bold)
                                 }
                             }
                             Card(
