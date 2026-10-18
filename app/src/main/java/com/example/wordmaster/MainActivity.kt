@@ -291,7 +291,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
             showPronunciation -> showPronunciation = false
             showMatchGame -> showMatchGame = false
             showTools -> showTools = false
-            quizWord != null -> { quizWord = null; quizMessage = null; sessionActive = false }
+            quizWord != null -> { quizWord = null; quizMessage = null; sessionActive = false; placementMode = false }
             showQuizSummary -> showQuizSummary = false
             currentScreen != "Dersler" -> {
                 currentScreen = "Dersler"
