@@ -119,6 +119,8 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
     }
     var currentScreen by remember { mutableStateOf("Dersler") }
     var activeLesson by remember { mutableStateOf("") }
+    var activeCourseLessonId by remember { mutableStateOf<String?>(null) }
+    var completedCourseIds by remember { mutableStateOf(CourseProgressStore.completedIds(prefs)) }
     var activeLessonIndex by remember { mutableIntStateOf(0) }
     var lessonAnswer by remember { mutableStateOf(false) }
     var lessonStage by remember { mutableIntStateOf(0) }
@@ -180,7 +182,16 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
     } }
     val level = xp / 100 + 1
     val xpInLevel = xp % 100
-    val today = LocalDate.now().toString() 
+    val today = LocalDate.now().toString()
+    val studyPlan = remember(chosenLevel, completedCourseIds, today) {
+        DailyStudyPlan.create(
+            level = chosenLevel.ifBlank { selected }.ifBlank { "A1" },
+            completedLessonIds = completedCourseIds,
+            dueWords = learningStore.dueForReview(),
+            targetMinutes = CourseProgressStore.dailyGoalMinutes(prefs),
+            date = today
+        )
+    }
     val pageBackground = when (themeChoice) { 1 -> Color(0xFFEAF8F3); 2 -> Color(0xFFFFF1E5); else -> Color(0xFFF7F5FF) } 
     val heroBrush = when (themeChoice) { 1 -> Brush.linearGradient(listOf(Color(0xFF075E54), Color(0xFF16A085))); 2 -> Brush.linearGradient(listOf(Color(0xFF7C2D12), Color(0xFFF59E0B))); else -> Brush.linearGradient(listOf(Color(0xFF4F46E5), Color(0xFF9333EA), Color(0xFFEC4899))) }
     LaunchedEffect(today) {
@@ -385,6 +396,51 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                     Text("Not: Görevler bu cihazdaki kayıtlarına göre hesaplanır.", color = Color(0xFF89859B), fontSize = 11.sp)
                                 }
                             }
+                            Card(
+                                modifier = Modifier.fillMaxWidth(),
+                                shape = RoundedCornerShape(22.dp),
+                                colors = CardDefaults.cardColors(containerColor = Color.White)
+                            ) {
+                                Column(Modifier.fillMaxWidth().padding(18.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                                    Row(verticalAlignment = Alignment.CenterVertically) {
+                                        Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(3.dp)) {
+                                            Text("KİŞİSEL ÇALIŞMA PLANI", color = Color(0xFF6D5AE6), fontSize = 11.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 1.2.sp)
+                                            Text("${studyPlan.targetMinutes} dakikalık rota", color = Navy, fontSize = 19.sp, fontWeight = FontWeight.ExtraBold)
+                                        }
+                                        Text("🗺️", fontSize = 28.sp)
+                                    }
+                                    Text("Seviye: ${chosenLevel.ifBlank { selected }} · Tahmini süre: ${studyPlan.estimatedMinutes} dk", color = Color(0xFF68758E), fontSize = 12.sp)
+                                    if (studyPlan.lessonIds.isEmpty() && studyPlan.reviewWords.isEmpty()) {
+                                        Text("Bu seviyedeki dersleri tamamladın. Tekrar kelimeleri eklenince planın güncellenecek.", color = Color(0xFF68758E), fontSize = 13.sp, lineHeight = 19.sp)
+                                    } else {
+                                        studyPlan.lessonIds.take(3).forEachIndexed { index, lessonId ->
+                                            val plannedLesson = WordMasterCourseCatalog.find(lessonId)
+                                            if (plannedLesson != null) {
+                                                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                                                    Surface(shape = RoundedCornerShape(10.dp), color = PaleBlue) {
+                                                        Text("${index + 1}", Modifier.padding(horizontal = 10.dp, vertical = 7.dp), color = Blue, fontWeight = FontWeight.Bold)
+                                                    }
+                                                    Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
+                                                        Text(plannedLesson.title, color = Ink, fontWeight = FontWeight.SemiBold, fontSize = 14.sp)
+                                                        Text("${plannedLesson.category} · ${plannedLesson.estimatedMinutes} dk", color = Color(0xFF68758E), fontSize = 11.sp)
+                                                    }
+                                                    TextButton(onClick = {
+                                                        activeCourseLessonId = plannedLesson.id
+                                                        activeLesson = plannedLesson.title
+                                                        activeLessonIndex = 0
+                                                        lessonAnswer = false
+                                                        lessonStage = 0
+                                                        currentScreen = "Ders İçeriği"
+                                                    }) { Text("Başla") }
+                                                }
+                                            }
+                                        }
+                                        if (studyPlan.reviewWords.isNotEmpty()) {
+                                            Text("🧠 ${studyPlan.reviewWords.size} kelime tekrar listende", color = Color(0xFF7C4A03), fontSize = 12.sp, fontWeight = FontWeight.SemiBold)
+                                        }
+                                    }
+                                }
+                            }
                             if (dueCount > 0) {
                                 Card(shape = RoundedCornerShape(18.dp), colors = CardDefaults.cardColors(containerColor = Color(0xFFFFF7E8))) {
                                     Row(Modifier.fillMaxWidth().padding(15.dp), verticalAlignment = Alignment.CenterVertically) {
@@ -568,7 +624,11 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                             val key = "${selected}_${activeLessonIndex}_${activeLesson}"
                                             val done = (prefs.getStringSet("completedLessons", emptySet()) ?: emptySet()) + key
                                             prefs.edit().putStringSet("completedLessons", done).apply()
+                                            activeCourseLessonId?.let { courseId ->
+                                                completedCourseIds = CourseProgressStore.markCompleted(prefs, courseId)
+                                            }
                                             CourseProgressStore.addStudyMinutes(prefs, 10)
+                                            activeCourseLessonId = null
                                             currentScreen = "Dersler"
                                             lessonStage = 0
                                         }, modifier = Modifier.weight(1f)) { Text("Dersi tamamla ✓") }
