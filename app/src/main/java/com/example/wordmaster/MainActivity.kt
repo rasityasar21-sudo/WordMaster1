@@ -420,6 +420,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                             val key = "${selected}_${activeLessonIndex}_${activeLesson}"
                                             val done = (prefs.getStringSet("completedLessons", emptySet()) ?: emptySet()) + key
                                             prefs.edit().putStringSet("completedLessons", done).apply()
+                                            CourseProgressStore.addStudyMinutes(prefs, 10)
                                             currentScreen = "Dersler"
                                             lessonStage = 0
                                         }, modifier = Modifier.weight(1f)) { Text("Dersi tamamla ✓") }
