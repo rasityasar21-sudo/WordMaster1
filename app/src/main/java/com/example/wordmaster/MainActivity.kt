@@ -74,7 +74,13 @@ class MainActivity : ComponentActivity() {
 fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
     val appContext = LocalContext.current
     val scope = rememberCoroutineScope()
-    val quickPracticeWords = remember(words) { words.filter { DictionaryEntryFilter.isQuickPracticeEntry(it.en, it.tr) }.ifEmpty { words.filter { it.en.length <= 22 && it.tr.length <= 48 } } }
+    var quickPracticeWords by remember { mutableStateOf<List<Word>>(emptyList()) }
+    LaunchedEffect(words) {
+        quickPracticeWords = withContext(Dispatchers.Default) {
+            words.filter { DictionaryEntryFilter.isQuickPracticeEntry(it.en, it.tr) }
+                .ifEmpty { words.filter { it.en.length <= 22 && it.tr.length <= 48 } }
+        }
+    }
     val learningStore = remember { LearningProgressStore(appContext) }
     var query by remember { mutableStateOf("") }
     var filterQuery by remember { mutableStateOf("") }
@@ -290,10 +296,10 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
             containerColor = Color.Transparent,
             bottomBar = {
                 NavigationBar(containerColor = Color.Black, contentColor = Color.White) {
-                    NavigationBarItem(selected = currentScreen == "Dersler", onClick = { currentScreen = "Dersler"; selectedTopic = "Tümü"; selected = "A1" }, icon = { Text("📚") }, label = { Text("Dersler") })
-                    NavigationBarItem(selected = currentScreen == "Sözlük", onClick = { currentScreen = "Sözlük"; selectedTopic = "Tümü"; selected = "Tümü"; tab = 0; query = "" }, icon = { Text("A-Z") }, label = { Text("Sözlük") })
-                    NavigationBarItem(selected = currentScreen == "Mesleki İngilizce", onClick = { currentScreen = "Mesleki İngilizce" }, icon = { Text("✈️") }, label = { Text("Mesleki") })
-                    NavigationBarItem(selected = false, onClick = { showProfile = true }, icon = { Text("👤") }, label = { Text("Profil") })
+                    NavigationBarItem(selected = currentScreen == "Dersler", onClick = { currentScreen = "Dersler"; selectedTopic = "Tümü"; selected = "A1" }, icon = { Text("📚") }, label = { Text("Dersler") }, colors = NavigationBarItemDefaults.colors(selectedIconColor = Color(0xFF211D3A), selectedTextColor = Color.White, indicatorColor = Color(0xFFE9D5FF), unselectedIconColor = Color(0xFFB8B8C5), unselectedTextColor = Color(0xFFB8B8C5)))
+                    NavigationBarItem(selected = currentScreen == "Sözlük", onClick = { currentScreen = "Sözlük"; selectedTopic = "Tümü"; selected = "Tümü"; tab = 0; query = "" }, icon = { Text("A-Z") }, label = { Text("Sözlük") }, colors = NavigationBarItemDefaults.colors(selectedIconColor = Color(0xFF211D3A), selectedTextColor = Color.White, indicatorColor = Color(0xFFE9D5FF), unselectedIconColor = Color(0xFFB8B8C5), unselectedTextColor = Color(0xFFB8B8C5)))
+                    NavigationBarItem(selected = currentScreen == "Mesleki İngilizce", onClick = { currentScreen = "Mesleki İngilizce" }, icon = { Text("✈️") }, label = { Text("Mesleki") }, colors = NavigationBarItemDefaults.colors(selectedIconColor = Color(0xFF211D3A), selectedTextColor = Color.White, indicatorColor = Color(0xFFE9D5FF), unselectedIconColor = Color(0xFFB8B8C5), unselectedTextColor = Color(0xFFB8B8C5)))
+                    NavigationBarItem(selected = false, onClick = { showProfile = true }, icon = { Text("👤") }, label = { Text("Profil") }, colors = NavigationBarItemDefaults.colors(selectedIconColor = Color(0xFF211D3A), selectedTextColor = Color.White, indicatorColor = Color(0xFFE9D5FF), unselectedIconColor = Color(0xFFB8B8C5), unselectedTextColor = Color(0xFFB8B8C5)))
                 }
             }
         ) { padding ->
