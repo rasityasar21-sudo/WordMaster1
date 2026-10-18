@@ -65,42 +65,78 @@ object ProfessionalCourseCatalog {
             title = "Sağlık İngilizcesi",
             titleEnglish = "Healthcare English",
             description = "Hasta iletişimi, temel tıbbi terimler ve klinik ortamda İngilizce.",
-            topics = listOf("Hasta karşılama", "Belirti ve şikâyetler", "Tıbbi terimler", "Hasta güvenliği")
+            topics = listOf("Hasta karşılama", "Belirti ve şikâyetler", "Tıbbi terimler", "Hasta güvenliği"),
+            sampleTerms = listOf(
+            ProfessionalTerm("symptom", "belirti", "Tell me about your symptoms."),
+            ProfessionalTerm("appointment", "randevu", "Your appointment is at ten o’clock."),
+            ProfessionalTerm("patient", "hasta", "The patient is waiting in the room."),
+            ProfessionalTerm("recovery", "iyileşme", "The patient is making a good recovery.")
+            )
         ),
         ProfessionalTrack(
             id = "software-it",
             title = "Yazılım ve Bilişim İngilizcesi",
             titleEnglish = "Software and IT English",
             description = "Teknik dokümantasyon, yazılım ekipleri ve hata raporları için İngilizce.",
-            topics = listOf("Programlama terimleri", "Hata raporlama", "Teknik doküman okuma", "Toplantı ve kod inceleme")
+            topics = listOf("Programlama terimleri", "Hata raporlama", "Teknik doküman okuma", "Toplantı ve kod inceleme"),
+            sampleTerms = listOf(
+            ProfessionalTerm("bug", "yazılım hatası", "We found a bug in the application."),
+            ProfessionalTerm("deploy", "yayına almak", "We will deploy the update tonight."),
+            ProfessionalTerm("database", "veritabanı", "The database stores user information."),
+            ProfessionalTerm("debug", "hata ayıklamak", "We need to debug this function.")
+            )
         ),
         ProfessionalTrack(
             id = "engineering",
             title = "Mühendislik İngilizcesi",
             titleEnglish = "Engineering English",
             description = "Teknik çizimler, ölçüler, süreçler ve mühendislik raporları.",
-            topics = listOf("Teknik çizimler", "Ölçüm ve toleranslar", "Malzeme ve üretim", "Teknik raporlama")
+            topics = listOf("Teknik çizimler", "Ölçüm ve toleranslar", "Malzeme ve üretim", "Teknik raporlama"),
+            sampleTerms = listOf(
+            ProfessionalTerm("measurement", "ölçüm", "Record the measurement in the report."),
+            ProfessionalTerm("tolerance", "tolerans", "The part is within the specified tolerance."),
+            ProfessionalTerm("material", "malzeme", "Check the material specification."),
+            ProfessionalTerm("design", "tasarım", "The design must meet the requirements.")
+            )
         ),
         ProfessionalTrack(
             id = "business",
             title = "İş ve Ofis İngilizcesi",
             titleEnglish = "Business English",
             description = "E-posta, toplantı, sunum ve profesyonel iletişim.",
-            topics = listOf("Profesyonel e-posta", "Toplantılar", "Sunumlar", "Müşteri iletişimi")
+            topics = listOf("Profesyonel e-posta", "Toplantılar", "Sunumlar", "Müşteri iletişimi"),
+            sampleTerms = listOf(
+            ProfessionalTerm("deadline", "son teslim tarihi", "The deadline is Friday."),
+            ProfessionalTerm("meeting", "toplantı", "The meeting starts at nine."),
+            ProfessionalTerm("invoice", "fatura", "Please send the invoice by email."),
+            ProfessionalTerm("schedule", "program / takvim", "I will check the schedule.")
+            )
         ),
         ProfessionalTrack(
             id = "hospitality",
             title = "Turizm ve Otelcilik İngilizcesi",
             titleEnglish = "Hospitality English",
             description = "Misafir karşılama, rezervasyon ve hizmet iletişimi.",
-            topics = listOf("Misafir karşılama", "Rezervasyon", "Şikâyet çözme", "Yön tarif etme")
+            topics = listOf("Misafir karşılama", "Rezervasyon", "Şikâyet çözme", "Yön tarif etme"),
+            sampleTerms = listOf(
+            ProfessionalTerm("reservation", "rezervasyon", "I would like to confirm my reservation."),
+            ProfessionalTerm("guest", "misafir", "The guest needs an extra towel."),
+            ProfessionalTerm("checkout", "çıkış işlemi", "Checkout is before noon."),
+            ProfessionalTerm("available", "müsait / mevcut", "A single room is available.")
+            )
         ),
         ProfessionalTrack(
             id = "logistics",
             title = "Lojistik İngilizcesi",
             titleEnglish = "Logistics English",
             description = "Sevkiyat, depo, teslimat ve tedarik zinciri terminolojisi.",
-            topics = listOf("Sevkiyat belgeleri", "Depo işlemleri", "Teslimat durumları", "Tedarik zinciri")
+            topics = listOf("Sevkiyat belgeleri", "Depo işlemleri", "Teslimat durumları", "Tedarik zinciri"),
+            sampleTerms = listOf(
+            ProfessionalTerm("shipment", "sevkiyat", "The shipment will arrive tomorrow."),
+            ProfessionalTerm("warehouse", "depo", "The goods are stored in the warehouse."),
+            ProfessionalTerm("delivery", "teslimat", "The delivery is delayed."),
+            ProfessionalTerm("inventory", "stok / envanter", "Update the inventory after receiving goods.")
+            )
         ),
         ProfessionalTrack(
             id = "law",
@@ -121,7 +157,13 @@ object ProfessionalCourseCatalog {
             title = "Otomotiv İngilizcesi",
             titleEnglish = "Automotive English",
             description = "Araç sistemleri, servis iletişimi ve teknik arıza açıklamaları.",
-            topics = listOf("Araç parçaları", "Servis kabul", "Arıza tanımlama", "Bakım kayıtları")
+            topics = listOf("Araç parçaları", "Servis kabul", "Arıza tanımlama", "Bakım kayıtları"),
+            sampleTerms = listOf(
+            ProfessionalTerm("brake", "fren", "The mechanic inspected the brakes."),
+            ProfessionalTerm("engine", "motor", "The engine needs an inspection."),
+            ProfessionalTerm("tire", "lastik", "Check the tire pressure."),
+            ProfessionalTerm("repair", "onarım", "The repair is complete.")
+            )
         )
     )
 
