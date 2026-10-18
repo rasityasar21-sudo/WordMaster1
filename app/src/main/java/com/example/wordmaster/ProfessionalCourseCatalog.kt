@@ -246,13 +246,23 @@ object ProfessionalCourseCatalog {
             title = "Mühendislik İngilizcesi",
             titleEnglish = "Engineering English",
             description = "Teknik çizimler, ölçüler, süreçler ve mühendislik raporları.",
-            topics = listOf("Teknik çizimler", "Ölçüm ve toleranslar", "Malzeme ve üretim", "Teknik raporlama"),
-            lessons = listOf(ProfessionalLesson("engineering-specs", "Teknik şartname okuma", "Ölçü, birim ve tolerans ifadelerini ayırt etmek.", "Teknik raporlarda ölçüm birimini ve kabul sınırını birlikte belirtmek gerekir. Bir değerin uygun olup olmadığı, ilgili çizim veya şartnamedeki gerekliliklere göre değerlendirilir.", listOf("The part is within tolerance." to "Parça tolerans sınırları içindedir.", "Record the measured value." to "Ölçülen değeri kaydedin.", "Refer to the drawing for dimensions." to "Boyutlar için teknik çizime başvurun."), "Bir ölçüm raporunda sayısal değerle birlikte ne belirtilmelidir?", "Ölçü birimi ve karşılaştırılacağı ilgili şartname/tolerans.")),
+            topics = listOf("Teknik çizimler", "Ölçüm ve toleranslar", "Malzeme ve üretim", "Teknik raporlama", "Kalite kontrol", "Problem çözme"),
+            lessons = listOf(
+                ProfessionalLesson("engineering-specs", "Teknik şartname okuma", "Ölçü, birim ve tolerans ifadelerini ayırt etmek.", "Teknik raporlarda ölçüm birimini ve kabul sınırını birlikte belirtmek gerekir. Bir değerin uygun olup olmadığı, ilgili çizim veya şartnamedeki gerekliliklere göre değerlendirilir.", listOf("The part is within tolerance." to "Parça tolerans sınırları içindedir.", "Record the measured value." to "Ölçülen değeri kaydedin.", "Refer to the drawing for dimensions." to "Boyutlar için teknik çizime başvurun."), "Bir ölçüm raporunda sayısal değerle birlikte ne belirtilmelidir?", "Ölçü birimi ve karşılaştırılacağı ilgili şartname/tolerans."),
+                ProfessionalLesson("quality-inspection", "Kalite kontrol bulguları", "Kontrol sonucunu kanıta dayalı ve açık biçimde raporlamak.", "Quality inspection kalite kontrol, non-conformance ise şartnameye uymayan durumdur. Rapor, gözlemleneni ve ilgili gerekliliği ayırmalı; kök neden kanıt olmadan kesinleştirilmemelidir.", listOf("The part does not meet the specification." to "Parça şartnameyi karşılamıyor.", "Please document the inspection result." to "Lütfen kontrol sonucunu belgeleyin.", "A non-conformance was identified." to "Bir uygunsuzluk tespit edildi."), "Uygunsuzluk raporunda ne birbirinden ayrılmalıdır?", "Gözlenen bulgu, ilgili gereklilik ve doğrulanmış sonuç."),
+                ProfessionalLesson("engineering-handover", "Teknik durum ve proje devri", "İlerleme, risk ve açık işleri ekip arkadaşlarına aktarmak.", "Teknik devirde tamamlanan işler, açık konular, sorumlu kişiler ve sonraki adım belirtilir. Tahmini tarih kesin taahhüt gibi sunulmamalıdır.", listOf("The prototype is ready for testing." to "Prototip test için hazır.", "This issue is still under investigation." to "Bu konu hâlâ inceleniyor.", "The next review is scheduled for Monday." to "Bir sonraki gözden geçirme pazartesi planlandı."), "Teknik devirde açık bir konu nasıl aktarılmalıdır?", "Mevcut durum, sorumlu/sonraki adım ve varsa tahmini zaman açıkça belirtilmelidir.")
+            ),
             sampleTerms = listOf(
             ProfessionalTerm("measurement", "ölçüm", "Record the measurement in the report."),
             ProfessionalTerm("tolerance", "tolerans", "The part is within the specified tolerance."),
             ProfessionalTerm("material", "malzeme", "Check the material specification."),
-            ProfessionalTerm("design", "tasarım", "The design must meet the requirements.")
+            ProfessionalTerm("design", "tasarım", "The design must meet the requirements."),
+            ProfessionalTerm("specification", "şartname", "Check the specification before approval."),
+            ProfessionalTerm("dimension", "boyut / ölçü", "Refer to the drawing for dimensions."),
+            ProfessionalTerm("prototype", "prototip", "The prototype is ready for testing."),
+            ProfessionalTerm("quality inspection", "kalite kontrolü", "Document the quality inspection result."),
+            ProfessionalTerm("non-conformance", "uygunsuzluk", "Report any non-conformance clearly."),
+            ProfessionalTerm("root cause", "kök neden", "The team is investigating the root cause.")
             )
         ),
         ProfessionalTrack(
@@ -260,13 +270,23 @@ object ProfessionalCourseCatalog {
             title = "İş ve Ofis İngilizcesi",
             titleEnglish = "Business English",
             description = "E-posta, toplantı, sunum ve profesyonel iletişim.",
-            topics = listOf("Profesyonel e-posta", "Toplantılar", "Sunumlar", "Müşteri iletişimi"),
-            lessons = listOf(ProfessionalLesson("business-email", "Profesyonel e-posta yazımı", "Kısa, nazik ve amacı açık e-posta yazmak.", "İyi bir iş e-postası konu satırı, kısa bağlam, net istek ve uygun kapanış içerir. Alıcıdan beklenen eylem ve son tarih gerekiyorsa açıkça belirtilmelidir.", listOf("I am writing to follow up on..." to "...konusunu takip etmek için yazıyorum.", "Could you please confirm receipt?" to "Aldığınızı teyit edebilir misiniz?", "Thank you for your time." to "Zaman ayırdığınız için teşekkür ederim."), "İş e-postasında isteğin anlaşılır olması için ne yapılmalı?", "İstenen eylem ve gerekiyorsa son tarih açıkça yazılmalı.")),
+            topics = listOf("Profesyonel e-posta", "Toplantılar", "Sunumlar", "Müşteri iletişimi", "Müzakere", "İş takibi"),
+            lessons = listOf(
+                ProfessionalLesson("business-email", "Profesyonel e-posta yazımı", "Kısa, nazik ve amacı açık e-posta yazmak.", "İyi bir iş e-postası konu satırı, kısa bağlam, net istek ve uygun kapanış içerir. Alıcıdan beklenen eylem ve son tarih gerekiyorsa açıkça belirtilmelidir.", listOf("I am writing to follow up on..." to "...konusunu takip etmek için yazıyorum.", "Could you please confirm receipt?" to "Aldığınızı teyit edebilir misiniz?", "Thank you for your time." to "Zaman ayırdığınız için teşekkür ederim."), "İş e-postasında isteğin anlaşılır olması için ne yapılmalı?", "İstenen eylem ve gerekiyorsa son tarih açıkça yazılmalı."),
+                ProfessionalLesson("business-meetings", "Toplantılara katılma ve fikir belirtme", "Toplantıda söz almak, görüş belirtmek ve kararları netleştirmek.", "Toplantı dilinde görüşü nazikçe sunmak, anlamadığında açıklama istemek ve kararları özetlemek önemlidir. Karar ile öneri birbirine karıştırılmamalıdır.", listOf("Could I add a point?" to "Bir nokta ekleyebilir miyim?", "I agree with that suggestion." to "Bu öneriye katılıyorum.", "Could we summarize the next steps?" to "Sonraki adımları özetleyebilir miyiz?"), "Toplantı sonunda neden sonraki adımlar özetlenmelidir?", "Sorumlulukları ve yapılacak işleri herkesin aynı anlaması için."),
+                ProfessionalLesson("business-negotiation", "Teklif ve müzakere dili", "Teklif, koşul ve karşı önerileri profesyonelce ifade etmek.", "Müzakerede koşulların kapsamı açıkça söylenmeli; fiyat, teslim tarihi ve dahil olan hizmetler netleştirilmelidir. Kesinleşmemiş bir öneri anlaşma gibi sunulmamalıdır.", listOf("Could you provide a revised quotation?" to "Güncellenmiş bir fiyat teklifi sağlayabilir misiniz?", "This offer is valid until Friday." to "Bu teklif cuma gününe kadar geçerlidir.", "Let us review the terms." to "Koşulları gözden geçirelim."), "Bir teklifin yanlış anlaşılmasını önlemek için ne net yazılmalıdır?", "Kapsam, koşullar, geçerlilik süresi ve ilgili tarihler.")
+            ),
             sampleTerms = listOf(
             ProfessionalTerm("deadline", "son teslim tarihi", "The deadline is Friday."),
             ProfessionalTerm("meeting", "toplantı", "The meeting starts at nine."),
             ProfessionalTerm("invoice", "fatura", "Please send the invoice by email."),
-            ProfessionalTerm("schedule", "program / takvim", "I will check the schedule.")
+            ProfessionalTerm("schedule", "program / takvim", "I will check the schedule."),
+            ProfessionalTerm("quotation", "fiyat teklifi", "Please review the attached quotation."),
+            ProfessionalTerm("agenda", "gündem", "The agenda is attached to the invitation."),
+            ProfessionalTerm("minutes", "toplantı tutanağı", "Please share the meeting minutes."),
+            ProfessionalTerm("negotiate", "müzakere etmek", "We need to negotiate the delivery date."),
+            ProfessionalTerm("stakeholder", "paydaş", "Keep the stakeholders informed."),
+            ProfessionalTerm("follow-up", "takip / geri dönüş", "I am sending a follow-up email.")
             )
         ),
         ProfessionalTrack(
