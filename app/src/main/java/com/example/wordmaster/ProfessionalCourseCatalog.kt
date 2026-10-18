@@ -342,13 +342,23 @@ object ProfessionalCourseCatalog {
             title = "Hukuk İngilizcesi",
             titleEnglish = "Legal English",
             description = "Hukuki metinleri ve profesyonel yazışmaları anlamaya yönelik dil çalışmaları.",
-            topics = listOf("Hukuki terimler", "Sözleşmeler", "Resmî yazışma", "Metin okuma"),
-            lessons = listOf(ProfessionalLesson("contract-language", "Sözleşme dilini anlama", "Taraf, yükümlülük ve madde ifadelerini ayırt etmek.", "Hukuki İngilizcede shall, may ve must gibi ifadelerin anlamı bağlama ve belgeye göre değişebilir. Öğrenme örnekleri hukuki tavsiye değildir; gerçek belgeler uzman tarafından değerlendirilmelidir.", listOf("The parties agree to..." to "Taraflar ... konusunda anlaşır.", "This clause applies to..." to "Bu madde ... için geçerlidir.", "The agreement takes effect on..." to "Anlaşma ... tarihinde yürürlüğe girer."), "Gerçek bir sözleşmenin anlamı yalnızca tek bir kelimeye bakılarak kesinleştirilebilir mi?", "Hayır; tüm bağlam ve ilgili hukuk dikkate alınmalıdır.")),
+            topics = listOf("Hukuki terimler", "Sözleşmeler", "Resmî yazışma", "Metin okuma", "Gizlilik", "Yükümlülükler"),
+            lessons = listOf(
+                ProfessionalLesson("contract-language", "Sözleşme dilini anlama", "Taraf, yükümlülük ve madde ifadelerini ayırt etmek.", "Hukuki İngilizcede shall, may ve must gibi ifadelerin anlamı bağlama ve belgeye göre değişebilir. Öğrenme örnekleri hukuki tavsiye değildir; gerçek belgeler uzman tarafından değerlendirilmelidir.", listOf("The parties agree to..." to "Taraflar ... konusunda anlaşır.", "This clause applies to..." to "Bu madde ... için geçerlidir.", "The agreement takes effect on..." to "Anlaşma ... tarihinde yürürlüğe girer."), "Gerçek bir sözleşmenin anlamı yalnızca tek bir kelimeye bakılarak kesinleştirilebilir mi?", "Hayır; tüm bağlam ve ilgili hukuk dikkate alınmalıdır."),
+                ProfessionalLesson("legal-obligations", "Yükümlülük ve sorumluluklar", "Sözleşmedeki sorumluluk ifadelerini dikkatle ayırt etmek.", "Yükümlülük, izin ve olasılık bildiren ifadeler aynı anlama gelmez. Cümlenin tamamı ve istisnalar birlikte okunmalıdır.", listOf("The supplier must deliver the goods." to "Tedarikçi malları teslim etmelidir.", "The parties may amend this clause." to "Taraflar bu maddeyi değiştirebilir.", "Each party is responsible for its obligations." to "Her taraf kendi yükümlülüklerinden sorumludur."), "Sözleşmede bir yükümlülüğü yorumlarken neye dikkat edilmelidir?", "Kullanılan modal ifade, bağlam ve varsa istisnalar birlikte incelenmelidir."),
+                ProfessionalLesson("formal-legal-correspondence", "Resmî yazışma ve belge teyidi", "Belge ve yanıt taleplerini açık ve tarafsız ifade etmek.", "Resmî yazışmada amaç, ilgili belge ve beklenen yanıt net olmalıdır. Hukuki sonuç doğurabilecek metinler yetkin bir uzmana kontrol ettirilmelidir.", listOf("Please acknowledge receipt of this notice." to "Lütfen bu bildirimi aldığınızı teyit edin.", "The attached document is for your review." to "Ekli belge incelemeniz içindir.", "We request a written response by the stated date." to "Belirtilen tarihe kadar yazılı yanıt talep ediyoruz."), "Resmî bir yazıda hangi ayrıntılar açıkça belirtilmelidir?", "Talebin amacı, ilgili belge ve beklenen yanıt tarihi.")
+            ),
             sampleTerms = listOf(
             ProfessionalTerm("agreement", "anlaşma", "Both parties signed the agreement."),
             ProfessionalTerm("clause", "madde", "Read the clause carefully."),
             ProfessionalTerm("evidence", "delil", "The lawyer reviewed the evidence."),
-            ProfessionalTerm("claim", "iddia / talep", "The claim was reviewed by the court.")
+            ProfessionalTerm("claim", "iddia / talep", "The claim was reviewed by the court."),
+            ProfessionalTerm("obligation", "yükümlülük", "Each party has an obligation."),
+            ProfessionalTerm("liability", "sorumluluk", "The clause describes liability."),
+            ProfessionalTerm("confidentiality", "gizlilik", "The agreement includes confidentiality terms."),
+            ProfessionalTerm("jurisdiction", "yargı yetkisi", "The jurisdiction is stated in the agreement."),
+            ProfessionalTerm("amendment", "değişiklik", "The amendment needs review."),
+            ProfessionalTerm("termination", "fesih", "The termination clause explains the process.")
             )
         ),
         ProfessionalTrack(
@@ -356,13 +366,23 @@ object ProfessionalCourseCatalog {
             title = "Eğitim İngilizcesi",
             titleEnglish = "Education English",
             description = "Sınıf içi iletişim, eğitim terminolojisi ve akademik beceriler.",
-            topics = listOf("Sınıf dili", "Ders anlatımı", "Ölçme ve değerlendirme", "Akademik kelimeler"),
-            lessons = listOf(ProfessionalLesson("classroom-instructions", "Sınıf içi yönergeler", "Talimat ve açıklamaları basit İngilizceyle ifade etmek.", "Eğitim ortamında kısa yönergeler, kontrol soruları ve anlaşılmayı doğrulama ifadeleri kullanılır. Öğrenciden anlamadığında soru sorması istenebilir.", listOf("Please work in pairs." to "Lütfen ikili çalışın.", "Can you explain your answer?" to "Cevabını açıklayabilir misin?", "Do you have any questions?" to "Sorunuz var mı?"), "Bir yönergenin anlaşıldığını nasıl kontrol edebilirsin?", "Öğrenciden kendi sözleriyle açıklamasını istemek veya kısa kontrol sorusu sormak.")),
+            topics = listOf("Sınıf dili", "Ders anlatımı", "Ölçme ve değerlendirme", "Akademik kelimeler", "Geri bildirim", "Ders planlama"),
+            lessons = listOf(
+                ProfessionalLesson("classroom-instructions", "Sınıf içi yönergeler", "Talimat ve açıklamaları basit İngilizceyle ifade etmek.", "Eğitim ortamında kısa yönergeler, kontrol soruları ve anlaşılmayı doğrulama ifadeleri kullanılır. Öğrenciden anlamadığında soru sorması istenebilir.", listOf("Please work in pairs." to "Lütfen ikili çalışın.", "Can you explain your answer?" to "Cevabını açıklayabilir misin?", "Do you have any questions?" to "Sorunuz var mı?"), "Bir yönergenin anlaşıldığını nasıl kontrol edebilirsin?", "Öğrenciden kendi sözleriyle açıklamasını istemek veya kısa kontrol sorusu sormak."),
+                ProfessionalLesson("constructive-feedback", "Yapıcı geri bildirim", "Geliştirilecek noktaları somut ve destekleyici biçimde anlatmak.", "Geri bildirim kişilik yerine gözlemlenebilir çalışmaya odaklanmalıdır. Öğrenciye uygulanabilir bir sonraki adım sunulması öğrenmeyi destekler.", listOf("Your explanation is clear." to "Açıklaman açık.", "Add an example to support your answer." to "Cevabını desteklemek için bir örnek ekle.", "Please review the verb tense in this paragraph." to "Lütfen bu paragraftaki fiil zamanını gözden geçir."), "Etkili geri bildirim neden somut bir öneri içermelidir?", "Öğrenci neyi nasıl geliştireceğini anlayabilsin diye."),
+                ProfessionalLesson("lesson-planning", "Ders hedefleri ve planlama", "Hedef, etkinlik ve değerlendirmeyi birbiriyle eşleştirmek.", "Öğrenme hedefi gözlemlenebilir bir beceriyle ifade edilmelidir. Etkinlik ve değerlendirme aynı beceriye yönelik olmalıdır.", listOf("By the end of the lesson, students can..." to "Dersin sonunda öğrenciler ... yapabilir.", "Let's review the learning objective." to "Öğrenme hedefini gözden geçirelim.", "Use the rubric to assess the task." to "Görevi değerlendirmek için ölçüt tablosunu kullanın."), "Bir değerlendirme etkinliği neyi ölçmelidir?", "Ders hedefinde belirtilen beceriyi.")
+            ),
             sampleTerms = listOf(
             ProfessionalTerm("assignment", "ödev", "Please submit your assignment tomorrow."),
             ProfessionalTerm("grade", "not", "Your grade is available online."),
             ProfessionalTerm("curriculum", "öğretim programı", "The curriculum includes language practice."),
-            ProfessionalTerm("explain", "açıklamak", "Can you explain the answer?")
+            ProfessionalTerm("explain", "açıklamak", "Can you explain the answer?"),
+            ProfessionalTerm("feedback", "geri bildirim", "Thank you for your feedback."),
+            ProfessionalTerm("assessment", "değerlendirme", "The assessment includes a short quiz."),
+            ProfessionalTerm("learning objective", "öğrenme hedefi", "Share the learning objective at the start."),
+            ProfessionalTerm("rubric", "değerlendirme ölçüt tablosu", "Use the rubric to assess the task."),
+            ProfessionalTerm("engagement", "katılım", "The activity encourages student engagement."),
+            ProfessionalTerm("formative assessment", "süreç değerlendirmesi", "Use formative assessment during the lesson.")
             )
         ),
         ProfessionalTrack(
