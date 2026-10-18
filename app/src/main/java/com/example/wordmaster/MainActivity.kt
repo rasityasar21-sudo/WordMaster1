@@ -14,6 +14,7 @@ import kotlinx.coroutines.withContext
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.runtime.DisposableEffect
 import androidx.activity.ComponentActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.activity.compose.setContent
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
@@ -51,23 +52,72 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val prefs = getSharedPreferences("wordmaster", MODE_PRIVATE)
-        val words = try {
-            val json = assets.open("dictionary.json").bufferedReader().use { it.readText() }
-            val arr = JSONArray(json)
-            (0 until arr.length()).mapNotNull { i ->
-                val item = arr.getJSONObject(i)
-                val english = item.optString("en").trim()
-                val turkish = item.optString("tr").trim()
-                val example = item.optString("example", "").trim()
-                if (DictionaryEntryFilter.shouldExclude(english, turkish)) {
-                    null
-                } else {
-                    Word(english, turkish, item.optString("level", "A1"), example)
-                }
-            }.distinctBy { it.en.lowercase(Locale.ROOT) }
-                .sortedBy { it.en.lowercase(Locale.ROOT) }
-        } catch (_: Exception) { listOf(Word("hello", "merhaba", "A1")) }
-        setContent { WordMasterApp(words, prefs) }
+        val wordsState = mutableStateOf<List<Word>?>(null)
+
+        setContent {
+            val words by wordsState
+            if (words == null) {
+                DictionaryLoadingScreen()
+            } else {
+                WordMasterApp(words!!, prefs)
+            }
+        }
+
+        // JSON okuma, ayrıştırma, tekrar ayıklama ve sıralama UI iş parçacığını bloke etmesin.
+        lifecycleScope.launch(Dispatchers.IO) {
+            val words = loadDictionary()
+            withContext(Dispatchers.Main) {
+                wordsState.value = words
+            }
+        }
+    }
+
+    private fun loadDictionary(): List<Word> = try {
+        val json = assets.open("dictionary.json").bufferedReader().use { it.readText() }
+        val arr = JSONArray(json)
+        (0 until arr.length()).mapNotNull { i ->
+            val item = arr.getJSONObject(i)
+            val english = item.optString("en").trim()
+            val turkish = item.optString("tr").trim()
+            val example = item.optString("example", "").trim()
+            if (DictionaryEntryFilter.shouldExclude(english, turkish)) {
+                null
+            } else {
+                Word(english, turkish, item.optString("level", "A1"), example)
+            }
+        }.distinctBy { it.en.lowercase(Locale.ROOT) }
+            .sortedBy { it.en.lowercase(Locale.ROOT) }
+    } catch (_: Exception) {
+        listOf(Word("hello", "merhaba", "A1"))
+    }
+}
+
+@Composable
+private fun DictionaryLoadingScreen() {
+    Surface(
+        modifier = Modifier.fillMaxSize(),
+        color = Color(0xFFFFF5F5)
+    ) {
+        Column(
+            modifier = Modifier.fillMaxSize().padding(24.dp),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            CircularProgressIndicator(color = Color(0xFFC62828))
+            Spacer(modifier = Modifier.height(20.dp))
+            Text(
+                text = "WORDMASTER",
+                color = Color(0xFFC62828),
+                fontWeight = FontWeight.ExtraBold,
+                fontSize = 22.sp
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(
+                text = "Sözlük hazırlanıyor...",
+                color = Color(0xFF202044),
+                fontSize = 15.sp
+            )
+        }
     }
 }
 
