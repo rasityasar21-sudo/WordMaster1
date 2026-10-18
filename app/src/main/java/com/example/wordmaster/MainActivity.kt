@@ -184,11 +184,12 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
     val xpInLevel = xp % 100
     val today = LocalDate.now().toString()
     val studyPlanLevel = chosenLevel.ifBlank { selected.takeIf { it in listOf("A1", "A2", "B1", "B2", "C1") } ?: "A1" }
-    val studyPlan = remember(studyPlanLevel, completedCourseIds, today) {
+    val dueReviewWords = learningStore.dueForReview()
+    val studyPlan = remember(studyPlanLevel, completedCourseIds, dueReviewWords, today) {
         DailyStudyPlan.create(
             level = studyPlanLevel,
             completedLessonIds = completedCourseIds,
-            dueWords = learningStore.dueForReview(),
+            dueWords = dueReviewWords,
             targetMinutes = CourseProgressStore.dailyGoalMinutes(prefs),
             date = today
         )
