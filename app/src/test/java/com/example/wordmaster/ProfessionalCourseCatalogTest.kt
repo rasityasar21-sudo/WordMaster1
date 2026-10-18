@@ -139,4 +139,24 @@ class ProfessionalCourseCatalogTest {
         assertTrue(track.lessons.all { it.phrases.size >= 3 && it.question.isNotBlank() && it.answer.isNotBlank() })
     }
 
+    @Test
+    fun lawCourseCoversContractObligationsAndCorrespondence() {
+        val track = ProfessionalCourseCatalog.find("law")!!
+        assertTrue(track.lessons.size >= 3)
+        assertTrue(track.sampleTerms.size >= 8)
+        assertTrue(track.lessons.any { it.id == "legal-obligations" })
+        assertTrue(track.lessons.any { it.id == "formal-legal-correspondence" })
+        assertTrue(track.lessons.all { it.phrases.size >= 3 && it.question.isNotBlank() && it.answer.isNotBlank() })
+    }
+
+    @Test
+    fun educationCourseCoversFeedbackAndLessonPlanning() {
+        val track = ProfessionalCourseCatalog.find("education")!!
+        assertTrue(track.lessons.size >= 3)
+        assertTrue(track.sampleTerms.size >= 8)
+        assertTrue(track.lessons.any { it.id == "constructive-feedback" })
+        assertTrue(track.lessons.any { it.id == "lesson-planning" })
+        assertTrue(track.lessons.all { it.phrases.size >= 3 && it.question.isNotBlank() && it.answer.isNotBlank() })
+    }
+
 }
