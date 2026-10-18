@@ -855,7 +855,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                     repeat(4) { index ->
                         Box(
                             Modifier.weight(1f).height(5.dp)
-                                .background(if (index <= onboardingStep) Color(0xFF13A879) else Color(0xFFE5E7EB), RoundedCornerShape(8.dp))
+                                .background(if (index <= onboardingStep) Color(0xFF13A879) else Color(0xFFE5E7EB)), RoundedCornerShape(8.dp))
                         )
                     }
                 }
@@ -891,7 +891,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                             Surface(
                                 color = if (onboardingChoice == code) Color(0xFFE1F8F0) else Color(0xFFF8FAFC),
                                 shape = RoundedCornerShape(14.dp),
-                                border = androidx.compose.foundation.BorderStroke(1.dp, if (onboardingChoice == code) Color(0xFF13A879) else Color(0xFFE5E7EB),
+                                border = androidx.compose.foundation.BorderStroke(1.dp, if (onboardingChoice == code) Color(0xFF13A879) else Color(0xFFE5E7EB)),
                                 onClick = { onboardingChoice = code }
                             ) {
                                 Row(Modifier.fillMaxWidth().padding(horizontal = 10.dp, vertical = 9.dp), verticalAlignment = Alignment.CenterVertically) {
@@ -909,7 +909,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                             Surface(
                                 color = if (onboardingGoal == minutes) Color(0xFFE1F8F0) else Color(0xFFF8FAFC),
                                 shape = RoundedCornerShape(14.dp),
-                                border = androidx.compose.foundation.BorderStroke(1.dp, if (onboardingGoal == minutes) Color(0xFF13A879) else Color(0xFFE5E7EB),
+                                border = androidx.compose.foundation.BorderStroke(1.dp, if (onboardingGoal == minutes) Color(0xFF13A879) else Color(0xFFE5E7EB)),
                                 onClick = { onboardingGoal = minutes }
                             ) {
                                 Row(Modifier.fillMaxWidth().padding(horizontal = 12.dp, vertical = 12.dp), verticalAlignment = Alignment.CenterVertically) {
@@ -926,7 +926,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                             Surface(
                                 color = if (onboardingReason == reason) Color(0xFFE1F8F0) else Color(0xFFF8FAFC),
                                 shape = RoundedCornerShape(14.dp),
-                                border = androidx.compose.foundation.BorderStroke(1.dp, if (onboardingReason == reason) Color(0xFF13A879) else Color(0xFFE5E7EB),
+                                border = androidx.compose.foundation.BorderStroke(1.dp, if (onboardingReason == reason) Color(0xFF13A879) else Color(0xFFE5E7EB)),
                                 onClick = { onboardingReason = reason }
                             ) {
                                 Row(Modifier.fillMaxWidth().padding(horizontal = 12.dp, vertical = 10.dp), verticalAlignment = Alignment.CenterVertically) {
