@@ -5,6 +5,8 @@ package com.example.wordmaster
  * The caller runs this on Dispatchers.Default.
  */
 object QuizChoiceSelector {
+    private val whitespaceRegex = Regex("\\s+")
+    private val trailingPunctuationRegex = Regex("[.!?;,:]+$")
     fun select(target: Word, words: List<Word>, count: Int = 4): List<Word> {
         if (count <= 0) return emptyList()
 
@@ -51,6 +53,6 @@ object QuizChoiceSelector {
 
     private fun normalize(value: String): String =
         value.trim().lowercase()
-            .replace(Regex("\\s+"), " ")
-            .replace(Regex("[.!?;,:]+$"), "")
+            .replace(whitespaceRegex, " ")
+            .replace(trailingPunctuationRegex, "")
 }
