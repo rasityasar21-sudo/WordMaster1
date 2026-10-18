@@ -77,4 +77,16 @@ class ProfessionalCourseCatalogTest {
         assertTrue("corrosion-and-wear" in ids)
         assertTrue("maintenance-handover" in ids)
     }
+    @Test
+    fun healthcareCourseHasPracticalCommunicationLessonsAndExpandedVocabulary() {
+        val track = ProfessionalCourseCatalog.find("healthcare")!!
+        assertTrue(track.lessons.size >= 3)
+        assertTrue(track.sampleTerms.size >= 8)
+        assertTrue(track.lessons.any { it.id == "patient-history" })
+        assertTrue(track.lessons.any { it.id == "patient-instructions" })
+        assertTrue(track.lessons.all { lesson ->
+            lesson.phrases.size >= 3 && lesson.question.isNotBlank() && lesson.answer.isNotBlank()
+        })
+    }
+
 }
