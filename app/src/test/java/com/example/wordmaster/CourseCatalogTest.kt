@@ -1,0 +1,62 @@
+package com.example.wordmaster
+
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertNotNull
+import org.junit.Assert.assertNull
+import org.junit.Assert.assertTrue
+import org.junit.Test
+
+class CourseCatalogTest {
+    @Test
+    fun lessonLookupAndLevelFilteringAreCaseInsensitive() {
+        assertNotNull(WordMasterCourseCatalog.find("a1-greetings"))
+        assertNull(WordMasterCourseCatalog.find("missing-lesson"))
+        assertEquals(
+            WordMasterCourseCatalog.forLevel("A1"),
+            WordMasterCourseCatalog.forLevel("a1")
+        )
+    }
+
+    @Test
+    fun lessonsWithPrerequisitesStayLockedUntilPrerequisiteIsCompleted() {
+        val locked = WordMasterCourseCatalog.available(emptySet(), "A1")
+        assertFalse(locked.any { it.id == "a1-questions" })
+
+        val unlocked = WordMasterCourseCatalog.available(setOf("a1-pronouns"), "A1")
+        assertTrue(unlocked.any { it.id == "a1-questions" })
+    }
+
+    @Test
+    fun completedLessonsAreNotRecommendedAgain() {
+        val available = WordMasterCourseCatalog.available(setOf("a1-greetings"), "A1")
+        assertFalse(available.any { it.id == "a1-greetings" })
+        assertEquals("a1-pronouns", WordMasterCourseCatalog.nextRecommended(setOf("a1-greetings"), "A1")?.id)
+    }
+
+    @Test
+    fun dailyPlanRespectsTargetAndLimitsReviewQueue() {
+        val due = (1..15).map { WordProgress(word = "word$it") }
+        val plan = DailyStudyPlan.create(
+            level = "A1",
+            completedLessonIds = emptySet(),
+            dueWords = due,
+            targetMinutes = 15,
+            date = "2026-10-18"
+        )
+
+        assertEquals("2026-10-18", plan.date)
+        assertEquals(15, plan.targetMinutes)
+        assertTrue(plan.estimatedMinutes >= plan.targetMinutes)
+        assertEquals(10, plan.reviewWords.size)
+    }
+
+    @Test
+    fun dailyPlanClampsTargetToSupportedRange() {
+        val tooShort = DailyStudyPlan.create("A1", emptySet(), emptyList(), targetMinutes = 1)
+        val tooLong = DailyStudyPlan.create("A1", emptySet(), emptyList(), targetMinutes = 500)
+
+        assertEquals(5, tooShort.targetMinutes)
+        assertEquals(120, tooLong.targetMinutes)
+    }
+}
