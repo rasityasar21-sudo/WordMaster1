@@ -1,42 +1,49 @@
 package com.example.wordmaster
 
 /**
- * Builds distinct quiz options without shuffling/filtering the full 26k+ dictionary
- * on the UI thread. Call from a background dispatcher.
+ * Selects distinct quiz options while avoiding a full shuffle of the large dictionary.
+ * The caller runs this on Dispatchers.Default.
  */
 object QuizChoiceSelector {
     fun select(target: Word, words: List<Word>, count: Int = 4): List<Word> {
         if (count <= 0) return emptyList()
+
         val targetKey = normalize(target.en)
         val targetMeaning = normalize(target.tr)
-        val usedWords = mutableSetOf(targetKey)
-        val usedMeanings = mutableSetOf(targetMeaning)
         val sameLevel = mutableListOf<Word>()
         val otherLevels = mutableListOf<Word>()
 
-        // Random sampling is bounded, so a very large dictionary is never fully shuffled.
-        val attempts = minOf(words.size * 2, 1800)
-        repeat(attempts) {
-            val candidate = words.randomOrNull() ?: return@repeat
+        // A linear scan is predictable and cheap for ~27k records; random sampling
+        // could miss valid options and make tests/results flaky.
+        for (candidate in words) {
             val key = normalize(candidate.en)
             val meaning = normalize(candidate.tr)
-            if (key.isBlank() || meaning.isBlank() || key in usedWords || meaning in usedMeanings) return@repeat
-            if (candidate.level.equals(target.level, ignoreCase = true)) sameLevel += candidate
-            else otherLevels += candidate
+            if (key.isBlank() || meaning.isBlank()) continue
+            if (key == targetKey || meaning == targetMeaning) continue
+            if (candidate.level.equals(target.level, ignoreCase = true)) {
+                sameLevel.add(candidate)
+            } else {
+                otherLevels.add(candidate)
+            }
         }
 
         val result = mutableListOf(target)
+        val usedWords = mutableSetOf(targetKey)
+        val usedMeanings = mutableSetOf(targetMeaning)
+
         fun addUnique(candidates: List<Word>) {
             for (candidate in candidates.shuffled()) {
                 val key = normalize(candidate.en)
                 val meaning = normalize(candidate.tr)
-                if (key in usedWords || meaning.isBlank() || meaning in usedMeanings) continue
-                result += candidate
-                usedWords += key
-                usedMeanings += meaning
+                if (key.isBlank() || meaning.isBlank()) continue
+                if (key in usedWords || meaning in usedMeanings) continue
+                result.add(candidate)
+                usedWords.add(key)
+                usedMeanings.add(meaning)
                 if (result.size >= count) return
             }
         }
+
         addUnique(sameLevel.distinctBy { normalize(it.en) })
         if (result.size < count) addUnique(otherLevels.distinctBy { normalize(it.en) })
         return result.shuffled()
