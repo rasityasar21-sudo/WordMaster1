@@ -135,7 +135,7 @@ object LessonBook {
                     "Term → plain-English definition → context → example → safety note",
                     listOf("The technician inspected the landing gear." to "Teknisyen iniş takımını kontrol etti.", "Report any visible damage." to "Görülebilen hasarı bildirin.", "The aircraft must remain grounded until authorized release." to "Yetkili serbest bırakma verilene kadar hava aracı yerde kalmalıdır."),
                     listOf("Benzer teknik terimleri eş anlamlı sanma.", "Kısaltmayı açılımı ve bağlamıyla öğren.", "Dil örneğini gerçek bakım veya uçuş talimatı olarak kullanma."),
-                    listOf("Terimin tanımını kendi sözlerinle açıkla.", "Örnek cümlede terimin görevini belirle.", "Operasyonel kararlar için onaylı dokümana başvur.")),
+                    listOf("Terimin tanımını kendi sözlerinle açıkla.", "Örnek cümlede terimin görevini belirle.", "Operasyonel kararlar için onaylı dokümana başvur."))
             "countable" in t || "uncountable" in t || "sayılabil" in t || "some/any" in t -> 
                 LessonBookChapter("Sayılabilen ve sayılamayan isimler",
                     "Sayılabilen isimler tekil ve çoğul olabilir; a/an ve many ile kullanılabilir. Sayılamayan isimler genellikle doğrudan çoğul yapılmaz ve much ile kullanılabilir. Some olumlu cümlelerde sık görülür; any ise soru ve olumsuz cümlelerde sık kullanılır, ancak bağlama göre istisnalar vardır.",
