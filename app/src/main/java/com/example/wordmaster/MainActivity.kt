@@ -163,9 +163,6 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
     var savedPlacementCorrect by remember { mutableIntStateOf(prefs.getInt("placementCorrect", 0)) }
     var showOnboarding by remember { mutableStateOf(chosenLevel.isBlank()) }
     var onboardingChoice by remember { mutableStateOf(chosenLevel.ifBlank { "A1" }) }
-    var onboardingStep by remember { mutableIntStateOf(0) }
-    var onboardingGoal by remember { mutableIntStateOf(prefs.getInt("dailyGoalMinutes", 10)) }
-    var onboardingReason by remember { mutableStateOf(prefs.getString("onboardingReason", "Eğitimimi desteklemek için") ?: "Eğitimimi desteklemek için") }
     var placementMode by remember { mutableStateOf(false) }
     var placementAnswered by remember { mutableIntStateOf(0) }
     var placementCorrect by remember { mutableIntStateOf(0) }
@@ -833,112 +830,69 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                     }
                 item {
                     Button(onClick = { showTools = true }, modifier = Modifier.fillMaxWidth()) {
-                        Text("📅 Günlük görevler      if (showOnboarding) AlertDialog(
+                        Text("📅 Günlük görevler  •  🏅 Rozetler  •  🎮 Eşleştirme  •  📊 İstatistikler")
+                    }
+                }
+
+                item {
+                    Text("İpucu: Kelimeleri favorilerine ekleyip sonra tekrar çalışabilirsin.", color = Color(0xFF758099), fontSize = 12.sp)
+                }
+            }
+        }
+    }
+
+    if (showOnboarding) AlertDialog(
         onDismissRequest = { },
         title = {
-            Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 Box(
-                    Modifier.fillMaxWidth().height(118.dp)
+                    Modifier.fillMaxWidth().height(112.dp)
                         .background(
-                            Brush.linearGradient(listOf(Color(0xFF173F35), Color(0xFF13A879), Color(0xFFB8F36B))),
-                            RoundedCornerShape(24.dp)
+                            Brush.linearGradient(listOf(Color(0xFF4F46E5), Color(0xFF9333EA), Color(0xFFEC4899))),
+                            RoundedCornerShape(22.dp)
                         ),
                     contentAlignment = Alignment.Center
                 ) {
                     Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(5.dp)) {
-                        Text("🌱", fontSize = 35.sp)
-                        Text("WORDMASTER", color = Color.White, fontSize = 22.sp, fontWeight = FontWeight.Black, letterSpacing = 1.4.sp)
-                        Text("Kendi hızında. Kendi yolunda.", color = Color.White, fontSize = 12.sp)
+                        Text("📚", fontSize = 34.sp)
+                        Text("WORDMASTER", color = Color.White, fontSize = 19.sp, fontWeight = FontWeight.Black)
+                        Text("Her gün biraz daha İngilizce", color = Color.White, fontSize = 12.sp)
                     }
                 }
-                Row(horizontalArrangement = Arrangement.spacedBy(5.dp), modifier = Modifier.fillMaxWidth()) {
-                    repeat(4) { index ->
-                        Box(
-                            Modifier.weight(1f).height(5.dp)
-                                .background(if (index <= onboardingStep) Color(0xFF13A879) else Color(0xFFE5E7EB)), RoundedCornerShape(8.dp))
-                        )
-                    }
-                }
-                Text(
-                    when (onboardingStep) {
-                        0 -> "Yeni bir başlangıca hazır mısın?"
-                        1 -> "İngilizce seviyeni seç"
-                        2 -> "Günlük hedefin ne olsun?"
-                        else -> "İngilizceyi neden öğreniyorsun?"
-                    },
-                    fontWeight = FontWeight.ExtraBold, fontSize = 22.sp, color = Navy
-                )
+                Text("Hoş geldin! ✨", fontWeight = FontWeight.ExtraBold, fontSize = 23.sp, color = Navy)
             }
         },
         text = {
-            Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                when (onboardingStep) {
-                    0 -> {
-                        Text("Kelime ezberlemekten fazlası. Kelimeler, dersler ve tekrarlarla sana uygun bir öğrenme rotası oluşturalım.", fontSize = 15.sp, lineHeight = 22.sp, color = Color(0xFF596579))
-                        Surface(color = Color(0xFFE1F8F0), shape = RoundedCornerShape(18.dp)) {
-                            Row(Modifier.fillMaxWidth().padding(14.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                                Text("🧭", fontSize = 30.sp)
-                                Column(verticalArrangement = Arrangement.spacedBy(3.dp)) {
-                                    Text("Senin rotan, senin tempon", fontWeight = FontWeight.Bold, color = Color(0xFF075E54))
-                                    Text("İstediğinde hedefini ve seviyeni değiştirebilirsin.", fontSize = 12.sp, color = Color(0xFF287568), lineHeight = 17.sp)
-                                }
-                            }
-                        }
-                    }
-                    1 -> {
-                        Text("En yakın seçeneği işaretle. Emin değilsen kısa seviye tespit sınavını da kullanabilirsin.", fontSize = 14.sp, lineHeight = 20.sp, color = Color(0xFF596579))
-                        listOf("A1" to "Yeni başlıyorum", "A2" to "Temel kelime ve cümleleri biliyorum", "B1" to "Günlük konularda konuşabiliyorum", "B2" to "Birçok konuda rahat iletişim kuruyorum", "C1" to "İleri seviyede İngilizce kullanıyorum").forEach { (code, desc) ->
-                            Surface(
-                                color = if (onboardingChoice == code) Color(0xFFE1F8F0) else Color(0xFFF8FAFC),
-                                shape = RoundedCornerShape(14.dp),
-                                border = androidx.compose.foundation.BorderStroke(1.dp, if (onboardingChoice == code) Color(0xFF13A879) else Color(0xFFE5E7EB)),
-                                onClick = { onboardingChoice = code }
-                            ) {
-                                Row(Modifier.fillMaxWidth().padding(horizontal = 10.dp, vertical = 9.dp), verticalAlignment = Alignment.CenterVertically) {
-                                    Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
-                                        Text("$code  ·  $desc", fontWeight = FontWeight.Bold, color = Ink, fontSize = 13.sp)
-                                    }
-                                    if (onboardingChoice == code) Text("✓", color = Color(0xFF087F5B), fontWeight = FontWeight.Black, fontSize = 19.sp)
-                                }
-                            }
-                        }
-                    }
-                    2 -> {
-                        Text("Sürdürebileceğin küçük bir hedef seç. İleride ayarlardan değiştirebilirsin.", fontSize = 14.sp, lineHeight = 20.sp, color = Color(0xFF596579))
-                        listOf(5 to "Rahat", 10 to "Dengeli", 15 to "Kararlı", 30 to "Yoğun").forEach { (minutes, label) ->
-                            Surface(
-                                color = if (onboardingGoal == minutes) Color(0xFFE1F8F0) else Color(0xFFF8FAFC),
-                                shape = RoundedCornerShape(14.dp),
-                                border = androidx.compose.foundation.BorderStroke(1.dp, if (onboardingGoal == minutes) Color(0xFF13A879) else Color(0xFFE5E7EB)),
-                                onClick = { onboardingGoal = minutes }
-                            ) {
-                                Row(Modifier.fillMaxWidth().padding(horizontal = 12.dp, vertical = 12.dp), verticalAlignment = Alignment.CenterVertically) {
-                                    Text("$minutes dakika", Modifier.weight(1f), color = Ink, fontWeight = FontWeight.Bold)
-                                    Text(label, color = Color(0xFF68758E), fontSize = 12.sp)
-                                    if (onboardingGoal == minutes) Text("  ✓", color = Color(0xFF087F5B), fontWeight = FontWeight.Black)
-                                }
-                            }
-                        }
-                    }
-                    else -> {
-                        Text("Bunu bilmek, ana ekrandaki önerileri sana göre düzenlememize yardımcı olur.", fontSize = 14.sp, lineHeight = 20.sp, color = Color(0xFF596579))
-                        listOf("Bağlantı kurmak için", "Eğitimimi desteklemek için", "Kariyerimi geliştirmek için", "Seyahate hazırlanmak için", "Kendimi geliştirmek için", "Eğlencesine").forEach { reason ->
-                            Surface(
-                                color = if (onboardingReason == reason) Color(0xFFE1F8F0) else Color(0xFFF8FAFC),
-                                shape = RoundedCornerShape(14.dp),
-                                border = androidx.compose.foundation.BorderStroke(1.dp, if (onboardingReason == reason) Color(0xFF13A879) else Color(0xFFE5E7EB)),
-                                onClick = { onboardingReason = reason }
-                            ) {
-                                Row(Modifier.fillMaxWidth().padding(horizontal = 12.dp, vertical = 10.dp), verticalAlignment = Alignment.CenterVertically) {
-                                    Text(reason, Modifier.weight(1f), color = Ink, fontWeight = FontWeight.SemiBold)
-                                    if (onboardingReason == reason) Text("✓", color = Color(0xFF087F5B), fontWeight = FontWeight.Black)
-                                }
+            Column(verticalArrangement = Arrangement.spacedBy(9.dp)) {
+                Text("Sana uygun dersleri hazırlayalım. Seviyeni seçebilir ya da kısa sınavla belirleyebilirsin.", fontSize = 14.sp, lineHeight = 20.sp, color = Color(0xFF596579))
+                if (placementCompleted) {
+                    Surface(color = Color(0xFFE1F8F0), shape = RoundedCornerShape(14.dp)) {
+                        Row(Modifier.fillMaxWidth().padding(12.dp), verticalAlignment = Alignment.CenterVertically) {
+                            Text("✓", color = Color(0xFF087F5B), fontSize = 22.sp, fontWeight = FontWeight.Black)
+                            Spacer(Modifier.width(8.dp))
+                            Column {
+                                Text("Seviye tespit sınavın kaydedildi", fontWeight = FontWeight.Bold, color = Color(0xFF087F5B))
+                                Text("$chosenLevel seviyesi • $savedPlacementCorrect/10 doğru", fontSize = 12.sp, color = Color(0xFF087F5B))
                             }
                         }
                     }
                 }
-                if (placementCompleted && onboardingStep == 1) {
-                    Text("Önceki seviye sınavın: $chosenLevel • $savedPlacementCorrect/10 doğru", color = Color(0xFF087F5B), fontSize = 12.sp)
+                listOf("A1" to "Başlangıç", "A2" to "Temel", "B1" to "Orta", "B2" to "Orta-ileri", "C1" to "İleri").forEach { (code, desc) ->
+                    Surface(
+                        color = if (onboardingChoice == code) Color(0xFFEDE9FE) else Color(0xFFF8FAFC),
+                        shape = RoundedCornerShape(14.dp),
+                        onClick = { onboardingChoice = code }
+                    ) {
+                        Row(Modifier.fillMaxWidth().padding(horizontal = 9.dp, vertical = 5.dp), verticalAlignment = Alignment.CenterVertically) {
+                            RadioButton(selected = onboardingChoice == code, onClick = { onboardingChoice = code })
+                            Column {
+                                Text(code, fontWeight = FontWeight.Bold, color = Color(0xFF6D28D9))
+                                Text(desc, fontSize = 12.sp, color = Color(0xFF64748B))
+                            }
+                            Spacer(Modifier.weight(1f))
+                            if (onboardingChoice == code) Text("✓", color = Color(0xFF6D28D9), fontWeight = FontWeight.Black)
+                        }
+                    }
                 }
             }
         },
@@ -946,49 +900,25 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
             Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(7.dp)) {
                 Button(
                     onClick = {
-                        if (onboardingStep < 3) {
-                            onboardingStep += 1
-                        } else {
-                            chosenLevel = onboardingChoice
-                            selected = onboardingChoice
-                            prefs.edit()
-                                .putString("chosenLevel", chosenLevel)
-                                .putInt("dailyGoalMinutes", onboardingGoal)
-                                .putString("onboardingReason", onboardingReason)
-                                .apply()
-                            showOnboarding = false
-                            onboardingStep = 0
-                        }
+                        chosenLevel = onboardingChoice
+                        selected = onboardingChoice
+                        prefs.edit().putString("chosenLevel", chosenLevel).apply()
+                        showOnboarding = false
                     },
                     modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(15.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF13A879))
-                ) { Text(if (onboardingStep == 3) "ROTAMI OLUŞTUR  →" else if (onboardingStep == 0) "BAŞLA  →" else "DEVAM ET  →", modifier = Modifier.padding(vertical = 5.dp), fontWeight = FontWeight.ExtraBold) }
-                if (onboardingStep == 1) {
-                    OutlinedButton(
-                        onClick = {
-                            placementMode = true
-                            placementAnswered = 0
-                            placementCorrect = 0
-                            sessionAnswered = 0
-                            sessionCorrect = 0
-                            sessionActive = true
-                            showOnboarding = false
-                            selected = "Tümü"
-                            quizMode = "İngilizce → Türkçe"
-                            startQuiz()
-                        },
-                        modifier = Modifier.fillMaxWidth(),
-                        shape = RoundedCornerShape(15.dp)
-                    ) { Text("🧭  Seviye tespit sınavını çöz") }
-                }
-                if (onboardingStep > 0) {
-                    TextButton(onClick = { onboardingStep -= 1 }) { Text("← Geri", color = Color(0xFF68758E)) }
-                }
-            }
-        }
-    )
-                  quizMode = "İngilizce → Türkçe"
+                    shape = RoundedCornerShape(15.dp)
+                ) { Text("🚀  $onboardingChoice seviyesiyle başla", modifier = Modifier.padding(vertical = 5.dp)) }
+                OutlinedButton(
+                    onClick = {
+                        placementMode = true
+                        placementAnswered = 0
+                        placementCorrect = 0
+                        sessionAnswered = 0
+                        sessionCorrect = 0
+                        sessionActive = true
+                        showOnboarding = false
+                        selected = "Tümü"
+                        quizMode = "İngilizce → Türkçe"
                         startQuiz()
                     },
                     modifier = Modifier.fillMaxWidth(),
