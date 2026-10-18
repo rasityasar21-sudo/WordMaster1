@@ -227,7 +227,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
         // Prefer same-level distractors with different Turkish meanings to avoid ambiguous questions.
         val choices = QuizChoiceSelector.select(target, words, count = 4)
         quizWord = target
-        quizChoices = choices.values.shuffled()
+        quizChoices = choices
         quizMessage = null
     }
 
