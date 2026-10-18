@@ -372,6 +372,60 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                 shape = RoundedCornerShape(22.dp),
                                 colors = CardDefaults.cardColors(containerColor = Color.White)
                             ) {
+                                val progressSummary = learningStore.summary()
+                                val completedLessonCount = completedCourseIds.size
+                                val totalStudyMinutes = CourseProgressStore.studyMinutes(prefs, today)
+                                val studyMinuteGoal = CourseProgressStore.dailyGoalMinutes(prefs)
+                                val studyProgress = (totalStudyMinutes.toFloat() / studyMinuteGoal.coerceAtLeast(1)).coerceIn(0f, 1f)
+                                Column(Modifier.fillMaxWidth().padding(18.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                                    Row(verticalAlignment = Alignment.CenterVertically) {
+                                        Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(3.dp)) {
+                                            Text("ÖĞRENME ÖZETİ", color = Color(0xFF6D5AE6), fontSize = 11.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 1.3.sp)
+                                            Text("İlerlemen tek yerde", color = Color(0xFF211D3A), fontSize = 18.sp, fontWeight = FontWeight.ExtraBold)
+                                        }
+                                        Text("📊", fontSize = 28.sp)
+                                    }
+                                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                                        Column(Modifier.weight(1f).background(PaleBlue, RoundedCornerShape(14.dp)).padding(11.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                                            Text("📚", fontSize = 18.sp)
+                                            Text("${completedLessonCount}", color = Navy, fontSize = 21.sp, fontWeight = FontWeight.ExtraBold)
+                                            Text("Tamamlanan ders", color = Color(0xFF68758E), fontSize = 11.sp)
+                                        }
+                                        Column(Modifier.weight(1f).background(Mint, RoundedCornerShape(14.dp)).padding(11.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                                            Text("🧠", fontSize = 18.sp)
+                                            Text("${progressSummary.totalWords}", color = Navy, fontSize = 21.sp, fontWeight = FontWeight.ExtraBold)
+                                            Text("Takip edilen kelime", color = Color(0xFF68758E), fontSize = 11.sp)
+                                        }
+                                        Column(Modifier.weight(1f).background(Color(0xFFFFF1E5), RoundedCornerShape(14.dp)).padding(11.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                                            Text("🎯", fontSize = 18.sp)
+                                            Text("${progressSummary.accuracyPercent}%", color = Navy, fontSize = 21.sp, fontWeight = FontWeight.ExtraBold)
+                                            Text("Doğruluk", color = Color(0xFF68758E), fontSize = 11.sp)
+                                        }
+                                    }
+                                    Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                                        Row(verticalAlignment = Alignment.CenterVertically) {
+                                            Text("Bugünkü çalışma süresi", color = Color(0xFF29263D), fontWeight = FontWeight.SemiBold, fontSize = 13.sp, modifier = Modifier.weight(1f))
+                                            Text("${totalStudyMinutes} / ${studyMinuteGoal} dk", color = Color(0xFF68758E), fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                                        }
+                                        LinearProgressIndicator(
+                                            progress = { studyProgress },
+                                            modifier = Modifier.fillMaxWidth().height(6.dp),
+                                            color = if (totalStudyMinutes >= studyMinuteGoal) Color(0xFF13A879) else Blue,
+                                            trackColor = Color(0xFFEDEAF7)
+                                        )
+                                    }
+                                    Row(verticalAlignment = Alignment.CenterVertically) {
+                                        Text("Tekrar bekleyen: ${progressSummary.dueWords} kelime", color = Color(0xFF7C4A03), fontSize = 12.sp, modifier = Modifier.weight(1f))
+                                        Text("Seri: ${progressSummary.currentStreak} gün", color = Color(0xFF68758E), fontSize = 12.sp, fontWeight = FontWeight.SemiBold)
+                                    }
+                                    Text("İstatistikler bu cihazda kaydedilen ders ve kelime çalışmalarından hesaplanır.", color = Color(0xFF89859B), fontSize = 11.sp)
+                                }
+                            }
+                            Card(
+                                modifier = Modifier.fillMaxWidth(),
+                                shape = RoundedCornerShape(22.dp),
+                                colors = CardDefaults.cardColors(containerColor = Color.White)
+                            ) {
                                 Column(Modifier.fillMaxWidth().padding(18.dp), verticalArrangement = Arrangement.spacedBy(13.dp)) {
                                     Row(verticalAlignment = Alignment.CenterVertically) {
                                         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(3.dp)) {
