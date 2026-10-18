@@ -93,12 +93,14 @@ data class DailyStudyPlan(
             fun addPrerequisites(lesson: CourseLesson) {
                 lesson.prerequisiteIds.forEach { prerequisiteId ->
                     if (prerequisiteId !in completedLessonIds && prerequisiteId !in chosen) {
-                        WordMasterCourseCatalog.find(prerequisiteId)?.let { prerequisite ->
-                            addPrerequisites(prerequisite)
-                            if (prerequisite.id !in completedLessonIds && prerequisite.id !in chosen) {
-                                chosen += prerequisite.id
+                        WordMasterCourseCatalog.find(prerequisiteId)
+                            ?.takeIf { !it.level.equals(level, ignoreCase = true) }
+                            ?.let { prerequisite ->
+                                addPrerequisites(prerequisite)
+                                if (prerequisite.id !in completedLessonIds && prerequisite.id !in chosen) {
+                                    chosen += prerequisite.id
+                                }
                             }
-                        }
                     }
                 }
             }
