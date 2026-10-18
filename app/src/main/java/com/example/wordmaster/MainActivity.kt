@@ -19,6 +19,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.runtime.DisposableEffect
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
@@ -276,6 +277,26 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                 (search.isBlank() || word.en.contains(search, ignoreCase = true) || word.tr.contains(search, ignoreCase = true)) &&
                 (tab != 1 || word.en in favoriteSet) && (tab != 2 || word.en in learnedSet)
             }.toList()
+        }
+    }
+
+    val hasDismissibleOverlay = showProfile || showSettings || showTools || showPronunciation ||
+        showMatchGame || showQuizSummary || quizWord != null || showQuizSummary
+
+    BackHandler(enabled = hasDismissibleOverlay || currentScreen != "Dersler") {
+        when {
+            showProfile -> { showProfile = false; profileError = null }
+            showSettings -> showSettings = false
+            showPronunciation -> showPronunciation = false
+            showMatchGame -> showMatchGame = false
+            showTools -> showTools = false
+            quizWord != null -> { quizWord = null; quizMessage = null; sessionActive = false }
+            showQuizSummary -> showQuizSummary = false
+            currentScreen != "Dersler" -> {
+                currentScreen = "Dersler"
+                selectedTopic = "Tümü"
+                selected = "A1"
+            }
         }
     }
 
