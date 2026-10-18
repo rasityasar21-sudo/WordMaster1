@@ -56,7 +56,17 @@ fun CourseCatalogSection(
         }
         lessons.forEach { lesson ->
             val isDone = lesson.id in completedIds
-            val missing = lesson.prerequisiteIds.filter { it !in completedIds }
+            val levelOrder = listOf("A1", "A2", "B1", "B2", "C1")
+            val currentLevelIndex = levelOrder.indexOf(selectedLevel)
+            val missing = lesson.prerequisiteIds.filter { prerequisiteId ->
+                if (prerequisiteId in completedIds) {
+                    false
+                } else {
+                    val prerequisite = WordMasterCourseCatalog.find(prerequisiteId)
+                    prerequisite == null ||
+                        levelOrder.indexOf(prerequisite.level) >= currentLevelIndex
+                }
+            }
             val unlocked = missing.isEmpty()
             Card(
                 modifier = Modifier.fillMaxWidth(),
