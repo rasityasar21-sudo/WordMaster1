@@ -1,6 +1,7 @@
 package com.example.wordmaster
 
 import android.content.SharedPreferences
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import java.util.Locale
@@ -312,6 +313,50 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                                 }
                                             }
                                             Text("Dinledikten sonra aşağıdaki alıştırmada doğru cevabı seç.", color = Color.White, fontWeight = FontWeight.SemiBold)
+                                            Spacer(Modifier.height(8.dp))
+                                            Text("GERÇEK KAYIT • KAFEDE SİPARİŞ", color = Color(0xFFBDB4FF), fontWeight = FontWeight.Bold)
+                                            Text("Bu örnek, Oxford Online English tarafından yayımlanan insan sesli kafe diyaloğudur. Ses çevrimiçi oynatılır; bu sürümde çevrimdışı değildir.", color = Color(0xFFE5E2FF), fontSize = 13.sp, lineHeight = 19.sp)
+                                            var cafeAudioStatus by remember { mutableStateOf("Hazır") }
+                                            var cafeAudioPlayer by remember { mutableStateOf<MediaPlayer?>(null) }
+                                            DisposableEffect(Unit) {
+                                                onDispose { cafeAudioPlayer?.release(); cafeAudioPlayer = null }
+                                            }
+                                            Button(onClick = {
+                                                try {
+                                                    cafeAudioPlayer?.release()
+                                                    cafeAudioStatus = "Ses yükleniyor…"
+                                                    val player = MediaPlayer()
+                                                    cafeAudioPlayer = player
+                                                    player.setDataSource("https://www.oxfordonlineenglish.com/wp-content/uploads/2021/09/Ordering-at-a-Coffee-Shop-full.mp3")
+                                                    player.setOnPreparedListener { it.start(); cafeAudioStatus = "Çalıyor" }
+                                                    player.setOnCompletionListener { cafeAudioStatus = "Bitti" }
+                                                    player.setOnErrorListener { _, _, _ -> cafeAudioStatus = "Ses açılamadı. İnternet bağlantını kontrol et."; true }
+                                                    player.prepareAsync()
+                                                } catch (_: Exception) {
+                                                    cafeAudioStatus = "Ses açılamadı. İnternet bağlantını kontrol et."
+                                                }
+                                            }, modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(14.dp)) {
+                                                Text("▶ Gerçek diyaloğu oynat")
+                                            }
+                                            Text(cafeAudioStatus, color = Color(0xFFE5E2FF), fontSize = 12.sp)
+                                            Text("Dinleme sorusu: Kadın hangi içeceği sipariş ediyor?", color = Color.White, fontWeight = FontWeight.Bold)
+                                            var cafeAnswer by remember { mutableStateOf("") }
+                                            listOf("A tea" to "A tea", "A latte" to "A latte", "A juice" to "A juice").forEach { option ->
+                                                OutlinedButton(
+                                                    onClick = { cafeAnswer = option.first },
+                                                    modifier = Modifier.fillMaxWidth(),
+                                                    colors = ButtonDefaults.outlinedButtonColors(
+                                                        containerColor = if (cafeAnswer == option.first) Color(0xFF3B365B) else Color.Transparent
+                                                    )
+                                                ) { Text(option.second, color = Color.White) }
+                                            }
+                                            if (cafeAnswer.isNotBlank()) {
+                                                Text(
+                                                    if (cafeAnswer == "A latte") "Doğru! Kadın latte istiyor. ✓" else "Tekrar dinle: doğru cevap A latte.",
+                                                    color = if (cafeAnswer == "A latte") Color(0xFF86EFAC) else Color(0xFFFCD34D),
+                                                    fontWeight = FontWeight.Bold
+                                                )
+                                            }
                                         }
                                     }
                                     Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
