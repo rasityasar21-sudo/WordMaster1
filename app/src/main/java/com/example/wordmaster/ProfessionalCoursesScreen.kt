@@ -17,6 +17,10 @@ import androidx.compose.ui.unit.sp
 fun ProfessionalCoursesScreen(onBackToLessons: () -> Unit) {
     var selectedTrackId by remember { mutableStateOf<String?>(null) }
     var showAnswers by remember { mutableStateOf(false) }
+    var quizIndex by remember { mutableIntStateOf(0) }
+    var quizAnswer by remember { mutableStateOf<String?>(null) }
+    var quizChecked by remember { mutableStateOf(false) }
+    var quizScore by remember { mutableIntStateOf(0) }
     val tracks = ProfessionalCourseCatalog.tracks
     val selectedTrack = tracks.firstOrNull { it.id == selectedTrackId }
     Column(Modifier.fillMaxWidth().background(Color(0xFFF7F5FF)).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
@@ -30,7 +34,7 @@ fun ProfessionalCoursesScreen(onBackToLessons: () -> Unit) {
         Text("Mesleğine özel terimler, teknik okuma ve örnek cümlelerle İngilizceni geliştir.", color = Color(0xFF687086), fontSize = 14.sp, lineHeight = 20.sp)
         if (selectedTrack == null) {
             tracks.forEach { track ->
-                Card(Modifier.fillMaxWidth().clickable { selectedTrackId = track.id; showAnswers = false }, colors = CardDefaults.cardColors(containerColor = Color.White), shape = RoundedCornerShape(18.dp)) {
+                Card(Modifier.fillMaxWidth().clickable { selectedTrackId = track.id; showAnswers = false; quizIndex = 0; quizAnswer = null; quizChecked = false; quizScore = 0 }, colors = CardDefaults.cardColors(containerColor = Color.White), shape = RoundedCornerShape(18.dp)) {
                     Row(Modifier.fillMaxWidth().padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
                         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                             Text(track.title, color = Color(0xFF202044), fontWeight = FontWeight.Bold, fontSize = 16.sp)
@@ -68,11 +72,34 @@ fun ProfessionalCoursesScreen(onBackToLessons: () -> Unit) {
                         }
                     }
                 }
-                Button(onClick = { showAnswers = !showAnswers }, modifier = Modifier.fillMaxWidth()) { Text(if (showAnswers) "Mini testi gizle" else "Mini testi aç") }
-                if (showAnswers) Card(colors = CardDefaults.cardColors(containerColor = Color.White), shape = RoundedCornerShape(18.dp)) {
-                    Column(Modifier.fillMaxWidth().padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                        Text("Mini tekrar", color = Color(0xFF202044), fontSize = 18.sp, fontWeight = FontWeight.Bold)
-                        selectedTrack.sampleTerms.take(5).forEach { term -> Text("${term.english} = ${term.turkish}", color = Color(0xFF30384B), fontSize = 14.sp) }
+                Button(onClick = { showAnswers = !showAnswers; quizIndex = 0; quizAnswer = null; quizChecked = false; quizScore = 0 }, modifier = Modifier.fillMaxWidth()) { Text(if (showAnswers) "Mini testi kapat" else "Kendini test et") }
+                if (showAnswers) {
+                    val quizTerms = selectedTrack.sampleTerms.take(5)
+                    if (quizTerms.isNotEmpty() && quizIndex < quizTerms.size) {
+                        val currentTerm = quizTerms[quizIndex]
+                        val choices = remember(selectedTrack.id, quizIndex) { (listOf(currentTerm) + quizTerms.filter { it != currentTerm }.shuffled().take(3)).shuffled() }
+                        Card(colors = CardDefaults.cardColors(containerColor = Color.White), shape = RoundedCornerShape(18.dp)) {
+                            Column(Modifier.fillMaxWidth().padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                                Text("MİNİ TEST · ${quizIndex + 1}/${quizTerms.size}", color = Color(0xFF6957E8), fontSize = 11.sp, fontWeight = FontWeight.ExtraBold)
+                                Text("\"${currentTerm.english}\" ne demek?", color = Color(0xFF202044), fontSize = 18.sp, fontWeight = FontWeight.Bold)
+                                choices.forEach { option ->
+                                    OutlinedButton(onClick = { if (!quizChecked) quizAnswer = option.turkish }, modifier = Modifier.fillMaxWidth(), enabled = !quizChecked, colors = ButtonDefaults.outlinedButtonColors(containerColor = if (quizAnswer == option.turkish) Color(0xFFE8E4FF) else Color.White)) { Text(option.turkish, color = Color(0xFF202044)) }
+                                }
+                                if (quizChecked) {
+                                    val correct = quizAnswer == currentTerm.turkish
+                                    Text(if (correct) "Doğru cevap!" else "Doğru cevap: ${currentTerm.turkish}", color = if (correct) Color(0xFF18794E) else Color(0xFFB42318), fontWeight = FontWeight.Bold)
+                                    Button(onClick = { if (correct) quizScore++; quizIndex++; quizAnswer = null; quizChecked = false }, modifier = Modifier.fillMaxWidth()) { Text(if (quizIndex == quizTerms.lastIndex) "Sonucu gör" else "Sonraki soru") }
+                                } else { Button(onClick = { if (quizAnswer != null) quizChecked = true }, enabled = quizAnswer != null, modifier = Modifier.fillMaxWidth()) { Text("Cevabı kontrol et") } }
+                            }
+                        }
+                    } else if (quizTerms.isNotEmpty()) {
+                        Card(colors = CardDefaults.cardColors(containerColor = Color.White), shape = RoundedCornerShape(18.dp)) {
+                            Column(Modifier.fillMaxWidth().padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                                Text("Test tamamlandı!", color = Color(0xFF202044), fontSize = 20.sp, fontWeight = FontWeight.ExtraBold)
+                                Text("Doğru cevap: $quizScore / ${quizTerms.size}", color = Color(0xFF6957E8), fontSize = 18.sp, fontWeight = FontWeight.Bold)
+                                Button(onClick = { quizIndex = 0; quizAnswer = null; quizChecked = false; quizScore = 0 }, modifier = Modifier.fillMaxWidth()) { Text("Tekrar çöz") }
+                            }
+                        }
                     }
                 }
             } else Card(colors = CardDefaults.cardColors(containerColor = Color.White), shape = RoundedCornerShape(18.dp)) {
