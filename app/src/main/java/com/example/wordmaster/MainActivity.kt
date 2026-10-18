@@ -84,12 +84,27 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
     var activeLesson by remember { mutableStateOf("") }
     var activeCourseLessonId by remember { mutableStateOf<String?>(null) }
     var lessonSessionStartedAt by remember { mutableStateOf<Long?>(null) }
+    var lessonSessionAccumulatedMillis by remember { mutableStateOf(0L) }
     LaunchedEffect(currentScreen) {
-        if (currentScreen == "Ders İçeriği") {
-            lessonSessionStartedAt = System.currentTimeMillis()
-        } else {
-            lessonSessionStartedAt = null
+        lessonSessionAccumulatedMillis = 0L
+        lessonSessionStartedAt = if (currentScreen == "Ders İçeriği") System.currentTimeMillis() else null
+    }
+    val lifecycleActivity = appContext as? ComponentActivity
+    DisposableEffect(lifecycleActivity) {
+        val observer = androidx.lifecycle.LifecycleEventObserver { _, event ->
+            if (event == androidx.lifecycle.Lifecycle.Event.ON_PAUSE) {
+                lessonSessionStartedAt?.let { startedAt ->
+                    lessonSessionAccumulatedMillis += (System.currentTimeMillis() - startedAt).coerceAtLeast(0L)
+                }
+                lessonSessionStartedAt = null
+            } else if (event == androidx.lifecycle.Lifecycle.Event.ON_RESUME &&
+                currentScreen == "Ders İçeriği" && lessonSessionStartedAt == null
+            ) {
+                lessonSessionStartedAt = System.currentTimeMillis()
+            }
         }
+        lifecycleActivity?.lifecycle?.addObserver(observer)
+        onDispose { lifecycleActivity?.lifecycle?.removeObserver(observer) }
     }
     var completedCourseIds by remember { mutableStateOf(CourseProgressStore.completedIds(prefs)) }
     var activeLessonIndex by remember { mutableIntStateOf(0) }
@@ -736,9 +751,13 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                                 completedCourseIds = CourseProgressStore.markCompleted(prefs, courseId)
                                             }
                                             val sessionStart = lessonSessionStartedAt
-                                            val elapsedMinutes = sessionStart?.let { startedAt ->
-                                                StudySessionClock.elapsedWholeMinutes(startedAt, System.currentTimeMillis())
-                                            } ?: 1
+                                            val activeMillis = sessionStart?.let { startedAt ->
+                                                (System.currentTimeMillis() - startedAt).coerceAtLeast(0L)
+                                            } ?: 0L
+                                            val elapsedMinutes = StudySessionClock.elapsedWholeMinutes(
+                                                0L,
+                                                lessonSessionAccumulatedMillis + activeMillis
+                                            )
                                             CourseProgressStore.addStudyMinutes(prefs, elapsedMinutes)
                                             lessonSessionStartedAt = null
                                             activeCourseLessonId = null
