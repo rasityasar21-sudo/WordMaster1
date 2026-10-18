@@ -34,4 +34,33 @@ class LessonBookTest {
         assertFalse(chapter.examples.isEmpty())
         assertFalse(chapter.checkpoints.isEmpty())
     }
+    @Test
+    fun articleLessonsExplainSoundBasedChoiceAndSpecificReference() {
+        val chapter = LessonBook.chapter("Articles: a, an and the")
+        assertTrue(chapter.explanation.contains("ses"))
+        assertTrue(chapter.formation.contains("a +"))
+        assertTrue(chapter.examples.size >= 3)
+    }
+
+    @Test
+    fun modalLessonsCoverMeaningAndBaseVerbRule() {
+        val chapter = LessonBook.chapter("Modal verbs: must and should")
+        assertTrue(chapter.formation.contains("V1"))
+        assertTrue(chapter.examples.any { it.first.contains("should") })
+    }
+
+    @Test
+    fun writingLessonsHaveAnOrganizedWritingFramework() {
+        val chapter = LessonBook.chapter("Formal email writing")
+        assertTrue(chapter.formation.contains("purpose"))
+        assertTrue(chapter.checkpoints.size >= 3)
+    }
+
+    @Test
+    fun aviationLessonsIncludeAnOperationalSafetyBoundary() {
+        val chapter = LessonBook.chapter("Aviation English")
+        assertTrue(chapter.explanation.contains("onaylı prosedürler"))
+        assertTrue(chapter.commonMistakes.isNotEmpty())
+    }
+
 }
