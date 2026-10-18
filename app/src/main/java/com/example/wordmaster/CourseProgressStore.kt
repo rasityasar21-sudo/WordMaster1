@@ -26,6 +26,26 @@ object CourseProgressStore {
     fun isCompleted(prefs: SharedPreferences, lessonId: String): Boolean =
         lessonId in completedIds(prefs)
 
+    /** Lessons that are unlocked and not yet completed for the chosen level. */
+    fun availableLessons(prefs: SharedPreferences, level: String): List<CourseLesson> =
+        WordMasterCourseCatalog.available(completedIds(prefs), level)
+
+    /** The next unlocked lesson, if one remains at this level. */
+    fun nextRecommendedLesson(prefs: SharedPreferences, level: String): CourseLesson? =
+        WordMasterCourseCatalog.nextRecommended(completedIds(prefs), level)
+
+    /** Returns completed and total lesson counts for a level. */
+    fun levelProgress(prefs: SharedPreferences, level: String): Pair<Int, Int> {
+        val lessons = WordMasterCourseCatalog.forLevel(level)
+        val done = completedIds(prefs).intersect(lessons.map { it.id }.toSet()).size
+        return done to lessons.size
+    }
+
+    /** Clears course completion only; daily goal and study history are preserved. */
+    fun clearCompletedLessons(prefs: SharedPreferences) {
+        prefs.edit().remove(COMPLETED_KEY).apply()
+    }
+
     fun completedCount(prefs: SharedPreferences): Int = completedIds(prefs).size
 
     fun setDailyGoalMinutes(prefs: SharedPreferences, minutes: Int) {
