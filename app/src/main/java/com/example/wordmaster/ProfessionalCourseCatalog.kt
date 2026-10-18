@@ -39,13 +39,18 @@ object ProfessionalCourseCatalog {
                 "Aircraft and component manufacturer documentation, where lawfully available"
             ),
             topics = listOf(
-                "Temel bakım ve atölye terimleri",
-                "Gövde (airframe) ve motor (powerplant) sistemleri",
-                "Aletler, ölçüm ve bakım dokümanları",
-                "Inspection, defect reporting and work orders",
-                "Safety instructions, warnings and human factors",
-                "Teknik metin okuma ve Türkçe açıklama",
-                "İş yeri diyalogları ve teknik rapor yazımı"
+                "Temel bakım İngilizcesi ve atölye iletişimi",
+                "Airframe: gövde ve yapısal parçalar",
+                "Powerplant: motor ve güç grubu terimleri",
+                "Bakım el kitapları, task card ve teknik kayıtlar",
+                "Inspection: kontrol bulgularını ifade etme",
+                "Defect reporting: arıza ve hasar raporlama dili",
+                "Ölçüm, tolerans, tork ve alet kontrolü terimleri",
+                "Safety instructions, warnings ve human factors",
+                "Bakım ekibiyle iletişim ve iş teslimi",
+                "Teknik metin okuma ve Türkçe anlamlandırma",
+                "İş emri ve bakım kayıtları için yazılı İngilizce",
+                "Tekrar testi ve mesleki kelime değerlendirmesi"
             ),
             sampleTerms = listOf(
                 ProfessionalTerm("maintenance", "bakım", "Maintenance must follow the approved procedure.", note = "Türkçesi: Bakım, onaylı prosedüre uygun yapılmalıdır."),
