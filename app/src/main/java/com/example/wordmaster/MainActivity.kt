@@ -73,6 +73,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
     val appContext = LocalContext.current
+    val scope = rememberCoroutineScope()
     val quickPracticeWords = remember(words) { words.filter { DictionaryEntryFilter.isQuickPracticeEntry(it.en, it.tr) }.ifEmpty { words.filter { it.en.length <= 22 && it.tr.length <= 48 } } }
     val learningStore = remember { LearningProgressStore(appContext) }
     var query by remember { mutableStateOf("") }
