@@ -118,6 +118,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
     var xp by remember { mutableIntStateOf(prefs.getInt("xp", 0)) }
     var coins by remember { mutableIntStateOf(prefs.getInt("coins", 0)) }
     var quizWord by remember { mutableStateOf<Word?>(null) }
+    var quizLoading by remember { mutableStateOf(false) }
     var quizChoices by remember { mutableStateOf<List<Word>>(emptyList()) }
     var quizMessage by remember { mutableStateOf<String?>(null) }
     var quizCount by remember { mutableIntStateOf(0) }
@@ -200,35 +201,45 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
     val favorites = remember { mutableStateListOf<String>().apply { addAll(prefs.getStringSet("favorites", emptySet()) ?: emptySet()) } }
 
     fun startQuiz() {
-        if (words.size < 4) return
-        val levels = listOf("A1", "A2", "B1", "B2", "C1")
-        // Seviye tespitinde sorular, kullanıcının seçtiği başlangıç seviyesinden gelir.
-        // Sıradan mini testte ise önce yanlış cevaplanan kelimeler tekrar edilir.
-        val pool = if (placementMode) {
-            val preferred = words.filter { it.level == onboardingChoice }
-            val index = levels.indexOf(onboardingChoice).coerceAtLeast(0)
-            preferred.ifEmpty {
-                val nearestLevels = levels.sortedBy { kotlin.math.abs(levels.indexOf(it) - index) }
-                nearestLevels.asSequence().map { level -> words.filter { it.level == level } }
-                    .firstOrNull { it.isNotEmpty() } ?: words
+        if (words.size < 4 || quizLoading) return
+        val isPlacement = placementMode
+        val selectedLevel = onboardingChoice
+        val dueSet = if (isPlacement) emptySet() else learningStore.dueForReview().map { it.word }.toSet()
+        val reviewSet = reviewWords.toSet()
+        quizWord = null
+        quizLoading = true
+        quizMessage = null
+        scope.launch {
+            val result = withContext(Dispatchers.Default) {
+                val levels = listOf("A1", "A2", "B1", "B2", "C1")
+                val pool = if (isPlacement) {
+                    val preferred = words.filter { it.level == selectedLevel }
+                    val index = levels.indexOf(selectedLevel).coerceAtLeast(0)
+                    preferred.ifEmpty {
+                        val nearestLevels = levels.sortedBy { kotlin.math.abs(levels.indexOf(it) - index) }
+                        nearestLevels.asSequence().map { level -> words.filter { it.level == level } }
+                            .firstOrNull { it.isNotEmpty() } ?: words
+                    }
+                } else {
+                    val duePool = words.filter { it.en in dueSet }
+                    val reviewPool = words.filter { it.en in reviewSet }
+                    when {
+                        duePool.isNotEmpty() -> duePool
+                        reviewPool.isNotEmpty() -> reviewPool
+                        else -> words
+                    }
+                }
+                val target = pool.randomOrNull() ?: words.randomOrNull()
+                target?.let { it to QuizChoiceSelector.select(it, words, count = 4) }
             }
-        } else {
-            // Önce zamanı gelen aralıklı tekrar kelimeleri; sonra eski yanlış cevap kuyruğu.
-            val dueSet = learningStore.dueForReview().map { it.word }.toSet()
-            val duePool = words.filter { it.en in dueSet }
-            val reviewPool = words.filter { it.en in reviewWords }
-            when {
-                duePool.isNotEmpty() -> duePool
-                reviewPool.isNotEmpty() -> reviewPool
-                else -> words
+            quizLoading = false
+            if (result != null) {
+                quizWord = result.first
+                quizChoices = result.second
+            } else {
+                quizMessage = "Test için yeterli kelime bulunamadı."
             }
         }
-        val target = pool.randomOrNull() ?: words.randomOrNull() ?: return
-        // Prefer same-level distractors with different Turkish meanings to avoid ambiguous questions.
-        val choices = QuizChoiceSelector.select(target, words, count = 4)
-        quizWord = target
-        quizChoices = choices
-        quizMessage = null
     }
 
     val favoriteSet = favorites.toSet()
@@ -247,7 +258,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
         }
     }
 
-    val hasDismissibleOverlay = showProfile || showSettings || showTools || showPronunciation ||
+    val hasDismissibleOverlay = quizLoading || showProfile || showSettings || showTools || showPronunciation ||
         showMatchGame || showQuizSummary || quizWord != null
 
     BackHandler(enabled = hasDismissibleOverlay || currentScreen != "Dersler") {
