@@ -190,7 +190,18 @@ object ProfessionalCourseCatalog {
                 ProfessionalTerm("warning", "uyarı", "Read every warning before starting a task."),
                 ProfessionalTerm("personal protective equipment", "kişisel koruyucu donanım", "Use the personal protective equipment required by the procedure."),
                 ProfessionalTerm("foreign object debris", "yabancı cisim kaynaklı kalıntı/hasar", "Follow the local process for foreign object debris prevention."),
-                ProfessionalTerm("troubleshooting", "arıza teşhisi", "Use the approved troubleshooting procedure to investigate the reported fault.")
+                ProfessionalTerm("troubleshooting", "arıza teşhisi", "Use the approved troubleshooting procedure to investigate the reported fault."),
+                ProfessionalTerm("aileron", "kanatçık; yatış kontrol yüzeyi", "Inspect the aileron hinge and control linkage in accordance with the approved maintenance data.", note = "Aileronlar uçağın boylamsal eksen etrafındaki yatış hareketini kontrol eder. Kontrol sistemi ve bağlantıları uçak tipine özgü onaylı dokümana göre değerlendirilir."),
+                ProfessionalTerm("flap", "kanat firar kenarı yüksek kaldırma yüzeyi", "The flap position indication must agree with the applicable maintenance procedure.", note = "Flaplar düşük hız koşullarında kaldırmayı artırmaya yardımcı olur; sürüklemeyi de artırırlar. Tip, hareket aralığı ve kontrol yöntemi uçak tasarımına göre değişir."),
+                ProfessionalTerm("elevator", "irtifa dümeni", "The elevator is part of the aircraft pitch-control system.", note = "Elevator, uçağın enine eksen etrafındaki yunuslama hareketini etkiler."),
+                ProfessionalTerm("rudder", "yön dümeni", "Inspect the rudder control system using the approved maintenance instructions.", note = "Rudder, dikey eksen etrafındaki sapma hareketini kontrol eder."),
+                ProfessionalTerm("spoiler", "spoiler; kaldırma azaltıcı yüzey", "Consult the aircraft maintenance manual for spoiler system checks.", note = "Spoilerlar tasarıma göre kaldırmayı azaltmak ve sürüklemeyi artırmak gibi görevler yapabilir."),
+                ProfessionalTerm("trim tab", "trim tabı", "Check the trim tab system according to the aircraft-specific procedure.", note = "Trim sistemi kumanda kuvvetlerini azaltmaya yardımcı olur; ayrıntılar uçak tipine bağlıdır."),
+                ProfessionalTerm("hinge", "menteşe / mafsal", "Inspect the hinge for condition and security as specified in the task card.", note = "Hareketli kumanda yüzeylerini yapıya bağlayan mafsal/menteşe."),
+                ProfessionalTerm("control linkage", "kumanda bağlantı mekanizması", "Look for the specified evidence of damage in the control linkage.", note = "Kumanda hareketini ilgili yüzeye ileten mekanik bağlantılar için kullanılan terim."),
+                ProfessionalTerm("flight control surface", "uçuş kumanda yüzeyi", "Identify the flight control surface using the aircraft illustrated parts data.", note = "Aileron, elevator ve rudder temel kumanda yüzeyleridir; yapılandırma uçak tipine göre değişebilir."),
+                ProfessionalTerm("trailing edge", "kanadın firar kenarı", "The flap is installed along the wing trailing edge on this design.", note = "Kanadın hava akışına göre arka kenarı; flaplar çoğunlukla burada bulunur."),
+                ProfessionalTerm("leading edge", "kanadın hücum kenarı", "Inspect the leading edge for the findings listed in the task card.", note = "Kanadın hava akışını ilk karşılayan ön kenarı.")
             )
         ),
         ProfessionalTrack(
