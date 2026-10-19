@@ -496,7 +496,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                             }
                             Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                                 Card(Modifier.weight(1f), shape = RoundedCornerShape(20.dp), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)) {
-                                    Column(Modifier.fillMaxWidth().clickable { showMatchGame = true; matchRound = 0; matched = emptySet(); selectedEnglish = null; matchWords = quickPracticeWords.shuffled().take(5); matchTurkishOrder = matchWords.shuffled(); matchMessage = "İngilizce kelimeyi seç, sonra Türkçe karşılığını bul." }.padding(15.dp), verticalArrangement = Arrangement.spacedBy(7.dp)) {
+                                    Column(Modifier.fillMaxWidth().clickable { showMatchGame = true; matchRound = 0; matched = emptySet(); selectedEnglish = null; matchWords = quickPracticeWords.shuffled().take(6); matchTurkishOrder = matchWords.shuffled(); matchMessage = "İngilizce kelimeyi seç, sonra Türkçe karşılığını bul." }.padding(15.dp), verticalArrangement = Arrangement.spacedBy(7.dp)) {
                                         Text("🧩", fontSize = 25.sp)
                                         Text("Eşleştirme", color = MaterialTheme.colorScheme.onSurface, fontWeight = FontWeight.Bold)
                                         Text("Hızlı oyun", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.62f), fontSize = 12.sp)
@@ -1716,13 +1716,13 @@ private fun PronunciationPracticeDialog(words: List<Word>, onDismiss: () -> Unit
         onDismissRequest = onDismiss,
         title = { Text("🎧 Kelime Telaffuzu") },
         text = {
-            Column(modifier = Modifier.heightIn(max = 300.dp).verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            Column(modifier = Modifier.heightIn(max = 420.dp).verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(12.dp)) {
                 Surface(
                     modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(18.dp),
+                    shape = RoundedCornerShape(20.dp),
                     color = MaterialTheme.colorScheme.primaryContainer
                 ) {
-                    Column(Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                    Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                         Text("LISTENING LAB  •  PRONUNCIATION", color = MaterialTheme.colorScheme.primary, fontSize = 10.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 1.sp)
                         Text("Dinle · Tanı · Öğren", color = MaterialTheme.colorScheme.onSurface, fontSize = 18.sp, fontWeight = FontWeight.ExtraBold)
                         Text("Kayıtlı insan telaffuzu aranır; ses bulunamazsa yapay sesle değiştirilmez.", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.75f), fontSize = 12.sp, lineHeight = 17.sp)
