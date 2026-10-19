@@ -39,9 +39,9 @@ fun CourseCatalogSection(
     val lessons = WordMasterCourseCatalog.forLevel(selectedLevel)
     val completed = lessons.count { it.id in completedIds }
     Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        Text("YAPILANDIRILMIŞ İNGİLİZCE KURSU", color = Color(0xFF6D5AE6), fontSize = 11.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 1.2.sp)
-        Text("A1’den C1’e ders yolu", color = Color(0xFF202044), fontSize = 21.sp, fontWeight = FontWeight.ExtraBold)
-        Text("Konu anlatımı, hedefler ve ön koşullarla ilerle. Tamamlanan dersler bu cihazda saklanır.", color = Color(0xFF68758E), fontSize = 13.sp, lineHeight = 19.sp)
+        Text("YAPILANDIRILMIŞ İNGİLİZCE KURSU", color = MaterialTheme.colorScheme.primary, fontSize = 11.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 1.2.sp)
+        Text("A1’den C1’e ders yolu", color = MaterialTheme.colorScheme.onSurface, fontSize = 21.sp, fontWeight = FontWeight.ExtraBold)
+        Text("Konu anlatımı, hedefler ve ön koşullarla ilerle. Tamamlanan dersler bu cihazda saklanır.", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f), fontSize = 13.sp, lineHeight = 19.sp)
         Row(
             modifier = Modifier.horizontalScroll(rememberScrollState()),
             horizontalArrangement = Arrangement.spacedBy(7.dp)
@@ -51,7 +51,7 @@ fun CourseCatalogSection(
             }
         }
         Row(verticalAlignment = Alignment.CenterVertically) {
-            Text("$completed / ${lessons.size} ders tamamlandı", color = Color(0xFF68758E), fontSize = 12.sp)
+            Text("$completed / ${lessons.size} ders tamamlandı", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f), fontSize = 12.sp)
             Spacer(Modifier.width(8.dp))
             LinearProgressIndicator(
                 progress = { if (lessons.isEmpty()) 0f else completed.toFloat() / lessons.size },
@@ -76,17 +76,17 @@ fun CourseCatalogSection(
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(18.dp),
-                colors = CardDefaults.cardColors(containerColor = if (isDone) Color(0xFFE8F8F0) else Color.White),
+                colors = CardDefaults.cardColors(containerColor = if (isDone) (if (androidx.compose.foundation.isSystemInDarkTheme()) Color(0xFF17382F) else Color(0xFFE8F8F0)) else MaterialTheme.colorScheme.surface),
                 elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
             ) {
                 Column(Modifier.fillMaxWidth().padding(15.dp), verticalArrangement = Arrangement.spacedBy(7.dp)) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        Text(lesson.title, modifier = Modifier.weight(1f), color = Color(0xFF202044), fontSize = 15.sp, fontWeight = FontWeight.Bold)
+                        Text(lesson.title, modifier = Modifier.weight(1f), color = MaterialTheme.colorScheme.onSurface, fontSize = 15.sp, fontWeight = FontWeight.Bold)
                         Text(if (isDone) "✓" else if (unlocked) "→" else "🔒", fontSize = 17.sp)
                     }
-                    Text("${lesson.category} · ${lesson.estimatedMinutes} dk", color = Color(0xFF68758E), fontSize = 11.sp)
+                    Text("${lesson.category} · ${lesson.estimatedMinutes} dk", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.68f), fontSize = 11.sp)
                     lesson.objectives.forEach { objective ->
-                        Text("• $objective", color = Color(0xFF3F4960), fontSize = 12.sp, lineHeight = 17.sp)
+                        Text("• $objective", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.85f), fontSize = 12.sp, lineHeight = 17.sp)
                     }
                     if (!unlocked) {
                         val prerequisiteTitles = missing.mapNotNull(WordMasterCourseCatalog::find).joinToString { it.title }
