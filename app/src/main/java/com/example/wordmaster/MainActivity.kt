@@ -1643,6 +1643,9 @@ private fun PronunciationPracticeDialog(words: List<Word>, onDismiss: () -> Unit
     var message by remember { mutableStateOf("Kayıtlı insan sesleri kullanılır; ses bulunamazsa yapay sesle değiştirilmez.") }
     var isLoading by remember { mutableStateOf(false) }
     var mediaPlayer by remember { mutableStateOf<MediaPlayer?>(null) }
+    var recognizedCorrectly by remember { mutableStateOf(false) }
+    var pronunciationCorrect by remember { mutableIntStateOf(0) }
+    var pronunciationAnswered by remember { mutableIntStateOf(0) }
 
     fun playRecorded(term: String) {
         scope.launch {
@@ -1712,6 +1715,20 @@ private fun PronunciationPracticeDialog(words: List<Word>, onDismiss: () -> Unit
                 }
                 HorizontalDivider()
                 Text("KELİME TANIMA", color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.ExtraBold, fontSize = 11.sp, letterSpacing = 1.sp)
+                Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    Surface(Modifier.weight(1f), shape = RoundedCornerShape(14.dp), color = MaterialTheme.colorScheme.surfaceVariant) {
+                        Column(Modifier.padding(11.dp), verticalArrangement = Arrangement.spacedBy(3.dp)) {
+                            Text("DOĞRU", color = MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 10.sp, fontWeight = FontWeight.Bold)
+                            Text("$pronunciationCorrect", color = MaterialTheme.colorScheme.onSurface, fontSize = 20.sp, fontWeight = FontWeight.ExtraBold)
+                        }
+                    }
+                    Surface(Modifier.weight(1f), shape = RoundedCornerShape(14.dp), color = MaterialTheme.colorScheme.surfaceVariant) {
+                        Column(Modifier.padding(11.dp), verticalArrangement = Arrangement.spacedBy(3.dp)) {
+                            Text("CEVAPLANAN", color = MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 10.sp, fontWeight = FontWeight.Bold)
+                            Text("$pronunciationAnswered", color = MaterialTheme.colorScheme.onSurface, fontSize = 20.sp, fontWeight = FontWeight.ExtraBold)
+                        }
+                    }
+                }
                 Surface(
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(16.dp),
@@ -1728,18 +1745,36 @@ private fun PronunciationPracticeDialog(words: List<Word>, onDismiss: () -> Unit
                 }
                 Text("Duyduğun/öğrendiğin kelimeyi tanı", color = MaterialTheme.colorScheme.onSurface, fontWeight = FontWeight.Bold)
                 choices.forEach { option ->
-                    OutlinedButton(onClick = {
-                        message = if (option.en == current.en) "Doğru! Şimdi kelimenin telaffuzunu dinle. ✓" else "Henüz değil. Anlamı tekrar düşün ve yeniden dene."
-                    }, modifier = Modifier.fillMaxWidth()) { Text(option.en.replaceFirstChar { it.uppercase() }) }
+                    OutlinedButton(
+                        onClick = {
+                            if (!recognizedCorrectly) {
+                                pronunciationAnswered++
+                                if (option.en == current.en) {
+                                    pronunciationCorrect++
+                                    recognizedCorrectly = true
+                                    message = "Doğru! Kelimeyi tekrar dinleyip sesli tekrar etmeyi dene. ✓"
+                                } else {
+                                    message = "Henüz değil. Anlamı tekrar düşün ve yeniden dene."
+                                }
+                            }
+                        },
+                        modifier = Modifier.fillMaxWidth(),
+                        enabled = !recognizedCorrectly,
+                        colors = ButtonDefaults.outlinedButtonColors(
+                            containerColor = if (recognizedCorrectly && option.en == current.en) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surface,
+                            contentColor = MaterialTheme.colorScheme.onSurface
+                        )
+                    ) { Text(option.en.replaceFirstChar { it.uppercase() }) }
                 }
                 if (message.isNotBlank()) Text(message, color = if (message.startsWith("Doğru")) Color(0xFF12805C) else Color(0xFFB45309), fontWeight = FontWeight.Bold)
             }
         },
         confirmButton = {
             TextButton(onClick = {
-                current = words.random()
+                current = words.filter { it.en != current.en }.randomOrNull() ?: words.random()
                 choices = (listOf(current) + words.filter { it.en != current.en }.shuffled().take(3)).shuffled()
-                message = "Yeni kelime seçildi."
+                recognizedCorrectly = false
+                message = "Yeni kelime seçildi. Önce dinle, sonra doğru kelimeyi tanı."
             }) { Text("Sonraki kelime") }
         },
         dismissButton = { TextButton(onClick = onDismiss) { Text("Bitir") } }
