@@ -1516,7 +1516,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
 
     if (showMatchGame) AlertDialog(
         onDismissRequest = { showMatchGame = false },
-        title = { Text("Kelime eşleştirme 🎮") },
+        title = { Text("Kelime eşleştirme") },
         text = {
             Column(modifier = Modifier.heightIn(max = 420.dp).verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(10.dp)) {
                 Surface(
@@ -1525,11 +1525,11 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                     color = MaterialTheme.colorScheme.primaryContainer
                 ) {
                     Column(Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                        Text("WORD PAIRS  •  TUR  $matchRound", color = MaterialTheme.colorScheme.primary, fontSize = 10.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 1.2.sp)
+                        Text("WORD PAIRS  /  TUR  $matchRound", color = MaterialTheme.colorScheme.primary, fontSize = 10.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 1.4.sp)
                         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
                             Column {
                                 Text("Kelime eşleştirme", color = MaterialTheme.colorScheme.onSurface, fontSize = 18.sp, fontWeight = FontWeight.ExtraBold)
-                                Text("Doğru eşleşme başına +5 XP", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f), fontSize = 12.sp)
+                                Text("Her doğru eşleşme +5 XP kazandırır", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f), fontSize = 12.sp)
                             }
                             Text("${matched.size}/${matchWords.size}", color = MaterialTheme.colorScheme.primary, fontSize = 20.sp, fontWeight = FontWeight.ExtraBold)
                         }
@@ -1537,7 +1537,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                         Text(matchMessage, color = MaterialTheme.colorScheme.onSurface, fontWeight = FontWeight.SemiBold, fontSize = 13.sp)
                     }
                 }
-                Text("01  ·  İNGİLİZCE", color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.ExtraBold, fontSize = 11.sp, letterSpacing = 1.sp)
+                Text("01  /  ENGLISH", color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.ExtraBold, fontSize = 10.sp, letterSpacing = 1.2.sp)
                 matchWords.filter { it.en !in matched }.forEach { word ->
                     OutlinedButton(
                         onClick = { selectedEnglish = word.en; matchMessage = "Şimdi ${word.en} kelimesinin Türkçesini seç." },
@@ -1550,7 +1550,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                         shape = RoundedCornerShape(13.dp)
                     ) { Text(if (selectedEnglish == word.en) "●  ${word.en}" else word.en, fontWeight = FontWeight.SemiBold) }
                 }
-                Text("02  ·  TÜRKÇE", color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.ExtraBold, fontSize = 11.sp, letterSpacing = 1.sp)
+                Text("02  /  TÜRKÇE", color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.ExtraBold, fontSize = 10.sp, letterSpacing = 1.2.sp)
                 matchTurkishOrder.filter { it.en !in matched }.forEach { word ->
                     OutlinedButton(
                         onClick = {
