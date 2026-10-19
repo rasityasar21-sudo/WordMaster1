@@ -105,7 +105,16 @@ fun ProfessionalCoursesScreen(onBackToLessons: () -> Unit) {
                 placeholder = { Text("Örn. uçak bakım, yazılım, sağlık") },
                 shape = RoundedCornerShape(14.dp)
             )
-            val visibleTracks = tracks.filter { it.title.contains(trackSearch, ignoreCase = true) || it.description.contains(trackSearch, ignoreCase = true) }
+            val visibleTracks = tracks.filter { track ->
+                track.title.contains(trackSearch, ignoreCase = true) ||
+                    track.titleEnglish.contains(trackSearch, ignoreCase = true) ||
+                    track.description.contains(trackSearch, ignoreCase = true) ||
+                    track.topics.any { it.contains(trackSearch, ignoreCase = true) } ||
+                    track.sampleTerms.any { term ->
+                        term.english.contains(trackSearch, ignoreCase = true) ||
+                            term.turkish.contains(trackSearch, ignoreCase = true)
+                    }
+            }
             if (visibleTracks.isEmpty()) Text("Bu aramayla eşleşen meslek bulunamadı.", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.68f), fontSize = 13.sp)
             visibleTracks.forEach { track ->
                 Card(Modifier.fillMaxWidth().clickable { selectedTrackId = track.id; showAnswers = false; revealedLessonAnswers = emptySet(); quizIndex = 0; quizAnswer = null; quizChecked = false; quizScore = 0 }, colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface), shape = RoundedCornerShape(18.dp)) {
