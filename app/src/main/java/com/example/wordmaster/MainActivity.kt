@@ -55,7 +55,6 @@ class MainActivity : ComponentActivity() {
         // Keep Android system bars aligned with WordMaster's light, premium interface.
         window.navigationBarColor = android.graphics.Color.rgb(255, 255, 255)
         window.statusBarColor = android.graphics.Color.rgb(255, 245, 245)
-        @Suppress("DEPRECATION")
         window.decorView.systemUiVisibility = window.decorView.systemUiVisibility or
             View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
         val prefs = getSharedPreferences("wordmaster", MODE_PRIVATE)
