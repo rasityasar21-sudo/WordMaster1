@@ -757,7 +757,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                             Text(bookChapter.purpose, fontSize = 19.sp, fontWeight = FontWeight.ExtraBold, color = MaterialTheme.colorScheme.onSurface)
                                             Text(bookChapter.explanation, fontSize = 15.sp, lineHeight = 23.sp, color = MaterialTheme.colorScheme.onSurface)
                                             Text("Yapı ve kullanım", fontWeight = FontWeight.Bold, fontSize = 16.sp, color = MaterialTheme.colorScheme.onSurface)
-                                            Surface(color = PaleBlue, shape = RoundedCornerShape(14.dp)) {
+                                            Surface(color = if (darkTheme) Color(0xFF263254) else PaleBlue, shape = RoundedCornerShape(14.dp)) {
                                                 Text(bookChapter.formation, Modifier.fillMaxWidth().padding(14.dp), fontSize = 14.sp, lineHeight = 21.sp, color = MaterialTheme.colorScheme.onSurface)
                                             }
                                             Text("Ek örnekler", fontWeight = FontWeight.Bold, fontSize = 16.sp, color = MaterialTheme.colorScheme.onSurface)
@@ -1486,7 +1486,10 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
     if (showTools) AlertDialog(
         onDismissRequest = { showTools = false },
         title = { Text("WordMaster Pro") },
-        text = { Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+        text = { Column(
+            modifier = Modifier.heightIn(max = 480.dp).verticalScroll(rememberScrollState()),
+            verticalArrangement = Arrangement.spacedBy(10.dp)
+        ) {
             Text("📅 GÜNLÜK GÖREVLER", fontWeight = FontWeight.Bold)
             Text("• $dailyGoal kelime öğren: ${learned.size.coerceAtMost(dailyGoal)}/$dailyGoal")
             Text("• Testte 5 soruyu cevapla: ${quizCount.coerceAtMost(5)}/5")
@@ -1508,18 +1511,6 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
             Text((if (learned.size >= 50) "✅" else "🔒") + " 50 kelime")
             Text((if (bestCorrectStreak >= 5) "✅" else "🔒") + " 5 doğru üst üste")
             Text((if (dailyStreak >= 7) "✅" else "🔒") + " 7 günlük seri")
-            HorizontalDivider()
-            Text("🎮 KELİME EŞLEŞTİRME", fontWeight = FontWeight.Bold)
-            Button(onClick = {
-                matchWords = quickPracticeWords.shuffled().take(6)
-                matchTurkishOrder = matchWords.shuffled()
-                matchRound++
-                matched = emptySet()
-                selectedEnglish = null
-                matchMessage = "İngilizce kelimeyi seç, sonra Türkçe karşılığını bul."
-                showTools = false
-                showMatchGame = true
-            }, modifier = Modifier.fillMaxWidth()) { Text("Oyunu başlat") }
             HorizontalDivider()
             Text("📊 İSTATİSTİKLER", fontWeight = FontWeight.Bold)
             Text("Öğrenilen kelime: ${learned.size} / ${words.size}")
@@ -1554,41 +1545,59 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                         Text(matchMessage, color = MaterialTheme.colorScheme.onSurface, fontWeight = FontWeight.SemiBold, fontSize = 13.sp)
                     }
                 }
-                Text("01  /  ENGLISH", color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.ExtraBold, fontSize = 10.sp, letterSpacing = 1.2.sp)
-                matchWords.filter { it.en !in matched }.forEach { word ->
-                    OutlinedButton(
-                        onClick = { selectedEnglish = word.en; matchMessage = "Şimdi ${word.en} kelimesinin Türkçesini seç." },
-                        modifier = Modifier.fillMaxWidth(),
-                        enabled = selectedEnglish == null || selectedEnglish == word.en,
-                        colors = ButtonDefaults.outlinedButtonColors(
-                            containerColor = if (selectedEnglish == word.en) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surface,
-                            contentColor = MaterialTheme.colorScheme.onSurface
-                        ),
-                        shape = RoundedCornerShape(13.dp)
-                    ) { Text(if (selectedEnglish == word.en) "●  ${word.en}" else word.en, fontWeight = FontWeight.SemiBold) }
-                }
-                Text("02  /  TÜRKÇE", color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.ExtraBold, fontSize = 10.sp, letterSpacing = 1.2.sp)
-                matchTurkishOrder.filter { it.en !in matched }.forEach { word ->
-                    OutlinedButton(
-                        onClick = {
-                            val selected = selectedEnglish
-                            if (selected == null) {
-                                matchMessage = "Önce İngilizce kelime seç."
-                            } else if (selected == word.en) {
-                                matched = matched + word.en
-                                selectedEnglish = null
-                                xp += 5
-                                prefs.edit().putInt("xp", xp).apply()
-                                matchMessage = if (matched.size == matchWords.size) "Harika! Tüm eşleşmeler tamamlandı. +${matchWords.size * 5} XP 🎉" else "Doğru eşleşme! +5 XP"
-                            } else {
-                                selectedEnglish = null
-                                matchMessage = "Bu eşleşme doğru değil. Tekrar dene!"
-                            }
-                        },
-                        modifier = Modifier.fillMaxWidth(),
-                        colors = ButtonDefaults.outlinedButtonColors(contentColor = MaterialTheme.colorScheme.onSurface),
-                        shape = RoundedCornerShape(13.dp)
-                    ) { Text(word.tr, fontWeight = FontWeight.Medium) }
+                Row(
+                    modifier = Modifier.fillMaxWidth().heightIn(max = 330.dp),
+                    horizontalArrangement = Arrangement.spacedBy(10.dp),
+                    verticalAlignment = Alignment.Top
+                ) {
+                    Column(
+                        modifier = Modifier.weight(1f).verticalScroll(rememberScrollState()),
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        Text("ENGLISH", color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.ExtraBold, fontSize = 10.sp, letterSpacing = 1.sp)
+                        matchWords.filter { it.en !in matched }.forEach { word ->
+                            OutlinedButton(
+                                onClick = { selectedEnglish = word.en; matchMessage = "Şimdi ${word.en} kelimesinin Türkçesini seç." },
+                                modifier = Modifier.fillMaxWidth(),
+                                contentPadding = PaddingValues(horizontal = 6.dp, vertical = 8.dp),
+                                enabled = selectedEnglish == null || selectedEnglish == word.en,
+                                colors = ButtonDefaults.outlinedButtonColors(
+                                    containerColor = if (selectedEnglish == word.en) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surface,
+                                    contentColor = MaterialTheme.colorScheme.onSurface
+                                ),
+                                shape = RoundedCornerShape(12.dp)
+                            ) { Text(if (selectedEnglish == word.en) "● ${word.en}" else word.en, fontWeight = FontWeight.SemiBold, fontSize = 12.sp, maxLines = 2) }
+                        }
+                    }
+                    Column(
+                        modifier = Modifier.weight(1f).verticalScroll(rememberScrollState()),
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        Text("TÜRKÇE", color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.ExtraBold, fontSize = 10.sp, letterSpacing = 1.sp)
+                        matchTurkishOrder.filter { it.en !in matched }.forEach { word ->
+                            OutlinedButton(
+                                onClick = {
+                                    val selected = selectedEnglish
+                                    if (selected == null) {
+                                        matchMessage = "Önce İngilizce kelime seç."
+                                    } else if (selected == word.en) {
+                                        matched = matched + word.en
+                                        selectedEnglish = null
+                                        xp += 5
+                                        prefs.edit().putInt("xp", xp).apply()
+                                        matchMessage = if (matched.size == matchWords.size) "Harika! Tüm eşleşmeler tamamlandı. +${matchWords.size * 5} XP 🎉" else "Doğru eşleşme! +5 XP"
+                                    } else {
+                                        selectedEnglish = null
+                                        matchMessage = "Bu eşleşme doğru değil. Tekrar dene!"
+                                    }
+                                },
+                                modifier = Modifier.fillMaxWidth(),
+                                contentPadding = PaddingValues(horizontal = 6.dp, vertical = 8.dp),
+                                colors = ButtonDefaults.outlinedButtonColors(contentColor = MaterialTheme.colorScheme.onSurface),
+                                shape = RoundedCornerShape(12.dp)
+                            ) { Text(word.tr, fontWeight = FontWeight.Medium, fontSize = 12.sp, maxLines = 2) }
+                        }
+                    }
                 }
             }
         },
