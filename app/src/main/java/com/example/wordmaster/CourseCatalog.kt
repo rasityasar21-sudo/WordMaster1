@@ -128,6 +128,33 @@ object WordMasterCourseCatalog {
             listOf("Tool inventory ve foreign object debris terimlerini tanı", "Kontrol listesi dilini anla"), listOf("aviation-tools")),
         CourseLesson("aviation-defect-report", "Arıza ve bulgu raporu yazımı", "Mesleki", "Uçak Bakım İngilizcesi", 25,
             listOf("Belirti, bulgu ve eylemi birbirinden ayır", "Varsayım eklemeden teknik rapor yaz"), listOf("aviation-inspection", "aviation-documentation"))
+
+        ,
+        CourseLesson("aviation-human-factors", "Human factors ve emniyet iletişimi", "Mesleki", "Emniyet İngilizcesi", 25,
+            listOf("Fatigue, workload ve situational awareness terimlerini ayırt et", "Endişeyi açık ve saygılı biçimde bildir"), listOf("aviation-maintenance-basics")),
+        CourseLesson("aviation-warning-language", "Uyarı, ikaz ve zorunluluk dili", "Mesleki", "Teknik doküman okuma", 20,
+            listOf("Warning, caution ve note ifadelerini ayırt et", "Must, should ve may sözcüklerinin bağlamdaki işlevini tanı"), listOf("aviation-documentation")),
+        CourseLesson("aviation-measurements", "Ölçüler, toleranslar ve birimler", "Mesleki", "Teknik İngilizce", 25,
+            listOf("Length, diameter, clearance ve tolerance terimlerini öğren", "Ölçüm sonuçlarını birim belirterek ifade et"), listOf("aviation-tools")),
+        CourseLesson("aviation-fasteners", "Bağlantı elemanları ve donanım", "Mesleki", "Parça terminolojisi", 22,
+            listOf("Bolt, nut, washer, fastener ve thread terimlerini tanı", "Parça adlarını teknik açıklamada kullan"), listOf("aviation-tools")),
+        CourseLesson("aviation-materials", "Malzemeler ve korozyon terminolojisi", "Mesleki", "Yapısal İngilizce", 22,
+            listOf("Alloy, composite, corrosion ve coating terimlerini tanı", "Malzeme durumunu tarafsız biçimde açıkla"), listOf("aviation-airframe")),
+        CourseLesson("aviation-pneumatics", "Pnömatik sistemler ve hava akışı", "Mesleki", "Sistem terminolojisi", 22,
+            listOf("Air supply, duct, valve ve pressure terimlerini öğren", "Sistem açıklamalarında akış ve basınç sözcüklerini tanı"), listOf("aviation-hydraulics")),
+        CourseLesson("aviation-avionics", "Aviyonik ve iletişim sistemleri", "Mesleki", "Aviyonik İngilizcesi", 25,
+            listOf("Sensor, display, signal ve circuit terimlerini ayırt et", "Teknik açıklamadaki sistem ilişkilerini özetle"), listOf("aviation-electrical")),
+        CourseLesson("aviation-engine-inspection", "Motor kontrolü ve durum ifadeleri", "Mesleki", "Motor İngilizcesi", 25,
+            listOf("Wear, leak, debris ve abnormal noise terimlerini öğren", "Gözlenen bulguyu tahmin eklemeden ifade et"), listOf("aviation-powerplant")),
+        CourseLesson("aviation-task-cards", "Task card ve iş emri okuma", "Mesleki", "Dokümantasyon", 25,
+            listOf("Task, reference, sign-off ve record alanlarını tanı", "İş emrindeki bilgi türlerini birbirinden ayır"), listOf("aviation-documentation")),
+        CourseLesson("aviation-handover", "Vardiya teslimi ve ekip iletişimi", "Mesleki", "Mesleki konuşma", 20,
+            listOf("Work completed, pending item ve handover ifadelerini kullan", "Tamamlanan ve bekleyen işleri net biçimde özetle"), listOf("aviation-defect-report")),
+        CourseLesson("aviation-technical-reading", "Teknik metin okuma stratejileri", "Mesleki", "Teknik okuma", 25,
+            listOf("Başlık, uyarı, adım ve referansları sırayla incele", "Bilmediğin terimi bağlamdan çıkarıp doğrulama ihtiyacını belirle"), listOf("aviation-warning-language")),
+        CourseLesson("aviation-review-assessment", "Mesleki terimler ve tekrar değerlendirmesi", "Mesleki", "Değerlendirme", 20,
+            listOf("Bakım, yapı, motor ve dokümantasyon terimlerini tekrar et", "Terimleri kısa teknik cümlelerde doğru kullan"), listOf("aviation-human-factors", "aviation-measurements", "aviation-avionics"))
+
     )
 
     fun forLevel(level: String): List<CourseLesson> =
