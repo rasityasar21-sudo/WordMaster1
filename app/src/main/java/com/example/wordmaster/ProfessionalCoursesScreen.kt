@@ -58,6 +58,35 @@ fun ProfessionalCoursesScreen(onBackToLessons: () -> Unit) {
         }
         Text("Mesleğine özel terimler, teknik okuma ve örnek cümlelerle İngilizceni geliştir.", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.68f), fontSize = 14.sp, lineHeight = 20.sp)
         if (selectedTrack == null) {
+            val totalProfessionalLessons = tracks.sumOf { it.lessons.size }
+            val totalProfessionalTerms = tracks.sumOf { it.sampleTerms.size }
+            val completionPercent = if (totalProfessionalLessons == 0) 0 else (completedProfessionalLessons.size * 100 / totalProfessionalLessons).coerceAtMost(100)
+            Card(modifier = Modifier.fillMaxWidth(), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface), shape = RoundedCornerShape(18.dp)) {
+                Column(Modifier.fillMaxWidth().padding(14.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Column(Modifier.weight(1f)) {
+                            Text("MESLEKİ AKADEMİ", color = MaterialTheme.colorScheme.primary, fontSize = 11.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 1.1.sp)
+                            Text("Öğrenme kontrol paneli", color = MaterialTheme.colorScheme.onSurface, fontSize = 17.sp, fontWeight = FontWeight.Bold)
+                        }
+                        Text("$completionPercent%", color = MaterialTheme.colorScheme.primary, fontSize = 22.sp, fontWeight = FontWeight.ExtraBold)
+                    }
+                    LinearProgressIndicator(progress = { completionPercent / 100f }, modifier = Modifier.fillMaxWidth(), color = MaterialTheme.colorScheme.primary, trackColor = MaterialTheme.colorScheme.surfaceVariant)
+                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        listOf(Triple("Uzmanlık", tracks.size.toString(), "alan"), Triple("Ders", totalProfessionalLessons.toString(), "konu"), Triple("Terim", totalProfessionalTerms.toString(), "örnek")).forEach { metric ->
+                            Surface(modifier = Modifier.weight(1f), color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.65f), shape = RoundedCornerShape(12.dp)) {
+                                Column(Modifier.padding(10.dp), verticalArrangement = Arrangement.spacedBy(3.dp)) {
+                                    Text(metric.second, color = MaterialTheme.colorScheme.onSurface, fontSize = 20.sp, fontWeight = FontWeight.ExtraBold)
+                                    Text(metric.first, color = MaterialTheme.colorScheme.onSurface, fontSize = 11.sp, fontWeight = FontWeight.Bold)
+                                    Text(metric.third, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.65f), fontSize = 10.sp)
+                                }
+                            }
+                        }
+                    }
+                    Text("${completedProfessionalLessons.size.coerceAtMost(totalProfessionalLessons)} / $totalProfessionalLessons ders tamamlandı", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f), fontSize = 12.sp)
+                }
+            }
+        }
+        if (selectedTrack == null) {
             Surface(color = MaterialTheme.colorScheme.primaryContainer, shape = RoundedCornerShape(14.dp)) {
                 Row(Modifier.fillMaxWidth().padding(12.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                     Text("✦", color = MaterialTheme.colorScheme.primary, fontSize = 22.sp)
