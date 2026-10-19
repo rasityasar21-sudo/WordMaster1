@@ -1237,7 +1237,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
     if (showProfile) AlertDialog(
         onDismissRequest = { showProfile = false },
         title = { Text("Profilim 👤", fontWeight = FontWeight.ExtraBold) },
-        text = { Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+        text = { Column(modifier = Modifier.heightIn(max = 440.dp).verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(12.dp)) {
             Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
                 Surface(shape = RoundedCornerShape(28.dp), color = PaleBlue) {
                     Text("🧑‍🎓", modifier = Modifier.padding(18.dp), fontSize = 34.sp)
@@ -1494,7 +1494,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
         onDismissRequest = { showMatchGame = false },
         title = { Text("Kelime eşleştirme 🎮") },
         text = {
-            Column(modifier = Modifier.heightIn(max = 420.dp).verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Column(modifier = Modifier.heightIn(max = 300.dp).verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 Text("Eşleşen: ${matched.size}/${matchWords.size}")
                 LinearProgressIndicator(progress = { if (matchWords.isEmpty()) 0f else matched.size.toFloat() / matchWords.size }, modifier = Modifier.fillMaxWidth())
                 Text(matchMessage, color = Blue, fontWeight = FontWeight.SemiBold)
@@ -1641,7 +1641,7 @@ private fun PronunciationPracticeDialog(words: List<Word>, onDismiss: () -> Unit
         onDismissRequest = onDismiss,
         title = { Text("🎧 Kelime Telaffuzu") },
         text = {
-            Column(modifier = Modifier.heightIn(max = 420.dp).verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            Column(modifier = Modifier.heightIn(max = 300.dp).verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(10.dp)) {
                 Text("İngilizce sözlüklerdeki kayıtlı telaffuzları dinle. Ses kaydı olmayan kelimelerde yapay ses kullanılmaz.")
                 OutlinedTextField(
                     value = searchText, onValueChange = { searchText = it },
