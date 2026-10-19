@@ -25,6 +25,7 @@ fun ProfessionalCoursesScreen(onBackToLessons: () -> Unit) {
     var quizScore by remember { mutableIntStateOf(0) }
     var missedTerms by remember { mutableStateOf(listOf<String>()) }
     var trackSearch by remember { mutableStateOf("") }
+    var trackContentSearch by remember(selectedTrackId) { mutableStateOf("") }
     var revealedLessonAnswers by remember { mutableStateOf(setOf<String>()) }
     val context = LocalContext.current
     val prefs = remember(context) { context.getSharedPreferences("wordmaster", Context.MODE_PRIVATE) }
@@ -112,6 +113,16 @@ fun ProfessionalCoursesScreen(onBackToLessons: () -> Unit) {
             TextButton(onClick = { selectedTrackId = null; showAnswers = false }) { Text("← Meslek kataloğuna dön") }
             Text(selectedTrack!!.title, color = MaterialTheme.colorScheme.onSurface, fontSize = 23.sp, fontWeight = FontWeight.ExtraBold)
             Text(selectedTrack.description, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.68f), fontSize = 14.sp, lineHeight = 20.sp)
+            OutlinedTextField(
+                value = trackContentSearch,
+                onValueChange = { trackContentSearch = it },
+                modifier = Modifier.fillMaxWidth(),
+                singleLine = true,
+                label = { Text("Bu uzmanlıkta ara") },
+                placeholder = { Text("Ders, terim veya Türkçe anlam") },
+                shape = RoundedCornerShape(14.dp),
+                leadingIcon = { Text("⌕", fontSize = 20.sp) }
+            )
             if (selectedTrack.lessons.isNotEmpty()) {
                 val trackLessonIds = selectedTrack.lessons.map { "${selectedTrack.id}:${it.id}" }
                 val completedInTrack = trackLessonIds.count { it in completedProfessionalLessons }
@@ -146,7 +157,14 @@ fun ProfessionalCoursesScreen(onBackToLessons: () -> Unit) {
             if (selectedTrack.lessons.isNotEmpty()) {
                 Text("KONU ANLATIMLI DERSLER", color = MaterialTheme.colorScheme.primary, fontSize = 11.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 1.sp)
                 Text("Her derste hedef, kısa anlatım, mesleki ifadeler ve kontrol sorusu bulunur.", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.68f), fontSize = 13.sp, lineHeight = 18.sp)
-                selectedTrack.lessons.forEach { lesson ->
+                val visibleLessons = selectedTrack.lessons.filter { lesson ->
+                    trackContentSearch.isBlank() || lesson.title.contains(trackContentSearch, ignoreCase = true) ||
+                        lesson.objective.contains(trackContentSearch, ignoreCase = true) ||
+                        lesson.explanation.contains(trackContentSearch, ignoreCase = true) ||
+                        lesson.phrases.any { (english, turkish) -> english.contains(trackContentSearch, ignoreCase = true) || turkish.contains(trackContentSearch, ignoreCase = true) }
+                }
+                if (visibleLessons.isEmpty()) Text("Aramayla eşleşen ders bulunamadı.", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.68f), fontSize = 12.sp)
+                visibleLessons.forEach { lesson ->
                     Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface), shape = RoundedCornerShape(18.dp)) {
                         Column(Modifier.fillMaxWidth().padding(16.dp), verticalArrangement = Arrangement.spacedBy(9.dp)) {
                             val progressId = "${selectedTrack.id}:${lesson.id}"
@@ -201,7 +219,14 @@ fun ProfessionalCoursesScreen(onBackToLessons: () -> Unit) {
             if (selectedTrack.sampleTerms.isNotEmpty()) {
                 Text("TERİM KARTLARI", color = MaterialTheme.colorScheme.primary, fontSize = 11.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 1.sp)
                 Text("İngilizce terimi ve Türkçe anlamını örnekle birlikte öğren.", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.68f), fontSize = 13.sp)
-                selectedTrack.sampleTerms.forEach { term ->
+                val visibleTerms = selectedTrack.sampleTerms.filter { term ->
+                    trackContentSearch.isBlank() || term.english.contains(trackContentSearch, ignoreCase = true) ||
+                        term.turkish.contains(trackContentSearch, ignoreCase = true) || term.exampleEnglish.contains(trackContentSearch, ignoreCase = true) ||
+                        term.note.contains(trackContentSearch, ignoreCase = true)
+                }
+                Text("${visibleTerms.size} / ${selectedTrack.sampleTerms.size} terim gösteriliyor", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.65f), fontSize = 11.sp)
+                if (visibleTerms.isEmpty()) Text("Aramayla eşleşen terim bulunamadı.", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.68f), fontSize = 12.sp)
+                visibleTerms.forEach { term ->
                     Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface), shape = RoundedCornerShape(16.dp)) {
                         Column(Modifier.fillMaxWidth().padding(15.dp), verticalArrangement = Arrangement.spacedBy(5.dp)) {
                             Text(term.english, color = MaterialTheme.colorScheme.onSurface, fontSize = 17.sp, fontWeight = FontWeight.ExtraBold)
