@@ -34,6 +34,7 @@ import androidx.compose.animation.animateContentSize
 import java.time.LocalDate
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
@@ -264,7 +265,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
     }
     val darkTheme = themeChoice == 1 || (themeChoice == 2 && androidx.compose.foundation.isSystemInDarkTheme())
     val pageBackground = if (darkTheme) Color(0xFF0B1022) else Color(0xFFF7F5FF)
-    val heroBrush = if (darkTheme) Brush.linearGradient(listOf(Color(0xFF222D62), Color(0xFF542C9C), Color(0xFF111936))) else Brush.linearGradient(listOf(Color(0xFFEAE5FF), Color(0xFFFFFFFF), Color(0xFFFFF4FA)))
+    val heroBrush = Brush.linearGradient(listOf(Color(0xFF222D62), Color(0xFF542C9C), Color(0xFF111936)))
     LaunchedEffect(today) {
         if (lastLoginDate != today) {
             dailyStreak = if (lastLoginDate == LocalDate.now().minusDays(1).toString()) dailyStreak + 1 else 1
