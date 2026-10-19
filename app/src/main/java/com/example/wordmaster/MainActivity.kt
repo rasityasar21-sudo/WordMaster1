@@ -1732,6 +1732,7 @@ private fun PronunciationPracticeDialog(words: List<Word>, onDismiss: () -> Unit
                 }
                 HorizontalDivider()
                 Text("KELİME TANIMA", color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.ExtraBold, fontSize = 11.sp, letterSpacing = 1.sp)
+                val pronunciationAccuracy = if (pronunciationAnswered == 0) 0 else pronunciationCorrect * 100 / pronunciationAnswered
                 Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     Surface(Modifier.weight(1f), shape = RoundedCornerShape(14.dp), color = MaterialTheme.colorScheme.surfaceVariant) {
                         Column(Modifier.padding(11.dp), verticalArrangement = Arrangement.spacedBy(3.dp)) {
@@ -1745,6 +1746,24 @@ private fun PronunciationPracticeDialog(words: List<Word>, onDismiss: () -> Unit
                             Text("$pronunciationAnswered", color = MaterialTheme.colorScheme.onSurface, fontSize = 20.sp, fontWeight = FontWeight.ExtraBold)
                         }
                     }
+                    Surface(Modifier.weight(1f), shape = RoundedCornerShape(14.dp), color = MaterialTheme.colorScheme.primaryContainer) {
+                        Column(Modifier.padding(11.dp), verticalArrangement = Arrangement.spacedBy(3.dp)) {
+                            Text("BAŞARI", color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.75f), fontSize = 10.sp, fontWeight = FontWeight.Bold)
+                            Text("$pronunciationAccuracy%", color = MaterialTheme.colorScheme.onPrimaryContainer, fontSize = 20.sp, fontWeight = FontWeight.ExtraBold)
+                        }
+                    }
+                }
+                Column(verticalArrangement = Arrangement.spacedBy(5.dp)) {
+                    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
+                        Text("Oturum başarısı", color = MaterialTheme.colorScheme.onSurface, fontSize = 12.sp, fontWeight = FontWeight.SemiBold)
+                        Text("$pronunciationCorrect / $pronunciationAnswered doğru", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.68f), fontSize = 11.sp)
+                    }
+                    LinearProgressIndicator(
+                        progress = { pronunciationAccuracy / 100f },
+                        modifier = Modifier.fillMaxWidth(),
+                        color = MaterialTheme.colorScheme.primary,
+                        trackColor = MaterialTheme.colorScheme.surfaceVariant
+                    )
                 }
                 Surface(
                     modifier = Modifier.fillMaxWidth(),
