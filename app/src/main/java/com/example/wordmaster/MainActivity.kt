@@ -216,7 +216,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
     var usernameDraft by remember { mutableStateOf(username) }
     var emailDraft by remember { mutableStateOf(accountEmail) }
     var phoneDraft by remember { mutableStateOf(accountPhone) }
-    var themeChoice by remember { mutableIntStateOf(prefs.getInt("themeChoice", 0)) }
+    var themeChoice by remember { mutableIntStateOf(prefs.getInt("themeChoice", 0).coerceIn(0, 2)) }
     var compactCards by remember { mutableStateOf(prefs.getBoolean("compactCards", false)) }
     var dailyGoal by remember { mutableIntStateOf(prefs.getInt("dailyGoal", 10)) }
     var dailyStudyGoal by remember { mutableIntStateOf(CourseProgressStore.dailyGoalMinutes(prefs)) }
@@ -262,8 +262,9 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
             date = today
         )
     }
-    val pageBackground = when (themeChoice) { 1 -> Color(0xFFEAF8F3); 2 -> Color(0xFFFFF1E5); else -> Color(0xFF0B1022) } 
-    val heroBrush = when (themeChoice) { 1 -> Brush.linearGradient(listOf(Color(0xFF075E54), Color(0xFF16A085))); 2 -> Brush.linearGradient(listOf(Color(0xFF7C2D12), Color(0xFFF59E0B))); else -> Brush.linearGradient(listOf(Color(0xFF222D62), Color(0xFF542C9C), Color(0xFF111936))) }
+    val darkTheme = themeChoice == 1 || (themeChoice == 2 && androidx.compose.foundation.isSystemInDarkTheme())
+    val pageBackground = if (darkTheme) Color(0xFF0B1022) else Color(0xFFF7F5FF)
+    val heroBrush = if (darkTheme) Brush.linearGradient(listOf(Color(0xFF222D62), Color(0xFF542C9C), Color(0xFF111936))) else Brush.linearGradient(listOf(Color(0xFFEAE5FF), Color(0xFFFFFFFF), Color(0xFFFFF4FA)))
     LaunchedEffect(today) {
         if (lastLoginDate != today) {
             dailyStreak = if (lastLoginDate == LocalDate.now().minusDays(1).toString()) dailyStreak + 1 else 1
@@ -356,17 +357,30 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
         }
     }
 
+    SideEffect {
+        val activity = appContext as? ComponentActivity
+        activity?.window?.navigationBarColor = if (darkTheme) android.graphics.Color.rgb(11, 16, 34) else android.graphics.Color.WHITE
+        activity?.window?.statusBarColor = if (darkTheme) android.graphics.Color.rgb(11, 16, 34) else android.graphics.Color.rgb(247, 245, 255)
+        @Suppress("DEPRECATION")
+        activity?.window?.decorView?.systemUiVisibility = if (darkTheme) 0 else
+            (View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)
+    }
     MaterialTheme(
-        colorScheme = lightColorScheme(
-            primary = Color(0xFF8B72FF), onPrimary = Color.White, background = pageBackground,
-            surface = Color(0xFF151D38), onSurface = Color(0xFFF3F4FF), secondary = Color(0xFF55D6BE)
+        colorScheme = if (darkTheme) darkColorScheme(
+            primary = Color(0xFFB8A7FF), onPrimary = Color(0xFF20134B),
+            background = Color(0xFF0B1022), surface = Color(0xFF151D38),
+            onSurface = Color(0xFFF3F4FF), secondary = Color(0xFF55D6BE)
+        ) else lightColorScheme(
+            primary = Color(0xFF6D4AFF), onPrimary = Color.White,
+            background = Color(0xFFF7F5FF), surface = Color.White,
+            onSurface = Color(0xFF17213C), secondary = Color(0xFF087F68)
         )
     ) {
         Scaffold(
             containerColor = Color.Transparent,
             bottomBar = {
-                NavigationBar(containerColor = Color(0xFF10172D), contentColor = Color(0xFFE8E9FF)) {
-                    NavigationBarItem(selected = currentScreen == "Dersler", onClick = { currentScreen = "Dersler"; selectedTopic = "Tümü"; selected = "A1" }, icon = { Text("📚") }, label = { Text("Dersler") }, colors = NavigationBarItemDefaults.colors(selectedIconColor = Color(0xFFB8A7FF), selectedTextColor = Color(0xFFE5DEFF), indicatorColor = Color(0xFF30275A), unselectedIconColor = Color(0xFF929BB8), unselectedTextColor = Color(0xFF929BB8)))
+                NavigationBar(containerColor = if (darkTheme) Color(0xFF10172D) else Color.White, contentColor = if (darkTheme) Color(0xFFE8E9FF) else Color(0xFF17213C)) {
+                    NavigationBarItem(selected = currentScreen == "Dersler", onClick = { currentScreen = "Dersler"; selectedTopic = "Tümü"; selected = "A1" }, icon = { Text("📚") }, label = { Text("Dersler") }, colors = NavigationBarItemDefaults.colors(selectedIconColor = if (darkTheme) Color(0xFFB8A7FF) else Color(0xFF6D4AFF), selectedTextColor = if (darkTheme) Color(0xFFE5DEFF) else Color(0xFF6D4AFF), indicatorColor = if (darkTheme) Color(0xFF30275A) else Color(0xFFEAE5FF), unselectedIconColor = if (darkTheme) Color(0xFF929BB8) else Color(0xFF77738B), unselectedTextColor = if (darkTheme) Color(0xFF929BB8) else Color(0xFF77738B)))
                     NavigationBarItem(selected = currentScreen == "Sözlük", onClick = { currentScreen = "Sözlük"; selectedTopic = "Tümü"; selected = "Tümü"; tab = 0; query = "" }, icon = { Text("A-Z") }, label = { Text("Sözlük") }, colors = NavigationBarItemDefaults.colors(selectedIconColor = Color(0xFFB8A7FF), selectedTextColor = Color(0xFFE5DEFF), indicatorColor = Color(0xFF30275A), unselectedIconColor = Color(0xFF929BB8), unselectedTextColor = Color(0xFF929BB8)))
                     NavigationBarItem(selected = currentScreen == "Mesleki İngilizce", onClick = { currentScreen = "Mesleki İngilizce" }, icon = { Text("✈️") }, label = { Text("Mesleki") }, colors = NavigationBarItemDefaults.colors(selectedIconColor = Color(0xFFB8A7FF), selectedTextColor = Color(0xFFE5DEFF), indicatorColor = Color(0xFF30275A), unselectedIconColor = Color(0xFF929BB8), unselectedTextColor = Color(0xFF929BB8)))
                     NavigationBarItem(selected = false, onClick = { showProfile = true }, icon = { Text("👤") }, label = { Text("Profil") }, colors = NavigationBarItemDefaults.colors(selectedIconColor = Color(0xFFB8A7FF), selectedTextColor = Color(0xFFE5DEFF), indicatorColor = Color(0xFF30275A), unselectedIconColor = Color(0xFF929BB8), unselectedTextColor = Color(0xFF929BB8)))
@@ -374,7 +388,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
             }
         ) { padding ->
             LazyColumn(
-                modifier = Modifier.fillMaxSize().background(Brush.verticalGradient(listOf(Color(0xFF0B1022), Color(0xFF111936), Color(0xFF17132F)))).padding(padding),
+                modifier = Modifier.fillMaxSize().background(Brush.verticalGradient(if (darkTheme) listOf(Color(0xFF0B1022), Color(0xFF111936), Color(0xFF17132F)) else listOf(Color(0xFFF1EDFF), Color.White, Color(0xFFFFF2F8)))).padding(padding),
                 contentPadding = PaddingValues(start = 18.dp, end = 18.dp, top = 12.dp, bottom = 28.dp),
                 verticalArrangement = Arrangement.spacedBy(14.dp)
             ) {
@@ -899,166 +913,6 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                         }
                     }
                 }
-                if (currentScreen == "Dersler") {
-                    item {
-                        Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                            Text("📚 Dersler", fontSize = 23.sp, fontWeight = FontWeight.ExtraBold, color = Navy)
-                            Text("Bir seviye ve konu seç.", fontSize = 13.sp, color = Color(0xFF68758E))
-                            if (selected in listOf("A1", "A2", "B1", "B2", "C1")) {
-                                val levelProgress = CourseProgressStore.levelProgress(prefs, selected)
-                                val progressPercent = if (levelProgress.second > 0) levelProgress.first * 100 / levelProgress.second else 0
-                                val nextLesson = WordMasterCourseCatalog.nextRecommended(completedCourseIds, selected)
-                                Card(
-                                    modifier = Modifier.fillMaxWidth(),
-                                    shape = RoundedCornerShape(20.dp),
-                                    colors = CardDefaults.cardColors(containerColor = Color.White)
-                                ) {
-                                    Column(Modifier.fillMaxWidth().padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                                        Row(verticalAlignment = Alignment.CenterVertically) {
-                                            Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(3.dp)) {
-                                                Text("$selected SEVİYE İLERLEMESİ", color = Blue, fontWeight = FontWeight.ExtraBold, fontSize = 11.sp, letterSpacing = 1.sp)
-                                                Text("${levelProgress.first} / ${levelProgress.second} ders tamamlandı", color = Navy, fontWeight = FontWeight.Bold, fontSize = 16.sp)
-                                            }
-                                            Text("$progressPercent%", color = Blue, fontWeight = FontWeight.ExtraBold, fontSize = 22.sp)
-                                        }
-                                        LinearProgressIndicator(
-                                            progress = { progressPercent / 100f },
-                                            modifier = Modifier.fillMaxWidth().height(7.dp),
-                                            color = Blue,
-                                            trackColor = PaleBlue
-                                        )
-                                        if (nextLesson != null) {
-                                            Text("Sıradaki öneri: ${nextLesson.title}", color = Color(0xFF68758E), fontSize = 12.sp)
-                                            Button(
-                                                onClick = {
-                                                    activeCourseLessonId = nextLesson.id
-                                                    activeLesson = nextLesson.title
-                                                    activeLessonIndex = 0
-                                                    lessonAnswer = false
-                                                    lessonStage = 0
-                                                    currentScreen = "Ders İçeriği"
-                                                },
-                                                modifier = Modifier.fillMaxWidth(),
-                                                shape = RoundedCornerShape(14.dp)
-                                            ) { Text("Önerilen derse başla  →") }
-                                        } else {
-                                            Text("Bu seviyedeki tüm katalog derslerini tamamladın. Harika ilerleme!", color = Color(0xFF16845D), fontSize = 13.sp, fontWeight = FontWeight.SemiBold)
-                                        }
-                                    }
-                                }
-                            }
-                            Row(
-                                Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()),
-                                horizontalArrangement = Arrangement.spacedBy(8.dp)
-                            ) {
-                                listOf("A1", "A2", "B1", "B2", "C1").forEach { levelName ->
-                                    val count = remember(words) { words.count { it.level == levelName } }
-                                    FilterChip(
-                                        selected = selected == levelName,
-                                        onClick = { selected = levelName; selectedTopic = "Tümü"; tab = 0 },
-                                        label = { Text(levelName, fontSize = 12.sp) }
-                                    )
-                                }
-                            }
-                            Row(verticalAlignment = Alignment.CenterVertically) {
-                                Text(if (selected == "Tümü") "Konular" else "$selected konuları", fontSize = 19.sp, fontWeight = FontWeight.ExtraBold, color = Navy)
-                                Spacer(Modifier.weight(1f))
-                                Text("Birini seç", fontSize = 11.sp, color = Color(0xFF68758E))
-                            }
-                            val lessonTitles = when (selected) {
-                                "A1" -> listOf("Greetings & Introducing", "Spelling words & Telling phone numbers", "Countries and nationalities", "Counting objects", "Expressing possession", "Family members", "Everyday objects", "Colors and numbers", "Food and drinks", "At home", "School life", "Days and months", "Telling the time", "Daily routines", "Likes and dislikes", "Describing people", "Clothes", "Weather", "Places in town", "Asking for directions", "Transport", "Can / can't", "There is / There are", "A1 review")
-                                "A2" -> listOf("Daily routines", "Shopping", "Asking for directions", "Health and body", "Hobbies and free time", "Past events", "Plans and invitations", "Comparisons", "Travel", "Food choices", "At work", "Household tasks", "Making requests", "Giving advice", "Feelings", "Describing places", "Weather forecast", "Transport problems", "Life experiences", "Future plans", "A2 review")
-                                "B1" -> listOf("Simple Past Tense", "Used to / Get used to / Be used to", "Past Continuous Tense", "Present Perfect", "Future forms", "Giving opinions", "Education and work", "Travel experiences", "Feelings and relationships", "Media and technology", "Solving problems", "Environment", "Goals and ambitions", "Conditionals", "Passive voice", "Reported speech", "Making decisions", "Culture", "Health and lifestyle", "Describing trends", "Phrasal verbs", "B1 review")
-                                "B2" -> listOf("Debates and opinions", "Professional life", "Society and culture", "Science and technology", "News and media", "Complex feelings", "Academic vocabulary", "Idioms", "Advanced conditionals", "Cause and effect", "Formal writing", "Presentations", "Negotiation", "Global issues", "Research", "Collocations", "Nuanced adjectives", "Advanced phrasal verbs", "Workplace communication", "B2 review")
-                                else -> listOf("Advanced expressions", "Academic English", "Abstract concepts", "Culture and society", "Professional communication", "Subtle meaning differences", "Advanced verbs", "Idioms and phrases", "Critical analysis", "Formal register", "Research vocabulary", "Persuasive language", "Literature", "Politics and society", "Advanced collocations", "C1 review")
-                            }
-                            val lessonIcons = listOf("✦", "Aa", "◎", "123", "▣", "⌂", "◇", "＋", "☼", "↗", "▤", "◷")
-                            val completedLessons = remember { mutableStateListOf<String>().apply {
-                                addAll(prefs.getStringSet("completedLessons", emptySet()) ?: emptySet())
-                            } }
-                            val lessonRows = lessonTitles.chunked(2)
-                            Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                                lessonRows.forEachIndexed { rowIndex, rowTitles ->
-                                    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                                        rowTitles.forEachIndexed { columnIndex, title ->
-                                            val lessonIndex = rowIndex * 2 + columnIndex
-                                            val lessonKey = "${selected}_${lessonIndex}_${title}"
-                                            val completed = lessonKey in completedLessons
-                                            val unlocked = lessonIndex == 0 || "${selected}_${lessonIndex - 1}_${lessonTitles.getOrNull(lessonIndex - 1).orEmpty()}" in completedLessons
-                                            Card(
-                                                modifier = Modifier.weight(1f).heightIn(min = 142.dp),
-                                                shape = RoundedCornerShape(22.dp),
-                                                colors = CardDefaults.cardColors(containerColor = if (unlocked) Color.White else Color(0xFFF0F1F6)),
-                                                elevation = CardDefaults.cardElevation(defaultElevation = if (unlocked) 3.dp else 0.dp),
-                                                onClick = {
-                                                    if (unlocked) {
-                                                        activeCourseLessonId = null
-                                                        activeLesson = title
-                                                        activeLessonIndex = lessonIndex
-                                                        lessonAnswer = false
-                                                        currentScreen = "Ders İçeriği"
-                                                    }
-                                                }
-                                            ) {
-                                                Column(Modifier.fillMaxSize().padding(14.dp), verticalArrangement = Arrangement.SpaceBetween) {
-                                                    Row(verticalAlignment = Alignment.CenterVertically) {
-                                                        Box(
-                                                            Modifier.size(38.dp).background(
-                                                                if (completed) Color(0xFFDDF7EA) else if (unlocked) Color(0xFFE3F5F0) else Color(0xFFE2E4EC),
-                                                                RoundedCornerShape(12.dp)
-                                                            ),
-                                                            contentAlignment = Alignment.Center
-                                                        ) {
-                                                            Text(lessonIcons[lessonIndex % lessonIcons.size], fontSize = 17.sp, fontWeight = FontWeight.Bold, color = Color(0xFF175E57))
-                                                        }
-                                                        Spacer(Modifier.weight(1f))
-                                                        Text(
-                                                            if (completed) "✓" else if (unlocked) "→" else "•",
-                                                            fontSize = 20.sp, fontWeight = FontWeight.Bold,
-                                                            color = if (completed) Color(0xFF16845D) else Color(0xFF667085)
-                                                        )
-                                                    }
-                                                    Spacer(Modifier.height(12.dp))
-                                                    Text(title, fontSize = 14.sp, fontWeight = FontWeight.Bold, color = Ink, lineHeight = 19.sp)
-                                                    Spacer(Modifier.height(6.dp))
-                                                    Text(
-                                                        if (completed) "Tamamlandı" else if (unlocked) "Başlamak için dokun" else "Daha sonra açılır",
-                                                        fontSize = 11.sp, color = Color(0xFF667085)
-                                                    )
-                                                }
-                                            }
-                                        }
-                                        if (rowTitles.size == 1) Spacer(Modifier.weight(1f))
-                                    }
-                                }
-                            }
-                            if (selectedTopic != "Tümü") {
-                                TextButton(onClick = { selectedTopic = "Tümü" }, modifier = Modifier.align(Alignment.End)) {
-                                    Text("Tüm konuları göster")
-                                }
-                            }
-                        }
-                    }
-                    }
-                if (currentScreen == "Dersler") {
-                    item {
-                        CourseCatalogSection(
-                            level = studyPlanLevel,
-                            completedIds = completedCourseIds,
-                            onLaunch = { courseLesson ->
-                                activeCourseLessonId = courseLesson.id
-                                activeLesson = courseLesson.title
-                                activeLessonIndex = 0
-                                lessonAnswer = false
-                                lessonStage = 0
-                                currentScreen = "Ders İçeriği"
-                            }
-                        )
-                    }
-                }
-                if (currentScreen == "Mesleki İngilizce") {
-                    item { ProfessionalCoursesScreen(onBackToLessons = { currentScreen = "Dersler" }) }
-                }
                 if (currentScreen == "Sözlük") {
                     item {
                         Text(if (selectedTopic == "Tümü") "Kelime defterim" else "$selectedTopic · Kelimeler", fontSize = 21.sp, fontWeight = FontWeight.ExtraBold, color = Navy)
@@ -1428,11 +1282,17 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
         onDismissRequest = { showSettings = false },
         title = { Text("Görünüm ve ayarlar ⚙️", fontWeight = FontWeight.ExtraBold) },
         text = { Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-            Text("Uygulama teması", fontWeight = FontWeight.Bold)
-            listOf("Kırmızı premium", "Zümrüt yeşili", "Sıcak gün batımı").forEachIndexed { index, label ->
-                Row(verticalAlignment = Alignment.CenterVertically) {
+            Text("Görünüm modu", fontWeight = FontWeight.Bold)
+            Text("İstediğin zaman değiştir; seçimin bu cihazda hatırlanır.", fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f))
+            listOf("Açık tema", "Koyu tema", "Sistem ayarını izle").forEachIndexed { index, label ->
+                Row(
+                    modifier = Modifier.fillMaxWidth().clip(RoundedCornerShape(14.dp)).background(
+                        if (themeChoice == index) MaterialTheme.colorScheme.primary.copy(alpha = 0.12f) else Color.Transparent
+                    ).clickable { themeChoice = index; prefs.edit().putInt("themeChoice", index).apply() }.padding(horizontal = 10.dp, vertical = 5.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
                     RadioButton(selected = themeChoice == index, onClick = { themeChoice = index; prefs.edit().putInt("themeChoice", index).apply() })
-                    Text(label)
+                    Text(when (index) { 0 -> "☀️  Açık tema"; 1 -> "🌙  Koyu tema"; else -> "📱  Sistem ayarını izle" }, color = MaterialTheme.colorScheme.onSurface)
                 }
             }
             HorizontalDivider()
