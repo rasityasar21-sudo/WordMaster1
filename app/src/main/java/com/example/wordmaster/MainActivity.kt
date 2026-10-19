@@ -1,5 +1,6 @@
 package com.example.wordmaster
 
+import android.app.Activity
 import android.content.SharedPreferences
 import android.content.Context
 import android.media.MediaPlayer
@@ -14,6 +15,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.SideEffect
 import androidx.activity.ComponentActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.activity.compose.setContent
@@ -264,6 +266,21 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
         )
     }
     val darkTheme = themeChoice == 1 || (themeChoice == 2 && androidx.compose.foundation.isSystemInDarkTheme())
+    // Keep Android system bars synchronized with the user's theme choice.
+    SideEffect {
+        val activity = appContext as? Activity
+        activity?.window?.let { window ->
+            window.statusBarColor = if (darkTheme) android.graphics.Color.rgb(11, 16, 34) else android.graphics.Color.rgb(247, 245, 255)
+            window.navigationBarColor = if (darkTheme) android.graphics.Color.rgb(11, 16, 34) else android.graphics.Color.rgb(255, 255, 255)
+            var flags = window.decorView.systemUiVisibility
+            flags = if (darkTheme) {
+                flags and View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR.inv() and View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR.inv()
+            } else {
+                flags or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
+            }
+            window.decorView.systemUiVisibility = flags
+        }
+    }
     val pageBackground = if (darkTheme) Color(0xFF0B1022) else Color(0xFFF7F5FF)
     val heroBrush = Brush.linearGradient(listOf(Color(0xFF222D62), Color(0xFF542C9C), Color(0xFF111936)))
     LaunchedEffect(today) {
