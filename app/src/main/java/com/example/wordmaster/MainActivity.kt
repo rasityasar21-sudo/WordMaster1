@@ -481,21 +481,21 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                 Card(Modifier.weight(1f), shape = RoundedCornerShape(20.dp), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)) {
                                     Column(Modifier.fillMaxWidth().clickable { showMatchGame = true; matchRound = 0; matched = emptySet(); selectedEnglish = null; matchWords = quickPracticeWords.shuffled().take(5); matchTurkishOrder = matchWords.shuffled(); matchMessage = "İngilizce kelimeyi seç, sonra Türkçe karşılığını bul." }.padding(15.dp), verticalArrangement = Arrangement.spacedBy(7.dp)) {
                                         Text("🧩", fontSize = 25.sp)
-                                        Text("Eşleştirme", color = Color(0xFF211D3A), fontWeight = FontWeight.Bold)
+                                        Text("Eşleştirme", color = MaterialTheme.colorScheme.onSurface, fontWeight = FontWeight.Bold)
                                         Text("Hızlı oyun", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.62f), fontSize = 12.sp)
                                     }
                                 }
                                 Card(Modifier.weight(1f), shape = RoundedCornerShape(20.dp), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)) {
                                     Column(Modifier.fillMaxWidth().clickable { showPronunciation = true }.padding(15.dp), verticalArrangement = Arrangement.spacedBy(7.dp)) {
                                         Text("🎙️", fontSize = 25.sp)
-                                        Text("Konuşma", color = Color(0xFF211D3A), fontWeight = FontWeight.Bold)
+                                        Text("Konuşma", color = MaterialTheme.colorScheme.onSurface, fontWeight = FontWeight.Bold)
                                         Text("Sesli pratik", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.62f), fontSize = 12.sp)
                                     }
                                 }
                                 Card(Modifier.weight(1f), shape = RoundedCornerShape(20.dp), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)) {
                                     Column(Modifier.fillMaxWidth().clickable { showProfile = true }.padding(15.dp), verticalArrangement = Arrangement.spacedBy(7.dp)) {
                                         Text("📈", fontSize = 25.sp)
-                                        Text("İlerleme", color = Color(0xFF211D3A), fontWeight = FontWeight.Bold)
+                                        Text("İlerleme", color = MaterialTheme.colorScheme.onSurface, fontWeight = FontWeight.Bold)
                                         Text("$xp XP • Seviye $level", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.62f), fontSize = 11.sp)
                                     }
                                 }
@@ -532,23 +532,23 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                 Column(Modifier.fillMaxWidth().padding(18.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
                                     Row(verticalAlignment = Alignment.CenterVertically) {
                                         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(3.dp)) {
-                                            Text("ÖĞRENME ÖZETİ", color = Color(0xFFB91C1C), fontSize = 11.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 1.3.sp)
-                                            Text("İlerlemen tek yerde", color = Color(0xFF211D3A), fontSize = 18.sp, fontWeight = FontWeight.ExtraBold)
+                                            Text("ÖĞRENME ÖZETİ", color = MaterialTheme.colorScheme.primary, fontSize = 11.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 1.3.sp)
+                                            Text("İlerlemen tek yerde", color = MaterialTheme.colorScheme.onSurface, fontSize = 18.sp, fontWeight = FontWeight.ExtraBold)
                                         }
                                         Text("📊", fontSize = 28.sp)
                                     }
                                     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                                        Column(Modifier.weight(1f).background(PaleBlue, RoundedCornerShape(14.dp)).padding(11.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                                        Column(Modifier.weight(1f).background(if (darkTheme) Color(0xFF202A49) else PaleBlue, RoundedCornerShape(14.dp)).padding(11.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                                             Text("📚", fontSize = 18.sp)
                                             Text("${completedLessonCount}", color = MaterialTheme.colorScheme.onSurface, fontSize = 21.sp, fontWeight = FontWeight.ExtraBold)
                                             Text("Tamamlanan ders", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f), fontSize = 11.sp)
                                         }
-                                        Column(Modifier.weight(1f).background(Mint, RoundedCornerShape(14.dp)).padding(11.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                                        Column(Modifier.weight(1f).background(if (darkTheme) Color(0xFF183B42) else Mint, RoundedCornerShape(14.dp)).padding(11.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                                             Text("🧠", fontSize = 18.sp)
                                             Text("${progressSummary.totalWords}", color = MaterialTheme.colorScheme.onSurface, fontSize = 21.sp, fontWeight = FontWeight.ExtraBold)
                                             Text("Takip edilen kelime", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f), fontSize = 11.sp)
                                         }
-                                        Column(Modifier.weight(1f).background(Color(0xFFFFF1E5), RoundedCornerShape(14.dp)).padding(11.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                                        Column(Modifier.weight(1f).background(if (darkTheme) Color(0xFF3B2C35) else Color(0xFFFFF1E5), RoundedCornerShape(14.dp)).padding(11.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                                             Text("🎯", fontSize = 18.sp)
                                             Text("${progressSummary.accuracyPercent}%", color = MaterialTheme.colorScheme.onSurface, fontSize = 21.sp, fontWeight = FontWeight.ExtraBold)
                                             Text("Doğruluk", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f), fontSize = 11.sp)
@@ -556,14 +556,14 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                     }
                                     Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
                                         Row(verticalAlignment = Alignment.CenterVertically) {
-                                            Text("Bugünkü çalışma süresi", color = Color(0xFF29263D), fontWeight = FontWeight.SemiBold, fontSize = 13.sp, modifier = Modifier.weight(1f))
+                                            Text("Bugünkü çalışma süresi", color = MaterialTheme.colorScheme.onSurface, fontWeight = FontWeight.SemiBold, fontSize = 13.sp, modifier = Modifier.weight(1f))
                                             Text("${totalStudyMinutes} / ${studyMinuteGoal} dk", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f), fontSize = 12.sp, fontWeight = FontWeight.Bold)
                                         }
                                         LinearProgressIndicator(
                                             progress = { studyProgress },
                                             modifier = Modifier.fillMaxWidth().height(6.dp),
                                             color = if (totalStudyMinutes >= studyMinuteGoal) Color(0xFF13A879) else Blue,
-                                            trackColor = Color(0xFFEDEAF7)
+                                            trackColor = if (darkTheme) Color(0xFF303B5D) else Color(0xFFEDEAF7)
                                         )
                                     }
                                     Row(verticalAlignment = Alignment.CenterVertically) {
@@ -581,8 +581,8 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                 Column(Modifier.fillMaxWidth().padding(18.dp), verticalArrangement = Arrangement.spacedBy(13.dp)) {
                                     Row(verticalAlignment = Alignment.CenterVertically) {
                                         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(3.dp)) {
-                                            Text("GÜNLÜK GÖREVLER", color = Color(0xFFB91C1C), fontSize = 11.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 1.3.sp)
-                                            Text("Bugünün küçük kazanımları", color = Color(0xFF211D3A), fontSize = 18.sp, fontWeight = FontWeight.ExtraBold)
+                                            Text("GÜNLÜK GÖREVLER", color = MaterialTheme.colorScheme.primary, fontSize = 11.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 1.3.sp)
+                                            Text("Bugünün küçük kazanımları", color = MaterialTheme.colorScheme.onSurface, fontSize = 18.sp, fontWeight = FontWeight.ExtraBold)
                                         }
                                         Text("🎯", fontSize = 28.sp)
                                     }
@@ -598,12 +598,12 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                                             Text(if (completed) "✅" else "◯", fontSize = 18.sp)
                                             Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(5.dp)) {
-                                                Text(task.first, color = Color(0xFF29263D), fontWeight = FontWeight.SemiBold, fontSize = 13.sp)
+                                                Text(task.first, color = MaterialTheme.colorScheme.onSurface, fontWeight = FontWeight.SemiBold, fontSize = 13.sp)
                                                 LinearProgressIndicator(
                                                     progress = { (task.second.toFloat() / task.third).coerceIn(0f, 1f) },
                                                     modifier = Modifier.fillMaxWidth().height(5.dp),
                                                     color = if (completed) Color(0xFF13A879) else Color(0xFF7C3AED),
-                                                    trackColor = Color(0xFFEDEAF7)
+                                                    trackColor = if (darkTheme) Color(0xFF303B5D) else Color(0xFFEDEAF7)
                                                 )
                                             }
                                             Text(if (completed) "Tamam" else "${task.second}/${task.third}", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.62f), fontSize = 11.sp)
@@ -620,7 +620,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                 Column(Modifier.fillMaxWidth().padding(18.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
                                     Row(verticalAlignment = Alignment.CenterVertically) {
                                         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(3.dp)) {
-                                            Text("KİŞİSEL ÇALIŞMA PLANI", color = Color(0xFFB91C1C), fontSize = 11.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 1.2.sp)
+                                            Text("KİŞİSEL ÇALIŞMA PLANI", color = MaterialTheme.colorScheme.primary, fontSize = 11.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 1.2.sp)
                                             Text("${studyPlan.targetMinutes} dakikalık rota", color = MaterialTheme.colorScheme.onSurface, fontSize = 19.sp, fontWeight = FontWeight.ExtraBold)
                                         }
                                         Text("🗺️", fontSize = 28.sp)
@@ -658,7 +658,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                 }
                             }
                             if (dueCount > 0) {
-                                Card(shape = RoundedCornerShape(18.dp), colors = CardDefaults.cardColors(containerColor = Color(0xFFFFF7E8))) {
+                                Card(shape = RoundedCornerShape(18.dp), colors = CardDefaults.cardColors(containerColor = if (darkTheme) Color(0xFF302B28) else Color(0xFFFFF7E8))) {
                                     Column(Modifier.fillMaxWidth().padding(15.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
                                         Row(verticalAlignment = Alignment.CenterVertically) {
                                             Text("🧠", fontSize = 25.sp)
