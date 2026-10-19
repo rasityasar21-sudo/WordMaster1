@@ -402,12 +402,12 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                 Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(3.dp)) {
                                     Text("WORDMASTER", color = Color(0xFFB8A7FF), fontSize = 12.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 2.sp)
                                     Text("Merhaba, $displayName 👋", color = Color(0xFFF5F3FF), fontSize = 25.sp, fontWeight = FontWeight.ExtraBold)
-                                    Text("Bugün küçük bir adım, yarın büyük ilerleme.", color = Color(0xFF77738B), fontSize = 13.sp)
+                                    Text("Bugün küçük bir adım, yarın büyük ilerleme.", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.62f), fontSize = 13.sp)
                                 }
                                 Surface(shape = RoundedCornerShape(18.dp), color = Color.White, shadowElevation = 4.dp) {
                                     Column(Modifier.padding(horizontal = 13.dp, vertical = 10.dp), horizontalAlignment = Alignment.CenterHorizontally) {
                                         Text("🔥 $dailyStreak", color = Color(0xFFE45D36), fontWeight = FontWeight.ExtraBold, fontSize = 18.sp)
-                                        Text("seri", color = Color(0xFF77738B), fontSize = 11.sp)
+                                        Text("seri", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.62f), fontSize = 11.sp)
                                     }
                                 }
                             }
@@ -443,32 +443,32 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                         onClick = { placementMode = false; quizMode = "İngilizce → Türkçe"; startQuiz(); sessionAnswered = 0; sessionCorrect = 0; sessionActive = true; currentScreen = "Sınav" },
                                         modifier = Modifier.fillMaxWidth(),
                                         shape = RoundedCornerShape(16.dp),
-                                        colors = ButtonDefaults.buttonColors(containerColor = Color.White, contentColor = Color(0xFFB91C1C))
+                                        colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.surface, contentColor = Color(0xFFB91C1C))
                                     ) {
                                         Text("Öğrenmeye başla  →", fontWeight = FontWeight.ExtraBold, modifier = Modifier.padding(vertical = 5.dp))
                                     }
                                 }
                             }
                             Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                                Card(Modifier.weight(1f), shape = RoundedCornerShape(20.dp), colors = CardDefaults.cardColors(containerColor = Color.White)) {
+                                Card(Modifier.weight(1f), shape = RoundedCornerShape(20.dp), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)) {
                                     Column(Modifier.fillMaxWidth().clickable { showMatchGame = true; matchRound = 0; matched = emptySet(); selectedEnglish = null; matchWords = quickPracticeWords.shuffled().take(5); matchTurkishOrder = matchWords.shuffled(); matchMessage = "İngilizce kelimeyi seç, sonra Türkçe karşılığını bul." }.padding(15.dp), verticalArrangement = Arrangement.spacedBy(7.dp)) {
                                         Text("🧩", fontSize = 25.sp)
                                         Text("Eşleştirme", color = Color(0xFF211D3A), fontWeight = FontWeight.Bold)
-                                        Text("Hızlı oyun", color = Color(0xFF77738B), fontSize = 12.sp)
+                                        Text("Hızlı oyun", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.62f), fontSize = 12.sp)
                                     }
                                 }
-                                Card(Modifier.weight(1f), shape = RoundedCornerShape(20.dp), colors = CardDefaults.cardColors(containerColor = Color.White)) {
+                                Card(Modifier.weight(1f), shape = RoundedCornerShape(20.dp), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)) {
                                     Column(Modifier.fillMaxWidth().clickable { showPronunciation = true }.padding(15.dp), verticalArrangement = Arrangement.spacedBy(7.dp)) {
                                         Text("🎙️", fontSize = 25.sp)
                                         Text("Konuşma", color = Color(0xFF211D3A), fontWeight = FontWeight.Bold)
-                                        Text("Sesli pratik", color = Color(0xFF77738B), fontSize = 12.sp)
+                                        Text("Sesli pratik", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.62f), fontSize = 12.sp)
                                     }
                                 }
-                                Card(Modifier.weight(1f), shape = RoundedCornerShape(20.dp), colors = CardDefaults.cardColors(containerColor = Color.White)) {
+                                Card(Modifier.weight(1f), shape = RoundedCornerShape(20.dp), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)) {
                                     Column(Modifier.fillMaxWidth().clickable { showProfile = true }.padding(15.dp), verticalArrangement = Arrangement.spacedBy(7.dp)) {
                                         Text("📈", fontSize = 25.sp)
                                         Text("İlerleme", color = Color(0xFF211D3A), fontWeight = FontWeight.Bold)
-                                        Text("$xp XP • Seviye $level", color = Color(0xFF77738B), fontSize = 11.sp)
+                                        Text("$xp XP • Seviye $level", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.62f), fontSize = 11.sp)
                                     }
                                 }
                             }
@@ -494,7 +494,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                             Card(
                                 modifier = Modifier.fillMaxWidth(),
                                 shape = RoundedCornerShape(22.dp),
-                                colors = CardDefaults.cardColors(containerColor = Color.White)
+                                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
                             ) {
                                 val progressSummary = learningStore.summary()
                                 val completedLessonCount = completedCourseIds.size
@@ -512,24 +512,24 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                                         Column(Modifier.weight(1f).background(PaleBlue, RoundedCornerShape(14.dp)).padding(11.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                                             Text("📚", fontSize = 18.sp)
-                                            Text("${completedLessonCount}", color = Navy, fontSize = 21.sp, fontWeight = FontWeight.ExtraBold)
-                                            Text("Tamamlanan ders", color = Color(0xFF68758E), fontSize = 11.sp)
+                                            Text("${completedLessonCount}", color = MaterialTheme.colorScheme.onSurface, fontSize = 21.sp, fontWeight = FontWeight.ExtraBold)
+                                            Text("Tamamlanan ders", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f), fontSize = 11.sp)
                                         }
                                         Column(Modifier.weight(1f).background(Mint, RoundedCornerShape(14.dp)).padding(11.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                                             Text("🧠", fontSize = 18.sp)
-                                            Text("${progressSummary.totalWords}", color = Navy, fontSize = 21.sp, fontWeight = FontWeight.ExtraBold)
-                                            Text("Takip edilen kelime", color = Color(0xFF68758E), fontSize = 11.sp)
+                                            Text("${progressSummary.totalWords}", color = MaterialTheme.colorScheme.onSurface, fontSize = 21.sp, fontWeight = FontWeight.ExtraBold)
+                                            Text("Takip edilen kelime", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f), fontSize = 11.sp)
                                         }
                                         Column(Modifier.weight(1f).background(Color(0xFFFFF1E5), RoundedCornerShape(14.dp)).padding(11.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                                             Text("🎯", fontSize = 18.sp)
-                                            Text("${progressSummary.accuracyPercent}%", color = Navy, fontSize = 21.sp, fontWeight = FontWeight.ExtraBold)
-                                            Text("Doğruluk", color = Color(0xFF68758E), fontSize = 11.sp)
+                                            Text("${progressSummary.accuracyPercent}%", color = MaterialTheme.colorScheme.onSurface, fontSize = 21.sp, fontWeight = FontWeight.ExtraBold)
+                                            Text("Doğruluk", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f), fontSize = 11.sp)
                                         }
                                     }
                                     Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
                                         Row(verticalAlignment = Alignment.CenterVertically) {
                                             Text("Bugünkü çalışma süresi", color = Color(0xFF29263D), fontWeight = FontWeight.SemiBold, fontSize = 13.sp, modifier = Modifier.weight(1f))
-                                            Text("${totalStudyMinutes} / ${studyMinuteGoal} dk", color = Color(0xFF68758E), fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                                            Text("${totalStudyMinutes} / ${studyMinuteGoal} dk", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f), fontSize = 12.sp, fontWeight = FontWeight.Bold)
                                         }
                                         LinearProgressIndicator(
                                             progress = { studyProgress },
@@ -540,7 +540,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                     }
                                     Row(verticalAlignment = Alignment.CenterVertically) {
                                         Text("Tekrar bekleyen: ${progressSummary.dueWords} kelime", color = Color(0xFF7C4A03), fontSize = 12.sp, modifier = Modifier.weight(1f))
-                                        Text("Seri: ${progressSummary.currentStreak} gün", color = Color(0xFF68758E), fontSize = 12.sp, fontWeight = FontWeight.SemiBold)
+                                        Text("Seri: ${progressSummary.currentStreak} gün", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f), fontSize = 12.sp, fontWeight = FontWeight.SemiBold)
                                     }
                                     Text("İstatistikler bu cihazda kaydedilen ders ve kelime çalışmalarından hesaplanır.", color = Color(0xFF89859B), fontSize = 11.sp)
                                 }
@@ -548,7 +548,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                             Card(
                                 modifier = Modifier.fillMaxWidth(),
                                 shape = RoundedCornerShape(22.dp),
-                                colors = CardDefaults.cardColors(containerColor = Color.White)
+                                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
                             ) {
                                 Column(Modifier.fillMaxWidth().padding(18.dp), verticalArrangement = Arrangement.spacedBy(13.dp)) {
                                     Row(verticalAlignment = Alignment.CenterVertically) {
@@ -578,7 +578,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                                     trackColor = Color(0xFFEDEAF7)
                                                 )
                                             }
-                                            Text(if (completed) "Tamam" else "${task.second}/${task.third}", color = Color(0xFF77738B), fontSize = 11.sp)
+                                            Text(if (completed) "Tamam" else "${task.second}/${task.third}", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.62f), fontSize = 11.sp)
                                         }
                                     }
                                     Text("Not: Görevler bu cihazdaki kayıtlarına göre hesaplanır.", color = Color(0xFF89859B), fontSize = 11.sp)
@@ -587,19 +587,19 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                             Card(
                                 modifier = Modifier.fillMaxWidth(),
                                 shape = RoundedCornerShape(22.dp),
-                                colors = CardDefaults.cardColors(containerColor = Color.White)
+                                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
                             ) {
                                 Column(Modifier.fillMaxWidth().padding(18.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
                                     Row(verticalAlignment = Alignment.CenterVertically) {
                                         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(3.dp)) {
                                             Text("KİŞİSEL ÇALIŞMA PLANI", color = Color(0xFFB91C1C), fontSize = 11.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 1.2.sp)
-                                            Text("${studyPlan.targetMinutes} dakikalık rota", color = Navy, fontSize = 19.sp, fontWeight = FontWeight.ExtraBold)
+                                            Text("${studyPlan.targetMinutes} dakikalık rota", color = MaterialTheme.colorScheme.onSurface, fontSize = 19.sp, fontWeight = FontWeight.ExtraBold)
                                         }
                                         Text("🗺️", fontSize = 28.sp)
                                     }
-                                    Text("Seviye: $studyPlanLevel · Tahmini süre: ${studyPlan.estimatedMinutes} dk", color = Color(0xFF68758E), fontSize = 12.sp)
+                                    Text("Seviye: $studyPlanLevel · Tahmini süre: ${studyPlan.estimatedMinutes} dk", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f), fontSize = 12.sp)
                                     if (studyPlan.lessonIds.isEmpty() && studyPlan.reviewWords.isEmpty()) {
-                                        Text("Şu anda bu seviyede açılabilir yeni ders yok. Ön koşulları tamamla veya zamanı gelen kelimelerini tekrar et.", color = Color(0xFF68758E), fontSize = 13.sp, lineHeight = 19.sp)
+                                        Text("Şu anda bu seviyede açılabilir yeni ders yok. Ön koşulları tamamla veya zamanı gelen kelimelerini tekrar et.", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f), fontSize = 13.sp, lineHeight = 19.sp)
                                     } else {
                                         studyPlan.lessonIds.take(3).forEachIndexed { index, lessonId ->
                                             val plannedLesson = WordMasterCourseCatalog.find(lessonId)
@@ -609,8 +609,8 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                                         Text("${index + 1}", Modifier.padding(horizontal = 10.dp, vertical = 7.dp), color = Blue, fontWeight = FontWeight.Bold)
                                                     }
                                                     Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
-                                                        Text(plannedLesson.title, color = Ink, fontWeight = FontWeight.SemiBold, fontSize = 14.sp)
-                                                        Text("${plannedLesson.category} · ${plannedLesson.estimatedMinutes} dk", color = Color(0xFF68758E), fontSize = 11.sp)
+                                                        Text(plannedLesson.title, color = MaterialTheme.colorScheme.onSurface, fontWeight = FontWeight.SemiBold, fontSize = 14.sp)
+                                                        Text("${plannedLesson.category} · ${plannedLesson.estimatedMinutes} dk", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f), fontSize = 11.sp)
                                                     }
                                                     TextButton(onClick = {
                                                         activeCourseLessonId = plannedLesson.id
@@ -661,9 +661,9 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                             dueReviewWords.take(5).forEach { progress ->
                                                 val translation = words.firstOrNull { it.en.equals(progress.word, ignoreCase = true) }?.tr
                                                 Column(Modifier.fillMaxWidth().background(Color.White, RoundedCornerShape(12.dp)).padding(12.dp), verticalArrangement = Arrangement.spacedBy(7.dp)) {
-                                                    Text(progress.word, color = Ink, fontWeight = FontWeight.Bold, fontSize = 16.sp)
-                                                    Text(translation ?: "Türkçe karşılık sözlükte bulunamadı", color = Color(0xFF68758E), fontSize = 13.sp)
-                                                    Text("Doğru: ${progress.correctCount} · Hata: ${progress.mistakeCount} · Başarı: ${progress.accuracyPercent}%", color = Color(0xFF77738B), fontSize = 11.sp)
+                                                    Text(progress.word, color = MaterialTheme.colorScheme.onSurface, fontWeight = FontWeight.Bold, fontSize = 16.sp)
+                                                    Text(translation ?: "Türkçe karşılık sözlükte bulunamadı", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f), fontSize = 13.sp)
+                                                    Text("Doğru: ${progress.correctCount} · Hata: ${progress.mistakeCount} · Başarı: ${progress.accuracyPercent}%", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.62f), fontSize = 11.sp)
                                                     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                                                         OutlinedButton(
                                                             onClick = {
@@ -702,55 +702,55 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                 Text("Bölüm ${lessonStage + 1}/3", color = Blue, fontWeight = FontWeight.Bold)
                             }
                             LinearProgressIndicator(progress = { (lessonStage + 1) / 3f }, modifier = Modifier.fillMaxWidth(), color = Blue)
-                            Text(activeLesson, fontSize = 26.sp, fontWeight = FontWeight.ExtraBold, color = Navy)
+                            Text(activeLesson, fontSize = 26.sp, fontWeight = FontWeight.ExtraBold, color = MaterialTheme.colorScheme.onSurface)
                             val bookChapter = remember(activeLesson) { LessonBook.chapter(activeLesson) }
                             when (lessonStage) {
                                 0 -> {
                                     Text("KONU ANLATIMI · KİTAP MODU", color = Blue, fontWeight = FontWeight.ExtraBold, fontSize = 12.sp)
-                                    Card(shape = RoundedCornerShape(24.dp), colors = CardDefaults.cardColors(containerColor = Color.White)) {
+                                    Card(shape = RoundedCornerShape(24.dp), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)) {
                                         Column(Modifier.fillMaxWidth().padding(20.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                                            Text(bookChapter.purpose, fontSize = 19.sp, fontWeight = FontWeight.ExtraBold, color = Ink)
-                                            Text(bookChapter.explanation, fontSize = 15.sp, lineHeight = 23.sp, color = Ink)
-                                            Text("Yapı ve kullanım", fontWeight = FontWeight.Bold, fontSize = 16.sp, color = Navy)
+                                            Text(bookChapter.purpose, fontSize = 19.sp, fontWeight = FontWeight.ExtraBold, color = MaterialTheme.colorScheme.onSurface)
+                                            Text(bookChapter.explanation, fontSize = 15.sp, lineHeight = 23.sp, color = MaterialTheme.colorScheme.onSurface)
+                                            Text("Yapı ve kullanım", fontWeight = FontWeight.Bold, fontSize = 16.sp, color = MaterialTheme.colorScheme.onSurface)
                                             Surface(color = PaleBlue, shape = RoundedCornerShape(14.dp)) {
-                                                Text(bookChapter.formation, Modifier.fillMaxWidth().padding(14.dp), fontSize = 14.sp, lineHeight = 21.sp, color = Navy)
+                                                Text(bookChapter.formation, Modifier.fillMaxWidth().padding(14.dp), fontSize = 14.sp, lineHeight = 21.sp, color = MaterialTheme.colorScheme.onSurface)
                                             }
-                                            Text("Ek örnekler", fontWeight = FontWeight.Bold, fontSize = 16.sp, color = Navy)
+                                            Text("Ek örnekler", fontWeight = FontWeight.Bold, fontSize = 16.sp, color = MaterialTheme.colorScheme.onSurface)
                                             bookChapter.examples.forEach { example ->
                                                 Column(Modifier.fillMaxWidth().background(Color(0xFFF7F8FC), RoundedCornerShape(12.dp)).padding(12.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                                                    Text(example.first, fontWeight = FontWeight.Bold, fontSize = 14.sp, color = Ink)
-                                                    Text(example.second, fontSize = 13.sp, color = Color(0xFF68758E))
+                                                    Text(example.first, fontWeight = FontWeight.Bold, fontSize = 14.sp, color = MaterialTheme.colorScheme.onSurface)
+                                                    Text(example.second, fontSize = 13.sp, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f))
                                                 }
                                             }
-                                            Text("Sık yapılan hatalar", fontWeight = FontWeight.Bold, fontSize = 16.sp, color = Navy)
+                                            Text("Sık yapılan hatalar", fontWeight = FontWeight.Bold, fontSize = 16.sp, color = MaterialTheme.colorScheme.onSurface)
                                             bookChapter.commonMistakes.forEach { mistake ->
-                                                Text("• $mistake", fontSize = 13.sp, lineHeight = 19.sp, color = Ink)
+                                                Text("• $mistake", fontSize = 13.sp, lineHeight = 19.sp, color = MaterialTheme.colorScheme.onSurface)
                                             }
-                                            Text("Kendini kontrol et", fontWeight = FontWeight.Bold, fontSize = 16.sp, color = Navy)
+                                            Text("Kendini kontrol et", fontWeight = FontWeight.Bold, fontSize = 16.sp, color = MaterialTheme.colorScheme.onSurface)
                                             bookChapter.checkpoints.forEachIndexed { index, checkpoint ->
-                                                Text("${index + 1}. $checkpoint", fontSize = 13.sp, lineHeight = 19.sp, color = Ink)
+                                                Text("${index + 1}. $checkpoint", fontSize = 13.sp, lineHeight = 19.sp, color = MaterialTheme.colorScheme.onSurface)
                                             }
                                         }
                                     }
-                                    Card(shape = RoundedCornerShape(24.dp), colors = CardDefaults.cardColors(containerColor = Color.White)) {
+                                    Card(shape = RoundedCornerShape(24.dp), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)) {
                                         Column(Modifier.fillMaxWidth().padding(20.dp), verticalArrangement = Arrangement.spacedBy(15.dp)) {
-                                            Text(lesson.heading, fontSize = 21.sp, fontWeight = FontWeight.ExtraBold, color = Ink)
-                                            Text(lesson.explanation, fontSize = 16.sp, lineHeight = 25.sp, color = Ink)
+                                            Text(lesson.heading, fontSize = 21.sp, fontWeight = FontWeight.ExtraBold, color = MaterialTheme.colorScheme.onSurface)
+                                            Text(lesson.explanation, fontSize = 16.sp, lineHeight = 25.sp, color = MaterialTheme.colorScheme.onSurface)
                                             Surface(color = PaleBlue, shape = RoundedCornerShape(16.dp)) {
-                                                Text(lesson.rule, Modifier.fillMaxWidth().padding(16.dp), fontSize = 18.sp, fontWeight = FontWeight.Bold, color = Navy)
+                                                Text(lesson.rule, Modifier.fillMaxWidth().padding(16.dp), fontSize = 18.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onSurface)
                                             }
                                             Text("Örnekler", fontWeight = FontWeight.ExtraBold, fontSize = 18.sp)
                                             lesson.examples.forEach { example ->
                                                 Column(Modifier.fillMaxWidth().background(Color(0xFFF7F8FC), RoundedCornerShape(14.dp)).padding(13.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                                                    Text(example.first, fontWeight = FontWeight.Bold, color = Ink, fontSize = 16.sp)
-                                                    Text(example.second, color = Color(0xFF68758E), fontSize = 14.sp)
+                                                    Text(example.first, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onSurface, fontSize = 16.sp)
+                                                    Text(example.second, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f), fontSize = 14.sp)
                                                 }
                                             }
                                             Text("Kelimeler", fontWeight = FontWeight.ExtraBold, fontSize = 18.sp)
                                             lesson.words.forEach { pair ->
                                                 Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-                                                    Text(pair.first, Modifier.weight(1f), fontWeight = FontWeight.SemiBold, color = Ink)
-                                                    Text(pair.second, color = Color(0xFF68758E))
+                                                    Text(pair.first, Modifier.weight(1f), fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurface)
+                                                    Text(pair.second, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f))
                                                 }
                                                 HorizontalDivider(color = Color(0xFFEDEEF4))
                                             }
@@ -760,7 +760,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                 }
                                 1 -> {
                                     Text("LISTENING • DİNLEME", color = Blue, fontWeight = FontWeight.ExtraBold, fontSize = 12.sp)
-                                    Text("Kısa konuşmayı dinle, ardından soruları cevapla.", color = Color(0xFF68758E), lineHeight = 22.sp)
+                                    Text("Kısa konuşmayı dinle, ardından soruları cevapla.", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f), lineHeight = 22.sp)
                                     val context = LocalContext.current
                                     var listeningReady by remember { mutableStateOf(false) }
                                     val listeningTts = remember {
@@ -856,12 +856,12 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                     }
                                     val practice = practiceQuestions[practiceIndex.coerceIn(0, practiceQuestions.lastIndex)]
                                     Text("ALIŞTIRMA • ${practiceIndex + 1}/${practiceQuestions.size}", color = Blue, fontWeight = FontWeight.ExtraBold, fontSize = 12.sp)
-                                    Card(shape = RoundedCornerShape(24.dp), colors = CardDefaults.cardColors(containerColor = Color.White)) {
+                                    Card(shape = RoundedCornerShape(24.dp), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)) {
                                         Column(Modifier.fillMaxWidth().padding(20.dp), verticalArrangement = Arrangement.spacedBy(14.dp)) {
-                                            Text("Soru ${practiceIndex + 1} / ${practiceQuestions.size}", fontSize = 13.sp, color = Color(0xFF68758E), fontWeight = FontWeight.Bold)
+                                            Text("Soru ${practiceIndex + 1} / ${practiceQuestions.size}", fontSize = 13.sp, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f), fontWeight = FontWeight.Bold)
                                             LinearProgressIndicator(progress = { (practiceIndex + 1) / practiceQuestions.size.toFloat() }, modifier = Modifier.fillMaxWidth(), color = Blue)
-                                            Text(if (practiceIndex == 0) "Boşluğu doldur" else "Anlamı veya doğru kullanımı seç", fontSize = 21.sp, fontWeight = FontWeight.ExtraBold, color = Ink)
-                                            Text(practice.first, fontSize = 18.sp, lineHeight = 26.sp, color = Ink)
+                                            Text(if (practiceIndex == 0) "Boşluğu doldur" else "Anlamı veya doğru kullanımı seç", fontSize = 21.sp, fontWeight = FontWeight.ExtraBold, color = MaterialTheme.colorScheme.onSurface)
+                                            Text(practice.first, fontSize = 18.sp, lineHeight = 26.sp, color = MaterialTheme.colorScheme.onSurface)
                                             practice.second.shuffled().forEach { option ->
                                                 OutlinedButton(
                                                     onClick = {
@@ -878,7 +878,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                                 ) { Text(option, modifier = Modifier.padding(4.dp)) }
                                             }
                                             if (practiceFeedback.isNotBlank()) Text(practiceFeedback, color = if (practiceChoice == practice.third) Color(0xFF16845D) else Color(0xFFB45309), fontWeight = FontWeight.Bold)
-                                            Text("Doğru cevaplanan soru: $practiceCorrect / ${practiceQuestions.size}", color = Color(0xFF68758E), fontSize = 13.sp)
+                                            Text("Doğru cevaplanan soru: $practiceCorrect / ${practiceQuestions.size}", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f), fontSize = 13.sp)
                                             HorizontalDivider()
                                             Text("Dinleme / konu kontrolü", fontWeight = FontWeight.Bold)
                                             Text(lesson.videoQuestion, fontSize = 16.sp, lineHeight = 24.sp)
@@ -916,7 +916,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                 }
                 if (currentScreen == "Sözlük") {
                     item {
-                        Text(if (selectedTopic == "Tümü") "Kelime defterim" else "$selectedTopic · Kelimeler", fontSize = 21.sp, fontWeight = FontWeight.ExtraBold, color = Navy)
+                        Text(if (selectedTopic == "Tümü") "Kelime defterim" else "$selectedTopic · Kelimeler", fontSize = 21.sp, fontWeight = FontWeight.ExtraBold, color = MaterialTheme.colorScheme.onSurface)
                     }
                     item {
                         OutlinedTextField(
@@ -969,7 +969,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                             Column(Modifier.padding(if (compactCards) 11.dp else 17.dp)) {
                                 Row(verticalAlignment = Alignment.CenterVertically) {
                                     Column(Modifier.weight(1f)) {
-                                        Text(word.en.replaceFirstChar { it.uppercase() }, fontSize = 20.sp, maxLines = 2, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis, fontWeight = FontWeight.ExtraBold, color = Navy)
+                                        Text(word.en.replaceFirstChar { it.uppercase() }, fontSize = 20.sp, maxLines = 2, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis, fontWeight = FontWeight.ExtraBold, color = MaterialTheme.colorScheme.onSurface)
                                         Spacer(Modifier.height(3.dp))
                                         Text(word.tr.replaceFirstChar { it.uppercase() }, fontSize = 15.sp, maxLines = 2, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis, color = Color(0xFF46536D))
                                     }
@@ -1012,7 +1012,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                             Card(
                                 modifier = Modifier.weight(1f).clickable { showTools = true },
                                 shape = RoundedCornerShape(18.dp),
-                                colors = CardDefaults.cardColors(containerColor = Color.White),
+                                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
                                 border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFFEAE7F4))
                             ) {
                                 Row(
@@ -1030,7 +1030,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                             Card(
                                 modifier = Modifier.weight(1f).clickable { showTools = true },
                                 shape = RoundedCornerShape(18.dp),
-                                colors = CardDefaults.cardColors(containerColor = Color.White),
+                                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
                                 border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFFEAE7F4))
                             ) {
                                 Row(
@@ -1050,7 +1050,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                             Card(
                                 modifier = Modifier.weight(1f).clickable { showTools = true },
                                 shape = RoundedCornerShape(18.dp),
-                                colors = CardDefaults.cardColors(containerColor = Color.White),
+                                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
                                 border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFFEAE7F4))
                             ) {
                                 Row(
@@ -1068,7 +1068,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                             Card(
                                 modifier = Modifier.weight(1f).clickable { showTools = true },
                                 shape = RoundedCornerShape(18.dp),
-                                colors = CardDefaults.cardColors(containerColor = Color.White),
+                                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
                                 border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFFEAE7F4))
                             ) {
                                 Row(
@@ -1112,7 +1112,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                         Text("Her gün biraz daha İngilizce", color = Color.White, fontSize = 12.sp)
                     }
                 }
-                Text("Hoş geldin! ✨", fontWeight = FontWeight.ExtraBold, fontSize = 23.sp, color = Navy)
+                Text("Hoş geldin! ✨", fontWeight = FontWeight.ExtraBold, fontSize = 23.sp, color = MaterialTheme.colorScheme.onSurface)
             }
         },
         text = {
@@ -1194,7 +1194,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                 Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                     Text("WORDMASTER ID", color = Color(0xFFB91C1C), fontWeight = FontWeight.ExtraBold, fontSize = 11.sp, letterSpacing = 1.sp)
                     Text(userId, color = Color(0xFF211D3A), fontWeight = FontWeight.Black, fontSize = 20.sp)
-                    Text("Bu cihazdaki profil kimliğin. Kullanıcı adı uygunluğu ve arkadaş ekleme için çevrim içi hesap sunucusu henüz bağlı değil.", color = Color(0xFF77738B), fontSize = 11.sp, lineHeight = 16.sp)
+                    Text("Bu cihazdaki profil kimliğin. Kullanıcı adı uygunluğu ve arkadaş ekleme için çevrim içi hesap sunucusu henüz bağlı değil.", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.62f), fontSize = 11.sp, lineHeight = 16.sp)
                 }
             }
             Surface(
@@ -1232,26 +1232,26 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
             OutlinedTextField(value = nameDraft, onValueChange = { nameDraft = it.take(30) }, modifier = Modifier.fillMaxWidth(), label = { Text("Görünen ad") }, singleLine = true)
             OutlinedTextField(value = usernameDraft, onValueChange = { value -> usernameDraft = value.removePrefix("@").filter { ch -> ch.isLetterOrDigit() || ch == '_' }.take(20).let { clean -> if (clean.isBlank()) "" else "@$clean" }; profileError = null }, modifier = Modifier.fillMaxWidth(), label = { Text("Kullanıcı adı") }, supportingText = { Text("3-20 karakter; harf, rakam ve _ kullan.") }, singleLine = true)
             profileError?.let { Text(it, color = MaterialTheme.colorScheme.error, fontSize = 12.sp) }
-            Text("📚 Öğrenilen: ${learned.size} kelime   ⭐ Favori: ${favorites.size}", color = Ink)
-            Text("📖 Tamamlanan ders: ${CourseProgressStore.completedCount(prefs)}", color = Ink)
-            Text("⏱️ Günlük çalışma: ${CourseProgressStore.studyMinutes(prefs)} / ${CourseProgressStore.dailyGoalMinutes(prefs)} dakika", color = Ink)
+            Text("📚 Öğrenilen: ${learned.size} kelime   ⭐ Favori: ${favorites.size}", color = MaterialTheme.colorScheme.onSurface)
+            Text("📖 Tamamlanan ders: ${CourseProgressStore.completedCount(prefs)}", color = MaterialTheme.colorScheme.onSurface)
+            Text("⏱️ Günlük çalışma: ${CourseProgressStore.studyMinutes(prefs)} / ${CourseProgressStore.dailyGoalMinutes(prefs)} dakika", color = MaterialTheme.colorScheme.onSurface)
             val todayWordCount = if (prefs.getString("todayWordsDate", "") == today) prefs.getInt("todayWords", 0) else 0
             val learningSummary = learningStore.summary()
             Surface(Modifier.fillMaxWidth(), shape = RoundedCornerShape(14.dp), color = Color(0xFFEAF7F1)) {
                 Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(5.dp)) {
                     Text("BUGÜNKÜ ÖĞRENME PLANI", color = Color(0xFF24785A), fontWeight = FontWeight.ExtraBold, fontSize = 11.sp, letterSpacing = 0.7.sp)
-                    Text("$todayWordCount / $dailyGoal kelime hedefi", color = Ink, fontWeight = FontWeight.Bold)
+                    Text("$todayWordCount / $dailyGoal kelime hedefi", color = MaterialTheme.colorScheme.onSurface, fontWeight = FontWeight.Bold)
                     LinearProgressIndicator(
                         progress = { (todayWordCount.toFloat() / dailyGoal.coerceAtLeast(1)).coerceIn(0f, 1f) },
                         modifier = Modifier.fillMaxWidth(),
                         color = Color(0xFF319B73),
                         trackColor = Color(0xFFD2E9DF)
                     )
-                    Text("Tekrar bekleyen: ${learningSummary.dueWords} kelime", color = Ink, fontSize = 13.sp)
-                    Text("Kelime doğruluğu: ${learningSummary.accuracyPercent}%  •  Öğrenilen toplam: ${learningSummary.totalWords}", color = Ink, fontSize = 13.sp)
+                    Text("Tekrar bekleyen: ${learningSummary.dueWords} kelime", color = MaterialTheme.colorScheme.onSurface, fontSize = 13.sp)
+                    Text("Kelime doğruluğu: ${learningSummary.accuracyPercent}%  •  Öğrenilen toplam: ${learningSummary.totalWords}", color = MaterialTheme.colorScheme.onSurface, fontSize = 13.sp)
                 }
             }
-            Text("🏆 En iyi seri: $bestCorrectStreak   🎯 Test doğrusu: $totalCorrect", color = Ink)
+            Text("🏆 En iyi seri: $bestCorrectStreak   🎯 Test doğrusu: $totalCorrect", color = MaterialTheme.colorScheme.onSurface)
         } },
         confirmButton = { TextButton(onClick = {
             val cleanUsername = usernameDraft.trim().removePrefix("@")
