@@ -1146,8 +1146,89 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
     
                     }
                 item {
-                    Button(onClick = { showTools = true }, modifier = Modifier.fillMaxWidth()) {
-                        Text("📅 Günlük görevler  •  🏅 Rozetler  •  🎮 Eşleştirme  •  📊 İstatistikler")
+                    Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                        Text(
+                            "Çalışma araçların",
+                            color = Color(0xFF211D3A),
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                        Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                            Card(
+                                modifier = Modifier.weight(1f).clickable { showTools = true },
+                                shape = RoundedCornerShape(18.dp),
+                                colors = CardDefaults.cardColors(containerColor = Color.White),
+                                border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFFEAE7F4))
+                            ) {
+                                Row(
+                                    Modifier.fillMaxWidth().padding(horizontal = 13.dp, vertical = 15.dp),
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement = Arrangement.spacedBy(10.dp)
+                                ) {
+                                    Text("📅", fontSize = 23.sp)
+                                    Column {
+                                        Text("Günlük görevler", color = Color(0xFF28243D), fontWeight = FontWeight.SemiBold, fontSize = 13.sp)
+                                        Text("Hedefini tamamla", color = Color(0xFF817D95), fontSize = 11.sp)
+                                    }
+                                }
+                            }
+                            Card(
+                                modifier = Modifier.weight(1f).clickable { showTools = true },
+                                shape = RoundedCornerShape(18.dp),
+                                colors = CardDefaults.cardColors(containerColor = Color.White),
+                                border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFFEAE7F4))
+                            ) {
+                                Row(
+                                    Modifier.fillMaxWidth().padding(horizontal = 13.dp, vertical = 15.dp),
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement = Arrangement.spacedBy(10.dp)
+                                ) {
+                                    Text("🏅", fontSize = 23.sp)
+                                    Column {
+                                        Text("Rozetler", color = Color(0xFF28243D), fontWeight = FontWeight.SemiBold, fontSize = 13.sp)
+                                        Text("Başarılarını gör", color = Color(0xFF817D95), fontSize = 11.sp)
+                                    }
+                                }
+                            }
+                        }
+                        Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                            Card(
+                                modifier = Modifier.weight(1f).clickable { showTools = true },
+                                shape = RoundedCornerShape(18.dp),
+                                colors = CardDefaults.cardColors(containerColor = Color.White),
+                                border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFFEAE7F4))
+                            ) {
+                                Row(
+                                    Modifier.fillMaxWidth().padding(horizontal = 13.dp, vertical = 15.dp),
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement = Arrangement.spacedBy(10.dp)
+                                ) {
+                                    Text("🧩", fontSize = 23.sp)
+                                    Column {
+                                        Text("Eşleştirme", color = Color(0xFF28243D), fontWeight = FontWeight.SemiBold, fontSize = 13.sp)
+                                        Text("Kelimelerle oyna", color = Color(0xFF817D95), fontSize = 11.sp)
+                                    }
+                                }
+                            }
+                            Card(
+                                modifier = Modifier.weight(1f).clickable { showTools = true },
+                                shape = RoundedCornerShape(18.dp),
+                                colors = CardDefaults.cardColors(containerColor = Color.White),
+                                border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFFEAE7F4))
+                            ) {
+                                Row(
+                                    Modifier.fillMaxWidth().padding(horizontal = 13.dp, vertical = 15.dp),
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement = Arrangement.spacedBy(10.dp)
+                                ) {
+                                    Text("📊", fontSize = 23.sp)
+                                    Column {
+                                        Text("İstatistikler", color = Color(0xFF28243D), fontWeight = FontWeight.SemiBold, fontSize = 13.sp)
+                                        Text("İlerlemeni takip et", color = Color(0xFF817D95), fontSize = 11.sp)
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
 
