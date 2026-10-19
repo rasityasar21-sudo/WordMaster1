@@ -43,11 +43,11 @@ import org.json.JSONArray
 
 data class Word(val en: String, val tr: String, val level: String, val example: String = "")
 
-private val Navy = Color(0xFF202044)
-private val Blue = Color(0xFFC62828)
-private val PaleBlue = Color(0xFFFDECEC)
-private val Mint = Color(0xFFE1F8F0)
-private val Ink = Color(0xFF172033)
+private val Navy = Color(0xFF111936)
+private val Blue = Color(0xFF7C5CFF)
+private val PaleBlue = Color(0xFFEAE5FF)
+private val Mint = Color(0xFFD9F8F0)
+private val Ink = Color(0xFF17213C)
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -262,8 +262,8 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
             date = today
         )
     }
-    val pageBackground = when (themeChoice) { 1 -> Color(0xFFEAF8F3); 2 -> Color(0xFFFFF1E5); else -> Color(0xFFFFF5F5) } 
-    val heroBrush = when (themeChoice) { 1 -> Brush.linearGradient(listOf(Color(0xFF075E54), Color(0xFF16A085))); 2 -> Brush.linearGradient(listOf(Color(0xFF7C2D12), Color(0xFFF59E0B))); else -> Brush.linearGradient(listOf(Color(0xFF991B1B), Color(0xFFDC2626), Color(0xFFFB7185))) }
+    val pageBackground = when (themeChoice) { 1 -> Color(0xFFEAF8F3); 2 -> Color(0xFFFFF1E5); else -> Color(0xFF0B1022) } 
+    val heroBrush = when (themeChoice) { 1 -> Brush.linearGradient(listOf(Color(0xFF075E54), Color(0xFF16A085))); 2 -> Brush.linearGradient(listOf(Color(0xFF7C2D12), Color(0xFFF59E0B))); else -> Brush.linearGradient(listOf(Color(0xFF222D62), Color(0xFF542C9C), Color(0xFF111936))) }
     LaunchedEffect(today) {
         if (lastLoginDate != today) {
             dailyStreak = if (lastLoginDate == LocalDate.now().minusDays(1).toString()) dailyStreak + 1 else 1
@@ -358,23 +358,23 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
 
     MaterialTheme(
         colorScheme = lightColorScheme(
-            primary = Color(0xFF7C3AED), onPrimary = Color.White, background = pageBackground,
-            surface = Color.White, onSurface = Ink, secondary = Color(0xFF13A879)
+            primary = Color(0xFF8B72FF), onPrimary = Color.White, background = pageBackground,
+            surface = Color(0xFF151D38), onSurface = Color(0xFFF3F4FF), secondary = Color(0xFF55D6BE)
         )
     ) {
         Scaffold(
             containerColor = Color.Transparent,
             bottomBar = {
-                NavigationBar(containerColor = Color.White, contentColor = Ink) {
-                    NavigationBarItem(selected = currentScreen == "Dersler", onClick = { currentScreen = "Dersler"; selectedTopic = "Tümü"; selected = "A1" }, icon = { Text("📚") }, label = { Text("Dersler") }, colors = NavigationBarItemDefaults.colors(selectedIconColor = Color(0xFFB91C1C), selectedTextColor = Color(0xFF991B1B), indicatorColor = Color(0xFFFDECEC), unselectedIconColor = Color(0xFF77738B), unselectedTextColor = Color(0xFF77738B)))
-                    NavigationBarItem(selected = currentScreen == "Sözlük", onClick = { currentScreen = "Sözlük"; selectedTopic = "Tümü"; selected = "Tümü"; tab = 0; query = "" }, icon = { Text("A-Z") }, label = { Text("Sözlük") }, colors = NavigationBarItemDefaults.colors(selectedIconColor = Color(0xFFB91C1C), selectedTextColor = Color(0xFF991B1B), indicatorColor = Color(0xFFFDECEC), unselectedIconColor = Color(0xFF77738B), unselectedTextColor = Color(0xFF77738B)))
-                    NavigationBarItem(selected = currentScreen == "Mesleki İngilizce", onClick = { currentScreen = "Mesleki İngilizce" }, icon = { Text("✈️") }, label = { Text("Mesleki") }, colors = NavigationBarItemDefaults.colors(selectedIconColor = Color(0xFFB91C1C), selectedTextColor = Color(0xFF991B1B), indicatorColor = Color(0xFFFDECEC), unselectedIconColor = Color(0xFF77738B), unselectedTextColor = Color(0xFF77738B)))
-                    NavigationBarItem(selected = false, onClick = { showProfile = true }, icon = { Text("👤") }, label = { Text("Profil") }, colors = NavigationBarItemDefaults.colors(selectedIconColor = Color(0xFFB91C1C), selectedTextColor = Color(0xFF991B1B), indicatorColor = Color(0xFFFDECEC), unselectedIconColor = Color(0xFF77738B), unselectedTextColor = Color(0xFF77738B)))
+                NavigationBar(containerColor = Color(0xFF10172D), contentColor = Color(0xFFE8E9FF)) {
+                    NavigationBarItem(selected = currentScreen == "Dersler", onClick = { currentScreen = "Dersler"; selectedTopic = "Tümü"; selected = "A1" }, icon = { Text("📚") }, label = { Text("Dersler") }, colors = NavigationBarItemDefaults.colors(selectedIconColor = Color(0xFFB8A7FF), selectedTextColor = Color(0xFFE5DEFF), indicatorColor = Color(0xFF30275A), unselectedIconColor = Color(0xFF929BB8), unselectedTextColor = Color(0xFF929BB8)))
+                    NavigationBarItem(selected = currentScreen == "Sözlük", onClick = { currentScreen = "Sözlük"; selectedTopic = "Tümü"; selected = "Tümü"; tab = 0; query = "" }, icon = { Text("A-Z") }, label = { Text("Sözlük") }, colors = NavigationBarItemDefaults.colors(selectedIconColor = Color(0xFFB8A7FF), selectedTextColor = Color(0xFFE5DEFF), indicatorColor = Color(0xFF30275A), unselectedIconColor = Color(0xFF929BB8), unselectedTextColor = Color(0xFF929BB8)))
+                    NavigationBarItem(selected = currentScreen == "Mesleki İngilizce", onClick = { currentScreen = "Mesleki İngilizce" }, icon = { Text("✈️") }, label = { Text("Mesleki") }, colors = NavigationBarItemDefaults.colors(selectedIconColor = Color(0xFFB8A7FF), selectedTextColor = Color(0xFFE5DEFF), indicatorColor = Color(0xFF30275A), unselectedIconColor = Color(0xFF929BB8), unselectedTextColor = Color(0xFF929BB8)))
+                    NavigationBarItem(selected = false, onClick = { showProfile = true }, icon = { Text("👤") }, label = { Text("Profil") }, colors = NavigationBarItemDefaults.colors(selectedIconColor = Color(0xFFB8A7FF), selectedTextColor = Color(0xFFE5DEFF), indicatorColor = Color(0xFF30275A), unselectedIconColor = Color(0xFF929BB8), unselectedTextColor = Color(0xFF929BB8)))
                 }
             }
         ) { padding ->
             LazyColumn(
-                modifier = Modifier.fillMaxSize().background(Brush.verticalGradient(listOf(Color(0xFFF0ECFF), Color(0xFFFFFFFF), Color(0xFFFFF0F7)))).padding(padding),
+                modifier = Modifier.fillMaxSize().background(Brush.verticalGradient(listOf(Color(0xFF0B1022), Color(0xFF111936), Color(0xFF17132F)))).padding(padding),
                 contentPadding = PaddingValues(start = 18.dp, end = 18.dp, top = 12.dp, bottom = 28.dp),
                 verticalArrangement = Arrangement.spacedBy(14.dp)
             ) {
@@ -385,8 +385,8 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                         Column(verticalArrangement = Arrangement.spacedBy(14.dp)) {
                             Row(verticalAlignment = Alignment.CenterVertically) {
                                 Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(3.dp)) {
-                                    Text("WORDMASTER", color = Color(0xFFB91C1C), fontSize = 12.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 2.sp)
-                                    Text("Merhaba, $displayName 👋", color = Color(0xFF17152B), fontSize = 25.sp, fontWeight = FontWeight.ExtraBold)
+                                    Text("WORDMASTER", color = Color(0xFFB8A7FF), fontSize = 12.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 2.sp)
+                                    Text("Merhaba, $displayName 👋", color = Color(0xFFF5F3FF), fontSize = 25.sp, fontWeight = FontWeight.ExtraBold)
                                     Text("Bugün küçük bir adım, yarın büyük ilerleme.", color = Color(0xFF77738B), fontSize = 13.sp)
                                 }
                                 Surface(shape = RoundedCornerShape(18.dp), color = Color.White, shadowElevation = 4.dp) {
