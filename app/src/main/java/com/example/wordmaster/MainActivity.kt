@@ -4,6 +4,7 @@ import android.content.SharedPreferences
 import android.content.Context
 import android.media.MediaPlayer
 import android.os.Bundle
+import android.view.View
 import android.speech.tts.TextToSpeech
 import java.util.Locale
 import java.util.UUID
@@ -51,6 +52,12 @@ private val Ink = Color(0xFF172033)
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Keep Android system bars aligned with WordMaster's light, premium interface.
+        window.navigationBarColor = android.graphics.Color.rgb(255, 255, 255)
+        window.statusBarColor = android.graphics.Color.rgb(255, 245, 245)
+        @Suppress("DEPRECATION")
+        window.decorView.systemUiVisibility = window.decorView.systemUiVisibility or
+            View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
         val prefs = getSharedPreferences("wordmaster", MODE_PRIVATE)
         val wordsState = mutableStateOf<List<Word>?>(null)
 
@@ -203,9 +210,13 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
     val defaultUsername = "kasif" + userId.lowercase(Locale.ROOT).takeLast(6)
     var displayName by remember { mutableStateOf(prefs.getString("displayName", "Kelime Kaşifi") ?: "Kelime Kaşifi") }
     var username by remember { mutableStateOf(prefs.getString("username", "@$defaultUsername") ?: "@$defaultUsername") }
+    var accountEmail by remember { mutableStateOf(prefs.getString("accountEmail", "") ?: "") }
+    var accountPhone by remember { mutableStateOf(prefs.getString("accountPhone", "") ?: "") }
     var profileError by remember { mutableStateOf<String?>(null) }
     var nameDraft by remember { mutableStateOf(displayName) }
     var usernameDraft by remember { mutableStateOf(username) }
+    var emailDraft by remember { mutableStateOf(accountEmail) }
+    var phoneDraft by remember { mutableStateOf(accountPhone) }
     var themeChoice by remember { mutableIntStateOf(prefs.getInt("themeChoice", 0)) }
     var compactCards by remember { mutableStateOf(prefs.getBoolean("compactCards", false)) }
     var dailyGoal by remember { mutableIntStateOf(prefs.getInt("dailyGoal", 10)) }
@@ -1251,8 +1262,40 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                     Text("Bu cihazdaki profil kimliğin. Kullanıcı adı uygunluğu ve arkadaş ekleme için çevrim içi hesap sunucusu henüz bağlı değil.", color = Color(0xFF77738B), fontSize = 11.sp, lineHeight = 16.sp)
                 }
             }
-            OutlinedTextField(value = nameDraft, onValueChange = { nameDraft = it.take(30) }, label = { Text("Görünen ad") }, singleLine = true)
-            OutlinedTextField(value = usernameDraft, onValueChange = { value -> usernameDraft = value.removePrefix("@").filter { ch -> ch.isLetterOrDigit() || ch == '_' }.take(20).let { clean -> if (clean.isBlank()) "" else "@$clean" }; profileError = null }, label = { Text("Kullanıcı adı") }, supportingText = { Text("3-20 karakter; harf, rakam ve _ kullan.") }, singleLine = true)
+            Surface(
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(18.dp),
+                color = Color(0xFFF8F7FF),
+                border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFFE7E2FA))
+            ) {
+                Column(Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                    Text("HESAP BİLGİLERİ", color = Color(0xFF6D28D9), fontWeight = FontWeight.ExtraBold, fontSize = 11.sp, letterSpacing = 1.sp)
+                    Text("E-posta ve telefon bilgilerini profilinde sakla.", color = Color(0xFF55516D), fontSize = 12.sp, lineHeight = 17.sp)
+                    OutlinedTextField(
+                        value = emailDraft,
+                        onValueChange = { emailDraft = it.take(120); profileError = null },
+                        modifier = Modifier.fillMaxWidth(),
+                        label = { Text("E-posta adresi") },
+                        placeholder = { Text("ornek@eposta.com") },
+                        singleLine = true,
+                        keyboardOptions = androidx.compose.foundation.text.KeyboardOptions(keyboardType = androidx.compose.ui.text.input.KeyboardType.Email),
+                        leadingIcon = { Text("✉️") }
+                    )
+                    OutlinedTextField(
+                        value = phoneDraft,
+                        onValueChange = { phoneDraft = it.filter { ch -> ch.isDigit() || ch == '+' || ch == ' ' || ch == '-' || ch == '(' || ch == ')' }.take(24); profileError = null },
+                        modifier = Modifier.fillMaxWidth(),
+                        label = { Text("Telefon numarası (isteğe bağlı)") },
+                        placeholder = { Text("+90 5xx xxx xx xx") },
+                        singleLine = true,
+                        keyboardOptions = androidx.compose.foundation.text.KeyboardOptions(keyboardType = androidx.compose.ui.text.input.KeyboardType.Phone),
+                        leadingIcon = { Text("📱") }
+                    )
+                    Text("Önemli: Bu sürümde bilgiler bu cihazda saklanır. E-posta doğrulama, SMS kodu ve cihazlar arası hesap kurtarma için güvenli çevrim içi hesap sunucusu henüz bağlanmadı.", color = Color(0xFF7A5260), fontSize = 11.sp, lineHeight = 16.sp)
+                }
+            }
+            OutlinedTextField(value = nameDraft, onValueChange = { nameDraft = it.take(30) }, modifier = Modifier.fillMaxWidth(), label = { Text("Görünen ad") }, singleLine = true)
+            OutlinedTextField(value = usernameDraft, onValueChange = { value -> usernameDraft = value.removePrefix("@").filter { ch -> ch.isLetterOrDigit() || ch == '_' }.take(20).let { clean -> if (clean.isBlank()) "" else "@$clean" }; profileError = null }, modifier = Modifier.fillMaxWidth(), label = { Text("Kullanıcı adı") }, supportingText = { Text("3-20 karakter; harf, rakam ve _ kullan.") }, singleLine = true)
             profileError?.let { Text(it, color = MaterialTheme.colorScheme.error, fontSize = 12.sp) }
             Text("📚 Öğrenilen: ${learned.size} kelime   ⭐ Favori: ${favorites.size}", color = Ink)
             Text("📖 Tamamlanan ders: ${CourseProgressStore.completedCount(prefs)}", color = Ink)
@@ -1280,10 +1323,22 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
             if (cleanUsername.length !in 3..20 || !cleanUsername.matches(Regex("[A-Za-z0-9_]+"))) {
                 profileError = "Kullanıcı adı 3-20 karakter olmalı; İngilizce harf, rakam ve _ kullan."
             } else {
-                displayName = nameDraft.trim().ifBlank { "Kelime Kaşifi" }
-                username = "@$cleanUsername"
-                prefs.edit().putString("displayName", displayName).putString("username", username).apply()
-                showProfile = false
+                val cleanEmail = emailDraft.trim()
+                if (cleanEmail.isNotBlank() && !android.util.Patterns.EMAIL_ADDRESS.matcher(cleanEmail).matches()) {
+                    profileError = "Geçerli bir e-posta adresi gir."
+                } else {
+                    displayName = nameDraft.trim().ifBlank { "Kelime Kaşifi" }
+                    username = "@$cleanUsername"
+                    accountEmail = cleanEmail
+                    accountPhone = phoneDraft.trim()
+                    prefs.edit()
+                        .putString("displayName", displayName)
+                        .putString("username", username)
+                        .putString("accountEmail", accountEmail)
+                        .putString("accountPhone", accountPhone)
+                        .apply()
+                    showProfile = false
+                }
             }
         }) { Text("Kaydet") } },
         dismissButton = { TextButton(onClick = { showProfile = false }) { Text("Vazgeç") } }
