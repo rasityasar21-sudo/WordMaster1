@@ -404,10 +404,38 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                     Text("Merhaba, $displayName 👋", color = Color(0xFFF5F3FF), fontSize = 25.sp, fontWeight = FontWeight.ExtraBold)
                                     Text("Bugün küçük bir adım, yarın büyük ilerleme.", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.62f), fontSize = 13.sp)
                                 }
-                                Surface(shape = RoundedCornerShape(18.dp), color = Color.White, shadowElevation = 4.dp) {
-                                    Column(Modifier.padding(horizontal = 13.dp, vertical = 10.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-                                        Text("🔥 $dailyStreak", color = Color(0xFFE45D36), fontWeight = FontWeight.ExtraBold, fontSize = 18.sp)
-                                        Text("seri", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.62f), fontSize = 11.sp)
+                                Row(
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                                ) {
+                                    Surface(
+                                        modifier = Modifier.clip(RoundedCornerShape(15.dp)).clickable {
+                                            themeChoice = if (darkTheme) 0 else 1
+                                            prefs.edit().putInt("themeChoice", themeChoice).apply()
+                                        },
+                                        shape = RoundedCornerShape(15.dp),
+                                        color = if (darkTheme) Color(0xFF30275A) else Color.White,
+                                        border = androidx.compose.foundation.BorderStroke(1.dp, if (darkTheme) Color(0xFF55458D) else Color(0xFFE5E0F4))
+                                    ) {
+                                        Row(
+                                            Modifier.padding(horizontal = 11.dp, vertical = 12.dp),
+                                            verticalAlignment = Alignment.CenterVertically,
+                                            horizontalArrangement = Arrangement.spacedBy(5.dp)
+                                        ) {
+                                            Text(if (darkTheme) "☀️" else "🌙", fontSize = 16.sp)
+                                            Text(if (darkTheme) "Açık" else "Koyu", color = if (darkTheme) Color(0xFFF3F0FF) else Color(0xFF30275A), fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                                        }
+                                    }
+                                    Surface(
+                                        shape = RoundedCornerShape(15.dp),
+                                        color = if (darkTheme) Color(0xFF202A49) else Color.White,
+                                        shadowElevation = 2.dp,
+                                        border = androidx.compose.foundation.BorderStroke(1.dp, if (darkTheme) Color(0xFF303B5D) else Color(0xFFE5E0F4))
+                                    ) {
+                                        Column(Modifier.padding(horizontal = 12.dp, vertical = 9.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+                                            Text("🔥 $dailyStreak", color = Color(0xFFE45D36), fontWeight = FontWeight.ExtraBold, fontSize = 17.sp)
+                                            Text("seri", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.62f), fontSize = 11.sp)
+                                        }
                                     }
                                 }
                             }
