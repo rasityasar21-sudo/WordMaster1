@@ -1729,7 +1729,7 @@ private fun PronunciationPracticeDialog(words: List<Word>, onDismiss: () -> Unit
                 Text("Duyduğun/öğrendiğin kelimeyi tanı", color = MaterialTheme.colorScheme.onSurface, fontWeight = FontWeight.Bold)
                 choices.forEach { option ->
                     OutlinedButton(onClick = {
-                        message = if (option.en == current.en) "Doğru! ✓" else "Tekrar dene. İpucu: Türkçe anlamı düşün."
+                        message = if (option.en == current.en) "Doğru! Şimdi kelimenin telaffuzunu dinle. ✓" else "Henüz değil. Anlamı tekrar düşün ve yeniden dene."
                     }, modifier = Modifier.fillMaxWidth()) { Text(option.en.replaceFirstChar { it.uppercase() }) }
                 }
                 if (message.isNotBlank()) Text(message, color = if (message.startsWith("Doğru")) Color(0xFF12805C) else Color(0xFFB45309), fontWeight = FontWeight.Bold)
