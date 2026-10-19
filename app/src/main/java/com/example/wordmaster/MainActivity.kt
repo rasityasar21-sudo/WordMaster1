@@ -1511,7 +1511,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
             HorizontalDivider()
             Text("🎮 KELİME EŞLEŞTİRME", fontWeight = FontWeight.Bold)
             Button(onClick = {
-                matchWords = quickPracticeWords.shuffled().take(4)
+                matchWords = quickPracticeWords.shuffled().take(6)
                 matchTurkishOrder = matchWords.shuffled()
                 matchRound++
                 matched = emptySet()
@@ -1546,7 +1546,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
                             Column {
                                 Text("Kelime eşleştirme", color = MaterialTheme.colorScheme.onSurface, fontSize = 18.sp, fontWeight = FontWeight.ExtraBold)
-                                Text("Her doğru eşleşme +5 XP kazandırır", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f), fontSize = 12.sp)
+                                Text("6 çifti tamamla · Her doğru eşleşme +5 XP", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f), fontSize = 12.sp)
                             }
                             Text("${matched.size}/${matchWords.size}", color = MaterialTheme.colorScheme.primary, fontSize = 20.sp, fontWeight = FontWeight.ExtraBold)
                         }
@@ -1594,7 +1594,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
         },
         confirmButton = {
             TextButton(onClick = {
-                matchWords = quickPracticeWords.shuffled().take(4)
+                matchWords = quickPracticeWords.shuffled().take(6)
                 matchTurkishOrder = matchWords.shuffled()
                 matchRound++
                 matched = emptySet()
