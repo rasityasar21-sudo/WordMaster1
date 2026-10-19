@@ -1518,21 +1518,39 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
         onDismissRequest = { showMatchGame = false },
         title = { Text("Kelime eşleştirme 🎮") },
         text = {
-            Column(modifier = Modifier.heightIn(max = 300.dp).verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                Text("Eşleşen: ${matched.size}/${matchWords.size}")
-                LinearProgressIndicator(progress = { if (matchWords.isEmpty()) 0f else matched.size.toFloat() / matchWords.size }, modifier = Modifier.fillMaxWidth())
-                Text(matchMessage, color = Blue, fontWeight = FontWeight.SemiBold)
-                HorizontalDivider()
-                Text("İngilizce", fontWeight = FontWeight.Bold)
+            Column(modifier = Modifier.heightIn(max = 420.dp).verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                Surface(
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(18.dp),
+                    color = MaterialTheme.colorScheme.primaryContainer
+                ) {
+                    Column(Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                        Text("WORD PAIRS  •  TUR  $matchRound", color = MaterialTheme.colorScheme.primary, fontSize = 10.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 1.2.sp)
+                        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
+                            Column {
+                                Text("Kelime eşleştirme", color = MaterialTheme.colorScheme.onSurface, fontSize = 18.sp, fontWeight = FontWeight.ExtraBold)
+                                Text("Doğru eşleşme başına +5 XP", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f), fontSize = 12.sp)
+                            }
+                            Text("${matched.size}/${matchWords.size}", color = MaterialTheme.colorScheme.primary, fontSize = 20.sp, fontWeight = FontWeight.ExtraBold)
+                        }
+                        LinearProgressIndicator(progress = { if (matchWords.isEmpty()) 0f else matched.size.toFloat() / matchWords.size }, modifier = Modifier.fillMaxWidth())
+                        Text(matchMessage, color = MaterialTheme.colorScheme.onSurface, fontWeight = FontWeight.SemiBold, fontSize = 13.sp)
+                    }
+                }
+                Text("01  ·  İNGİLİZCE", color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.ExtraBold, fontSize = 11.sp, letterSpacing = 1.sp)
                 matchWords.filter { it.en !in matched }.forEach { word ->
                     OutlinedButton(
                         onClick = { selectedEnglish = word.en; matchMessage = "Şimdi ${word.en} kelimesinin Türkçesini seç." },
                         modifier = Modifier.fillMaxWidth(),
-                        enabled = selectedEnglish == null || selectedEnglish == word.en
-                    ) { Text(if (selectedEnglish == word.en) "👉 ${word.en}" else word.en) }
+                        enabled = selectedEnglish == null || selectedEnglish == word.en,
+                        colors = ButtonDefaults.outlinedButtonColors(
+                            containerColor = if (selectedEnglish == word.en) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surface,
+                            contentColor = MaterialTheme.colorScheme.onSurface
+                        ),
+                        shape = RoundedCornerShape(13.dp)
+                    ) { Text(if (selectedEnglish == word.en) "●  ${word.en}" else word.en, fontWeight = FontWeight.SemiBold) }
                 }
-                HorizontalDivider()
-                Text("Türkçe", fontWeight = FontWeight.Bold)
+                Text("02  ·  TÜRKÇE", color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.ExtraBold, fontSize = 11.sp, letterSpacing = 1.sp)
                 matchTurkishOrder.filter { it.en !in matched }.forEach { word ->
                     OutlinedButton(
                         onClick = {
@@ -1550,14 +1568,18 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                 matchMessage = "Bu eşleşme doğru değil. Tekrar dene!"
                             }
                         },
-                        modifier = Modifier.fillMaxWidth()
-                    ) { Text(word.tr) }
+                        modifier = Modifier.fillMaxWidth(),
+                        colors = ButtonDefaults.outlinedButtonColors(contentColor = MaterialTheme.colorScheme.onSurface),
+                        shape = RoundedCornerShape(13.dp)
+                    ) { Text(word.tr, fontWeight = FontWeight.Medium) }
                 }
             }
         },
         confirmButton = {
             TextButton(onClick = {
-                matchWords = words.shuffled().take(4)
+                matchWords = quickPracticeWords.shuffled().take(4)
+                matchTurkishOrder = matchWords.shuffled()
+                matchRound++
                 matched = emptySet()
                 selectedEnglish = null
                 matchMessage = "Yeni tur! İngilizce kelimeyi seç, sonra Türkçe karşılığını bul."
@@ -1666,7 +1688,17 @@ private fun PronunciationPracticeDialog(words: List<Word>, onDismiss: () -> Unit
         title = { Text("🎧 Kelime Telaffuzu") },
         text = {
             Column(modifier = Modifier.heightIn(max = 300.dp).verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                Text("İngilizce sözlüklerdeki kayıtlı telaffuzları dinle. Ses kaydı olmayan kelimelerde yapay ses kullanılmaz.")
+                Surface(
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(18.dp),
+                    color = MaterialTheme.colorScheme.primaryContainer
+                ) {
+                    Column(Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                        Text("LISTENING LAB  •  PRONUNCIATION", color = MaterialTheme.colorScheme.primary, fontSize = 10.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 1.sp)
+                        Text("Dinle · Tanı · Öğren", color = MaterialTheme.colorScheme.onSurface, fontSize = 18.sp, fontWeight = FontWeight.ExtraBold)
+                        Text("Kayıtlı insan telaffuzu aranır; ses bulunamazsa yapay sesle değiştirilmez.", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.75f), fontSize = 12.sp, lineHeight = 17.sp)
+                    }
+                }
                 OutlinedTextField(
                     value = searchText, onValueChange = { searchText = it },
                     modifier = Modifier.fillMaxWidth(), label = { Text("Kelime ara") },
@@ -1679,11 +1711,22 @@ private fun PronunciationPracticeDialog(words: List<Word>, onDismiss: () -> Unit
                     Text(if (isLoading) "Ses aranıyor…" else "🔎 Kayıtlı telaffuzu dinle")
                 }
                 HorizontalDivider()
-                Text("Kelime pratiği", fontWeight = FontWeight.Bold)
-                Text("${current.en} — ${current.tr}", color = Blue, fontWeight = FontWeight.Bold)
-                Button(onClick = { playRecorded(current.en) }, enabled = !isLoading, modifier = Modifier.fillMaxWidth()) {
-                    Text("🔊 Seçili kelimeyi dinle")
+                Text("KELİME TANIMA", color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.ExtraBold, fontSize = 11.sp, letterSpacing = 1.sp)
+                Surface(
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(16.dp),
+                    color = MaterialTheme.colorScheme.surface,
+                    border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant)
+                ) {
+                    Column(Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                        Text(current.en, color = MaterialTheme.colorScheme.onSurface, fontWeight = FontWeight.ExtraBold, fontSize = 22.sp)
+                        Text(current.tr, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.72f), fontSize = 14.sp)
+                        Button(onClick = { playRecorded(current.en) }, enabled = !isLoading, modifier = Modifier.fillMaxWidth()) {
+                            Text("🔊 Telaffuzu dinle")
+                        }
+                    }
                 }
+                Text("Duyduğun/öğrendiğin kelimeyi tanı", color = MaterialTheme.colorScheme.onSurface, fontWeight = FontWeight.Bold)
                 choices.forEach { option ->
                     OutlinedButton(onClick = {
                         message = if (option.en == current.en) "Doğru! ✓" else "Tekrar dene. İpucu: Türkçe anlamı düşün."
