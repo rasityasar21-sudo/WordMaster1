@@ -76,7 +76,7 @@ fun CourseCatalogSection(
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(18.dp),
-                colors = CardDefaults.cardColors(containerColor = if (isDone) (if (androidx.compose.foundation.isSystemInDarkTheme()) Color(0xFF17382F) else Color(0xFFE8F8F0)) else MaterialTheme.colorScheme.surface),
+                colors = CardDefaults.cardColors(containerColor = if (isDone) MaterialTheme.colorScheme.secondary.copy(alpha = 0.16f) else MaterialTheme.colorScheme.surface),
                 elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
             ) {
                 Column(Modifier.fillMaxWidth().padding(15.dp), verticalArrangement = Arrangement.spacedBy(7.dp)) {
