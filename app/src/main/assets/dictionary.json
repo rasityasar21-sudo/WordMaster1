@@ -6112,5 +6112,473 @@
     "tr": "dayanmak; karşı koymak",
     "level": "C1",
     "example": "The structure can withstand strong winds."
+  },
+  {
+    "en": "family",
+    "tr": "aile",
+    "level": "A1",
+    "example": "My family lives near the city."
+  },
+  {
+    "en": "parent",
+    "tr": "ebeveyn",
+    "level": "A1",
+    "example": "Each parent came to the meeting."
+  },
+  {
+    "en": "child",
+    "tr": "çocuk",
+    "level": "A1",
+    "example": "The child is playing outside."
+  },
+  {
+    "en": "friend",
+    "tr": "arkadaş",
+    "level": "A1",
+    "example": "My friend studies English."
+  },
+  {
+    "en": "neighbor",
+    "tr": "komşu",
+    "level": "A1",
+    "example": "Our neighbor is very helpful."
+  },
+  {
+    "en": "teacher",
+    "tr": "öğretmen",
+    "level": "A1",
+    "example": "The teacher explains the lesson."
+  },
+  {
+    "en": "student",
+    "tr": "öğrenci",
+    "level": "A1",
+    "example": "Every student has a notebook."
+  },
+  {
+    "en": "classroom",
+    "tr": "sınıf",
+    "level": "A1",
+    "example": "The classroom is bright and quiet."
+  },
+  {
+    "en": "homework",
+    "tr": "ödev",
+    "level": "A1",
+    "example": "I finish my homework after dinner."
+  },
+  {
+    "en": "notebook",
+    "tr": "defter",
+    "level": "A1",
+    "example": "Please write the answer in your notebook."
+  },
+  {
+    "en": "pencil",
+    "tr": "kurşun kalem",
+    "level": "A1",
+    "example": "I need a pencil for the test."
+  },
+  {
+    "en": "window",
+    "tr": "pencere",
+    "level": "A1",
+    "example": "Please open the window."
+  },
+  {
+    "en": "door",
+    "tr": "kapı",
+    "level": "A1",
+    "example": "Someone is waiting at the door."
+  },
+  {
+    "en": "kitchen",
+    "tr": "mutfak",
+    "level": "A1",
+    "example": "My mother is in the kitchen."
+  },
+  {
+    "en": "bedroom",
+    "tr": "yatak odası",
+    "level": "A1",
+    "example": "My bedroom has a large window."
+  },
+  {
+    "en": "bathroom",
+    "tr": "banyo",
+    "level": "A1",
+    "example": "The bathroom is upstairs."
+  },
+  {
+    "en": "breakfast",
+    "tr": "kahvaltı",
+    "level": "A1",
+    "example": "We have breakfast at seven."
+  },
+  {
+    "en": "lunch",
+    "tr": "öğle yemeği",
+    "level": "A1",
+    "example": "I usually eat lunch at school."
+  },
+  {
+    "en": "dinner",
+    "tr": "akşam yemeği",
+    "level": "A1",
+    "example": "Dinner is ready."
+  },
+  {
+    "en": "hungry",
+    "tr": "aç",
+    "level": "A1",
+    "example": "I am hungry after the lesson."
+  },
+  {
+    "en": "thirsty",
+    "tr": "susamış",
+    "level": "A1",
+    "example": "She is thirsty after running."
+  },
+  {
+    "en": "weather",
+    "tr": "hava durumu",
+    "level": "A1",
+    "example": "The weather is warm today."
+  },
+  {
+    "en": "cloudy",
+    "tr": "bulutlu",
+    "level": "A1",
+    "example": "It is cloudy this morning."
+  },
+  {
+    "en": "sunny",
+    "tr": "güneşli",
+    "level": "A1",
+    "example": "It will be sunny tomorrow."
+  },
+  {
+    "en": "rainy",
+    "tr": "yağmurlu",
+    "level": "A1",
+    "example": "Take an umbrella on a rainy day."
+  },
+  {
+    "en": "station",
+    "tr": "istasyon",
+    "level": "A1",
+    "example": "The train leaves from this station."
+  },
+  {
+    "en": "ticket",
+    "tr": "bilet",
+    "level": "A1",
+    "example": "I bought a ticket online."
+  },
+  {
+    "en": "leave",
+    "tr": "ayrılmak; hareket etmek",
+    "level": "A1",
+    "example": "The bus leaves at nine."
+  },
+  {
+    "en": "lend",
+    "tr": "ödünç vermek",
+    "level": "A2",
+    "example": "Could you lend me a pen?"
+  },
+  {
+    "en": "choose",
+    "tr": "seçmek",
+    "level": "A1",
+    "example": "Choose the correct answer."
+  },
+  {
+    "en": "decide",
+    "tr": "karar vermek",
+    "level": "A2",
+    "example": "We need to decide today."
+  },
+  {
+    "en": "improve",
+    "tr": "geliştirmek; iyileşmek",
+    "level": "A2",
+    "example": "Reading every day can improve your English."
+  },
+  {
+    "en": "remember",
+    "tr": "hatırlamak",
+    "level": "A1",
+    "example": "I remember her name."
+  },
+  {
+    "en": "forget",
+    "tr": "unutmak",
+    "level": "A1",
+    "example": "Do not forget your keys."
+  },
+  {
+    "en": "practice",
+    "tr": "alıştırma yapmak; pratik",
+    "level": "A1",
+    "example": "I practice speaking every evening."
+  },
+  {
+    "en": "repeat",
+    "tr": "tekrarlamak",
+    "level": "A1",
+    "example": "Please repeat the sentence."
+  },
+  {
+    "en": "invite",
+    "tr": "davet etmek",
+    "level": "A2",
+    "example": "We will invite our friends."
+  },
+  {
+    "en": "refuse",
+    "tr": "reddetmek",
+    "level": "A2",
+    "example": "He had to refuse the invitation."
+  },
+  {
+    "en": "promise",
+    "tr": "söz vermek",
+    "level": "A2",
+    "example": "I promise to call you later."
+  },
+  {
+    "en": "usually",
+    "tr": "genellikle",
+    "level": "A1",
+    "example": "I usually walk to school."
+  },
+  {
+    "en": "sometimes",
+    "tr": "bazen",
+    "level": "A1",
+    "example": "Sometimes we study together."
+  },
+  {
+    "en": "almost",
+    "tr": "neredeyse",
+    "level": "A2",
+    "example": "The work is almost finished."
+  },
+  {
+    "en": "enough",
+    "tr": "yeterli; yeterince",
+    "level": "A2",
+    "example": "We have enough time to review."
+  },
+  {
+    "en": "dangerous",
+    "tr": "tehlikeli",
+    "level": "A2",
+    "example": "It is dangerous to drive too fast."
+  },
+  {
+    "en": "healthy",
+    "tr": "sağlıklı",
+    "level": "A2",
+    "example": "A healthy breakfast gives you energy."
+  },
+  {
+    "en": "tired",
+    "tr": "yorgun",
+    "level": "A1",
+    "example": "I feel tired after work."
+  },
+  {
+    "en": "excited",
+    "tr": "heyecanlı",
+    "level": "A2",
+    "example": "The students are excited about the trip."
+  },
+  {
+    "en": "worried",
+    "tr": "endişeli",
+    "level": "A2",
+    "example": "She is worried about the exam."
+  },
+  {
+    "en": "quiet",
+    "tr": "sessiz",
+    "level": "A1",
+    "example": "Please be quiet in the library."
+  },
+  {
+    "en": "crowded",
+    "tr": "kalabalık",
+    "level": "A2",
+    "example": "The bus is crowded in the morning."
+  },
+  {
+    "en": "empty",
+    "tr": "boş",
+    "level": "A1",
+    "example": "The room is empty."
+  },
+  {
+    "en": "full",
+    "tr": "dolu",
+    "level": "A1",
+    "example": "The bottle is full of water."
+  },
+  {
+    "en": "cheap",
+    "tr": "ucuz",
+    "level": "A1",
+    "example": "This shop sells cheap notebooks."
+  },
+  {
+    "en": "expensive",
+    "tr": "pahalı",
+    "level": "A1",
+    "example": "That jacket is too expensive."
+  },
+  {
+    "en": "price",
+    "tr": "fiyat",
+    "level": "A1",
+    "example": "What is the price of this book?"
+  },
+  {
+    "en": "receipt",
+    "tr": "fiş; makbuz",
+    "level": "A2",
+    "example": "Keep the receipt after you pay."
+  },
+  {
+    "en": "medicine",
+    "tr": "ilaç",
+    "level": "A2",
+    "example": "Take the medicine as the doctor explains."
+  },
+  {
+    "en": "headache",
+    "tr": "baş ağrısı",
+    "level": "A2",
+    "example": "He stayed home because of a headache."
+  },
+  {
+    "en": "exercise",
+    "tr": "egzersiz; alıştırma",
+    "level": "A1",
+    "example": "Regular exercise helps us stay active."
+  },
+  {
+    "en": "message",
+    "tr": "mesaj",
+    "level": "A1",
+    "example": "I received your message this morning."
+  },
+  {
+    "en": "reply",
+    "tr": "yanıtlamak; yanıt",
+    "level": "A2",
+    "example": "Please reply to my email."
+  },
+  {
+    "en": "website",
+    "tr": "internet sitesi",
+    "level": "A2",
+    "example": "The website has useful information."
+  },
+  {
+    "en": "password",
+    "tr": "şifre",
+    "level": "A2",
+    "example": "Never share your password with strangers."
+  },
+  {
+    "en": "download",
+    "tr": "indirmek",
+    "level": "A2",
+    "example": "You can download the document."
+  },
+  {
+    "en": "upload",
+    "tr": "yüklemek",
+    "level": "A2",
+    "example": "Please upload your homework file."
+  },
+  {
+    "en": "search",
+    "tr": "aramak; arama",
+    "level": "A1",
+    "example": "Search for the word in the dictionary."
+  },
+  {
+    "en": "reason",
+    "tr": "sebep; neden",
+    "level": "A2",
+    "example": "What is the reason for the delay?"
+  },
+  {
+    "en": "opportunity",
+    "tr": "fırsat",
+    "level": "A2",
+    "example": "This course is a good opportunity to learn."
+  },
+  {
+    "en": "skill",
+    "tr": "beceri",
+    "level": "A2",
+    "example": "Listening is an important language skill."
+  },
+  {
+    "en": "solution",
+    "tr": "çözüm",
+    "level": "A2",
+    "example": "We found a solution to the problem."
+  },
+  {
+    "en": "problem",
+    "tr": "sorun; problem",
+    "level": "A1",
+    "example": "Let's solve the problem together."
+  },
+  {
+    "en": "past",
+    "tr": "geçmiş",
+    "level": "A1",
+    "example": "We talked about our past experiences."
+  },
+  {
+    "en": "during",
+    "tr": "sırasında",
+    "level": "A2",
+    "example": "Please take notes during the lesson."
+  },
+  {
+    "en": "until",
+    "tr": "-e kadar",
+    "level": "A2",
+    "example": "The library is open until six."
+  },
+  {
+    "en": "instead",
+    "tr": "bunun yerine",
+    "level": "A2",
+    "example": "We walked instead of taking a taxi."
+  },
+  {
+    "en": "although",
+    "tr": "-mesine rağmen",
+    "level": "A2",
+    "example": "Although it was cold, we went outside."
+  },
+  {
+    "en": "because",
+    "tr": "çünkü",
+    "level": "A1",
+    "example": "I stayed home because I was ill."
+  },
+  {
+    "en": "between",
+    "tr": "arasında",
+    "level": "A1",
+    "example": "The café is between the bank and the school."
   }
 ]
