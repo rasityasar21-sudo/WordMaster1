@@ -1542,14 +1542,37 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                     Column(Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                         Text("WORD PAIRS  /  TUR  $matchRound", color = MaterialTheme.colorScheme.primary, fontSize = 10.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 1.4.sp)
                         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
-                            Column {
+                            Column(modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(3.dp)) {
                                 Text("Kelime eşleştirme", color = MaterialTheme.colorScheme.onSurface, fontSize = 18.sp, fontWeight = FontWeight.ExtraBold)
-                                Text("6 çifti tamamla · Her doğru eşleşme +5 XP", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f), fontSize = 12.sp)
+                                Text("Anlamı bul · hafızanı güçlendir", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.72f), fontSize = 12.sp)
                             }
-                            Text("${matched.size}/${matchWords.size}", color = MaterialTheme.colorScheme.primary, fontSize = 20.sp, fontWeight = FontWeight.ExtraBold)
+                            Surface(
+                                shape = RoundedCornerShape(14.dp),
+                                color = MaterialTheme.colorScheme.surface.copy(alpha = 0.86f),
+                                border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.24f))
+                            ) {
+                                Column(Modifier.padding(horizontal = 12.dp, vertical = 7.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+                                    Text("${matched.size}/${matchWords.size}", color = MaterialTheme.colorScheme.primary, fontSize = 19.sp, fontWeight = FontWeight.ExtraBold)
+                                    Text("ÇİFT", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.65f), fontSize = 9.sp, fontWeight = FontWeight.Bold, letterSpacing = 1.sp)
+                                }
+                            }
                         }
-                        LinearProgressIndicator(progress = { if (matchWords.isEmpty()) 0f else matched.size.toFloat() / matchWords.size }, modifier = Modifier.fillMaxWidth())
-                        Text(matchMessage, color = MaterialTheme.colorScheme.onSurface, fontWeight = FontWeight.SemiBold, fontSize = 13.sp)
+                        LinearProgressIndicator(
+                            progress = { if (matchWords.isEmpty()) 0f else matched.size.toFloat() / matchWords.size },
+                            modifier = Modifier.fillMaxWidth().height(7.dp).clip(RoundedCornerShape(8.dp)),
+                            color = Color(0xFF8B7CFF),
+                            trackColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.75f)
+                        )
+                        Surface(
+                            shape = RoundedCornerShape(12.dp),
+                            color = MaterialTheme.colorScheme.surface.copy(alpha = 0.72f),
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Row(Modifier.padding(horizontal = 10.dp, vertical = 9.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                                Text(if (matched.size == matchWords.size && matchWords.isNotEmpty()) "✓" else "✦", color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.ExtraBold)
+                                Text(matchMessage, color = MaterialTheme.colorScheme.onSurface, fontWeight = FontWeight.SemiBold, fontSize = 12.sp, lineHeight = 17.sp)
+                            }
+                        }
                     }
                 }
                 Row(
