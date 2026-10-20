@@ -139,14 +139,14 @@ fun ProfessionalCoursesScreen(onBackToLessons: () -> Unit) {
                             Text(track.description, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.68f), fontSize = 12.sp, lineHeight = 17.sp, maxLines = 2, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis)
                             Row(horizontalArrangement = Arrangement.spacedBy(6.dp), verticalAlignment = Alignment.CenterVertically) {
                                 Surface(color = MaterialTheme.colorScheme.primaryContainer, shape = RoundedCornerShape(7.dp)) { Text("${track.topics.size} konu", Modifier.padding(horizontal = 8.dp, vertical = 4.dp), color = MaterialTheme.colorScheme.primary, fontSize = 10.sp, fontWeight = FontWeight.Bold) }
-                                if (track.sampleTerms.isNotEmpty()) Surface(color = Color(0xFFE7F7EF), shape = RoundedCornerShape(7.dp)) { Text("${track.sampleTerms.size} terim", Modifier.padding(horizontal = 8.dp, vertical = 4.dp), color = Color(0xFF18794E), fontSize = 10.sp, fontWeight = FontWeight.Bold) }
+                                if (track.sampleTerms.isNotEmpty()) Surface(color = MaterialTheme.colorScheme.secondaryContainer, shape = RoundedCornerShape(7.dp)) { Text("${track.sampleTerms.size} terim", Modifier.padding(horizontal = 8.dp, vertical = 4.dp), color = MaterialTheme.colorScheme.onSecondaryContainer, fontSize = 10.sp, fontWeight = FontWeight.Bold) }
                             }
                         }
                         Text("›", color = MaterialTheme.colorScheme.primary, fontSize = 26.sp, fontWeight = FontWeight.Bold)
                     }
                 }
             }
-            Text("Not: Premium rozeti tek başına ödeme alındığı veya satın alma doğrulandığı anlamına gelmez.", color = Color(0xFF77738B), fontSize = 11.sp, lineHeight = 16.sp)
+            Text("Not: Premium rozeti tek başına ödeme alındığı veya satın alma doğrulandığı anlamına gelmez.", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.58f), fontSize = 11.sp, lineHeight = 16.sp)
         } else {
             TextButton(onClick = { selectedTrackId = null; showAnswers = false }) { Text("← Meslek kataloğuna dön") }
             Text(selectedTrack!!.title, color = MaterialTheme.colorScheme.onSurface, fontSize = 23.sp, fontWeight = FontWeight.ExtraBold)
@@ -171,15 +171,15 @@ fun ProfessionalCoursesScreen(onBackToLessons: () -> Unit) {
                         LinearProgressIndicator(
                             progress = { completedInTrack.toFloat() / selectedTrack.lessons.size.coerceAtLeast(1) },
                             modifier = Modifier.fillMaxWidth(),
-                            color = Color(0xFF319B73),
+                            color = MaterialTheme.colorScheme.primary,
                             trackColor = MaterialTheme.colorScheme.primaryContainer
                         )
                         Text("İlerlemen bu cihazda saklanır.", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.68f), fontSize = 11.sp)
                     }
                 }
             }
-            Surface(color = Color(0xFFE7F7EF), shape = RoundedCornerShape(12.dp)) {
-                Text(if (selectedTrack.id == "aviation-maintenance") "Önemli: Bu kurs İngilizce öğrenimi içindir. Gerçek bakım işlemlerinde güncel, onaylı bakım dokümanları ve yetkili prosedürler esas alınmalıdır." else "Öğrenme yolu: konu başlıklarını incele, terimleri örnek cümlelerle öğren ve mini testle kendini kontrol et.", Modifier.fillMaxWidth().padding(12.dp), color = Color(0xFF245B46), fontSize = 12.sp, lineHeight = 17.sp)
+            Surface(color = MaterialTheme.colorScheme.secondaryContainer, shape = RoundedCornerShape(12.dp)) {
+                Text(if (selectedTrack.id == "aviation-maintenance") "Önemli: Bu kurs İngilizce öğrenimi içindir. Gerçek bakım işlemlerinde güncel, onaylı bakım dokümanları ve yetkili prosedürler esas alınmalıdır." else "Öğrenme yolu: konu başlıklarını incele, terimleri örnek cümlelerle öğren ve mini testle kendini kontrol et.", Modifier.fillMaxWidth().padding(12.dp), color = MaterialTheme.colorScheme.onSecondaryContainer, fontSize = 12.sp, lineHeight = 17.sp)
             }
             Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface), shape = RoundedCornerShape(20.dp)) {
                 Column(Modifier.fillMaxWidth().padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -210,8 +210,8 @@ fun ProfessionalCoursesScreen(onBackToLessons: () -> Unit) {
                             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                                 Text(lesson.title, modifier = Modifier.weight(1f), color = MaterialTheme.colorScheme.onSurface, fontSize = 17.sp, fontWeight = FontWeight.ExtraBold)
                                 if (isLessonCompleted) {
-                                    Surface(color = Color(0xFFE7F7EF), shape = RoundedCornerShape(8.dp)) {
-                                        Text("✓ Tamamlandı", Modifier.padding(horizontal = 8.dp, vertical = 5.dp), color = Color(0xFF18794E), fontSize = 10.sp, fontWeight = FontWeight.Bold)
+                                    Surface(color = MaterialTheme.colorScheme.secondaryContainer, shape = RoundedCornerShape(8.dp)) {
+                                        Text("✓ Tamamlandı", Modifier.padding(horizontal = 8.dp, vertical = 5.dp), color = MaterialTheme.colorScheme.onSecondaryContainer, fontSize = 10.sp, fontWeight = FontWeight.Bold)
                                     }
                                 }
                             }
@@ -233,8 +233,8 @@ fun ProfessionalCoursesScreen(onBackToLessons: () -> Unit) {
                             ) { Text(if (lesson.id in revealedLessonAnswers) "Yanıtı gizle" else "Kontrol sorusunu yanıtla") }
                             Text(lesson.question, color = MaterialTheme.colorScheme.onSurface, fontSize = 14.sp, fontWeight = FontWeight.Bold)
                             if (lesson.id in revealedLessonAnswers) {
-                                Surface(color = Color(0xFFE7F7EF), shape = RoundedCornerShape(10.dp)) {
-                                    Text(lesson.answer, Modifier.fillMaxWidth().padding(11.dp), color = Color(0xFF245B46), fontSize = 12.sp, lineHeight = 18.sp)
+                                Surface(color = MaterialTheme.colorScheme.secondaryContainer, shape = RoundedCornerShape(10.dp)) {
+                                    Text(lesson.answer, Modifier.fillMaxWidth().padding(11.dp), color = MaterialTheme.colorScheme.onSecondaryContainer, fontSize = 12.sp, lineHeight = 18.sp)
                                 }
                             }
                             OutlinedButton(
@@ -289,7 +289,7 @@ fun ProfessionalCoursesScreen(onBackToLessons: () -> Unit) {
                                 }
                                 if (quizChecked) {
                                     val correct = quizAnswer == currentTerm.turkish
-                                    Text(if (correct) "Doğru cevap! ✓" else "Doğru cevap: ${currentTerm.turkish}", color = if (correct) Color(0xFF18794E) else Color(0xFFB42318), fontWeight = FontWeight.Bold)
+                                    Text(if (correct) "Doğru cevap! ✓" else "Doğru cevap: ${currentTerm.turkish}", color = if (correct) MaterialTheme.colorScheme.onSecondaryContainer else Color(0xFFB42318), fontWeight = FontWeight.Bold)
                                     Text("Kelime: ${currentTerm.english}  •  Türkçesi: ${currentTerm.turkish}", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.68f), fontSize = 12.sp, lineHeight = 17.sp)
                                     Button(onClick = {
                                         if (correct) quizScore++ else missedTerms = (missedTerms + currentTerm.english).distinct()
@@ -314,7 +314,7 @@ fun ProfessionalCoursesScreen(onBackToLessons: () -> Unit) {
                                         }
                                     }
                                 } else {
-                                    Text("Harika! Bu testte tüm cevaplar doğru. Bir sonraki oturumda yeni terimlerle tekrar yap.", color = Color(0xFF18794E), fontSize = 13.sp, lineHeight = 18.sp)
+                                    Text("Harika! Bu testte tüm cevaplar doğru. Bir sonraki oturumda yeni terimlerle tekrar yap.", color = MaterialTheme.colorScheme.onSecondaryContainer, fontSize = 13.sp, lineHeight = 18.sp)
                                 }
                                 Button(onClick = { quizIndex = 0; quizAnswer = null; quizChecked = false; quizScore = 0; missedTerms = emptyList() }, modifier = Modifier.fillMaxWidth()) { Text("Tekrar çöz") }
                             }
