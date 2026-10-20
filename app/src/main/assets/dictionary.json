@@ -6640,5 +6640,311 @@
     "tr": "verim; üretmek; boyun eğmek",
     "level": "B2",
     "example": "The word \"yield\" is used in context."
+  },
+  {
+    "en": "airworthiness",
+    "tr": "uçuşa elverişlilik",
+    "level": "C1",
+    "example": "The engineer checked the aircraft's airworthiness before release."
+  },
+  {
+    "en": "airframe",
+    "tr": "uçak gövdesi",
+    "level": "C1",
+    "example": "The inspection revealed corrosion on the airframe."
+  },
+  {
+    "en": "altimeter",
+    "tr": "irtifa ölçer",
+    "level": "B2",
+    "example": "The pilot cross-checked the altimeter before descent."
+  },
+  {
+    "en": "airspeed",
+    "tr": "hava hızı",
+    "level": "B2",
+    "example": "Maintain the required airspeed during the approach."
+  },
+  {
+    "en": "avionics",
+    "tr": "aviyonik sistemler",
+    "level": "C1",
+    "example": "Avionics technicians tested the navigation equipment."
+  },
+  {
+    "en": "bulkhead",
+    "tr": "bölme duvarı",
+    "level": "C1",
+    "example": "The technician inspected the bulkhead for cracks."
+  },
+  {
+    "en": "checklist",
+    "tr": "kontrol listesi",
+    "level": "B1",
+    "example": "Follow the checklist before starting the engine."
+  },
+  {
+    "en": "clearance",
+    "tr": "müsaade; izin",
+    "level": "B2",
+    "example": "The aircraft received clearance to taxi to the runway."
+  },
+  {
+    "en": "corrosion",
+    "tr": "korozyon",
+    "level": "B2",
+    "example": "Remove any corrosion according to the maintenance manual."
+  },
+  {
+    "en": "deviation",
+    "tr": "sapma",
+    "level": "B2",
+    "example": "Report any deviation from the approved procedure."
+  },
+  {
+    "en": "diagnostic",
+    "tr": "tanı amaçlı; arıza tespit",
+    "level": "C1",
+    "example": "The diagnostic test identified a faulty sensor."
+  },
+  {
+    "en": "dispatch",
+    "tr": "sevk; sefere verme",
+    "level": "B2",
+    "example": "The aircraft cannot be released for dispatch until the defect is resolved."
+  },
+  {
+    "en": "fatigue",
+    "tr": "yorulma; metal yorgunluğu",
+    "level": "B2",
+    "example": "Repeated stress can cause metal fatigue."
+  },
+  {
+    "en": "fastener",
+    "tr": "sabitleyici bağlantı elemanı",
+    "level": "C1",
+    "example": "Check each fastener for damage and correct torque."
+  },
+  {
+    "en": "fuselage",
+    "tr": "uçak gövdesi",
+    "level": "B2",
+    "example": "The inspection covered the fuselage panels."
+  },
+  {
+    "en": "grounding",
+    "tr": "uçağın yerde tutulması",
+    "level": "B2",
+    "example": "A serious defect may result in the grounding of an aircraft."
+  },
+  {
+    "en": "hydraulic",
+    "tr": "hidrolik",
+    "level": "B2",
+    "example": "The hydraulic system must be checked for leaks."
+  },
+  {
+    "en": "inspection",
+    "tr": "muayene; inceleme",
+    "level": "B1",
+    "example": "The inspection must be documented in the aircraft logbook."
+  },
+  {
+    "en": "interlock",
+    "tr": "emniyet kilitleme mekanizması",
+    "level": "C1",
+    "example": "The interlock prevents the system from operating in an unsafe state."
+  },
+  {
+    "en": "logbook",
+    "tr": "teknik kayıt defteri",
+    "level": "B2",
+    "example": "Record the completed work in the aircraft logbook."
+  },
+  {
+    "en": "malfunction",
+    "tr": "arıza; hatalı çalışma",
+    "level": "B2",
+    "example": "The crew reported a malfunction in the warning system."
+  },
+  {
+    "en": "overhaul",
+    "tr": "büyük bakım; revizyon",
+    "level": "C1",
+    "example": "The engine is scheduled for an overhaul."
+  },
+  {
+    "en": "payload",
+    "tr": "faydalı yük",
+    "level": "B2",
+    "example": "The payload must remain within the aircraft's limits."
+  },
+  {
+    "en": "preventive",
+    "tr": "önleyici",
+    "level": "B2",
+    "example": "Preventive maintenance can reduce unexpected downtime."
+  },
+  {
+    "en": "rectification",
+    "tr": "düzeltme; arızayı giderme",
+    "level": "C1",
+    "example": "The rectification was recorded after the functional test."
+  },
+  {
+    "en": "redundancy",
+    "tr": "yedeklilik",
+    "level": "C1",
+    "example": "Redundancy allows a backup system to take over after a failure."
+  },
+  {
+    "en": "release",
+    "tr": "servise verme; serbest bırakma",
+    "level": "B2",
+    "example": "Only authorized staff can approve the release to service."
+  },
+  {
+    "en": "runway incursion",
+    "tr": "pist ihlali",
+    "level": "C1",
+    "example": "Clear communication helps prevent a runway incursion."
+  },
+  {
+    "en": "serviceable",
+    "tr": "kullanılabilir; çalışır durumda",
+    "level": "C1",
+    "example": "Confirm that the equipment is serviceable before use."
+  },
+  {
+    "en": "troubleshooting",
+    "tr": "arıza giderme",
+    "level": "C1",
+    "example": "The manual provides a troubleshooting sequence for the warning light."
+  },
+  {
+    "en": "torque",
+    "tr": "tork; sıkma momenti",
+    "level": "C1",
+    "example": "Apply the specified torque to the fastener."
+  },
+  {
+    "en": "wear",
+    "tr": "aşınma",
+    "level": "B1",
+    "example": "Excessive wear was found on the brake assembly."
+  },
+  {
+    "en": "work order",
+    "tr": "iş emri",
+    "level": "B2",
+    "example": "The technician reviewed the work order before beginning the task."
+  },
+  {
+    "en": "workmanship",
+    "tr": "işçilik kalitesi",
+    "level": "C1",
+    "example": "The inspection confirmed that the workmanship met the required standard."
+  },
+  {
+    "en": "concise",
+    "tr": "özlü; kısa ve açık",
+    "level": "C1",
+    "example": "Write a concise report that includes the main findings."
+  },
+  {
+    "en": "corroborate",
+    "tr": "doğrulamak; desteklemek",
+    "level": "C1",
+    "example": "The second test helped corroborate the initial diagnosis."
+  },
+  {
+    "en": "specification",
+    "tr": "teknik şartname; özellik",
+    "level": "B2",
+    "example": "The replacement part must meet the manufacturer's specification."
+  },
+  {
+    "en": "validate",
+    "tr": "geçerliliğini doğrulamak",
+    "level": "C1",
+    "example": "The team validated the results with an independent test."
+  },
+  {
+    "en": "workload",
+    "tr": "iş yükü",
+    "level": "B2",
+    "example": "A clear handover helps the next shift manage its workload."
+  },
+  {
+    "en": "handover",
+    "tr": "devir teslim",
+    "level": "B2",
+    "example": "The handover included all unresolved maintenance items."
+  },
+  {
+    "en": "hazard",
+    "tr": "tehlike",
+    "level": "B1",
+    "example": "Identify each hazard before work begins."
+  },
+  {
+    "en": "threshold",
+    "tr": "eşik değer",
+    "level": "C1",
+    "example": "Stop the test if the temperature exceeds the threshold."
+  },
+  {
+    "en": "tolerance",
+    "tr": "tolerans; izin verilen sapma",
+    "level": "C1",
+    "example": "Measure the part to confirm it is within tolerance."
+  },
+  {
+    "en": "traceability",
+    "tr": "izlenebilirlik",
+    "level": "C1",
+    "example": "Traceability links each installed part to its documentation."
+  },
+  {
+    "en": "unserviceable",
+    "tr": "kullanılamaz; hizmet dışı",
+    "level": "C1",
+    "example": "Label unserviceable equipment and follow the reporting procedure."
+  },
+  {
+    "en": "workforce",
+    "tr": "iş gücü; çalışan kadrosu",
+    "level": "B2",
+    "example": "The workforce completed the updated safety training."
+  },
+  {
+    "en": "accountability",
+    "tr": "hesap verebilirlik; sorumluluk",
+    "level": "C1",
+    "example": "Clear records support accountability for each maintenance action."
+  },
+  {
+    "en": "contingency",
+    "tr": "beklenmedik durum planı",
+    "level": "C1",
+    "example": "The team prepared a contingency plan for equipment failure."
+  },
+  {
+    "en": "precaution",
+    "tr": "önlem",
+    "level": "B2",
+    "example": "Take the required precaution before opening the access panel."
+  },
+  {
+    "en": "reconcile",
+    "tr": "uzlaştırmak; karşılaştırıp tutarlı hâle getirmek",
+    "level": "C1",
+    "example": "Reconcile the parts list with the physical inventory."
+  },
+  {
+    "en": "sustainability",
+    "tr": "sürdürülebilirlik",
+    "level": "B2",
+    "example": "Sustainability initiatives can reduce waste in maintenance operations."
   }
 ]
