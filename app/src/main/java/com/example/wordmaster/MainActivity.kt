@@ -1821,7 +1821,7 @@ private fun PronunciationPracticeDialog(words: List<Word>, onDismiss: () -> Unit
                         Text(current.tr, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.82f), fontSize = 15.sp, lineHeight = 21.sp)
                         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                             Surface(shape = RoundedCornerShape(8.dp), color = MaterialTheme.colorScheme.surfaceVariant) {
-                                Text(topicForWord(current.en), modifier = Modifier.padding(horizontal = 9.dp, vertical = 5.dp), color = MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 10.sp, fontWeight = FontWeight.SemiBold)
+                                Text(topicForWord(current), modifier = Modifier.padding(horizontal = 9.dp, vertical = 5.dp), color = MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 10.sp, fontWeight = FontWeight.SemiBold)
                             }
                             Text("Dinle ve anlamı hatırla", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.65f), fontSize = 11.sp)
                         }
