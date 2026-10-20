@@ -108,6 +108,12 @@
     "example": "We use the word \"account\" in everyday English."
   },
   {
+    "en": "accountability",
+    "tr": "hesap verebilirlik; sorumluluk",
+    "level": "C1",
+    "example": "Clear records support accountability for each maintenance action."
+  },
+  {
     "en": "accountable",
     "tr": "hesap verebilir",
     "level": "B2",
@@ -360,10 +366,46 @@
     "example": "The word \"aid\" is used in context."
   },
   {
+    "en": "aileron",
+    "tr": "kanatçık",
+    "level": "B2",
+    "example": "The pilot adjusted the ailerons to help the aircraft roll."
+  },
+  {
     "en": "aim",
     "tr": "amaç; hedeflemek",
     "level": "A2",
     "example": "The word \"aim\" is used in context."
+  },
+  {
+    "en": "air traffic control",
+    "tr": "hava trafik kontrolü",
+    "level": "B2",
+    "example": "Air traffic control cleared the aircraft to land."
+  },
+  {
+    "en": "air traffic controller",
+    "tr": "hava trafik kontrolörü",
+    "level": "B2",
+    "example": "The air traffic controller gave the crew a new heading."
+  },
+  {
+    "en": "airframe",
+    "tr": "uçak gövdesi",
+    "level": "C1",
+    "example": "The inspection revealed corrosion on the airframe."
+  },
+  {
+    "en": "airspeed",
+    "tr": "hava hızı",
+    "level": "B2",
+    "example": "Maintain the required airspeed during the approach."
+  },
+  {
+    "en": "airworthiness",
+    "tr": "uçuşa elverişlilik",
+    "level": "C1",
+    "example": "The engineer checked the aircraft's airworthiness before release."
   },
   {
     "en": "alarm",
@@ -420,6 +462,12 @@
     "example": "The word \"alter\" is used in context."
   },
   {
+    "en": "alternate airport",
+    "tr": "yedek meydan",
+    "level": "B2",
+    "example": "The crew selected an alternate airport because of the forecast."
+  },
+  {
     "en": "alternative",
     "tr": "alternatif; seçenek",
     "level": "B2",
@@ -430,6 +478,18 @@
     "tr": "-mesine rağmen",
     "level": "A2",
     "example": "Although it was cold, we went outside."
+  },
+  {
+    "en": "altimeter",
+    "tr": "irtifa ölçer",
+    "level": "B2",
+    "example": "The pilot cross-checked the altimeter before descent."
+  },
+  {
+    "en": "altitude",
+    "tr": "irtifa",
+    "level": "B1",
+    "example": "The aircraft maintained an altitude of ten thousand feet."
   },
   {
     "en": "amazing",
@@ -508,6 +568,12 @@
     "tr": "açı",
     "level": "A2",
     "example": "We use the word \"angle\" in everyday English."
+  },
+  {
+    "en": "angle of attack",
+    "tr": "hücum açısı",
+    "level": "C1",
+    "example": "The instructor explained how angle of attack affects lift."
   },
   {
     "en": "announce",
@@ -628,6 +694,12 @@
     "tr": "yaklaşık olarak",
     "level": "B1",
     "example": "We use the word \"approximately\" in everyday English."
+  },
+  {
+    "en": "apron",
+    "tr": "apron",
+    "level": "B2",
+    "example": "Ground staff guided the aircraft across the apron."
   },
   {
     "en": "arbitrary",
@@ -900,6 +972,12 @@
     "example": "The word \"autonomy\" is useful in everyday English."
   },
   {
+    "en": "autopilot",
+    "tr": "otomatik pilot",
+    "level": "B1",
+    "example": "The pilot engaged the autopilot after reaching a safe altitude."
+  },
+  {
     "en": "availability",
     "tr": "mevcudiyet; kullanılabilirlik",
     "level": "B1",
@@ -916,6 +994,18 @@
     "tr": "ortalama",
     "level": "A2",
     "example": "We use the word \"average\" in everyday English."
+  },
+  {
+    "en": "aviation",
+    "tr": "havacılık",
+    "level": "B1",
+    "example": "Aviation requires careful planning and clear communication."
+  },
+  {
+    "en": "avionics",
+    "tr": "aviyonik sistemler",
+    "level": "C1",
+    "example": "Avionics technicians tested the navigation equipment."
   },
   {
     "en": "avoid",
@@ -1020,6 +1110,12 @@
     "example": "We use the word \"battery\" in everyday English."
   },
   {
+    "en": "bearing",
+    "tr": "kerteriz; yön açısı",
+    "level": "C1",
+    "example": "The navigator reported the bearing to the next waypoint."
+  },
+  {
     "en": "because",
     "tr": "çünkü",
     "level": "A1",
@@ -1092,10 +1188,22 @@
     "example": "The word \"biology\" is used in context."
   },
   {
+    "en": "bird strike",
+    "tr": "kuş çarpması",
+    "level": "B2",
+    "example": "The aircraft returned to the airport after a bird strike."
+  },
+  {
     "en": "birth",
     "tr": "doğum",
     "level": "A1",
     "example": "We use the word \"birth\" in everyday English."
+  },
+  {
+    "en": "black box",
+    "tr": "uçuş kayıt cihazı",
+    "level": "B2",
+    "example": "Investigators examined the flight data recorder, often called the black box."
   },
   {
     "en": "blame",
@@ -1206,16 +1314,34 @@
     "example": "We use the word \"budget\" in everyday English."
   },
   {
+    "en": "bulkhead",
+    "tr": "bölme duvarı",
+    "level": "C1",
+    "example": "The technician inspected the bulkhead for cracks."
+  },
+  {
     "en": "burden",
     "tr": "yük",
     "level": "B2",
     "example": "We use the word \"burden\" in everyday English."
   },
   {
+    "en": "cabin crew",
+    "tr": "kabin ekibi",
+    "level": "B1",
+    "example": "The cabin crew checked that all passengers were seated."
+  },
+  {
     "en": "calculate",
     "tr": "hesaplamak",
     "level": "A2",
     "example": "The word \"calculate\" is useful in everyday English."
+  },
+  {
+    "en": "call sign",
+    "tr": "çağrı adı",
+    "level": "B1",
+    "example": "The controller used the aircraft's call sign when issuing instructions."
   },
   {
     "en": "campaign",
@@ -1386,6 +1512,12 @@
     "example": "This shop sells cheap notebooks."
   },
   {
+    "en": "checklist",
+    "tr": "kontrol listesi",
+    "level": "B1",
+    "example": "Follow the checklist before starting the engine."
+  },
+  {
     "en": "chemical",
     "tr": "kimyasal",
     "level": "B1",
@@ -1486,6 +1618,12 @@
     "tr": "sınıf",
     "level": "A1",
     "example": "The classroom is bright and quiet."
+  },
+  {
+    "en": "clearance",
+    "tr": "müsaade; izin",
+    "level": "B2",
+    "example": "The aircraft received clearance to taxi to the runway."
   },
   {
     "en": "climate",
@@ -1806,6 +1944,12 @@
     "example": "The word \"concession\" is useful in everyday English."
   },
   {
+    "en": "concise",
+    "tr": "özlü; kısa ve açık",
+    "level": "C1",
+    "example": "Write a concise report that includes the main findings."
+  },
+  {
     "en": "conclude",
     "tr": "sonuçlandırmak",
     "level": "B1",
@@ -2076,6 +2220,12 @@
     "example": "The word \"context\" is used in context."
   },
   {
+    "en": "contingency",
+    "tr": "beklenmedik durum planı",
+    "level": "C1",
+    "example": "The team prepared a contingency plan for equipment failure."
+  },
+  {
     "en": "contract",
     "tr": "sözleşme",
     "level": "B1",
@@ -2208,6 +2358,18 @@
     "example": "The word \"correspondent\" is useful in everyday English."
   },
   {
+    "en": "corroborate",
+    "tr": "doğrulamak; desteklemek",
+    "level": "C1",
+    "example": "The second test helped corroborate the initial diagnosis."
+  },
+  {
+    "en": "corrosion",
+    "tr": "korozyon",
+    "level": "B2",
+    "example": "Remove any corrosion according to the maintenance manual."
+  },
+  {
     "en": "council",
     "tr": "konsey",
     "level": "B1",
@@ -2262,6 +2424,12 @@
     "example": "We use the word \"credit\" in everyday English."
   },
   {
+    "en": "crew resource management",
+    "tr": "ekip kaynak yönetimi",
+    "level": "C1",
+    "example": "Crew resource management encourages clear communication and teamwork."
+  },
+  {
     "en": "crime",
     "tr": "suç",
     "level": "A2",
@@ -2310,6 +2478,12 @@
     "example": "We use the word \"criticize\" in everyday English."
   },
   {
+    "en": "crosswind",
+    "tr": "yan rüzgâr",
+    "level": "B2",
+    "example": "The aircraft landed safely despite the strong crosswind."
+  },
+  {
     "en": "crowded",
     "tr": "kalabalık",
     "level": "A2",
@@ -2320,6 +2494,12 @@
     "tr": "çok önemli",
     "level": "B2",
     "example": "Sleep is crucial for learning."
+  },
+  {
+    "en": "cruise altitude",
+    "tr": "seyir irtifası",
+    "level": "B2",
+    "example": "The aircraft reached its planned cruise altitude."
   },
   {
     "en": "culture",
@@ -2392,6 +2572,12 @@
     "tr": "veri",
     "level": "A2",
     "example": "We use the word \"data\" in everyday English."
+  },
+  {
+    "en": "de-icing",
+    "tr": "buz çözme",
+    "level": "B2",
+    "example": "The ground team completed de-icing before departure."
   },
   {
     "en": "deadline",
@@ -2580,6 +2766,12 @@
     "example": "The word derives from Latin."
   },
   {
+    "en": "descent",
+    "tr": "alçalma",
+    "level": "B1",
+    "example": "The captain announced the beginning of the descent."
+  },
+  {
     "en": "describe",
     "tr": "tanımlamak",
     "level": "A2",
@@ -2640,6 +2832,12 @@
     "example": "We develop new skills."
   },
   {
+    "en": "deviation",
+    "tr": "sapma",
+    "level": "B2",
+    "example": "Report any deviation from the approved procedure."
+  },
+  {
     "en": "device",
     "tr": "cihaz",
     "level": "A2",
@@ -2656,6 +2854,12 @@
     "tr": "teşhis",
     "level": "B2",
     "example": "We use the word \"diagnosis\" in everyday English."
+  },
+  {
+    "en": "diagnostic",
+    "tr": "tanı amaçlı; arıza tespit",
+    "level": "C1",
+    "example": "The diagnostic test identified a faulty sensor."
   },
   {
     "en": "difference",
@@ -2778,6 +2982,12 @@
     "example": "The word \"dismiss\" is used in context."
   },
   {
+    "en": "dispatch",
+    "tr": "sevk; sefere verme",
+    "level": "B2",
+    "example": "The aircraft cannot be released for dispatch until the defect is resolved."
+  },
+  {
     "en": "displacement",
     "tr": "yerinden edilme; yer değiştirme",
     "level": "B2",
@@ -2838,6 +3048,12 @@
     "example": "The word \"distort\" is useful in everyday English."
   },
   {
+    "en": "distress call",
+    "tr": "tehlike çağrısı",
+    "level": "C1",
+    "example": "The crew transmitted a distress call and reported their position."
+  },
+  {
     "en": "distribute",
     "tr": "dağıtmak",
     "level": "B1",
@@ -2860,6 +3076,12 @@
     "tr": "çeşitli",
     "level": "B1",
     "example": "The word \"diverse\" is used in context."
+  },
+  {
+    "en": "diversion",
+    "tr": "başka meydana yönelme",
+    "level": "B2",
+    "example": "Bad weather forced a diversion to a nearby airport."
   },
   {
     "en": "diversity",
@@ -2908,6 +3130,12 @@
     "tr": "indirmek",
     "level": "A2",
     "example": "You can download the document."
+  },
+  {
+    "en": "drag",
+    "tr": "sürükleme kuvveti",
+    "level": "B2",
+    "example": "Reducing drag can improve the aircraft's efficiency."
   },
   {
     "en": "dramatic",
@@ -2994,6 +3222,12 @@
     "example": "The word \"elevate\" is useful in everyday English."
   },
   {
+    "en": "elevator",
+    "tr": "irtifa dümeni",
+    "level": "B2",
+    "example": "The elevator helps control the aircraft's pitch."
+  },
+  {
     "en": "eligible",
     "tr": "uygun; hak sahibi",
     "level": "B1",
@@ -3040,6 +3274,18 @@
     "tr": "ortaya çıkış",
     "level": "B2",
     "example": "The word \"emergence\" is useful in everyday English."
+  },
+  {
+    "en": "emergency checklist",
+    "tr": "acil durum kontrol listesi",
+    "level": "B2",
+    "example": "The first officer read the emergency checklist aloud."
+  },
+  {
+    "en": "emergency landing",
+    "tr": "acil iniş",
+    "level": "B1",
+    "example": "The crew prepared for an emergency landing after the warning."
   },
   {
     "en": "emphasis",
@@ -3124,6 +3370,12 @@
     "tr": "katılım; bağlılık",
     "level": "B1",
     "example": "The word \"engagement\" is useful in everyday English."
+  },
+  {
+    "en": "engine failure",
+    "tr": "motor arızası",
+    "level": "B2",
+    "example": "The checklist explains what to do in the event of an engine failure."
   },
   {
     "en": "enhance",
@@ -3280,6 +3532,12 @@
     "tr": "etik",
     "level": "B2",
     "example": "The word \"ethical\" is used in context."
+  },
+  {
+    "en": "evacuation",
+    "tr": "tahliye",
+    "level": "B2",
+    "example": "Passengers followed the crew's instructions during the evacuation."
   },
   {
     "en": "evaluate",
@@ -3594,6 +3852,24 @@
     "example": "My family lives near the city."
   },
   {
+    "en": "fastener",
+    "tr": "sabitleyici bağlantı elemanı",
+    "level": "C1",
+    "example": "Check each fastener for damage and correct torque."
+  },
+  {
+    "en": "fatigue",
+    "tr": "yorulma; metal yorgunluğu",
+    "level": "B2",
+    "example": "Repeated stress can cause metal fatigue."
+  },
+  {
+    "en": "fatigue management",
+    "tr": "yorgunluk yönetimi",
+    "level": "C1",
+    "example": "Fatigue management is important for safe flight operations."
+  },
+  {
     "en": "feasible",
     "tr": "uygulanabilir",
     "level": "B2",
@@ -3654,6 +3930,12 @@
     "example": "The word \"fiscal\" is useful in everyday English."
   },
   {
+    "en": "flap",
+    "tr": "flap; kaldırma artırıcı kanat yüzeyi",
+    "level": "B2",
+    "example": "The pilot extended the flaps before landing."
+  },
+  {
     "en": "flexibility",
     "tr": "esneklik",
     "level": "B1",
@@ -3664,6 +3946,42 @@
     "tr": "esnek",
     "level": "B2",
     "example": "My schedule is flexible."
+  },
+  {
+    "en": "flight deck",
+    "tr": "kokpit",
+    "level": "B1",
+    "example": "Only authorized crew members may enter the flight deck."
+  },
+  {
+    "en": "flight level",
+    "tr": "uçuş seviyesi",
+    "level": "B2",
+    "example": "The aircraft climbed to its assigned flight level."
+  },
+  {
+    "en": "flight manifest",
+    "tr": "uçuş yolcu/yük listesi",
+    "level": "C1",
+    "example": "Ground staff checked the flight manifest before departure."
+  },
+  {
+    "en": "flight operations",
+    "tr": "uçuş operasyonları",
+    "level": "B1",
+    "example": "The flight operations team monitored the weather and schedule."
+  },
+  {
+    "en": "flight plan",
+    "tr": "uçuş planı",
+    "level": "B1",
+    "example": "The dispatcher filed the flight plan before departure."
+  },
+  {
+    "en": "flight recorder",
+    "tr": "uçuş kayıt cihazı",
+    "level": "B2",
+    "example": "The flight recorder stores important information about the flight."
   },
   {
     "en": "flourish",
@@ -3792,6 +4110,12 @@
     "example": "The word \"furthermore\" is used in context."
   },
   {
+    "en": "fuselage",
+    "tr": "uçak gövdesi",
+    "level": "B2",
+    "example": "The inspection covered the fuselage panels."
+  },
+  {
     "en": "future",
     "tr": "gelecek",
     "level": "A2",
@@ -3838,6 +4162,12 @@
     "tr": "küresel",
     "level": "A2",
     "example": "The word \"global\" is used in context."
+  },
+  {
+    "en": "go-around",
+    "tr": "pas geçme",
+    "level": "B2",
+    "example": "The pilot performed a go-around because the runway was not clear."
   },
   {
     "en": "goal",
@@ -3900,6 +4230,24 @@
     "example": "The word \"grasp\" is useful in everyday English."
   },
   {
+    "en": "ground handling",
+    "tr": "yer hizmetleri",
+    "level": "B2",
+    "example": "Efficient ground handling helped the aircraft depart on time."
+  },
+  {
+    "en": "ground speed",
+    "tr": "yer hızı",
+    "level": "B2",
+    "example": "A strong tailwind increased the aircraft's ground speed."
+  },
+  {
+    "en": "grounding",
+    "tr": "uçağın yerde tutulması",
+    "level": "B2",
+    "example": "A serious defect may result in the grounding of an aircraft."
+  },
+  {
     "en": "guarantee",
     "tr": "garanti; garanti etmek",
     "level": "B1",
@@ -3924,10 +4272,28 @@
     "example": "I can handle this task."
   },
   {
+    "en": "handover",
+    "tr": "devir teslim",
+    "level": "B2",
+    "example": "The handover included all unresolved maintenance items."
+  },
+  {
+    "en": "hazard",
+    "tr": "tehlike",
+    "level": "B1",
+    "example": "Identify each hazard before work begins."
+  },
+  {
     "en": "headache",
     "tr": "baş ağrısı",
     "level": "A2",
     "example": "He stayed home because of a headache."
+  },
+  {
+    "en": "heading",
+    "tr": "baş açısı",
+    "level": "B1",
+    "example": "The controller instructed the pilot to maintain the current heading."
   },
   {
     "en": "healthy",
@@ -3966,6 +4332,12 @@
     "example": "We use the word \"historical\" in everyday English."
   },
   {
+    "en": "holding pattern",
+    "tr": "bekleme paterni",
+    "level": "C1",
+    "example": "The aircraft entered a holding pattern while waiting to land."
+  },
+  {
     "en": "holistic",
     "tr": "bütüncül",
     "level": "C1",
@@ -3982,6 +4354,18 @@
     "tr": "aç",
     "level": "A1",
     "example": "I am hungry after the lesson."
+  },
+  {
+    "en": "hydraulic",
+    "tr": "hidrolik",
+    "level": "B2",
+    "example": "The hydraulic system must be checked for leaks."
+  },
+  {
+    "en": "hydraulic system",
+    "tr": "hidrolik sistem",
+    "level": "B2",
+    "example": "The maintenance team checked the hydraulic system."
   },
   {
     "en": "hypothesis",
@@ -4254,6 +4638,12 @@
     "example": "The word \"inspect\" is useful in everyday English."
   },
   {
+    "en": "inspection",
+    "tr": "muayene; inceleme",
+    "level": "B1",
+    "example": "The inspection must be documented in the aircraft logbook."
+  },
+  {
     "en": "inspiration",
     "tr": "ilham",
     "level": "A2",
@@ -4282,6 +4672,12 @@
     "tr": "talimat",
     "level": "A2",
     "example": "We use the word \"instruction\" in everyday English."
+  },
+  {
+    "en": "instrument landing system",
+    "tr": "aletli iniş sistemi",
+    "level": "C1",
+    "example": "The instrument landing system assists pilots during an approach."
   },
   {
     "en": "insurance",
@@ -4348,6 +4744,12 @@
     "tr": "etkileşim",
     "level": "B1",
     "example": "The word \"interaction\" is used in context."
+  },
+  {
+    "en": "interlock",
+    "tr": "emniyet kilitleme mekanizması",
+    "level": "C1",
+    "example": "The interlock prevents the system from operating in an unsafe state."
   },
   {
     "en": "intermediate",
@@ -4470,6 +4872,12 @@
     "example": "The word \"issue\" is used in context."
   },
   {
+    "en": "jet bridge",
+    "tr": "körük",
+    "level": "B2",
+    "example": "Passengers boarded the aircraft through the jet bridge."
+  },
+  {
     "en": "journey",
     "tr": "yolculuk",
     "level": "A2",
@@ -4504,6 +4912,18 @@
     "tr": "laboratuvar",
     "level": "A2",
     "example": "The word \"laboratory\" is used in context."
+  },
+  {
+    "en": "landing clearance",
+    "tr": "iniş izni",
+    "level": "B1",
+    "example": "The controller issued landing clearance after checking runway conditions."
+  },
+  {
+    "en": "landing gear",
+    "tr": "iniş takımı",
+    "level": "B1",
+    "example": "The landing gear was inspected before the next flight."
   },
   {
     "en": "language",
@@ -4542,6 +4962,12 @@
     "example": "The word \"lecture\" is used in context."
   },
   {
+    "en": "left rudder",
+    "tr": "sol dümen pedalı komutu",
+    "level": "C1",
+    "example": "The instructor asked the student to apply left rudder."
+  },
+  {
     "en": "legal",
     "tr": "yasal",
     "level": "A2",
@@ -4570,6 +4996,12 @@
     "tr": "liberal; özgürlükçü",
     "level": "B1",
     "example": "The word \"liberal\" is useful in everyday English."
+  },
+  {
+    "en": "lift",
+    "tr": "kaldırma kuvveti",
+    "level": "B1",
+    "example": "The wings generate lift as air flows around them."
   },
   {
     "en": "likelihood",
@@ -4620,6 +5052,12 @@
     "example": "We use the word \"location\" in everyday English."
   },
   {
+    "en": "logbook",
+    "tr": "teknik kayıt defteri",
+    "level": "B2",
+    "example": "Record the completed work in the aircraft logbook."
+  },
+  {
     "en": "logic",
     "tr": "mantık",
     "level": "B1",
@@ -4650,10 +5088,22 @@
     "example": "The word \"maintenance\" is useful in everyday English."
   },
   {
+    "en": "maintenance log",
+    "tr": "bakım kayıt defteri",
+    "level": "B2",
+    "example": "The engineer recorded the repair in the maintenance log."
+  },
+  {
     "en": "majority",
     "tr": "çoğunluk",
     "level": "B1",
     "example": "The word \"majority\" is used in context."
+  },
+  {
+    "en": "malfunction",
+    "tr": "arıza; hatalı çalışma",
+    "level": "B2",
+    "example": "The crew reported a malfunction in the warning system."
   },
   {
     "en": "manage",
@@ -4678,6 +5128,12 @@
     "tr": "yönlendirmek; manipüle etmek",
     "level": "B2",
     "example": "The word \"manipulate\" is used in context."
+  },
+  {
+    "en": "mayday",
+    "tr": "acil tehlike çağrısı",
+    "level": "B2",
+    "example": "The pilot used the word mayday to declare a life-threatening emergency."
   },
   {
     "en": "meaning",
@@ -4746,6 +5202,12 @@
     "example": "I received your message this morning."
   },
   {
+    "en": "meteorological conditions",
+    "tr": "meteorolojik koşullar",
+    "level": "B2",
+    "example": "Meteorological conditions changed rapidly near the mountains."
+  },
+  {
     "en": "method",
     "tr": "yöntem",
     "level": "B1",
@@ -4774,6 +5236,12 @@
     "tr": "minimize etmek; en aza indirmek",
     "level": "B1",
     "example": "The word \"minimize\" is useful in everyday English."
+  },
+  {
+    "en": "minimum visibility",
+    "tr": "asgari görüş mesafesi",
+    "level": "C1",
+    "example": "The airport temporarily closed because visibility fell below the minimum."
   },
   {
     "en": "ministry",
@@ -4860,6 +5328,12 @@
     "example": "The word \"namely\" is useful in everyday English."
   },
   {
+    "en": "navigation",
+    "tr": "seyrüsefer",
+    "level": "B1",
+    "example": "Modern aircraft use several systems for navigation."
+  },
+  {
     "en": "negate",
     "tr": "geçersiz kılmak; olumsuzlamak",
     "level": "C1",
@@ -4906,6 +5380,12 @@
     "tr": "dikkate değer",
     "level": "B1",
     "example": "The word \"notable\" is useful in everyday English."
+  },
+  {
+    "en": "NOTAM",
+    "tr": "havacılara bildirim",
+    "level": "C1",
+    "example": "The crew reviewed the NOTAMs before departure."
   },
   {
     "en": "notebook",
@@ -5058,6 +5538,18 @@
     "example": "The word \"overall\" is used in context."
   },
   {
+    "en": "overhaul",
+    "tr": "büyük bakım; revizyon",
+    "level": "C1",
+    "example": "The engine is scheduled for an overhaul."
+  },
+  {
+    "en": "overhead bin",
+    "tr": "baş üstü bagaj bölmesi",
+    "level": "A2",
+    "example": "Please place your small bag in the overhead bin."
+  },
+  {
     "en": "overlap",
     "tr": "örtüşmek",
     "level": "B2",
@@ -5122,6 +5614,12 @@
     "tr": "sabırlı",
     "level": "A2",
     "example": "Be patient with yourself."
+  },
+  {
+    "en": "payload",
+    "tr": "faydalı yük",
+    "level": "B2",
+    "example": "The payload must remain within the aircraft's limits."
   },
   {
     "en": "pencil",
@@ -5208,6 +5706,12 @@
     "example": "The word \"physical\" is used in context."
   },
   {
+    "en": "pitot tube",
+    "tr": "pitot tüpü",
+    "level": "C1",
+    "example": "Ice can block a pitot tube and affect airspeed readings."
+  },
+  {
     "en": "policy",
     "tr": "politika; ilke",
     "level": "B1",
@@ -5250,6 +5754,12 @@
     "example": "The word \"practitioner\" is used in context."
   },
   {
+    "en": "precaution",
+    "tr": "önlem",
+    "level": "B2",
+    "example": "Take the required precaution before opening the access panel."
+  },
+  {
     "en": "precede",
     "tr": "önce gelmek",
     "level": "B2",
@@ -5280,6 +5790,12 @@
     "example": "The word \"predominantly\" is useful in everyday English."
   },
   {
+    "en": "preflight inspection",
+    "tr": "uçuş öncesi kontrol",
+    "level": "B2",
+    "example": "The pilot completed the preflight inspection using the checklist."
+  },
+  {
     "en": "preliminary",
     "tr": "ön hazırlık niteliğinde",
     "level": "C1",
@@ -5290,6 +5806,12 @@
     "tr": "hazırlamak",
     "level": "A2",
     "example": "Prepare for the exam."
+  },
+  {
+    "en": "pressure altitude",
+    "tr": "basınç irtifası",
+    "level": "C1",
+    "example": "The performance calculation used pressure altitude and temperature."
   },
   {
     "en": "presumably",
@@ -5308,6 +5830,12 @@
     "tr": "önlemek",
     "level": "B1",
     "example": "Exercise can prevent illness."
+  },
+  {
+    "en": "preventive",
+    "tr": "önleyici",
+    "level": "B2",
+    "example": "Preventive maintenance can reduce unexpected downtime."
   },
   {
     "en": "previous",
@@ -5496,6 +6024,12 @@
     "example": "The word \"pursue\" is used in context."
   },
   {
+    "en": "pushback",
+    "tr": "geri itme",
+    "level": "B2",
+    "example": "The aircraft requested pushback from the gate."
+  },
+  {
     "en": "qualitative",
     "tr": "nitel",
     "level": "C1",
@@ -5520,16 +6054,34 @@
     "example": "The word \"quote\" is used in context."
   },
   {
+    "en": "radar vectoring",
+    "tr": "radar vektörlemesi",
+    "level": "C1",
+    "example": "Radar vectoring guided the aircraft toward the approach path."
+  },
+  {
     "en": "radical",
     "tr": "köklü; radikal",
     "level": "B2",
     "example": "The word \"radical\" is used in context."
   },
   {
+    "en": "radio communication",
+    "tr": "telsiz iletişimi",
+    "level": "B1",
+    "example": "Clear radio communication reduces misunderstandings."
+  },
+  {
     "en": "rainy",
     "tr": "yağmurlu",
     "level": "A1",
     "example": "Take an umbrella on a rainy day."
+  },
+  {
+    "en": "ramp agent",
+    "tr": "apron görevlisi",
+    "level": "B2",
+    "example": "The ramp agent confirmed that the baggage hold was secured."
   },
   {
     "en": "random",
@@ -5560,6 +6112,12 @@
     "tr": "tepki",
     "level": "A2",
     "example": "We use the word \"reaction\" in everyday English."
+  },
+  {
+    "en": "readback",
+    "tr": "talimatı geri okuma",
+    "level": "B2",
+    "example": "The pilot completed the readback to confirm the instruction."
   },
   {
     "en": "realize",
@@ -5604,6 +6162,12 @@
     "example": "We use the word \"recommendation\" in everyday English."
   },
   {
+    "en": "reconcile",
+    "tr": "uzlaştırmak; karşılaştırıp tutarlı hâle getirmek",
+    "level": "C1",
+    "example": "Reconcile the parts list with the physical inventory."
+  },
+  {
     "en": "recover",
     "tr": "iyileşmek; geri kazanmak",
     "level": "A2",
@@ -5616,6 +6180,12 @@
     "example": "We use the word \"recovery\" in everyday English."
   },
   {
+    "en": "rectification",
+    "tr": "düzeltme; arızayı giderme",
+    "level": "C1",
+    "example": "The rectification was recorded after the functional test."
+  },
+  {
     "en": "reduce",
     "tr": "azaltmak",
     "level": "B1",
@@ -5626,6 +6196,12 @@
     "tr": "azalma; indirim",
     "level": "B1",
     "example": "We use the word \"reduction\" in everyday English."
+  },
+  {
+    "en": "redundancy",
+    "tr": "yedeklilik",
+    "level": "C1",
+    "example": "Redundancy allows a backup system to take over after a failure."
   },
   {
     "en": "refer",
@@ -5710,6 +6286,12 @@
     "tr": "ilişki",
     "level": "B1",
     "example": "They have a good relationship."
+  },
+  {
+    "en": "release",
+    "tr": "servise verme; serbest bırakma",
+    "level": "B2",
+    "example": "Only authorized staff can approve the release to service."
   },
   {
     "en": "relevant",
@@ -5916,10 +6498,46 @@
     "example": "My morning routine is simple."
   },
   {
+    "en": "rudder",
+    "tr": "yön dümeni",
+    "level": "B1",
+    "example": "The rudder helps the pilot control yaw."
+  },
+  {
+    "en": "runway holding point",
+    "tr": "pist bekleme noktası",
+    "level": "B2",
+    "example": "The aircraft stopped at the runway holding point."
+  },
+  {
+    "en": "runway incursion",
+    "tr": "pist ihlali",
+    "level": "C1",
+    "example": "Clear communication helps prevent a runway incursion."
+  },
+  {
+    "en": "runway threshold",
+    "tr": "pist eşiği",
+    "level": "B2",
+    "example": "The aircraft crossed the runway threshold at the correct height."
+  },
+  {
+    "en": "runway visual range",
+    "tr": "pist görüş mesafesi",
+    "level": "C1",
+    "example": "Runway visual range decreased during the heavy fog."
+  },
+  {
     "en": "safe",
     "tr": "güvenli",
     "level": "A2",
     "example": "Keep your account safe."
+  },
+  {
+    "en": "safety briefing",
+    "tr": "güvenlik bilgilendirmesi",
+    "level": "B1",
+    "example": "The cabin crew delivered the safety briefing before takeoff."
   },
   {
     "en": "scenario",
@@ -5970,6 +6588,12 @@
     "example": "This is a serious problem."
   },
   {
+    "en": "serviceable",
+    "tr": "kullanılabilir; çalışır durumda",
+    "level": "C1",
+    "example": "Confirm that the equipment is serviceable before use."
+  },
+  {
     "en": "shift",
     "tr": "değişim; değiştirmek",
     "level": "A2",
@@ -5998,6 +6622,12 @@
     "tr": "alan; site",
     "level": "A2",
     "example": "The word \"site\" is used in context."
+  },
+  {
+    "en": "situational awareness",
+    "tr": "durumsal farkındalık",
+    "level": "C1",
+    "example": "Good situational awareness helps crews identify developing risks."
   },
   {
     "en": "skill",
@@ -6042,6 +6672,12 @@
     "example": "The word \"specific\" is used in context."
   },
   {
+    "en": "specification",
+    "tr": "teknik şartname; özellik",
+    "level": "B2",
+    "example": "The replacement part must meet the manufacturer's specification."
+  },
+  {
     "en": "specify",
     "tr": "belirtmek",
     "level": "B1",
@@ -6060,6 +6696,18 @@
     "example": "The word \"stable\" is used in context."
   },
   {
+    "en": "stall",
+    "tr": "perdövites",
+    "level": "B2",
+    "example": "The training session explained how to recognize an aerodynamic stall."
+  },
+  {
+    "en": "standard operating procedure",
+    "tr": "standart işletim prosedürü",
+    "level": "B2",
+    "example": "The crew followed the standard operating procedure."
+  },
+  {
     "en": "station",
     "tr": "istasyon",
     "level": "A1",
@@ -6076,6 +6724,12 @@
     "tr": "durum; statü",
     "level": "A2",
     "example": "The word \"status\" is used in context."
+  },
+  {
+    "en": "sterile cockpit",
+    "tr": "steril kokpit",
+    "level": "C1",
+    "example": "The sterile cockpit rule limits nonessential conversation during critical phases."
   },
   {
     "en": "straightforward",
@@ -6204,10 +6858,22 @@
     "example": "The word \"sustain\" is used in context."
   },
   {
+    "en": "sustainability",
+    "tr": "sürdürülebilirlik",
+    "level": "B2",
+    "example": "Sustainability initiatives can reduce waste in maintenance operations."
+  },
+  {
     "en": "symbol",
     "tr": "sembol",
     "level": "A2",
     "example": "The word \"symbol\" is used in context."
+  },
+  {
+    "en": "takeoff clearance",
+    "tr": "kalkış izni",
+    "level": "B1",
+    "example": "The pilot waited for takeoff clearance before entering the runway."
   },
   {
     "en": "target",
@@ -6222,6 +6888,12 @@
     "example": "The word \"task\" is used in context."
   },
   {
+    "en": "taxiway",
+    "tr": "taksi yolu",
+    "level": "B1",
+    "example": "The aircraft followed the taxiway to the assigned runway."
+  },
+  {
     "en": "teacher",
     "tr": "öğretmen",
     "level": "A1",
@@ -6232,6 +6904,12 @@
     "tr": "teknik",
     "level": "A2",
     "example": "The word \"technical\" is used in context."
+  },
+  {
+    "en": "technical logbook",
+    "tr": "teknik kayıt defteri",
+    "level": "B2",
+    "example": "The technician entered the defect in the technical logbook."
   },
   {
     "en": "technique",
@@ -6306,10 +6984,22 @@
     "example": "She is thirsty after running."
   },
   {
+    "en": "threshold",
+    "tr": "eşik değer",
+    "level": "C1",
+    "example": "Stop the test if the temperature exceeds the threshold."
+  },
+  {
     "en": "throughout",
     "tr": "boyunca",
     "level": "B1",
     "example": "It rained throughout the night."
+  },
+  {
+    "en": "thrust",
+    "tr": "itki",
+    "level": "B2",
+    "example": "The engines produced enough thrust for takeoff."
   },
   {
     "en": "ticket",
@@ -6324,10 +7014,34 @@
     "example": "I feel tired after work."
   },
   {
+    "en": "tolerance",
+    "tr": "tolerans; izin verilen sapma",
+    "level": "C1",
+    "example": "Measure the part to confirm it is within tolerance."
+  },
+  {
+    "en": "torque",
+    "tr": "tork; sıkma momenti",
+    "level": "C1",
+    "example": "Apply the specified torque to the fastener."
+  },
+  {
+    "en": "touchdown",
+    "tr": "teker koyma",
+    "level": "B2",
+    "example": "The touchdown was smooth and close to the runway centerline."
+  },
+  {
     "en": "trace",
     "tr": "iz; izini sürmek",
     "level": "B1",
     "example": "The word \"trace\" is used in context."
+  },
+  {
+    "en": "traceability",
+    "tr": "izlenebilirlik",
+    "level": "C1",
+    "example": "Traceability links each installed part to its documentation."
   },
   {
     "en": "tradition",
@@ -6372,6 +7086,12 @@
     "example": "The word \"transmit\" is used in context."
   },
   {
+    "en": "transponder",
+    "tr": "transponder; cevaplayıcı",
+    "level": "B2",
+    "example": "The pilot selected the assigned code on the transponder."
+  },
+  {
     "en": "transport",
     "tr": "taşımak; ulaşım",
     "level": "A2",
@@ -6390,10 +7110,22 @@
     "example": "The word \"trigger\" is used in context."
   },
   {
+    "en": "troubleshooting",
+    "tr": "arıza giderme",
+    "level": "C1",
+    "example": "The manual provides a troubleshooting sequence for the warning light."
+  },
+  {
     "en": "trust",
     "tr": "güvenmek",
     "level": "A2",
     "example": "I trust my team."
+  },
+  {
+    "en": "turbulence",
+    "tr": "türbülans",
+    "level": "B1",
+    "example": "The captain asked passengers to remain seated because of turbulence."
   },
   {
     "en": "ultimate",
@@ -6438,6 +7170,12 @@
     "example": "The word \"unique\" is used in context."
   },
   {
+    "en": "unserviceable",
+    "tr": "kullanılamaz; hizmet dışı",
+    "level": "C1",
+    "example": "Label unserviceable equipment and follow the reporting procedure."
+  },
+  {
     "en": "until",
     "tr": "-e kadar",
     "level": "A2",
@@ -6478,6 +7216,12 @@
     "tr": "geçerli",
     "level": "B2",
     "example": "That is a valid point."
+  },
+  {
+    "en": "validate",
+    "tr": "geçerliliğini doğrulamak",
+    "level": "C1",
+    "example": "The team validated the results with an independent test."
   },
   {
     "en": "validity",
@@ -6564,6 +7308,12 @@
     "example": "We use the word \"visual\" in everyday English."
   },
   {
+    "en": "visual approach",
+    "tr": "görerek yaklaşma",
+    "level": "B2",
+    "example": "The controller approved a visual approach in clear weather."
+  },
+  {
     "en": "volume",
     "tr": "hacim; cilt",
     "level": "A2",
@@ -6576,16 +7326,46 @@
     "example": "I volunteer at the library."
   },
   {
+    "en": "wake turbulence",
+    "tr": "uyan türbülansı",
+    "level": "C1",
+    "example": "Air traffic control increased the separation because of wake turbulence."
+  },
+  {
+    "en": "waypoint",
+    "tr": "yol noktası",
+    "level": "B2",
+    "example": "The flight plan included a waypoint near the coast."
+  },
+  {
+    "en": "wear",
+    "tr": "aşınma",
+    "level": "B1",
+    "example": "Excessive wear was found on the brake assembly."
+  },
+  {
     "en": "weather",
     "tr": "hava durumu",
     "level": "A1",
     "example": "The weather is warm today."
   },
   {
+    "en": "weather radar",
+    "tr": "hava radarı",
+    "level": "B1",
+    "example": "The pilots used weather radar to avoid the storm."
+  },
+  {
     "en": "website",
     "tr": "internet sitesi",
     "level": "A2",
     "example": "The website has useful information."
+  },
+  {
+    "en": "weight and balance",
+    "tr": "ağırlık ve denge",
+    "level": "B2",
+    "example": "The crew checked the aircraft's weight and balance before departure."
   },
   {
     "en": "welfare",
@@ -6606,10 +7386,22 @@
     "example": "The practice is widespread."
   },
   {
+    "en": "wind direction",
+    "tr": "rüzgâr yönü",
+    "level": "A2",
+    "example": "The wind direction changed before the aircraft landed."
+  },
+  {
     "en": "window",
     "tr": "pencere",
     "level": "A1",
     "example": "Please open the window."
+  },
+  {
+    "en": "windshear",
+    "tr": "rüzgâr kesmesi",
+    "level": "C1",
+    "example": "The warning system alerted the crew to possible windshear."
   },
   {
     "en": "withdraw",
@@ -6630,286 +7422,10 @@
     "example": "I wonder what happened."
   },
   {
-    "en": "worried",
-    "tr": "endişeli",
-    "level": "A2",
-    "example": "She is worried about the exam."
-  },
-  {
-    "en": "yield",
-    "tr": "verim; üretmek; boyun eğmek",
-    "level": "B2",
-    "example": "The word \"yield\" is used in context."
-  },
-  {
-    "en": "airworthiness",
-    "tr": "uçuşa elverişlilik",
-    "level": "C1",
-    "example": "The engineer checked the aircraft's airworthiness before release."
-  },
-  {
-    "en": "airframe",
-    "tr": "uçak gövdesi",
-    "level": "C1",
-    "example": "The inspection revealed corrosion on the airframe."
-  },
-  {
-    "en": "altimeter",
-    "tr": "irtifa ölçer",
-    "level": "B2",
-    "example": "The pilot cross-checked the altimeter before descent."
-  },
-  {
-    "en": "airspeed",
-    "tr": "hava hızı",
-    "level": "B2",
-    "example": "Maintain the required airspeed during the approach."
-  },
-  {
-    "en": "avionics",
-    "tr": "aviyonik sistemler",
-    "level": "C1",
-    "example": "Avionics technicians tested the navigation equipment."
-  },
-  {
-    "en": "bulkhead",
-    "tr": "bölme duvarı",
-    "level": "C1",
-    "example": "The technician inspected the bulkhead for cracks."
-  },
-  {
-    "en": "checklist",
-    "tr": "kontrol listesi",
-    "level": "B1",
-    "example": "Follow the checklist before starting the engine."
-  },
-  {
-    "en": "clearance",
-    "tr": "müsaade; izin",
-    "level": "B2",
-    "example": "The aircraft received clearance to taxi to the runway."
-  },
-  {
-    "en": "corrosion",
-    "tr": "korozyon",
-    "level": "B2",
-    "example": "Remove any corrosion according to the maintenance manual."
-  },
-  {
-    "en": "deviation",
-    "tr": "sapma",
-    "level": "B2",
-    "example": "Report any deviation from the approved procedure."
-  },
-  {
-    "en": "diagnostic",
-    "tr": "tanı amaçlı; arıza tespit",
-    "level": "C1",
-    "example": "The diagnostic test identified a faulty sensor."
-  },
-  {
-    "en": "dispatch",
-    "tr": "sevk; sefere verme",
-    "level": "B2",
-    "example": "The aircraft cannot be released for dispatch until the defect is resolved."
-  },
-  {
-    "en": "fatigue",
-    "tr": "yorulma; metal yorgunluğu",
-    "level": "B2",
-    "example": "Repeated stress can cause metal fatigue."
-  },
-  {
-    "en": "fastener",
-    "tr": "sabitleyici bağlantı elemanı",
-    "level": "C1",
-    "example": "Check each fastener for damage and correct torque."
-  },
-  {
-    "en": "fuselage",
-    "tr": "uçak gövdesi",
-    "level": "B2",
-    "example": "The inspection covered the fuselage panels."
-  },
-  {
-    "en": "grounding",
-    "tr": "uçağın yerde tutulması",
-    "level": "B2",
-    "example": "A serious defect may result in the grounding of an aircraft."
-  },
-  {
-    "en": "hydraulic",
-    "tr": "hidrolik",
-    "level": "B2",
-    "example": "The hydraulic system must be checked for leaks."
-  },
-  {
-    "en": "inspection",
-    "tr": "muayene; inceleme",
-    "level": "B1",
-    "example": "The inspection must be documented in the aircraft logbook."
-  },
-  {
-    "en": "interlock",
-    "tr": "emniyet kilitleme mekanizması",
-    "level": "C1",
-    "example": "The interlock prevents the system from operating in an unsafe state."
-  },
-  {
-    "en": "logbook",
-    "tr": "teknik kayıt defteri",
-    "level": "B2",
-    "example": "Record the completed work in the aircraft logbook."
-  },
-  {
-    "en": "malfunction",
-    "tr": "arıza; hatalı çalışma",
-    "level": "B2",
-    "example": "The crew reported a malfunction in the warning system."
-  },
-  {
-    "en": "overhaul",
-    "tr": "büyük bakım; revizyon",
-    "level": "C1",
-    "example": "The engine is scheduled for an overhaul."
-  },
-  {
-    "en": "payload",
-    "tr": "faydalı yük",
-    "level": "B2",
-    "example": "The payload must remain within the aircraft's limits."
-  },
-  {
-    "en": "preventive",
-    "tr": "önleyici",
-    "level": "B2",
-    "example": "Preventive maintenance can reduce unexpected downtime."
-  },
-  {
-    "en": "rectification",
-    "tr": "düzeltme; arızayı giderme",
-    "level": "C1",
-    "example": "The rectification was recorded after the functional test."
-  },
-  {
-    "en": "redundancy",
-    "tr": "yedeklilik",
-    "level": "C1",
-    "example": "Redundancy allows a backup system to take over after a failure."
-  },
-  {
-    "en": "release",
-    "tr": "servise verme; serbest bırakma",
-    "level": "B2",
-    "example": "Only authorized staff can approve the release to service."
-  },
-  {
-    "en": "runway incursion",
-    "tr": "pist ihlali",
-    "level": "C1",
-    "example": "Clear communication helps prevent a runway incursion."
-  },
-  {
-    "en": "serviceable",
-    "tr": "kullanılabilir; çalışır durumda",
-    "level": "C1",
-    "example": "Confirm that the equipment is serviceable before use."
-  },
-  {
-    "en": "troubleshooting",
-    "tr": "arıza giderme",
-    "level": "C1",
-    "example": "The manual provides a troubleshooting sequence for the warning light."
-  },
-  {
-    "en": "torque",
-    "tr": "tork; sıkma momenti",
-    "level": "C1",
-    "example": "Apply the specified torque to the fastener."
-  },
-  {
-    "en": "wear",
-    "tr": "aşınma",
-    "level": "B1",
-    "example": "Excessive wear was found on the brake assembly."
-  },
-  {
     "en": "work order",
     "tr": "iş emri",
     "level": "B2",
     "example": "The technician reviewed the work order before beginning the task."
-  },
-  {
-    "en": "workmanship",
-    "tr": "işçilik kalitesi",
-    "level": "C1",
-    "example": "The inspection confirmed that the workmanship met the required standard."
-  },
-  {
-    "en": "concise",
-    "tr": "özlü; kısa ve açık",
-    "level": "C1",
-    "example": "Write a concise report that includes the main findings."
-  },
-  {
-    "en": "corroborate",
-    "tr": "doğrulamak; desteklemek",
-    "level": "C1",
-    "example": "The second test helped corroborate the initial diagnosis."
-  },
-  {
-    "en": "specification",
-    "tr": "teknik şartname; özellik",
-    "level": "B2",
-    "example": "The replacement part must meet the manufacturer's specification."
-  },
-  {
-    "en": "validate",
-    "tr": "geçerliliğini doğrulamak",
-    "level": "C1",
-    "example": "The team validated the results with an independent test."
-  },
-  {
-    "en": "workload",
-    "tr": "iş yükü",
-    "level": "B2",
-    "example": "A clear handover helps the next shift manage its workload."
-  },
-  {
-    "en": "handover",
-    "tr": "devir teslim",
-    "level": "B2",
-    "example": "The handover included all unresolved maintenance items."
-  },
-  {
-    "en": "hazard",
-    "tr": "tehlike",
-    "level": "B1",
-    "example": "Identify each hazard before work begins."
-  },
-  {
-    "en": "threshold",
-    "tr": "eşik değer",
-    "level": "C1",
-    "example": "Stop the test if the temperature exceeds the threshold."
-  },
-  {
-    "en": "tolerance",
-    "tr": "tolerans; izin verilen sapma",
-    "level": "C1",
-    "example": "Measure the part to confirm it is within tolerance."
-  },
-  {
-    "en": "traceability",
-    "tr": "izlenebilirlik",
-    "level": "C1",
-    "example": "Traceability links each installed part to its documentation."
-  },
-  {
-    "en": "unserviceable",
-    "tr": "kullanılamaz; hizmet dışı",
-    "level": "C1",
-    "example": "Label unserviceable equipment and follow the reporting procedure."
   },
   {
     "en": "workforce",
@@ -6918,33 +7434,33 @@
     "example": "The workforce completed the updated safety training."
   },
   {
-    "en": "accountability",
-    "tr": "hesap verebilirlik; sorumluluk",
-    "level": "C1",
-    "example": "Clear records support accountability for each maintenance action."
-  },
-  {
-    "en": "contingency",
-    "tr": "beklenmedik durum planı",
-    "level": "C1",
-    "example": "The team prepared a contingency plan for equipment failure."
-  },
-  {
-    "en": "precaution",
-    "tr": "önlem",
+    "en": "workload",
+    "tr": "iş yükü",
     "level": "B2",
-    "example": "Take the required precaution before opening the access panel."
+    "example": "A clear handover helps the next shift manage its workload."
   },
   {
-    "en": "reconcile",
-    "tr": "uzlaştırmak; karşılaştırıp tutarlı hâle getirmek",
+    "en": "workmanship",
+    "tr": "işçilik kalitesi",
     "level": "C1",
-    "example": "Reconcile the parts list with the physical inventory."
+    "example": "The inspection confirmed that the workmanship met the required standard."
   },
   {
-    "en": "sustainability",
-    "tr": "sürdürülebilirlik",
+    "en": "worried",
+    "tr": "endişeli",
+    "level": "A2",
+    "example": "She is worried about the exam."
+  },
+  {
+    "en": "yaw",
+    "tr": "sapma hareketi",
+    "level": "C1",
+    "example": "The rudder controls yaw around the aircraft's vertical axis."
+  },
+  {
+    "en": "yield",
+    "tr": "verim; üretmek; boyun eğmek",
     "level": "B2",
-    "example": "Sustainability initiatives can reduce waste in maintenance operations."
+    "example": "The word \"yield\" is used in context."
   }
 ]
