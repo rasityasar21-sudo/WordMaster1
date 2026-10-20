@@ -390,6 +390,18 @@
     "example": "The air traffic controller gave the crew a new heading."
   },
   {
+    "en": "aircraft logbook",
+    "tr": "uçak kayıt defteri",
+    "level": "C1",
+    "example": "The aircraft logbook records relevant maintenance and operational history."
+  },
+  {
+    "en": "aircraft structure",
+    "tr": "uçak yapısı",
+    "level": "B2",
+    "example": "The inspection report describes the condition of the aircraft structure."
+  },
+  {
     "en": "airframe",
     "tr": "uçak gövdesi",
     "level": "C1",
@@ -406,6 +418,12 @@
     "tr": "uçuşa elverişlilik",
     "level": "C1",
     "example": "The engineer checked the aircraft's airworthiness before release."
+  },
+  {
+    "en": "airworthiness directive",
+    "tr": "uçuşa elverişlilik direktifi",
+    "level": "C1",
+    "example": "The maintenance team reviewed the applicable airworthiness directive."
   },
   {
     "en": "alarm",
@@ -594,6 +612,18 @@
     "example": "The word \"annually\" is useful in everyday English."
   },
   {
+    "en": "anti-ice system",
+    "tr": "buz önleme sistemi",
+    "level": "C1",
+    "example": "The training module explains the purpose of the anti-ice system."
+  },
+  {
+    "en": "anti-icing",
+    "tr": "buzlanma önleme",
+    "level": "C1",
+    "example": "The anti-icing system helps prevent ice from forming on critical surfaces."
+  },
+  {
     "en": "anticipate",
     "tr": "önceden tahmin etmek",
     "level": "B2",
@@ -664,6 +694,12 @@
     "tr": "yaklaşım",
     "level": "B2",
     "example": "We need a new approach."
+  },
+  {
+    "en": "approach clearance",
+    "tr": "yaklaşma müsaadesi",
+    "level": "C1",
+    "example": "The controller issued the approach clearance after confirming separation."
   },
   {
     "en": "appropriate",
@@ -1218,6 +1254,18 @@
     "example": "We use the word \"blank\" in everyday English."
   },
   {
+    "en": "bleed air",
+    "tr": "basınçlı hava tahliyesi",
+    "level": "C1",
+    "example": "The system uses bleed air for several aircraft functions."
+  },
+  {
+    "en": "bonding",
+    "tr": "elektriksel kuşaklama; eş potansiyel bağlantı",
+    "level": "C1",
+    "example": "The technical document explains bonding requirements for the relevant component."
+  },
+  {
     "en": "book",
     "tr": "kitap",
     "level": "A1",
@@ -1246,6 +1294,12 @@
     "tr": "sınır",
     "level": "B2",
     "example": "The word \"boundary\" is used in context."
+  },
+  {
+    "en": "braking system",
+    "tr": "fren sistemi",
+    "level": "B2",
+    "example": "The braking system was checked during the scheduled inspection."
   },
   {
     "en": "branch",
@@ -1332,10 +1386,22 @@
     "example": "The cabin crew checked that all passengers were seated."
   },
   {
+    "en": "cabin pressure",
+    "tr": "kabin basıncı",
+    "level": "B2",
+    "example": "Cabin pressure is monitored throughout the flight."
+  },
+  {
     "en": "calculate",
     "tr": "hesaplamak",
     "level": "A2",
     "example": "The word \"calculate\" is useful in everyday English."
+  },
+  {
+    "en": "calibration",
+    "tr": "kalibrasyon",
+    "level": "C1",
+    "example": "The measuring instrument requires calibration at the specified interval."
   },
   {
     "en": "call sign",
@@ -1546,6 +1612,12 @@
     "tr": "kronik",
     "level": "B2",
     "example": "The word \"chronic\" is useful in everyday English."
+  },
+  {
+    "en": "circuit breaker",
+    "tr": "devre kesici",
+    "level": "B2",
+    "example": "The manual identifies the circuit breaker associated with the system."
   },
   {
     "en": "circulate",
@@ -1884,6 +1956,12 @@
     "example": "The report is comprehensive."
   },
   {
+    "en": "compressor",
+    "tr": "kompresör",
+    "level": "B2",
+    "example": "The compressor increases the pressure of the incoming air."
+  },
+  {
     "en": "comprise",
     "tr": "içermek; oluşmak",
     "level": "B2",
@@ -2190,6 +2268,12 @@
     "example": "We use the word \"container\" in everyday English."
   },
   {
+    "en": "contamination",
+    "tr": "kirlenme; yabancı madde bulaşması",
+    "level": "C1",
+    "example": "Inspect the filter for signs of contamination."
+  },
+  {
     "en": "contemplate",
     "tr": "üzerinde düşünmek",
     "level": "B2",
@@ -2242,6 +2326,12 @@
     "tr": "katkı",
     "level": "B1",
     "example": "We use the word \"contribution\" in everyday English."
+  },
+  {
+    "en": "control surface",
+    "tr": "kumanda yüzeyi",
+    "level": "C1",
+    "example": "The technician inspected each control surface for damage."
   },
   {
     "en": "controversial",
@@ -2386,6 +2476,12 @@
     "tr": "cesaret",
     "level": "A2",
     "example": "We use the word \"courage\" in everyday English."
+  },
+  {
+    "en": "crack detection",
+    "tr": "çatlak tespiti",
+    "level": "C1",
+    "example": "The lesson compares common crack detection methods used in inspection."
   },
   {
     "en": "crash",
@@ -2644,6 +2740,18 @@
     "tr": "çıkarım; kesinti",
     "level": "B2",
     "example": "The word \"deduction\" is useful in everyday English."
+  },
+  {
+    "en": "defect report",
+    "tr": "arıza/hasar raporu",
+    "level": "B2",
+    "example": "The technician documented the observed defect in a defect report."
+  },
+  {
+    "en": "deferral",
+    "tr": "erteleme; erteleme işlemi",
+    "level": "C1",
+    "example": "The defect deferral must follow the approved maintenance procedure."
   },
   {
     "en": "deficiency",
@@ -3216,6 +3324,18 @@
     "example": "The word \"electoral\" is useful in everyday English."
   },
   {
+    "en": "electrical bus",
+    "tr": "elektrik barası",
+    "level": "C1",
+    "example": "The electrical bus distributes power to connected systems."
+  },
+  {
+    "en": "electrical continuity",
+    "tr": "elektriksel süreklilik",
+    "level": "C1",
+    "example": "The training material defines electrical continuity and explains how it is documented."
+  },
+  {
     "en": "elevate",
     "tr": "yükseltmek",
     "level": "B2",
@@ -3286,6 +3406,12 @@
     "tr": "acil iniş",
     "level": "B1",
     "example": "The crew prepared for an emergency landing after the warning."
+  },
+  {
+    "en": "emergency locator transmitter",
+    "tr": "acil durum yer belirleme vericisi",
+    "level": "C1",
+    "example": "The emergency locator transmitter is inspected according to the maintenance schedule."
   },
   {
     "en": "emphasis",
@@ -3372,10 +3498,22 @@
     "example": "The word \"engagement\" is useful in everyday English."
   },
   {
+    "en": "engine cowling",
+    "tr": "motor kaportası",
+    "level": "C1",
+    "example": "The illustrated glossary identifies the engine cowling and its main purpose."
+  },
+  {
     "en": "engine failure",
     "tr": "motor arızası",
     "level": "B2",
     "example": "The checklist explains what to do in the event of an engine failure."
+  },
+  {
+    "en": "engine nacelle",
+    "tr": "motor kaportası",
+    "level": "C1",
+    "example": "The engine nacelle was checked for loose fasteners."
   },
   {
     "en": "enhance",
@@ -3864,6 +4002,12 @@
     "example": "Repeated stress can cause metal fatigue."
   },
   {
+    "en": "fatigue crack",
+    "tr": "yorulma çatlağı",
+    "level": "C1",
+    "example": "The inspection identified a fatigue crack near the fastener hole."
+  },
+  {
     "en": "fatigue management",
     "tr": "yorgunluk yönetimi",
     "level": "C1",
@@ -3948,10 +4092,28 @@
     "example": "My schedule is flexible."
   },
   {
+    "en": "flight control system",
+    "tr": "uçuş kumanda sistemi",
+    "level": "B2",
+    "example": "The course introduces the main components of a flight control system."
+  },
+  {
+    "en": "flight data recorder",
+    "tr": "uçuş veri kayıt cihazı",
+    "level": "C1",
+    "example": "Investigators reviewed the flight data recorder after the incident."
+  },
+  {
     "en": "flight deck",
     "tr": "kokpit",
     "level": "B1",
     "example": "Only authorized crew members may enter the flight deck."
+  },
+  {
+    "en": "flight envelope",
+    "tr": "uçuş zarfı",
+    "level": "C1",
+    "example": "The aircraft must remain within its approved flight envelope."
   },
   {
     "en": "flight level",
@@ -4078,6 +4240,18 @@
     "tr": "arkadaş",
     "level": "A1",
     "example": "My friend studies English."
+  },
+  {
+    "en": "fuel flow",
+    "tr": "yakıt akışı",
+    "level": "B2",
+    "example": "The crew monitored fuel flow during engine start."
+  },
+  {
+    "en": "fuel leak",
+    "tr": "yakıt sızıntısı",
+    "level": "B2",
+    "example": "Report any suspected fuel leak immediately through the approved process."
   },
   {
     "en": "fulfil",
@@ -4242,6 +4416,12 @@
     "example": "A strong tailwind increased the aircraft's ground speed."
   },
   {
+    "en": "ground support equipment",
+    "tr": "yer destek ekipmanı",
+    "level": "C1",
+    "example": "The maintenance plan lists the ground support equipment required for the task."
+  },
+  {
     "en": "grounding",
     "tr": "uçağın yerde tutulması",
     "level": "B2",
@@ -4362,6 +4542,24 @@
     "example": "The hydraulic system must be checked for leaks."
   },
   {
+    "en": "hydraulic actuator",
+    "tr": "hidrolik eyleyici",
+    "level": "C1",
+    "example": "The diagram shows how a hydraulic actuator converts pressure into movement."
+  },
+  {
+    "en": "hydraulic fluid",
+    "tr": "hidrolik sıvı",
+    "level": "B2",
+    "example": "The aircraft documentation specifies the approved hydraulic fluid for the system."
+  },
+  {
+    "en": "hydraulic pressure",
+    "tr": "hidrolik basınç",
+    "level": "B2",
+    "example": "The technician recorded the hydraulic pressure reading."
+  },
+  {
     "en": "hydraulic system",
     "tr": "hidrolik sistem",
     "level": "B2",
@@ -4372,6 +4570,12 @@
     "tr": "hipotez",
     "level": "B2",
     "example": "The word \"hypothesis\" is used in context."
+  },
+  {
+    "en": "icing conditions",
+    "tr": "buzlanma koşulları",
+    "level": "C1",
+    "example": "The crew followed the applicable procedures in icing conditions."
   },
   {
     "en": "identical",
@@ -4644,6 +4848,18 @@
     "example": "The inspection must be documented in the aircraft logbook."
   },
   {
+    "en": "inspection finding",
+    "tr": "muayene bulgusu",
+    "level": "B2",
+    "example": "Each inspection finding should be described clearly and supported by evidence."
+  },
+  {
+    "en": "inspection interval",
+    "tr": "kontrol aralığı",
+    "level": "C1",
+    "example": "The inspection interval is defined in the approved maintenance program."
+  },
+  {
     "en": "inspiration",
     "tr": "ilham",
     "level": "A2",
@@ -4672,6 +4888,12 @@
     "tr": "talimat",
     "level": "A2",
     "example": "We use the word \"instruction\" in everyday English."
+  },
+  {
+    "en": "instrument approach",
+    "tr": "aletli yaklaşma",
+    "level": "C1",
+    "example": "The crew briefed the instrument approach before descent."
   },
   {
     "en": "instrument landing system",
@@ -4950,6 +5172,12 @@
     "example": "The leader gave a speech."
   },
   {
+    "en": "leakage",
+    "tr": "sızıntı",
+    "level": "B2",
+    "example": "The report records the observed leakage and the location where it was found."
+  },
+  {
     "en": "leave",
     "tr": "ayrılmak; hareket etmek",
     "level": "A1",
@@ -5040,6 +5268,12 @@
     "example": "The word \"literal\" is useful in everyday English."
   },
   {
+    "en": "load factor",
+    "tr": "yük faktörü",
+    "level": "C1",
+    "example": "The load factor increases during a coordinated turn."
+  },
+  {
     "en": "local",
     "tr": "yerel",
     "level": "A2",
@@ -5094,6 +5328,12 @@
     "example": "The engineer recorded the repair in the maintenance log."
   },
   {
+    "en": "maintenance release",
+    "tr": "bakım çıkış onayı",
+    "level": "C1",
+    "example": "The authorized engineer completed the maintenance release after all required checks."
+  },
+  {
     "en": "majority",
     "tr": "çoğunluk",
     "level": "B1",
@@ -5124,10 +5364,22 @@
     "example": "The word \"mandatory\" is useful in everyday English."
   },
   {
+    "en": "manifold pressure",
+    "tr": "manifold basıncı",
+    "level": "C1",
+    "example": "The mechanic compared the manifold pressure with the specified range."
+  },
+  {
     "en": "manipulate",
     "tr": "yönlendirmek; manipüle etmek",
     "level": "B2",
     "example": "The word \"manipulate\" is used in context."
+  },
+  {
+    "en": "material traceability",
+    "tr": "malzeme izlenebilirliği",
+    "level": "C1",
+    "example": "Material traceability links a component to its documented origin and records."
   },
   {
     "en": "mayday",
@@ -5238,6 +5490,12 @@
     "example": "The word \"minimize\" is useful in everyday English."
   },
   {
+    "en": "minimum equipment list",
+    "tr": "asgari teçhizat listesi",
+    "level": "C1",
+    "example": "The dispatch team consulted the minimum equipment list before release."
+  },
+  {
     "en": "minimum visibility",
     "tr": "asgari görüş mesafesi",
     "level": "C1",
@@ -5334,6 +5592,12 @@
     "example": "Modern aircraft use several systems for navigation."
   },
   {
+    "en": "navigation aid",
+    "tr": "seyrüsefer yardımcısı",
+    "level": "B2",
+    "example": "The crew confirmed that the navigation aid was available."
+  },
+  {
     "en": "negate",
     "tr": "geçersiz kılmak; olumsuzlamak",
     "level": "C1",
@@ -5362,6 +5626,12 @@
     "tr": "tarafsız; nötr",
     "level": "B1",
     "example": "The word \"neutral\" is used in context."
+  },
+  {
+    "en": "non-destructive testing",
+    "tr": "tahribatsız muayene",
+    "level": "C1",
+    "example": "Non-destructive testing can reveal defects without damaging the component."
   },
   {
     "en": "normal",
@@ -5478,6 +5748,12 @@
     "example": "The word \"ongoing\" is used in context."
   },
   {
+    "en": "operating limitation",
+    "tr": "işletme sınırı",
+    "level": "C1",
+    "example": "The crew must observe every applicable operating limitation."
+  },
+  {
     "en": "operation",
     "tr": "işlem; operasyon",
     "level": "A2",
@@ -5488,6 +5764,12 @@
     "tr": "işletimsel; operasyonel",
     "level": "B2",
     "example": "The word \"operational\" is useful in everyday English."
+  },
+  {
+    "en": "operational check",
+    "tr": "işlevsel kontrol",
+    "level": "B2",
+    "example": "The training example explains how an operational check is recorded in the maintenance documentation."
   },
   {
     "en": "opponent",
@@ -5568,6 +5850,12 @@
     "example": "The word \"oversee\" is useful in everyday English."
   },
   {
+    "en": "oxygen system",
+    "tr": "oksijen sistemi",
+    "level": "B2",
+    "example": "The course outlines the purpose of the aircraft oxygen system."
+  },
+  {
     "en": "paradigm",
     "tr": "paradigma",
     "level": "C1",
@@ -5584,6 +5872,12 @@
     "tr": "ebeveyn",
     "level": "A1",
     "example": "Each parent came to the meeting."
+  },
+  {
+    "en": "part number",
+    "tr": "parça numarası",
+    "level": "B2",
+    "example": "The part number must match the applicable parts documentation."
   },
   {
     "en": "participate",
@@ -5814,6 +6108,18 @@
     "example": "The performance calculation used pressure altitude and temperature."
   },
   {
+    "en": "pressure differential",
+    "tr": "basınç farkı",
+    "level": "C1",
+    "example": "The system monitors the pressure differential across the filter."
+  },
+  {
+    "en": "pressure relief valve",
+    "tr": "basınç tahliye valfi",
+    "level": "C1",
+    "example": "The system diagram identifies the pressure relief valve and its function."
+  },
+  {
     "en": "presumably",
     "tr": "muhtemelen",
     "level": "B2",
@@ -5836,6 +6142,12 @@
     "tr": "önleyici",
     "level": "B2",
     "example": "Preventive maintenance can reduce unexpected downtime."
+  },
+  {
+    "en": "preventive maintenance",
+    "tr": "önleyici bakım",
+    "level": "C1",
+    "example": "Preventive maintenance aims to reduce the likelihood of equipment failure."
   },
   {
     "en": "previous",
@@ -5952,6 +6264,12 @@
     "example": "We use the word \"promotion\" in everyday English."
   },
   {
+    "en": "propeller pitch",
+    "tr": "pervane hatvesi",
+    "level": "C1",
+    "example": "The mechanism adjusts propeller pitch to meet operating demands."
+  },
+  {
     "en": "proportion",
     "tr": "oran",
     "level": "B2",
@@ -6034,6 +6352,12 @@
     "tr": "nitel",
     "level": "C1",
     "example": "The word \"qualitative\" is used in context."
+  },
+  {
+    "en": "quality assurance",
+    "tr": "kalite güvencesi",
+    "level": "B2",
+    "example": "Quality assurance supports consistent processes and reliable documentation."
   },
   {
     "en": "quantify",
@@ -6588,10 +6912,22 @@
     "example": "This is a serious problem."
   },
   {
+    "en": "service bulletin",
+    "tr": "servis bülteni",
+    "level": "C1",
+    "example": "The maintenance planner reviewed the applicable service bulletin."
+  },
+  {
     "en": "serviceable",
     "tr": "kullanılabilir; çalışır durumda",
     "level": "C1",
     "example": "Confirm that the equipment is serviceable before use."
+  },
+  {
+    "en": "shear stress",
+    "tr": "kayma gerilmesi",
+    "level": "C1",
+    "example": "The engineer calculated the shear stress on the fastener."
   },
   {
     "en": "shift",
@@ -6702,6 +7038,12 @@
     "example": "The training session explained how to recognize an aerodynamic stall."
   },
   {
+    "en": "stall warning",
+    "tr": "stall ikazı",
+    "level": "B2",
+    "example": "The stall warning alerts the crew to a developing aerodynamic condition."
+  },
+  {
     "en": "standard operating procedure",
     "tr": "standart işletim prosedürü",
     "level": "B2",
@@ -6748,6 +7090,18 @@
     "tr": "stres; vurgulamak",
     "level": "A2",
     "example": "The word \"stress\" is used in context."
+  },
+  {
+    "en": "structural damage",
+    "tr": "yapısal hasar",
+    "level": "B2",
+    "example": "The inspection report describes the location and nature of the structural damage."
+  },
+  {
+    "en": "structural integrity",
+    "tr": "yapısal bütünlük",
+    "level": "C1",
+    "example": "The inspection assessed the structural integrity of the repaired area."
   },
   {
     "en": "structure",
@@ -6912,6 +7266,12 @@
     "example": "The technician entered the defect in the technical logbook."
   },
   {
+    "en": "technical record",
+    "tr": "teknik kayıt",
+    "level": "B2",
+    "example": "The technical record should be complete, legible, and traceable."
+  },
+  {
     "en": "technique",
     "tr": "teknik; yöntem",
     "level": "A2",
@@ -7002,6 +7362,12 @@
     "example": "The engines produced enough thrust for takeoff."
   },
   {
+    "en": "thrust reverser",
+    "tr": "ters itki sistemi",
+    "level": "C1",
+    "example": "The thrust reverser was inspected for signs of damage."
+  },
+  {
     "en": "ticket",
     "tr": "bilet",
     "level": "A1",
@@ -7024,6 +7390,18 @@
     "tr": "tork; sıkma momenti",
     "level": "C1",
     "example": "Apply the specified torque to the fastener."
+  },
+  {
+    "en": "torque setting",
+    "tr": "tork ayarı",
+    "level": "C1",
+    "example": "Use the specified torque setting when tightening the fastener."
+  },
+  {
+    "en": "torque value",
+    "tr": "tork değeri",
+    "level": "C1",
+    "example": "The approved technical data specifies the applicable torque value."
   },
   {
     "en": "touchdown",
@@ -7110,6 +7488,12 @@
     "example": "The word \"trigger\" is used in context."
   },
   {
+    "en": "trim tab",
+    "tr": "trim sekmesi",
+    "level": "C1",
+    "example": "The trim tab helps reduce control forces in flight."
+  },
+  {
     "en": "troubleshooting",
     "tr": "arıza giderme",
     "level": "C1",
@@ -7120,6 +7504,12 @@
     "tr": "güvenmek",
     "level": "A2",
     "example": "I trust my team."
+  },
+  {
+    "en": "turbine blade",
+    "tr": "türbin kanadı",
+    "level": "C1",
+    "example": "The turbine blade was examined for cracks and surface damage."
   },
   {
     "en": "turbulence",
@@ -7404,6 +7794,12 @@
     "example": "The warning system alerted the crew to possible windshear."
   },
   {
+    "en": "wiring diagram",
+    "tr": "kablolama şeması",
+    "level": "B2",
+    "example": "The wiring diagram helps the reader understand the documented electrical connections."
+  },
+  {
     "en": "withdraw",
     "tr": "geri çekmek; çekilmek",
     "level": "B1",
@@ -7420,6 +7816,12 @@
     "tr": "merak etmek",
     "level": "B1",
     "example": "I wonder what happened."
+  },
+  {
+    "en": "work card",
+    "tr": "iş kartı",
+    "level": "C1",
+    "example": "The technician signed the work card after completing the task."
   },
   {
     "en": "work order",
@@ -7462,245 +7864,5 @@
     "tr": "verim; üretmek; boyun eğmek",
     "level": "B2",
     "example": "The word \"yield\" is used in context."
-  },
-  {
-    "en": "anti-icing",
-    "tr": "buzlanma önleme",
-    "level": "C1",
-    "example": "The anti-icing system helps prevent ice from forming on critical surfaces."
-  },
-  {
-    "en": "approach clearance",
-    "tr": "yaklaşma müsaadesi",
-    "level": "C1",
-    "example": "The controller issued the approach clearance after confirming separation."
-  },
-  {
-    "en": "bleed air",
-    "tr": "basınçlı hava tahliyesi",
-    "level": "C1",
-    "example": "The system uses bleed air for several aircraft functions."
-  },
-  {
-    "en": "braking system",
-    "tr": "fren sistemi",
-    "level": "B2",
-    "example": "The braking system was checked during the scheduled inspection."
-  },
-  {
-    "en": "cabin pressure",
-    "tr": "kabin basıncı",
-    "level": "B2",
-    "example": "Cabin pressure is monitored throughout the flight."
-  },
-  {
-    "en": "calibration",
-    "tr": "kalibrasyon",
-    "level": "C1",
-    "example": "The measuring instrument requires calibration at the specified interval."
-  },
-  {
-    "en": "compressor",
-    "tr": "kompresör",
-    "level": "B2",
-    "example": "The compressor increases the pressure of the incoming air."
-  },
-  {
-    "en": "contamination",
-    "tr": "kirlenme; yabancı madde bulaşması",
-    "level": "C1",
-    "example": "Inspect the filter for signs of contamination."
-  },
-  {
-    "en": "control surface",
-    "tr": "kumanda yüzeyi",
-    "level": "C1",
-    "example": "The technician inspected each control surface for damage."
-  },
-  {
-    "en": "deferral",
-    "tr": "erteleme; erteleme işlemi",
-    "level": "C1",
-    "example": "The defect deferral must follow the approved maintenance procedure."
-  },
-  {
-    "en": "electrical bus",
-    "tr": "elektrik barası",
-    "level": "C1",
-    "example": "The electrical bus distributes power to connected systems."
-  },
-  {
-    "en": "emergency locator transmitter",
-    "tr": "acil durum yer belirleme vericisi",
-    "level": "C1",
-    "example": "The emergency locator transmitter is inspected according to the maintenance schedule."
-  },
-  {
-    "en": "engine nacelle",
-    "tr": "motor kaportası",
-    "level": "C1",
-    "example": "The engine nacelle was checked for loose fasteners."
-  },
-  {
-    "en": "fatigue crack",
-    "tr": "yorulma çatlağı",
-    "level": "C1",
-    "example": "The inspection identified a fatigue crack near the fastener hole."
-  },
-  {
-    "en": "flight data recorder",
-    "tr": "uçuş veri kayıt cihazı",
-    "level": "C1",
-    "example": "Investigators reviewed the flight data recorder after the incident."
-  },
-  {
-    "en": "flight envelope",
-    "tr": "uçuş zarfı",
-    "level": "C1",
-    "example": "The aircraft must remain within its approved flight envelope."
-  },
-  {
-    "en": "fuel flow",
-    "tr": "yakıt akışı",
-    "level": "B2",
-    "example": "The crew monitored fuel flow during engine start."
-  },
-  {
-    "en": "fuel leak",
-    "tr": "yakıt sızıntısı",
-    "level": "B2",
-    "example": "Report any suspected fuel leak immediately through the approved process."
-  },
-  {
-    "en": "hydraulic pressure",
-    "tr": "hidrolik basınç",
-    "level": "B2",
-    "example": "The technician recorded the hydraulic pressure reading."
-  },
-  {
-    "en": "icing conditions",
-    "tr": "buzlanma koşulları",
-    "level": "C1",
-    "example": "The crew followed the applicable procedures in icing conditions."
-  },
-  {
-    "en": "inspection interval",
-    "tr": "kontrol aralığı",
-    "level": "C1",
-    "example": "The inspection interval is defined in the approved maintenance program."
-  },
-  {
-    "en": "instrument approach",
-    "tr": "aletli yaklaşma",
-    "level": "C1",
-    "example": "The crew briefed the instrument approach before descent."
-  },
-  {
-    "en": "load factor",
-    "tr": "yük faktörü",
-    "level": "C1",
-    "example": "The load factor increases during a coordinated turn."
-  },
-  {
-    "en": "maintenance release",
-    "tr": "bakım çıkış onayı",
-    "level": "C1",
-    "example": "The authorized engineer completed the maintenance release after all required checks."
-  },
-  {
-    "en": "manifold pressure",
-    "tr": "manifold basıncı",
-    "level": "C1",
-    "example": "The mechanic compared the manifold pressure with the specified range."
-  },
-  {
-    "en": "minimum equipment list",
-    "tr": "asgari teçhizat listesi",
-    "level": "C1",
-    "example": "The dispatch team consulted the minimum equipment list before release."
-  },
-  {
-    "en": "navigation aid",
-    "tr": "seyrüsefer yardımcısı",
-    "level": "B2",
-    "example": "The crew confirmed that the navigation aid was available."
-  },
-  {
-    "en": "non-destructive testing",
-    "tr": "tahribatsız muayene",
-    "level": "C1",
-    "example": "Non-destructive testing can reveal defects without damaging the component."
-  },
-  {
-    "en": "operating limitation",
-    "tr": "işletme sınırı",
-    "level": "C1",
-    "example": "The crew must observe every applicable operating limitation."
-  },
-  {
-    "en": "pressure differential",
-    "tr": "basınç farkı",
-    "level": "C1",
-    "example": "The system monitors the pressure differential across the filter."
-  },
-  {
-    "en": "propeller pitch",
-    "tr": "pervane hatvesi",
-    "level": "C1",
-    "example": "The mechanism adjusts propeller pitch to meet operating demands."
-  },
-  {
-    "en": "service bulletin",
-    "tr": "servis bülteni",
-    "level": "C1",
-    "example": "The maintenance planner reviewed the applicable service bulletin."
-  },
-  {
-    "en": "shear stress",
-    "tr": "kayma gerilmesi",
-    "level": "C1",
-    "example": "The engineer calculated the shear stress on the fastener."
-  },
-  {
-    "en": "stall warning",
-    "tr": "stall ikazı",
-    "level": "B2",
-    "example": "The stall warning alerts the crew to a developing aerodynamic condition."
-  },
-  {
-    "en": "structural integrity",
-    "tr": "yapısal bütünlük",
-    "level": "C1",
-    "example": "The inspection assessed the structural integrity of the repaired area."
-  },
-  {
-    "en": "thrust reverser",
-    "tr": "ters itki sistemi",
-    "level": "C1",
-    "example": "The thrust reverser was inspected for signs of damage."
-  },
-  {
-    "en": "torque setting",
-    "tr": "tork ayarı",
-    "level": "C1",
-    "example": "Use the specified torque setting when tightening the fastener."
-  },
-  {
-    "en": "trim tab",
-    "tr": "trim sekmesi",
-    "level": "C1",
-    "example": "The trim tab helps reduce control forces in flight."
-  },
-  {
-    "en": "turbine blade",
-    "tr": "türbin kanadı",
-    "level": "C1",
-    "example": "The turbine blade was examined for cracks and surface damage."
-  },
-  {
-    "en": "work card",
-    "tr": "iş kartı",
-    "level": "C1",
-    "example": "The technician signed the work card after completing the task."
   }
 ]
