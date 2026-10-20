@@ -1744,6 +1744,7 @@ private fun PronunciationPracticeDialog(words: List<Word>, onDismiss: () -> Unit
     val scope = rememberCoroutineScope()
     var current by remember { mutableStateOf(words.firstOrNull() ?: Word("hello", "merhaba", "A1")) }
     var searchText by remember { mutableStateOf("") }
+    var pronunciationLevel by remember { mutableStateOf("Tümü") }
     var choices by remember { mutableStateOf((listOf(current) + words.filter { it.en != current.en }.shuffled().take(3)).shuffled()) }
     var message by remember { mutableStateOf("Kayıtlı insan sesleri kullanılır; ses bulunamazsa yapay sesle değiştirilmez.") }
     var isLoading by remember { mutableStateOf(false) }
@@ -1818,6 +1819,23 @@ private fun PronunciationPracticeDialog(words: List<Word>, onDismiss: () -> Unit
                     if (term.isBlank()) message = "Önce bir İngilizce kelime yaz." else playRecorded(term)
                 }, enabled = !isLoading, modifier = Modifier.fillMaxWidth()) {
                     Text(if (isLoading) "Ses aranıyor…" else "🔎 Kayıtlı telaffuzu dinle")
+                }
+                Text("ÇALIŞMA SEVİYESİ", color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.ExtraBold, fontSize = 10.sp, letterSpacing = 1.sp)
+                Row(
+                    modifier = Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()),
+                    horizontalArrangement = Arrangement.spacedBy(6.dp)
+                ) {
+                    listOf("Tümü", "A1", "A2", "B1", "B2", "C1").forEach { level ->
+                        FilterChip(
+                            selected = pronunciationLevel == level,
+                            onClick = {
+                                pronunciationLevel = level
+                                message = if (level == "Tümü") "Tüm seviyeler seçildi. Sonraki kelimeyle devam edebilirsin."
+                                else "$level seviyesi seçildi. Sonraki kelime bu seviyeden seçilecek."
+                            },
+                            label = { Text(level) }
+                        )
+                    }
                 }
                 HorizontalDivider()
                 Text("KELİME TANIMA", color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.ExtraBold, fontSize = 11.sp, letterSpacing = 1.sp)
@@ -1916,11 +1934,13 @@ private fun PronunciationPracticeDialog(words: List<Word>, onDismiss: () -> Unit
         },
         confirmButton = {
             TextButton(onClick = {
-                val nextWord = words.filter { it.en != current.en }.randomOrNull()
-                    ?: words.randomOrNull()
+                val levelPool = words.filter { pronunciationLevel == "Tümü" || it.level.equals(pronunciationLevel, ignoreCase = true) }
+                    .ifEmpty { words }
+                val nextWord = levelPool.filter { it.en != current.en }.randomOrNull()
+                    ?: levelPool.randomOrNull()
                     ?: Word("hello", "merhaba", "A1")
                 current = nextWord
-                choices = (listOf(nextWord) + words.filter { it.en != nextWord.en }.shuffled().take(3)).shuffled()
+                choices = (listOf(nextWord) + levelPool.filter { it.en != nextWord.en }.shuffled().take(3)).shuffled()
                 recognizedCorrectly = false
                 currentQuestionRecorded = false
                 message = "Yeni kelime seçildi. Önce dinle, sonra doğru kelimeyi tanı."
