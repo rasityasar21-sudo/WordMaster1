@@ -1593,10 +1593,14 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                 enabled = selectedEnglish == null || selectedEnglish == word.en,
                                 colors = ButtonDefaults.outlinedButtonColors(
                                     containerColor = if (selectedEnglish == word.en) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surface,
-                                    contentColor = MaterialTheme.colorScheme.onSurface
+                                    contentColor = if (selectedEnglish == word.en) MaterialTheme.colorScheme.onPrimaryContainer else MaterialTheme.colorScheme.onSurface
+                                ),
+                                border = androidx.compose.foundation.BorderStroke(
+                                    1.dp,
+                                    if (selectedEnglish == word.en) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outlineVariant
                                 ),
                                 shape = RoundedCornerShape(12.dp)
-                            ) { Text(if (selectedEnglish == word.en) "● ${word.en}" else word.en, fontWeight = FontWeight.SemiBold, fontSize = 12.sp, maxLines = 2) }
+                            ) { Text(if (selectedEnglish == word.en) "✓  ${word.en}" else word.en, fontWeight = FontWeight.SemiBold, fontSize = 12.sp, maxLines = 2) }
                         }
                     }
                     Column(
@@ -1623,7 +1627,11 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                 },
                                 modifier = Modifier.fillMaxWidth(),
                                 contentPadding = PaddingValues(horizontal = 6.dp, vertical = 8.dp),
-                                colors = ButtonDefaults.outlinedButtonColors(contentColor = MaterialTheme.colorScheme.onSurface),
+                                colors = ButtonDefaults.outlinedButtonColors(
+                                    containerColor = MaterialTheme.colorScheme.surface,
+                                    contentColor = MaterialTheme.colorScheme.onSurface
+                                ),
+                                border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
                                 shape = RoundedCornerShape(12.dp)
                             ) { Text(word.tr, fontWeight = FontWeight.Medium, fontSize = 12.sp, maxLines = 2) }
                         }
