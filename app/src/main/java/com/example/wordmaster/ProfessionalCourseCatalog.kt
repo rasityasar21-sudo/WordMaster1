@@ -193,6 +193,45 @@ object ProfessionalCourseCatalog {
                     ),
                     question = "Wiring diagram ne anlama gelir?",
                     answer = "Elektrik kablolama şeması."
+                ),
+                ProfessionalLesson(
+                    id = "flight-controls-and-landing-gear",
+                    title = "11. Uçuş kumandaları ve iniş takımı terminolojisi",
+                    objective = "Uçuş kumandaları ve iniş takımıyla ilgili teknik açıklamaları anlamak ve durum bildirmek.",
+                    explanation = "Aileron, elevator ve rudder sırasıyla yatış, yunuslama ve sapma eksenlerindeki kumanda hareketleriyle ilişkilidir. Landing gear iniş takımını, actuator ise bir sistemi hareket ettiren mekanizmayı ifade eder. Bu ders terminoloji ve okuduğunu anlama içindir; gerçek sistem değerlendirmesinde uçak tipine ait güncel onaylı bakım dokümanı esas alınır.",
+                    phrases = listOf(
+                        "The report refers to the landing gear assembly." to "Rapor iniş takımı grubuna atıfta bulunuyor.",
+                        "The flight control surface is identified in the diagram." to "Uçuş kumanda yüzeyi şemada belirtilmiştir.",
+                        "Refer to the aircraft-specific maintenance data." to "Uçağa özgü bakım verilerine başvurun."
+                    ),
+                    question = "Aileron, elevator ve rudder terimleri neyi adlandırır?",
+                    answer = "Uçağın temel uçuş kumanda yüzeylerini: yatış, yunuslama ve sapma kumandalarını."
+                ),
+                ProfessionalLesson(
+                    id = "avionics-and-indications",
+                    title = "12. Aviyonik göstergeler ve arıza mesajları",
+                    objective = "Gösterge, uyarı mesajı ve teknik rapor ifadelerini birbirinden ayırmak.",
+                    explanation = "Indication gösterge veya belirtilen durum, alert uyarı, fault message ise arıza mesajı anlamına gelebilir. Ekrandaki bir mesaj tek başına arızanın nedenini kanıtlamaz. Dil çalışmasında mesajı doğru aktarmaya ve kaynağını belirtmeye odaklan; gerçek değerlendirme için onaylı hata ayıklama prosedürleri izlenmelidir.",
+                    phrases = listOf(
+                        "The crew reported an intermittent warning message." to "Ekip aralıklı bir uyarı mesajı bildirdi.",
+                        "Record the exact message and operating context." to "Mesajı ve çalışma bağlamını aynen kaydedin.",
+                        "The cause has not yet been confirmed." to "Neden henüz doğrulanmadı."
+                    ),
+                    question = "Bir uyarı mesajı görüldüğünde raporda ne yapılmalıdır?",
+                    answer = "Mesajı ve bağlamını doğru kaydetmek; doğrulanmamış nedeni kesin bilgi gibi yazmamak."
+                ),
+                ProfessionalLesson(
+                    id = "technical-case-study",
+                    title = "13. Teknik vaka: bulgudan rapora",
+                    objective = "Gözlem, referans, durum ve takip bilgisini profesyonel bir İngilizce raporda düzenlemek.",
+                    explanation = "Teknik raporlamada gözlenen bulgu ile olası neden birbirinden ayrılır. İyi bir kısa kayıt; bileşen veya konum, gözlenen durum, kullanılan geçerli referans ve gereken takip bilgisini açıkça belirtir. Aşağıdaki örnekler yalnızca dil öğrenme senaryosudur ve gerçek bakım kaydı yerine kullanılamaz.",
+                    phrases = listOf(
+                        "A fluid trace was observed near the line connection." to "Hat bağlantısının yakınında sıvı izi gözlemlendi.",
+                        "The finding was recorded for further assessment." to "Bulgu daha ileri değerlendirme için kaydedildi.",
+                        "No cause has been confirmed at this stage." to "Bu aşamada herhangi bir neden doğrulanmadı."
+                    ),
+                    question = "Profesyonel teknik raporda hangi iki şeyi birbirinden ayırmak gerekir?",
+                    answer = "Doğrudan gözlemlenen bulguyu ve henüz doğrulanmamış olası nedeni."
                 )
             ),
             sampleTerms = listOf(
