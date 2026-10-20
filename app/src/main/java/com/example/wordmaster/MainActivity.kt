@@ -138,8 +138,12 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
     var quickPracticeWords by remember { mutableStateOf<List<Word>>(emptyList()) }
     LaunchedEffect(words) {
         quickPracticeWords = withContext(Dispatchers.Default) {
-            words.filter { DictionaryEntryFilter.isQuickPracticeEntry(it.en, it.tr) }
-                .ifEmpty { words.filter { it.en.length <= 22 && it.tr.length <= 48 } }
+            // A single English headword must map to one practice card; duplicate dictionary
+            // entries can otherwise create repeated choices or make matching ambiguous.
+            val filtered = words.filter { DictionaryEntryFilter.isQuickPracticeEntry(it.en, it.tr) }
+            val fallback = words.filter { it.en.length <= 22 && it.tr.length <= 48 }
+            (filtered.ifEmpty { fallback })
+                .distinctBy { it.en.trim().lowercase(Locale.ROOT) }
         }
     }
     val learningStore = remember { LearningProgressStore(appContext) }
