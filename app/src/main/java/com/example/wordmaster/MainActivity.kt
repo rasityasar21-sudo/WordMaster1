@@ -1065,7 +1065,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                 modifier = Modifier.weight(1f).clickable { showTools = true },
                                 shape = RoundedCornerShape(18.dp),
                                 colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-                                border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFFEAE7F4))
+                                border = androidx.compose.foundation.BorderStroke(1.dp, if (darkTheme) Color(0xFF2B3657) else Color(0xFFEAE7F4))
                             ) {
                                 Row(
                                     Modifier.fillMaxWidth().padding(horizontal = 13.dp, vertical = 15.dp),
@@ -1083,7 +1083,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                 modifier = Modifier.weight(1f).clickable { showTools = true },
                                 shape = RoundedCornerShape(18.dp),
                                 colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-                                border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFFEAE7F4))
+                                border = androidx.compose.foundation.BorderStroke(1.dp, if (darkTheme) Color(0xFF2B3657) else Color(0xFFEAE7F4))
                             ) {
                                 Row(
                                     Modifier.fillMaxWidth().padding(horizontal = 13.dp, vertical = 15.dp),
@@ -1092,8 +1092,8 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                 ) {
                                     Text("🏅", fontSize = 23.sp)
                                     Column {
-                                        Text("Rozetler", color = Color(0xFF28243D), fontWeight = FontWeight.SemiBold, fontSize = 13.sp)
-                                        Text("Başarılarını gör", color = Color(0xFF817D95), fontSize = 11.sp)
+                                        Text("Rozetler", color = MaterialTheme.colorScheme.onSurface, fontWeight = FontWeight.SemiBold, fontSize = 13.sp)
+                                        Text("Başarılarını gör", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.62f), fontSize = 11.sp)
                                     }
                                 }
                             }
@@ -1103,7 +1103,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                 modifier = Modifier.weight(1f).clickable { showTools = true },
                                 shape = RoundedCornerShape(18.dp),
                                 colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-                                border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFFEAE7F4))
+                                border = androidx.compose.foundation.BorderStroke(1.dp, if (darkTheme) Color(0xFF2B3657) else Color(0xFFEAE7F4))
                             ) {
                                 Row(
                                     Modifier.fillMaxWidth().padding(horizontal = 13.dp, vertical = 15.dp),
@@ -1112,8 +1112,8 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                 ) {
                                     Text("🧩", fontSize = 23.sp)
                                     Column {
-                                        Text("Eşleştirme", color = Color(0xFF28243D), fontWeight = FontWeight.SemiBold, fontSize = 13.sp)
-                                        Text("Kelimelerle oyna", color = Color(0xFF817D95), fontSize = 11.sp)
+                                        Text("Eşleştirme", color = MaterialTheme.colorScheme.onSurface, fontWeight = FontWeight.SemiBold, fontSize = 13.sp)
+                                        Text("Kelimelerle oyna", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.62f), fontSize = 11.sp)
                                     }
                                 }
                             }
@@ -1121,7 +1121,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                 modifier = Modifier.weight(1f).clickable { showTools = true },
                                 shape = RoundedCornerShape(18.dp),
                                 colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-                                border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFFEAE7F4))
+                                border = androidx.compose.foundation.BorderStroke(1.dp, if (darkTheme) Color(0xFF2B3657) else Color(0xFFEAE7F4))
                             ) {
                                 Row(
                                     Modifier.fillMaxWidth().padding(horizontal = 13.dp, vertical = 15.dp),
@@ -1130,8 +1130,8 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                 ) {
                                     Text("📊", fontSize = 23.sp)
                                     Column {
-                                        Text("İstatistikler", color = Color(0xFF28243D), fontWeight = FontWeight.SemiBold, fontSize = 13.sp)
-                                        Text("İlerlemeni takip et", color = Color(0xFF817D95), fontSize = 11.sp)
+                                        Text("İstatistikler", color = MaterialTheme.colorScheme.onSurface, fontWeight = FontWeight.SemiBold, fontSize = 13.sp)
+                                        Text("İlerlemeni takip et", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.62f), fontSize = 11.sp)
                                     }
                                 }
                             }
