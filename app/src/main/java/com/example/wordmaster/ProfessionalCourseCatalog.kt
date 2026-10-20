@@ -154,6 +154,45 @@ object ProfessionalCourseCatalog {
                     ),
                     question = "İş devrinde hangi iki durum açıkça ayrılmalıdır?",
                     answer = "Tamamlanan işler ile henüz tamamlanmamış veya takip bekleyen işler."
+                ),
+                ProfessionalLesson(
+                    id = "technical-reading-and-abbreviations",
+                    title = "8. Teknik metin ve kısaltmaları anlama",
+                    objective = "Teknik cümlelerde referans, kısaltma ve koşul ifadelerini doğru yorumlamak.",
+                    explanation = "Technical documentation içinde kısaltmaların anlamı dokümanın kendi kısaltma listesi ve bağlamıyla doğrulanmalıdır. Unless aksi belirtilmedikçe anlamına gelebilir; prior to önce, after completion tamamlandıktan sonra demektir. Bir kısaltmanın yaygın anlamını bilmek, üretici dokümanındaki tanımı kontrol etme gereğini ortadan kaldırmaz.",
+                    phrases = listOf(
+                        "Refer to the abbreviations section." to "Kısaltmalar bölümüne başvurun.",
+                        "Complete the check prior to installation." to "Kontrolü montajdan önce tamamlayın.",
+                        "Record the result after completion." to "Sonucu tamamlandıktan sonra kaydedin."
+                    ),
+                    question = "Teknik dokümandaki bir kısaltmanın anlamı nasıl doğrulanmalıdır?",
+                    answer = "Dokümanın kendi kısaltmalar listesi ve cümledeki bağlamı kontrol edilmelidir."
+                ),
+                ProfessionalLesson(
+                    id = "hydraulic-and-pneumatic-language",
+                    title = "9. Hidrolik ve pnömatik sistem dili",
+                    objective = "Hidrolik ve pnömatik sistemlerle ilgili genel teknik terimleri anlamak.",
+                    explanation = "Hydraulic system sıvı basıncıyla, pneumatic system ise basınçlı gazla çalışan sistemleri ifade eder. Pressure basınç, line hat, fitting bağlantı elemanı, leakage sızıntı demektir. Bu ders yalnızca İngilizce terminoloji çalışmasıdır; gerçek uçak üzerinde kontrol veya işlem için güncel onaylı bakım verileri ve yetkili personel gereklidir.",
+                    phrases = listOf(
+                        "The hydraulic line requires an inspection." to "Hidrolik hattın kontrol edilmesi gerekiyor.",
+                        "Record the reported pressure indication." to "Bildirilen basınç göstergesini kaydedin.",
+                        "Check the applicable maintenance instructions." to "İlgili bakım talimatlarını kontrol edin."
+                    ),
+                    question = "Hydraulic ve pneumatic terimleri arasındaki temel fark nedir?",
+                    answer = "Hydraulic sıvı basıncına, pneumatic ise basınçlı gaza dayalı sistemi anlatır."
+                ),
+                ProfessionalLesson(
+                    id = "electrical-system-vocabulary",
+                    title = "10. Elektrik sistemleri ve bağlantı terminolojisi",
+                    objective = "Elektrik bağlantıları ve teknik kayıtlarla ilgili temel İngilizceyi kullanmak.",
+                    explanation = "Connector konektör, wiring kablolama, continuity süreklilik, insulation yalıtım anlamına gelir. Teknik metinlerde observed condition gözlenen durumu, specified value belirtilen değeri anlatır. Gerçek elektriksel testler için yalnızca uygun yetki, emniyet koşulları ve uçağa özgü onaylı prosedürler kullanılmalıdır.",
+                    phrases = listOf(
+                        "Document the connector condition." to "Konektörün durumunu belgeleyin.",
+                        "Refer to the wiring diagram." to "Kablolama şemasına başvurun.",
+                        "Record the observed condition." to "Gözlemlenen durumu kaydedin."
+                    ),
+                    question = "Wiring diagram ne anlama gelir?",
+                    answer = "Elektrik kablolama şeması."
                 )
             ),
             sampleTerms = listOf(
