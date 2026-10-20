@@ -978,6 +978,78 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                         }
                     }
                 }
+                if (currentScreen == "Mesleki İngilizce") {
+                    item {
+                        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                            Text("MESLEKİ AKADEMİ", color = MaterialTheme.colorScheme.primary, fontSize = 11.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 1.5.sp)
+                            Text("Havacılık İngilizcesi", color = MaterialTheme.colorScheme.onSurface, fontSize = 25.sp, fontWeight = FontWeight.ExtraBold)
+                            Text("Temel terimlerden operasyonel iletişime kadar adım adım ilerle.", color = MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 14.sp)
+                        }
+                    }
+                    item {
+                        Card(
+                            modifier = Modifier.fillMaxWidth(),
+                            shape = RoundedCornerShape(22.dp),
+                            colors = CardDefaults.cardColors(containerColor = if (darkTheme) Color(0xFF182747) else Color(0xFFE8EDFF))
+                        ) {
+                            Column(Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                                    Surface(shape = RoundedCornerShape(14.dp), color = Color(0xFF5145CD)) {
+                                        Text("✈", modifier = Modifier.padding(12.dp), color = Color.White, fontSize = 24.sp)
+                                    }
+                                    Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(3.dp)) {
+                                        Text("Aviation English Pathway", color = MaterialTheme.colorScheme.onSurface, fontWeight = FontWeight.ExtraBold, fontSize = 17.sp)
+                                        Text("Terminoloji · İletişim · Teknik bilgi", color = MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 12.sp)
+                                    }
+                                }
+                                Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.fillMaxWidth()) {
+                                    listOf("A1–A2 Temel", "B1–B2 Operasyon", "C1 İleri").forEach { stage ->
+                                        Surface(modifier = Modifier.weight(1f), shape = RoundedCornerShape(12.dp), color = if (darkTheme) Color(0xFF24365B) else Color.White) {
+                                            Text(stage, modifier = Modifier.padding(horizontal = 7.dp, vertical = 10.dp), color = MaterialTheme.colorScheme.onSurface, fontSize = 10.sp, fontWeight = FontWeight.Bold, textAlign = androidx.compose.ui.text.style.TextAlign.Center)
+                                        }
+                                    }
+                                }
+                                Text("Öğrenme yolu; terim, örnek cümle, bağlam ve kısa kontrol sorularıyla ilerleyecek şekilde düzenlenmiştir.", color = MaterialTheme.colorScheme.onSurface, fontSize = 13.sp)
+                            }
+                        }
+                    }
+                    item {
+                        Text("EĞİTİM MODÜLLERİ", color = MaterialTheme.colorScheme.onSurface, fontSize = 17.sp, fontWeight = FontWeight.ExtraBold)
+                    }
+                    items(listOf(
+                        Triple("01", "Uçak ve uçuş kontrol yüzeyleri", "Aileron, rudder, elevator, flap, spoiler · parçaların görevleri ve örnek kullanım"),
+                        Triple("02", "Havaalanı ve yer operasyonları", "Runway, taxiway, apron, gate, boarding, ground handling · operasyon kelimeleri"),
+                        Triple("03", "ATC ve telsiz iletişimi", "Readback, clearance, heading, altitude, maintain, standby · standart ifade kalıpları"),
+                        Triple("04", "Meteoroloji ve uçuş koşulları", "Visibility, crosswind, turbulence, icing, forecast, ceiling · raporları anlama"),
+                        Triple("05", "Uçak sistemleri ve teknik bakım", "Landing gear, hydraulic system, fuel system, inspection, malfunction · teknik bağlam"),
+                        Triple("06", "Acil durum ve emniyet", "Emergency, evacuation, precaution, incident, checklist · emniyet odaklı terimler"),
+                        Triple("07", "Mesleki okuma ve raporlama", "Manual, procedure, warning, report, requirement · teknik metinleri yorumlama"),
+                        Triple("08", "Senaryo ve seviye değerlendirmesi", "Bağlam içinde kelime seçimi, kısa diyaloglar ve modül sonu bilgi kontrolü")
+                    )) { module ->
+                        Card(
+                            modifier = Modifier.fillMaxWidth(),
+                            shape = RoundedCornerShape(18.dp),
+                            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                            border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant)
+                        ) {
+                            Row(Modifier.padding(15.dp), horizontalArrangement = Arrangement.spacedBy(12.dp), verticalAlignment = Alignment.Top) {
+                                Surface(shape = RoundedCornerShape(12.dp), color = if (darkTheme) Color(0xFF30275A) else Color(0xFFEAE5FF)) {
+                                    Text(module.first, modifier = Modifier.padding(horizontal = 11.dp, vertical = 9.dp), color = if (darkTheme) Color(0xFFD5CCFF) else Color(0xFF5145CD), fontWeight = FontWeight.ExtraBold)
+                                }
+                                Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                                    Text(module.second, color = MaterialTheme.colorScheme.onSurface, fontWeight = FontWeight.Bold, fontSize = 15.sp)
+                                    Text(module.third, color = MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 12.sp, lineHeight = 18.sp)
+                                }
+                            }
+                        }
+                    }
+                    item {
+                        Card(shape = RoundedCornerShape(16.dp), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)) {
+                            Text("Not: Bu modül başlıkları ve örnek terimler eğitim yolunun kapsamını tanımlar. Tam ders kitapları, telaffuz kayıtları ve sınav içerikleri ayrı ayrı genişletilecek; doğrulanmamış içerik gerçek havacılık talimatı yerine kullanılmamalıdır.", modifier = Modifier.padding(14.dp), color = MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 11.sp, lineHeight = 16.sp)
+                        }
+                    }
+                }
+
                 if (currentScreen == "Sözlük") {
                     item {
                         Text(if (selectedTopic == "Tümü") "Kelime defterim" else "$selectedTopic · Kelimeler", fontSize = 21.sp, fontWeight = FontWeight.ExtraBold, color = MaterialTheme.colorScheme.onSurface)
