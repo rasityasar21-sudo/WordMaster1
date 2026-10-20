@@ -1708,6 +1708,7 @@ private fun PronunciationPracticeDialog(words: List<Word>, onDismiss: () -> Unit
     var isLoading by remember { mutableStateOf(false) }
     var mediaPlayer by remember { mutableStateOf<MediaPlayer?>(null) }
     var recognizedCorrectly by remember { mutableStateOf(false) }
+    var currentQuestionRecorded by remember { mutableStateOf(false) }
     var pronunciationCorrect by remember { mutableIntStateOf(0) }
     var pronunciationAnswered by remember { mutableIntStateOf(0) }
 
@@ -1848,13 +1849,16 @@ private fun PronunciationPracticeDialog(words: List<Word>, onDismiss: () -> Unit
                     OutlinedButton(
                         onClick = {
                             if (!recognizedCorrectly) {
-                                pronunciationAnswered++
+                                if (!currentQuestionRecorded) {
+                                    pronunciationAnswered++
+                                    currentQuestionRecorded = true
+                                }
                                 if (option.en == current.en) {
                                     pronunciationCorrect++
                                     recognizedCorrectly = true
                                     message = "Doğru! Kelimeyi tekrar dinleyip sesli tekrar etmeyi dene. ✓"
                                 } else {
-                                    message = "Henüz değil. Anlamı tekrar düşün ve yeniden dene."
+                                    message = "Henüz değil. İpucu: ${current.tr}. Tekrar dinleyip yeniden dene."
                                 }
                             }
                         },
@@ -1871,9 +1875,13 @@ private fun PronunciationPracticeDialog(words: List<Word>, onDismiss: () -> Unit
         },
         confirmButton = {
             TextButton(onClick = {
-                current = words.filter { it.en != current.en }.randomOrNull() ?: words.random()
-                choices = (listOf(current) + words.filter { it.en != current.en }.shuffled().take(3)).shuffled()
+                val nextWord = words.filter { it.en != current.en }.randomOrNull()
+                    ?: words.randomOrNull()
+                    ?: Word("hello", "merhaba", "A1")
+                current = nextWord
+                choices = (listOf(nextWord) + words.filter { it.en != nextWord.en }.shuffled().take(3)).shuffled()
                 recognizedCorrectly = false
+                currentQuestionRecorded = false
                 message = "Yeni kelime seçildi. Önce dinle, sonra doğru kelimeyi tanı."
             }) { Text("Sonraki kelime") }
         },
