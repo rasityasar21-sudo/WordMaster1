@@ -55,18 +55,27 @@ private val Ink = Color(0xFF17213C)
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // Keep Android system bars aligned with WordMaster's light, premium interface.
-        window.navigationBarColor = android.graphics.Color.rgb(255, 255, 255)
-        window.statusBarColor = android.graphics.Color.rgb(255, 245, 245)
-        window.decorView.systemUiVisibility = window.decorView.systemUiVisibility or
-            View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
         val prefs = getSharedPreferences("wordmaster", MODE_PRIVATE)
+        // WordMaster's default is the selected professional navy theme; the saved choice
+        // is applied immediately so the loading screen and system bars do not flash red/white.
+        val initialThemeChoice = prefs.getInt("themeChoice", 1).coerceIn(0, 2)
+        val initialDarkTheme = initialThemeChoice == 1 ||
+            (initialThemeChoice == 2 && androidx.compose.foundation.isSystemInDarkTheme())
+        window.navigationBarColor = if (initialDarkTheme) android.graphics.Color.rgb(11, 16, 34) else android.graphics.Color.rgb(255, 255, 255)
+        window.statusBarColor = if (initialDarkTheme) android.graphics.Color.rgb(11, 16, 34) else android.graphics.Color.rgb(247, 245, 255)
+        var initialFlags = window.decorView.systemUiVisibility
+        initialFlags = if (initialDarkTheme) {
+            initialFlags and View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR.inv() and View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR.inv()
+        } else {
+            initialFlags or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
+        }
+        window.decorView.systemUiVisibility = initialFlags
         val wordsState = mutableStateOf<List<Word>?>(null)
 
         setContent {
             val words by wordsState
             if (words == null) {
-                DictionaryLoadingScreen()
+                DictionaryLoadingScreen(themeChoice = prefs.getInt("themeChoice", 1).coerceIn(0, 2))
             } else {
                 WordMasterApp(words!!, prefs)
             }
@@ -102,28 +111,33 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-private fun DictionaryLoadingScreen() {
+private fun DictionaryLoadingScreen(themeChoice: Int) {
+    val darkTheme = themeChoice == 1 ||
+        (themeChoice == 2 && androidx.compose.foundation.isSystemInDarkTheme())
+    val background = if (darkTheme) Color(0xFF0B1022) else Color(0xFFF7F5FF)
+    val accent = if (darkTheme) Color(0xFF9B8CFF) else Color(0xFF6550D9)
+    val foreground = if (darkTheme) Color(0xFFF3F1FF) else Color(0xFF202044)
     Surface(
         modifier = Modifier.fillMaxSize(),
-        color = Color(0xFFFFF5F5)
+        color = background
     ) {
         Column(
             modifier = Modifier.fillMaxSize().padding(24.dp),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            CircularProgressIndicator(color = Color(0xFFC62828))
+            CircularProgressIndicator(color = accent)
             Spacer(modifier = Modifier.height(20.dp))
             Text(
                 text = "WORDMASTER",
-                color = Color(0xFFC62828),
+                color = accent,
                 fontWeight = FontWeight.ExtraBold,
                 fontSize = 22.sp
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(
                 text = "Sözlük hazırlanıyor...",
-                color = Color(0xFF202044),
+                color = foreground,
                 fontSize = 15.sp
             )
         }
@@ -223,7 +237,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
     var usernameDraft by remember { mutableStateOf(username) }
     var emailDraft by remember { mutableStateOf(accountEmail) }
     var phoneDraft by remember { mutableStateOf(accountPhone) }
-    var themeChoice by remember { mutableIntStateOf(prefs.getInt("themeChoice", 0).coerceIn(0, 2)) }
+    var themeChoice by remember { mutableIntStateOf(prefs.getInt("themeChoice", 1).coerceIn(0, 2)) }
     var compactCards by remember { mutableStateOf(prefs.getBoolean("compactCards", false)) }
     var dailyGoal by remember { mutableIntStateOf(prefs.getInt("dailyGoal", 10)) }
     var dailyStudyGoal by remember { mutableIntStateOf(CourseProgressStore.dailyGoalMinutes(prefs)) }
