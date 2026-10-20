@@ -60,7 +60,7 @@ class MainActivity : ComponentActivity() {
         // is applied immediately so the loading screen and system bars do not flash red/white.
         val initialThemeChoice = prefs.getInt("themeChoice", 1).coerceIn(0, 2)
         val initialDarkTheme = initialThemeChoice == 1 ||
-            (initialThemeChoice == 2 && androidx.compose.foundation.isSystemInDarkTheme())
+            (initialThemeChoice == 2 && (resources.configuration.uiMode and android.content.res.Configuration.UI_MODE_NIGHT_MASK) == android.content.res.Configuration.UI_MODE_NIGHT_YES)
         window.navigationBarColor = if (initialDarkTheme) android.graphics.Color.rgb(11, 16, 34) else android.graphics.Color.rgb(255, 255, 255)
         window.statusBarColor = if (initialDarkTheme) android.graphics.Color.rgb(11, 16, 34) else android.graphics.Color.rgb(247, 245, 255)
         var initialFlags = window.decorView.systemUiVisibility
