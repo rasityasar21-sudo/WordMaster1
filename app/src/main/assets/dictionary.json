@@ -7462,5 +7462,245 @@
     "tr": "verim; üretmek; boyun eğmek",
     "level": "B2",
     "example": "The word \"yield\" is used in context."
+  },
+  {
+    "en": "anti-icing",
+    "tr": "buzlanma önleme",
+    "level": "C1",
+    "example": "The anti-icing system helps prevent ice from forming on critical surfaces."
+  },
+  {
+    "en": "approach clearance",
+    "tr": "yaklaşma müsaadesi",
+    "level": "C1",
+    "example": "The controller issued the approach clearance after confirming separation."
+  },
+  {
+    "en": "bleed air",
+    "tr": "basınçlı hava tahliyesi",
+    "level": "C1",
+    "example": "The system uses bleed air for several aircraft functions."
+  },
+  {
+    "en": "braking system",
+    "tr": "fren sistemi",
+    "level": "B2",
+    "example": "The braking system was checked during the scheduled inspection."
+  },
+  {
+    "en": "cabin pressure",
+    "tr": "kabin basıncı",
+    "level": "B2",
+    "example": "Cabin pressure is monitored throughout the flight."
+  },
+  {
+    "en": "calibration",
+    "tr": "kalibrasyon",
+    "level": "C1",
+    "example": "The measuring instrument requires calibration at the specified interval."
+  },
+  {
+    "en": "compressor",
+    "tr": "kompresör",
+    "level": "B2",
+    "example": "The compressor increases the pressure of the incoming air."
+  },
+  {
+    "en": "contamination",
+    "tr": "kirlenme; yabancı madde bulaşması",
+    "level": "C1",
+    "example": "Inspect the filter for signs of contamination."
+  },
+  {
+    "en": "control surface",
+    "tr": "kumanda yüzeyi",
+    "level": "C1",
+    "example": "The technician inspected each control surface for damage."
+  },
+  {
+    "en": "deferral",
+    "tr": "erteleme; erteleme işlemi",
+    "level": "C1",
+    "example": "The defect deferral must follow the approved maintenance procedure."
+  },
+  {
+    "en": "electrical bus",
+    "tr": "elektrik barası",
+    "level": "C1",
+    "example": "The electrical bus distributes power to connected systems."
+  },
+  {
+    "en": "emergency locator transmitter",
+    "tr": "acil durum yer belirleme vericisi",
+    "level": "C1",
+    "example": "The emergency locator transmitter is inspected according to the maintenance schedule."
+  },
+  {
+    "en": "engine nacelle",
+    "tr": "motor kaportası",
+    "level": "C1",
+    "example": "The engine nacelle was checked for loose fasteners."
+  },
+  {
+    "en": "fatigue crack",
+    "tr": "yorulma çatlağı",
+    "level": "C1",
+    "example": "The inspection identified a fatigue crack near the fastener hole."
+  },
+  {
+    "en": "flight data recorder",
+    "tr": "uçuş veri kayıt cihazı",
+    "level": "C1",
+    "example": "Investigators reviewed the flight data recorder after the incident."
+  },
+  {
+    "en": "flight envelope",
+    "tr": "uçuş zarfı",
+    "level": "C1",
+    "example": "The aircraft must remain within its approved flight envelope."
+  },
+  {
+    "en": "fuel flow",
+    "tr": "yakıt akışı",
+    "level": "B2",
+    "example": "The crew monitored fuel flow during engine start."
+  },
+  {
+    "en": "fuel leak",
+    "tr": "yakıt sızıntısı",
+    "level": "B2",
+    "example": "Report any suspected fuel leak immediately through the approved process."
+  },
+  {
+    "en": "hydraulic pressure",
+    "tr": "hidrolik basınç",
+    "level": "B2",
+    "example": "The technician recorded the hydraulic pressure reading."
+  },
+  {
+    "en": "icing conditions",
+    "tr": "buzlanma koşulları",
+    "level": "C1",
+    "example": "The crew followed the applicable procedures in icing conditions."
+  },
+  {
+    "en": "inspection interval",
+    "tr": "kontrol aralığı",
+    "level": "C1",
+    "example": "The inspection interval is defined in the approved maintenance program."
+  },
+  {
+    "en": "instrument approach",
+    "tr": "aletli yaklaşma",
+    "level": "C1",
+    "example": "The crew briefed the instrument approach before descent."
+  },
+  {
+    "en": "load factor",
+    "tr": "yük faktörü",
+    "level": "C1",
+    "example": "The load factor increases during a coordinated turn."
+  },
+  {
+    "en": "maintenance release",
+    "tr": "bakım çıkış onayı",
+    "level": "C1",
+    "example": "The authorized engineer completed the maintenance release after all required checks."
+  },
+  {
+    "en": "manifold pressure",
+    "tr": "manifold basıncı",
+    "level": "C1",
+    "example": "The mechanic compared the manifold pressure with the specified range."
+  },
+  {
+    "en": "minimum equipment list",
+    "tr": "asgari teçhizat listesi",
+    "level": "C1",
+    "example": "The dispatch team consulted the minimum equipment list before release."
+  },
+  {
+    "en": "navigation aid",
+    "tr": "seyrüsefer yardımcısı",
+    "level": "B2",
+    "example": "The crew confirmed that the navigation aid was available."
+  },
+  {
+    "en": "non-destructive testing",
+    "tr": "tahribatsız muayene",
+    "level": "C1",
+    "example": "Non-destructive testing can reveal defects without damaging the component."
+  },
+  {
+    "en": "operating limitation",
+    "tr": "işletme sınırı",
+    "level": "C1",
+    "example": "The crew must observe every applicable operating limitation."
+  },
+  {
+    "en": "pressure differential",
+    "tr": "basınç farkı",
+    "level": "C1",
+    "example": "The system monitors the pressure differential across the filter."
+  },
+  {
+    "en": "propeller pitch",
+    "tr": "pervane hatvesi",
+    "level": "C1",
+    "example": "The mechanism adjusts propeller pitch to meet operating demands."
+  },
+  {
+    "en": "service bulletin",
+    "tr": "servis bülteni",
+    "level": "C1",
+    "example": "The maintenance planner reviewed the applicable service bulletin."
+  },
+  {
+    "en": "shear stress",
+    "tr": "kayma gerilmesi",
+    "level": "C1",
+    "example": "The engineer calculated the shear stress on the fastener."
+  },
+  {
+    "en": "stall warning",
+    "tr": "stall ikazı",
+    "level": "B2",
+    "example": "The stall warning alerts the crew to a developing aerodynamic condition."
+  },
+  {
+    "en": "structural integrity",
+    "tr": "yapısal bütünlük",
+    "level": "C1",
+    "example": "The inspection assessed the structural integrity of the repaired area."
+  },
+  {
+    "en": "thrust reverser",
+    "tr": "ters itki sistemi",
+    "level": "C1",
+    "example": "The thrust reverser was inspected for signs of damage."
+  },
+  {
+    "en": "torque setting",
+    "tr": "tork ayarı",
+    "level": "C1",
+    "example": "Use the specified torque setting when tightening the fastener."
+  },
+  {
+    "en": "trim tab",
+    "tr": "trim sekmesi",
+    "level": "C1",
+    "example": "The trim tab helps reduce control forces in flight."
+  },
+  {
+    "en": "turbine blade",
+    "tr": "türbin kanadı",
+    "level": "C1",
+    "example": "The turbine blade was examined for cracks and surface damage."
+  },
+  {
+    "en": "work card",
+    "tr": "iş kartı",
+    "level": "C1",
+    "example": "The technician signed the work card after completing the task."
   }
 ]
