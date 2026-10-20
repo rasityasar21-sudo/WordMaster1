@@ -252,6 +252,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
     var placementLevel by remember { mutableStateOf("A1") }
     var showMatchGame by remember { mutableStateOf(false) }
     var matchRound by remember { mutableIntStateOf(0) }
+    var matchPairCount by remember { mutableIntStateOf(prefs.getInt("matchPairCount", 6).coerceIn(4, 8)) }
     var matchWords by remember { mutableStateOf<List<Word>>(emptyList()) }
     var matchTurkishOrder by remember { mutableStateOf<List<Word>>(emptyList()) }
     var matched by remember { mutableStateOf(setOf<String>()) }
@@ -1575,6 +1576,28 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                 }
                             }
                         }
+                        Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.fillMaxWidth()) {
+                            Text("ZORLUK", modifier = Modifier.align(Alignment.CenterVertically), color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.68f), fontSize = 10.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 0.8.sp)
+                            listOf(4, 6, 8).forEach { pairCount ->
+                                val active = matchPairCount == pairCount
+                                Surface(
+                                    modifier = Modifier.weight(1f).clip(RoundedCornerShape(10.dp)).clickable {
+                                        matchPairCount = pairCount
+                                        prefs.edit().putInt("matchPairCount", pairCount).apply()
+                                        matchWords = quickPracticeWords.shuffled().take(pairCount)
+                                        matchTurkishOrder = matchWords.shuffled()
+                                        matched = emptySet()
+                                        selectedEnglish = null
+                                        matchMessage = "Yeni zorluk seçildi. İngilizce kelimeyi eşleştir."
+                                    },
+                                    shape = RoundedCornerShape(10.dp),
+                                    color = if (active) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surface,
+                                    border = androidx.compose.foundation.BorderStroke(1.dp, if (active) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outlineVariant)
+                                ) {
+                                    Text("$pairCount çift", modifier = Modifier.padding(vertical = 9.dp), textAlign = androidx.compose.ui.text.style.TextAlign.Center, color = if (active) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurface, fontWeight = FontWeight.Bold, fontSize = 11.sp)
+                                }
+                            }
+                        }
                         LinearProgressIndicator(
                             progress = { if (matchWords.isEmpty()) 0f else matched.size.toFloat() / matchWords.size },
                             modifier = Modifier.fillMaxWidth().height(7.dp).clip(RoundedCornerShape(8.dp)),
@@ -1659,7 +1682,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
         },
         confirmButton = {
             TextButton(onClick = {
-                matchWords = quickPracticeWords.shuffled().take(6)
+                matchWords = quickPracticeWords.shuffled().take(matchPairCount)
                 matchTurkishOrder = matchWords.shuffled()
                 matchRound++
                 matched = emptySet()
