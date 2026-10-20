@@ -256,7 +256,18 @@ object ProfessionalCourseCatalog {
                 ProfessionalTerm("corrosion assessment", "korozyon değerlendirmesi", "Document the corrosion assessment using the applicable inspection criteria.", note = "Korozyon bulgularının ilgili ölçütlere göre değerlendirilmesi; gerçek bakımda güncel ve onaylı doküman esas alınır."),
                 ProfessionalTerm("bonding", "elektriksel eşpotansiyel bağlama", "Inspect the bonding connection in accordance with the aircraft-specific instructions.", note = "Elektriksel süreklilik ve eşpotansiyel bağlantı için kullanılan teknik terim."),
                 ProfessionalTerm("ground handling", "yer hizmetleri / yerde elleçleme", "Coordinate ground handling activities using the established safety procedures.", note = "Uçağın yerdeki hareketi ve operasyonlarıyla ilgili faaliyetler."),
-                ProfessionalTerm("handover", "iş devri / teslim", "Include open tasks, findings and required follow-up in the handover.", note = "Bir vardiya veya ekipten diğerine iş durumunun açık ve izlenebilir biçimde aktarılması.")
+                ProfessionalTerm("handover", "iş devri / teslim", "Include open tasks, findings and required follow-up in the handover.", note = "Bir vardiya veya ekipten diğerine iş durumunun açık ve izlenebilir biçimde aktarılması."),
+                ProfessionalTerm("landing gear", "iniş takımı", "The report describes the landing gear condition.", note = "Uçağın yerde desteklenmesi ve iniş-kalkış sırasında yüklerin taşınmasıyla ilgili sistem."),
+                ProfessionalTerm("pitot-static system", "pitot-statik sistemi", "The technical report refers to the pitot-static system.", note = "Hava basıncı ölçümleriyle ilişkili sistem; gerçek testler uçak tipine özgü onaylı prosedürlerle yapılır."),
+                ProfessionalTerm("bleed air", "motor kompresöründen alınan basınçlı hava", "The training text explains the bleed air system.", note = "Bazı uçak sistemlerinde kullanılan basınçlı hava; mimari uçak tipine göre değişir."),
+                ProfessionalTerm("de-icing", "buz giderme", "The de-icing procedure is described in the approved operational documentation.", note = "Buzun giderilmesiyle ilgili terim; uygulama yöntemi ve koşulları ilgili onaylı dokümana bağlıdır."),
+                ProfessionalTerm("fire detection", "yangın algılama", "The lesson covers fire detection terminology.", note = "Yangın durumunu algılamaya yönelik sistem ve göstergelerle ilgili genel terim."),
+                ProfessionalTerm("emergency equipment", "acil durum ekipmanı", "Check the equipment status in the applicable records.", note = "Acil durumlarda kullanılan ekipman; kontrol ve kayıt gereklilikleri onaylı süreçte tanımlanır."),
+                ProfessionalTerm("electrical bonding", "elektriksel eşpotansiyel bağlama", "The report identifies an electrical bonding point.", note = "Elektriksel potansiyel farklarını azaltmak ve gerekli sürekliliği sağlamakla ilgili bağlantı terimi."),
+                ProfessionalTerm("service difficulty", "servis sırasında karşılaşılan teknik sorun", "Describe the service difficulty clearly in the report.", note = "Teknik raporlama bağlamında hizmet sırasında ortaya çıkan güçlük veya sorun."),
+                ProfessionalTerm("flight data recorder", "uçuş veri kayıt cihazı", "The flight data recorder is referenced in the training material.", note = "Uçuş verilerini kaydeden sistem; bakım ve erişim süreçleri ilgili kurallara tabidir."),
+                ProfessionalTerm("cabin pressure", "kabin basıncı", "The technical text discusses cabin pressure indications.", note = "Basınçlandırılmış kabin koşullarıyla ilişkili terim."),
+                ProfessionalTerm("component traceability", "parça izlenebilirliği", "Maintain component traceability through the approved records.", note = "Bir parçanın kimliğinin, geçmişinin ve kayıtlarının izlenebilmesini ifade eder.")
             )
         ),
         ProfessionalTrack(
