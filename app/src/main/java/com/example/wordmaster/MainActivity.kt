@@ -223,6 +223,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
     var sessionActive by remember { mutableStateOf(false) }
     var showQuizSummary by remember { mutableStateOf(false) }
     var showTools by remember { mutableStateOf(false) }
+    var toolsDestination by remember { mutableStateOf("Günlük görevler") }
     var showPronunciation by remember { mutableStateOf(false) }
     var showProfile by remember { mutableStateOf(false) }
     var showSettings by remember { mutableStateOf(false) }
@@ -1177,7 +1178,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                         )
                         Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                             Card(
-                                modifier = Modifier.weight(1f).clickable { showTools = true },
+                                modifier = Modifier.weight(1f).clickable { toolsDestination = "Günlük görevler"; showTools = true },
                                 shape = RoundedCornerShape(18.dp),
                                 colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
                                 border = androidx.compose.foundation.BorderStroke(1.dp, if (darkTheme) Color(0xFF2B3657) else Color(0xFFEAE7F4))
@@ -1195,7 +1196,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                 }
                             }
                             Card(
-                                modifier = Modifier.weight(1f).clickable { showTools = true },
+                                modifier = Modifier.weight(1f).clickable { toolsDestination = "Rozetler"; showTools = true },
                                 shape = RoundedCornerShape(18.dp),
                                 colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
                                 border = androidx.compose.foundation.BorderStroke(1.dp, if (darkTheme) Color(0xFF2B3657) else Color(0xFFEAE7F4))
@@ -1215,7 +1216,14 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                         }
                         Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                             Card(
-                                modifier = Modifier.weight(1f).clickable { showTools = true },
+                                modifier = Modifier.weight(1f).clickable {
+                                    matchWords = quickPracticeWords.shuffled().take(matchPairCount)
+                                    matchTurkishOrder = matchWords.shuffled()
+                                    matched = emptySet()
+                                    selectedEnglish = null
+                                    matchMessage = "İngilizce kelimeyi oku ve doğru Türkçe karşılığı seç."
+                                    showMatchGame = true
+                                },
                                 shape = RoundedCornerShape(18.dp),
                                 colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
                                 border = androidx.compose.foundation.BorderStroke(1.dp, if (darkTheme) Color(0xFF2B3657) else Color(0xFFEAE7F4))
@@ -1233,7 +1241,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                 }
                             }
                             Card(
-                                modifier = Modifier.weight(1f).clickable { showTools = true },
+                                modifier = Modifier.weight(1f).clickable { toolsDestination = "İstatistikler"; showTools = true },
                                 shape = RoundedCornerShape(18.dp),
                                 colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
                                 border = androidx.compose.foundation.BorderStroke(1.dp, if (darkTheme) Color(0xFF2B3657) else Color(0xFFEAE7F4))
@@ -1607,40 +1615,70 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
 
     if (showTools) AlertDialog(
         onDismissRequest = { showTools = false },
-        title = { Text("WordMaster Pro") },
-        text = { Column(
-            modifier = Modifier.heightIn(max = 480.dp).verticalScroll(rememberScrollState()),
-            verticalArrangement = Arrangement.spacedBy(10.dp)
-        ) {
-            Text("📅 GÜNLÜK GÖREVLER", fontWeight = FontWeight.Bold)
-            Text("• $dailyGoal kelime öğren: ${learned.size.coerceAtMost(dailyGoal)}/$dailyGoal")
-            Text("• Testte 5 soruyu cevapla: ${quizCount.coerceAtMost(5)}/5")
-            Text("• Günlük seri: $dailyStreak gün")
-            Button(
-                enabled = !dailyRewardClaimed && learned.size >= 10,
-                onClick = {
-                    xp += 20
-                    coins += 10
-                    dailyRewardClaimed = true
-                    prefs.edit().putInt("xp", xp).putInt("coins", coins).putString("dailyRewardDate", LocalDate.now().toString()).apply()
-                },
-                modifier = Modifier.fillMaxWidth()
-            ) { Text(if (dailyRewardClaimed) "✅ Bugünkü ödül alındı" else "🎁 Günlük hedef ödülünü al (+20 XP, +10 coin)") }
-            HorizontalDivider()
-            Text("🏅 ROZETLER", fontWeight = FontWeight.Bold)
-            Text((if (learned.isNotEmpty()) "✅" else "🔒") + " İlk kelime")
-            Text((if (xp >= 100) "✅" else "🔒") + " 100 XP")
-            Text((if (learned.size >= 50) "✅" else "🔒") + " 50 kelime")
-            Text((if (bestCorrectStreak >= 5) "✅" else "🔒") + " 5 doğru üst üste")
-            Text((if (dailyStreak >= 7) "✅" else "🔒") + " 7 günlük seri")
-            HorizontalDivider()
-            Text("📊 İSTATİSTİKLER", fontWeight = FontWeight.Bold)
-            Text("Öğrenilen kelime: ${learned.size} / ${words.size}")
-            Text("XP: $xp • Seviye: ${xp / 100 + 1} • Coin: $coins")
-            Text("Doğru cevap: $totalCorrect / $totalAnswered")
-            Text("Başarı oranı: ${if (totalAnswered == 0) 0 else totalCorrect * 100 / totalAnswered}%")
-            Text("Doğru seri rekoru: $bestCorrectStreak • Tekrar kuyruğu: ${reviewWords.size}")
-        } },
+        title = { Text(toolsDestination, fontWeight = FontWeight.ExtraBold) },
+        text = {
+            Column(
+                modifier = Modifier.heightIn(max = 480.dp).verticalScroll(rememberScrollState()),
+                verticalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                when (toolsDestination) {
+                    "Günlük görevler" -> {
+                        Text("BUGÜNÜN HEDEFLERİ", color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.ExtraBold, fontSize = 11.sp, letterSpacing = 1.sp)
+                        Text("• $dailyGoal kelime öğren: ${learned.size.coerceAtMost(dailyGoal)}/$dailyGoal")
+                        Text("• Testte 5 soruyu cevapla: ${quizCount.coerceAtMost(5)}/5")
+                        Text("• Günlük seri: $dailyStreak gün")
+                        Button(
+                            enabled = !dailyRewardClaimed && learned.size >= 10,
+                            onClick = {
+                                xp += 20
+                                coins += 10
+                                dailyRewardClaimed = true
+                                prefs.edit().putInt("xp", xp).putInt("coins", coins).putString("dailyRewardDate", LocalDate.now().toString()).apply()
+                            },
+                            modifier = Modifier.fillMaxWidth()
+                        ) { Text(if (dailyRewardClaimed) "Bugünkü ödül alındı" else "Hedef ödülünü al (+20 XP, +10 coin)") }
+                        if (!dailyRewardClaimed && learned.size < 10) {
+                            Text("Ödülün açılması için toplam 10 kelime öğrenmelisin.", color = MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 12.sp)
+                        }
+                    }
+                    "Rozetler" -> {
+                        Text("Kazandığın rozetler ve açılacak sonraki başarılar.", color = MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 13.sp)
+                        listOf(
+                            Triple("İlk kelime", learned.isNotEmpty(), "En az 1 kelime öğren"),
+                            Triple("100 XP", xp >= 100, "100 deneyim puanına ulaş"),
+                            Triple("50 kelime", learned.size >= 50, "50 kelime öğren"),
+                            Triple("5 doğru üst üste", bestCorrectStreak >= 5, "Bir testte 5 doğruyu arka arkaya yap"),
+                            Triple("7 günlük seri", dailyStreak >= 7, "7 günlük çalışma serisi tamamla")
+                        ).forEach { badge ->
+                            Surface(
+                                modifier = Modifier.fillMaxWidth(),
+                                shape = RoundedCornerShape(14.dp),
+                                color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.55f)
+                            ) {
+                                Row(Modifier.padding(12.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                                    Text(if (badge.second) "🏅" else "🔒", fontSize = 24.sp)
+                                    Column(Modifier.weight(1f)) {
+                                        Text(badge.first, color = MaterialTheme.colorScheme.onSurface, fontWeight = FontWeight.Bold)
+                                        Text(if (badge.second) "Tamamlandı" else badge.third, color = MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 12.sp)
+                                    }
+                                    if (badge.second) Text("✓", color = Color(0xFF20B486), fontWeight = FontWeight.ExtraBold)
+                                }
+                            }
+                        }
+                    }
+                    else -> {
+                        Text("Öğrenme ilerlemen", color = MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 13.sp)
+                        Text("Öğrenilen kelime: ${learned.size} / ${words.size}")
+                        Text("XP: $xp  •  Seviye: ${xp / 100 + 1}  •  Coin: $coins")
+                        Text("Doğru cevap: $totalCorrect / $totalAnswered")
+                        Text("Başarı oranı: ${if (totalAnswered == 0) 0 else totalCorrect * 100 / totalAnswered}%")
+                        Text("En uzun doğru seri: $bestCorrectStreak")
+                        Text("Tekrar kuyruğu: ${reviewWords.size} kelime")
+                        Text("Tamamlanan mesleki ders: ${completedCourseIds.size}")
+                    }
+                }
+            }
+        },
         confirmButton = { TextButton(onClick = { showTools = false }) { Text("Kapat") } }
     )
 
