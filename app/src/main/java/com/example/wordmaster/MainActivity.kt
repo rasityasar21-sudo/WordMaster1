@@ -919,6 +919,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                     var practiceCorrect by remember(activeLesson) { mutableIntStateOf(0) }
                                     var practiceChoice by remember(activeLesson) { mutableStateOf("") }
                                     var practiceFeedback by remember(activeLesson) { mutableStateOf("") }
+                                    var practiceScored by remember(activeLesson) { mutableStateOf(false) }
                                     val practiceQuestions = remember(lesson) {
                                         val base = listOf(lesson.question to lesson.options to lesson.correct).map { Triple(it.first.first, it.first.second, it.second) }
                                         val examples = lesson.examples.map { pair ->
@@ -927,6 +928,8 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                         (base + examples + examples.reversed() + examples).take(10)
                                     }
                                     val practice = practiceQuestions[practiceIndex.coerceIn(0, practiceQuestions.lastIndex)]
+                                    // Keep choices stable while the composable recomposes after an answer.
+                                    val practiceOptions = remember(practiceIndex, practiceQuestions) { practice.second.distinct().shuffled() }
                                     Text("ALIŞTIRMA • ${practiceIndex + 1}/${practiceQuestions.size}", color = Blue, fontWeight = FontWeight.ExtraBold, fontSize = 12.sp)
                                     Card(shape = RoundedCornerShape(24.dp), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)) {
                                         Column(Modifier.fillMaxWidth().padding(20.dp), verticalArrangement = Arrangement.spacedBy(14.dp)) {
@@ -934,13 +937,17 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                             LinearProgressIndicator(progress = { (practiceIndex + 1) / practiceQuestions.size.toFloat() }, modifier = Modifier.fillMaxWidth(), color = Blue)
                                             Text(if (practiceIndex == 0) "Boşluğu doldur" else "Anlamı veya doğru kullanımı seç", fontSize = 21.sp, fontWeight = FontWeight.ExtraBold, color = MaterialTheme.colorScheme.onSurface)
                                             Text(practice.first, fontSize = 18.sp, lineHeight = 26.sp, color = MaterialTheme.colorScheme.onSurface)
-                                            practice.second.shuffled().forEach { option ->
+                                            practiceOptions.forEach { option ->
                                                 OutlinedButton(
+                                                    enabled = !practiceScored,
                                                     onClick = {
                                                         practiceChoice = option
                                                         val correct = option == practice.third
                                                         practiceFeedback = if (correct) "Doğru cevap! ✓" else "Tekrar dene."
-                                                        if (correct) practiceCorrect = (practiceCorrect + 1).coerceAtMost(practiceQuestions.size)
+                                                        if (correct && !practiceScored) {
+                                                            practiceCorrect = (practiceCorrect + 1).coerceAtMost(practiceQuestions.size)
+                                                            practiceScored = true
+                                                        }
                                                         lessonChoice = if (correct) lesson.correct else option
                                                         lessonAnswer = correct
                                                     },
@@ -961,28 +968,41 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                     }
                                     Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                                         OutlinedButton(onClick = { lessonStage = 1 }, modifier = Modifier.weight(1f)) { Text("← Videoya dön") }
-                                        Button(enabled = lessonAnswer, onClick = {
-                                            val key = "${selected}_${activeLessonIndex}_${activeLesson}"
-                                            val done = (prefs.getStringSet("completedLessons", emptySet()) ?: emptySet()) + key
-                                            prefs.edit().putStringSet("completedLessons", done).apply()
-                                            val completedCourseId = activeCourseLessonId
-                                            completedCourseId?.let { courseId ->
-                                                completedCourseIds = CourseProgressStore.markCompleted(prefs, courseId)
-                                            }
-                                            val sessionStart = lessonSessionStartedAt
-                                            val activeMillis = sessionStart?.let { startedAt ->
-                                                (System.currentTimeMillis() - startedAt).coerceAtLeast(0L)
-                                            } ?: 0L
-                                            val elapsedMinutes = StudySessionClock.elapsedWholeMinutes(
-                                                0L,
-                                                lessonSessionAccumulatedMillis + activeMillis
-                                            )
-                                            CourseProgressStore.addStudyMinutes(prefs, elapsedMinutes)
-                                            lessonSessionStartedAt = null
-                                            activeCourseLessonId = null
-                                            currentScreen = "Dersler"
-                                            lessonStage = 0
-                                        }, modifier = Modifier.weight(1f)) { Text("Dersi tamamla ✓") }
+                                        Button(
+                                            enabled = lessonAnswer,
+                                            onClick = {
+                                                if (practiceIndex < practiceQuestions.lastIndex) {
+                                                    practiceIndex++
+                                                    practiceChoice = ""
+                                                    practiceFeedback = ""
+                                                    practiceScored = false
+                                                    lessonAnswer = false
+                                                    lessonChoice = ""
+                                                } else {
+                                                    val key = "${selected}_${activeLessonIndex}_${activeLesson}"
+                                                    val done = (prefs.getStringSet("completedLessons", emptySet()) ?: emptySet()) + key
+                                                    prefs.edit().putStringSet("completedLessons", done).apply()
+                                                    val completedCourseId = activeCourseLessonId
+                                                    completedCourseId?.let { courseId ->
+                                                        completedCourseIds = CourseProgressStore.markCompleted(prefs, courseId)
+                                                    }
+                                                    val sessionStart = lessonSessionStartedAt
+                                                    val activeMillis = sessionStart?.let { startedAt ->
+                                                        (System.currentTimeMillis() - startedAt).coerceAtLeast(0L)
+                                                    } ?: 0L
+                                                    val elapsedMinutes = StudySessionClock.elapsedWholeMinutes(
+                                                        0L,
+                                                        lessonSessionAccumulatedMillis + activeMillis
+                                                    )
+                                                    CourseProgressStore.addStudyMinutes(prefs, elapsedMinutes)
+                                                    lessonSessionStartedAt = null
+                                                    activeCourseLessonId = null
+                                                    currentScreen = "Dersler"
+                                                    lessonStage = 0
+                                                }
+                                            },
+                                            modifier = Modifier.weight(1f)
+                                        ) { Text(if (practiceIndex < practiceQuestions.lastIndex) "Sonraki soru →" else "Dersi tamamla ✓") }
                                     }
                                 }
                             }
