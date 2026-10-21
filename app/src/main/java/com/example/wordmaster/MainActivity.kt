@@ -784,7 +784,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                             }
                                             Text("Ek örnekler", fontWeight = FontWeight.Bold, fontSize = 16.sp, color = MaterialTheme.colorScheme.onSurface)
                                             bookChapter.examples.forEach { example ->
-                                                Column(Modifier.fillMaxWidth().background(Color(0xFFF7F8FC), RoundedCornerShape(12.dp)).padding(12.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                                                Column(Modifier.fillMaxWidth().background(if (darkTheme) MaterialTheme.colorScheme.surfaceVariant else Color(0xFFF7F8FC), RoundedCornerShape(12.dp)).padding(12.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                                                     Text(example.first, fontWeight = FontWeight.Bold, fontSize = 14.sp, color = MaterialTheme.colorScheme.onSurface)
                                                     Text(example.second, fontSize = 13.sp, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f))
                                                 }
@@ -803,12 +803,12 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                         Column(Modifier.fillMaxWidth().padding(20.dp), verticalArrangement = Arrangement.spacedBy(15.dp)) {
                                             Text(lesson.heading, fontSize = 21.sp, fontWeight = FontWeight.ExtraBold, color = MaterialTheme.colorScheme.onSurface)
                                             Text(lesson.explanation, fontSize = 16.sp, lineHeight = 25.sp, color = MaterialTheme.colorScheme.onSurface)
-                                            Surface(color = PaleBlue, shape = RoundedCornerShape(16.dp)) {
+                                            Surface(color = if (darkTheme) Color(0xFF263254) else PaleBlue, shape = RoundedCornerShape(16.dp)) {
                                                 Text(lesson.rule, Modifier.fillMaxWidth().padding(16.dp), fontSize = 18.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onSurface)
                                             }
                                             Text("Örnekler", fontWeight = FontWeight.ExtraBold, fontSize = 18.sp)
                                             lesson.examples.forEach { example ->
-                                                Column(Modifier.fillMaxWidth().background(Color(0xFFF7F8FC), RoundedCornerShape(14.dp)).padding(13.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                                                Column(Modifier.fillMaxWidth().background(if (darkTheme) MaterialTheme.colorScheme.surfaceVariant else Color(0xFFF7F8FC), RoundedCornerShape(14.dp)).padding(13.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                                                     Text(example.first, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onSurface, fontSize = 16.sp)
                                                     Text(example.second, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f), fontSize = 14.sp)
                                                 }
@@ -899,9 +899,9 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                                     }
                                                 }
                                             }
-                                            Text("Dinledikten sonra aşağıdaki alıştırmada doğru cevabı seç.", color = Color.White, fontWeight = FontWeight.SemiBold)
+                                            Text("Dinledikten sonra aşağıdaki alıştırmada doğru cevabı seç.", color = if (darkTheme) Color.White else MaterialTheme.colorScheme.onSurface, fontWeight = FontWeight.SemiBold)
                                             Spacer(Modifier.height(8.dp))
-                                            Text("Bu dinleme bölümünde yukarıdaki konuşmayı dinleyip cümleleri kontrol edebilirsin.", color = Color(0xFFE5E2FF), fontSize = 13.sp, lineHeight = 19.sp)
+                                            Text("Bu dinleme bölümünde yukarıdaki konuşmayı dinleyip cümleleri kontrol edebilirsin.", color = if (darkTheme) Color(0xFFE5E2FF) else MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 13.sp, lineHeight = 19.sp)
                                         }
                                     }
                                     Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
