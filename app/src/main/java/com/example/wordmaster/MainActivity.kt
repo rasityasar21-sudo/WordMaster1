@@ -1037,7 +1037,21 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                         Triple("18", "Senaryo ve seviye değerlendirmesi", "Terim seçimi, bağlam tamamlama ve modül sonu kontrol soruları; öğrenilen bilgiyi tekrar etme.")
                     )) { module ->
                         Card(
-                            modifier = Modifier.fillMaxWidth(),
+                            modifier = Modifier.fillMaxWidth().clickable {
+                                activeLesson = when (module.first) {
+                                    "01", "02" -> "Uçuş kumandaları"
+                                    "13" -> "Bakım aletleri ve ekipman"
+                                    "14" -> "Kontrol, bulgu ve hasar ifadeleri"
+                                    "15" -> "Uçak bakımına giriş"
+                                    else -> module.second
+                                }
+                                activeCourseLessonId = "aviation-module-${module.first}"
+                                activeLessonIndex = 0
+                                lessonAnswer = false
+                                lessonStage = 0
+                                lessonChoice = ""
+                                currentScreen = "Ders İçeriği"
+                            },
                             shape = RoundedCornerShape(18.dp),
                             colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
                             border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant)
