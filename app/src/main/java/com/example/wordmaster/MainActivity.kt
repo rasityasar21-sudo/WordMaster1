@@ -1017,14 +1017,24 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                         Text("EĞİTİM MODÜLLERİ", color = MaterialTheme.colorScheme.onSurface, fontSize = 17.sp, fontWeight = FontWeight.ExtraBold)
                     }
                     items(listOf(
-                        Triple("01", "Uçak ve uçuş kontrol yüzeyleri", "Aileron, rudder, elevator, flap, spoiler · parçaların görevleri ve örnek kullanım"),
-                        Triple("02", "Havaalanı ve yer operasyonları", "Runway, taxiway, apron, gate, boarding, ground handling · operasyon kelimeleri"),
-                        Triple("03", "ATC ve telsiz iletişimi", "Readback, clearance, heading, altitude, maintain, standby · standart ifade kalıpları"),
-                        Triple("04", "Meteoroloji ve uçuş koşulları", "Visibility, crosswind, turbulence, icing, forecast, ceiling · raporları anlama"),
-                        Triple("05", "Uçak sistemleri ve teknik bakım", "Landing gear, hydraulic system, fuel system, inspection, malfunction · teknik bağlam"),
-                        Triple("06", "Acil durum ve emniyet", "Emergency, evacuation, precaution, incident, checklist · emniyet odaklı terimler"),
-                        Triple("07", "Mesleki okuma ve raporlama", "Manual, procedure, warning, report, requirement · teknik metinleri yorumlama"),
-                        Triple("08", "Senaryo ve seviye değerlendirmesi", "Bağlam içinde kelime seçimi, kısa diyaloglar ve modül sonu bilgi kontrolü")
+                        Triple("01", "Uçak ve uçuş kontrol yüzeyleri", "Aileron, elevator, rudder, flap ve spoiler: her parçanın temel görevi, hareket yönleri ve teknik İngilizce örnekleri."),
+                        Triple("02", "Kontrol yüzeyleri: hareket ve eksenler", "Roll, pitch, yaw, deflection ve control input terimleri; kavramları birbirinden ayırma ve kısa okuma."),
+                        Triple("03", "Gövde, kanat ve yapısal parçalar", "Fuselage, wing, rib, spar, skin, fastener ve access panel; parça adları ve konum tarifleri."),
+                        Triple("04", "Havaalanı ve yer operasyonları", "Runway, taxiway, apron, stand, gate, boarding ve ground handling; konum ve hareket bildiren cümleler."),
+                        Triple("05", "ATC ve telsiz iletişimi", "Readback, clearance, heading, altitude, maintain ve standby; standart ifadeleri dinleme ve anlama."),
+                        Triple("06", "Meteoroloji ve uçuş koşulları", "Visibility, crosswind, turbulence, icing, forecast ve ceiling; hava raporlarından temel bilgiyi çıkarma."),
+                        Triple("07", "Elektrik sistemi terminolojisi", "Circuit breaker, wiring, connector, voltage, current ve power supply; şema açıklamalarını okumaya giriş."),
+                        Triple("08", "Hidrolik ve pnömatik sistemler", "Hydraulic line, pressure, leak, actuator, reservoir ve pneumatic system; arıza bildirim dili."),
+                        Triple("09", "Yakıt ve yağlama sistemleri", "Fuel tank, fuel line, lubrication, contamination ve level; teknik metinlerdeki uyarı sözcükleri."),
+                        Triple("10", "İniş takımı ve fren sistemi", "Landing gear, wheel, tyre, brake assembly, extension ve retraction; sistem bileşenlerini tanımlama."),
+                        Triple("11", "Motor ve yardımcı güç ünitesi", "Engine, compressor, turbine, exhaust ve auxiliary power unit; temel bileşen adları ve açıklamalar."),
+                        Triple("12", "Bakım dokümanları ve teknik yazım", "Manual, task card, revision, reference, requirement ve record; doküman bölümlerini doğru yorumlama."),
+                        Triple("13", "Aletler, ölçüm ve atölye dili", "Torque wrench, gauge, measurement, tolerance, calibrated ve tool control; ölçüm sonuçlarını ifade etme."),
+                        Triple("14", "Muayene, bulgu ve arıza raporu", "Inspection, finding, defect, discrepancy, evidence ve corrective action; tarafsız rapor cümleleri kurma."),
+                        Triple("15", "Emniyet, uyarılar ve insan faktörleri", "Caution, warning, hazard, fatigue, distraction ve checklist; emniyet metinlerini anlama."),
+                        Triple("16", "Mesleki okuma ve raporlama", "Kısa teknik pasaj, iş emri, teslim notu ve bakım kaydı üzerinden ana fikir ve ayrıntı bulma."),
+                        Triple("17", "Teknik dinleme ve telaffuz", "Parça adları, harf-rakam dizileri ve kısa işyeri konuşmaları; dinledikten sonra ana bilgiyi belirleme."),
+                        Triple("18", "Senaryo ve seviye değerlendirmesi", "Terim seçimi, bağlam tamamlama ve modül sonu kontrol soruları; öğrenilen bilgiyi tekrar etme.")
                     )) { module ->
                         Card(
                             modifier = Modifier.fillMaxWidth(),
