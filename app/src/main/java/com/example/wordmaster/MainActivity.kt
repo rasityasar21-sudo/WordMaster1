@@ -713,7 +713,9 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                             val adaptiveAdvice = AdaptiveLearningAdvisor.recommend(learningStore.all())
                                             Card(
                                                 shape = RoundedCornerShape(12.dp),
-                                                colors = CardDefaults.cardColors(containerColor = Color(0xFFF2F0FF))
+                                                colors = CardDefaults.cardColors(
+                                                    containerColor = if (darkTheme) MaterialTheme.colorScheme.surfaceVariant else Color(0xFFF2F0FF)
+                                                )
                                             ) {
                                                 Column(
                                                     Modifier.fillMaxWidth().padding(12.dp),
@@ -725,7 +727,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                             }
                                             dueReviewWords.take(5).forEach { progress ->
                                                 val translation = words.firstOrNull { it.en.equals(progress.word, ignoreCase = true) }?.tr
-                                                Column(Modifier.fillMaxWidth().background(Color.White, RoundedCornerShape(12.dp)).padding(12.dp), verticalArrangement = Arrangement.spacedBy(7.dp)) {
+                                                Column(Modifier.fillMaxWidth().background(if (darkTheme) MaterialTheme.colorScheme.surfaceVariant else Color.White, RoundedCornerShape(12.dp)).padding(12.dp), verticalArrangement = Arrangement.spacedBy(7.dp)) {
                                                     Text(progress.word, color = MaterialTheme.colorScheme.onSurface, fontWeight = FontWeight.Bold, fontSize = 16.sp)
                                                     Text(translation ?: "Türkçe karşılık sözlükte bulunamadı", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f), fontSize = 13.sp)
                                                     Text("Doğru: ${progress.correctCount} · Hata: ${progress.mistakeCount} · Başarı: ${progress.accuracyPercent}%", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.62f), fontSize = 11.sp)
@@ -939,7 +941,10 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                                     },
                                                     modifier = Modifier.fillMaxWidth(),
                                                     shape = RoundedCornerShape(14.dp),
-                                                    colors = ButtonDefaults.outlinedButtonColors(containerColor = if (practiceChoice == option && option == practice.third) Mint else Color.White)
+                                                    colors = ButtonDefaults.outlinedButtonColors(
+                                                        containerColor = if (practiceChoice == option && option == practice.third) Mint
+                                                        else if (darkTheme) MaterialTheme.colorScheme.surfaceVariant else Color.White
+                                                    )
                                                 ) { Text(option, modifier = Modifier.padding(4.dp)) }
                                             }
                                             if (practiceFeedback.isNotBlank()) Text(practiceFeedback, color = if (practiceChoice == practice.third) Color(0xFF16845D) else Color(0xFFB45309), fontWeight = FontWeight.Bold)
