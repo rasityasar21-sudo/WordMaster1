@@ -1697,7 +1697,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
             properties = androidx.compose.ui.window.DialogProperties(usePlatformDefaultWidth = false),
             title = { Text("Kelime Arenası", fontWeight = FontWeight.ExtraBold) },
             text = {
-                Column(Modifier.heightIn(max = 540.dp).verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                Column(Modifier.fillMaxWidth().heightIn(max = 680.dp).verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(14.dp)) {
                     Surface(Modifier.fillMaxWidth(), shape = RoundedCornerShape(18.dp), color = MaterialTheme.colorScheme.primaryContainer) {
                         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
@@ -1901,7 +1901,7 @@ private fun PronunciationPracticeDialog(words: List<Word>, onDismiss: () -> Unit
         properties = androidx.compose.ui.window.DialogProperties(usePlatformDefaultWidth = false),
         title = { Text("🎧 Kelime Telaffuzu") },
         text = {
-            Column(modifier = Modifier.heightIn(max = 420.dp).verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+            Column(modifier = Modifier.fillMaxWidth().heightIn(max = 680.dp).verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(14.dp)) {
                 Surface(
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(20.dp),
