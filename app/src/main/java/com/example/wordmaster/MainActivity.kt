@@ -314,6 +314,11 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
     if (showPronunciation) PronunciationPracticeDialog(words = quickPracticeWords, onDismiss = { showPronunciation = false })
 
     val learned = remember { mutableStateListOf<String>().apply { addAll(prefs.getStringSet("learned", emptySet()) ?: emptySet()) } }
+    // A word grants its learning XP only once, even if the user toggles its learned state.
+    val learnedRewarded = remember { mutableStateListOf<String>().apply {
+        addAll(prefs.getStringSet("learnedRewarded", emptySet()) ?: emptySet())
+        addAll(prefs.getStringSet("learned", emptySet()) ?: emptySet())
+    } }
     val favorites = remember { mutableStateListOf<String>().apply { addAll(prefs.getStringSet("favorites", emptySet()) ?: emptySet()) } }
 
     fun startQuiz() {
@@ -1198,9 +1203,20 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                 HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
                                 Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                                     TextButton(onClick = {
-                                        if (word.en in learned) learned.remove(word.en)
-                                        else { learned.add(word.en); xp += 5; prefs.edit().putInt("xp", xp).putStringSet("learned", learned.toSet()).apply() }
-                                        prefs.edit().putStringSet("learned", learned.toSet()).apply()
+                                        if (word.en in learned) {
+                                            learned.remove(word.en)
+                                        } else {
+                                            learned.add(word.en)
+                                            if (word.en !in learnedRewarded) {
+                                                learnedRewarded.add(word.en)
+                                                xp += 5
+                                            }
+                                        }
+                                        prefs.edit()
+                                            .putInt("xp", xp)
+                                            .putStringSet("learned", learned.toSet())
+                                            .putStringSet("learnedRewarded", learnedRewarded.toSet())
+                                            .apply()
                                     }) { Text(if (word.en in learned) "✓ Öğrenildi" else "✓ Öğrendim") }
                                     Spacer(Modifier.weight(1f))
                                     TextButton(onClick = {
