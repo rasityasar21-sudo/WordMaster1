@@ -1644,150 +1644,116 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
         confirmButton = { TextButton(onClick = { showTools = false }) { Text("Kapat") } }
     )
 
-    if (showMatchGame) AlertDialog(
-        onDismissRequest = { showMatchGame = false },
-        title = { Text("Kelime eşleştirme") },
-        text = {
-            Column(modifier = Modifier.heightIn(max = 420.dp).verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                Surface(
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(18.dp),
-                    color = MaterialTheme.colorScheme.primaryContainer
-                ) {
-                    Column(Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                        Text("WORD PAIRS  /  TUR  $matchRound", color = MaterialTheme.colorScheme.primary, fontSize = 10.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 1.4.sp)
-                        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
-                            Column(modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(3.dp)) {
-                                Text("Kelime eşleştirme", color = MaterialTheme.colorScheme.onSurface, fontSize = 18.sp, fontWeight = FontWeight.ExtraBold)
-                                Text("Anlamı bul · hafızanı güçlendir", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.72f), fontSize = 12.sp)
+    if (showMatchGame) {
+        val targetWord = matchWords.firstOrNull { it.en !in matched }
+        val answerOptions = remember(targetWord?.en, matchWords, matched, quickPracticeWords) {
+            if (targetWord == null) emptyList()
+            else (listOf(targetWord) + quickPracticeWords.filter {
+                it.en !in matchWords.map { gameWord -> gameWord.en } && it.tr.isNotBlank() &&
+                    !it.tr.equals(targetWord.tr, ignoreCase = true)
+            }.distinctBy { it.tr.trim().lowercase(Locale.ROOT) }.shuffled().take(3)).shuffled()
+        }
+        AlertDialog(
+            onDismissRequest = { showMatchGame = false },
+            title = { Text("Kelime Arenası", fontWeight = FontWeight.ExtraBold) },
+            text = {
+                Column(Modifier.heightIn(max = 540.dp).verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                    Surface(Modifier.fillMaxWidth(), shape = RoundedCornerShape(18.dp), color = MaterialTheme.colorScheme.primaryContainer) {
+                        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
+                                Text("GÜNLÜK ANTRENMAN", color = MaterialTheme.colorScheme.primary, fontSize = 10.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 1.sp)
+                                Text("${matched.size}/${matchWords.size}", color = MaterialTheme.colorScheme.onPrimaryContainer, fontWeight = FontWeight.Bold)
                             }
-                            Surface(
-                                shape = RoundedCornerShape(14.dp),
-                                color = MaterialTheme.colorScheme.surface.copy(alpha = 0.86f),
-                                border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.24f))
-                            ) {
-                                Column(Modifier.padding(horizontal = 12.dp, vertical = 7.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-                                    Text("${matched.size}/${matchWords.size}", color = MaterialTheme.colorScheme.primary, fontSize = 19.sp, fontWeight = FontWeight.ExtraBold)
-                                    Text("ÇİFT", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.65f), fontSize = 9.sp, fontWeight = FontWeight.Bold, letterSpacing = 1.sp)
-                                }
-                            }
+                            Text("Anlamını bul!", color = MaterialTheme.colorScheme.onPrimaryContainer, fontSize = 23.sp, fontWeight = FontWeight.ExtraBold)
+                            Text("İngilizce kelimeyi oku ve doğru Türkçe karşılığı seç.", color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.78f), fontSize = 13.sp)
+                            LinearProgressIndicator(
+                                progress = { if (matchWords.isEmpty()) 0f else matched.size.toFloat() / matchWords.size },
+                                modifier = Modifier.fillMaxWidth().height(7.dp).clip(RoundedCornerShape(8.dp))
+                            )
                         }
-                        Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.fillMaxWidth()) {
-                            Text("ZORLUK", modifier = Modifier.align(Alignment.CenterVertically), color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.68f), fontSize = 10.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 0.8.sp)
-                            listOf(4, 6, 8).forEach { pairCount ->
-                                val active = matchPairCount == pairCount
-                                Surface(
-                                    modifier = Modifier.weight(1f).clip(RoundedCornerShape(10.dp)).clickable {
-                                        matchPairCount = pairCount
-                                        prefs.edit().putInt("matchPairCount", pairCount).apply()
-                                        matchWords = quickPracticeWords.shuffled().take(pairCount)
-                                        matchTurkishOrder = matchWords.shuffled()
-                                        matched = emptySet()
-                                        selectedEnglish = null
-                                        matchMessage = "Yeni zorluk seçildi. İngilizce kelimeyi eşleştir."
-                                    },
-                                    shape = RoundedCornerShape(10.dp),
-                                    color = if (active) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surface,
-                                    border = androidx.compose.foundation.BorderStroke(1.dp, if (active) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outlineVariant)
-                                ) {
-                                    Text("$pairCount çift", modifier = Modifier.padding(vertical = 9.dp), textAlign = androidx.compose.ui.text.style.TextAlign.Center, color = if (active) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurface, fontWeight = FontWeight.Bold, fontSize = 11.sp)
-                                }
-                            }
-                        }
-                        LinearProgressIndicator(
-                            progress = { if (matchWords.isEmpty()) 0f else matched.size.toFloat() / matchWords.size },
-                            modifier = Modifier.fillMaxWidth().height(7.dp).clip(RoundedCornerShape(8.dp)),
-                            color = Color(0xFF8B7CFF),
-                            trackColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.75f)
-                        )
+                    }
+                    if (targetWord != null) {
+                        Text("İNGİLİZCE KELİME", color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.ExtraBold, fontSize = 11.sp, letterSpacing = 1.sp)
                         Surface(
-                            shape = RoundedCornerShape(12.dp),
-                            color = MaterialTheme.colorScheme.surface.copy(alpha = 0.72f),
-                            modifier = Modifier.fillMaxWidth()
+                            Modifier.fillMaxWidth(),
+                            shape = RoundedCornerShape(20.dp),
+                            color = if (darkTheme) Color(0xFF28215A) else Color(0xFFEAE5FF),
+                            border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.55f))
                         ) {
-                            Row(Modifier.padding(horizontal = 10.dp, vertical = 9.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                                Text(if (matched.size == matchWords.size && matchWords.isNotEmpty()) "✓" else "✦", color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.ExtraBold)
-                                Text(matchMessage, color = MaterialTheme.colorScheme.onSurface, fontWeight = FontWeight.SemiBold, fontSize = 12.sp, lineHeight = 17.sp)
+                            Column(Modifier.padding(vertical = 22.dp, horizontal = 16.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(7.dp)) {
+                                Text("Aa", color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.ExtraBold)
+                                Text(targetWord.en.replaceFirstChar { it.uppercase() }, color = MaterialTheme.colorScheme.onPrimaryContainer, fontSize = 27.sp, fontWeight = FontWeight.ExtraBold, textAlign = androidx.compose.ui.text.style.TextAlign.Center)
+                                Text("Doğru anlamı seç", color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.75f), fontSize = 12.sp)
                             }
                         }
-                    }
-                }
-                Row(
-                    modifier = Modifier.fillMaxWidth().heightIn(max = 330.dp),
-                    horizontalArrangement = Arrangement.spacedBy(10.dp),
-                    verticalAlignment = Alignment.Top
-                ) {
-                    Column(
-                        modifier = Modifier.weight(1f).verticalScroll(rememberScrollState()),
-                        verticalArrangement = Arrangement.spacedBy(8.dp)
-                    ) {
-                        Text("ENGLISH", color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.ExtraBold, fontSize = 10.sp, letterSpacing = 1.sp)
-                        matchWords.filter { it.en !in matched }.forEach { word ->
-                            OutlinedButton(
-                                onClick = { selectedEnglish = word.en; matchMessage = "Şimdi ${word.en} kelimesinin Türkçesini seç." },
-                                modifier = Modifier.fillMaxWidth(),
-                                contentPadding = PaddingValues(horizontal = 6.dp, vertical = 8.dp),
-                                enabled = selectedEnglish == null || selectedEnglish == word.en,
-                                colors = ButtonDefaults.outlinedButtonColors(
-                                    containerColor = if (selectedEnglish == word.en) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surface,
-                                    contentColor = if (selectedEnglish == word.en) MaterialTheme.colorScheme.onPrimaryContainer else MaterialTheme.colorScheme.onSurface
-                                ),
-                                border = androidx.compose.foundation.BorderStroke(
-                                    1.dp,
-                                    if (selectedEnglish == word.en) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outlineVariant
-                                ),
-                                shape = RoundedCornerShape(12.dp)
-                            ) { Text(if (selectedEnglish == word.en) "✓  ${word.en}" else word.en, fontWeight = FontWeight.SemiBold, fontSize = 12.sp, maxLines = 2) }
-                        }
-                    }
-                    Column(
-                        modifier = Modifier.weight(1f).verticalScroll(rememberScrollState()),
-                        verticalArrangement = Arrangement.spacedBy(8.dp)
-                    ) {
-                        Text("TÜRKÇE", color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.ExtraBold, fontSize = 10.sp, letterSpacing = 1.sp)
-                        matchTurkishOrder.filter { it.en !in matched }.forEach { word ->
+                        Text("DOĞRU ANLAMI SEÇ", color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.ExtraBold, fontSize = 11.sp, letterSpacing = 1.sp)
+                        answerOptions.forEachIndexed { index, option ->
                             OutlinedButton(
                                 onClick = {
-                                    val selected = selectedEnglish
-                                    if (selected == null) {
-                                        matchMessage = "Önce İngilizce kelime seç."
-                                    } else if (selected == word.en) {
-                                        matched = matched + word.en
-                                        selectedEnglish = null
+                                    if (option.en == targetWord.en) {
+                                        matched = matched + targetWord.en
                                         xp += 5
                                         prefs.edit().putInt("xp", xp).apply()
-                                        matchMessage = if (matched.size == matchWords.size) "Harika! Tüm eşleşmeler tamamlandı. +${matchWords.size * 5} XP 🎉" else "Doğru eşleşme! +5 XP"
+                                        matchMessage = if (matched.size == matchWords.size) "Harika! Tüm kelimeler tamamlandı. +${matchWords.size * 5} XP 🎉" else "Doğru cevap! +5 XP. Sıradaki kelimeye geçtin."
                                     } else {
-                                        selectedEnglish = null
-                                        matchMessage = "Bu eşleşme doğru değil. Tekrar dene!"
+                                        matchMessage = "Tekrar dene! ${targetWord.en} kelimesinin anlamını düşün."
                                     }
                                 },
-                                modifier = Modifier.fillMaxWidth(),
-                                contentPadding = PaddingValues(horizontal = 6.dp, vertical = 8.dp),
-                                colors = ButtonDefaults.outlinedButtonColors(
-                                    containerColor = MaterialTheme.colorScheme.surface,
-                                    contentColor = MaterialTheme.colorScheme.onSurface
-                                ),
-                                border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
-                                shape = RoundedCornerShape(12.dp)
-                            ) { Text(word.tr, fontWeight = FontWeight.Medium, fontSize = 12.sp, maxLines = 2) }
+                                modifier = Modifier.fillMaxWidth().heightIn(min = 54.dp),
+                                shape = RoundedCornerShape(14.dp),
+                                contentPadding = PaddingValues(horizontal = 12.dp, vertical = 10.dp),
+                                colors = ButtonDefaults.outlinedButtonColors(containerColor = MaterialTheme.colorScheme.surface, contentColor = MaterialTheme.colorScheme.onSurface),
+                                border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant)
+                            ) {
+                                Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                                    Surface(shape = RoundedCornerShape(9.dp), color = MaterialTheme.colorScheme.primaryContainer) {
+                                        Text(('A'.code + index).toChar().toString(), Modifier.padding(horizontal = 10.dp, vertical = 7.dp), color = MaterialTheme.colorScheme.onPrimaryContainer, fontWeight = FontWeight.ExtraBold)
+                                    }
+                                    Text(option.tr.replaceFirstChar { it.uppercase() }, Modifier.weight(1f), fontWeight = FontWeight.SemiBold, fontSize = 14.sp)
+                                }
+                            }
+                        }
+                    } else {
+                        Text("🏆 Antrenman tamamlandı!", color = MaterialTheme.colorScheme.primary, fontSize = 20.sp, fontWeight = FontWeight.ExtraBold)
+                        Text("${matchWords.size} kelimeyi bitirdin ve ${matchWords.size * 5} XP kazandın.")
+                    }
+                    Surface(shape = RoundedCornerShape(14.dp), color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.65f), modifier = Modifier.fillMaxWidth()) {
+                        Text(matchMessage, Modifier.padding(12.dp), color = MaterialTheme.colorScheme.onSurface, fontWeight = FontWeight.Medium, fontSize = 12.sp)
+                    }
+                    Text("ZORLUK", color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.ExtraBold, fontSize = 10.sp, letterSpacing = 1.sp)
+                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.fillMaxWidth()) {
+                        listOf(4, 6, 8).forEach { pairCount ->
+                            val active = matchPairCount == pairCount
+                            OutlinedButton(
+                                onClick = {
+                                    matchPairCount = pairCount
+                                    prefs.edit().putInt("matchPairCount", pairCount).apply()
+                                    matchWords = quickPracticeWords.shuffled().take(pairCount)
+                                    matchTurkishOrder = matchWords.shuffled()
+                                    matched = emptySet()
+                                    selectedEnglish = null
+                                    matchMessage = "Yeni zorluk seçildi. İlk kelimenin anlamını bul."
+                                },
+                                modifier = Modifier.weight(1f),
+                                contentPadding = PaddingValues(horizontal = 4.dp, vertical = 6.dp)
+                            ) { Text("$pairCount çift", fontSize = 11.sp, color = if (active) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface) }
                         }
                     }
                 }
-            }
-        },
-        confirmButton = {
-            TextButton(onClick = {
-                matchWords = quickPracticeWords.shuffled().take(matchPairCount)
-                matchTurkishOrder = matchWords.shuffled()
-                matchRound++
-                matched = emptySet()
-                selectedEnglish = null
-                matchMessage = "Yeni tur! İngilizce kelimeyi seç, sonra Türkçe karşılığını bul."
-            }) { Text("Yeni tur") }
-        },
-        dismissButton = { TextButton(onClick = { showMatchGame = false }) { Text("Bitir") } }
-    )
+            },
+            confirmButton = {
+                TextButton(onClick = {
+                    matchWords = quickPracticeWords.shuffled().take(matchPairCount)
+                    matchTurkishOrder = matchWords.shuffled()
+                    matchRound++
+                    matched = emptySet()
+                    selectedEnglish = null
+                    matchMessage = "Yeni tur! İlk kelimenin doğru anlamını bul."
+                }) { Text("Yeni tur") }
+            },
+            dismissButton = { TextButton(onClick = { showMatchGame = false }) { Text("Bitir") } }
+        )
+    }
 
     if (showQuizSummary) {
         AlertDialog(
