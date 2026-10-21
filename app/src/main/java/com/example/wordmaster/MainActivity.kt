@@ -739,15 +739,23 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                                     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                                                         OutlinedButton(
                                                             onClick = {
-                                                                learningStore.rateRecall(progress.word, quality = 1)
-                                                                reviewRefresh++
+                                                                scope.launch {
+                                                                    withContext(Dispatchers.IO) {
+                                                                        learningStore.rateRecall(progress.word, quality = 1)
+                                                                    }
+                                                                    reviewRefresh++
+                                                                }
                                                             },
                                                             modifier = Modifier.weight(1f)
                                                         ) { Text("Zorlandım") }
                                                         Button(
                                                             onClick = {
-                                                                learningStore.rateRecall(progress.word, quality = 4)
-                                                                reviewRefresh++
+                                                                scope.launch {
+                                                                    withContext(Dispatchers.IO) {
+                                                                        learningStore.rateRecall(progress.word, quality = 4)
+                                                                    }
+                                                                    reviewRefresh++
+                                                                }
                                                             },
                                                             modifier = Modifier.weight(1f)
                                                         ) { Text("Biliyordum") }
