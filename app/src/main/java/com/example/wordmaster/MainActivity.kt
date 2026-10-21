@@ -1693,6 +1693,8 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
         }
         AlertDialog(
             onDismissRequest = { showMatchGame = false },
+            modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp),
+            properties = androidx.compose.ui.window.DialogProperties(usePlatformDefaultWidth = false),
             title = { Text("Kelime Arenası", fontWeight = FontWeight.ExtraBold) },
             text = {
                 Column(Modifier.heightIn(max = 540.dp).verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(12.dp)) {
@@ -1895,6 +1897,8 @@ private fun PronunciationPracticeDialog(words: List<Word>, onDismiss: () -> Unit
 
     AlertDialog(
         onDismissRequest = onDismiss,
+        modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp),
+        properties = androidx.compose.ui.window.DialogProperties(usePlatformDefaultWidth = false),
         title = { Text("🎧 Kelime Telaffuzu") },
         text = {
             Column(modifier = Modifier.heightIn(max = 420.dp).verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(12.dp)) {
