@@ -257,6 +257,9 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
     var matchWords by remember { mutableStateOf<List<Word>>(emptyList()) }
     var matchTurkishOrder by remember { mutableStateOf<List<Word>>(emptyList()) }
     var matched by remember { mutableStateOf(setOf<String>()) }
+    // MutableStateList updates immediately, preventing duplicate XP from rapid taps
+    // before the screen has recomposed with the latest matched set.
+    val matchRewarded = remember { mutableStateListOf<String>() }
     var selectedEnglish by remember { mutableStateOf<String?>(null) }
     var matchMessage by remember { mutableStateOf("İngilizce kelimeyi seç, sonra Türkçe karşılığını bul.") }
     var totalCorrect by remember { mutableIntStateOf(prefs.getInt("totalCorrect", 0)) }
@@ -521,7 +524,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                             }
                             Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                                 Card(Modifier.weight(1f), shape = RoundedCornerShape(20.dp), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)) {
-                                    Column(Modifier.fillMaxWidth().clickable { showMatchGame = true; matchRound = 0; matched = emptySet(); selectedEnglish = null; matchWords = quickPracticeWords.shuffled().take(6); matchTurkishOrder = matchWords.shuffled(); matchMessage = "İngilizce kelimeyi seç, sonra Türkçe karşılığını bul." }.padding(15.dp), verticalArrangement = Arrangement.spacedBy(7.dp)) {
+                                    Column(Modifier.fillMaxWidth().clickable { showMatchGame = true; matchRound = 0; matched = emptySet(); matchRewarded.clear(); selectedEnglish = null; matchWords = quickPracticeWords.shuffled().take(6); matchTurkishOrder = matchWords.shuffled(); matchMessage = "İngilizce kelimeyi seç, sonra Türkçe karşılığını bul." }.padding(15.dp), verticalArrangement = Arrangement.spacedBy(7.dp)) {
                                         Text("🧩", fontSize = 25.sp)
                                         Text("Eşleştirme", color = MaterialTheme.colorScheme.onSurface, fontWeight = FontWeight.Bold)
                                         Text("Hızlı oyun", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.62f), fontSize = 12.sp)
@@ -1831,7 +1834,8 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                 onClick = {
                                     if (option.en == targetWord.en) {
                                         // Guard against rapid repeated taps before Compose redraws.
-                                        if (targetWord.en !in matched) {
+                                        if (targetWord.en !in matchRewarded) {
+                                            matchRewarded.add(targetWord.en)
                                             matched = matched + targetWord.en
                                             xp += 5
                                             prefs.edit().putInt("xp", xp).apply()
