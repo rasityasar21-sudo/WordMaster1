@@ -846,7 +846,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                     }
                                     Card(
                                         shape = RoundedCornerShape(22.dp),
-                                        colors = CardDefaults.cardColors(containerColor = Color(0xFF19172D))
+                                        colors = CardDefaults.cardColors(containerColor = if (darkTheme) Color(0xFF19172D) else Color(0xFFF0EDFF))
                                     ) {
                                         Column(
                                             Modifier.fillMaxWidth().padding(18.dp),
@@ -855,11 +855,11 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                                                 Text("🎧", fontSize = 30.sp)
                                                 Column {
-                                                    Text("LISTENING PRACTICE", color = Color(0xFFBDB4FF), fontWeight = FontWeight.Bold, fontSize = 12.sp)
-                                                    Text(lesson.heading, color = Color.White, fontWeight = FontWeight.ExtraBold, fontSize = 20.sp)
+                                                    Text("LISTENING PRACTICE", color = if (darkTheme) Color(0xFFBDB4FF) else Color(0xFF6550B8), fontWeight = FontWeight.Bold, fontSize = 12.sp)
+                                                    Text(lesson.heading, color = if (darkTheme) Color.White else MaterialTheme.colorScheme.onSurface, fontWeight = FontWeight.ExtraBold, fontSize = 20.sp)
                                                 }
                                             }
-                                            Text("Konuşmayı önce dinle. İstersen tekrar dinleyip sonra metni kontrol et.", color = Color(0xFFE5E2FF), lineHeight = 22.sp)
+                                            Text("Konuşmayı önce dinle. İstersen tekrar dinleyip sonra metni kontrol et.", color = if (darkTheme) Color(0xFFE5E2FF) else MaterialTheme.colorScheme.onSurfaceVariant, lineHeight = 22.sp)
                                             Button(
                                                 onClick = {
                                                     if (listeningReady) {
@@ -881,14 +881,14 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                             if (showListeningTranscript) {
                                                 dialogue.forEachIndexed { index, pair ->
                                                     Row(
-                                                        Modifier.fillMaxWidth().background(Color(0xFF292541), RoundedCornerShape(12.dp)).padding(12.dp),
+                                                        Modifier.fillMaxWidth().background(if (darkTheme) Color(0xFF292541) else Color(0xFFE7E2FA), RoundedCornerShape(12.dp)).padding(12.dp),
                                                         verticalAlignment = Alignment.CenterVertically,
                                                         horizontalArrangement = Arrangement.spacedBy(10.dp)
                                                     ) {
                                                         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                                                             Text(if (index % 2 == 0) "A" else "B", color = Color(0xFFFFE500), fontWeight = FontWeight.ExtraBold)
-                                                            Text(pair.first, color = Color.White, fontWeight = FontWeight.SemiBold, fontSize = 16.sp)
-                                                            Text(pair.second, color = Color(0xFFD0CBEA), fontSize = 14.sp)
+                                                            Text(pair.first, color = if (darkTheme) Color.White else MaterialTheme.colorScheme.onSurface, fontWeight = FontWeight.SemiBold, fontSize = 16.sp)
+                                                            Text(pair.second, color = if (darkTheme) Color(0xFFD0CBEA) else MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 14.sp)
                                                         }
                                                         IconButton(onClick = {
                                                             if (listeningReady) {
@@ -1092,7 +1092,18 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                             placeholder = { Text("Örn. apple, elma...") },
                             singleLine = true,
                             shape = RoundedCornerShape(17.dp),
-                            colors = OutlinedTextFieldDefaults.colors(focusedBorderColor = Blue, focusedLabelColor = Blue)
+                            colors = OutlinedTextFieldDefaults.colors(
+                                focusedBorderColor = if (darkTheme) Color(0xFFB8A7FF) else Blue,
+                                focusedLabelColor = if (darkTheme) Color(0xFFB8A7FF) else Blue,
+                                focusedTextColor = MaterialTheme.colorScheme.onSurface,
+                                unfocusedTextColor = MaterialTheme.colorScheme.onSurface,
+                                cursorColor = MaterialTheme.colorScheme.primary
+                            ),
+                            trailingIcon = {
+                                if (query.isNotEmpty()) {
+                                    TextButton(onClick = { query = "" }) { Text("Temizle") }
+                                }
+                            }
                         )
                     }
                     item {
@@ -1146,8 +1157,18 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                         Spacer(Modifier.height(3.dp))
                                         Text(word.tr.replaceFirstChar { it.uppercase() }, fontSize = 15.sp, maxLines = 2, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.78f))
                                     }
-                                    Surface(color = listOf(Color(0xFFE9DEFF), Color(0xFFD9F7ED), Color(0xFFFFE6D5), Color(0xFFDDEEFF), Color(0xFFFFE0EB))[filtered.indexOf(word).coerceAtLeast(0) % 5], shape = RoundedCornerShape(12.dp)) {
-                                        Text(word.level, modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp), color = Blue, fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                                    Surface(
+                                        color = if (darkTheme) MaterialTheme.colorScheme.primaryContainer
+                                        else listOf(Color(0xFFE9DEFF), Color(0xFFD9F7ED), Color(0xFFFFE6D5), Color(0xFFDDEEFF), Color(0xFFFFE0EB))[filtered.indexOf(word).coerceAtLeast(0) % 5],
+                                        shape = RoundedCornerShape(12.dp)
+                                    ) {
+                                        Text(
+                                            word.level,
+                                            modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
+                                            color = if (darkTheme) MaterialTheme.colorScheme.onPrimaryContainer else Blue,
+                                            fontSize = 12.sp,
+                                            fontWeight = FontWeight.Bold
+                                        )
                                     }
                                 }
                                 if (word.example.isNotBlank()) {
@@ -1281,7 +1302,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                 Box(
                     Modifier.fillMaxWidth().height(112.dp)
                         .background(
-                            Brush.linearGradient(listOf(Color(0xFFB91C1C), Color(0xFFDC2626), Color(0xFFEC4899))),
+                            Brush.linearGradient(listOf(Color(0xFF4B35A8), Color(0xFF6550D9), Color(0xFF8B5CF6))),
                             RoundedCornerShape(22.dp)
                         ),
                     contentAlignment = Alignment.Center
