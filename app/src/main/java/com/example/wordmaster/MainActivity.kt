@@ -1830,10 +1830,13 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                             OutlinedButton(
                                 onClick = {
                                     if (option.en == targetWord.en) {
-                                        matched = matched + targetWord.en
-                                        xp += 5
-                                        prefs.edit().putInt("xp", xp).apply()
-                                        matchMessage = if (matched.size == matchWords.size) "Harika! Tüm kelimeler tamamlandı. +${matchWords.size * 5} XP 🎉" else "Doğru cevap! +5 XP. Sıradaki kelimeye geçtin."
+                                        // Guard against rapid repeated taps before Compose redraws.
+                                        if (targetWord.en !in matched) {
+                                            matched = matched + targetWord.en
+                                            xp += 5
+                                            prefs.edit().putInt("xp", xp).apply()
+                                            matchMessage = if (matched.size == matchWords.size) "Harika! Tüm kelimeler tamamlandı. +${matchWords.size * 5} XP 🎉" else "Doğru cevap! +5 XP. Sıradaki kelimeye geçtin."
+                                        }
                                     } else {
                                         matchMessage = "Tekrar dene! ${targetWord.en} kelimesinin anlamını düşün."
                                     }
