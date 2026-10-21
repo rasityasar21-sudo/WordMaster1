@@ -1686,10 +1686,20 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
         val targetWord = matchWords.firstOrNull { it.en !in matched }
         val answerOptions = remember(targetWord?.en, matchWords, matched, quickPracticeWords) {
             if (targetWord == null) emptyList()
-            else (listOf(targetWord) + quickPracticeWords.filter {
-                it.en !in matchWords.map { gameWord -> gameWord.en } && it.tr.isNotBlank() &&
-                    !it.tr.equals(targetWord.tr, ignoreCase = true)
-            }.distinctBy { it.tr.trim().lowercase(Locale.ROOT) }.shuffled().take(3)).shuffled()
+            else {
+                // Use the full practice pool first, then the current round as a fallback.
+                // This keeps answer buttons useful even when the external pool is small.
+                val distractors = (quickPracticeWords + matchWords)
+                    .filter {
+                        !it.en.equals(targetWord.en, ignoreCase = true) &&
+                            it.tr.isNotBlank() &&
+                            !it.tr.equals(targetWord.tr, ignoreCase = true)
+                    }
+                    .distinctBy { it.tr.trim().lowercase(Locale.ROOT) }
+                    .shuffled()
+                    .take(3)
+                (listOf(targetWord) + distractors).shuffled()
+            }
         }
         AlertDialog(
             onDismissRequest = { showMatchGame = false },
@@ -1847,7 +1857,13 @@ private fun PronunciationPracticeDialog(words: List<Word>, onDismiss: () -> Unit
     var current by remember { mutableStateOf(words.firstOrNull() ?: Word("hello", "merhaba", "A1")) }
     var searchText by remember { mutableStateOf("") }
     var pronunciationLevel by remember { mutableStateOf("Tümü") }
-    var choices by remember { mutableStateOf((listOf(current) + words.filter { it.en != current.en }.shuffled().take(3)).shuffled()) }
+    var choices by remember {
+        mutableStateOf(
+            (listOf(current) + words.filter { !it.en.equals(current.en, ignoreCase = true) }
+                .distinctBy { it.en.trim().lowercase(Locale.ROOT) }
+                .shuffled().take(3)).shuffled()
+        )
+    }
     var message by remember { mutableStateOf("Kayıtlı insan sesleri kullanılır; ses bulunamazsa yapay sesle değiştirilmez.") }
     var isLoading by remember { mutableStateOf(false) }
     var mediaPlayer by remember { mutableStateOf<MediaPlayer?>(null) }
@@ -2044,7 +2060,10 @@ private fun PronunciationPracticeDialog(words: List<Word>, onDismiss: () -> Unit
                     ?: levelPool.randomOrNull()
                     ?: Word("hello", "merhaba", "A1")
                 current = nextWord
-                choices = (listOf(nextWord) + levelPool.filter { it.en != nextWord.en }.shuffled().take(3)).shuffled()
+                choices = (listOf(nextWord) + levelPool
+                    .filter { !it.en.equals(nextWord.en, ignoreCase = true) }
+                    .distinctBy { it.en.trim().lowercase(Locale.ROOT) }
+                    .shuffled().take(3)).shuffled()
                 recognizedCorrectly = false
                 currentQuestionRecorded = false
                 message = "Yeni kelime seçildi. Önce dinle, sonra doğru kelimeyi tanı."
