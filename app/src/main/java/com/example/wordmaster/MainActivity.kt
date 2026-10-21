@@ -1125,6 +1125,25 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                             }
                         }
                     }
+                    item {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Text(
+                                if (query.isBlank()) "Kelime sayısı" else "Arama sonuçları",
+                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                fontSize = 12.sp
+                            )
+                            Text(
+                                "${filtered.size} kelime",
+                                color = MaterialTheme.colorScheme.primary,
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 12.sp
+                            )
+                        }
+                    }
                     if (filtered.isEmpty()) {
                         item {
                             Card(shape = RoundedCornerShape(20.dp)) {
