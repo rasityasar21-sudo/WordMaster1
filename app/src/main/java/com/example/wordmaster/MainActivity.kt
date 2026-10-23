@@ -775,6 +775,24 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                         }
                     }
                 }
+                if (currentScreen == "Dersler") {
+                    item {
+                        CourseCatalogSection(
+                            level = studyPlanLevel,
+                            completedIds = completedCourseIds,
+                            onLaunch = { selectedLesson ->
+                                activeCourseLessonId = selectedLesson.id
+                                activeLesson = selectedLesson.title
+                                activeLessonIndex = 0
+                                lessonAnswer = false
+                                lessonStage = 0
+                                lessonChoice = ""
+                                currentScreen = "Ders İçeriği"
+                            }
+                        )
+                    }
+                }
+
                 if (currentScreen == "Ders İçeriği") {
                     item {
                         val lesson = lessonContent(activeLesson)
@@ -857,8 +875,9 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                     LaunchedEffect(listeningReady) {
                                         if (listeningReady) listeningTts.language = Locale.US
                                     }
-                                    val dialogue = lesson.examples.take(3).ifEmpty {
-                                        listOf(lesson.heading to lesson.explanation)
+                                    var slowListening by remember(activeLesson) { mutableStateOf(false) }
+                                    val dialogue = remember(activeLesson, lesson.heading) {
+                                        listeningDialogueFor(activeLesson, lesson)
                                     }
                                     Card(
                                         shape = RoundedCornerShape(22.dp),
@@ -876,19 +895,30 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                                 }
                                             }
                                             Text("Konuşmayı önce dinle. İstersen tekrar dinleyip sonra metni kontrol et.", color = if (darkTheme) Color(0xFFE5E2FF) else MaterialTheme.colorScheme.onSurfaceVariant, lineHeight = 22.sp)
-                                            Button(
-                                                onClick = {
-                                                    if (listeningReady) {
-                                                        listeningTts.language = Locale.US
-                                                        val script = dialogue.mapIndexed { i, pair ->
-                                                            (if (i % 2 == 0) "Speaker one. " else "Speaker two. ") + pair.first
-                                                        }.joinToString(". ")
-                                                        listeningTts.speak(script, TextToSpeech.QUEUE_FLUSH, null, "lesson_listening_dialogue")
-                                                    }
-                                                },
-                                                modifier = Modifier.fillMaxWidth(),
-                                                shape = RoundedCornerShape(14.dp)
-                                            ) { Text("▶ Konuşmayı dinle", modifier = Modifier.padding(4.dp)) }
+                                            Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.fillMaxWidth()) {
+                                                Button(
+                                                    onClick = {
+                                                        if (listeningReady) {
+                                                            listeningTts.language = Locale.US
+                                                            listeningTts.setSpeechRate(if (slowListening) 0.75f else 1.0f)
+                                                            val script = dialogue.mapIndexed { i, pair ->
+                                                                (if (i % 2 == 0) "Speaker one. " else "Speaker two. ") + pair.first
+                                                            }.joinToString(". ")
+                                                            listeningTts.speak(script, TextToSpeech.QUEUE_FLUSH, null, "lesson_listening_dialogue")
+                                                        }
+                                                    },
+                                                    modifier = Modifier.weight(1f),
+                                                    shape = RoundedCornerShape(14.dp)
+                                                ) { Text("▶ Dinle", modifier = Modifier.padding(4.dp)) }
+                                                OutlinedButton(
+                                                    onClick = { slowListening = !slowListening; listeningTts.stop() },
+                                                    shape = RoundedCornerShape(14.dp)
+                                                ) { Text(if (slowListening) "🐢 Yavaş" else "1× Normal") }
+                                                OutlinedButton(
+                                                    onClick = { listeningTts.stop() },
+                                                    shape = RoundedCornerShape(14.dp)
+                                                ) { Text("■ Durdur") }
+                                            }
                                             HorizontalDivider(color = Color(0xFF55516C))
                                             var showListeningTranscript by remember { mutableStateOf(false) }
                                             TextButton(onClick = { showListeningTranscript = !showListeningTranscript }) {
@@ -2201,6 +2231,64 @@ private data class LessonContent(
     val question: String, val options: List<String>, val correct: String, val videoQuestion: String,
     val offlineFrames: List<Pair<String, String>> = listOf("Learn the rule" to "Kuralı öğren", "Read the example" to "Örneği oku", "Try it yourself" to "Kendin dene")
 )
+
+private fun listeningDialogueFor(title: String, lesson: LessonContent): List<Pair<String, String>> {
+    val t = title.lowercase(Locale.ROOT)
+    return when {
+        "selam" in t || "tanış" in t || "greeting" in t ->
+            listOf("Hello, I'm Ece. What's your name?" to "Merhaba, ben Ece. Senin adın ne?",
+                "My name is Ali. Nice to meet you." to "Benim adım Ali. Tanıştığıma memnun oldum.",
+                "Nice to meet you, too. Are you a new student?" to "Ben de tanıştığıma memnun oldum. Yeni öğrenci misin?",
+                "Yes, I am. Where is classroom two?" to "Evet. İkinci sınıf nerede?")
+        "alışveriş" in t || "shopping" in t ->
+            listOf("Excuse me, how much is this T-shirt?" to "Affedersiniz, bu tişört ne kadar?",
+                "It's fifteen pounds." to "On beş sterlin.",
+                "Do you have it in a smaller size?" to "Daha küçük bedeni var mı?",
+                "Yes, here you are. Would you like a receipt?" to "Evet, buyurun. Fiş ister misiniz?",
+                "Yes, please. Thank you." to "Evet, lütfen. Teşekkür ederim.")
+        "yol tarifi" in t || "direction" in t ->
+            listOf("Excuse me, how can I get to the station?" to "Affedersiniz, istasyona nasıl gidebilirim?",
+                "Go straight and turn left at the bank." to "Dümdüz gidin ve bankada sola dönün.",
+                "Is it far from here?" to "Buradan uzak mı?",
+                "No, it's about five minutes on foot." to "Hayır, yürüyerek yaklaşık beş dakika.")
+        "yemek" in t || "food" in t || "sipariş" in t ->
+            listOf("Are you ready to order?" to "Sipariş vermeye hazır mısınız?",
+                "I'd like a chicken sandwich and water, please." to "Bir tavuklu sandviç ve su istiyorum, lütfen.",
+                "Would you like anything else?" to "Başka bir şey ister misiniz?",
+                "No, that's all. How much is it?" to "Hayır, hepsi bu. Ne kadar?")
+        "rutin" in t || "routine" in t || "alışkanlık" in t ->
+            listOf("What time do you get up on weekdays?" to "Hafta içi saat kaçta kalkarsın?",
+                "I usually get up at seven." to "Genellikle yedide kalkarım.",
+                "Do you have breakfast at home?" to "Evde kahvaltı yapar mısın?",
+                "Yes, and then I take the bus to school." to "Evet, sonra okula otobüsle giderim.")
+        "aile" in t || "family" in t ->
+            listOf("Have you got any brothers or sisters?" to "Erkek veya kız kardeşin var mı?",
+                "Yes, I have one older sister." to "Evet, bir ablam var.",
+                "What is she like?" to "Nasıl biridir?",
+                "She's friendly and very patient." to "Arkadaş canlısı ve çok sabırlıdır.")
+        "sağlık" in t || "health" in t ->
+            listOf("Good morning. What seems to be the problem?" to "Günaydın. Sorununuz nedir?",
+                "I have a headache and a sore throat." to "Başım ağrıyor ve boğazım ağrıyor.",
+                "How long have you felt this way?" to "Ne zamandır böyle hissediyorsunuz?",
+                "Since yesterday. What should I do?" to "Dünden beri. Ne yapmalıyım?")
+        "yazılım" in t || "software" in t || "program" in t ->
+            listOf("The application crashes when I open the settings page." to "Ayarlar sayfasını açınca uygulama çöküyor.",
+                "Can you reproduce the problem?" to "Sorunu yeniden oluşturabiliyor musun?",
+                "Yes. It happens on every attempt." to "Evet. Her denemede oluyor.",
+                "Please check the logs and create a bug report." to "Lütfen kayıtları kontrol et ve hata raporu oluştur.")
+        "havacılık" in t || "uçak" in t || "maintenance" in t || "flight control" in t ->
+            listOf("What did you find during the inspection?" to "Kontrol sırasında ne buldun?",
+                "There is visible damage near the access panel." to "Erişim panelinin yakınında görünür hasar var.",
+                "Has the finding been recorded?" to "Bulgu kaydedildi mi?",
+                "Yes. I recorded the location and the observed condition." to "Evet. Konumu ve gözlenen durumu kaydettim.")
+        else -> listOf(
+            "Could you explain that one more time, please?" to "Bunu bir kez daha açıklayabilir misiniz, lütfen?",
+            lesson.examples.getOrNull(0)?.first ?: lesson.heading to (lesson.examples.getOrNull(0)?.second ?: lesson.explanation),
+            "Can you give me an example?" to "Bir örnek verebilir misiniz?",
+            lesson.examples.getOrNull(1)?.first ?: lesson.rule to (lesson.examples.getOrNull(1)?.second ?: lesson.explanation)
+        )
+    }
+}
 
 private fun lessonContent(title: String): LessonContent {
     val t = title.lowercase(Locale.ROOT)
