@@ -2283,9 +2283,9 @@ private fun listeningDialogueFor(title: String, lesson: LessonContent): List<Pai
                 "Yes. I recorded the location and the observed condition." to "Evet. Konumu ve gözlenen durumu kaydettim.")
         else -> listOf(
             "Could you explain that one more time, please?" to "Bunu bir kez daha açıklayabilir misiniz, lütfen?",
-            lesson.examples.getOrNull(0)?.first ?: lesson.heading to (lesson.examples.getOrNull(0)?.second ?: lesson.explanation),
+            (lesson.examples.getOrNull(0)?.first ?: lesson.heading) to (lesson.examples.getOrNull(0)?.second ?: lesson.explanation),
             "Can you give me an example?" to "Bir örnek verebilir misiniz?",
-            lesson.examples.getOrNull(1)?.first ?: lesson.rule to (lesson.examples.getOrNull(1)?.second ?: lesson.explanation)
+            (lesson.examples.getOrNull(1)?.first ?: lesson.rule) to (lesson.examples.getOrNull(1)?.second ?: lesson.explanation)
         )
     }
 }
