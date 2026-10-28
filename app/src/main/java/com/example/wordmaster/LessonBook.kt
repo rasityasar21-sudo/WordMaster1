@@ -62,6 +62,36 @@ object LessonBook {
                 listOf("Fuselage ve wing içindeki temel elemanları adlandır.", "Dört hasar terimini ayırt et.", "Tarafsız bir İngilizce gözlem cümlesi yaz.", "SRM'nin neden uçak tipine özgü olduğunu açıkla.")
             )
         }
+        if ("motor ve güç ünitesi terimleri" in t) {
+            return LessonBookChapter(
+                "Turbofan motorun ana bölümlerini ve teknik rapor dilini anlamak",
+                "Aircraft powerplant terminology, motorun çalışma ilkelerini İngilizce kaynaklardan doğru okumayı sağlar. Modern turbofan motorlarda fan, compressor, combustor, turbine ve exhaust gibi bölümler bulunur. Compressor havanın basıncını artırır; combustor yakıt-hava karışımının yanmasıyla enerji üretir; turbine sıcak gaz akışından enerji alarak ilgili döner bileşenleri tahrik eder. N1 ve N2, motor tasarımına göre farklı rotor gruplarının dönüş hızlarıyla ilişkili göstergelerdir; bunların kesin tanımı ve sınırları motor tipine özgüdür. Engine indication, vibration, abnormal indication, discrepancy ve troubleshooting terimlerini ayırt etmek gerekir. Bir göstergenin anormal olması tek başına belirli bir sensör veya kablo arızasını kanıtlamaz. Uçak tipi, motor modeli ve konfigürasyonuna uygun güncel AMM, FIM/TSM ve diğer onaylı kaynaklar olmadan bakım adımı veya arıza kodu çıkarılmamalıdır.",
+                "Airflow vocabulary: inlet → fan/compressor → combustor → turbine → exhaust.\nReporting: observed indication → operating context → approved reference → verified finding.",
+                listOf(
+                    "The compressor raises the pressure of the incoming air." to "Kompresör gelen havanın basıncını artırır.",
+                    "The turbine extracts energy from the hot gas stream." to "Türbin sıcak gaz akışından enerji alır.",
+                    "The reported N1 indication requires assessment using the applicable maintenance data." to "Bildirilen N1 göstergesi geçerli bakım verileriyle değerlendirilmelidir.",
+                    "An abnormal indication does not, by itself, identify a failed component." to "Anormal bir gösterge tek başına arızalı parçayı belirlemez."
+                ),
+                listOf("N1 ve N2 tanımlarını bütün motorlarda aynı kabul etme.", "Bir göstergeden doğrulanmamış arıza nedeni üretme.", "Genel açıklamayı motor tipine özgü bakım talimatı yerine kullanma."),
+                listOf("Motorun beş ana bölümünü İngilizce tanımla.", "Compressor ile turbine işlevini karşılaştır.", "Indication ve confirmed fault farkını açıkla.", "Belirsizliği koruyan kısa bir teknik rapor yaz.")
+            )
+        }
+        if ("hidrolik sistemler" in t) {
+            return LessonBookChapter(
+                "Hidrolik sistemin temel bileşenlerini ve durum bildirimlerini okumak",
+                "Aircraft hydraulic systems, basınçlı akışkan üzerinden kuvvet aktarımı sağlayabilir. Reservoir akışkan deposu, pump pompa, pressure line basınç hattı, return line dönüş hattı, actuator hareket sağlayan eleman, valve ise akışı yönlendiren veya kontrol eden bileşendir. Pressure, flow, leakage, contamination ve isolation gibi kelimeler teknik belgelerde farklı durumları anlatır. Pressure düşüşü, tek başına hangi parçanın arızalı olduğunu belirlemez. Bir raporda observed leakage ile suspected source ifadeleri ayrı tutulmalıdır. Hidrolik sistemler depolanmış enerji ve basınç içerebilir; bu eğitim bölümü hiçbir şekilde uçakta hat açma, basınç boşaltma veya bakım yapma talimatı değildir. Gerçek işlemler yalnızca yetkili personelce güncel ve uçak tipine uygun onaylı dokümanlarla yapılır.",
+                "System vocabulary: reservoir → pump → lines/valves → actuator → return.\nObservation language: pressure indication / visible leakage / contamination / verified condition.",
+                listOf(
+                    "The hydraulic pump supplies pressurized fluid to the system." to "Hidrolik pompa sisteme basınçlı akışkan sağlar.",
+                    "The actuator converts hydraulic energy into movement." to "Aktüatör hidrolik enerjiyi harekete dönüştürür.",
+                    "The report notes visible leakage but does not identify its source." to "Rapor görünür sızıntıyı belirtir ancak kaynağını belirlemez.",
+                    "Hydraulic maintenance requires the applicable approved procedure." to "Hidrolik bakım geçerli onaylı prosedürü gerektirir."
+                ),
+                listOf("Pressure ile flow kavramlarını eş anlamlı sanma.", "Görülen sızıntının kaynağını kanıtsız kesinleştirme.", "Basınçlı sistemler için genel ders metnini uygulama talimatı sayma."),
+                listOf("Reservoir, pump, valve ve actuator işlevlerini açıkla.", "Leakage ve contamination terimlerini ayır.", "Gözlemi varsayımdan ayıran rapor yaz.", "Onaylı prosedürün emniyet açısından önemini açıkla.")
+            )
+        }
         // C1-specific chapters must precede broad grammar and writing title matches.
         if ("anlam incelikleri ve register" in t) {
             return LessonBookChapter(
