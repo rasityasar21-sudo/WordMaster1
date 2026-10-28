@@ -1540,7 +1540,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
             }
         },
         text = {
-            Column(verticalArrangement = Arrangement.spacedBy(9.dp)) {
+            Column(modifier = Modifier.heightIn(max = 410.dp).verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(9.dp)) {
                 Text("Sana uygun dersleri hazırlayalım. Seviyeni seçebilir ya da kısa sınavla belirleyebilirsin.", fontSize = 14.sp, lineHeight = 20.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 if (placementCompleted) {
                     Surface(color = if (darkTheme) Color(0xFF15372F) else Color(0xFFE1F8F0), contentColor = if (darkTheme) Color(0xFFB9F5DF) else Color(0xFF087F5B), shape = RoundedCornerShape(14.dp)) {
