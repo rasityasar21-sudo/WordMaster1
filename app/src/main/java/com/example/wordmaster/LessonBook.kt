@@ -19,6 +19,13 @@ object LessonBook {
         return when {
 
 
+            ("geçmiş zaman" in t && ("düzenli" in t || "düzensiz" in t)) || "past simple" in t ->
+                LessonBookChapter("Past Simple ile bitmiş olayları anlatmak",
+                    "Past Simple, geçmişte başlayıp bitmiş olayları ve geçmişteki sıralı eylemleri anlatır. Düzenli fiiller çoğunlukla -ed alır; düzensiz fiillerin ikinci hâli ayrı öğrenilir. Olumsuz ve soru cümlelerinde did/didn't kullanılır ve ana fiil yalın biçimde kalır. Be fiili was/were ile kurulur ve bu yapıda did kullanılmaz.",
+                    "Positive: subject + V2\nNegative: subject + didn't + V1\nQuestion: Did + subject + V1?\nRegular: work → worked · Irregular: go → went",
+                    listOf("We visited the museum last Saturday." to "Geçen cumartesi müzeyi ziyaret ettik.", "She didn't take the early bus." to "Erken otobüse binmedi.", "Did you finish the assignment?" to "Ödevi bitirdin mi?", "They went home after the lesson." to "Dersten sonra eve gittiler."),
+                    listOf("Did you went değil did you go kullan.", "Didn't sonrası V2 değil V1 kullan.", "Was/were ile eylem fiillerinin geçmiş biçimlerini karıştırma.", "Her düzensiz fiilin -ed aldığını varsayma."),
+                    listOf("Eylemin geçmişte bitip bitmediğini belirle.", "Olumlu cümlede V2 kullan.", "Soru ve olumsuzda did/didn't + V1 kur.", "Zaman ifadesini cümleyle eşleştir."))
             "geçmiş zaman: was/were" in t ->
                 LessonBookChapter("Was ve were ile geçmişteki durumları anlatmak",
                     "Was ve were, be fiilinin geçmiş biçimleridir. I, he, she ve it ile was; you, we ve they ile were kullanılır. Olumsuzda was not/wasn't ve were not/weren't gelir. Soruda was/were öznenin önüne geçer. Bu yapı geçmişteki durumları anlatır; eylem fiillerinin geçmiş hâliyle karıştırılmamalıdır.",
