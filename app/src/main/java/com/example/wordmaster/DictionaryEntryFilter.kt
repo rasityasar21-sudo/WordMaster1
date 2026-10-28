@@ -29,7 +29,18 @@ internal object DictionaryEntryFilter {
             Regex("(?i)^\\s*(?:n\\.|v\\.|adj\\.|adv\\.|pron\\.|prep\\.|conj\\.|interj\\.)").containsMatchIn(tr) ||
             Regex("(?i)^\\s*(?:the action of|to be |to do |a person who|an act of|the state of|used to describe)").containsMatchIn(tr)
 
-        return isMorphologyFragment || looksLikeEnglishDefinition || isOrdinalNoise || isDefinitionInTranslation
+        // Reject standalone source artifacts, but keep real terms such as "B737" or "N1".
+        val isPunctuationOnly = en.none { it.isLetter() }
+        val isPlaceholder = en.equals("null", ignoreCase = true) ||
+            en.equals("undefined", ignoreCase = true) ||
+            en.equals("n/a", ignoreCase = true) ||
+            tr.equals("null", ignoreCase = true) ||
+            tr.equals("undefined", ignoreCase = true) ||
+            tr.equals("n/a", ignoreCase = true) ||
+            tr == "-" || tr == "?"
+        val isRepeatedFiller = en.length >= 5 && en.all { it == en.first() }
+        return isMorphologyFragment || looksLikeEnglishDefinition || isOrdinalNoise ||
+            isDefinitionInTranslation || isPunctuationOnly || isPlaceholder || isRepeatedFiller
     }
 
     /** Short, learner-friendly entries suitable for rapid matching and pronunciation drills. */
