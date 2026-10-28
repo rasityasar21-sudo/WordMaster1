@@ -51,7 +51,9 @@ data class WordProgress(
             streak = nextStreak,
             intervalDays = nextInterval,
             easeFactor = nextEase,
-            dueDate = today.plusDays(nextInterval.toLong()).toString(),
+            // Missed words return to the review queue immediately; successful recall
+            // uses the spaced interval so the learner sees the word again later.
+            dueDate = if (q < 3) today.toString() else today.plusDays(nextInterval.toLong()).toString(),
             lastReviewed = today.toString()
         )
     }
