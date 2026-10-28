@@ -16,6 +16,22 @@ data class LessonBookChapter(
 object LessonBook {
     fun chapter(title: String): LessonBookChapter {
         val t = title.lowercase().replace("i\u0307", "i")
+        if ("uçuş kumandaları" in t) {
+            return LessonBookChapter(
+                "Uçuş kumanda yüzeylerinin İngilizce adlarını, hareketlerini ve bakım dilini öğrenmek",
+                "Primary flight controls ana uçuş kumandalarını ifade eder: ailerons yatış (roll), elevator veya stabilator yunuslama (pitch), rudder sapma (yaw) hareketiyle ilişkilidir. Secondary flight controls arasında flaps, slats ve spoilers gibi yüzeyler bulunur; ancak sistem mimarisi uçak tipine göre değişir. Aileron, wing üzerindeki hareketli yüzeydir; flap ile aynı görevde değildir. Elevator genellikle horizontal stabilizer bölgesinde, rudder ise vertical stabilizer üzerinde bulunur. Bakım dokümanlarında deflection yüzeyin sapmasını, hinge bağlantı eksenini, actuator hareket sağlayan birimi, linkage mekanik bağlantıyı, rigging ise uygun ayar/hizalama işlemlerini ifade eder. Inspection, discrepancy, limitation ve rectification sözcükleri bir arıza kaydını anlamada önemlidir. Bir teknisyen İngilizce rapor okurken gözlenen durum, doğrulanmış bulgu ve varsayımı birbirinden ayırmalıdır. Bu içerik terim ve teknik okuma eğitimi içindir; belirli uçak üzerinde kontrol, ayar veya bakım yapmak için tip ve seri numarasına uygun güncel AMM, FIM/TSM, yetkili prosedürler ve eğitim gerekir.",
+                "Flight axis: roll → aileron; pitch → elevator/stabilator; yaw → rudder.\nVocabulary: flap/slat → lift-related high-lift devices; spoiler → airflow/lift management; actuator → movement; hinge → pivot; linkage → mechanical connection.\nTechnical report: observed condition → affected component → document reference → verified finding (if available).",
+                listOf(
+                    "The ailerons control roll about the aircraft's longitudinal axis." to "Aileronlar uçağın boylamasına ekseni etrafındaki yatış hareketini kontrol eder.",
+                    "The rudder is mounted on the vertical stabilizer." to "Rudder, dikey stabilize üzerinde bulunur.",
+                    "The technician recorded the observed discrepancy without assuming its cause." to "Teknisyen, nedenini varsaymadan gözlenen uygunsuzluğu kaydetti.",
+                    "The maintenance team must consult the applicable approved manual before any adjustment." to "Bakım ekibi herhangi bir ayardan önce geçerli onaylı el kitabına başvurmalıdır.",
+                    "Flaps and slats are not interchangeable with primary flight controls." to "Flaplar ve slatlar ana uçuş kumandalarıyla birbirinin yerine geçmez."
+                ),
+                listOf("Aileron ile flap görevlerini birbirine karıştırma.", "Rudder ile elevator hareket eksenlerini karıştırma.", "Bir gözlemi doğrulanmış arıza nedeni gibi raporlama.", "Genel eğitim açıklamasını uçak tipine özgü bakım prosedürü yerine kullanma."),
+                listOf("Roll, pitch ve yaw için ilgili kumandayı İngilizce açıkla.", "Primary ve secondary flight control örneklerini sınıflandır.", "Actuator, hinge, linkage ve deflection terimlerini tanımla.", "Gözlem ile varsayımı ayıran iki cümlelik İngilizce rapor yaz.", "Gerçek bakım için tip bazlı onaylı doküman gerekliliğini açıkla.")
+            )
+        }
         // C1-specific chapters must precede broad grammar and writing title matches.
         if ("anlam incelikleri ve register" in t) {
             return LessonBookChapter(
