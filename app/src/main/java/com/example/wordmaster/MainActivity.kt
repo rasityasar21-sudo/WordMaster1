@@ -2327,6 +2327,128 @@ private fun listeningDialogueFor(title: String, lesson: LessonContent): List<Pai
                 "Can you reproduce the problem?" to "Sorunu yeniden oluşturabiliyor musun?",
                 "Yes. It happens on every attempt." to "Evet. Her denemede oluyor.",
                 "Please check the logs and create a bug report." to "Lütfen kayıtları kontrol et ve hata raporu oluştur.")
+
+        "sayılar, saatler" in t || "tarihler" in t ->
+            listOf("What time does the lesson start?" to "Ders saat kaçta başlıyor?",
+                "It starts at half past eight on Tuesday." to "Salı günü sekiz buçukta başlıyor.",
+                "Is the test on the twenty-eighth of October?" to "Sınav yirmi sekiz Ekim'de mi?",
+                "Yes, and please arrive ten minutes early." to "Evet, lütfen on dakika erken gel.")
+        "karşılaştırmalar" in t || "görüşleri karşılaştırma" in t ->
+            listOf("Which route is faster, the train or the bus?" to "Hangi rota daha hızlı, tren mi otobüs mü?",
+                "The train is faster, but it is more expensive." to "Tren daha hızlı ama daha pahalı.",
+                "That's true. The bus is cheaper than the train." to "Doğru. Otobüs trenden daha ucuz.",
+                "So let's take the train today and the bus tomorrow." to "O hâlde bugün trenle, yarın otobüsle gidelim.")
+        "şimdiki zaman" in t ->
+            listOf("What are you doing right now?" to "Şu anda ne yapıyorsun?",
+                "I'm preparing for my English lesson." to "İngilizce dersime hazırlanıyorum.",
+                "Is your brother studying too?" to "Erkek kardeşin de ders çalışıyor mu?",
+                "No, he's making dinner." to "Hayır, akşam yemeği hazırlıyor.")
+        "gelecek planları" in t ->
+            listOf("What are you going to do this weekend?" to "Bu hafta sonu ne yapacaksın?",
+                "I'm going to visit my grandparents." to "Büyükannemle büyükbabamı ziyaret edeceğim.",
+                "I think it will rain on Sunday." to "Sanırım pazar günü yağmur yağacak.",
+                "Then we'll stay inside and play a board game." to "O zaman içeride kalıp kutu oyunu oynarız.")
+        "can, must" in t || "can / can't" in t ->
+            listOf("Can you use this computer?" to "Bu bilgisayarı kullanabilir misin?",
+                "Yes, but I must finish the safety training first." to "Evet ama önce güvenlik eğitimini bitirmeliyim.",
+                "Do we have to bring our own headphones?" to "Kendi kulaklığımızı getirmek zorunda mıyız?",
+                "No, the school provides them." to "Hayır, okul sağlıyor.")
+        "sıklık zarfları" in t ->
+            listOf("How often do you practise English?" to "Ne sıklıkla İngilizce pratik yaparsın?",
+                "I usually practise after dinner." to "Genellikle akşam yemeğinden sonra pratik yaparım.",
+                "Do you ever listen to English on the bus?" to "Otobüste hiç İngilizce dinler misin?",
+                "Sometimes, but I rarely use subtitles." to "Bazen ama nadiren altyazı kullanırım.")
+        "seyahat ve konaklama" in t || "travel" in t ->
+            listOf("Hello, I have a reservation under the name Demir." to "Merhaba, Demir adına rezervasyonum var.",
+                "Certainly. Could I see your booking confirmation?" to "Elbette. Rezervasyon onayınızı görebilir miyim?",
+                "Here it is. What time is check-out?" to "Buyurun. Çıkış saati kaçta?",
+                "Check-out is at eleven in the morning." to "Çıkış sabah saat on birde.")
+        "yer edatları" in t || "there is / there are" in t ->
+            listOf("Where are my keys?" to "Anahtarlarım nerede?",
+                "They're on the table, next to your bag." to "Masada, çantanın yanında.",
+                "And where is my phone?" to "Peki telefonum nerede?",
+                "It's under the notebook." to "Defterin altında.")
+        "sayılabilen ve sayılamayan" in t || "yemek siparişi ve miktarlar" in t ->
+            listOf("Would you like some water?" to "Biraz su ister misin?",
+                "Yes, please. And could I have two apples?" to "Evet, lütfen. İki elma da alabilir miyim?",
+                "Of course. Anything else?" to "Elbette. Başka bir şey?",
+                "No, that's enough, thank you." to "Hayır, bu yeterli, teşekkürler.")
+        "geçmiş zaman: düzenli ve düzensiz" in t ->
+            listOf("What did you do yesterday?" to "Dün ne yaptın?",
+                "I visited my cousin and we watched a film." to "Kuzenimi ziyaret ettim ve film izledik.",
+                "Did you go home late?" to "Eve geç gittin mi?",
+                "No, I took the last bus at nine." to "Hayır, dokuzdaki son otobüse bindim.")
+        "fikir belirtme" in t || "iş yerinde iletişim" in t || "toplantılarda fikir savunma" in t || "profesyonel iletişim" in t ->
+            listOf("I think we should update the plan." to "Bence planı güncellemeliyiz.",
+                "What is the main reason?" to "Temel gerekçe nedir?",
+                "The current process takes too long, and the data supports that." to "Mevcut süreç çok uzun sürüyor ve veriler bunu destekliyor.",
+                "That makes sense. Could you share the report with the team?" to "Mantıklı. Raporu ekiple paylaşabilir misin?")
+        "profesyonel e-posta" in t || "e-posta yazımı" in t ->
+            listOf("Could you send me the updated schedule, please?" to "Güncellenmiş programı bana gönderebilir misiniz lütfen?",
+                "Certainly. Do you need it before the meeting?" to "Elbette. Toplantıdan önce mi gerekiyor?",
+                "Yes, by three o'clock would be ideal." to "Evet, saat üçe kadar olması ideal olur.",
+                "I'll attach it to my reply this afternoon." to "Bu öğleden sonra yanıtıma ekleyeceğim.")
+        "dinlemede ayrıntı" in t || "uzun konuşmalarda ana fikir" in t || "ileri dinleme" in t ->
+            listOf("The briefing will begin at nine in room four." to "Bilgilendirme saat dokuzda dördüncü odada başlayacak.",
+                "Please bring the inspection summary and two copies of the chart." to "Lütfen kontrol özetini ve grafiğin iki kopyasını getir.",
+                "After the briefing, the team will review the open actions." to "Bilgilendirmeden sonra ekip açık eylemleri gözden geçirecek.",
+                "So, nine o'clock, room four, and two copies of the chart." to "Yani saat dokuz, dördüncü oda ve grafiğin iki kopyası.")
+        "gövde ve yapısal parçalar" in t ->
+            listOf("Which area is described in the inspection note?" to "Kontrol notunda hangi bölge anlatılıyor?",
+                "The note refers to the fuselage skin near a frame." to "Not, bir çerçevenin yakınındaki gövde kaplamasından bahsediyor.",
+                "Is the cause confirmed?" to "Neden doğrulandı mı?",
+                "No. The report records the observation only." to "Hayır. Rapor yalnızca gözlemi kaydediyor.")
+        "motor ve güç ünitesi" in t || "motor kontrolü" in t ->
+            listOf("What did the report say about the engine indication?" to "Rapor motor göstergesi hakkında ne söyledi?",
+                "It says the value fluctuated during the observation." to "Gözlem sırasında değerin dalgalandığını söylüyor.",
+                "Does the report identify the cause?" to "Rapor nedeni belirtiyor mu?",
+                "No. The approved troubleshooting procedure must be consulted." to "Hayır. Onaylı arıza giderme prosedürüne başvurulmalı.")
+        "hidrolik sistemler" in t ->
+            listOf("What was recorded during the inspection?" to "Kontrol sırasında ne kaydedildi?",
+                "A possible hydraulic fluid leak was observed." to "Olası bir hidrolik sıvı kaçağı gözlendi.",
+                "Did the report include a location?" to "Raporda konum belirtildi mi?",
+                "Yes, it records the observed area without guessing the cause." to "Evet, neden tahmin etmeden gözlenen alanı kaydediyor.")
+        "elektrik ve kablolama" in t ->
+            listOf("What should the report identify?" to "Rapor neyi tanımlamalı?",
+                "The connector location and the observed condition." to "Konnektörün konumunu ve gözlenen durumu.",
+                "Can we invent a test result?" to "Bir test sonucu uydurabilir miyiz?",
+                "No. Record only verified results from the approved procedure." to "Hayır. Yalnızca onaylı prosedürden doğrulanmış sonuçları kaydet.")
+        "aviyonik ve iletişim" in t ->
+            listOf("The crew reported an intermittent communication issue." to "Ekip aralıklı bir iletişim sorunu bildirdi.",
+                "Was a fault code confirmed?" to "Bir arıza kodu doğrulandı mı?",
+                "Not yet. We need to follow the aircraft-specific troubleshooting data." to "Henüz değil. Uçağa özgü arıza giderme verisini izlemeliyiz.",
+                "Understood. Record the exact report first." to "Anlaşıldı. Önce bildirimi aynen kaydet.")
+        "bakım kayıtları ve teknik dokümanlar" in t || "task card" in t || "iş emri okuma" in t ->
+            listOf("Which document revision are you using?" to "Hangi doküman revizyonunu kullanıyorsun?",
+                "The current approved revision listed for this task." to "Bu iş için listelenen güncel onaylı revizyonu.",
+                "Have you checked the task prerequisites?" to "İşin ön koşullarını kontrol ettin mi?",
+                "Yes, and I will record completion in the designated field." to "Evet ve tamamlanmayı belirtilen alana kaydedeceğim.")
+        "alet kontrolü" in t || "yabancı cisim" in t ->
+            listOf("Have all tools been accounted for?" to "Tüm aletlerin sayımı yapıldı mı?",
+                "The inventory is complete, and one item needs rechecking." to "Envanter tamamlandı ve bir öğenin yeniden kontrol edilmesi gerekiyor.",
+                "What about the work area?" to "Çalışma alanı ne durumda?",
+                "It has been checked for foreign object debris." to "Yabancı cisim kalıntıları açısından kontrol edildi.")
+        "human factors" in t || "vardiya teslimi" in t ->
+            listOf("What needs to be included in the handover?" to "Devir teslimde neler yer almalı?",
+                "The open task, current status, and next action." to "Açık iş, mevcut durum ve sonraki adım.",
+                "Should we mention the unresolved item?" to "Çözülmemiş maddeyi belirtmeli miyiz?",
+                "Yes, clearly and without making assumptions." to "Evet, açıkça ve varsayım yapmadan.")
+        "arıza ve bulgu raporu" in t || "kontrol, bulgu" in t || "hasar ifadeleri" in t ->
+            listOf("What did you observe?" to "Ne gözlemledin?",
+                "A visible crack near the bracket." to "Braket yakınında görünür bir çatlak.",
+                "Is the cause known?" to "Nedeni biliniyor mu?",
+                "No. I recorded the finding and referred it for assessment." to "Hayır. Bulguyu kaydettim ve değerlendirmeye yönlendirdim.")
+        "ölçüler, toleranslar" in t || "bağlantı elemanları" in t || "malzemeler ve korozyon" in t || "pnömatik sistemler" in t ->
+            listOf("Where did you verify the required limit?" to "Gerekli limiti nereden doğruladın?",
+                "In the current approved technical documentation." to "Güncel onaylı teknik dokümandan.",
+                "Should we estimate it from memory?" to "Hafızamızdan tahmin etmeli miyiz?",
+                "No. Use the specified data and record the result accurately." to "Hayır. Belirtilen veriyi kullan ve sonucu doğru kaydet.")
+        "ileri düzey" in t || "sentez" in t || "akademik paragraf" in t || "eleştirel okuma" in t || "metin düzenleme" in t || "rapor ve öneri" in t || "örtük anlam" in t || "müzakere" in t ->
+            listOf("The first source supports the proposal, but the second raises a concern." to "İlk kaynak öneriyi destekliyor ancak ikinci kaynak bir endişe dile getiriyor.",
+                "How should we evaluate the difference?" to "Farkı nasıl değerlendirmeliyiz?",
+                "We should compare the evidence, limitations, and context." to "Kanıtı, sınırlılıkları ve bağlamı karşılaştırmalıyız.",
+                "Agreed. Then we can state a balanced conclusion." to "Katılıyorum. Ardından dengeli bir sonuç belirtebiliriz.")
+
         "havacılık" in t || "uçak" in t || "maintenance" in t || "flight control" in t ->
             listOf("What did you find during the inspection?" to "Kontrol sırasında ne buldun?",
                 "There is visible damage near the access panel." to "Erişim panelinin yakınında görünür hasar var.",
