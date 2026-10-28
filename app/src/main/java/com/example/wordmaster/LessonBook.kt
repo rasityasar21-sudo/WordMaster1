@@ -152,6 +152,36 @@ object LessonBook {
                 listOf("Sensor, signal ve display arasındaki ilişkiyi açıkla.", "Heading, course, altitude ve attitude kavramlarını ayır.", "Intermittent indication için tarafsız bir İngilizce rapor yaz.", "BITE bilgisinin neden tip bazlı yorumlandığını açıkla.")
             )
         }
+        if ("human factors ve emniyet iletişimi" in t) {
+            return LessonBookChapter(
+                "İnsan faktörleri risklerini İngilizce ifade etmek ve açık emniyet iletişimi kurmak",
+                "Human factors, insanların iş ortamı, görev yükü, iletişim ve organizasyonla etkileşimini inceler. Fatigue yorgunluğu, workload iş yükünü, distraction dikkat dağınıklığını, time pressure zaman baskısını ve situational awareness durumsal farkındalığı anlatır. Assumption varsayım, confirmation teyit, handover vardiya teslimi ve escalation konunun uygun yetkiliye iletilmesidir. Bakım iletişiminde belirsizlik gizlenmemelidir: not confirmed, requires clarification ve pending verification gibi ifadeler bir bilginin henüz doğrulanmadığını açıkça belirtir. Read-back veya confirmation, kritik bilginin doğru anlaşıldığını kontrol etmek için kullanılan iletişim kavramlarıdır; uygulama biçimi kuruluş prosedürlerine bağlıdır. Emniyet kaygısı bildirirken kişileri suçlayan dil yerine gözlenebilir olgular ve gerekli açıklama kullanılır. Bu ders profesyonel iletişim İngilizcesi içindir; gerçek bakım faaliyetlerinde geçerli emniyet sistemi, yetkilendirme ve onaylı prosedürler uygulanır.",
+                "Communication: observed concern → impact/uncertainty → request for clarification → confirmation → documented handover.\nVocabulary: fatigue / workload / distraction / time pressure / situational awareness / escalation.",
+                listOf(
+                    "The technician reported a concern about time pressure during the handover." to "Teknisyen vardiya tesliminde zaman baskısıyla ilgili bir endişeyi bildirdi.",
+                    "The task status has not been confirmed and requires clarification." to "Görevin durumu doğrulanmadı ve açıklığa kavuşturulması gerekiyor.",
+                    "Please confirm that you received the updated maintenance record." to "Lütfen güncellenmiş bakım kaydını aldığınızı teyit edin.",
+                    "Fatigue and distraction can affect situational awareness." to "Yorgunluk ve dikkat dağınıklığı durumsal farkındalığı etkileyebilir."
+                ),
+                listOf("Doğrulanmamış işi completed olarak bildirme.", "Emniyet endişesini kişisel suçlama biçiminde yazma.", "Teyit gerektiren bilgiyi varsayarak aktarım yapma."),
+                listOf("Beş insan faktörü terimini tanımla.", "Belirsiz iş durumu için nazik teyit isteği yaz.", "Gözlem ile varsayımı ayır.", "İki cümlelik tarafsız vardiya iletişimi oluştur.")
+            )
+        }
+        if ("vardiya teslimi ve ekip iletişimi" in t) {
+            return LessonBookChapter(
+                "Bakım vardiyası tesliminde tamamlanan, bekleyen ve doğrulanmamış işleri ayırmak",
+                "Shift handover, devam eden bakımın durumunun başka bir ekibe aktarılmasıdır. Completed work tamamlanmış işi, pending item bekleyen maddeyi, outstanding defect giderilmemiş uygunsuzluğu, open task açık görevi, deferred item ise geçerli kurallara göre ertelenmiş maddeyi ifade edebilir. Bu terimler birbirinin yerine geçmez; özellikle deferred ifadesi yetkili kayıt ve prosedür olmadan kullanılmamalıdır. Handover notes, task status, document reference, parts availability ve verification status gibi alanlar bir kaydın anlaşılmasına yardımcı olur. Bir ekip üyesi bilmediği durumu not confirmed veya status unknown olarak ifade etmelidir; tamamlanmamış bir işi bitmiş gibi göstermemelidir. Gerçek bakım kayıtları kuruluşun onaylı sisteminde, yetkili kişilerce ve ilgili düzenlemelere uygun tutulur.",
+                "Handover summary: aircraft/task reference → completed work → pending items → unresolved observations → verification status → receiving-team confirmation.",
+                listOf(
+                    "The inspection is complete, but the documentation review remains pending." to "Kontrol tamamlandı ancak dokümantasyon incelemesi bekliyor.",
+                    "The reported discrepancy remains open and has not been cleared." to "Bildirilen uygunsuzluk açık durumda ve kapatılmadı.",
+                    "Please confirm receipt of the outstanding task list." to "Lütfen bekleyen görev listesini aldığınızı teyit edin.",
+                    "The component status is unknown; no completion is recorded." to "Bileşenin durumu bilinmiyor; tamamlanma kaydı yok."
+                ),
+                listOf("Pending işi completed diye aktarma.", "Deferred terimini yetkili erteleme kaydı olmadan kullanma.", "Alıcı ekibin teyidini varsayma."),
+                listOf("Completed, pending, outstanding ve deferred farkını açıkla.", "İki maddelik İngilizce vardiya teslim notu yaz.", "Doğrulanmamış durumu açıkça belirt.", "Alıcı ekipten teyit isteyen bir cümle kur.")
+            )
+        }
         // C1-specific chapters must precede broad grammar and writing title matches.
         if ("anlam incelikleri ve register" in t) {
             return LessonBookChapter(
