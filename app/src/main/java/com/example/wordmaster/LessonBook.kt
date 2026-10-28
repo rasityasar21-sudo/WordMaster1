@@ -17,6 +17,82 @@ object LessonBook {
     fun chapter(title: String): LessonBookChapter {
         val t = title.lowercase()
         return when {
+
+            "selamlaşma" in t || "tanışma" in t ->
+                LessonBookChapter("Selamlaşma ve kendini tanıtma",
+                    "İlk karşılaşmada selamlaş, adını söyle ve karşındakinin adını sor. Hello ve Hi gündelik selamlaşmalardır; Good morning sabah kullanılır. Nice to meet you tanışma sırasında söylenir. Resmî ve samimi durumlarda uygun ifadeyi seç.",
+                    "Hello, I'm ... · My name is ... · What's your name? · Nice to meet you.",
+                    listOf("Hello, I'm Ece." to "Merhaba, ben Ece.", "What is your name?" to "Adın ne?", "Nice to meet you, too." to "Ben de tanıştığıma memnun oldum."),
+                    listOf("My name Ece değil My name is Ece kullan.", "İlk tanışmada karşı tarafın adını doğru duymak için gerekirse tekrar iste.", "Good night genellikle vedalaşırken veya gece uyumadan önce kullanılır; selamlaşma değildir."),
+                    listOf("Kendini iki cümleyle tanıt.", "Karşındaki kişinin adını sor.", "Selamlaşma ve vedalaşma ifadelerini ayırt et."))
+            "günlük temel kelimeler" in t ->
+                LessonBookChapter("Günlük kelimeleri cümle içinde öğrenmek",
+                    "Kelimeyi yalnızca Türkçe karşılığıyla ezberlemek yerine bir örnek cümleyle öğren. Book, water, food, school ve friend gibi kelimeler günlük bağlamlarda sık kullanılır. A/an, çoğul -s ve temel sıfatlarla birlikte kullanıma dikkat et.",
+                    "This is a book. · I drink water. · My friends are at school.",
+                    listOf("I have a notebook." to "Bir defterim var.", "The food is hot." to "Yemek sıcak.", "My friend is here." to "Arkadaşım burada."),
+                    listOf("Her kelimeyi tek başına ezberleyip cümlede kullanmamazlık yapma.", "Water gibi sayılamayan isimleri doğrudan çoğul yapma.", "İsimden önceki a/an seçimini ilk sese göre kontrol et."),
+                    listOf("Beş günlük kelime seç ve her biriyle cümle kur.", "İsmin tekil, çoğul veya sayılamayan olup olmadığını belirle.", "Cümledeki kelimenin anlamını bağlamdan doğrula."))
+            "günlük rutinim" in t || "geniş zaman: günlük alışkanlıklar" in t ->
+                LessonBookChapter("Günlük rutinleri Present Simple ile anlatmak",
+                    "Present Simple alışkanlıklar, rutinler ve genel gerçekler için kullanılır. I/you/we/they ile fiilin yalın hâli; he/she/it ile olumlu cümlede çoğunlukla -s veya -es kullanılır. Do/does soru, don't/doesn't olumsuz yapı kurar. Every day, usually ve at seven gibi zaman ifadeleri anlamı netleştirir.",
+                    "I/You/We/They + V1 · He/She/It + V-s
+Do/Does + özne + V1? · don't/doesn't + V1",
+                    listOf("I get up at seven every day." to "Her gün saat yedide kalkarım.", "She goes to school by bus." to "Okula otobüsle gider.", "He doesn't drink coffee." to "Kahve içmez.", "Do you study in the evening?" to "Akşamları ders çalışır mısın?"),
+                    listOf("She go değil she goes kullan.", "Does he works değil does he work kullan.", "Usually gibi sıklık zarflarını be fiilinden sonra, çoğu ana fiilden önce kullan."),
+                    listOf("Cümlenin rutin mi şu anki eylem mi anlattığını belirle.", "He/she/it ile olumlu fiil ekini kontrol et.", "Does/did gibi yardımcı fiilden sonra ana fiili yalın tut."))
+            "kısa diyalogları anlama" in t ->
+                LessonBookChapter("Kısa diyaloglarda ana bilgi ve bağlam",
+                    "Kısa konuşmayı dinlerken önce kimlerin konuştuğunu ve amaçlarını anlamaya çalış. Sonra isim, yer, saat ve istek gibi ayrıntılara odaklan. Bilmediğin bir kelime tüm konuşmayı anlamanı engellemesin; soru, cevap ve bağlam ipuçlarını kullan.",
+                    "1. Ana amaç · 2. Kim/nerede/ne zaman · 3. Anahtar kelimeler · 4. Cevabı doğrula",
+                    listOf("A: What time is the lesson? B: At nine." to "A: Ders saat kaçta? B: Dokuzda.", "A: Is this seat free? B: Yes, it is." to "A: Bu koltuk boş mu? B: Evet, boş."),
+                    listOf("Her kelimeyi anlamaya çalışıp konuşmanın ana fikrini kaçırma.", "Sayıları ve saatleri duyduğunda sorunun ne istediğini kontrol et.", "Metni görmeden önce ilk dinlemede ana fikri bulmayı dene."),
+                    listOf("Konuşmanın amacını bir cümleyle söyle.", "İsim, yer veya saati not et.", "İkinci dinlemede cevabını metinle karşılaştır."))
+            "sayılar, saatler ve tarihler" in t ->
+                LessonBookChapter("Sayı, saat ve tarihleri doğru söylemek",
+                    "Saatlerde at nine o'clock, half past seven ve quarter to six gibi kalıplar kullanılır. Günlerle on, ay ve yıllarla in, belirli saatlerle at yaygındır. Tarihlerin söylenişi İngiliz İngilizcesi ve Amerikan İngilizcesinde farklı sırada olabilir; duyduğun biçimi bağlamıyla anlamaya çalış.",
+                    "at 8:30 · on Monday · in October · on 28 October / October 28",
+                    listOf("The class starts at half past eight." to "Ders sekiz buçukta başlar.", "My appointment is on Friday." to "Randevum cuma günü.", "Her birthday is in May." to "Onun doğum günü mayısta."),
+                    listOf("Saat için on, gün için at kullanma.", "Quarter past çeyrek geçe, quarter to ise bir sonraki saate çeyrek kala demektir.", "Tarihte gün ve ay sırasının bölgeye göre değişebileceğini unutma."),
+                    listOf("Üç farklı saati İngilizce söyle.", "Bir gün ve bir ayı cümlede kullan.", "At/on/in seçimini zaman ifadesine göre kontrol et."))
+            "there is / there are" in t ->
+                LessonBookChapter("Bir yerde ne bulunduğunu anlatmak",
+                    "There is tekil isim veya sayılamayan isimle, there are çoğul isimlerle kullanılır. Soru oluştururken is/are başa gelir; olumsuzda isn't/aren't kullanılır. A/an ve some/any ifadelerini isim türüne göre seç.",
+                    "There is + tekil/sayılamayan isim
+There are + çoğul isim
+Is there ...? / Are there ...?",
+                    listOf("There is a pharmacy near the school." to "Okulun yakınında bir eczane var.", "There are two chairs in the room." to "Odada iki sandalye var.", "Is there any water?" to "Biraz su var mı?"),
+                    listOf("There is two books değil there are two books kullan.", "Bir yerin konumunu belirtirken in, on, next to gibi edatları ekle.", "Soru cümlesinde is/are yardımcı fiilini başa getir."),
+                    listOf("İsmin tekil mi çoğul mu olduğunu belirle.", "There is veya there are seç.", "Bir olumlu, bir soru ve bir olumsuz örnek kur."))
+            "aile ve insanları tanımlama" in t ->
+                LessonBookChapter("Aile üyelerini ve kişilik özelliklerini anlatmak",
+                    "Family kelimeleri aile ilişkilerini, possessive adjectives ise kime ait olduklarını anlatır: my, your, his, her, our ve their. Kişilik özelliklerinde friendly, kind ve patient; görünüşte tall, short ve curly hair gibi ifadeler kullanılabilir. Be fiilini özneyle eşleştir.",
+                    "This is my ... · He/She is ... · He/She has ...",
+                    listOf("This is my older sister." to "Bu benim ablam.", "My father is patient and kind." to "Babam sabırlı ve naziktir.", "She has curly hair." to "Onun kıvırcık saçları var."),
+                    listOf("He is hair curly gibi kelime sırasını bozma; She has curly hair kullan.", "His ve her seçiminde eşyanın sahibini kontrol et.", "Be fiilini özneye göre seç."),
+                    listOf("Üç aile üyesini İngilizce adlandır.", "Bir kişiyi iki sıfatla anlat.", "My/his/her/our kullanımını kontrol et."))
+            "temel sıfatlar ve betimleme" in t ->
+                LessonBookChapter("Kişi ve nesneleri sıfatlarla betimlemek",
+                    "Sıfatlar bir kişinin, nesnenin veya yerin özelliğini anlatır. Çoğunlukla isimden önce (a small room) veya be fiilinden sonra (the room is small) gelir. Sıfatlar İngilizcede genellikle isimle çoğul uyumu almaz: two small rooms.",
+                    "adjective + noun · subject + be + adjective",
+                    listOf("It is a quiet street." to "Sessiz bir sokak.", "The engine is noisy." to "Motor gürültülü.", "They are friendly people." to "Onlar arkadaş canlısı insanlar."),
+                    listOf("Two smalls rooms değil two small rooms kullan.", "Be fiilini atlama: The room clean değil The room is clean.", "Sıfatı zarftan ayırt et; slowly bir zarf, slow bir sıfattır."),
+                    listOf("Bir nesneyi üç sıfatla tarif et.", "Sıfatı isimden önce ve be fiilinden sonra kullan.", "Sıfatın çoğul isimle biçiminin değişmediğini kontrol et."))
+            "a / an ve tekil isimler" in t ->
+                LessonBookChapter("Tekil sayılabilen isimlerde a ve an",
+                    "A ve an, tekil sayılabilen isimlerden önce gelir. A sessiz sesle başlayan, an sesli sesle başlayan sözcüklerden önce kullanılır. Karar yazılı harfe değil ilk sese dayanır: an hour ama a university. Belirli bir şeyden ikinci kez söz ederken the kullanılabilir.",
+                    "a + consonant sound · an + vowel sound · a/an + singular countable noun",
+                    listOf("a technician" to "bir teknisyen", "an engineer" to "bir mühendis", "an hour" to "bir saat", "a university" to "bir üniversite"),
+                    listOf("An university değil a university kullan.", "Tekil sayılabilen ismi çoğunlukla a/an veya the olmadan bırakma.", "Çoğul ve sayılamayan isimlerle a/an kullanma."),
+                    listOf("İsmin tekil ve sayılabilir olduğunu doğrula.", "İlk sesin ünlü olup olmadığını belirle.", "İlk söz ediş ile bilinen şey arasındaki farkı düşün."))
+            "can / can't" in t ->
+                LessonBookChapter("Can ve can't ile yetenek ve izin",
+                    "Can bir yeteneği veya izin verilen bir şeyi anlatır. Can't, yapamama veya izin olmaması anlamına gelebilir; bağlam belirleyicidir. Can bütün öznelerle aynı kalır ve ardından to almayan yalın fiil gelir. Soru cümlesinde can öznenin önüne geçer.",
+                    "Özne + can/can't + V1
+Can + özne + V1?",
+                    listOf("I can swim." to "Yüzebilirim.", "She can't drive." to "Araba kullanamaz.", "Can you help me?" to "Bana yardım edebilir misin?"),
+                    listOf("He cans değil he can kullan.", "Can to swim değil can swim kullan.", "Can't bazen yeteneksizlik, bazen yasak anlamı taşır; bağlama bak."),
+                    listOf("Bir yeteneğini can ile anlat.", "Yapamadığın bir şeyi can't ile söyle.", "Can ile bir soru kur ve kısa cevap ver."))
+
             "zamir" in t || "pronoun" in t || "to be" in t || "am/is/are" in t || "am is are" in t ->
                 LessonBookChapter("Cümlede özneyi doğru belirlemek",
                     "İngilizcede çoğu tam cümlede özne ve fiil bulunur. I, you, he, she, it, we ve they özneyi gösterir. Be fiili özneye göre am, is veya are biçimini alır. Olumsuzluk için be fiilinden sonra not gelir; soru oluştururken be fiili öznenin önüne geçer.",
