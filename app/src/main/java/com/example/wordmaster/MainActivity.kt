@@ -258,6 +258,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
     var savedPlacementCorrect by remember { mutableIntStateOf(prefs.getInt("placementCorrect", 0)) }
     var showOnboarding by remember { mutableStateOf(chosenLevel.isBlank()) }
     var onboardingChoice by remember { mutableStateOf(chosenLevel.ifBlank { "A1" }) }
+    var learningPurpose by remember { mutableStateOf(prefs.getString("learningPurpose", "Genel İngilizce") ?: "Genel İngilizce") }
     var placementMode by remember { mutableStateOf(false) }
     var placementAnswered by remember { mutableIntStateOf(0) }
     var placementCorrect by remember { mutableIntStateOf(0) }
@@ -1554,6 +1555,14 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                         }
                     }
                 }
+                Text("İngilizceyi hangi amaçla öğreniyorsun?", color = MaterialTheme.colorScheme.onSurface, fontWeight = FontWeight.SemiBold)
+                listOf("Genel İngilizce", "Seyahat", "Okul ve sınav", "Mesleki İngilizce").forEach { purpose ->
+                    Row(Modifier.fillMaxWidth().clickable { learningPurpose = purpose }.padding(vertical = 3.dp), verticalAlignment = Alignment.CenterVertically) {
+                        RadioButton(selected = learningPurpose == purpose, onClick = { learningPurpose = purpose })
+                        Text(purpose, color = MaterialTheme.colorScheme.onSurface)
+                    }
+                }
+                Text("İngilizce seviyen", color = MaterialTheme.colorScheme.onSurface, fontWeight = FontWeight.SemiBold)
                 listOf("A1" to "Başlangıç", "A2" to "Temel", "B1" to "Orta", "B2" to "Orta-ileri", "C1" to "İleri").forEach { (code, desc) ->
                     Surface(
                         color = if (darkTheme) { if (onboardingChoice == code) Color(0xFF30275A) else Color(0xFF171F36) } else { if (onboardingChoice == code) Color(0xFFEDE9FE) else Color(0xFFF8FAFC) },
@@ -1579,7 +1588,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                     onClick = {
                         chosenLevel = onboardingChoice
                         selected = onboardingChoice
-                        prefs.edit().putString("chosenLevel", chosenLevel).apply()
+                        prefs.edit().putString("chosenLevel", chosenLevel).putString("learningPurpose", learningPurpose).apply()
                         showOnboarding = false
                     },
                     modifier = Modifier.fillMaxWidth(),
