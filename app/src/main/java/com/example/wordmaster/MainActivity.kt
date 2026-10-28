@@ -944,9 +944,8 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                                         if (listeningReady) {
                                                             listeningTts.language = Locale.US
                                                             listeningTts.setSpeechRate(if (slowListening) 0.75f else 1.0f)
-                                                            val script = dialogue.mapIndexed { i, pair ->
-                                                                (if (i % 2 == 0) "Speaker one. " else "Speaker two. ") + pair.first
-                                                            }.joinToString(". ")
+                                                            // Speak the dialogue naturally, without repeated speaker labels.
+                                                            val script = dialogue.joinToString(" ") { it.first }
                                                             listeningTts.speak(script, TextToSpeech.QUEUE_FLUSH, null, "lesson_listening_dialogue")
                                                         }
                                                     },
