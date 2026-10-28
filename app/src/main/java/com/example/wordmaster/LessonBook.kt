@@ -18,6 +18,64 @@ object LessonBook {
         val t = title.lowercase()
         return when {
 
+
+            "geçmiş zaman: was/were" in t ->
+                LessonBookChapter("Was ve were ile geçmişteki durumları anlatmak",
+                    "Was ve were, be fiilinin geçmiş biçimleridir. I, he, she ve it ile was; you, we ve they ile were kullanılır. Olumsuzda was not/wasn't ve were not/weren't gelir. Soruda was/were öznenin önüne geçer. Bu yapı geçmişteki durumları anlatır; eylem fiillerinin geçmiş hâliyle karıştırılmamalıdır.",
+                    "I/he/she/it + was · you/we/they + were\nWas/Were + özne ...? · wasn't/weren't",
+                    listOf("I was at home yesterday." to "Dün evdeydim.", "They weren't ready." to "Hazır değillerdi.", "Were you tired after school?" to "Okuldan sonra yorgun muydun?"),
+                    listOf("They was değil they were kullan.", "Was/were ile did yardımcı fiilini aynı be sorusunda gereksiz yere birleştirme.", "Geçmişteki durum ile geçmişte yapılan eylemi ayırt et."),
+                    listOf("Özneye göre was veya were seç.", "Olumsuzda not ekle.", "Soruda was/were fiilini öznenin önüne getir."))
+            "alışverişte ingilizce" in t ->
+                LessonBookChapter("Mağazada ürün ve fiyat sormak",
+                    "Alışverişte fiyatı How much is it? ile sorabilir, ürün istemek için I'd like ... veya Can I have ...? kullanabilirsin. Beden, renk ve miktar sorarken kibar ton seç. Fiyatı duyduktan sonra para birimini ve miktarı tekrar ederek doğrulamak yanlış anlamayı azaltır.",
+                    "How much is ...? · Do you have ... in another size? · I'd like ...",
+                    listOf("How much is this jacket?" to "Bu ceket ne kadar?", "Do you have it in a smaller size?" to "Bunun daha küçük bedeni var mı?", "I'd like to pay by card." to "Kartla ödemek istiyorum."),
+                    listOf("How many is it yerine fiyat için how much kullan.", "Kibar istekte I'd like kullanımı I want'tan daha nazik olabilir.", "Fiyatı ve para birimini duyduğundan emin ol."),
+                    listOf("Bir ürünün fiyatını sor.", "Beden veya renk hakkında soru kur.", "Ürün istemek için kibar bir kalıp seç."))
+            "şimdiki zaman" in t ->
+                LessonBookChapter("Şu anda devam eden eylemler: Present Continuous",
+                    "Present Continuous konuşma anında devam eden veya geçici olarak süren eylemleri anlatır. Be fiili (am/is/are) ve -ing biçimindeki ana fiil birlikte kullanılır. He/she/it ile is, I ile am, you/we/they ile are gelir. Stative verbs gibi bazı fiiller genellikle bu yapıda kullanılmaz.",
+                    "Özne + am/is/are + V-ing\nOlumsuz: be + not + V-ing · Soru: Am/Is/Are + özne + V-ing?",
+                    listOf("I am studying English now." to "Şu anda İngilizce çalışıyorum.", "She isn't working today." to "Bugün çalışmıyor.", "Are they waiting outside?" to "Dışarıda mı bekliyorlar?"),
+                    listOf("She is study değil she is studying kullan.", "I am ile -ing fiilini birlikte kullan.", "Every day gibi alışkanlık işaretleri varsa Present Simple gerekip gerekmediğini değerlendir."),
+                    listOf("Eylemin şu anda sürüp sürmediğini belirle.", "Özneye uygun am/is/are seç.", "Ana fiile uygun -ing biçimini getir."))
+            "yol tarifi" in t || "şehirde yön bulma" in t ->
+                LessonBookChapter("Şehirde yer tarif etmek ve yön sormak",
+                    "Bir yere ulaşmayı sormak için How can I get to ...? veya Where is ...? kullan. Go straight, turn left/right ve cross the street gibi ifadeler hareketi; next to, opposite ve between gibi edatlar konumu anlatır. Tarif verirken adımları sıralı ve net söyle.",
+                    "How can I get to ...? · Go straight · Turn left/right · It is opposite ...",
+                    listOf("Go straight and turn left at the bank." to "Dümdüz git ve bankada sola dön.", "The pharmacy is opposite the station." to "Eczane istasyonun karşısında.", "Cross the street at the traffic lights." to "Trafik ışıklarında karşıya geç."),
+                    listOf("Left ve right yönlerini karıştırma.", "Konum tarifinde next to ile opposite arasındaki farkı öğren.", "Uzun tarifi tek cümle yerine adımlara böl."),
+                    listOf("Bir yerin nasıl bulunacağını sor.", "İki yön talimatını sırayla söyle.", "Bir yerin konumunu edatla tarif et."))
+            "sıklık zarfları" in t ->
+                LessonBookChapter("Sıklık zarfları ve rutinler",
+                    "Always, usually, often, sometimes, rarely ve never eylemin ne sıklıkta yapıldığını anlatır. Be fiilinden sonra (She is usually early), diğer ana fiillerden önce gelir (She usually walks). Every day ve once a week gibi zaman ifadeleri sıklığı daha kesin belirtir.",
+                    "subject + usually/often + main verb\nsubject + be + usually/often · once/twice a week",
+                    listOf("I usually study after dinner." to "Genellikle akşam yemeğinden sonra ders çalışırım.", "He is often late." to "O sık sık geç kalır.", "We practise twice a week." to "Haftada iki kez pratik yaparız."),
+                    listOf("Sıklık zarfını her zaman cümlenin sonuna koyma.", "Be fiili ile ana fiilin yerleşimini ayırt et.", "Never zaten olumsuz anlam verdiği için standart cümlede ayrıca don't ekleme."),
+                    listOf("Bir alışkanlığını usually ile anlat.", "Be fiili içeren bir cümlede sıklık zarfı kullan.", "Once/twice a week kalıbıyla sıklık belirt."))
+            "sağlık ve günlük sorunlar" in t ->
+                LessonBookChapter("Belirtiyi anlatmak ve yardım istemek",
+                    "Bir sağlık sorununu anlatırken I have a headache, I feel dizzy veya My throat hurts gibi net ifadeler kullan. Ne zamandır sürdüğünü since yesterday veya for two days ile belirt. Yardım isterken Could you help me? gibi nazik kalıplar seç. Bu bölüm dil öğrenimi içindir, tıbbi tanı yerine geçmez.",
+                    "I have a ... · I feel ... · It hurts ... · I've had it for/since ...",
+                    listOf("I have a headache." to "Başım ağrıyor.", "I have felt dizzy since this morning." to "Bu sabahtan beri başım dönüyor.", "Could you help me, please?" to "Lütfen bana yardım edebilir misiniz?"),
+                    listOf("Belirtiyi abartmadan, açık ve doğru anlat.", "For süreyi, since başlangıç noktasını belirtir.", "Ağrıyan yeri ve ne zamandır sürdüğünü ayırt et."),
+                    listOf("İki belirtiyi İngilizce ifade et.", "For ve since ile birer örnek kur.", "Kibar bir yardım isteği oluştur."))
+            "seyahat ve konaklama" in t ->
+                LessonBookChapter("Rezervasyon ve konaklama konuşmaları",
+                    "Konaklama sırasında I'd like to book ..., I have a reservation ve What time is check-out? gibi kalıplar kullanılır. İsim, tarih, kişi sayısı ve oda türünü netleştir. Ulaşımda departure/kalkış, arrival/varış ve platform/peron gibi kelimeleri ayırt et.",
+                    "I'd like to book ... · I have a reservation under ... · What time is ...?",
+                    listOf("I have a reservation under the name Demir." to "Demir adına rezervasyonum var.", "Could I have the room key, please?" to "Oda anahtarını alabilir miyim lütfen?", "What time does the train leave?" to "Tren saat kaçta kalkıyor?"),
+                    listOf("Rezervasyon sahibinin adını açık söyle.", "Check-in giriş, check-out çıkış işlemidir.", "Saat ve tarih bilgisini tekrar ederek doğrula."),
+                    listOf("Bir rezervasyon yaptırma cümlesi kur.", "Check-out saatini sor.", "Bir ulaşım aracının kalkış saatini öğren."))
+            "yemek siparişi ve miktarlar" in t ->
+                LessonBookChapter("Restoranda sipariş ve miktar ifadeleri",
+                    "Sipariş verirken I'd like ... veya Could I have ...? kalıpları kullanılır. A glass of water, a piece of cake ve a bottle of juice gibi ölçü ifadeleri sayılamayan isimlerle miktar belirtir. Menü, hesap ve porsiyon kelimelerini öğren; özel bir isteği kibarca açıklayabil.",
+                    "I'd like ... · Could I have ...? · a glass/bottle/piece of ...",
+                    listOf("Could I have a glass of water, please?" to "Bir bardak su alabilir miyim lütfen?", "I'd like the vegetable soup." to "Sebze çorbası istiyorum.", "Could we have the bill, please?" to "Hesabı alabilir miyiz lütfen?"),
+                    listOf("Water gibi sayılamayan isimleri doğrudan sayı ile kullanma; a bottle of water de.", "Siparişte please ile nazik ol.", "Bill hesap, menu menü, order sipariş anlamına gelir."),
+                    listOf("Kibar bir yemek siparişi ver.", "Sayılamayan bir içecek için ölçü ifadesi kullan.", "Hesabı istemek için bir cümle kur."))
+
             "selamlaşma" in t || "tanışma" in t ->
                 LessonBookChapter("Selamlaşma ve kendini tanıtma",
                     "İlk karşılaşmada selamlaş, adını söyle ve karşındakinin adını sor. Hello ve Hi gündelik selamlaşmalardır; Good morning sabah kullanılır. Nice to meet you tanışma sırasında söylenir. Resmî ve samimi durumlarda uygun ifadeyi seç.",
