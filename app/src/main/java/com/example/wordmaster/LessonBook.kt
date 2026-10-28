@@ -92,6 +92,81 @@ object LessonBook {
                 listOf("Raporun okuyucusunu ve karar sorusunu belirle.", "Bulguları yorumlardan ayrı başlıklarda sun.", "Bir sınırlılığı açıkça belirt.", "Eylem, gerekçe ve ölçüt içeren iki öneri yaz.", "Yönetici özetini yalnızca temel sonuç ve öneriyle sınırla.")
             )
         }
+        if ("ima, ton ve örtük anlam" in t) {
+            return LessonBookChapter(
+                "C1 okumasında söylenmeyen anlamı kanıttan ayırmak",
+                "Örtük anlam, metinde doğrudan yazılmayan ancak sözcük seçimi, bağlam ve karşıtlıkla desteklenen yorumdur. Apparently, supposedly ve even gibi işaretler yazarın mesafesini veya şaşkınlığını gösterebilir; yine de tek bir sözcük kesin niyet kanıtı değildir. Önce yazarın açıkça söylediğini belirle, ardından olası imayı metindeki ifadeyle gerekçelendir. The author seems to imply ... gibi ölçülü yorumlar kullan. İroniyi tanırken söylenen ile bağlamın işaret ettiği sonuç arasındaki farkı ara. Okurun kendi varsayımını yazarın tutumuymuş gibi sunma.",
+                "Explicit statement → contextual clue → plausible inference → alternative reading",
+                listOf(
+                    "The plan is ambitious, although its funding remains unclear." to "Plan iddialı; ancak finansmanı hâlâ belirsiz.",
+                    "The author appears sceptical about the proposed timeline." to "Yazar önerilen takvime kuşkuyla yaklaşıyor gibi görünüyor.",
+                    "Interestingly, the report omits the most recent figures." to "İlginç biçimde rapor en güncel rakamları dışarıda bırakıyor.",
+                    "This wording may imply concern rather than outright rejection." to "Bu ifade doğrudan ret yerine endişe ima ediyor olabilir."
+                ),
+                listOf("Yazarın niyetini tek bir kelimeye dayanarak kesinleştirme.", "Olumsuz tonu doğrudan düşmanlık olarak yorumlama.", "Metinde olmayan bilgiyi çıkarım diye ekleme."),
+                listOf("Açık iddiayı ve örtük yorumu ayır.", "Çıkarımını iki bağlam ipucuyla destekle.", "Alternatif bir okuma öner.", "Kesin olmayan yorumda ihtiyatlı dil kullan.")
+            )
+        }
+        if ("ileri düzey tartışma" in t) {
+            return LessonBookChapter(
+                "Karşı görüşü adil biçimde ele alarak sav geliştirmek",
+                "C1 tartışmasında güçlü argüman, karşı tarafın görüşünü çarpıtmadan özetler ve hangi noktada ayrıldığını kanıtla açıklar. İlk olarak tartışılabilir bir tez kur. Ardından gerekçe, örnek ve sınırları belirt. I take your point that ... ile karşı tarafın haklı yönünü kabul edip However, this overlooks ... ile eksik kalan boyutu gösterebilirsin. Straw man, yani karşı görüşün zayıflatılmış biçimine cevap verme hatasından kaçın. Uzlaşma olasılığı varsa hangi koşulda ortak çözümün mümkün olduğunu açıkla.",
+                "Position → reason → evidence → fair counterargument → rebuttal → qualified conclusion",
+                listOf(
+                    "I accept that the proposal may reduce costs in the short term." to "Önerinin kısa vadede maliyetleri azaltabileceğini kabul ediyorum.",
+                    "However, this argument overlooks the long-term maintenance burden." to "Ancak bu argüman uzun vadeli bakım yükünü göz ardı ediyor.",
+                    "A more balanced approach would test both options before scaling up." to "Daha dengeli bir yaklaşım, genişletmeden önce her iki seçeneği de test etmek olurdu.",
+                    "Our disagreement concerns the evidence, not the overall objective." to "Anlaşmazlığımız genel amaçla değil, kanıtlarla ilgili."
+                ),
+                listOf("Karşı görüşü olduğundan daha uç gösterme.", "Kanıtsız kesin hükümler verme.", "İtirazı kişiye yöneltme."),
+                listOf("Tezini tek cümlede açıkla.", "Karşı savı adil biçimde özetle.", "Kanıtla desteklenen bir yanıt oluştur.", "Ortak zemin veya çözüm koşulunu belirt.")
+            )
+        }
+        if ("metin düzenleme ve üslup" in t) {
+            return LessonBookChapter(
+                "C1 metninde açıklık, tutarlılık ve hedef kitle uyumu",
+                "İyi düzenleme yalnızca dil bilgisi hatalarını düzeltmez. Her paragrafın bir ana düşünce taşıdığını, zamirlerin açık bir gönderimi olduğunu ve terimlerin tutarlı kullanıldığını kontrol et. İlk okumada mantık akışını, ikincide cümlelerin açıklığını, üçüncüde üslup ve dil bilgisi ayrıntılarını değerlendir. Due to the fact that yerine because kullanmak çoğu zaman daha açıktır. Resmî üslup, her cümleyi uzun yapmayı gerektirmez. Düzenleme sırasında anlamı değiştirmemeye ve kaynağın kesinlik düzeyini korumaya dikkat et.",
+                "Structure pass → clarity pass → register pass → accuracy pass",
+                listOf(
+                    "The results were inconclusive, so further testing is required." to "Sonuçlar kesin değildi; bu nedenle ek test gerekiyor.",
+                    "Because the deadline changed, the team revised its schedule." to "Son tarih değiştiği için ekip takvimini güncelledi.",
+                    "The revised policy applies to all departments." to "Güncellenen politika bütün departmanlara uygulanır.",
+                    "The evidence suggests improvement, but the effect remains uncertain." to "Kanıtlar iyileşmeye işaret ediyor, ancak etkinin derecesi belirsiz."
+                ),
+                listOf("Gereksiz uzunluğu akademik kalite sanma.", "Belirsiz it/this zamirlerini açıklamadan bırakma.", "Düzenlerken ihtiyatlı bir iddiayı kesinleştirme."),
+                listOf("Bir paragrafın ana düşüncesini belirle.", "Gereksiz tekrarları çıkar.", "Belirsiz zamirleri somut adlarla değiştir.", "Metnin resmiyet düzeyini tutarlı hale getir.")
+            )
+        }
+        if ("ileri dinleme ve not çıkarma" in t) {
+            return LessonBookChapter(
+                "Uzun konuşmada tutum, yapı ve kanıtı notlarla yakalamak",
+                "C1 dinlemede her kelimeyi yazmaya çalışmak yerine konuşmanın amacını, ana iddialarını ve bunları destekleyen kanıtları ayırt et. However, nevertheless ve in contrast karşıtlığa; to sum up ve ultimately sonuca işaret eder. Konuşmacının tutumunu kesinlik, çekince ve vurgu ifadelerinden çıkar. Cornell benzeri iki sütunlu notlarda solda anahtar soru veya kavram, sağda kanıt ve örnek tut; sonunda üç cümlelik özet yaz. Ses kaydı yoksa bu bölümün metin ve not alma çalışması olduğunu açıkça belirt; gerçek dinleme yapıldığını varsayma.",
+                "Purpose → claim → evidence → contrast → conclusion\nNotes: key idea | supporting detail | uncertainty",
+                listOf(
+                    "The speaker questions whether the benefits justify the cost." to "Konuşmacı faydaların maliyeti haklı çıkarıp çıkarmadığını sorguluyor.",
+                    "Nevertheless, the findings warrant further investigation." to "Buna rağmen bulgular daha fazla araştırmayı gerektiriyor.",
+                    "The main point is supported by two examples and one limitation." to "Ana fikir iki örnek ve bir sınırlılıkla destekleniyor.",
+                    "In summary, the proposal is promising but requires validation." to "Özetle öneri umut verici ancak doğrulama gerektiriyor."
+                ),
+                listOf("Her kelimeyi not almaya çalışıp ana fikri kaçırma.", "Konuşmacının aktardığı görüşü kendi görüşüyle karıştırma.", "Metin çalışmasını gerçek sesli dinleme olarak sunma."),
+                listOf("Ana iddiayı tek cümlede özetle.", "İki kanıtı ve bir sınırlılığı not et.", "Konuşmacının tutumunu bir ifadeyle gerekçelendir.", "Notlardan üç cümlelik özet üret.")
+            )
+        }
+        if ("profesyonel iletişim ve ikna" in t) {
+            return LessonBookChapter(
+                "C1 profesyonel görüşmelerde netlik ve ölçülü ikna",
+                "Karmaşık profesyonel görüşmelerde amaç, görüşünü güçlü biçimde savunurken belirsizlikleri dürüstçe açıklamaktır. Önce karşı tarafın önceliğini doğrula; sonra önerini yarar, maliyet ve risk dengesiyle anlat. I appreciate your concern ... ifadesi itirazı kabul ederken Our recommendation is based on ... kanıta dönüş sağlar. Beklenmedik sorularda bilmediğin ayrıntıyı tahmin etme; doğrulanacak bilgiyi ve sonraki adımı belirt. Görüşme sonunda karar, sorumlu ve takip tarihini açıkça özetle.",
+                "Acknowledge → clarify → recommendation → evidence → risk → agreed next step",
+                listOf(
+                    "I understand your concern about the implementation timeline." to "Uygulama takvimiyle ilgili endişenizi anlıyorum.",
+                    "Our recommendation balances reliability with operational cost." to "Önerimiz güvenilirlikle işletme maliyetini dengeliyor.",
+                    "I would prefer to verify that estimate before making a commitment." to "Taahhütte bulunmadan önce bu tahmini doğrulamayı tercih ederim.",
+                    "To confirm, we will review the results and report back on Friday." to "Teyit etmek için sonuçları inceleyip cuma günü geri bildirim vereceğiz."
+                ),
+                listOf("Karşı tarafın önceliğini sormadan varsayma.", "Kesin olmayan tahmini taahhüt gibi sunma.", "Görüşmeyi somut sonraki adım olmadan bitirme."),
+                listOf("Muhatabın endişesini kendi sözlerinle doğrula.", "Önerini iki gerekçeyle destekle.", "Bir risk veya belirsizlik belirt.", "Sorumlu ve takip adımıyla görüşmeyi kapat.")
+            )
+        }
         // Match the B1 problem-solving chapter before general catalog rules.
         if ("sorun" in t && "çözüm" in t && ("öner" in t || "oneri" in t)) {
             return LessonBookChapter(
