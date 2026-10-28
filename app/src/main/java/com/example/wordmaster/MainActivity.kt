@@ -2284,7 +2284,7 @@ private data class LessonContent(
 )
 
 private fun listeningDialogueFor(title: String, lesson: LessonContent): List<Pair<String, String>> {
-    val t = title.lowercase(Locale.ROOT)
+    val t = title.lowercase(Locale.ROOT).replace("i\u0307", "i")
     return when {
         "selam" in t || "tanış" in t || "greeting" in t ->
             listOf("Hello, I'm Ece. What's your name?" to "Merhaba, ben Ece. Senin adın ne?",
