@@ -16,6 +16,33 @@ data class LessonBookChapter(
 object LessonBook {
     fun chapter(title: String): LessonBookChapter {
         val t = title.lowercase().replace("i\u0307", "i")
+        // Match the B1 problem-solving chapter before general catalog rules.
+        if ("sorun" in t && "çözüm" in t && ("öner" in t || "oneri" in t)) {
+            return LessonBookChapter(
+                "Sorunu açıkça tanımlayıp çözüm önermek",
+                "Bir sorunu açıklarken gözlenen durumu, etkisini ve bilinen kanıtı birbirinden ayır. B1 düzeyinde önce problemi somut bir cümleyle tanımla, sonra kimleri veya hangi işi etkilediğini açıkla; varsa tarih, tekrar sıklığı veya örnek gibi doğrulanabilir kanıt ekle. Çözüm önerirken I recommend ..., One option would be ... ve We could ... gibi kalıplar kullan ve seçeneğin neden işe yarayabileceğini belirt. Kök nedeni bilmiyorsan kesinmiş gibi sunma; önce kontrol edilmesi gereken bilgiyi söyle.",
+                "Observed issue → impact → evidence → options → recommendation/next step",
+                listOf(
+                    "The system responds slowly when several users sign in." to "Birden fazla kullanıcı giriş yaptığında sistem yavaş yanıt veriyor.",
+                    "I recommend checking the logs before changing the configuration." to "Yapılandırmayı değiştirmeden önce kayıtları kontrol etmeyi öneriyorum.",
+                    "One option would be to test the update with a small group first." to "Bir seçenek, güncellemeyi önce küçük bir grupla test etmek olurdu.",
+                    "We cannot confirm the cause yet, so the next step is to collect more data." to "Nedeni henüz doğrulayamıyoruz; bu yüzden sonraki adım daha fazla veri toplamak."
+                ),
+                listOf(
+                    "Gözlemi doğrulanmamış nedenden ayır.",
+                    "Çözümü gerekçesiz sunma.",
+                    "Kesin kanıt yoksa may/might/could gibi ölçülü ifadeler kullan.",
+                    "Bir sonraki adımı ve sorumlusunu belirsiz bırakma."
+                ),
+                listOf(
+                    "Sorunu somut ve ölçülebilir biçimde tanımla.",
+                    "Etkisini ve mevcut kanıtı açıkla.",
+                    "En az iki çözüm seçeneği üret.",
+                    "Önerini gerekçeyle destekle.",
+                    "Gerekliyse hangi bilginin hâlâ doğrulanmadığını belirt."
+                )
+            )
+        }
         return when {
 
 
