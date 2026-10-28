@@ -1693,6 +1693,25 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
             OutlinedTextField(value = usernameDraft, onValueChange = { value -> usernameDraft = value.removePrefix("@").filter { ch -> ch.isLetterOrDigit() || ch == '_' }.take(20).let { clean -> if (clean.isBlank()) "" else "@$clean" }; profileError = null }, modifier = Modifier.fillMaxWidth(), label = { Text("Kullanıcı adı") }, supportingText = { Text("3-20 karakter; harf, rakam ve _ kullan.") }, singleLine = true)
             profileError?.let { Text(it, color = MaterialTheme.colorScheme.error, fontSize = 12.sp) }
             Text("🎯 Öğrenme amacım: $learningPurpose", color = MaterialTheme.colorScheme.onSurface, fontWeight = FontWeight.SemiBold)
+            Text("Öğrenme amacını değiştir", color = MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 12.sp)
+            listOf("Genel İngilizce", "Seyahat", "Okul ve sınav", "Mesleki İngilizce").forEach { purpose ->
+                Row(
+                    Modifier.fillMaxWidth().clickable {
+                        learningPurpose = purpose
+                        prefs.edit().putString("learningPurpose", purpose).apply()
+                    }.padding(vertical = 2.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    RadioButton(
+                        selected = learningPurpose == purpose,
+                        onClick = {
+                            learningPurpose = purpose
+                            prefs.edit().putString("learningPurpose", purpose).apply()
+                        }
+                    )
+                    Text(purpose, color = MaterialTheme.colorScheme.onSurface, fontSize = 13.sp)
+                }
+            }
             Text("📚 Öğrenilen: ${learned.size} kelime   ⭐ Favori: ${favorites.size}", color = MaterialTheme.colorScheme.onSurface)
             Text("Bu sayılar farklı ölçümleri gösterir: öğrenilenler tamamlanan kelimeler, favoriler kaydedilenler, tekrar istatistikleri ise çalışılmış kelimelerdir.", color = MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 11.sp, lineHeight = 16.sp)
             Text("📖 Tamamlanan ders: ${CourseProgressStore.completedCount(prefs)}", color = MaterialTheme.colorScheme.onSurface)
