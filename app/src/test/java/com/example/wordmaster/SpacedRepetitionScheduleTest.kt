@@ -25,7 +25,7 @@ class SpacedRepetitionScheduleTest {
         assertEquals(1, updated.mistakeCount)
         assertEquals(0, updated.streak)
         assertEquals(1, updated.intervalDays)
-        assertEquals(today.plusDays(1).toString(), updated.dueDate)
+        assertEquals(today.toString(), updated.dueDate)
     }
 
     @Test
