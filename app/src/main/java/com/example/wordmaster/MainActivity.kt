@@ -222,10 +222,11 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
 
     // A streak advances only when the user actually studies, not merely when the app opens.
     fun recordStudyDay() {
-        if (lastLoginDate == today) return
+        val studyDate = LocalDate.now().toString()
+        if (lastLoginDate == studyDate) return
         dailyStreak = if (lastLoginDate == LocalDate.now().minusDays(1).toString()) dailyStreak + 1 else 1
-        lastLoginDate = today
-        prefs.edit().putInt("dailyStreak", dailyStreak).putString("lastLoginDate", today).apply()
+        lastLoginDate = studyDate
+        prefs.edit().putInt("dailyStreak", dailyStreak).putString("lastLoginDate", studyDate).apply()
     }
     var sessionAnswered by remember { mutableIntStateOf(0) }
     var sessionCorrect by remember { mutableIntStateOf(0) }
