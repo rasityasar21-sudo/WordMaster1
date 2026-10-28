@@ -15,14 +15,14 @@ data class LessonBookChapter(
  */
 object LessonBook {
     fun chapter(title: String): LessonBookChapter {
-        val t = title.lowercase()
+        val t = title.lowercase().replace("i\u0307", "i")
         return when {
 
 
             "geçmiş zaman: was/were" in t ->
                 LessonBookChapter("Was ve were ile geçmişteki durumları anlatmak",
                     "Was ve were, be fiilinin geçmiş biçimleridir. I, he, she ve it ile was; you, we ve they ile were kullanılır. Olumsuzda was not/wasn't ve were not/weren't gelir. Soruda was/were öznenin önüne geçer. Bu yapı geçmişteki durumları anlatır; eylem fiillerinin geçmiş hâliyle karıştırılmamalıdır.",
-                    "I/he/she/it + was · you/we/they + were\nWas/Were + özne ...? · wasn't/weren't",
+                    "I/he/she/it + was · you/we/they + were\nWas/Were + özne ...? · wasn't/weren't\nEylem fiilleri: Did + özne + V1? · didn't + V1",
                     listOf("I was at home yesterday." to "Dün evdeydim.", "They weren't ready." to "Hazır değillerdi.", "Were you tired after school?" to "Okuldan sonra yorgun muydun?"),
                     listOf("They was değil they were kullan.", "Was/were ile did yardımcı fiilini aynı be sorusunda gereksiz yere birleştirme.", "Geçmişteki durum ile geçmişte yapılan eylemi ayırt et."),
                     listOf("Özneye göre was veya were seç.", "Olumsuzda not ekle.", "Soruda was/were fiilini öznenin önüne getir."))
