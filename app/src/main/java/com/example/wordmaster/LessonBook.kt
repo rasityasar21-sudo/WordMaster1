@@ -16,6 +16,52 @@ data class LessonBookChapter(
 object LessonBook {
     fun chapter(title: String): LessonBookChapter {
         val t = title.lowercase().replace("i\u0307", "i")
+        // C1-specific chapters must precede broad grammar and writing title matches.
+        if ("anlam incelikleri ve register" in t) {
+            return LessonBookChapter(
+                "Yakın anlamlı ifadeler arasında anlam, tutum ve resmiyet farkını seçmek",
+                "C1 düzeyinde doğru sözcüğü seçmek yalnızca sözlük anlamını bilmek değildir. Claim, argue, maintain ve suggest aynı görüş bildirme işlevine sahip olabilir; ancak claim bazen kanıtı tartışmalı bir iddiayı, maintain ise konuşanın görüşünü ısrarla sürdürdüğünü hissettirir. Resmî bir raporda get yerine obtain, fix yerine resolve kullanılabilir; fakat gereksiz ağır sözcükler açıklığı azaltır. Bir ifadenin hedef kitlesini, kanıt düzeyini ve duygusal tonunu birlikte değerlendir. Kesin kanıt olmadığında proves yerine suggests veya indicates daha ölçülüdür. Aynı metinde üslubu tutarlı koru.",
+                "Audience + purpose + evidence strength → word choice → register check.\nTentative: may suggest / appears to indicate\nNeutral: reports / states / explains\nStrong: demonstrates / establishes (only with sufficient evidence)",
+                listOf(
+                    "The findings suggest a possible link, but do not establish causation." to "Bulgular olası bir ilişkiye işaret ediyor ancak nedenselliği kanıtlamıyor.",
+                    "The committee maintained that the evidence was insufficient." to "Komite, kanıtların yetersiz olduğu görüşünü sürdürdü.",
+                    "We need to resolve the issue before publishing the report." to "Raporu yayımlamadan önce sorunu çözmemiz gerekiyor.",
+                    "The proposal is feasible, although its long-term impact remains uncertain." to "Öneri uygulanabilir; ancak uzun vadeli etkisi belirsizliğini koruyor."
+                ),
+                listOf("Suggests yerine proves yazarak kanıtı olduğundan güçlü gösterme.", "Resmî bir raporda gündelik ve resmî ifadeleri rastgele karıştırma.", "Yakın anlamlı kelimelerin her bağlamda birbirinin yerine geçeceğini varsayma.", "Uzun kelimenin her zaman daha iyi bir seçim olduğunu düşünme."),
+                listOf("Bir görüşün ne kadar kesin ifade edildiğini belirle.", "Aynı cümleyi resmî ve gündelik hedef kitle için yeniden yaz.", "Claim, suggest ve demonstrate arasındaki kanıt farkını açıkla.", "Bir paragraftaki üslup tutarsızlıklarını düzelt.", "Seçtiğin sözcüğün okuyucuda yaratacağı tutumu gerekçelendir.")
+            )
+        }
+        if ("ileri düzey cümle yapıları" in t) {
+            return LessonBookChapter(
+                "C1 cümlelerinde vurgu, koşul ve bilgi akışını yönetmek",
+                "İleri düzey yazıda karmaşıklık amaç değil araçtır. Inversion, sınırlayıcı ifadeyi başa taşıyarak vurgular: Not only did the team identify the problem, but it also proposed a solution. Cleft sentence, önemli bilgiyi ayırır: What matters most is the reliability of the evidence. Participle clause, öznesi ana cümleyle aynı olduğunda tekrarı azaltır: Having reviewed the data, the team revised its conclusion. Reduced relative clause ve nominalisation resmî üslupta yoğun bilgi taşır; fakat özne ilişkisini belirsizleştirmemelidir. Önce açık bir temel cümle kur, ardından yalnızca anlamı güçlendiren dönüşümü uygula.",
+                "Not only + auxiliary + subject + verb, but also ...\nWhat + clause + be + focus\nHaving + past participle, main clause (shared subject)\nOnly after + clause + auxiliary + subject + verb",
+                listOf(
+                    "Not only did the review reveal gaps, but it also identified practical solutions." to "İnceleme yalnızca eksikleri ortaya çıkarmadı, uygulanabilir çözümler de belirledi.",
+                    "What the report fails to address is the cost of implementation." to "Raporun ele almadığı nokta uygulama maliyetidir.",
+                    "Having examined both proposals, the panel recommended a pilot study." to "Her iki öneriyi de inceledikten sonra kurul bir pilot çalışma önerdi.",
+                    "Only after the results were verified did the researchers publish their conclusions." to "Araştırmacılar ancak sonuçlar doğrulandıktan sonra çıkarımlarını yayımladı."
+                ),
+                listOf("Not only sonrası yardımcı fiil ile özneyi ters çevirmeyi unutma.", "Having reviewed ... yan cümlesinin öznesini ana cümlenin öznesinden farklı kurma.", "Vurgulu yapıyı yalnızca daha uzun göründüğü için kullanma.", "Nominalisation yüzünden eylemi kimin yaptığını belirsizleştirme."),
+                listOf("Düz cümleyi anlamı değiştirmeden inversion ile yeniden kur.", "Bir cleft sentence içinde odaklanan bilgiyi göster.", "Participle clause ile ana cümlenin öznesini eşleştir.", "Gereksiz karmaşık cümleyi açık ve doğru biçime sadeleştir.", "İki farklı vurgu biçiminin okuyucu üzerindeki etkisini karşılaştır.")
+            )
+        }
+        if ("birden fazla kaynaktan sentez" in t) {
+            return LessonBookChapter(
+                "Kaynakları karşılaştırıp özgün ve kanıta dayalı sentez üretmek",
+                "Sentez, iki metni sırayla özetlemekten farklıdır: ortak soruyu belirler, bulguların nerede birleşip ayrıldığını gösterir ve bu karşılaştırmadan sınırlı bir sonuç çıkarır. Önce her kaynağın iddiasını, yöntemini, kanıtını ve sınırlılığını not et. Ardından Both sources acknowledge ..., Whereas the first study ..., the second ... gibi karşılaştırma yapılarıyla ilişki kur. Bir kaynağın yorumunu doğrulanmış gerçek gibi aktarma. Korelasyon ile nedenselliği ayır; örneklem veya yöntem farklılıklarının sonucu nasıl etkileyebileceğini belirt. Son paragrafta yeni bir iddia icat etmek yerine kanıtların birlikte neyi desteklediğini yaz.",
+                "Shared question → source A claim/evidence → source B claim/evidence → agreement or tension → qualified synthesis",
+                listOf(
+                    "Both reports identify delays, but they attribute them to different factors." to "İki rapor da gecikmeleri belirliyor; ancak bunları farklı etkenlere bağlıyor.",
+                    "Whereas the first study focuses on cost, the second examines long-term reliability." to "İlk çalışma maliyete odaklanırken ikincisi uzun vadeli güvenilirliği inceliyor.",
+                    "Taken together, the findings suggest a need for further testing." to "Bulgular birlikte değerlendirildiğinde ek testlere ihtiyaç olabileceğine işaret ediyor.",
+                    "This conclusion is tentative because the samples differ considerably." to "Örneklemler önemli ölçüde farklı olduğu için bu sonuç geçicidir."
+                ),
+                listOf("İki ayrı özeti yan yana koyup buna sentez deme.", "Kaynakların çeliştiği noktaları gizleme.", "Kanıtın desteklemediği kesin nedensel sonuç çıkarma.", "Kaynak fikrini kendi bulgun gibi sunma."),
+                listOf("İki kaynağın ortak araştırma sorusunu yaz.", "Her kaynak için iddia ve kanıtı ayrı not et.", "En az bir uzlaşma ve bir ayrışma noktası belirle.", "Karşılaştırmayı tek bir sentez paragrafına dönüştür.", "Sonucun sınırlarını ve doğrulanması gereken noktayı belirt.")
+            )
+        }
         // Match the B1 problem-solving chapter before general catalog rules.
         if ("sorun" in t && "çözüm" in t && ("öner" in t || "oneri" in t)) {
             return LessonBookChapter(
