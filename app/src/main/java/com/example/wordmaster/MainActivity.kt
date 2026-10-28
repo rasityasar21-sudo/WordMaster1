@@ -988,9 +988,31 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                                     }
                                                 }
                                             }
-                                            Text("Dinledikten sonra aşağıdaki alıştırmada doğru cevabı seç.", color = if (darkTheme) Color.White else MaterialTheme.colorScheme.onSurface, fontWeight = FontWeight.SemiBold)
-                                            Spacer(Modifier.height(8.dp))
-                                            Text("Bu dinleme bölümünde yukarıdaki konuşmayı dinleyip cümleleri kontrol edebilirsin.", color = if (darkTheme) Color(0xFFE5E2FF) else MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 13.sp, lineHeight = 19.sp)
+                                            Text("Dinleme kontrolü", color = if (darkTheme) Color.White else MaterialTheme.colorScheme.onSurface, fontWeight = FontWeight.Bold)
+                                            var listeningAnswer by remember(activeLesson) { mutableStateOf<String?>(null) }
+                                            val listeningTarget = dialogue.getOrNull(1)
+                                            if (listeningTarget != null) {
+                                                Text("İkinci konuşmacının cümlesinin Türkçe anlamı hangisi?", color = if (darkTheme) Color(0xFFE5E2FF) else MaterialTheme.colorScheme.onSurfaceVariant)
+                                                val listeningOptions = remember(activeLesson, dialogue) {
+                                                    val correct = dialogue[1].second
+                                                    (listOf(correct) + dialogue.map { it.second }.filter { it != correct }.take(2)).shuffled()
+                                                }
+                                                listeningOptions.forEach { option ->
+                                                    OutlinedButton(
+                                                        onClick = { listeningAnswer = option },
+                                                        enabled = listeningAnswer == null,
+                                                        modifier = Modifier.fillMaxWidth()
+                                                    ) { Text(option) }
+                                                }
+                                                if (listeningAnswer != null) {
+                                                    Text(
+                                                        if (listeningAnswer == listeningTarget.second) "Doğru! Konuşmanın anlamını yakaladın."
+                                                        else "Tekrar dinle ve ikinci konuşmacıya odaklan. Doğru anlam: ${listeningTarget.second}",
+                                                        color = if (darkTheme) Color(0xFFE5E2FF) else MaterialTheme.colorScheme.onSurfaceVariant
+                                                    )
+                                                    TextButton(onClick = { listeningAnswer = null }) { Text("Yeniden dene") }
+                                                }
+                                            }
                                         }
                                     }
                                     Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
