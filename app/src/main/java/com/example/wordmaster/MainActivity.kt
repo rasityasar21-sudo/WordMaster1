@@ -1729,7 +1729,8 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                         trackColor = Color(0xFFD2E9DF)
                     )
                     Text("Tekrar bekleyen: ${learningSummary.dueWords} kelime", color = MaterialTheme.colorScheme.onSurface, fontSize = 13.sp)
-                    Text("Kelime doğruluğu: ${learningSummary.accuracyPercent}%  •  Öğrenilen toplam: ${learningSummary.totalWords}", color = MaterialTheme.colorScheme.onSurface, fontSize = 13.sp)
+                    Text("Tekrar doğruluğu: ${learningSummary.accuracyPercent}%  •  Tekrar geçmişi: ${learningSummary.totalWords} kelime", color = MaterialTheme.colorScheme.onSurface, fontSize = 13.sp)
+                    Text("İyi öğrenilmiş: ${learningSummary.masteredWords} kelime", color = MaterialTheme.colorScheme.onSurface, fontSize = 13.sp)
                 }
             }
             Text("🏆 En iyi seri: $bestCorrectStreak   🎯 Test doğrusu: $totalCorrect", color = MaterialTheme.colorScheme.onSurface)
