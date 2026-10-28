@@ -62,6 +62,36 @@ object LessonBook {
                 listOf("İki kaynağın ortak araştırma sorusunu yaz.", "Her kaynak için iddia ve kanıtı ayrı not et.", "En az bir uzlaşma ve bir ayrışma noktası belirle.", "Karşılaştırmayı tek bir sentez paragrafına dönüştür.", "Sonucun sınırlarını ve doğrulanması gereken noktayı belirt.")
             )
         }
+        if ("sunum ve ikna edici konuşma" in t) {
+            return LessonBookChapter(
+                "C1 sunumunda iddia, kanıt ve itirazları yönetmek",
+                "Etkili bir C1 sunumu, yalnızca akıcı konuşma değil, dinleyicinin neden ikna olması gerektiğini açıkça göstermektir. Açılışta problemi ve ana iddiayı belirt; ardından üç ana noktayı kanıtla destekle. Signposting ifadeleri dinleyicinin yapıyı takip etmesini sağlar: Let me begin by ..., Turning to ..., To put this into perspective .... Verinin sınırlılıklarını saklama; özellikle kesin sonuç çıkarmaya yetmeyen bulgularda cautiously ve may gibi ifadeler kullan. Soru-cevap bölümünde önce soruyu kendi sözcüklerinle doğrula, doğrudan cevap ver, sonra gerekçe ve gerekirse belirsizlik ekle. Bilmediğin sayıyı uydurmak yerine doğrulamayı teklif et.",
+                "Opening → claim → evidence → limitation → recommendation → questions\nQuestion response: acknowledge → direct answer → evidence → next step",
+                listOf(
+                    "Let me begin by outlining the problem we are trying to solve." to "Çözmeye çalıştığımız sorunu ana hatlarıyla açıklayarak başlayayım.",
+                    "Turning to the evidence, the results are promising but not conclusive." to "Kanıtlara geçersek sonuçlar umut verici ancak kesin değil.",
+                    "That is a fair concern; our recommendation accounts for the additional cost." to "Bu yerinde bir endişe; önerimiz ek maliyeti hesaba katıyor.",
+                    "I cannot confirm that figure yet, but I can verify it after the session." to "Bu rakamı henüz doğrulayamam; ancak oturumdan sonra kontrol edebilirim."
+                ),
+                listOf("Sunuma amaç ve ana iddia belirtmeden başlama.", "Bir grafiğin korelasyonunu kesin nedensellik olarak sunma.", "İtirazı yanıtlamak yerine aynı iddiayı tekrarlama.", "Doğrulanmamış sayı veya kaynağı kesin bilgi gibi aktarma."),
+                listOf("Bir dakikalık problem–kanıt–öneri açılışı hazırla.", "Üç geçiş ifadesiyle sunumun bölümlerini bağla.", "Kanıtın en az bir sınırlılığını açıkla.", "Zor bir soruya önce kısa ve doğrudan yanıt ver.", "Sonuç bölümünde tek bir uygulanabilir sonraki adım öner.")
+            )
+        }
+        if ("resmî rapor ve öneri yazımı" in t) {
+            return LessonBookChapter(
+                "Kanıta dayalı C1 raporu ve uygulanabilir öneri hazırlamak",
+                "C1 düzeyinde resmî rapor, okuyucunun karar verebilmesi için bulguları izlenebilir bir yapıda sunar. Executive summary ana sonuçları ve öneriyi kısa biçimde verir; background konuyu ve kapsamı tanımlar; findings doğrulanabilir gözlemleri aktarır; discussion olası açıklamaları ve sınırlılıkları tartışır; recommendations uygulanabilir adımları gerekçelendirir. Bulguyla yorumu ayır: The survey recorded ... bir bulgu, This may indicate ... bir yorumdur. Öneriler için sorumlu, öncelik ve doğrulama ölçütü belirt. Üslubu ölçülü, açık ve tutarlı tut; belirsiz fiiller yerine yapılabilir eylemler yaz.",
+                "Executive summary → scope/method → findings → discussion/limitations → recommendations\nRecommendation = action + rationale + owner + success measure",
+                listOf(
+                    "The report evaluates three options against cost, reliability and feasibility." to "Rapor üç seçeneği maliyet, güvenilirlik ve uygulanabilirlik açısından değerlendiriyor.",
+                    "The available evidence indicates a reduction in delays, although the sample is limited." to "Mevcut kanıtlar gecikmelerde azalmaya işaret ediyor; ancak örneklem sınırlı.",
+                    "We recommend a four-week pilot to assess operational impact." to "Operasyonel etkiyi değerlendirmek için dört haftalık bir pilot uygulama öneriyoruz.",
+                    "The team should review the results against agreed success criteria." to "Ekip sonuçları üzerinde uzlaşılan başarı ölçütlerine göre incelemelidir."
+                ),
+                listOf("Executive summary bölümünü ayrıntılı yöntem anlatımıyla doldurma.", "Bulguyu olası açıklamasıyla karıştırma.", "Öneriyi sorumlusu ve ölçütü olmayan belirsiz bir dilekle bitirme.", "Kanıt sınırlılıklarını rapordan çıkarma."),
+                listOf("Raporun okuyucusunu ve karar sorusunu belirle.", "Bulguları yorumlardan ayrı başlıklarda sun.", "Bir sınırlılığı açıkça belirt.", "Eylem, gerekçe ve ölçüt içeren iki öneri yaz.", "Yönetici özetini yalnızca temel sonuç ve öneriyle sınırla.")
+            )
+        }
         // Match the B1 problem-solving chapter before general catalog rules.
         if ("sorun" in t && "çözüm" in t && ("öner" in t || "oneri" in t)) {
             return LessonBookChapter(
