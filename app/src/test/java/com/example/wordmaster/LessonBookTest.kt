@@ -74,6 +74,18 @@ class LessonBookTest {
     }
 
     @Test
+    fun pastSimpleLessonCoversTimeMarkersRegularSpellingAndIrregularVerbs() {
+        val chapter = LessonBook.chapter("Geçmiş zaman: düzenli ve düzensiz fiiller")
+
+        assertTrue(chapter.explanation.contains("Yesterday"))
+        assertTrue(chapter.explanation.contains("study → studied"))
+        assertTrue(chapter.explanation.contains("go → went"))
+        assertTrue(chapter.formation.contains("didn't + V1"))
+        assertTrue(chapter.examples.any { it.first.contains("studied") })
+        assertTrue(chapter.commonMistakes.any { it.contains("studyed") })
+    }
+
+    @Test
     fun everyA2CatalogLessonHasTopicSpecificBookContent() {
         val a2Lessons = WordMasterCourseCatalog.forLevel("A2")
 
