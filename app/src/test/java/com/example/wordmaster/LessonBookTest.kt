@@ -90,6 +90,33 @@ class LessonBookTest {
     }
 
     @Test
+    fun b2ArgumentComparisonLessonUsesEvidenceAndBalancedConclusion() {
+        val chapter = LessonBook.chapter("Görüşleri karşılaştırma")
+
+        assertTrue(chapter.purpose.contains("Karşıt görüşleri"))
+        assertTrue(chapter.explanation.contains("varsayımlarını"))
+        assertTrue(chapter.formation.contains("Claim A"))
+        assertTrue(chapter.examples.any { it.first.contains("Whereas") })
+        assertTrue(chapter.commonMistakes.any { it.contains("Karşıt görüşü") })
+        assertTrue(chapter.checkpoints.size >= 5)
+    }
+
+    @Test
+    fun b2ReadingListeningReportingAndNegotiationLessonsHaveFocusedContent() {
+        val reading = LessonBook.chapter("Eleştirel okuma ve çıkarım")
+        val listening = LessonBook.chapter("Uzun konuşmalarda ana fikir")
+        val reporting = LessonBook.chapter("Veri ve sonuçları raporlama")
+        val negotiation = LessonBook.chapter("Müzakere ve uzlaşma")
+        val writing = LessonBook.chapter("Akademik paragraf ve argüman")
+
+        assertTrue(reading.explanation.contains("iddiasını"))
+        assertTrue(listening.formation.contains("speaker's purpose"))
+        assertTrue(reporting.explanation.contains("verinin neyi gösterdiğini"))
+        assertTrue(negotiation.examples.any { it.first.contains("Could we") })
+        assertTrue(writing.formation.contains("evidence"))
+    }
+
+    @Test
     fun everyB1ToC1CatalogLessonHasTopicSpecificBookContent() {
         val advancedLessons = WordMasterCourseCatalog.lessons.filter {
             it.level in setOf("B1", "B2", "C1")
