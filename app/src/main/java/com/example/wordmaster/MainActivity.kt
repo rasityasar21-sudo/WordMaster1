@@ -168,6 +168,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
         filterQuery = query.trim()
     }
     var currentScreen by remember { mutableStateOf("Dersler") }
+    var lessonReturnScreen by remember { mutableStateOf("Dersler") }
     var activeLesson by remember { mutableStateOf("") }
     var activeCourseLessonId by remember { mutableStateOf<String?>(null) }
     var lessonSessionStartedAt by remember { mutableStateOf<Long?>(null) }
@@ -396,9 +397,16 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
             quizWord != null -> { quizWord = null; quizMessage = null; sessionActive = false; placementMode = false }
             showQuizSummary -> showQuizSummary = false
             currentScreen != "Dersler" -> {
-                currentScreen = "Dersler"
-                selectedTopic = "Tümü"
-                selected = "A1"
+                val destination = if (currentScreen == "Ders İçeriği") lessonReturnScreen else "Dersler"
+                currentScreen = destination
+                if (destination == "Dersler") {
+                    selectedTopic = "Tümü"
+                    selected = "A1"
+                }
+                if (destination != "Ders İçeriği") {
+                    activeCourseLessonId = null
+                    lessonStage = 0
+                }
             }
         }
     }
@@ -686,6 +694,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                                         Text("${plannedLesson.category} · ${plannedLesson.estimatedMinutes} dk", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f), fontSize = 11.sp)
                                                     }
                                                     TextButton(onClick = {
+                                                        lessonReturnScreen = "Dersler"
                                                         activeCourseLessonId = plannedLesson.id
                                                         activeLesson = plannedLesson.title
                                                         activeLessonIndex = 0
@@ -781,6 +790,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                             level = studyPlanLevel,
                             completedIds = completedCourseIds,
                             onLaunch = { selectedLesson ->
+                                lessonReturnScreen = "Dersler"
                                 activeCourseLessonId = selectedLesson.id
                                 activeLesson = selectedLesson.title
                                 activeLessonIndex = 0
@@ -798,7 +808,15 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                         val lesson = lessonContent(activeLesson)
                         Column(verticalArrangement = Arrangement.spacedBy(14.dp)) {
                             Row(verticalAlignment = Alignment.CenterVertically) {
-                                TextButton(onClick = { currentScreen = "Dersler"; lessonStage = 0; activeCourseLessonId = null }) { Text("✕ Çık") }
+                                TextButton(onClick = {
+                                    currentScreen = lessonReturnScreen
+                                    lessonStage = 0
+                                    activeCourseLessonId = null
+                                    if (currentScreen == "Dersler") {
+                                        selectedTopic = "Tümü"
+                                        selected = "A1"
+                                    }
+                                }) { Text("✕ Çık") }
                                 Spacer(Modifier.weight(1f))
                                 Text("Bölüm ${lessonStage + 1}/3", color = Blue, fontWeight = FontWeight.Bold)
                             }
@@ -1038,7 +1056,11 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                                     CourseProgressStore.addStudyMinutes(prefs, elapsedMinutes)
                                                     lessonSessionStartedAt = null
                                                     activeCourseLessonId = null
-                                                    currentScreen = "Dersler"
+                                                    currentScreen = lessonReturnScreen
+                                                    if (currentScreen == "Dersler") {
+                                                        selectedTopic = "Tümü"
+                                                        selected = "A1"
+                                                    }
                                                     lessonStage = 0
                                                 }
                                             },
@@ -1110,6 +1132,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                     )) { module ->
                         Card(
                             modifier = Modifier.fillMaxWidth().clickable {
+                                lessonReturnScreen = "Mesleki İngilizce"
                                 activeLesson = when (module.first) {
                                     "01", "02" -> "Uçuş kumandaları"
                                     "13" -> "Bakım aletleri ve ekipman"
