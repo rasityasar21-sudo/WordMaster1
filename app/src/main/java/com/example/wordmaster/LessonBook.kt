@@ -92,6 +92,36 @@ object LessonBook {
                 listOf("Reservoir, pump, valve ve actuator işlevlerini açıkla.", "Leakage ve contamination terimlerini ayır.", "Gözlemi varsayımdan ayıran rapor yaz.", "Onaylı prosedürün emniyet açısından önemini açıkla.")
             )
         }
+        if ("bakım kayıtları ve teknik dokümanlar" in t) {
+            return LessonBookChapter(
+                "AMM, FIM/TSM, SRM ve iş kayıtlarını doğru bağlamda okumak",
+                "Aircraft Maintenance Manual (AMM), uçak bakımına ilişkin onaylı görev bilgilerini içerir. Fault Isolation Manual (FIM) veya Troubleshooting Manual (TSM), tip ve konfigürasyona bağlı arıza araştırma dokümanlarıdır. Wiring Diagram Manual (WDM) elektrik bağlantılarını anlamak için kullanılır; Structural Repair Manual (SRM) yapısal değerlendirme ve onarım verileriyle ilgilidir. Illustrated Parts Catalog (IPC), parça tanımlama amacı taşır ve tek başına bakım uygulama talimatı değildir. Work order iş emrini, task card görev kartını, aircraft logbook uçak kayıtlarını ifade edebilir. Revision status, applicability, effectivity ve reference terimleri doğru doküman sürümünü ve kapsamını belirlemek açısından kritiktir. Dokümanın varlığı, her teknisyenin her işlemi yapmaya yetkili olduğu anlamına gelmez. Bu ders doküman okuma ve İngilizce raporlama eğitimidir; gerçek uygulamada geçerli onaylı veri, yetki ve kuruluş prosedürleri esas alınır.",
+                "Document purpose: AMM → maintenance tasks; FIM/TSM → fault isolation; WDM → wiring; SRM → structural repair; IPC → parts identification.\nRecord: observation → reference → authorized action (if performed) → verification → sign-off.",
+                listOf(
+                    "Check the document revision and applicability before interpreting the task." to "Görevi yorumlamadan önce doküman revizyonunu ve uygulanabilirliğini kontrol edin.",
+                    "The fault isolation manual is not interchangeable with the wiring diagram manual." to "Arıza izolasyon el kitabı ile kablo şeması el kitabı birbirinin yerine geçmez.",
+                    "The work order references the applicable maintenance manual." to "İş emri geçerli bakım el kitabına atıfta bulunur.",
+                    "Only authorized personnel may certify the completed maintenance record." to "Tamamlanan bakım kaydını yalnızca yetkili personel onaylayabilir."
+                ),
+                listOf("IPC'yi bakım adımı sağlayan bir el kitabı olarak yorumlama.", "Doküman revizyonu ve uygulanabilirlik bilgisini atlama.", "Gerçekte yapılmamış bir işlemi tamamlanmış gibi kaydetme.", "Eğitim metnini gerçek bakım yetkilendirmesi sanma."),
+                listOf("AMM, FIM/TSM, WDM, SRM ve IPC amaçlarını karşılaştır.", "Effectivity ve revision status terimlerini açıkla.", "Gözlem ve yapılan işi ayrı cümlelerde raporla.", "Yetkili sign-off gerekliliğini ifade et.")
+            )
+        }
+        if ("arıza ve bulgu raporu yazımı" in t) {
+            return LessonBookChapter(
+                "Teknik arıza kaydında belirti, kanıt ve doğrulanmış bulguyu ayırmak",
+                "Discrepancy bildirilen uygunsuzluğu, symptom gözlenen belirtiyi, finding doğrulanmış bulguyu ve corrective action uygulanan düzeltici işlemi ifade eder. Intermittent aralıklı, reproducible tekrar oluşturulabilir, reported bildirilen, confirmed doğrulanan ve not verified doğrulanmayan durumlar için kullanılır. Bir teknisyen İngilizce kayıtta pilot veya başka personel tarafından bildirilen durumu, kendi gözlemini ve belgeyle doğrulanan bulguyu ayrı belirtmelidir. Örneğin bir motor göstergesinin beklenmedik değer göstermesi, sensör veya kablonun kesin arızalı olduğunu kanıtlamaz. Fault isolation için geçerli tip bazlı FIM/TSM, elektriksel ilişki için WDM ve görevler için AMM gibi onaylı kaynaklar kullanılabilir. Bu metin hiçbir arıza giderme adımı, devre kesici konumu veya gerçek bakım talimatı vermez.",
+                "Reported symptom → observed condition → document reference → verified finding → authorized corrective action → recorded outcome.\nLanguage: reported / observed / suspected / confirmed / not verified.",
+                listOf(
+                    "The crew reported an intermittent engine indication." to "Mürettebat aralıklı bir motor göstergesi sorunu bildirdi.",
+                    "The reported symptom has not yet been independently verified." to "Bildirilen belirti henüz bağımsız olarak doğrulanmadı.",
+                    "The cause remains undetermined pending approved fault isolation." to "Onaylı arıza izolasyonu yapılana kadar neden belirlenmiş değildir.",
+                    "The maintenance record must distinguish observed facts from assumptions." to "Bakım kaydı gözlenen olguları varsayımlardan ayırmalıdır."
+                ),
+                listOf("Reported ile confirmed terimlerini karıştırma.", "Göstergedeki anormallikten doğrudan arızalı parça sonucu çıkarma.", "Gerçekte yapılmayan kontrol veya işlemi kayda ekleme."),
+                listOf("Belirti ve doğrulanmış bulguya ayrı örnek yaz.", "Intermittent ve reproducible terimlerini açıkla.", "Varsayım içermeyen kısa İngilizce arıza kaydı hazırla.", "Kullanılan doküman türünün amacını belirt.")
+            )
+        }
         // C1-specific chapters must precede broad grammar and writing title matches.
         if ("anlam incelikleri ve register" in t) {
             return LessonBookChapter(
