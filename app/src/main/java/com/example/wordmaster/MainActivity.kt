@@ -951,7 +951,8 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                                     },
                                                     modifier = Modifier.weight(1f),
                                                     shape = RoundedCornerShape(14.dp)
-                                                ) { Text("▶ Dinle", modifier = Modifier.padding(4.dp)) }
+                                                , enabled = listeningReady && dialogue.isNotEmpty()
+                                                ) { Text(if (listeningReady) "▶ Dinle" else "Ses hazırlanıyor", modifier = Modifier.padding(4.dp)) }
                                                 OutlinedButton(
                                                     onClick = { slowListening = !slowListening; listeningTts.stop() },
                                                     shape = RoundedCornerShape(14.dp)
