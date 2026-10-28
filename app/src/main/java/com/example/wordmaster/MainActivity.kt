@@ -1589,6 +1589,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                         chosenLevel = onboardingChoice
                         selected = onboardingChoice
                         prefs.edit().putString("chosenLevel", chosenLevel).putString("learningPurpose", learningPurpose).apply()
+                        if (learningPurpose == "Mesleki İngilizce") currentScreen = "Mesleki İngilizce"
                         showOnboarding = false
                     },
                     modifier = Modifier.fillMaxWidth(),
