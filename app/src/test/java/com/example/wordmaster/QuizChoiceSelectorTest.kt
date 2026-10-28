@@ -46,6 +46,24 @@ class QuizChoiceSelectorTest {
     }
 
     @Test
+    fun excludesDictionaryNoiseFromQuizDistractors() {
+        val target = Word("engine", "motor", "A1")
+        val words = listOf(
+            target,
+            Word("100th", "yüzüncü", "A1"),
+            Word("undefined", "bilinmiyor", "A1"),
+            Word("rudder", "dümen", "A1"),
+            Word("flap", "kanatçık", "A1")
+        )
+
+        val choices = QuizChoiceSelector.select(target, words, 4)
+
+        assertTrue(choices.any { it.en == "engine" })
+        assertTrue(choices.none { it.en == "100th" || it.en == "undefined" })
+        assertEquals(3, choices.size)
+    }
+
+    @Test
     fun invalidCountReturnsEmptyList() {
         assertTrue(QuizChoiceSelector.select(Word("book", "kitap", "A1"), emptyList(), 0).isEmpty())
     }
