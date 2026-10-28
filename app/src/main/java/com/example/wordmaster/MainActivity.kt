@@ -2434,6 +2434,51 @@ private fun listeningDialogueFor(title: String, lesson: LessonContent): List<Pai
                 "I visited my cousin and we watched a film." to "Kuzenimi ziyaret ettim ve film izledik.",
                 "Did you go home late?" to "Eve geç gittin mi?",
                 "No, I took the last bus at nine." to "Hayır, dokuzdaki son otobüse bindim.")
+        "deneyimleri anlatmak" in t || "present perfect" in t ->
+            listOf("Have you ever worked on a group project?" to "Hiç grup projesinde çalıştın mı?",
+                "Yes, I have. I have worked on two projects this year." to "Evet. Bu yıl iki projede çalıştım.",
+                "Did you enjoy the last one?" to "Sonuncusundan hoşlandın mı?",
+                "Yes, but we finished it late last Friday." to "Evet ama geçen cuma geç bitirdik.")
+        "koşul cümleleri" in t || "conditional" in t ->
+            listOf("What will you do if the bus is late?" to "Otobüs geç kalırsa ne yapacaksın?",
+                "If it is late, I'll call the school." to "Geç kalırsa okulu arayacağım.",
+                "What would you do if you had a free month?" to "Bir ay boş zamanın olsa ne yapardın?",
+                "I'd travel and practise English every day." to "Seyahat eder ve her gün İngilizce pratik yapardım.")
+        "phrasal verbs" in t || "yaygın phrasal" in t ->
+            listOf("Did you find out why the meeting changed?" to "Toplantının neden değiştiğini öğrendin mi?",
+                "Yes, they had to put it off until Thursday." to "Evet, perşembeye ertelemek zorunda kaldılar.",
+                "Should I write down the new time?" to "Yeni saati not almalı mıyım?",
+                "Yes, and please let the rest of the team know." to "Evet, lütfen ekibin geri kalanına da haber ver.")
+        "olay anlatımı ve bağlaçlar" in t ->
+            listOf("What happened during the test?" to "Test sırasında ne oldu?",
+                "The first attempt failed because one step was missing." to "İlk deneme bir adım eksik olduğu için başarısız oldu.",
+                "What happened next?" to "Sonra ne oldu?",
+                "We corrected the list; however, we checked it again before continuing." to "Listeyi düzelttik; ancak devam etmeden önce tekrar kontrol ettik.")
+        "sorun açıklama ve çözüm" in t ->
+            listOf("What is the main issue with the new process?" to "Yeni süreçteki temel sorun nedir?",
+                "It takes too long when several requests arrive together." to "Birden fazla istek aynı anda geldiğinde çok uzun sürüyor.",
+                "What do you recommend?" to "Ne öneriyorsun?",
+                "I suggest reviewing the logs first and then testing one change." to "Önce kayıtları incelemeyi, sonra bir değişikliği test etmeyi öneriyorum.")
+        "akademik paragraf" in t || "academic writing" in t ->
+            listOf("What is the main claim of your paragraph?" to "Paragrafının temel iddiası nedir?",
+                "Regular feedback can improve learning outcomes." to "Düzenli geri bildirim öğrenme sonuçlarını iyileştirebilir.",
+                "What evidence supports that claim?" to "Bu iddiayı hangi kanıt destekliyor?",
+                "The study reports progress, but it also notes limitations." to "Çalışma ilerleme bildiriyor ancak sınırlamalara da değiniyor.")
+        "toplantılarda fikir savunma" in t || "meetings" in t ->
+            listOf("Could we review the delivery date?" to "Teslim tarihini gözden geçirebilir miyiz?",
+                "Certainly. The current schedule leaves little time for testing." to "Elbette. Mevcut program test için çok az zaman bırakıyor.",
+                "Could we move the review to Thursday?" to "İncelemeyi perşembeye alabilir miyiz?",
+                "That would work if we share the draft by Tuesday." to "Taslağı salıya kadar paylaşırsak bu uygun olur.")
+        "veri ve sonuçları raporlama" in t || "reporting data" in t ->
+            listOf("What changed in the latest report?" to "Son raporda ne değişti?",
+                "Response time decreased by eight percent compared with last month." to "Yanıt süresi geçen aya kıyasla yüzde sekiz azaldı.",
+                "Does that prove the new system caused the change?" to "Bu, değişime yeni sistemin neden olduğunu kanıtlar mı?",
+                "Not by itself. We need to check other factors as well." to "Tek başına kanıtlamaz. Diğer etkenleri de kontrol etmeliyiz.")
+        "müzakere ve uzlaşma" in t || "negotiation" in t ->
+            listOf("We need the report by Wednesday." to "Rapora çarşambaya kadar ihtiyacımız var.",
+                "Could we deliver the main findings on Wednesday and the appendix on Thursday?" to "Ana bulguları çarşamba, eki perşembe teslim edebilir miyiz?",
+                "That could work. Can you confirm the exact sections?" to "Olabilir. Kesin bölümleri teyit edebilir misin?",
+                "Yes, I'll send the agreed outline this afternoon." to "Evet, üzerinde anlaştığımız taslağı bu öğleden sonra göndereceğim.")
         "fikir belirtme" in t || "iş yerinde iletişim" in t || "toplantılarda fikir savunma" in t || "profesyonel iletişim" in t ->
             listOf("I think we should update the plan." to "Bence planı güncellemeliyiz.",
                 "What is the main reason?" to "Temel gerekçe nedir?",
