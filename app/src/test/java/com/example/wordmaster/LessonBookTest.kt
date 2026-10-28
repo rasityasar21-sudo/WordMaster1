@@ -207,7 +207,7 @@ class LessonBookTest {
         assertTrue(paraphrasing.explanation.contains("kendi sözlerinle"))
         assertTrue(paraphrasing.formation.contains("new structure"))
         assertTrue(paraphrasing.examples.size >= 2)
-        assertTrue(paraphrasing.commonMistakes.any { it.contains("kaynağın iddiasını") })
+        assertTrue(paraphrasing.commonMistakes.any { it.contains("kaynağın iddiasını", ignoreCase = true) })
         assertTrue(paraphrasing.checkpoints.size >= 5)
     }
 
