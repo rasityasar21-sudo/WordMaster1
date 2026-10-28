@@ -357,6 +357,76 @@ object LessonBook {
                     listOf("The team reviewed the draft and removed repeated information." to "Ekip taslağı gözden geçirip tekrarlanan bilgileri kaldırdı.", "Please clarify what 'it' refers to in the second paragraph." to "Lütfen ikinci paragraftaki 'it' ifadesinin neye gönderme yaptığını açıklayın."),
                     listOf("Düzenlerken yazarın asıl anlamını değiştirme.", "Her uzun cümleyi otomatik olarak bölme.", "Terimleri metin boyunca tutarlı kullan."),
                     listOf("Metnin amacını ve hedef kitlesini belirle.", "Tekrar ve belirsiz göndermeleri düzelt.", "Son kontrolde anlam, yapı ve tonu birlikte değerlendir."))
+            "ileri düzey cümle yapıları" in t ->
+                LessonBookChapter("Karmaşık cümleleri çözümlemek",
+                    "İleri düzey cümlelerde yan cümlecikler, bağlaçlar ve vurgu bilgiyi nasıl düzenlediğini belirler. Önce ana cümlenin özne ve yüklemini bul, ardından relative, conditional veya concessive clause gibi ek yapıları ayır. Uzun cümle mutlaka daha iyi cümle demek değildir.",
+                    "Main clause + subordinate clause · although/even though · which/that · if/unless",
+                    listOf("Although the task was complex, the team completed it on time." to "Görev karmaşık olmasına rağmen ekip zamanında tamamladı.", "The report, which was published yesterday, includes the revised figures." to "Dün yayımlanan rapor güncellenmiş rakamları içeriyor."),
+                    listOf("Ana cümleyi bulmadan tüm cümleyi çevirmeye çalışma.", "Bağlaçların kurduğu mantıksal ilişkiyi atlama.", "Yan cümleciğin hangi ismi veya fikri açıkladığını kontrol et."),
+                    listOf("Ana cümlenin özne ve yüklemini belirle.", "Yan cümlecikleri parantezleyerek ayır.", "Bağlacın anlam ilişkisini açıkla."))
+            "akademik paragraf ve argüman" in t ->
+                LessonBookChapter("Akademik paragrafta iddia ve kanıt kurmak",
+                    "Akademik paragraf genellikle ana iddiayı sunan bir topic sentence, bunu destekleyen gerekçe veya kanıt ve iddiayla bağlantıyı açıklayan yorum içerir. Kaynak kullanıyorsan kanıtı doğru aktar ve kendi yorumunu kaynak bulgusundan ayır.",
+                    "Topic sentence → evidence/example → explanation → link to argument",
+                    listOf("Regular feedback can improve performance because it helps learners identify specific gaps." to "Düzenli geri bildirim performansı artırabilir çünkü öğrenenlerin belirli eksikleri fark etmesine yardım eder.", "However, the effect depends on how the feedback is used." to "Bununla birlikte etki, geri bildirimin nasıl kullanıldığına bağlıdır."),
+                    listOf("Paragrafı birbirinden kopuk örneklerle doldurma.", "Kaynağın söylediğinden daha güçlü bir iddia kurma.", "Kanıtın ana iddiayı nasıl desteklediğini açıklamayı unutma."),
+                    listOf("Paragrafın tek ana iddiasını yaz.", "İlgili kanıt ekle.", "Kanıt ile iddia arasındaki bağı açıkla."))
+            "olay anlatımı ve bağlaçlar" in t ->
+                LessonBookChapter("Olayları kronolojik ve tutarlı anlatmak",
+                    "Olay anlatımında önce olayların sırasını belirle, sonra when, while, after ve before gibi zaman bağlaçlarını kullan. However karşıtlık, therefore sonuç, although ise beklenmeyen karşıt durum kurar. Bağlaç seçimi olaylar arasındaki gerçek ilişkiyi yansıtmalıdır.",
+                    "First/then/after that · while/when · however/therefore/although",
+                    listOf("While I was checking the list, the supervisor called." to "Listeyi kontrol ederken sorumlu kişi aradı.", "The first attempt failed; however, the second one worked." to "İlk deneme başarısız oldu; ancak ikincisi işe yaradı."),
+                    listOf("Then ve therefore aynı işlevde değildir.", "While ile when kullanımını bağlama göre seç.", "Bağlaç eklemek için olaylar arasındaki mantığı bozma."),
+                    listOf("Olayları sıraya koy.", "Zaman veya mantık ilişkisini belirle.", "Uygun bağlacı seçip noktalama işaretlerini kontrol et."))
+            "sorun açıklama ve çözüm önerme" in t ->
+                LessonBookChapter("Sorunu açıkça tanımlayıp çözüm önermek",
+                    "Bir sorunu açıklarken gözlenen durumu, etkisini ve bilinen kanıtı ayır. Ardından uygulanabilir çözüm seçeneklerini ve gerekçelerini sun. Sorunun nedenini bilmiyorsan tahminini gerçekmiş gibi anlatma.",
+                    "Observed issue → impact → evidence → options → recommendation",
+                    listOf("The system responds slowly when several users sign in." to "Birden fazla kullanıcı giriş yaptığında sistem yavaş yanıt veriyor.", "I recommend checking the logs before changing the configuration." to "Yapılandırmayı değiştirmeden önce kayıtları kontrol etmeyi öneriyorum."),
+                    listOf("Gözlemi doğrulanmamış nedenden ayır.", "Çözümü gerekçesiz sunma.", "Bir sonraki adımı belirsiz bırakma."),
+                    listOf("Sorunu ölçülebilir biçimde tanımla.", "Etkisini ve kanıtını açıkla.", "Gerekçeli bir sonraki adım öner."))
+            "iş yerinde iletişim" in t ->
+                LessonBookChapter("İş yerinde net ve nazik iletişim",
+                    "İş yerinde görev, sorumluluk ve süreleri açık ifade et. Talimatı anlamadığında kibarca tekrar veya açıklama iste; devir teslimde tamamlanan işi, açık kalan maddeleri ve sonraki adımı belirt.",
+                    "Could you clarify ...? · My understanding is ... · The next step is ...",
+                    listOf("Could you clarify which version we should use?" to "Hangi sürümü kullanmamız gerektiğini açıklayabilir misiniz?", "My understanding is that the report is due on Thursday." to "Anladığım kadarıyla rapor perşembe günü teslim edilecek."),
+                    listOf("Belirsiz bir talimatı anladığını varsayma.", "Süre ve sorumluyu belirtmeden görev devretme.", "Nazikliği açıklığın yerine koyma."),
+                    listOf("Görev ve sorumluyu netleştir.", "Anladığını kendi sözlerinle teyit et.", "Süreyi ve sonraki adımı belirt."))
+            "dinlemede ayrıntı yakalama" in t ->
+                LessonBookChapter("Dinlemede ayrıntı ve ana fikri ayırmak",
+                    "İlk dinlemede konuşmanın amacını ve genel konusunu yakala. İkinci dinlemede sorunun istediği ayrıntıya odaklan: isim, tarih, sayı, yer, gerekçe veya sonraki adım. Her kelimeyi yazmak yerine kısa anahtar notlar kullan.",
+                    "First listen: purpose/topic · Second listen: requested detail · Final check: evidence",
+                    listOf("The briefing starts at 9:15 in room 204." to "Bilgilendirme 9.15'te 204 numaralı odada başlıyor.", "The team postponed the test because one document was missing." to "Ekip bir belge eksik olduğu için testi erteledi."),
+                    listOf("Benzer sayıları veya saatleri duyunca soruyla eşleştir.", "Kendi tahminini konuşmada duyduğun bilgiyle karıştırma.", "İlk dinlemede tüm ayrıntıları yakalamaya çalışma."),
+                    listOf("Ana amacı tek cümleyle özetle.", "İstenen ayrıntıyı not et.", "Yanıtını duyduğun ifadeyle doğrula."))
+            "uzun konuşmalarda ana fikir" in t ->
+                LessonBookChapter("Uzun konuşmada amaç, tutum ve not çıkarma",
+                    "Uzun konuşmada başlık değişimlerini, vurgulanan noktaları ve konuşmacının amacını izle. Notlarda her cümleyi yazmak yerine ana fikir, destekleyici kanıt, karşıtlık ve eylem maddelerini kısaltmalarla kaydet.",
+                    "Topic → speaker's purpose → key points → contrast → action items",
+                    listOf("The speaker supports the proposal but asks for a cost review before approval." to "Konuşmacı öneriyi destekliyor ancak onaydan önce maliyet incelemesi istiyor.", "The main concern is the effect on the delivery schedule." to "Temel endişe teslimat programına etkisi."),
+                    listOf("Her kelimeyi yazmaya çalışıp ana fikri kaçırma.", "Konuşmacının görüşüyle aktardığı başkasının görüşünü ayır.", "Önemli karşıtlık ve koşulları atlama."),
+                    listOf("Konuşmacının amacını belirle.", "Ana noktaları ve karşıtlıkları not et.", "Sonunda kısa ve dengeli bir özet çıkar."))
+            "resmî rapor ve öneri yazımı" in t ->
+                LessonBookChapter("Resmî rapor ve öneriyi yapılandırmak",
+                    "Resmî rapor amaç ve kapsamı tanımlar, bulguları kanıta dayalı sunar ve sonuçları önerilerden ayırır. Başlıklar, kısa paragraflar ve tutarlı terimler okuyucunun bilgiyi taramasını kolaylaştırır. Önerinin dayanağını ve beklenen etkisini açıkça belirt.",
+                    "Purpose/scope → findings → analysis → conclusion → recommendations",
+                    listOf("The review identified three recurring delays." to "İnceleme tekrarlanan üç gecikme belirledi.", "We recommend a limited trial before full implementation." to "Tam uygulamadan önce sınırlı bir deneme öneriyoruz."),
+                    listOf("Bulguyu öneriyle karıştırma.", "Kanıtlanmamış kesinlik kullanma.", "Önerinin kime ve hangi adım için olduğunu belirsiz bırakma."),
+                    listOf("Raporun amacını belirt.", "Bulguları kanıtla destekle.", "Uygulanabilir ve ölçülebilir öneri yaz."))
+            "profesyonel iletişim ve ikna" in t ->
+                LessonBookChapter("Profesyonel iletişimde ikna ve güven",
+                    "Profesyonel ikna, muhatabın ihtiyacını anlamayı, önerinin faydasını kanıtla açıklamayı ve sınırlamaları dürüstçe belirtmeyi gerektirir. İddiaları ölçülü kur; itiraz geldiğinde önce kaygıyı netleştir, sonra ilgili kanıt ve seçeneklerle yanıtla.",
+                    "Audience need → proposal → evidence → limitation → next step",
+                    listOf("This option could reduce delays, based on the last three reviews." to "Son üç incelemeye dayanarak bu seçenek gecikmeleri azaltabilir.", "I understand the concern; we can test the change on a small scale first." to "Endişeyi anlıyorum; önce değişikliği küçük ölçekte deneyebiliriz."),
+                    listOf("Kanıt olmadan garanti verme.", "Karşı tarafın endişesini görmezden gelme.", "Sonraki adımı veya karar ölçütünü belirsiz bırakma."),
+                    listOf("Muhatabın ihtiyacını belirle.", "Öneriyi kanıt ve sınırlamayla açıkla.", "Net bir sonraki adım öner."))
+            "ileri dinleme ve not çıkarma" in t ->
+                LessonBookChapter("İleri dinlemede çıkarım ve yoğun not alma",
+                    "İleri düzey dinlemede yalnızca açıkça söylenen bilgiyi değil, konuşmacının tutumunu, koşulları ve makul çıkarımları da izlersin. Notları ana fikir, kanıt, çekince ve eylem maddeleri şeklinde grupla; emin olmadığın çıkarımı gerçek bilgi gibi kaydetme.",
+                    "Claim · evidence · qualification · implication · action",
+                    listOf("The speaker cautiously supports the plan, provided that costs remain within the agreed limit." to "Konuşmacı, maliyetler kararlaştırılan sınırda kaldığı sürece planı temkinli biçimde destekliyor.", "The deadline may need to change if the review identifies further risks." to "İnceleme ek riskler belirlerse son tarihin değişmesi gerekebilir."),
+                    listOf("Could/may gibi ihtimal bildiren ifadeleri kesinlik gibi aktarma.", "Konuşmacının çekincelerini notlardan çıkarma.", "Çıkarım ile doğrudan söylenen bilgiyi ayır."),
+                    listOf("Ana iddiayı yakala.", "Çekince ve koşulları not et.", "Çıkarımı destekleyen ipucunu belirt."))
             "email" in t || "e-mail" in t || "e-posta" in t || "writing" in t || "yazma" in t -> 
                 LessonBookChapter("Amaçlı ve düzenli İngilizce yazmak",
                     "İyi bir e-posta veya kısa yazı okuyucunun amacını hızlıca anlamasını sağlar. Resmî e-postada uygun selamlama, ilk paragrafta amaç, gövdede açık ayrıntılar ve sonunda nazik kapanış bulunur. Akademik yazıda iddia, gerekçe ve örnek arasında açık bağ kurulur. Paragrafları tek ana fikir etrafında düzenle ve son kontrolde dilbilgisi kadar tonu da incele.",
