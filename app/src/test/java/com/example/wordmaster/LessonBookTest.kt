@@ -84,7 +84,7 @@ class LessonBookTest {
         assertTrue(chapter.explanation.contains("doğrulanabilir kanıt"))
         assertTrue(chapter.formation.contains("evidence"))
         assertTrue(chapter.examples.any { it.first.contains("cannot confirm the cause") })
-        assertTrue(chapter.commonMistakes.any { it.contains("kesin kanıt") })
+        assertTrue(chapter.commonMistakes.any { it.contains("kanıt yoksa") })
         assertTrue(chapter.checkpoints.size >= 5)
     }
 
