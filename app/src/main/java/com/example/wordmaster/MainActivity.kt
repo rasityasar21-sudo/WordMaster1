@@ -1099,58 +1099,6 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                     }
                 }
                 if (currentScreen == "Mesleki İngilizce") {
-                    item {
-                        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                            Text("MESLEKİ AKADEMİ", color = MaterialTheme.colorScheme.primary, fontSize = 11.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 1.5.sp)
-                            Text(if (selectedCareerTrack == "Uçak Bakım") "Uçak Bakım İngilizcesi" else "$selectedCareerTrack İngilizcesi", color = MaterialTheme.colorScheme.onSurface, fontSize = 25.sp, fontWeight = FontWeight.ExtraBold)
-                            Text(if (selectedCareerTrack == "Uçak Bakım") "Temel terimlerden operasyonel iletişime kadar adım adım ilerle." else "Mesleğine uygun kelimeleri, diyalogları ve işyeri iletişimini öğren.", color = MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 14.sp)
-                        }
-                    }
-                    item {
-                        Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                            Text("KARİYER YOLUNU SEÇ", color = MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 11.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 1.sp)
-                            Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                                vocationalTracks.forEach { track ->
-                                    FilterChip(
-                                        selected = selectedCareerTrack == track,
-                                        onClick = { selectedCareerTrack = track },
-                                        label = { Text(track, maxLines = 1) }
-                                    )
-                                }
-                            }
-                        }
-                    }
-                    item {
-                        Card(
-                            modifier = Modifier.fillMaxWidth(),
-                            shape = RoundedCornerShape(22.dp),
-                            colors = CardDefaults.cardColors(containerColor = if (darkTheme) Color(0xFF182747) else Color(0xFFE8EDFF))
-                        ) {
-                            Column(Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                                    Surface(shape = RoundedCornerShape(14.dp), color = Color(0xFF5145CD)) {
-                                        Text("✈", modifier = Modifier.padding(12.dp), color = Color.White, fontSize = 24.sp)
-                                    }
-                                    Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(3.dp)) {
-                                        Text(if (selectedCareerTrack == "Uçak Bakım") "Aircraft Maintenance English" else "$selectedCareerTrack English Pathway", color = MaterialTheme.colorScheme.onSurface, fontWeight = FontWeight.ExtraBold, fontSize = 17.sp)
-                                        Text("Terminoloji · İletişim · Teknik bilgi", color = MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 12.sp)
-                                    }
-                                }
-                                Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.fillMaxWidth()) {
-                                    listOf("A1–A2 Temel", "B1–B2 Operasyon", "C1 İleri").forEach { stage ->
-                                        Surface(modifier = Modifier.weight(1f), shape = RoundedCornerShape(12.dp), color = if (darkTheme) Color(0xFF24365B) else Color.White) {
-                                            Text(stage, modifier = Modifier.padding(horizontal = 7.dp, vertical = 10.dp), color = MaterialTheme.colorScheme.onSurface, fontSize = 10.sp, fontWeight = FontWeight.Bold, textAlign = androidx.compose.ui.text.style.TextAlign.Center)
-                                        }
-                                    }
-                                }
-                                Text("Öğrenme yolu; terim, örnek cümle, bağlam ve kısa kontrol sorularıyla ilerleyecek şekilde düzenlenmiştir.", color = MaterialTheme.colorScheme.onSurface, fontSize = 13.sp)
-                            }
-                        }
-                    }
-                    item {
-                        Text("EĞİTİM MODÜLLERİ", color = MaterialTheme.colorScheme.onSurface, fontSize = 17.sp, fontWeight = FontWeight.ExtraBold)
-                    }
-
                     val vocationalTracks = listOf("Uçak Bakım", "Yazılım", "Sağlık", "Turizm", "Otomotiv", "İş ve Lojistik")
                     val aviationModules = listOf(
                         Triple("01", "Uçak ve uçuş kontrol yüzeyleri", "Aileron, elevator, rudder, flap ve spoiler: her parçanın temel görevi, hareket yönleri ve teknik İngilizce örnekleri."),
@@ -1210,6 +1158,59 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                         )
                         else -> aviationModules
                     }
+                    item {
+                        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                            Text("MESLEKİ AKADEMİ", color = MaterialTheme.colorScheme.primary, fontSize = 11.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 1.5.sp)
+                            Text(if (selectedCareerTrack == "Uçak Bakım") "Uçak Bakım İngilizcesi" else "$selectedCareerTrack İngilizcesi", color = MaterialTheme.colorScheme.onSurface, fontSize = 25.sp, fontWeight = FontWeight.ExtraBold)
+                            Text(if (selectedCareerTrack == "Uçak Bakım") "Temel terimlerden operasyonel iletişime kadar adım adım ilerle." else "Mesleğine uygun kelimeleri, diyalogları ve işyeri iletişimini öğren.", color = MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 14.sp)
+                        }
+                    }
+                    item {
+                        Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                            Text("KARİYER YOLUNU SEÇ", color = MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 11.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 1.sp)
+                            Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                                vocationalTracks.forEach { track ->
+                                    FilterChip(
+                                        selected = selectedCareerTrack == track,
+                                        onClick = { selectedCareerTrack = track },
+                                        label = { Text(track, maxLines = 1) }
+                                    )
+                                }
+                            }
+                        }
+                    }
+                    item {
+                        Card(
+                            modifier = Modifier.fillMaxWidth(),
+                            shape = RoundedCornerShape(22.dp),
+                            colors = CardDefaults.cardColors(containerColor = if (darkTheme) Color(0xFF182747) else Color(0xFFE8EDFF))
+                        ) {
+                            Column(Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                                    Surface(shape = RoundedCornerShape(14.dp), color = Color(0xFF5145CD)) {
+                                        Text("✈", modifier = Modifier.padding(12.dp), color = Color.White, fontSize = 24.sp)
+                                    }
+                                    Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(3.dp)) {
+                                        Text(if (selectedCareerTrack == "Uçak Bakım") "Aircraft Maintenance English" else "$selectedCareerTrack English Pathway", color = MaterialTheme.colorScheme.onSurface, fontWeight = FontWeight.ExtraBold, fontSize = 17.sp)
+                                        Text("Terminoloji · İletişim · Teknik bilgi", color = MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 12.sp)
+                                    }
+                                }
+                                Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.fillMaxWidth()) {
+                                    listOf("A1–A2 Temel", "B1–B2 Operasyon", "C1 İleri").forEach { stage ->
+                                        Surface(modifier = Modifier.weight(1f), shape = RoundedCornerShape(12.dp), color = if (darkTheme) Color(0xFF24365B) else Color.White) {
+                                            Text(stage, modifier = Modifier.padding(horizontal = 7.dp, vertical = 10.dp), color = MaterialTheme.colorScheme.onSurface, fontSize = 10.sp, fontWeight = FontWeight.Bold, textAlign = androidx.compose.ui.text.style.TextAlign.Center)
+                                        }
+                                    }
+                                }
+                                Text("Öğrenme yolu; terim, örnek cümle, bağlam ve kısa kontrol sorularıyla ilerleyecek şekilde düzenlenmiştir.", color = MaterialTheme.colorScheme.onSurface, fontSize = 13.sp)
+                            }
+                        }
+                    }
+                    item {
+                        Text("EĞİTİM MODÜLLERİ", color = MaterialTheme.colorScheme.onSurface, fontSize = 17.sp, fontWeight = FontWeight.ExtraBold)
+                    }
+
+                    items(vocationalModules) { module ->
                         Card(
                             modifier = Modifier.fillMaxWidth().clickable {
                                 lessonReturnScreen = "Mesleki İngilizce"
