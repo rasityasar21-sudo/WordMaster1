@@ -225,4 +225,22 @@ class LessonBookTest {
         }
     }
 
+    @Test
+    fun everyC1LessonHasDetailedDistinctAndActionableChapter() {
+        val lessons = WordMasterCourseCatalog.forLevel("C1")
+        assertTrue("C1 should cover at least ten topics", lessons.size >= 10)
+        val purposes = mutableSetOf<String>()
+        lessons.forEach { lesson ->
+            val chapter = LessonBook.chapter(lesson.title)
+            assertTrue("C1 explanation too short: ${lesson.id}", chapter.explanation.length >= 300)
+            assertTrue("C1 formation missing: ${lesson.id}", chapter.formation.length >= 40)
+            assertTrue("C1 examples insufficient: ${lesson.id}", chapter.examples.size >= 4)
+            assertTrue("C1 mistake guidance insufficient: ${lesson.id}", chapter.commonMistakes.size >= 3)
+            assertTrue("C1 practice checkpoints insufficient: ${lesson.id}", chapter.checkpoints.size >= 4)
+            assertTrue("Duplicate C1 chapter purpose: ${lesson.id}", purposes.add(chapter.purpose))
+            assertTrue("Missing English example: ${lesson.id}",
+                chapter.examples.all { it.first.isNotBlank() && it.second.isNotBlank() })
+        }
+    }
+
 }
