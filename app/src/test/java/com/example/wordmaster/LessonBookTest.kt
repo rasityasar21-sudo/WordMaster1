@@ -180,4 +180,49 @@ class LessonBookTest {
         assertTrue(chapter.commonMistakes.isNotEmpty())
     }
 
+
+    @Test
+    fun b2LessonsCoverHedgingMixedConditionalsCohesionAndParaphrasing() {
+        val hedging = LessonBook.chapter("Akademik dilde ihtiyat ve kesinlik")
+        val conditionals = LessonBook.chapter("İleri koşul cümleleri ve varsayımlar")
+        val cohesion = LessonBook.chapter("Tutarlılık ve akademik bağlaçlar")
+        val paraphrasing = LessonBook.chapter("Parafraz ve kaynakları doğru aktarma")
+
+        assertTrue(hedging.explanation.contains("kanıtın gücü"))
+        assertTrue(hedging.formation.contains("may/might/could"))
+        assertTrue(hedging.examples.any { it.first.contains("may be related") })
+        assertTrue(hedging.commonMistakes.any { it.contains("Suggests") })
+        assertTrue(hedging.checkpoints.size >= 4)
+
+        assertTrue(conditionals.formation.contains("past perfect"))
+        assertTrue(conditionals.examples.any { it.first.contains("would live in London now") })
+        assertTrue(conditionals.commonMistakes.any { it.contains("V3") })
+        assertTrue(conditionals.checkpoints.size >= 4)
+
+        assertTrue(cohesion.explanation.contains("mantıksal ilişki"))
+        assertTrue(cohesion.formation.contains("therefore"))
+        assertTrue(cohesion.examples.any { it.first.contains("whereas") })
+        assertTrue(cohesion.checkpoints.size >= 4)
+
+        assertTrue(paraphrasing.explanation.contains("kendi sözlerinle"))
+        assertTrue(paraphrasing.formation.contains("new structure"))
+        assertTrue(paraphrasing.examples.size >= 2)
+        assertTrue(paraphrasing.commonMistakes.any { it.contains("kaynağın iddiasını") })
+        assertTrue(paraphrasing.checkpoints.size >= 5)
+    }
+
+    @Test
+    fun b2CatalogHasBroadCoverageAndEveryLessonHasSpecificBookContent() {
+        val b2Lessons = WordMasterCourseCatalog.forLevel("B2")
+
+        assertTrue("Expected at least 12 B2 lessons", b2Lessons.size >= 12)
+        b2Lessons.forEach { lesson ->
+            val chapter = LessonBook.chapter(lesson.title)
+            assertTrue("Missing B2 chapter for: ${lesson.title}",
+                chapter.purpose != "Konuyu adım adım öğren")
+            assertTrue("Missing B2 examples for: ${lesson.title}", chapter.examples.size >= 2)
+            assertTrue("Missing B2 checkpoints for: ${lesson.title}", chapter.checkpoints.isNotEmpty())
+        }
+    }
+
 }
