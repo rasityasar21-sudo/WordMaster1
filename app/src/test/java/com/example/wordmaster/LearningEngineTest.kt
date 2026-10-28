@@ -89,6 +89,16 @@ class LearningEngineTest {
     }
 
     @Test
+    fun summaryNeverReportsNegativeDailyStreak() {
+        val summary = WordMasterLearningEngine.summary(emptyList(), currentStreak = -5)
+
+        assertEquals(0, summary.currentStreak)
+        assertEquals(0, summary.totalWords)
+        assertEquals(0, summary.dueWords)
+        assertEquals(0, summary.accuracyPercent)
+    }
+
+    @Test
     fun reviewQueuePrioritizesLowerAccuracyThenOlderDueDate() {
         val today = LocalDate.now()
         val words = listOf(
