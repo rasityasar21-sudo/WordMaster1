@@ -2349,6 +2349,146 @@ private fun lessonContent(title: String): LessonContent {
         ("present perfect" in t || "life experiences" in t || "deneyimleri anlatmak" in t) -> LessonContent("Deneyimler ve sonucu süren durumlar", "Present Perfect, zamanı kesin belirtilmeyen deneyimler veya geçmişte başlayıp etkisi süren durumlar için kullanılır.", "Özne + have/has + V3", listOf("I have visited London." to "Londra'yı ziyaret ettim.", "She has finished her homework." to "Ödevini bitirdi.", "Have you ever tried sushi?" to "Hiç suşi denedin mi?"), listOf("already" to "çoktan", "yet" to "henüz", "ever" to "hiç", "never" to "asla / hiç"), "He ___ finished his work.", listOf("has", "have", "was", "did"), "has", "Videoda have ve has kullanımını ve fiilin üçüncü hâlini belirle.")
         "passive voice" in t -> LessonContent("Edilgen yapı", "Eylemi kimin yaptığı değil, eylemden etkilenen şey önemliyse edilgen yapı kullanılır.", "Özne + be + V3", listOf("The bridge was built in 1990." to "Köprü 1990'da inşa edildi.", "English is spoken here." to "Burada İngilizce konuşulur.", "The meal was prepared by Ali." to "Yemek Ali tarafından hazırlandı."), listOf("built" to "inşa edildi", "made" to "yapıldı", "spoken" to "konuşulan", "by" to "tarafından"), "The letters ___ sent yesterday.", listOf("were", "was", "are", "did"), "were", "Videoda edilgen yapıda be fiili ile V3 arasındaki ilişkiye dikkat et.")
         "reported speech" in t -> LessonContent("Dolaylı anlatım", "Birinin sözlerini doğrudan alıntılamak yerine aktardığımızda zaman ve kişi zamirleri değişebilir.", "He said (that) + aktarılan cümle", listOf("“I am tired.” → He said he was tired." to "“Yorgunum.” → Yorgun olduğunu söyledi.", "“I can swim.” → She said she could swim." to "“Yüzebilirim.” → Yüzebildiğini söyledi."), listOf("said" to "söyledi", "told" to "anlattı / söyledi", "asked" to "sordu", "promised" to "söz verdi"), "He said he ___ tired.", listOf("was", "is", "were", "be"), "was", "Videoda doğrudan konuşmadan dolaylı anlatıma geçerken zaman değişimini dinle.")
+        "sayılar, saatler ve tarihler" in t -> LessonContent(
+            "Sayılar, saatler ve tarihler",
+            "Saat söylerken o'clock, half past ve quarter past/to kalıpları kullanılır. Tarihlerde gün ve ay adlarını doğru sırayla söylemeye dikkat et.",
+            "What time is it? · It is half past seven. · on Monday · in October",
+            listOf("My class starts at nine o'clock." to "Dersim saat dokuzda başlıyor.", "Today is the twenty-eighth of October." to "Bugün yirmi sekiz Ekim.", "The meeting is on Friday." to "Toplantı cuma günü."),
+            listOf("quarter past" to "çeyrek geçe", "half past" to "buçuk", "date" to "tarih", "calendar" to "takvim"),
+            "The lesson starts ___ 8:30.",
+            listOf("at", "on", "in", "by"), "at",
+            "Saatler için at, günler için on, aylar ve yıllar için in kullanımını karşılaştır."
+        )
+        "karşılaştırmalar" in t -> LessonContent(
+            "Karşılaştırmalar",
+            "İki kişi veya şeyi karşılaştırırken kısa sıfatlara çoğunlukla -er, uzun sıfatlara more eklenir. Karşılaştırılan ikinci unsurdan önce than kullanılır.",
+            "short adjective + -er + than · more + long adjective + than",
+            listOf("A train is faster than a bus." to "Tren otobüsten daha hızlıdır.", "This exercise is more difficult than that one." to "Bu alıştırma şundan daha zordur.", "My bag is cheaper than yours." to "Çantam seninkinden daha ucuz."),
+            listOf("faster" to "daha hızlı", "cheaper" to "daha ucuz", "more difficult" to "daha zor", "than" to "-den daha"),
+            "A plane is ___ than a car.",
+            listOf("fast", "faster", "fastest", "more fast"), "faster",
+            "Sıfatın biçimini ve cümlede than bulunup bulunmadığını kontrol et."
+        )
+        "şimdiki zaman" in t -> LessonContent(
+            "Şimdiki zaman",
+            "Şu anda devam eden eylemler için am/is/are + fiil-ing kullanılır. He, she ve it ile is; I ile am; you, we ve they ile are gelir.",
+            "Özne + am/is/are + verb-ing",
+            listOf("I am studying now." to "Şu anda ders çalışıyorum.", "She is reading a book." to "Kitap okuyor.", "They aren't sleeping." to "Uyumuyorlar."),
+            listOf("now" to "şimdi", "currently" to "şu anda", "reading" to "okuyor", "working" to "çalışıyor"),
+            "They ___ playing football now.",
+            listOf("is", "am", "are", "be"), "are",
+            "Önce özneye uygun be fiilini, sonra -ing almış ana fiili bul."
+        )
+        "gelecek planları" in t -> LessonContent(
+            "Gelecek planları: going to ve will",
+            "Önceden düşünülmüş planlarda be going to, anlık karar ve tahminlerde will sık kullanılır. Will sonrasında fiilin yalın hâli gelir.",
+            "Özne + am/is/are going to + V1 · Özne + will + V1",
+            listOf("I'm going to study tonight." to "Bu akşam ders çalışacağım.", "I think it will rain." to "Sanırım yağmur yağacak.", "We are going to visit Ankara." to "Ankara'yı ziyaret edeceğiz."),
+            listOf("plan" to "plan", "tonight" to "bu akşam", "probably" to "muhtemelen", "tomorrow" to "yarın"),
+            "She will ___ you later.",
+            listOf("calls", "calling", "call", "called"), "call",
+            "Will sonrasında fiilin yalın hâlini kullan."
+        )
+        "can, must ve have to" in t -> LessonContent(
+            "Can, must ve have to",
+            "Can yetenek veya izin, must güçlü zorunluluk, have to ise kural ya da dış koşuldan doğan gereklilik anlatabilir. Bu yapılardan sonra fiilin yalın hâli gelir.",
+            "can + V1 · must + V1 · have/has to + V1",
+            listOf("You must wear a seat belt." to "Emniyet kemeri takmalısın.", "I can speak English." to "İngilizce konuşabilirim.", "He has to work today." to "Bugün çalışmak zorunda."),
+            listOf("permission" to "izin", "must" to "-meli / -malı", "have to" to "zorunda olmak", "rule" to "kural"),
+            "You must ___ the instructions.",
+            listOf("follow", "follows", "following", "followed"), "follow",
+            "Modal fiilden sonra -s veya -ing eklemeden fiilin yalın hâlini kullan."
+        )
+        "sıklık zarfları" in t -> LessonContent(
+            "Sıklık zarfları ve zaman ifadeleri",
+            "Always, usually, often, sometimes ve rarely eylemin ne sıklıkla yapıldığını belirtir. Be fiilinden sonra; diğer fiillerden önce kullanılırlar.",
+            "usually + main verb · be + usually",
+            listOf("I usually walk to school." to "Okula genellikle yürürüm.", "She is always on time." to "O her zaman zamanında gelir.", "We rarely eat out." to "Nadiren dışarıda yemek yeriz."),
+            listOf("always" to "her zaman", "usually" to "genellikle", "often" to "sık sık", "rarely" to "nadiren"),
+            "He ___ drinks coffee in the morning.",
+            listOf("usually", "yesterday", "next", "already"), "usually",
+            "Sıklık zarfının be fiiliyle ve diğer fiillerle yerini karşılaştır."
+        )
+        "sağlık ve günlük sorunlar" in t -> LessonContent(
+            "Sağlık ve günlük sorunlar",
+            "Bir belirtiyi anlatırken I have a headache, I feel sick veya It hurts kalıpları kullanılır. Yardım isterken Could you help me? gibi kibar ifadeler seçilir.",
+            "I have a ... · I feel ... · It hurts here.",
+            listOf("I have a headache." to "Başım ağrıyor.", "My throat hurts." to "Boğazım ağrıyor.", "Could you help me, please?" to "Lütfen bana yardım edebilir misiniz?"),
+            listOf("headache" to "baş ağrısı", "sore throat" to "boğaz ağrısı", "appointment" to "randevu", "hurt" to "ağrımak"),
+            "I have a ___; my head hurts.",
+            listOf("headache", "ticket", "platform", "receipt"), "headache",
+            "Belirtiyi tarif eden kelimeyi ve yardım isteme kalıbını öğren."
+        )
+        "seyahat ve konaklama" in t -> LessonContent(
+            "Seyahat ve konaklama",
+            "Rezervasyon, check-in ve ulaşım hakkında soru sorarken kibar kalıplar kullanılır. Rezervasyon bilgilerini tarih ve isimle birlikte net söyle.",
+            "I'd like to book ... · I have a reservation. · What time is check-out?",
+            listOf("I have a reservation under the name Yılmaz." to "Yılmaz adına rezervasyonum var.", "What time does the train leave?" to "Tren saat kaçta kalkıyor?", "Could I have a room key, please?" to "Oda anahtarını alabilir miyim?"),
+            listOf("reservation" to "rezervasyon", "check-in" to "giriş işlemi", "check-out" to "çıkış işlemi", "departure" to "kalkış"),
+            "I have a ___ for tonight.",
+            listOf("reservation", "headache", "weather", "homework"), "reservation",
+            "Seyahat diyaloglarında rezervasyon, saat ve kibar istek ifadelerine dikkat et."
+        )
+        "yol tarifi" in t || "şehirde yön bulma" in t -> LessonContent(
+            "Yol tarifi ve şehirde yön bulma",
+            "Yön tarifinde go straight, turn left/right ve next to gibi kalıplar kullanılır. Where is ...? bir yerin konumunu sormak için temel kalıptır.",
+            "Go straight. · Turn left. · It is next to ...",
+            listOf("Go straight for two blocks." to "İki blok dümdüz git.", "Turn right at the bank." to "Bankada sağa dön.", "The station is opposite the museum." to "İstasyon müzenin karşısında."),
+            listOf("opposite" to "karşısında", "between" to "arasında", "corner" to "köşe", "turn left" to "sola dön"),
+            "The pharmacy is ___ the bank and the café.",
+            listOf("between", "yesterday", "expensive", "usually"), "between",
+            "Bir yerin konumunu tarif eden edat ve yön ifadelerini ayırt et."
+        )
+        "yer edatları" in t -> LessonContent(
+            "Yer edatları",
+            "In, on, under, behind, in front of ve next to nesnelerin konumunu belirtir. Edatı seçerken iki nesne arasındaki ilişkiye bak.",
+            "in = içinde · on = üstünde · under = altında · behind = arkasında",
+            listOf("The keys are on the table." to "Anahtarlar masanın üstünde.", "The cat is under the chair." to "Kedi sandalyenin altında.", "The school is next to the park." to "Okul parkın yanında."),
+            listOf("behind" to "arkasında", "in front of" to "önünde", "under" to "altında", "next to" to "yanında"),
+            "The bag is ___ the chair, not on it.",
+            listOf("under", "between", "during", "often"), "under",
+            "Edatın, nesnenin konumunu cümleye uygun biçimde tarif ettiğini kontrol et."
+        )
+        "sayılabilen ve sayılamayan isimler" in t -> LessonContent(
+            "Sayılabilen ve sayılamayan isimler",
+            "Book ve apple gibi isimler sayılabilir; water ve rice gibi maddeler çoğunlukla sayılamaz. Some olumlu cümlelerde, any soru ve olumsuz cümlelerde sık kullanılır.",
+            "many + countable plural · much + uncountable · some/any",
+            listOf("We have some apples." to "Biraz elmamız var.", "There isn't much water." to "Çok su yok.", "How many books do you need?" to "Kaç kitaba ihtiyacın var?"),
+            listOf("countable" to "sayılabilen", "uncountable" to "sayılamayan", "much" to "çok (sayılamayan)", "many" to "çok (sayılabilen)"),
+            "How ___ water do you need?",
+            listOf("many", "much", "few", "several"), "much",
+            "İsmin sayılabilir olup olmadığını belirleyip many veya much seç."
+        )
+        "a / an ve tekil isimler" in t -> LessonContent(
+            "A / an ve tekil isimler",
+            "Tekil sayılabilen isimlerden önce a veya an gelir. Seçim yazılı harfe değil, kelimenin başlangıç sesine göre yapılır.",
+            "a + consonant sound · an + vowel sound",
+            listOf("a technician" to "bir teknisyen", "an engineer" to "bir mühendis", "an hour" to "bir saat", "a university" to "bir üniversite"),
+            listOf("technician" to "teknisyen", "engineer" to "mühendis", "hour" to "saat", "university" to "üniversite"),
+            "She is ___ engineer.",
+            listOf("a", "an", "the", "no article"), "an",
+            "A/an seçerken ilk sesin ünlü olup olmadığına dikkat et."
+        )
+        "temel sıfatlar ve betimleme" in t -> LessonContent(
+            "Temel sıfatlar ve betimleme",
+            "Sıfatlar kişi ve nesnelerin özelliklerini anlatır ve çoğunlukla isimden önce gelir. Be fiilinden sonra da kullanılabilir.",
+            "a small room · a friendly person · The room is clean.",
+            listOf("The engine is noisy." to "Motor gürültülü.", "She is friendly and helpful." to "O arkadaş canlısı ve yardımsever.", "It is a small, clean room." to "Küçük ve temiz bir oda."),
+            listOf("large" to "büyük", "small" to "küçük", "noisy" to "gürültülü", "reliable" to "güvenilir"),
+            "The room is very ___.",
+            listOf("clean", "cleanly", "cleaning", "cleaner than"), "clean",
+            "Sıfatın bir ismi mi yoksa özneyi mi tanımladığına dikkat et."
+        )
+        "geniş zaman: günlük alışkanlıklar" in t -> LessonContent(
+            "Geniş zaman: günlük alışkanlıklar",
+            "Geniş zaman alışkanlık ve rutinleri anlatır. He/she/it olumlu cümlede fiil genellikle -s/-es alır; soru ve olumsuzlarda do/does kullanılır.",
+            "I work. · She works. · Do you work? · She doesn't work.",
+            listOf("I study English every day." to "Her gün İngilizce çalışırım.", "He works at an airport." to "Havalimanında çalışır.", "Does she speak English?" to "İngilizce konuşur mu?"),
+            listOf("every day" to "her gün", "usually" to "genellikle", "work" to "çalışmak", "study" to "ders çalışmak"),
+            "My brother ___ to school by bus.",
+            listOf("go", "goes", "going", "went"), "goes",
+            "He/she/it öznesiyle olumlu geniş zaman cümlesinde fiil ekini kontrol et."
+        )
         "selamlaşma" in t || "tanışma" in t -> LessonContent("Selamlaşma ve kendini tanıtma", "İlk kez karşılaştığımız kişilerle selamlaşır, adımızı söyler ve karşımızdakinin adını sorarız.", "Hello / My name is… / Nice to meet you.", listOf("Hello, my name is Ece." to "Merhaba, benim adım Ece.", "Nice to meet you." to "Tanıştığıma memnun oldum.", "What is your name?" to "Adın ne?"), listOf("hello" to "merhaba", "good morning" to "günaydın", "goodbye" to "hoşça kal", "name" to "isim"), "My name ___ Ece.", listOf("is", "are", "am", "be"), "is", "Selamlaşma ve kendini tanıtma ifadelerini dinle.")
         "kişi zamirleri" in t || "pronouns" in t -> LessonContent("Kişi zamirleri ve be fiili", "İngilizcede kişi zamirleri özneyi belirtir. I ile am, he/she/it ile is, you/we/they ile are kullanılır.", "I am · You are · He/She/It is", listOf("I am a student." to "Ben öğrenciyim.", "She is my friend." to "O benim arkadaşım.", "They are at home." to "Onlar evde."), listOf("I" to "ben", "you" to "sen / siz", "he" to "o (erkek)", "she" to "o (kadın)"), "They ___ happy.", listOf("are", "is", "am", "be"), "are", "Kişi zamirlerine göre am, is ve are kullanımını dinle.")
         "günlük temel kelimeler" in t -> LessonContent("Günlük temel kelimeler", "Günlük yaşamda sık kullanılan kelimeleri öğrenmek, basit cümleleri anlamayı ve kurmayı kolaylaştırır.", "Kelime + anlam + örnek cümle", listOf("I drink water." to "Su içerim.", "This is my book." to "Bu benim kitabım.", "The food is good." to "Yemek güzel."), listOf("water" to "su", "book" to "kitap", "food" to "yemek", "friend" to "arkadaş"), "I drink ___.", listOf("water", "chair", "school", "window"), "water", "Günlük kelimelerin telaffuzuna ve cümledeki anlamına dikkat et.")
