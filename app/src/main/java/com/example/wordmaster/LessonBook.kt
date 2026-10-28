@@ -35,8 +35,7 @@ object LessonBook {
             "günlük rutinim" in t || "geniş zaman: günlük alışkanlıklar" in t ->
                 LessonBookChapter("Günlük rutinleri Present Simple ile anlatmak",
                     "Present Simple alışkanlıklar, rutinler ve genel gerçekler için kullanılır. I/you/we/they ile fiilin yalın hâli; he/she/it ile olumlu cümlede çoğunlukla -s veya -es kullanılır. Do/does soru, don't/doesn't olumsuz yapı kurar. Every day, usually ve at seven gibi zaman ifadeleri anlamı netleştirir.",
-                    "I/You/We/They + V1 · He/She/It + V-s
-Do/Does + özne + V1? · don't/doesn't + V1",
+                    "I/You/We/They + V1 · He/She/It + V-s\nDo/Does + özne + V1? · don't/doesn't + V1",
                     listOf("I get up at seven every day." to "Her gün saat yedide kalkarım.", "She goes to school by bus." to "Okula otobüsle gider.", "He doesn't drink coffee." to "Kahve içmez.", "Do you study in the evening?" to "Akşamları ders çalışır mısın?"),
                     listOf("She go değil she goes kullan.", "Does he works değil does he work kullan.", "Usually gibi sıklık zarflarını be fiilinden sonra, çoğu ana fiilden önce kullan."),
                     listOf("Cümlenin rutin mi şu anki eylem mi anlattığını belirle.", "He/she/it ile olumlu fiil ekini kontrol et.", "Does/did gibi yardımcı fiilden sonra ana fiili yalın tut."))
@@ -57,9 +56,7 @@ Do/Does + özne + V1? · don't/doesn't + V1",
             "there is / there are" in t ->
                 LessonBookChapter("Bir yerde ne bulunduğunu anlatmak",
                     "There is tekil isim veya sayılamayan isimle, there are çoğul isimlerle kullanılır. Soru oluştururken is/are başa gelir; olumsuzda isn't/aren't kullanılır. A/an ve some/any ifadelerini isim türüne göre seç.",
-                    "There is + tekil/sayılamayan isim
-There are + çoğul isim
-Is there ...? / Are there ...?",
+                    "There is + tekil/sayılamayan isim\nThere are + çoğul isim\nIs there ...? / Are there ...?",
                     listOf("There is a pharmacy near the school." to "Okulun yakınında bir eczane var.", "There are two chairs in the room." to "Odada iki sandalye var.", "Is there any water?" to "Biraz su var mı?"),
                     listOf("There is two books değil there are two books kullan.", "Bir yerin konumunu belirtirken in, on, next to gibi edatları ekle.", "Soru cümlesinde is/are yardımcı fiilini başa getir."),
                     listOf("İsmin tekil mi çoğul mu olduğunu belirle.", "There is veya there are seç.", "Bir olumlu, bir soru ve bir olumsuz örnek kur."))
@@ -87,8 +84,7 @@ Is there ...? / Are there ...?",
             "can / can't" in t ->
                 LessonBookChapter("Can ve can't ile yetenek ve izin",
                     "Can bir yeteneği veya izin verilen bir şeyi anlatır. Can't, yapamama veya izin olmaması anlamına gelebilir; bağlam belirleyicidir. Can bütün öznelerle aynı kalır ve ardından to almayan yalın fiil gelir. Soru cümlesinde can öznenin önüne geçer.",
-                    "Özne + can/can't + V1
-Can + özne + V1?",
+                    "Özne + can/can't + V1\nCan + özne + V1?",
                     listOf("I can swim." to "Yüzebilirim.", "She can't drive." to "Araba kullanamaz.", "Can you help me?" to "Bana yardım edebilir misin?"),
                     listOf("He cans değil he can kullan.", "Can to swim değil can swim kullan.", "Can't bazen yeteneksizlik, bazen yasak anlamı taşır; bağlama bak."),
                     listOf("Bir yeteneğini can ile anlat.", "Yapamadığın bir şeyi can't ile söyle.", "Can ile bir soru kur ve kısa cevap ver."))
