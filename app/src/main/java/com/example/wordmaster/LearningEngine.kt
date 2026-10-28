@@ -118,6 +118,7 @@ object WordMasterLearningEngine {
         val correct = words.sumOf { it.correctCount }
         val mistakes = words.sumOf { it.mistakeCount }
         val attempts = correct + mistakes
+        val safeStreak = currentStreak.coerceAtLeast(0)
         return LearningSummary(
             totalWords = words.size,
             masteredWords = words.count { it.streak >= 3 && it.accuracyPercent >= 80 },
@@ -125,7 +126,7 @@ object WordMasterLearningEngine {
             totalCorrect = correct,
             totalMistakes = mistakes,
             accuracyPercent = if (attempts == 0) 0 else (correct * 100.0 / attempts).toInt(),
-            currentStreak = currentStreak
+            currentStreak = safeStreak
         )
     }
 }
