@@ -74,6 +74,21 @@ class LessonBookTest {
     }
 
     @Test
+    fun everyA2CatalogLessonHasTopicSpecificBookContent() {
+        val a2Lessons = WordMasterCourseCatalog.forLevel("A2")
+
+        assertTrue("Expected A2 lessons in the catalog", a2Lessons.isNotEmpty())
+        a2Lessons.forEach { lesson ->
+            val chapter = LessonBook.chapter(lesson.title)
+            assertTrue("Missing topic-specific A2 chapter for: ${lesson.title}",
+                chapter.purpose != "Konuyu adım adım öğren")
+            assertTrue("Missing explanation for: ${lesson.title}", chapter.explanation.isNotBlank())
+            assertTrue("Missing examples for: ${lesson.title}", chapter.examples.size >= 2)
+            assertTrue("Missing checkpoints for: ${lesson.title}", chapter.checkpoints.isNotEmpty())
+        }
+    }
+
+    @Test
     fun aviationLessonsIncludeAnOperationalSafetyBoundary() {
         val chapter = LessonBook.chapter("Aviation English")
         assertTrue(chapter.explanation.contains("onaylı prosedürler"))
