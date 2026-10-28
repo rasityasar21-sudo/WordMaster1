@@ -32,6 +32,36 @@ object LessonBook {
                 listOf("Roll, pitch ve yaw için ilgili kumandayı İngilizce açıkla.", "Primary ve secondary flight control örneklerini sınıflandır.", "Actuator, hinge, linkage ve deflection terimlerini tanımla.", "Gözlem ile varsayımı ayıran iki cümlelik İngilizce rapor yaz.", "Gerçek bakım için tip bazlı onaylı doküman gerekliliğini açıkla.")
             )
         }
+        if ("bakım aletleri ve ekipman" in t) {
+            return LessonBookChapter(
+                "Uçak bakım aletlerini ve teknik doküman dilini doğru anlamak",
+                "Aircraft maintenance tools sözcükleri günlük İngilizcedeki genel alet adlarından daha kesin anlamlar taşıyabilir. Torque wrench belirlenmiş torkun uygulanmasıyla ilgili bir alettir; screwdriver vida başına uygun uç gerektirir; socket ve ratchet birlikte kullanılabilen farklı parçalardır. Multimeter elektriksel büyüklüklerin ölçümü için kullanılan cihazdır; ancak ölçümün güvenli ve geçerli yöntemi uçak sistemine, ekipmana ve onaylı talimata bağlıdır. Calibrated, serviceable, inspection due ve tool control terimleri aletin uygunluk ve izlenebilirlik durumunu anlatır. Missing tool report gibi ifadeler alet kontrolünün emniyet boyutunu gösterir. Teknik talimatta inspect, verify, record, replace ve refer to farklı eylemleri belirtir; bunları birbirinin yerine çevirmemek gerekir. Bu bölüm aletleri tanıma ve bakım İngilizcesi okuma eğitimi sunar; gerçek uçak bakım işlemleri için onaylı tip bazlı prosedür ve yetkilendirme zorunludur.",
+                "Tool → purpose → suitability status → document reference.\nVocabulary: torque wrench / socket / ratchet / multimeter / caliper / calibrated / serviceable / tool control.",
+                listOf(
+                    "Check that the required tool is identified in the applicable maintenance document." to "Gerekli aletin geçerli bakım dokümanında belirtildiğini kontrol edin.",
+                    "The torque wrench must have a valid calibration status." to "Tork anahtarının geçerli kalibrasyon durumu olmalıdır.",
+                    "The technician recorded the missing tool and informed the supervisor." to "Teknisyen eksik aleti kaydetti ve amirine bildirdi.",
+                    "A multimeter is a measuring instrument, not a substitute for an approved test procedure." to "Multimetre bir ölçüm cihazıdır; onaylı test prosedürünün yerine geçmez."
+                ),
+                listOf("Socket ve ratchet terimlerini eş anlamlı sanma.", "Kalibrasyon durumunu tahmin ederek uygunluk bildirme.", "Genel alet tanımından gerçek bakım uygulama adımı çıkarma."),
+                listOf("Altı aleti İngilizce adı ve amacıyla eşleştir.", "Calibrated ve serviceable arasındaki farkı açıkla.", "Bir alet kontrol kaydını İngilizce özetle.", "Gerçek kullanım için doküman ve yetki gerekliliğini belirt.")
+            )
+        }
+        if ("gövde ve yapısal parçalar" in t) {
+            return LessonBookChapter(
+                "Airframe yapısının temel parçalarını ve hasar raporu dilini öğrenmek",
+                "Fuselage uçağın ana gövdesini, wing kanadı, empennage kuyruk takımını ifade eder. Skin dış kaplama, frame gövde enine yapı elemanı, stringer boyuna destek elemanı, rib kanat profilini şekillendiren iç eleman ve spar kanadın temel taşıyıcı elemanlarından biridir. Fastener bağlantı elemanı, corrosion korozyon, crack çatlak ve dent göçük anlamına gelir. Bir hasar gözleminde location, extent, visible condition ve reference gibi ifadeler kullanılabilir. Görsel bir gözlem tek başına hasarın kabul edilebilir olduğunu göstermez; değerlendirme için uçak tipine uygun güncel SRM ve diğer yetkili bakım dokümanları gerekir. İngilizce raporda gözlemi açıkça yazmak, sınır değer veya tamir kararı uydurmaktan daha önemlidir.",
+                "Structure: fuselage → frame/stringer/skin; wing → spar/rib/skin.\nReport language: location → observed condition → reference → assessment status.",
+                listOf(
+                    "The inspection report describes a dent on the fuselage skin." to "Muayene raporu gövde kaplamasındaki bir göçüğü tanımlar.",
+                    "The wing spar is a major structural member." to "Kanat sparı önemli bir yapısal elemandır.",
+                    "The technician documented the visible corrosion without assessing its acceptability." to "Teknisyen, kabul edilebilirliğini değerlendirmeden görülen korozyonu belgeledi.",
+                    "Any structural assessment must follow the applicable approved data." to "Her yapısal değerlendirme geçerli onaylı verilere dayanmalıdır."
+                ),
+                listOf("Rib ile spar görevlerini karıştırma.", "Dent, crack ve corrosion terimlerini aynı hasar gibi çevirme.", "Gözlemi yetkili yapısal değerlendirme yerine koyma."),
+                listOf("Fuselage ve wing içindeki temel elemanları adlandır.", "Dört hasar terimini ayırt et.", "Tarafsız bir İngilizce gözlem cümlesi yaz.", "SRM'nin neden uçak tipine özgü olduğunu açıkla.")
+            )
+        }
         // C1-specific chapters must precede broad grammar and writing title matches.
         if ("anlam incelikleri ve register" in t) {
             return LessonBookChapter(
