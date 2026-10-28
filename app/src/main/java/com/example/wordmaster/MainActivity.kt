@@ -425,13 +425,33 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
     }
     MaterialTheme(
         colorScheme = if (darkTheme) darkColorScheme(
-            primary = Color(0xFFB8A7FF), onPrimary = Color(0xFF20134B),
-            background = Color(0xFF0B1022), surface = Color(0xFF151D38),
-            onSurface = Color(0xFFF3F4FF), secondary = Color(0xFF55D6BE), onSurfaceVariant = Color(0xFFB9C2DC), surfaceVariant = Color(0xFF202945), onBackground = Color(0xFFF3F4FF)
+            primary = Color(0xFFB8A7FF),
+            onPrimary = Color(0xFF20134B),
+            secondary = Color(0xFF55D6BE),
+            onSecondary = Color(0xFF082C28),
+            background = Color(0xFF0B1022),
+            onBackground = Color(0xFFF3F4FF),
+            surface = Color(0xFF151D38),
+            onSurface = Color(0xFFF3F4FF),
+            surfaceVariant = Color(0xFF202945),
+            onSurfaceVariant = Color(0xFFD0D7EA),
+            outline = Color(0xFF8995B5),
+            error = Color(0xFFFFB4AB),
+            onError = Color(0xFF690005)
         ) else lightColorScheme(
-            primary = Color(0xFF6D4AFF), onPrimary = Color.White,
-            background = Color(0xFFF7F5FF), surface = Color.White,
-            onSurface = Color(0xFF17213C), secondary = Color(0xFF087F68)
+            primary = Color(0xFF5B43CC),
+            onPrimary = Color.White,
+            secondary = Color(0xFF087F68),
+            onSecondary = Color.White,
+            background = Color(0xFFF7F5FF),
+            onBackground = Color(0xFF17213C),
+            surface = Color.White,
+            onSurface = Color(0xFF17213C),
+            surfaceVariant = Color(0xFFEAE5F8),
+            onSurfaceVariant = Color(0xFF49445F),
+            outline = Color(0xFF77718B),
+            error = Color(0xFFBA1A1A),
+            onError = Color.White
         )
     ) {
         Scaffold(
