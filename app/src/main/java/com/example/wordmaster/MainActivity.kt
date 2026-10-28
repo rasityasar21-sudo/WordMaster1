@@ -1613,7 +1613,25 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                     Text("🧑‍🎓", modifier = Modifier.padding(18.dp), fontSize = 34.sp)
                 }
             }
-            Text("Seviye ${xp / 100 + 1}  •  ${xp} XP  •  ${dailyStreak} günlük seri", color = Blue, fontWeight = FontWeight.Bold)
+            Surface(
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(18.dp),
+                color = if (darkTheme) Color(0xFF1C2442) else Color(0xFFF0EDFF),
+                border = androidx.compose.foundation.BorderStroke(1.dp, if (darkTheme) Color(0xFF39466C) else Color(0xFFDCD5FA))
+            ) {
+                Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                    Text(displayName, color = MaterialTheme.colorScheme.onSurface, fontSize = 21.sp, fontWeight = FontWeight.ExtraBold)
+                    Text(username, color = if (darkTheme) Color(0xFFC5B9FF) else Color(0xFF6D28D9), fontSize = 13.sp)
+                    Text("Seviye ${xp / 100 + 1}  •  ${xp} XP  •  ${dailyStreak} günlük seri", color = MaterialTheme.colorScheme.onSurface, fontWeight = FontWeight.SemiBold)
+                    LinearProgressIndicator(
+                        progress = { ((xp % 100).toFloat() / 100f).coerceIn(0f, 1f) },
+                        modifier = Modifier.fillMaxWidth(),
+                        color = Color(0xFF8B78EF),
+                        trackColor = if (darkTheme) Color(0xFF39466C) else Color(0xFFDCD5FA)
+                    )
+                    Text("Sonraki seviyeye ${100 - (xp % 100)} XP", color = MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 12.sp)
+                }
+            }
             Surface(Modifier.fillMaxWidth(), shape = RoundedCornerShape(14.dp), color = if (darkTheme) Color(0xFF24213F) else Color(0xFFF1EEFF)) {
                 Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                     Text("WORDMASTER ID", color = if (darkTheme) Color(0xFFFFA6B3) else Color(0xFFB91C1C), fontWeight = FontWeight.ExtraBold, fontSize = 11.sp, letterSpacing = 1.sp)
