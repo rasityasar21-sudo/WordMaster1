@@ -202,6 +202,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
     var offlineVideoFrame by remember { mutableIntStateOf(0) }
     var selected by remember { mutableStateOf("Tümü") }
     var selectedTopic by remember { mutableStateOf("Tümü") }
+    var selectedCareerTrack by remember { mutableStateOf("Uçak Bakım") }
     var tab by remember { mutableIntStateOf(0) }
     var xp by remember { mutableIntStateOf(prefs.getInt("xp", 0)) }
     var coins by remember { mutableIntStateOf(prefs.getInt("coins", 0)) }
@@ -1101,8 +1102,22 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                     item {
                         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                             Text("MESLEKİ AKADEMİ", color = MaterialTheme.colorScheme.primary, fontSize = 11.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 1.5.sp)
-                            Text("Havacılık İngilizcesi", color = MaterialTheme.colorScheme.onSurface, fontSize = 25.sp, fontWeight = FontWeight.ExtraBold)
-                            Text("Temel terimlerden operasyonel iletişime kadar adım adım ilerle.", color = MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 14.sp)
+                            Text(if (selectedCareerTrack == "Uçak Bakım") "Uçak Bakım İngilizcesi" else "$selectedCareerTrack İngilizcesi", color = MaterialTheme.colorScheme.onSurface, fontSize = 25.sp, fontWeight = FontWeight.ExtraBold)
+                            Text(if (selectedCareerTrack == "Uçak Bakım") "Temel terimlerden operasyonel iletişime kadar adım adım ilerle." else "Mesleğine uygun kelimeleri, diyalogları ve işyeri iletişimini öğren.", color = MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 14.sp)
+                        }
+                    }
+                    item {
+                        Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                            Text("KARİYER YOLUNU SEÇ", color = MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 11.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 1.sp)
+                            Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                                vocationalTracks.forEach { track ->
+                                    FilterChip(
+                                        selected = selectedCareerTrack == track,
+                                        onClick = { selectedCareerTrack = track },
+                                        label = { Text(track, maxLines = 1) }
+                                    )
+                                }
+                            }
                         }
                     }
                     item {
@@ -1117,7 +1132,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                         Text("✈", modifier = Modifier.padding(12.dp), color = Color.White, fontSize = 24.sp)
                                     }
                                     Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(3.dp)) {
-                                        Text("Aviation English Pathway", color = MaterialTheme.colorScheme.onSurface, fontWeight = FontWeight.ExtraBold, fontSize = 17.sp)
+                                        Text(if (selectedCareerTrack == "Uçak Bakım") "Aircraft Maintenance English" else "$selectedCareerTrack English Pathway", color = MaterialTheme.colorScheme.onSurface, fontWeight = FontWeight.ExtraBold, fontSize = 17.sp)
                                         Text("Terminoloji · İletişim · Teknik bilgi", color = MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 12.sp)
                                     }
                                 }
@@ -1135,7 +1150,9 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                     item {
                         Text("EĞİTİM MODÜLLERİ", color = MaterialTheme.colorScheme.onSurface, fontSize = 17.sp, fontWeight = FontWeight.ExtraBold)
                     }
-                    items(listOf(
+
+                    val vocationalTracks = listOf("Uçak Bakım", "Yazılım", "Sağlık", "Turizm", "Otomotiv", "İş ve Lojistik")
+                    val aviationModules = listOf(
                         Triple("01", "Uçak ve uçuş kontrol yüzeyleri", "Aileron, elevator, rudder, flap ve spoiler: her parçanın temel görevi, hareket yönleri ve teknik İngilizce örnekleri."),
                         Triple("02", "Kontrol yüzeyleri: hareket ve eksenler", "Roll, pitch, yaw, deflection ve control input terimleri; kavramları birbirinden ayırma ve kısa okuma."),
                         Triple("03", "Gövde, kanat ve yapısal parçalar", "Fuselage, wing, rib, spar, skin, fastener ve access panel; parça adları ve konum tarifleri."),
@@ -1154,18 +1171,56 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                         Triple("16", "Mesleki okuma ve raporlama", "Kısa teknik pasaj, iş emri, teslim notu ve bakım kaydı üzerinden ana fikir ve ayrıntı bulma."),
                         Triple("17", "Teknik dinleme ve telaffuz", "Parça adları, harf-rakam dizileri ve kısa işyeri konuşmaları; dinledikten sonra ana bilgiyi belirleme."),
                         Triple("18", "Senaryo ve seviye değerlendirmesi", "Terim seçimi, bağlam tamamlama ve modül sonu kontrol soruları; öğrenilen bilgiyi tekrar etme.")
-                    )) { module ->
+                    )
+                    val vocationalModules = when (selectedCareerTrack) {
+                        "Yazılım" -> listOf(
+                            Triple("01", "Sorun açıklama ve çözüm önerme", "Hata raporu, sorunu yeniden üretme, kayıtları inceleme ve çözüm önerisini açıklama."),
+                            Triple("02", "Profesyonel e-posta yazımı", "Durum güncellemesi, hata bildirimi, net konu satırı ve nazik teknik yazışma."),
+                            Triple("03", "İş yerinde iletişim", "Gereksinimleri netleştirme, kod incelemesi hakkında konuşma ve takip adımları."),
+                            Triple("04", "Teknik metin okuma stratejileri", "Dokümantasyon, sürüm notları, ön koşullar ve teknik yönergeleri okuma."),
+                            Triple("05", "Veri ve sonuçları raporlama", "Test sonuçlarını, hata sıklığını ve performans değişikliklerini açık biçimde raporlama.")
+                        )
+                        "Sağlık" -> listOf(
+                            Triple("01", "Sağlık ve günlük sorunlar", "Belirti sorma, şikâyeti anlaşılır biçimde tarif etme ve yardım isteme."),
+                            Triple("02", "İş yerinde iletişim", "Hasta veya ekip bilgilerini teyit etme, açıklama isteme ve kibar iletişim."),
+                            Triple("03", "Sayılar, saatler ve tarihler", "Randevu saati, tarih, süre ve sayıları yanlış anlaşılmadan söyleme."),
+                            Triple("04", "Profesyonel e-posta yazımı", "Randevu, vardiya ve iş amaçlı kısa, açık yazılı iletişim."),
+                            Triple("05", "Sorun açıklama ve çözüm önerme", "Sorunu, etkisini ve sonraki adımı düzenli şekilde ifade etme.")
+                        )
+                        "Turizm" -> listOf(
+                            Triple("01", "Seyahat ve konaklama", "Rezervasyon, check-in/check-out, oda isteği ve ulaşım bilgileri."),
+                            Triple("02", "Yol tarifi ve şehirde yön bulma", "Misafire yön tarif etme, konum sorma ve mesafeyi açıklama."),
+                            Triple("03", "Yemek siparişi ve miktarlar", "Menü, sipariş, alerjiyle ilgili açıklama isteme ve hesap konuşmaları."),
+                            Triple("04", "İş yerinde iletişim", "Misafir şikâyetini dinleme, nazik cevap verme ve çözüm sunma."),
+                            Triple("05", "Sıklık zarfları ve zaman ifadeleri", "Sefer saatleri, çalışma sıklığı ve günlük hizmet programını anlatma.")
+                        )
+                        "Otomotiv" -> listOf(
+                            Triple("01", "Motor ve güç ünitesi terimleri", "Motor, giriş, kompresör, egzoz ve temel teknik terimler."),
+                            Triple("02", "Elektrik ve kablolama", "Konnektör, kablo, süreklilik ve gözlenen durumu raporlama."),
+                            Triple("03", "Bakım aletleri ve ekipman", "Atölye aletleri, kontrol, ölçüm ve ekipman adları."),
+                            Triple("04", "Kontrol, bulgu ve hasar ifadeleri", "Aşınma, çatlak, hasar ve kontrol bulgularını tarafsız tarif etme."),
+                            Triple("05", "Ölçüler, toleranslar ve birimler", "Ölçüm değeri, birim, tolerans ve belirtilen sınırları ifade etme.")
+                        )
+                        "İş ve Lojistik" -> listOf(
+                            Triple("01", "Profesyonel e-posta yazımı", "Sipariş, sevkiyat ve durum güncellemesi için açık iş e-postaları."),
+                            Triple("02", "Veri ve sonuçları raporlama", "Teslimat süresi, miktar, eğilim ve performans verilerini anlatma."),
+                            Triple("03", "Müzakere ve uzlaşma", "Teslim tarihi, seçenek, karşı teklif ve ortak çözüm konuşmaları."),
+                            Triple("04", "İş yerinde iletişim", "Görev devri, durum teyidi ve sonraki adımları netleştirme."),
+                            Triple("05", "Olay anlatımı ve bağlaçlar", "Gecikme nedenini, sıralı olayları ve sonuçları açıklama.")
+                        )
+                        else -> aviationModules
+                    }
                         Card(
                             modifier = Modifier.fillMaxWidth().clickable {
                                 lessonReturnScreen = "Mesleki İngilizce"
-                                activeLesson = when (module.first) {
+                                activeLesson = if (selectedCareerTrack != "Uçak Bakım") module.second else when (module.first) {
                                     "01", "02" -> "Uçuş kumandaları"
                                     "13" -> "Bakım aletleri ve ekipman"
                                     "14" -> "Kontrol, bulgu ve hasar ifadeleri"
                                     "15" -> "Uçak bakımına giriş"
                                     else -> module.second
                                 }
-                                activeCourseLessonId = "aviation-module-${module.first}"
+                                activeCourseLessonId = "${selectedCareerTrack.lowercase(Locale.ROOT)}-module-${module.first}"
                                 activeLessonIndex = 0
                                 lessonAnswer = false
                                 lessonStage = 0
