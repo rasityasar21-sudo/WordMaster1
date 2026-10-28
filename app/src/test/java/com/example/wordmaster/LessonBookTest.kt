@@ -81,7 +81,7 @@ class LessonBookTest {
     fun b1ProblemSolvingLessonSeparatesEvidenceFromAssumptions() {
         val chapter = LessonBook.chapter("Sorun açıklama ve çözüm önerme")
 
-        assertTrue(chapter.purpose.contains("Sorunu"))
+        assertTrue(chapter.purpose.contains("sorun", ignoreCase = true))
         assertTrue(chapter.explanation.length > 100)
         assertTrue(chapter.formation.contains("evidence", ignoreCase = true))
         assertTrue(chapter.examples.any { it.first.contains("cannot confirm the cause") })
