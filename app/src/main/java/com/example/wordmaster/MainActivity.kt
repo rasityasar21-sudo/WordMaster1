@@ -219,6 +219,14 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
     var bestCorrectStreak by remember { mutableIntStateOf(prefs.getInt("bestCorrectStreak", 0)) }
     var dailyStreak by remember { mutableIntStateOf(prefs.getInt("dailyStreak", 0)) }
     var lastLoginDate by remember { mutableStateOf(prefs.getString("lastLoginDate", "") ?: "") }
+
+    // A streak advances only when the user actually studies, not merely when the app opens.
+    fun recordStudyDay() {
+        if (lastLoginDate == today) return
+        dailyStreak = if (lastLoginDate == LocalDate.now().minusDays(1).toString()) dailyStreak + 1 else 1
+        lastLoginDate = today
+        prefs.edit().putInt("dailyStreak", dailyStreak).putString("lastLoginDate", today).apply()
+    }
     var sessionAnswered by remember { mutableIntStateOf(0) }
     var sessionCorrect by remember { mutableIntStateOf(0) }
     var sessionActive by remember { mutableStateOf(false) }
@@ -307,14 +315,6 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
     }
     val pageBackground = if (darkTheme) Color(0xFF0B1022) else Color(0xFFF7F5FF)
     val heroBrush = Brush.linearGradient(listOf(Color(0xFF222D62), Color(0xFF542C9C), Color(0xFF111936)))
-    LaunchedEffect(today) {
-        if (lastLoginDate != today) {
-            dailyStreak = if (lastLoginDate == LocalDate.now().minusDays(1).toString()) dailyStreak + 1 else 1
-            lastLoginDate = today
-            coins += 3
-            prefs.edit().putInt("dailyStreak", dailyStreak).putString("lastLoginDate", today).putInt("coins", coins).apply()
-        }
-    }
     if (showPronunciation) PronunciationPracticeDialog(words = quickPracticeWords, onDismiss = { showPronunciation = false })
 
     val learned = remember { mutableStateListOf<String>().apply { addAll(prefs.getStringSet("learned", emptySet()) ?: emptySet()) } }
@@ -1054,6 +1054,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                                         lessonSessionAccumulatedMillis + activeMillis
                                                     )
                                                     CourseProgressStore.addStudyMinutes(prefs, elapsedMinutes)
+                                                    recordStudyDay()
                                                     lessonSessionStartedAt = null
                                                     activeCourseLessonId = null
                                                     currentScreen = lessonReturnScreen
@@ -1295,6 +1296,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                                 learnedRewarded.add(word.en)
                                                 xp += 5
                                             }
+                                            recordStudyDay()
                                         }
                                         prefs.edit()
                                             .putInt("xp", xp)
@@ -1680,6 +1682,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                     val savedToday = prefs.getString("todayWordsDate", "") == today
                                     val todayAnswered = (if (savedToday) prefs.getInt("todayWords", 0) else 0) + 1
                                     prefs.edit().putString("todayWordsDate", today).putInt("todayWords", todayAnswered).apply()
+                                    recordStudyDay()
                                     if (placementMode) {
                                         placementAnswered++
                                         if (choice.en == quizWord!!.en) placementCorrect++
@@ -1891,6 +1894,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                             matchRewarded.add(targetWord.en)
                                             matched = matched + targetWord.en
                                             xp += 5
+                                            recordStudyDay()
                                             prefs.edit().putInt("xp", xp).apply()
                                             matchMessage = if (matched.size == matchWords.size) "Harika! Tüm kelimeler tamamlandı. +${matchWords.size * 5} XP 🎉" else "Doğru cevap! +5 XP. Sıradaki kelimeye geçtin."
                                         }
