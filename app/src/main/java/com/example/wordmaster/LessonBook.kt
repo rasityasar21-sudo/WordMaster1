@@ -252,6 +252,111 @@ object LessonBook {
                     listOf("The meeting is on Friday." to "Toplantı cuma günü.", "The keys are on the table." to "Anahtarlar masanın üzerinde.", "We arrived at noon." to "Öğlen vardık."),
                     listOf("Gün için genellikle on, saat için at kullanılır.", "Türkçedeki ekleri doğrudan İngilizce edata çevirmeye çalışma.", "Depend on ve interested in gibi sabit eşleşmeleri ayrı öğren."),
                     listOf("Zaman mı yer mi anlatıldığını belirle.", "İfadenin nokta, yüzey veya alan anlamına bak.", "Sabit kelime eşleşmelerini not et."))
+            "deneyimleri anlatmak" in t || "present perfect" in t ->
+                LessonBookChapter("Deneyimleri Present Perfect ile anlatmak",
+                    "Present Perfect geçmişteki bir deneyimi, sonucu bugüne uzanan bir durumu veya henüz tamamlanmamış bir zaman dilimindeki olayı anlatır. Have/has yardımcı fiili ve fiilin üçüncü hâli (V3) kullanılır. Belirli ve bitmiş bir geçmiş zamanı vurguluyorsan Past Simple çoğunlukla daha uygundur.",
+                    "I/you/we/they + have + V3 · he/she/it + has + V3\nHave/Has + subject + V3? · ever/never/already/yet",
+                    listOf("I have visited London twice." to "Londra'yı iki kez ziyaret ettim.", "She has not finished the report yet." to "Raporu henüz bitirmedi.", "Have you ever used this tool?" to "Bu aleti hiç kullandın mı?"),
+                    listOf("Have went değil have gone kullan.", "Yesterday gibi bitmiş zaman ifadesiyle Present Perfect'i gelişigüzel birleştirme.", "Have/has seçimini özneye göre yap."),
+                    listOf("Deneyim mi, bitmiş geçmiş olay mı anlattığını belirle.", "Have/has seç ve V3 kullan.", "Ever, never, already ve yet ifadelerinin yerini kontrol et."))
+            "fikir belirtme" in t || "opinions" in t ->
+                LessonBookChapter("Fikir belirtmek ve gerekçelendirmek",
+                    "Bir görüşü açıkça belirt, ardından gerekçe ve mümkünse kanıt ver. I think ve In my view görüşü tanıtır; because gerekçe verir; however karşıtlık, therefore sonuç bildirir. Daha profesyonel bir tonda iddianın kesinliğini kanıta göre ayarla.",
+                    "In my view, ... · The main reason is ... · However, ... · Therefore, ...",
+                    listOf("In my view, the revised plan is more practical because it saves time." to "Bana göre güncellenmiş plan daha uygulanabilir çünkü zaman kazandırıyor.", "However, we should check the evidence first." to "Ancak önce kanıtı kontrol etmeliyiz."),
+                    listOf("Görüşü kanıt gibi sunma.", "However ile because aynı ilişkiyi kurmaz.", "Gerekçeyi açıklamadan yalnızca I agree/I disagree deme."),
+                    listOf("Görüşünü bir cümleyle belirt.", "En az bir gerekçe ekle.", "Karşı görüş varsa saygılı biçimde ele al."))
+            "perfect continuous" in t ->
+                LessonBookChapter("Perfect Continuous ile süreyi vurgulamak",
+                    "Perfect Continuous yapıları bir eylemin süresini veya devam eden sürecini öne çıkarır. Present Perfect Continuous have/has been + V-ing, Past Perfect Continuous had been + V-ing ile kurulur. Hangi zamanın seçileceği, referans alınan zaman ve eylemin bağlamına bağlıdır.",
+                    "Present: have/has been + V-ing\nPast: had been + V-ing",
+                    listOf("I have been studying for two hours." to "İki saattir ders çalışıyorum.", "They had been waiting before the bus arrived." to "Otobüs gelmeden önce bekliyorlardı."),
+                    listOf("Been sonrasında V-ing kullan.", "For süreyi, since başlangıç noktasını belirtir.", "Her fiilin continuous biçimde doğal olmadığını unutma."),
+                    listOf("Referans zamanını belirle.", "Have/has veya had seç.", "Been + V-ing biçimini ve süre ifadesini kontrol et."))
+            "inversion" in t || "vurgu ve inversion" in t ->
+                LessonBookChapter("Inversion ile vurgu oluşturmak",
+                    "Inversion, özellikle resmî veya edebî İngilizcede belirli olumsuz ya da sınırlayıcı ifadeler cümle başına geldiğinde yardımcı fiilin öznenin önüne geçmesidir. Her cümlede kullanılmaz; vurgu ve üslup amacıyla sınırlı kullanılır.",
+                    "Rarely/Never/Seldom + auxiliary + subject + verb",
+                    listOf("Rarely have we seen such a clear result." to "Bu kadar açık bir sonucu nadiren gördük.", "Not only did she explain the issue, but she also suggested a solution." to "Sorunu açıklamakla kalmadı, çözüm de önerdi."),
+                    listOf("Yardımcı fiili atlama.", "Past Simple'da did kullanıldığında ana fiili yalın tut.", "Inversion'ı gündelik her cümleye uygulama."),
+                    listOf("Cümle başındaki sınırlayıcı ifadeyi belirle.", "Gerekli yardımcı fiili öznenin önüne getir.", "Ana fiilin biçimini kontrol et."))
+            "deyimler ve dil düzeyi" in t || "idioms" in t || "register" in t ->
+                LessonBookChapter("Deyimleri bağlam ve dil düzeyine göre seçmek",
+                    "Deyimlerin anlamı çoğu zaman kelimelerin tek tek anlamından çıkarılamaz. Register ise ifadenin resmî, nötr veya samimi oluşunu anlatır. Bir deyimi kullanmadan önce bağlamın, dinleyicinin ve iletişim amacının uygun olup olmadığını kontrol et.",
+                    "formal: assist · neutral: help · informal: give someone a hand",
+                    listOf("Could you give me a hand with this task?" to "Bu görevde bana yardım edebilir misin?", "We need to resolve the issue before the meeting." to "Toplantıdan önce sorunu çözmemiz gerekiyor."),
+                    listOf("Deyimi kelimesi kelimesine çevirme.", "Samimi deyimleri resmî raporlarda gelişigüzel kullanma.", "Register seçimini yalnızca kelimenin zorluğuna göre yapma."),
+                    listOf("İletişim ortamını belirle.", "İfadenin resmiyet düzeyini seç.", "Deyimin anlamını cümle bağlamında doğrula."))
+            "eleştirel okuma" in t || "critical reading" in t ->
+                LessonBookChapter("Eleştirel okuma ve çıkarım yapma",
+                    "Eleştirel okumada yazarın iddiasını, sunduğu kanıtı ve varsayımlarını birbirinden ayır. Bir metindeki bilgi, yorum ve çıkarım aynı şey değildir. Kaynağın kapsamını ve kanıtın iddiayı gerçekten destekleyip desteklemediğini sorgula.",
+                    "Claim → evidence → assumption → limitation → conclusion",
+                    listOf("The survey suggests a trend, but it does not prove the cause." to "Anket bir eğilime işaret ediyor ancak nedeni kanıtlamıyor.", "The conclusion is stronger than the evidence provided." to "Sonuç, sunulan kanıttan daha iddialı."),
+                    listOf("Birlikte görülmeyi tek başına neden-sonuç kanıtı sayma.", "Yazarın görüşünü doğrulanmış bilgiyle karıştırma.", "Kaynağın sınırlamalarını göz ardı etme."),
+                    listOf("Ana iddiayı bul.", "İddiayı destekleyen kanıtı işaretle.", "Varsayım ve sınırlamaları not et."))
+            "toplantılarda fikir savunma" in t || "meetings" in t ->
+                LessonBookChapter("Toplantıda görüş sunmak ve yanıtlamak",
+                    "Toplantıda söz alırken görüşünü kısa bir cümleyle belirt, ardından gerekçeyi açıkla. Katılma, nazikçe itiraz etme ve konuşmayı netleştirme ifadeleri kullan. Başkasının sözünü kesmek yerine uygun bir geçiş ifadesi seç.",
+                    "I'd like to add ... · I see your point, but ... · Could we clarify ...?",
+                    listOf("I'd like to add one point about the timeline." to "Zaman çizelgesi hakkında bir nokta eklemek istiyorum.", "I see your point, but the latest figures suggest another option." to "Ne demek istediğinizi anlıyorum ancak son rakamlar başka bir seçeneğe işaret ediyor."),
+                    listOf("Katılmadığında kişiyi değil fikri değerlendir.", "Gerekçesiz itirazı uzatma.", "Önerilen kararı ve sonraki adımı özetle."),
+                    listOf("Görüşünü net ifade et.", "Bir gerekçe veya kanıt sun.", "Nazik bir karşı görüş ve öneri oluştur."))
+            "veri ve sonuçları raporlama" in t || "reporting data" in t ->
+                LessonBookChapter("Veriyi dikkatli yorumlayıp raporlamak",
+                    "Raporlarda verinin neyi gösterdiğini ve neyi göstermediğini ayır. Increase, decrease, remain stable ve compared with gibi ifadeler değişimi anlatır. Yaklaşık değerler için yaklaşık dil kullan; kanıtın desteklemediği kesin sonuçlar çıkarma.",
+                    "The figure increased by ... · compared with ... · the data suggests ...",
+                    listOf("Sales increased by eight percent compared with the previous quarter." to "Satışlar önceki çeyreğe kıyasla yüzde sekiz arttı.", "The data suggests a change, but further analysis is needed." to "Veriler bir değişime işaret ediyor ancak ek analiz gerekiyor."),
+                    listOf("By ile to arasındaki farkı kontrol et.", "Yüzde değişimini toplam değerle karıştırma.", "Correlation'ı tek başına causation olarak sunma."),
+                    listOf("Karşılaştırılan dönemleri belirt.", "Değişimin yönünü ve miktarını doğru ifade et.", "Sonucu verinin sınırlarına uygun yaz."))
+            "müzakere ve uzlaşma" in t || "negotiation" in t ->
+                LessonBookChapter("Müzakere etmek ve ortak çözüm bulmak",
+                    "Müzakerede ihtiyaçları açıklamak, seçenek önermek ve karşı tarafın koşullarını anlamak önemlidir. Could we consider..., If we..., we could... gibi kalıplar seçenek sunar. Uzlaşmayı kabul ederken hangi koşullarda anlaşıldığını açıkça özetle.",
+                    "Could we consider ...? · If we ..., we could ... · We can agree on ...",
+                    listOf("Could we move the deadline to Friday?" to "Son tarihi cumaya alabilir miyiz?", "If we split the work, we could finish on time." to "İşi bölersek zamanında bitirebiliriz."),
+                    listOf("Tek taraflı talebi uzlaşma gibi sunma.", "Koşulları ve son tarihi belirsiz bırakma.", "Anlaşılan noktaları teyit etmeden görüşmeyi bitirme."),
+                    listOf("Tarafların ihtiyaçlarını belirle.", "En az bir uygulanabilir seçenek öner.", "Uzlaşılan şartları özetle."))
+            "anlam incelikleri" in t || "nuance" in t ->
+                LessonBookChapter("Yakın anlamlı kelimelerin tonunu ayırt etmek",
+                    "Yakın anlamlı kelimeler aynı durumu anlatsa da resmiyet, kesinlik veya duygusal ton bakımından farklı olabilir. Örneğin suggest, recommend ve insist aynı güçte değildir. Kelime seçimini cümlenin amacı ve kanıt düzeyiyle uyumlu yap.",
+                    "suggest = öneri sunmak · recommend = tavsiye etmek · insist = ısrar etmek",
+                    listOf("The evidence suggests a possible link." to "Kanıt olası bir bağlantıya işaret ediyor.", "I recommend reviewing the latest version." to "Son sürümü gözden geçirmenizi tavsiye ederim."),
+                    listOf("Yakın anlamlı kelimeleri her bağlamda birbirinin yerine kullanma.", "Kesinlik derecesini gereğinden fazla yükseltme.", "Resmiyet ve muhatabı dikkate al."),
+                    listOf("Cümlenin amacını belirle.", "Kelimenin tonunu ve kesinliğini karşılaştır.", "Bağlama en uygun seçeneği seç."))
+            "sunum ve ikna edici konuşma" in t || "presentations" in t ->
+                LessonBookChapter("Sunum akışını kurmak ve soruları yanıtlamak",
+                    "Etkili sunumda açılış, amaç, ana noktalar, kanıt ve sonuç anlaşılır sırayla gelir. Signposting ifadeleri dinleyiciye yapıyı gösterir. Soru geldiğinde önce soruyu doğrula, ardından doğrudan ve kanıta dayalı yanıt ver.",
+                    "Today I'll focus on ... · First ... · Turning to ... · To conclude ...",
+                    listOf("Today I'll focus on two practical options." to "Bugün iki uygulanabilir seçeneğe odaklanacağım.", "To conclude, the evidence supports a cautious approach." to "Sonuç olarak kanıt temkinli bir yaklaşımı destekliyor."),
+                    listOf("Slayttaki her kelimeyi okumakla yetinme.", "Ana mesajı belirsiz bırakma.", "Bilmediğin soruya kesin olmayan bir yanıtı kesinmiş gibi verme."),
+                    listOf("Amacı bir cümleyle tanıt.", "Ana noktaları geçiş ifadeleriyle sırala.", "Sonuç ve sonraki adımı belirt."))
+            "birden fazla kaynaktan sentez" in t || "synthesis" in t ->
+                LessonBookChapter("Kaynakları karşılaştırıp sentezlemek",
+                    "Sentez, kaynakları art arda özetlemekten farklıdır: ortak noktaları, çelişkileri ve kanıt kalitesini karşılaştırarak birleşik bir sonuç oluşturur. Kaynakların ne konuda aynı fikirde olduğunu ve hangi noktada ayrıldığını açıkça göster.",
+                    "Both sources indicate ... · In contrast, ... · Taken together, ...",
+                    listOf("Both sources identify cost as a concern, but they propose different solutions." to "İki kaynak da maliyeti bir endişe olarak görüyor ancak farklı çözümler öneriyor.", "Taken together, the findings support further testing." to "Birlikte değerlendirildiğinde bulgular ek test yapılmasını destekliyor."),
+                    listOf("Kaynakları yalnızca sırayla özetleme.", "Çelişen sonuçları gizleme.", "Kaynağın desteklemediği ortak bir sonuç üretme."),
+                    listOf("Her kaynağın ana iddiasını çıkar.", "Ortaklık ve çelişkileri eşleştir.", "Kanıtların desteklediği dengeli bir sonuç yaz."))
+            "ima, ton ve örtük anlam" in t || "implicit meaning" in t ->
+                LessonBookChapter("İma ve konuşmacı tonunu yorumlamak",
+                    "Örtük anlam doğrudan söylenmeyen ancak bağlam, kelime seçimi veya tonla ima edilen bilgidir. Bir cümle nazik bir rica, kuşku veya dolaylı eleştiri taşıyabilir. Çıkarım yaparken metindeki ipuçlarına dayan; tek bir ifadeden kesin niyet sonucu çıkarma.",
+                    "Literal meaning + context + tone + supporting clues",
+                    listOf("That's an interesting solution." to "Bu ilginç bir çözüm.", "Given the missed deadline, we may need a different plan." to "Kaçırılan son tarih nedeniyle farklı bir plana ihtiyacımız olabilir."),
+                    listOf("İroni veya eleştiri olduğunu kanıtsız varsayma.", "Kelime anlamıyla konuşma amacının farklı olabileceğini değerlendir.", "Çıkarımın hangi ipuçlarına dayandığını açıkla."),
+                    listOf("Cümlenin doğrudan anlamını yaz.", "Bağlamdaki ipuçlarını bul.", "En makul çıkarımı kanıtıyla belirt."))
+            "ileri düzey tartışma" in t || "debate" in t ->
+                LessonBookChapter("Karmaşık bir görüşü tartışmak",
+                    "İleri tartışmada bir iddia ortaya koy, gerekçesini ve kanıtını sun, ardından güçlü bir karşı savı adil biçimde ele al. Concede, nevertheless ve on balance gibi bağlayıcılar görüşler arasındaki ilişkiyi netleştirir.",
+                    "Claim → evidence → counterargument → response → balanced conclusion",
+                    listOf("Although the proposal is costly, it may reduce long-term delays." to "Öneri maliyetli olsa da uzun vadeli gecikmeleri azaltabilir.", "On balance, the benefits appear to outweigh the risks." to "Genel değerlendirmede faydalar risklerden ağır basıyor gibi görünüyor."),
+                    listOf("Karşı savı çarpıtarak aktarma.", "Kanıtsız mutlak ifadeler kullanma.", "Sonuçta önemli sınırlamaları saklama."),
+                    listOf("Ana iddianı açıkla.", "Kanıt ve karşı sav sun.", "Karşı savı yanıtlayıp dengeli sonuç çıkar."))
+            "metin düzenleme ve üslup" in t || "editing" in t ->
+                LessonBookChapter("Metni açıklık, tutarlılık ve üslup için düzenlemek",
+                    "Düzenleme yalnızca dilbilgisi hatalarını düzeltmek değildir. Gereksiz tekrarları azalt, belirsiz zamirleri açıklaştır, cümleler arasındaki mantıksal bağı kontrol et ve hedef okuyucuya uygun resmiyet düzeyi seç.",
+                    "Meaning → structure → clarity → grammar → tone",
+                    listOf("The team reviewed the draft and removed repeated information." to "Ekip taslağı gözden geçirip tekrarlanan bilgileri kaldırdı.", "Please clarify what 'it' refers to in the second paragraph." to "Lütfen ikinci paragraftaki 'it' ifadesinin neye gönderme yaptığını açıklayın."),
+                    listOf("Düzenlerken yazarın asıl anlamını değiştirme.", "Her uzun cümleyi otomatik olarak bölme.", "Terimleri metin boyunca tutarlı kullan."),
+                    listOf("Metnin amacını ve hedef kitlesini belirle.", "Tekrar ve belirsiz göndermeleri düzelt.", "Son kontrolde anlam, yapı ve tonu birlikte değerlendir."))
             "email" in t || "e-mail" in t || "e-posta" in t || "writing" in t || "yazma" in t -> 
                 LessonBookChapter("Amaçlı ve düzenli İngilizce yazmak",
                     "İyi bir e-posta veya kısa yazı okuyucunun amacını hızlıca anlamasını sağlar. Resmî e-postada uygun selamlama, ilk paragrafta amaç, gövdede açık ayrıntılar ve sonunda nazik kapanış bulunur. Akademik yazıda iddia, gerekçe ve örnek arasında açık bağ kurulur. Paragrafları tek ana fikir etrafında düzenle ve son kontrolde dilbilgisi kadar tonu da incele.",
