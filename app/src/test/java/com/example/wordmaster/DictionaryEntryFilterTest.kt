@@ -33,6 +33,24 @@ class DictionaryEntryFilterTest {
         assertTrue(DictionaryEntryFilter.shouldExclude("barometer", definition))
     }
     @Test
+    fun rejectsSourcePlaceholdersAndRepeatedFiller() {
+        listOf("null", "undefined", "n/a", "aaaaa", ".....", "???").forEach { entry ->
+            assertTrue("Expected to reject $entry", DictionaryEntryFilter.shouldExclude(entry, "anlam"))
+        }
+        listOf("null", "undefined", "n/a", "-", "?").forEach { translation ->
+            assertTrue("Expected to reject translation $translation", DictionaryEntryFilter.shouldExclude("engine", translation))
+        }
+    }
+
+    @Test
+    fun keepsTechnicalIdentifiersAndUsefulQuickPracticeVocabulary() {
+        assertFalse(DictionaryEntryFilter.shouldExclude("B737", "Boeing 737"))
+        assertFalse(DictionaryEntryFilter.shouldExclude("N1", "motor fan devri"))
+        assertTrue(DictionaryEntryFilter.isQuickPracticeEntry("rudder", "dümen"))
+        assertTrue(DictionaryEntryFilter.isQuickPracticeEntry("take off", "havalanmak"))
+    }
+
+    @Test
     fun quickPracticeKeepsShortEntriesAndRejectsLongPhrasesAndDefinitions() {
         assertTrue(DictionaryEntryFilter.isQuickPracticeEntry("engine", "motor"))
         assertTrue(DictionaryEntryFilter.isQuickPracticeEntry("take off", "havalanmak"))
