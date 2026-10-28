@@ -122,6 +122,36 @@ object LessonBook {
                 listOf("Belirti ve doğrulanmış bulguya ayrı örnek yaz.", "Intermittent ve reproducible terimlerini açıkla.", "Varsayım içermeyen kısa İngilizce arıza kaydı hazırla.", "Kullanılan doküman türünün amacını belirt.")
             )
         }
+        if ("elektrik ve kablolama" in t) {
+            return LessonBookChapter(
+                "Uçak elektrik sistemlerinin temel terminolojisini ve şema dilini anlamak",
+                "Aircraft electrical terminology includes power source (güç kaynağı), bus (dağıtım barası), circuit (devre), conductor (iletken), wire (kablo teli), connector (konnektör), terminal (uç bağlantı) and ground/bonding (topraklama ve elektriksel bağlama). Voltage gerilim, current akım, resistance direnç ve continuity süreklilik anlamına gelir; bunlar farklı ölçülebilir kavramlardır. Circuit breaker bir devre koruma elemanıdır; konumu, etiketi ve işlevi uçak tipi ile konfigürasyona bağlıdır. Wiring Diagram Manual (WDM) bağlantı ilişkilerini gösterir, ancak tek başına arıza giderme adımlarının tamamını vermez. Open circuit ve short circuit farklı elektriksel arıza türleridir. Bir göstergenin çalışmaması, tek başına hangi kablonun veya devre kesicinin arızalı olduğunu kanıtlamaz. Elektrik sistemleri ciddi tehlikeler barındırır; bu bölüm yalnızca terminoloji ve teknik okuma eğitimi içindir, ölçüm, enerjilendirme veya devreye müdahale talimatı değildir. Gerçek işlemlerde güncel tip bazlı AMM, FIM/TSM, WDM ve yetkili personel gereklidir.",
+                "Electrical vocabulary: source → bus → protected circuit → conductor/connector → load.\nQuantities: voltage (V), current (A), resistance (Ω).\nDocument roles: WDM → connections; FIM/TSM → fault isolation; AMM → applicable maintenance tasks.",
+                listOf(
+                    "The wiring diagram identifies the relationship between connectors and circuits." to "Kablo şeması konnektörler ve devreler arasındaki ilişkiyi gösterir.",
+                    "A circuit breaker provides circuit protection." to "Devre kesici devre koruması sağlar.",
+                    "The technician reported an intermittent indication without identifying an unverified cause." to "Teknisyen doğrulanmamış bir neden belirtmeden aralıklı gösterge sorununu raporladı.",
+                    "Voltage and current describe different electrical quantities." to "Gerilim ve akım farklı elektriksel büyüklükleri tanımlar."
+                ),
+                listOf("Voltage ve current terimlerini aynı anlamda kullanma.", "WDM'yi tek başına bakım talimatı sayma.", "Devre kesici etiketi veya konumu uydurma.", "Gözlenen belirtiyi doğrulanmış kablo arızası gibi yazma."),
+                listOf("Bus, connector, conductor ve circuit breaker terimlerini tanımla.", "Voltage, current ve resistance farkını açıkla.", "WDM ile FIM/TSM amaçlarını karşılaştır.", "Belirsizliği koruyan kısa bir İngilizce gösterge raporu yaz.")
+            )
+        }
+        if ("aviyonik ve iletişim sistemleri" in t) {
+            return LessonBookChapter(
+                "Aviyonik göstergeler, sensörler ve iletişim terimlerini doğru kullanmak",
+                "Avionics, uçak üzerindeki elektronik gösterge, haberleşme, seyrüsefer ve izleme sistemleriyle ilgili genel terimdir. Sensor fiziksel bir büyüklükle ilgili veri sağlayabilir; signal bilgi taşıyan elektriksel veya dijital işarettir; display ise bilgiyi kullanıcıya sunar. Indication göstergede sunulan değeri, alert ikazı, failure arızayı, intermittent aralıklı durumu ve discrepancy bildirilen uygunsuzluğu ifade eder. Heading uçağın yönelimini, course izlenmesi planlanan veya seçilen rotayla ilgili yön bilgisini, altitude ise irtifayı ifade eder; kesin gösterim ve kaynaklar sistem tasarımına bağlıdır. N1 indication gibi motor verileri de gösterge sistemlerinde sunulabilir; anormal gösterim otomatik olarak sensör arızası anlamına gelmez. BITE (Built-In Test Equipment), bazı sistemlerin yerleşik test işlevleri için kullanılan bir terimdir; desteklenen testler ve sonuçların yorumu uçak tipi, sistem ve güncel dokümanlara bağlıdır. Bu bölüm operasyonel test adımları, gerçek arıza kodları veya devre kesici konumları sağlamaz.",
+                "Information chain (conceptual): sensor/source → signal processing → display/alert.\nNavigation terms: heading ≠ course; altitude ≠ attitude.\nReporting: reported indication → context → approved reference → verified finding.",
+                listOf(
+                    "The heading indication and selected course are not necessarily identical." to "Heading göstergesi ile seçilen course her zaman aynı değildir.",
+                    "The display presents information received from aircraft systems." to "Gösterge, uçak sistemlerinden alınan bilgiyi sunar.",
+                    "An intermittent indication does not establish which component has failed." to "Aralıklı gösterge sorunu hangi parçanın arızalandığını kanıtlamaz.",
+                    "Built-in test information must be interpreted using the applicable approved documentation." to "Yerleşik test bilgileri geçerli onaylı dokümana göre yorumlanmalıdır."
+                ),
+                listOf("Heading ile course terimlerini eş anlamlı sanma.", "Altitude ve attitude sözcüklerini karıştırma.", "BITE sonucunu dokümansız kesin arıza teşhisi sayma.", "Sistem tipini doğrulamadan gerçek arıza kodu veya devre kesici bilgisi üretme."),
+                listOf("Sensor, signal ve display arasındaki ilişkiyi açıkla.", "Heading, course, altitude ve attitude kavramlarını ayır.", "Intermittent indication için tarafsız bir İngilizce rapor yaz.", "BITE bilgisinin neden tip bazlı yorumlandığını açıkla.")
+            )
+        }
         // C1-specific chapters must precede broad grammar and writing title matches.
         if ("anlam incelikleri ve register" in t) {
             return LessonBookChapter(
