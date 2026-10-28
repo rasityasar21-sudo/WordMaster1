@@ -86,6 +86,19 @@ class LessonBookTest {
     }
 
     @Test
+    fun futurePlansLessonCoversIntentNegativesQuestionsAndContext() {
+        val chapter = LessonBook.chapter("Gelecek planları: going to / will")
+
+        assertTrue(chapter.explanation.contains("önceden yapılmış planlarda"))
+        assertTrue(chapter.formation.contains("won't + V1"))
+        assertTrue(chapter.formation.contains("Am/Is/Are"))
+        assertTrue(chapter.examples.any { it.first.contains("going to visit") })
+        assertTrue(chapter.examples.any { it.first.contains("won't forget") })
+        assertTrue(chapter.commonMistakes.any { it.contains("won't to go") })
+        assertTrue(chapter.checkpoints.size >= 4)
+    }
+
+    @Test
     fun everyA2CatalogLessonHasTopicSpecificBookContent() {
         val a2Lessons = WordMasterCourseCatalog.forLevel("A2")
 
