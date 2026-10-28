@@ -801,7 +801,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                                 }
                                             }
                                             if (dueReviewWords.size > 5) {
-                                                Text("İlk 5 kelime gösteriliyor. Test modunda tüm tekrar kuyruğu kullanılabilir.", color = Color(0xFF926C30), fontSize = 11.sp)
+                                                Text("İlk 5 kelime gösteriliyor. Test modunda tüm tekrar kuyruğu kullanılabilir.", color = if (darkTheme) Color(0xFFFFD18A) else Color(0xFF926C30), fontSize = 11.sp)
                                             }
                                         }
                                     }
@@ -897,7 +897,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                                     Text(pair.first, Modifier.weight(1f), fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurface)
                                                     Text(pair.second, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f))
                                                 }
-                                                HorizontalDivider(color = Color(0xFFEDEEF4))
+                                                HorizontalDivider(color = if (darkTheme) Color(0xFF394563) else Color(0xFFEDEEF4))
                                             }
                                         }
                                     }
@@ -1066,7 +1066,7 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                                                     )
                                                 ) { Text(option, modifier = Modifier.padding(4.dp)) }
                                             }
-                                            if (practiceFeedback.isNotBlank()) Text(practiceFeedback, color = if (practiceChoice == practice.third) Color(0xFF16845D) else Color(0xFFB45309), fontWeight = FontWeight.Bold)
+                                            if (practiceFeedback.isNotBlank()) Text(practiceFeedback, color = if (practiceChoice == practice.third) { if (darkTheme) Color(0xFF8DE0BE) else Color(0xFF16845D) } else { if (darkTheme) Color(0xFFFFC078) else Color(0xFFB45309) }, fontWeight = FontWeight.Bold)
                                             Text("Doğru cevaplanan soru: $practiceCorrect / ${practiceQuestions.size}", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f), fontSize = 13.sp)
                                             HorizontalDivider()
                                             Text("Dinleme / konu kontrolü", fontWeight = FontWeight.Bold)
@@ -1546,11 +1546,11 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                 if (placementCompleted) {
                     Surface(color = if (darkTheme) Color(0xFF15372F) else Color(0xFFE1F8F0), contentColor = if (darkTheme) Color(0xFFB9F5DF) else Color(0xFF087F5B), shape = RoundedCornerShape(14.dp)) {
                         Row(Modifier.fillMaxWidth().padding(12.dp), verticalAlignment = Alignment.CenterVertically) {
-                            Text("✓", color = Color(0xFF087F5B), fontSize = 22.sp, fontWeight = FontWeight.Black)
+                            Text("✓", color = if (darkTheme) Color(0xFFB9F5DF) else Color(0xFF087F5B), fontSize = 22.sp, fontWeight = FontWeight.Black)
                             Spacer(Modifier.width(8.dp))
                             Column {
-                                Text("Seviye tespit sınavın kaydedildi", fontWeight = FontWeight.Bold, color = Color(0xFF087F5B))
-                                Text("$chosenLevel seviyesi • $savedPlacementCorrect/10 doğru", fontSize = 12.sp, color = Color(0xFF087F5B))
+                                Text("Seviye tespit sınavın kaydedildi", fontWeight = FontWeight.Bold, color = if (darkTheme) Color(0xFFB9F5DF) else Color(0xFF087F5B))
+                                Text("$chosenLevel seviyesi • $savedPlacementCorrect/10 doğru", fontSize = 12.sp, color = if (darkTheme) Color(0xFFB9F5DF) else Color(0xFF087F5B))
                             }
                         }
                     }
