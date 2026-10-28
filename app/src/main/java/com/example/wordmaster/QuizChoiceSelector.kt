@@ -21,6 +21,7 @@ object QuizChoiceSelector {
             val key = normalize(candidate.en)
             val meaning = normalize(candidate.tr)
             if (key.isBlank() || meaning.isBlank()) continue
+            if (DictionaryEntryFilter.shouldExclude(candidate.en, candidate.tr)) continue
             if (key == targetKey || meaning == targetMeaning) continue
             if (candidate.level.equals(target.level, ignoreCase = true)) {
                 sameLevel.add(candidate)
