@@ -2479,7 +2479,42 @@ private fun listeningDialogueFor(title: String, lesson: LessonContent): List<Pai
                 "Could we deliver the main findings on Wednesday and the appendix on Thursday?" to "Ana bulguları çarşamba, eki perşembe teslim edebilir miyiz?",
                 "That could work. Can you confirm the exact sections?" to "Olabilir. Kesin bölümleri teyit edebilir misin?",
                 "Yes, I'll send the agreed outline this afternoon." to "Evet, üzerinde anlaştığımız taslağı bu öğleden sonra göndereceğim.")
-        "fikir belirtme" in t || "iş yerinde iletişim" in t || "toplantılarda fikir savunma" in t || "profesyonel iletişim" in t ->
+        "anlam incelikleri" in t || "nuance" in t ->
+            listOf("Would you say the proposal is certain to work?" to "Bu önerinin kesinlikle işe yarayacağını söyler misin?",
+                "I would say the evidence suggests it may work, with some limitations." to "Kanıtın bazı sınırlamalarla işe yarayabileceğine işaret ettiğini söylerdim.",
+                "So you support it, but cautiously?" to "Yani destekliyorsun ama temkinli biçimde mi?",
+                "Exactly. The wording should reflect that level of confidence." to "Aynen. İfade, bu güven düzeyini yansıtmalı.")
+        "sunum ve ikna edici konuşma" in t || "presentations" in t ->
+            listOf("Today I'll compare two options for reducing delays." to "Bugün gecikmeleri azaltmak için iki seçeneği karşılaştıracağım.",
+                "What evidence supports the first option?" to "İlk seçeneği hangi kanıt destekliyor?",
+                "The trial showed a shorter response time, although the sample was small." to "Deneme daha kısa yanıt süresi gösterdi ancak örneklem küçüktü.",
+                "Please explain how you would test it on a larger scale." to "Lütfen bunu daha geniş ölçekte nasıl test edeceğini açıkla.")
+        "birden fazla kaynaktan sentez" in t || "synthesis" in t ->
+            listOf("What do the two reports agree on?" to "İki rapor hangi konuda aynı fikirde?",
+                "Both identify cost as a major concern." to "İkisi de maliyeti önemli bir endişe olarak belirtiyor.",
+                "Do they recommend the same solution?" to "Aynı çözümü mü öneriyorlar?",
+                "No. One suggests training, while the other recommends changing the process." to "Hayır. Biri eğitim önerirken diğeri sürecin değiştirilmesini öneriyor.")
+        "ima, ton ve örtük anlam" in t || "implicit meaning" in t ->
+            listOf("The manager said, 'That is an ambitious deadline.'" to "Yönetici, 'Bu iddialı bir son tarih,' dedi.",
+                "Was that praise or a concern?" to "Bu övgü müydü yoksa bir endişe mi?",
+                "The context suggests the schedule may be unrealistic." to "Bağlam, programın gerçekçi olmayabileceğine işaret ediyor.",
+                "So we should ask which tasks can be prioritised." to "O hâlde hangi görevlere öncelik verilebileceğini sormalıyız.")
+        "ileri düzey tartışma" in t || "debate" in t ->
+            listOf("Should the team adopt the new system immediately?" to "Ekip yeni sistemi hemen benimsemeli mi?",
+                "The pilot results are promising, but the sample was limited." to "Pilot sonuçları umut verici ancak örneklem sınırlıydı.",
+                "Could a phased rollout reduce that risk?" to "Aşamalı uygulama bu riski azaltabilir mi?",
+                "Possibly. We should compare the cost, evidence, and potential impact first." to "Olabilir. Önce maliyeti, kanıtı ve olası etkiyi karşılaştırmalıyız.")
+        "metin düzenleme ve üslup" in t || "editing" in t ->
+            listOf("I think this paragraph repeats the same point." to "Bence bu paragraf aynı noktayı tekrarlıyor.",
+                "Agreed. We can remove the second sentence without losing the meaning." to "Katılıyorum. Anlamı kaybetmeden ikinci cümleyi kaldırabiliriz.",
+                "Does the final sentence make the recommendation clear?" to "Son cümle öneriyi açıkça ifade ediyor mu?",
+                "It should state the action and the reason more directly." to "Eylemi ve gerekçeyi daha doğrudan belirtmeli.")
+        "profesyonel iletişim ve ikna" in t ->
+            listOf("What would make the proposal valuable to the team?" to "Öneriyi ekip için değerli kılacak şey nedir?",
+                "It could reduce delays, but we should verify the result with a small trial." to "Gecikmeleri azaltabilir ancak sonucu küçük bir denemeyle doğrulamalıyız.",
+                "What risk should we communicate?" to "Hangi riski açıklamalıyız?",
+                "The trial may not represent every situation, so we should review the evidence before expanding it." to "Deneme her durumu temsil etmeyebilir; bu yüzden kapsamı büyütmeden önce kanıtı gözden geçirmeliyiz.")
+        "fikir belirtme" in t || "iş yerinde iletişim" in t || "toplantılarda fikir savunma" in t ->
             listOf("I think we should update the plan." to "Bence planı güncellemeliyiz.",
                 "What is the main reason?" to "Temel gerekçe nedir?",
                 "The current process takes too long, and the data supports that." to "Mevcut süreç çok uzun sürüyor ve veriler bunu destekliyor.",
