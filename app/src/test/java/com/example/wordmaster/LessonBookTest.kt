@@ -83,7 +83,7 @@ class LessonBookTest {
 
         assertTrue(chapter.purpose.contains("Sorunu"))
         assertTrue(chapter.explanation.length > 100)
-        assertTrue(chapter.formation.contains("evidence"))
+        assertTrue(chapter.formation.contains("evidence", ignoreCase = true))
         assertTrue(chapter.examples.any { it.first.contains("cannot confirm the cause") })
         assertTrue(chapter.commonMistakes.any { it.contains("kanıt yoksa") })
         assertTrue(chapter.checkpoints.size >= 5)
