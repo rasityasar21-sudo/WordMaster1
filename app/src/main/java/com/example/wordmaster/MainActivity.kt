@@ -282,6 +282,9 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
     val level = xp / 100 + 1
     val xpInLevel = xp % 100
     val today = LocalDate.now().toString()
+    // Index the large dictionary once so each quiz question does not rescan every entry.
+    val wordsByLevel = remember(words) { words.groupBy { it.level } }
+    val wordsByEnglish = remember(words) { words.groupBy { it.en } }
     val studyPlanLevel = chosenLevel.ifBlank { selected.takeIf { it in listOf("A1", "A2", "B1", "B2", "C1") } ?: "A1" }
     var reviewRefresh by remember { mutableIntStateOf(0) }
     var showReviewQueue by remember { mutableStateOf(false) }
@@ -340,16 +343,16 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                 val dueSet = if (isPlacement) emptySet() else learningStore.dueForReview().map { it.word }.toSet()
                 val levels = listOf("A1", "A2", "B1", "B2", "C1")
                 val pool = if (isPlacement) {
-                    val preferred = words.filter { it.level == selectedLevel }
+                    val preferred = wordsByLevel[selectedLevel].orEmpty()
                     val index = levels.indexOf(selectedLevel).coerceAtLeast(0)
                     preferred.ifEmpty {
                         val nearestLevels = levels.sortedBy { kotlin.math.abs(levels.indexOf(it) - index) }
-                        nearestLevels.asSequence().map { level -> words.filter { it.level == level } }
+                        nearestLevels.asSequence().map { level -> wordsByLevel[level].orEmpty() }
                             .firstOrNull { it.isNotEmpty() } ?: words
                     }
                 } else {
-                    val duePool = words.filter { it.en in dueSet }
-                    val reviewPool = words.filter { it.en in reviewSet }
+                    val duePool = dueSet.flatMap { wordsByEnglish[it].orEmpty() }
+                    val reviewPool = reviewSet.flatMap { wordsByEnglish[it].orEmpty() }
                     when {
                         duePool.isNotEmpty() -> duePool
                         reviewPool.isNotEmpty() -> reviewPool
