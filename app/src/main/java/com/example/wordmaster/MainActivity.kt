@@ -2068,14 +2068,22 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                             OutlinedButton(
                                 onClick = {
                                     if (option.en == targetWord.en) {
-                                        // Guard against rapid repeated taps before Compose redraws.
-                                        if (targetWord.en !in matchRewarded) {
-                                            matchRewarded.add(targetWord.en)
+                                        // Each word can be matched again in later rounds, but XP is awarded only once.
+                                        if (targetWord.en !in matched) {
                                             matched = matched + targetWord.en
-                                            xp += 5
-                                            recordStudyDay()
-                                            prefs.edit().putInt("xp", xp).apply()
-                                            matchMessage = if (matched.size == matchWords.size) "Harika! Tüm kelimeler tamamlandı. +${matchWords.size * 5} XP 🎉" else "Doğru cevap! +5 XP. Sıradaki kelimeye geçtin."
+                                            if (matchRewarded.add(targetWord.en)) {
+                                                xp += 5
+                                                recordStudyDay()
+                                                prefs.edit().putInt("xp", xp).apply()
+                                            }
+                                            matchMessage = if (matched.size == matchWords.size) {
+                                                "Harika! Tüm kelimeler tamamlandı." +
+                                                    if (matchWords.any { it.en !in matchRewarded }) " XP kazandın! 🎉" else " Yeni turda da tamamladın! 🎉"
+                                            } else if (targetWord.en in matchRewarded) {
+                                                "Doğru cevap! Bu kelime için XP daha önce alındı. Sıradaki kelimeye geçtin."
+                                            } else {
+                                                "Doğru cevap! +5 XP. Sıradaki kelimeye geçtin."
+                                            }
                                         }
                                     } else {
                                         matchMessage = "Tekrar dene! ${targetWord.en} kelimesinin anlamını düşün."
