@@ -1234,34 +1234,53 @@ fun WordMasterApp(words: List<Word>, prefs: SharedPreferences) {
                     }
 
                     items(vocationalModules) { module ->
+                        var detailsExpanded by remember(selectedCareerTrack, module.first) { mutableStateOf(false) }
                         Card(
-                            modifier = Modifier.fillMaxWidth().clickable {
-                                lessonReturnScreen = "Mesleki İngilizce"
-                                activeLesson = if (selectedCareerTrack != "Uçak Bakım") module.second else when (module.first) {
-                                    "01", "02" -> "Uçuş kumandaları"
-                                    "13" -> "Bakım aletleri ve ekipman"
-                                    "14" -> "Kontrol, bulgu ve hasar ifadeleri"
-                                    "15" -> "Uçak bakımına giriş"
-                                    else -> module.second
-                                }
-                                activeCourseLessonId = "${selectedCareerTrack.lowercase(Locale.ROOT)}-module-${module.first}"
-                                activeLessonIndex = 0
-                                lessonAnswer = false
-                                lessonStage = 0
-                                lessonChoice = ""
-                                currentScreen = "Ders İçeriği"
-                            },
                             shape = RoundedCornerShape(18.dp),
                             colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
                             border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant)
                         ) {
-                            Row(Modifier.padding(15.dp), horizontalArrangement = Arrangement.spacedBy(12.dp), verticalAlignment = Alignment.Top) {
-                                Surface(shape = RoundedCornerShape(12.dp), color = if (darkTheme) Color(0xFF30275A) else Color(0xFFEAE5FF)) {
-                                    Text(module.first, modifier = Modifier.padding(horizontal = 11.dp, vertical = 9.dp), color = if (darkTheme) Color(0xFFD5CCFF) else Color(0xFF5145CD), fontWeight = FontWeight.ExtraBold)
+                            Column(
+                                Modifier.fillMaxWidth().padding(15.dp),
+                                verticalArrangement = Arrangement.spacedBy(10.dp)
+                            ) {
+                                Row(horizontalArrangement = Arrangement.spacedBy(12.dp), verticalAlignment = Alignment.CenterVertically) {
+                                    Surface(shape = RoundedCornerShape(12.dp), color = if (darkTheme) Color(0xFF30275A) else Color(0xFFEAE5FF)) {
+                                        Text(module.first, modifier = Modifier.padding(horizontal = 11.dp, vertical = 9.dp), color = if (darkTheme) Color(0xFFD5CCFF) else Color(0xFF5145CD), fontWeight = FontWeight.ExtraBold)
+                                    }
+                                    Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                                        Text(module.second, color = MaterialTheme.colorScheme.onSurface, fontWeight = FontWeight.Bold, fontSize = 15.sp)
+                                        Text(if (detailsExpanded) module.third else "Modül özeti · Ayrıntıları görmek için genişlet.", color = MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 12.sp, lineHeight = 18.sp)
+                                    }
+                                    TextButton(onClick = { detailsExpanded = !detailsExpanded }) {
+                                        Text(if (detailsExpanded) "Daha az" else "Detay")
+                                    }
                                 }
-                                Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                                    Text(module.second, color = MaterialTheme.colorScheme.onSurface, fontWeight = FontWeight.Bold, fontSize = 15.sp)
-                                    Text(module.third, color = MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 12.sp, lineHeight = 18.sp)
+                                if (detailsExpanded) {
+                                    HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
+                                    Text("Bu modülde: ${module.third}", color = MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 13.sp, lineHeight = 19.sp)
+                                }
+                                Button(
+                                    onClick = {
+                                        lessonReturnScreen = "Mesleki İngilizce"
+                                        activeLesson = if (selectedCareerTrack != "Uçak Bakım") module.second else when (module.first) {
+                                            "01", "02" -> "Uçuş kumandaları"
+                                            "13" -> "Bakım aletleri ve ekipman"
+                                            "14" -> "Kontrol, bulgu ve hasar ifadeleri"
+                                            "15" -> "Uçak bakımına giriş"
+                                            else -> module.second
+                                        }
+                                        activeCourseLessonId = "${selectedCareerTrack.lowercase(Locale.ROOT)}-module-${module.first}"
+                                        activeLessonIndex = 0
+                                        lessonAnswer = false
+                                        lessonStage = 0
+                                        lessonChoice = ""
+                                        currentScreen = "Ders İçeriği"
+                                    },
+                                    modifier = Modifier.fillMaxWidth(),
+                                    shape = RoundedCornerShape(12.dp)
+                                ) {
+                                    Text("Modülü aç  →")
                                 }
                             }
                         }
