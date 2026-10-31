@@ -2331,6 +2331,20 @@ private fun PronunciationPracticeDialog(words: List<Word>, onDismiss: () -> Unit
                         color = MaterialTheme.colorScheme.primary,
                         trackColor = MaterialTheme.colorScheme.surfaceVariant
                     )
+                    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
+                        TextButton(
+                            onClick = {
+                                pronunciationCorrect = 0
+                                pronunciationAnswered = 0
+                                currentQuestionRecorded = false
+                                recognizedCorrectly = false
+                                message = "Oturum istatistikleri sıfırlandı. Bu kelimeyi yeniden deneyebilirsin."
+                            },
+                            enabled = pronunciationAnswered > 0 || pronunciationCorrect > 0
+                        ) {
+                            Text("İstatistikleri sıfırla")
+                        }
+                    }
                 }
                 Surface(
                     modifier = Modifier.fillMaxWidth(),
