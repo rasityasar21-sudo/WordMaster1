@@ -2394,6 +2394,13 @@ private fun PronunciationPracticeDialog(words: List<Word>, onDismiss: () -> Unit
         },
         confirmButton = {
             TextButton(onClick = {
+                // Stop the previous word's audio before changing the card.
+                mediaPlayer?.let { player ->
+                    try { player.stop() } catch (_: Exception) { }
+                    player.release()
+                }
+                mediaPlayer = null
+                isLoading = false
                 val levelPool = words.filter { pronunciationLevel == "Tümü" || it.level.equals(pronunciationLevel, ignoreCase = true) }
                     .ifEmpty { words }
                 val nextWord = levelPool.filter { it.en != current.en }.randomOrNull()
